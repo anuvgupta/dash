@@ -101,6 +101,20 @@ var ws_server = {
         if (!auth_req || client.auth)
             ws_server.events[event](client, data);
     },
+    // return error for event
+    return_event_error: (event, error_msg, client, auth_req = true) => {
+        ws_server.send_to_client(`${event}_res`, {
+            success: false, message: (`${error_msg}`)
+        }, client, auth_req);
+        return false;
+    },
+    // return data for event
+    return_event_data: (event, data, client, auth_req = true) => {
+        ws_server.send_to_client(`${event}_res`, {
+            success: true, data: data
+        }, client, auth_req);
+        return true;
+    },
     // initialize server
     init: _ => {
         // attach server socket events
@@ -160,16 +174,16 @@ var ws_server = {
 
 var init = _ => {
 
+    // auth
     ws_server.bind("auth", (client, req, token) => {
         if (token && ws_server.verify_token(token)) {
             client.auth = true;
-            ws_server.send_to_client("auth_res", { success: true }, client, true);
+            ws_server.return_event_data("auth", {}, client);
         } else {
             client.auth = false;
-            ws_server.send_to_client("auth_res", { success: false }, client, false);
+            ws_server.return_event_error("auth", "invalid token", client, false);
         }
     }, false);
-
     ws_server.bind("sign_in", (client, req) => {
         var success = false;
         var jwt_token = null;
@@ -179,10 +193,31 @@ var init = _ => {
         }
         ws_server.send_to_client("sign_in_res", {
             success: success,
+            message: (success ? null : "invalid token"),
             data: { token: jwt_token }
         }, client, false);
     }, false);
 
+    // projects
+    ws_server.bind("new_project", (client, req) => {
+        var slug = req.slug ? (`${req.slug}`).trim() : '';
+        var name = req.name ? (`${req.name}`).trim() : '';
+        var repo = req.repo ? (`${req.repo}`).trim() : '';
+        if (slug != '' && name != '') {
+            m.db.get_project(null, slug, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("new_project", "database error", client);
+                if (result1 != null && slug == result1.slug)
+                    return ws_server.return_event_error("new_project", "identifier already taken", client);
+                m.db.create_project(slug, name, repo, false, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("new_project", "database error", client);
+                    return ws_server.return_event_data("new_project", { id: result2.insertedId }, client);
+                });
+            });
+        }
+    });
+    ws_server.bind("get_projects", (client, req) => {
+        log(req);
+    })
 };
 var api = {};
 

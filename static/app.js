@@ -12,25 +12,22 @@ var app = {
             new_project: _ => {
                 bootbox.confirm({
                     centerVertical: true,
-                    title: '<span class="modal_title">New Project</span>',
+                    title: '<span class="modal_title">Create Project</span>',
                     message: `<div id='new_project_display_modal'>` +
-                        // `<h3 style="padding-left: 5px;">New Project</h3>` +
                         `<div style="margin: 3px 0;"><span class="modal_text_input_label">ID:</span>&nbsp;` +
-                        `<input placeholder="project-abc" class="modal_text_input id="np_modal_slug_input" type='text' name='np_modal_slug'/></div>` +
+                        `<input placeholder="project-abc" class="modal_text_input" id="np_modal_slug_input" type='text' name='np_modal_slug'/></div>` +
                         `<div style="margin: 3px 0;"><span class="modal_text_input_label">Name:</span>&nbsp;` +
-                        `<input placeholder="Project ABC" class="modal_text_input id="np_modal_name_input" type='text' name='np_modal_name'/></div>` +
-                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Name:</span>&nbsp;` +
-                        `<input placeholder="Project ABC" class="modal_text_input id="np_modal_name_input" type='text' name='np_modal_name'/></div>` +
+                        `<input placeholder="Project ABC" class="modal_text_input" id="np_modal_name_input" type='text' name='np_modal_name'/></div>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Repo:</span>&nbsp;` +
+                        `<input placeholder="https://github.com/u/project-abc" class="modal_text_input" id="np_modal_repo_input" type='text' name='np_modal_repo'/></div>` +
                         `<div style="height: 8px"></div></div>`,
                     callback: (result) => {
-                        console.log(result);
                         if (result) {
                             var slug = (`${$('#new_project_display_modal #np_modal_slug_input')[0].value}`).trim();
                             var name = (`${$('#new_project_display_modal #np_modal_name_input')[0].value}`).trim();
                             var repo = (`${$('#new_project_display_modal #np_modal_repo_input')[0].value}`).trim();
-                            if (slug == "" || name == "" || repo == "") return false;
-                            // cont...
-                            console.log(slug, name, repo);
+                            if (slug == "" || name == "") return false;
+                            app.ws.api.new_project(slug, name, repo);
                         }
                         return true;
                     }
@@ -100,7 +97,14 @@ var app = {
             });
             socket.addEventListener('close', e => {
                 console.log('[ws] socket disconnected');
-                // alert('disconnected from server');
+                bootbox.confirm({
+                    centerVertical: true,
+                    title: "Disconnected",
+                    message: "Refresh page?",
+                    callback: (result) => {
+                        if (result) window.location.reload();
+                    }
+                })
             });
             window.addEventListener('beforeunload', e => {
                 // socket.close(1001);
@@ -137,6 +141,13 @@ var app = {
             logout: _ => {
                 util.delete_cookie('token');
                 window.location.reload();
+            },
+            new_project: (slug, name, repo) => {
+                app.ws.send('new_project', {
+                    slug: slug,
+                    name: name,
+                    repo: repo
+                });
             }
         }
     },

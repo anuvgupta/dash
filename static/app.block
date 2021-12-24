@@ -429,15 +429,21 @@ app
                 button new_project_button
                     css
                         position absolute
-                        top 20px
+                        top 18px
                         right 15px
                         z-index 11
-                    class mdl-button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary new_project_button
+                        min-width 45px
+                        width 45px
+                        height 45px
+                        border none
+                        outline none
+                    class mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--primary new_project_button
                     div content
                         text text
                             val +
                             css
                                 font-family Source Sans Pro
+                                font-size 24px
                     :click
                         {
                             app.ui.display_modal.new_project();

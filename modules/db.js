@@ -27,6 +27,9 @@ var api = {
             name: name,
             repo: repo,
             public: public,
+            img: null,
+            icon: null,
+            featured: false,
             domains: [],
             ts_created: timestamp,
             ts_updated: timestamp,
@@ -41,7 +44,10 @@ var api = {
         var _find = {};
         if (id != null) _find['_id'] = mongo_oid(id);
         else if (slug != null) _find['slug'] = slug;
-        else return resolve(false, { message: "get_project requires either id or slug" });
+        else {
+            err("get_project requires either id or slug");
+            return resolve(false, { message: "get_project requires either id or slug" });
+        }
         mongo_api.collection('project').findOne(_find, (e, result1) => {
             if (e) {
                 err(`error finding project ${id} | ${slug}`, e.message ? e.message : e);
