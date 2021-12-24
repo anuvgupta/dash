@@ -32,10 +32,11 @@ var app = {
                 : 'ws://') +
             document.domain +
             (document.domain == 'localhost' ? ':8080' : ((location.protocol === 'https:' ? ':443' : ':80') + '/socket')),
-        encode_msg: (e, d) => {
+        encode_msg: (e, d, a = "") => {
             return JSON.stringify({
                 event: e,
-                data: d
+                data: d,
+                auth: a
             });
         },
         decode_msg: (m) => {
@@ -76,32 +77,35 @@ var app = {
             });
             app.ws.socket = socket;
         },
-        send: (event, data) => {
-            console.log('[ws] sending:', event, data);
-            app.ws.socket.send(app.ws.encode_msg(event, data));
+        send: (event, data, auth = true) => {
+            var token = null;
+            if (auth) token = app.ws.api.get_token_cookie();
+            console.log('[ws] sending:', event, data, token);
+            app.ws.socket.send(app.ws.encode_msg(event, data, token));
         },
         api: {
             cookie_login_flag: false,
             cookie_login: _ => {
                 app.ws.api.cookie_login_flag = true;
-                var hash_cookie = util.cookie('password');
-                if (hash_cookie != null && (`${hash_cookie}`).trim() != "") {
-                    hash_cookie = (`${hash_cookie}`).trim();
-                    app.ws.send('auth', {
-                        password: hash_cookie
-                    });
-                }
+                var token_cookie = app.ws.api.get_token_cookie();
+                if (token_cookie != null) app.ws.send('auth', {}, true);
+            },
+            get_token_cookie: _ => {
+                var token = util.cookie('token');
+                if (token && token != null && (`${token}`).trim() != "")
+                    return token;
+                return null;
             },
             login: password => {
                 util.sha256(`${password}`, hash => {
-                    app.ws.send('auth', {
+                    app.ws.send('sign_in', {
                         password: `${hash}`
-                    });
-                    util.cookie('password', `${hash}`, '__indefinite__');
+                    }, false);
+                    // util.cookie('token', `${token}`, '__indefinite__');
                 });
             },
             logout: _ => {
-                util.delete_cookie('password');
+                util.delete_cookie('token');
                 window.location.reload();
             }
         }

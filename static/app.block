@@ -16,9 +16,21 @@ app
         top 0
         left 0
 
-    #auth
+    #sign_in_res
         {
-            if (auth.success) {
+            if (sign_in_res.data.token != null) {
+                util.cookie('token', `${sign_in_res.data.token}`, '__indefinite__');
+            }
+            block.data({
+                auth_res: {
+                    success: sign_in_res.success
+                }
+            });
+        }
+    
+    #auth_res
+        {
+            if (auth_res.success) {
                 block.child('login').css('display', 'none');
                 block.child('main').css('display', 'block');
             } else {
@@ -131,7 +143,7 @@ app
                     val Dash
                     css
                         font-size 80px
-                        margin 25px 0 -15px 0
+                        margin 35px 0 -15px 0
                         color white
                         display block
                         font-weight 400

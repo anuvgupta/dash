@@ -40,20 +40,31 @@ var ws_server = {
     bind: (event, handler, auth_req = true) => {
         ws_server.events[event] = (client, req, auth) => {
             if (!auth_req || (client.auth && ws_server.verify_token(auth)))
-                handler(client, req);
+                handler(client, req, auth);
         };
     },
     // verify JWT token
     verify_token: (token) => {
-        if (token && token != null) {
-
+        if (!token || token == null)
+            return false;
+        var result = null;
+        try {
+            result = jwt.verify(token, global.config.jwt.secret);
+        } catch (e) {
+            console.log(`[web] error verifying token "${token}":`, (e.message ? e.message : e));
+            result = false;
         }
-        return false;
+        return result ? true : false;
     },
     // mark client as authenticated
     authenticate_client: (client, auth = true) => {
         client.auth = auth;
         // jwt.sign({ user_id: `${String(client.o_id)}` }, `${String(client.o_id)}`);
+        return jwt.sign(
+            { client_id: (`${client.id}`).trim() },
+            global.config.jwt.secret,
+            { algorithm: global.config.jwt.algo, expiresIn: global.config.jwt.expiration }
+        );
     },
     // assign client to specific type/group
     group_client: (client, type = "app") => {
@@ -149,14 +160,24 @@ var ws_server = {
 
 var init = _ => {
 
-    ws_server.bind("auth", (client, req) => {
+    ws_server.bind("auth", (client, req, token) => {
+        if (token && ws_server.verify_token(token)) {
+            client.auth = true;
+            ws_server.send_to_client("auth_res", { success: true }, client, true);
+        } else {
+            client.auth = false;
+            ws_server.send_to_client("auth_res", { success: false }, client, false);
+        }
+    }, false);
+
+    ws_server.bind("sign_in", (client, req) => {
         var success = false;
         var jwt_token = null;
         if (req.password && req.password.toLowerCase() == global.config.secret.toLowerCase()) {
             success = true;
             jwt_token = ws_server.authenticate_client(client);
         }
-        ws_server.send_to_client("auth", {
+        ws_server.send_to_client("sign_in_res", {
             success: success,
             data: { token: jwt_token }
         }, client, false);
