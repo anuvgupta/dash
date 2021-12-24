@@ -8,11 +8,41 @@ var app = {
             primary: "rgba(67, 133, 243, 0.99)", // rgba(219, 43, 58, 0.85)
             background: "#f1f1f1"
         },
+        display_modal: {
+            new_project: _ => {
+                bootbox.confirm({
+                    centerVertical: true,
+                    title: '<span class="modal_title">New Project</span>',
+                    message: `<div id='new_project_display_modal'>` +
+                        // `<h3 style="padding-left: 5px;">New Project</h3>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">ID:</span>&nbsp;` +
+                        `<input placeholder="project-abc" class="modal_text_input id="np_modal_slug_input" type='text' name='np_modal_slug'/></div>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Name:</span>&nbsp;` +
+                        `<input placeholder="Project ABC" class="modal_text_input id="np_modal_name_input" type='text' name='np_modal_name'/></div>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Name:</span>&nbsp;` +
+                        `<input placeholder="Project ABC" class="modal_text_input id="np_modal_name_input" type='text' name='np_modal_name'/></div>` +
+                        `<div style="height: 8px"></div></div>`,
+                    callback: (result) => {
+                        console.log(result);
+                        if (result) {
+                            var slug = (`${$('#new_project_display_modal #np_modal_slug_input')[0].value}`).trim();
+                            var name = (`${$('#new_project_display_modal #np_modal_name_input')[0].value}`).trim();
+                            var repo = (`${$('#new_project_display_modal #np_modal_repo_input')[0].value}`).trim();
+                            if (slug == "" || name == "" || repo == "") return false;
+                            // cont...
+                            console.log(slug, name, repo);
+                        }
+                        return true;
+                    }
+                });
+            }
+        },
         init: (callback) => {
             app.ui.block.fill(document.body);
             Block.queries();
             setTimeout(_ => {
                 app.ui.block.css('opacity', '1');
+                app.ui.block.on('ready');
             }, 100);
             setTimeout(_ => {
                 Block.queries();

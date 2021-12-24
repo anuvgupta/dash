@@ -16,6 +16,11 @@ app
         top 0
         left 0
 
+    :ready
+        {
+            console.log('ready');
+        }
+
     #sign_in_res
         {
             if (sign_in_res.data.token != null) {
@@ -33,10 +38,14 @@ app
             if (auth_res.success) {
                 block.child('login').css('display', 'none');
                 block.child('main').css('display', 'block');
+                setTimeout(_ => {
+                    block.child('main/menu/projects').$().click();
+                }, 50);
             } else {
+                console.log('fail');
                 block.child('login').css('display', 'table');
                 block.child('main').css('display', 'none');
-                if (!app.ws.api.cookie_login_flag)
+                if (app.ws.api.cookie_login_flag)
                     block.child('login/content/subcontent/error').on('show');
             }
         }
@@ -57,28 +66,6 @@ app
             background-repeat repeat
             background-attachment fixed
             opacity 0.05
-
-    block temp_slider
-        css
-            position absolute
-            top 0
-            left 0
-            width 200px
-            height 100px
-            background-color white
-            border-radius 0 0 5px 0
-            display none
-        input slider
-            type range
-            min 0
-            max 360
-            value 0
-            :change
-                {
-                    block.parent().sibling('login').child('content/background/image').data({
-                        color: block.$().val()
-                    });
-                }
 
     block login
         css
@@ -143,7 +130,7 @@ app
                     val Dash
                     css
                         font-size 80px
-                        margin 35px 0 -15px 0
+                        margin 100px 0 45px 0
                         color white
                         display block
                         font-weight 400
@@ -340,10 +327,12 @@ app
                             .on('select', (e, b, d) => {
                                 b.key('select', '1');
                                 b.css('background-color', '#f2f2f2');
+                                b.parent().sibling('content').child('' + b.mark()).css('display', 'block');
                             })
                             .on('deselect', (e, b, d) => {
                                 b.key('select', '0');
                                 b.css('background-color', 'white');
+                                b.parent().sibling('content').child('' + b.mark()).css('display', 'none');
                             })
                             .on('click', (e, b, d) => {
                                 var siblings = b.parent().children();
@@ -418,3 +407,207 @@ app
             menu-item resources
                 val Resources
                 icon dns_b.png
+        div content
+            css
+                padding-left 1px
+                padding-top 75px
+                text-align left
+            $padding+ 20
+            @query window width != 0
+                {
+                    var padding_plus = parseInt(block.key('padding+'));
+                    block.css('padding-left', (block.sibling('menu').$().width() + padding_plus) + 'px');
+                    block.css('padding-right', (5 + padding_plus) + 'px');
+                }
+            div projects
+                css
+                    width 100%
+                    height auto
+                    display none
+                    min-height 50px
+                    position relative
+                button new_project_button
+                    css
+                        position absolute
+                        top 20px
+                        right 15px
+                        z-index 11
+                    class mdl-button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary new_project_button
+                    div content
+                        text text
+                            val +
+                            css
+                                font-family Source Sans Pro
+                    :click
+                        {
+                            app.ui.display_modal.new_project();
+                        }
+                    {
+                        block.css("background-color", app.ui.colors.primary);
+                    }
+                div project_filter
+                    css
+                        position absolute
+                        top 23px
+                        right 80px
+                        z-index 11
+                    select filter_options
+                        css
+                            height 35px
+                            width 110px
+                            padding 0px 10px
+                            letter-spacing 0.9px
+                        option all
+                            value all
+                            html All
+                div title
+                    css
+                        position absolute
+                        top 34px
+                        left 15px
+                        z-index 11
+                    text text
+                        css
+                            font-size 30px
+                            color #333
+                        val Projects
+                div divider
+                    css
+                        //width 100%
+                        box-sizing border-box
+                        margin 0 10px
+                        padding-top 58px
+                        opacity 0.7
+                        position relative
+                        z-index 10
+                    hr hr
+                        css
+                            width 100%
+                div content
+                    css
+                        width 100%
+                        height auto
+            div domains
+                css
+                    width 100%
+                    height auto
+                    display none
+                    min-height 50px
+                    position relative
+                button new_domain_button
+                    css
+                        position absolute
+                        top 20px
+                        right 15px
+                        z-index 11
+                    class mdl-button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary new_project_button
+                    div content
+                        text text
+                            val +
+                    {
+                        block.css("background-color", app.ui.colors.primary);
+                    }
+                div domain_filter
+                    css
+                        position absolute
+                        top 23px
+                        right 80px
+                        z-index 11
+                    select filter_options
+                        css
+                            height 35px
+                            width 110px
+                            padding 0px 10px
+                            letter-spacing 0.9px
+                        option all
+                            value all
+                            html All
+                div title
+                    css
+                        position absolute
+                        top 34px
+                        left 15px
+                        z-index 11
+                    text text
+                        css
+                            font-size 30px
+                            color #333
+                        val Domains
+                div divider
+                    css
+                        //width 100%
+                        box-sizing border-box
+                        margin 0 10px
+                        padding-top 58px
+                        opacity 0.75
+                        position relative
+                        z-index 10
+                    hr hr
+                        css
+                            width 100%
+                div content
+                    css
+                        width 100%
+                        height auto
+            div resources
+                css
+                    width 100%
+                    height auto
+                    display none
+                    min-height 50px
+                    position relative
+                button new_resource_button
+                    css
+                        position absolute
+                        top 20px
+                        right 15px
+                        z-index 11
+                    class mdl-button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary new_project_button
+                    div content
+                        text text
+                            val +
+                    {
+                        block.css("background-color", app.ui.colors.primary);
+                    }
+                div resource_filter
+                    css
+                        position absolute
+                        top 23px
+                        right 80px
+                        z-index 11
+                    select filter_options
+                        css
+                            height 35px
+                            width 110px
+                            padding 0px 10px
+                            letter-spacing 0.9px
+                        option all
+                            value all
+                            html All
+                div title
+                    css
+                        position absolute
+                        top 34px
+                        left 15px
+                        z-index 11
+                    text text
+                        css
+                            font-size 30px
+                            color #333
+                        val Resources
+                div divider
+                    css
+                        //width 100%
+                        box-sizing border-box
+                        margin 0 10px
+                        padding-top 58px
+                        opacity 0.7
+                        position relative
+                        z-index 10
+                    hr hr
+                        css
+                            width 100%
+                div content
+                    css
+                        width 100%
+                        height auto
