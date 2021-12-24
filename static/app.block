@@ -1,0 +1,408 @@
+    *
+
+// app main blockfile
+
+// app UI layer
+app
+    id app
+    css
+        opacity 0
+        transition opacity 0.4s
+        width 100%
+        height 100%
+        margin 0 auto
+        box-sizing border-box
+        position absolute
+        top 0
+        left 0
+
+    #auth
+        {
+            if (auth.success) {
+                block.child('login').css('display', 'none');
+                block.child('main').css('display', 'block');
+            } else {
+                block.child('login').css('display', 'table');
+                block.child('main').css('display', 'none');
+                if (!app.ws.api.cookie_login_flag)
+                    block.child('login/content/subcontent/error').on('show');
+            }
+        }
+
+    div background
+        css
+            position absolute
+            top 0
+            left 0
+            width 100%
+            height 100%
+            box-sizing border-box
+            margin 0
+            padding 0
+            background-image url(img/gear_bg.jpg)
+            background-position top right
+            background-size auto
+            background-repeat repeat
+            background-attachment fixed
+            opacity 0.05
+
+    block temp_slider
+        css
+            position absolute
+            top 0
+            left 0
+            width 200px
+            height 100px
+            background-color white
+            border-radius 0 0 5px 0
+            display none
+        input slider
+            type range
+            min 0
+            max 360
+            value 0
+            :change
+                {
+                    block.parent().sibling('login').child('content/background/image').data({
+                        color: block.$().val()
+                    });
+                }
+
+    block login
+        css
+            display table
+        block content
+            css
+                height 90%
+                width 85%
+                max-height 400px
+                max-width 490px
+                margin 0 auto
+                border-radius 8px
+                opacity 0.95
+                position relative
+                // // #1da1f2 #51afe8 #DB2B39 rgba(219, 43, 58, 0.9)
+                // -webkit-box-shadow 0px 1px 4px 1px rgba(10,10,10,0.3)
+                // -moz-box-shadow 0px 1px 4px 1px rgba(10,10,10,0.3)
+                // box-shadow 0px 1px 4px 1px rgba(10,10,10,0.3)
+            {
+                // block.css("background-color", app.ui.colors.primary);
+            }
+            block background
+                css
+                    position absolute
+                    top -34px
+                    left 0
+                    z-index 1
+                image image
+                    src img/gear_l_b_2.png
+                    height 460px
+                    width 460px
+                    css
+                        margin 0 auto
+                        pointer-events none
+                        opacity 0.9
+                    {
+                        var classname = "";
+                        classname += `rotating${util.rand_int(6, 8)}`;
+                        classname += (util.rand_int(0, 1) == 0) ? "_n" : "";
+                        block.class(`${classname}`);
+                    }
+                    #color
+                        {
+                            console.log(color);
+                            //block.css("filter", `brightness(0.65) sepia() saturate(2500%) hue-rotate(${color}deg)`);
+                            //block.css("filter", `brightness(0.85)`);
+                        }
+                    //{
+                    //    block.data({
+                    //        color: 90
+                    //    });
+                    //}
+            div subcontent
+                css
+                    text-align center
+                    height 250px
+                    width 210px
+                    margin 7px auto 0
+                    position relative
+                    z-index 2
+                text text
+                    val Dash
+                    css
+                        font-size 80px
+                        margin 25px 0 -15px 0
+                        color white
+                        display block
+                        font-weight 400
+                input password
+                    type password
+                    placeholder ******
+                    css
+                        display block
+                        text-align center
+                        box-sizing border-box
+                        width 190px
+                        height 35px
+                        padding 5px 10px
+                        font-size 18px
+                        margin 10px auto 5px auto
+                        border none
+                        outline none
+                        border-radius 3px
+                        color #444
+                        letter-spacing 0.4px
+                        font-weight 300
+                    :keyup
+                        {
+                            if (event.keyCode && event.keyCode == 13) {
+                                block.sibling("submit").$().click();
+                            }
+                        }
+                button submit
+                    class subbutton
+                    css
+                        display block
+                        text-align center
+                        box-sizing border-box
+                        width 190px
+                        height 35px
+                        padding 5px 10px
+                        font-size 18px
+                        cursor pointer
+                        margin 2px auto 5px auto
+                        border none
+                        outline none
+                        border-radius 3px
+                        color #333
+                        letter-spacing 0.4px
+                        font-weight 300
+                    text text
+                        val enter
+                    :click
+                        {
+                            var val = block.sibling("password").$().val();
+                            if (val != null && (`${val}`).trim() != "") {
+                                val = (`${val}`).trim();
+                                app.ws.api.login(val);
+                            }
+                        }
+                text error
+                    val incorrect
+                    css
+                        margin 0
+                        opacity 0
+                        font-size 20px
+                        color white
+                        display block
+                        font-weight 600
+                        font-style italic
+                        letter-spacing 0.7px
+                        transition opacity 0.1s ease
+                    :show
+                        css
+                            opacity 0.95
+                    :hide
+                        css
+                            opacity 0
+                
+    div main
+        css
+            display none
+            height 100%
+            width 100%
+        div bar
+            css
+                box-shadow rgba(50, 50, 50, 0.3) 0px 2px 4px
+                width 100%
+                position fixed
+                left 0
+                top 0
+                height 72px
+                opacity 0.985
+                z-index 101
+            {
+                block.css("background-color", app.ui.colors.primary);
+            }
+            block icon
+                css
+                    width 70px
+                    margin-left 33px
+                    margin-right 17px
+                    float left
+                //class mdc-touch-target-wrapper
+                //button button
+                    //css
+                    //    height 54px
+                    //    width 54px
+                    //    margin 0 auto
+                    //    position relative
+                    //class mdc-button mdc-button--touch
+                    //span ripple
+                    //    class mdc-button__ripple
+                    //span touch
+                    //    class mdc-button__touch
+                block wrapper
+                    image image
+                        src img/cloud_5_w.png
+                        height 54px
+                        width 54px
+            block title
+                css
+                    width 200px
+                    float left
+                text text
+                    val Dash
+                    css
+                        font-size 49px
+                        margin 0
+                        color white
+                        display block
+                        font-weight 400
+                        text-align left
+                        margin-bottom 1px
+            block logout
+                css
+                    width 70px
+                    height 100%
+                    top 0
+                    right 10px
+                    position absolute
+                div img
+                    css
+                        height 45px
+                        width 45px
+                        opacity 1
+                        cursor pointer
+                        transition opacity 0.1s ease
+                        margin 0 auto
+                    image power
+                        src img/power_w.png
+                        height 45px
+                        width 45px
+                    :mouseover
+                        css
+                            opacity 0.9
+                    :mouseout
+                        css
+                            opacity 1
+                    :click
+                        {
+                            app.ws.api.logout();
+                        }
+        div menu
+            css
+                top 0
+                left 0
+                width 343px
+                height 100%
+                background-color white
+                border-right none
+                position fixed
+                box-shadow 1.5px 0px 4.5px 1px rgba(10,10,10,0.04)
+                padding-top 70px
+                box-sizing border-box
+            !menu-item
+                init
+                    {
+                        var block = Block("div")
+                            .key('select', '0')
+                            .css({
+                                width: '100%',
+                                height: '70px',
+                                borderBottom: '1px solid #f0f0f0',
+                                backgroundColor: 'white',
+                                transition: 'background-color 0.15s ease',
+                                cursor: 'pointer',
+                                position: 'relative',
+                                zIndex: '10'
+                            })
+                            .on('mouseover', (e, b, d) => {
+                                if (b.key('select') == '0')
+                                    b.css('background-color', '#f8f8f8');
+                            })
+                            .on('mouseout', (e, b, d) => {
+                                if (b.key('select') == '0')
+                                    b.css('background-color', 'white');
+                            })
+                            .on('select', (e, b, d) => {
+                                b.key('select', '1');
+                                b.css('background-color', '#f2f2f2');
+                            })
+                            .on('deselect', (e, b, d) => {
+                                b.key('select', '0');
+                                b.css('background-color', 'white');
+                            })
+                            .on('click', (e, b, d) => {
+                                var siblings = b.parent().children();
+                                for (var s in siblings) {
+                                    if (siblings.hasOwnProperty(s) && s != b.mark())
+                                        siblings[s].on('deselect');
+                                }
+                                b.on('select');
+                            })
+                            .add(Block('block', 'img')
+                                .css({
+                                    width: '80px',
+                                    float: 'left'
+                                })
+                                .add(Block('image', 1)
+                                    .data({
+                                        src: 'img/gear_b.png',
+                                        height: '27px',
+                                        width: '27px'
+                                    })
+                                    .css({
+                                        margin: '0 auto',
+                                        opacity: '0.7'
+                                    })
+                                )
+                            )
+                            .add(Block('block', 'txt')
+                                .css({
+                                    width: 'auto',
+                                    float: 'left'
+                                })
+                                .add(Block('text', 1)
+                                    .data("Title")
+                                    .css({
+                                        fontSize: '23px',
+                                        fontWeight: '300',
+                                        color: '#222',
+                                        marginLeft: '-3px'
+                                    })
+                                )
+                            )
+                        ;
+                        return block;
+                    }
+                load
+                    {
+                        data('val', val => {
+                            block.child('txt/text').html('').data(`${val}`);
+                        });
+                        data('icon', icon => {
+                            if (icon == "temp")
+                                icon = "gear_b.png";
+                            block.child('img/image').data({
+                                src: `img/${icon}`
+                            });
+                        });
+                        data('icon_size', icon_size => {
+                            block.child('img/image').data({
+                                height: icon_size,
+                                width: icon_size
+                            });
+                        });
+                    }
+            menu-item projects
+                val Projects
+                icon project_b.svg
+                icon_size 26px
+                //icon dashboard_l_b.png
+            menu-item domains
+                val Domains
+                icon globe_b.png
+            menu-item resources
+                val Resources
+                icon dns_b.png

@@ -1,0 +1,10 @@
+# server modules
+node_modules
+
+# database artifacts
+mongodb/dump
+mongodb/database
+
+# miscellaneous
+.DS_Store
+.vscode
