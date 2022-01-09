@@ -186,3 +186,417 @@
                 block.child('label').css('display', 'inline-table');
             });
         }
+
+// app-specific blocks
+!project-item
+    init
+        {
+            var block = Block('div');
+            var _block = block;
+            block
+                .css({
+                    width: '400px',
+                    height: '280px',
+                    borderRadius: '7px',
+                    backgroundColor: 'white',
+                    '-webkit-box-shadow': '2px 2px 5px 2px rgba(64,64,64,0.1)',
+                    'box-shadow': '2px 2px 5px 2px rgba(64,64,64,0.1)',
+                    display: 'inline-block',
+                    margin: '5px 10px 15px 10px',
+                    textAlign: 'left',
+                    boxSizing: 'border-box',
+                    padding: '20px 22px 20px 26px',
+                    position: 'relative'
+                })
+                .add(Block('div', 'menu_top')
+                    .css({
+                        top: '21px',
+                        right: '23px',
+                        width: '105px',
+                        height: '40px',
+                        position: 'absolute',
+                    })
+                    .add(Block('block', 'button_left')
+                        .css({
+                            position: 'absolute',
+                            left: '0',
+                            top: '0',
+                            width: '35px',
+                        })
+                        .add(Block('div', 'button_wrap')
+                            .css({
+                                height: '30px',
+                                width: '30px',
+                                display: 'inline-block'
+                            })
+                            .add(Block('button', 1)
+                                .key('disabled', 'no')
+                                .css({
+                                    height: '30px',
+                                    width: '30px',
+                                    outline: 'none',
+                                    border: 'none',
+                                    padding: '0',
+                                    opacity: '0.7',
+                                    transition: 'opacity 0.15s ease'
+                                })
+                                .on('disable', (e, b, d) => {
+                                    b.key('disabled', 'yes');
+                                    b.css({
+                                        opacity: '0.5',
+                                        pointerEvents: 'none'
+                                    });
+                                })
+                                .on('enable', (e, b, d) => {
+                                    b.key('disabled', 'no');
+                                    b.css({
+                                        opacity: '0.7',
+                                        pointerEvents: 'auto'
+                                    });
+                                })
+                                .on('disable')
+                                .on('mouseover', (e, b, d) => {
+                                    if (b.key('disabled') == 'no')
+                                        b.css('opacity', '1');
+                                })
+                                .on('mouseout', (e, b, d) => {
+                                    if (b.key('disabled') == 'no')
+                                        b.css('opacity', '0.7');
+                                })
+                                .on('click', (e, b, d) => {
+                                    if (b.key('disabled') == 'no') {
+                                        var repo = _block.key('repo');
+                                        if (repo != null && repo != '' && repo.trim() != '') {
+                                            b.child('a').data({ href: `${repo.trim()}` }).node().click();
+                                        }
+                                    }
+                                })
+                                .add(Block('image', 1)
+                                    .data({
+                                        height: '30px',
+                                        width: '30px',
+                                        src: '/img/code_b.png',
+                                        css: {
+                                            backgroundColor: 'white'
+                                        }
+                                    })
+                                )
+                                .add(Block('a', 1)
+                                    .css({
+                                        display: 'none',
+                                    })
+                                    .data({
+                                        href: '#',
+                                        target: '_blank'
+                                    })
+                                )
+                            )
+                        )
+                    )
+                    .add(Block('block', 'button_middle')
+                        .css({
+                            position: 'absolute',
+                            left: '35px',
+                            top: '0',
+                            width: '35px',
+                        })
+                        .add(Block('div', 'button_wrap')
+                            .css({
+                                height: '27px',
+                                width: '27px',
+                                display: 'inline-block'
+                            })
+                            .add(Block('button', 1)
+                                .key('disabled', 'no')
+                                .css({
+                                    height: '27px',
+                                    width: '27px',
+                                    outline: 'none',
+                                    border: 'none',
+                                    padding: '0',
+                                    opacity: '0.7',
+                                    transition: 'opacity 0.15s ease'
+                                })
+                                .on('disable', (e, b, d) => {
+                                    b.key('disabled', 'yes');
+                                    b.css({
+                                        opacity: '0.5',
+                                        pointerEvents: 'none'
+                                    });
+                                })
+                                .on('enable', (e, b, d) => {
+                                    b.key('disabled', 'no');
+                                    b.css({
+                                        opacity: '0.7',
+                                        pointerEvents: 'auto'
+                                    });
+                                })
+                                .on('disable')
+                                .on('mouseover', (e, b, d) => {
+                                    if (b.key('disabled') == 'no')
+                                        b.css('opacity', '0.9');
+                                })
+                                .on('mouseout', (e, b, d) => {
+                                    if (b.key('disabled') == 'no')
+                                        b.css('opacity', '0.7');
+                                })
+                                .on('click', (e, b, d) => {
+                                    if (b.key('disabled') == 'no') {
+                                        var link = _block.key('link');
+                                        if (link != null && link != '' && link.trim() != '') {
+                                            b.child('a').data({ href: `${link.trim()}` }).node().click();
+                                        }
+                                    }
+                                })
+                                .add(Block('image', 1)
+                                    .data({
+                                        height: '27px',
+                                        width: '27px',
+                                        src: '/img/public_b.png',
+                                        css: {
+                                            backgroundColor: 'white'
+                                        }
+                                    })
+                                )
+                                .add(Block('a', 1)
+                                    .css({
+                                        display: 'none',
+                                    })
+                                    .data({
+                                        href: '#',
+                                        target: '_blank'
+                                    })
+                                )
+                            )
+                        )
+                    )
+                    .add(Block('block', 'button_right')
+                        .css({
+                            position: 'absolute',
+                            right: '0',
+                            top: '0',
+                            width: '35px',
+                        })
+                        .add(Block('div', 'button_wrap')
+                            .css({
+                                height: '30px',
+                                width: '30px',
+                                display: 'inline-block'
+                            })
+                            .add(Block('button', 1)
+                                .key('disabled', 'no')
+                                .css({
+                                    height: '30px',
+                                    width: '30px',
+                                    outline: 'none',
+                                    border: 'none',
+                                    padding: '0',
+                                    opacity: '0.7',
+                                    transition: 'opacity 0.15s ease'
+                                })
+                                .on('disable', (e, b, d) => {
+                                    b.key('disabled', 'yes');
+                                    b.css({
+                                        opacity: '0.5',
+                                        pointerEvents: 'none'
+                                    });
+                                })
+                                .on('enable', (e, b, d) => {
+                                    b.key('disabled', 'no');
+                                    b.css({
+                                        opacity: '0.7',
+                                        pointerEvents: 'auto'
+                                    });
+                                })
+                                .on('enable')
+                                .on('mouseover', (e, b, d) => {
+                                    if (b.key('disabled') == 'no') {
+                                        b.css('opacity', '0.9');
+                                        if (_block.key('featured') === false) {
+                                            b.child('image').data({
+                                                src: '/img/bookmark_new_b.png'
+                                            });
+                                        }
+                                    }
+                                })
+                                .on('mouseout', (e, b, d) => {
+                                    if (b.key('disabled') == 'no')
+                                        b.css('opacity', '0.7');
+                                    if (_block.key('featured') === false) {
+                                        b.child('image').data({
+                                            src: '/img/bookmark_ol_b.png'
+                                        });
+                                    } else {
+                                        b.child('image').data({
+                                            src: '/img/bookmark_b.png'
+                                        });
+                                    }
+                                })
+                                .on('click', (e, b, d) => {
+                                    if (b.key('disabled') == 'no') {
+                                        app.ws.api.star_project(_block.key('id'));
+                                    }
+                                })
+                                .add(Block('image', 1)
+                                    .data({
+                                        height: '30px',
+                                        width: '30px',
+                                        src: '/img/bookmark_ol_b.png',
+                                        css: {
+                                            backgroundColor: 'white'
+                                        }
+                                    })
+                                )
+                            )
+                        )
+                    )
+                )
+                .add(Block('div', 'menu_extra')
+                    .css({
+                        top: '20px',
+                        right: '130px',
+                        width: '35px',
+                        height: '40px',
+                        position: 'absolute',
+                        display: 'none'
+                    })
+                    .add(Block('block', 'button_leftmost')
+                        .css({
+                            position: 'absolute',
+                            right: '0',
+                            top: '0',
+                            width: '35px',
+                        })
+                        .add(Block('div', 'button_wrap')
+                            .css({
+                                height: '23px',
+                                width: '23px',
+                                display: 'inline-block'
+                            })
+                            .add(Block('button', 1)
+                                .key('disabled', 'no')
+                                .css({
+                                    height: '23px',
+                                    width: '23px',
+                                    outline: 'none',
+                                    border: 'none',
+                                    padding: '0',
+                                    opacity: '0.7',
+                                    transition: 'opacity 0.15s ease'
+                                })
+                                .on('disable', (e, b, d) => {
+                                    b.key('disabled', 'yes');
+                                    b.css({
+                                        opacity: '0.5',
+                                        pointerEvents: 'none'
+                                    });
+                                })
+                                .on('enable', (e, b, d) => {
+                                    b.key('disabled', 'no');
+                                    b.css({
+                                        opacity: '0.7',
+                                        pointerEvents: 'auto'
+                                    });
+                                })
+                                .on('disable')
+                                .on('mouseover', (e, b, d) => {
+                                    if (b.key('disabled') == 'no')
+                                        b.css('opacity', '0.9');
+                                })
+                                .on('mouseout', (e, b, d) => {
+                                    if (b.key('disabled') == 'no')
+                                        b.css('opacity', '0.7');
+                                })
+                                .on('click', (e, b, d) => {
+                                    if (b.key('disabled') == 'no')
+                                        console.log('code');
+                                })
+                                .add(Block('image', 1)
+                                    .data({
+                                        height: '23px',
+                                        width: '23px',
+                                        src: '/img/launch_b.png',
+                                        css: {
+                                            backgroundColor: 'white'
+                                        }
+                                    })
+                                )
+                            )
+                        )
+                    )
+                )
+                .add(Block('div', 'spacer0')
+                    .css({
+                        height: '10px'
+                    })
+                )
+                .add(Block('div', 'name')
+                    .css({
+                        fontSize: '26px',
+                        fontWeight: '500'
+                    })
+                    .add(Block('text', 1)
+                        .data('_')
+                    )
+                )
+                .add(Block('div', 'spacer1')
+                    .css({
+                        height: '20px'
+                    })
+                )
+                .add(Block('div', 'description')
+                    .css({
+                        fontSize: '17px',
+                        fontWeight: '400',
+                        margin: '10px 2px 5px 5px'
+                    })
+                    .add(Block('text', 1)
+                        .data('_')
+                    )
+                )
+                .add(Block('div', 'spacer2')
+                    .css({
+                        height: '20px'
+                    })
+                )
+            ;
+            return block;
+        }
+    load
+        {
+            data('_id', (_id) => {
+                block.key('id', _id.toString());
+            });
+            data('name', (name) => {
+                block.key('name', name.toString());
+                block.child('name/text').html('').data(name);
+            });
+            data('description', (description) => {
+                block.key('description', description.toString());
+                block.child('description/text').html('').data(description);
+            });
+            data('featured', featured => {
+                block.key('featured', featured);
+                var img = '/img/bookmark';
+                if (featured) {
+                    img += '_b.png';
+                } else {
+                    img += '_ol_b.png';
+                }
+                block.child('menu_top/button_right/button_wrap/button/image').data({ src: img });
+            });
+            data('public', public => {
+                var img_src = '/img/public' + (public === true ? '' : '_off') + '_b.png';
+                block.child('menu_top/button_middle/button_wrap/button/image').data({
+                    src: img_src
+                });
+            });
+            data('link', link => {
+                block.key('link', link);
+                block.child('menu_top/button_middle/button_wrap/button').on('enable');
+            });
+            data('repo', repo => {
+                block.key('repo', repo);
+                block.child('menu_top/button_left/button_wrap/button').on('enable');
+            });
+        }

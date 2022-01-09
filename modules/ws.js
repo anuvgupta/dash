@@ -203,20 +203,39 @@ var init = _ => {
         var slug = req.slug ? (`${req.slug}`).trim() : '';
         var name = req.name ? (`${req.name}`).trim() : '';
         var repo = req.repo ? (`${req.repo}`).trim() : '';
+        var desc = req.desc ? (`${req.desc}`).trim() : '';
         if (slug != '' && name != '') {
             m.db.get_project(null, slug, (success1, result1) => {
                 if (success1 === false) return ws_server.return_event_error("new_project", "database error", client);
                 if (result1 != null && slug == result1.slug)
                     return ws_server.return_event_error("new_project", "identifier already taken", client);
-                m.db.create_project(slug, name, repo, false, (success2, result2) => {
+                m.db.create_project(slug, name, repo, desc, false, (success2, result2) => {
                     if (success2 === false) return ws_server.return_event_error("new_project", "database error", client);
-                    return ws_server.return_event_data("new_project", { id: result2.insertedId }, client);
+                    return ws_server.return_event_data("new_project", { id: result2, slug: slug }, client);
                 });
             });
         }
     });
     ws_server.bind("get_projects", (client, req) => {
-        log(req);
+        m.db.get_projects((success1, result1) => {
+            if (success1 === false || result1 === null)
+                return ws_server.return_event_error("get_projects", "database error", client);
+            return ws_server.return_event_data("get_projects", { list: result1 }, client);
+        });
+    })
+    ws_server.bind("star_project", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        if (id != '') {
+            m.db.get_project(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("star_project", "database error", client);
+                if (result1 == null)
+                    return ws_server.return_event_error("star_project", "project not found", client);
+                m.db.toggle_star_project(id, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("star_project", "database error", client);
+                    return ws_server.return_event_data("star_project", { id: id, starred: result2 }, client);
+                });
+            });
+        }
     })
 };
 var api = {};

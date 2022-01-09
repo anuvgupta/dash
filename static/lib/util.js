@@ -76,5 +76,11 @@ var util = {
     rand_int: (low, high) => {
         // inclusive
         return (Math.floor(Math.random() * (high - low + 1)) + low);
+    },
+    sort_compare_newest_first: (a, b, field = 'ts_updated') => {
+        return a[field] > b[field] ? -1 : 1;
+    },
+    sort_compare_oldest_first: (a, b, field = 'ts_updated') => {
+        return a[field] < b[field] ? -1 : 1;
     }
 };

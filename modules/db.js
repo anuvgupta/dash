@@ -20,7 +20,7 @@ var mongo_oid = mongodb.ObjectId;
 var init = _ => { };
 var api = {
     // projects
-    create_project: (slug, name, repo, public, resolve) => {
+    create_project: (slug, name, repo, desc, public, resolve) => {
         const timestamp = Date.now();
         mongo_api.collection('project').insertOne({
             slug: slug,
@@ -31,6 +31,8 @@ var api = {
             icon: null,
             featured: false,
             domains: [],
+            link: '',
+            description: desc,
             ts_created: timestamp,
             ts_updated: timestamp,
         }, (e, result1) => {
@@ -79,6 +81,32 @@ var api = {
                 err(`error deleting project ${id} | ${slug}`, e.message ? e.message : e);
                 resolve(false, e);
             } else resolve(result1.deletedCount == 1, result1);
+        });
+    },
+    toggle_star_project: (id, resolve) => {
+        mongo_api.collection('project').findOne({ _id: mongo_oid(id) }, (e, result1) => {
+            if (e) {
+                err(`error finding project ${id}`, e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (!result1) resolve(null, result1);
+                else {
+                    console.log(result1);
+                    var new_val = !(result1.featured);
+                    mongo_api.collection('project').updateOne({ _id: mongo_oid(id) }, {
+                        $set: {
+                            featured: new_val
+                        }
+                    }, (e2, result2) => {
+                        if (e2) {
+                            err(`error toggling star for project ${id}`, e2.message ? e2.message : e2);
+                            resolve(false, e2);
+                        } else {
+                            resolve(true, new_val);
+                        }
+                    });
+                }
+            }
         });
     },
     // domains

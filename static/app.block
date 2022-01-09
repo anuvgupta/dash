@@ -50,6 +50,35 @@ app
             }
         }
 
+    #new_project_res
+        {
+            if (new_project_res.success) {
+                app.ui.display_modal.new_project_res(`Created project "${new_project_res.data.slug}" (${new_project_res.data.id})`);
+            } else {
+                app.ui.display_modal.new_project_res(`<span style="color: #a60a0a; opacity: 0.9;">${util.capitalize(new_project_res.message ? new_project_res.message : 'unknown error')}.</span>`);
+            }
+        }
+
+    #get_projects_res
+        {
+            if (get_projects_res.success) {
+                console.log(get_projects_res.data.list);
+                block.child('main/content/projects').data({
+                    project_list: get_projects_res.data.list
+                });
+            } else {
+                app.ui.display_modal.generic_confirm('Load Projects', `Error - ${util.capitalize(get_projects_res.message ? get_projects_res.message : 'unknown error')}`);
+            }
+        }
+
+    #star_project_res
+        {
+            console.log(star_project_res.data.id, star_project_res.data.starred);
+            block.child('main/content/projects').data({
+                star_project: star_project_res.data
+            });
+        }
+
     div background
         css
             position absolute
@@ -130,7 +159,7 @@ app
                     val Dash
                     css
                         font-size 80px
-                        margin 100px 0 45px 0
+                        margin 110px 0 35px 0
                         color white
                         display block
                         font-weight 400
@@ -327,12 +356,12 @@ app
                             .on('select', (e, b, d) => {
                                 b.key('select', '1');
                                 b.css('background-color', '#f2f2f2');
-                                b.parent().sibling('content').child('' + b.mark()).css('display', 'block');
+                                b.parent().sibling('content').child('' + b.mark()).on('show');
                             })
                             .on('deselect', (e, b, d) => {
                                 b.key('select', '0');
                                 b.css('background-color', 'white');
-                                b.parent().sibling('content').child('' + b.mark()).css('display', 'none');
+                                b.parent().sibling('content').child('' + b.mark()).on('hide');
                             })
                             .on('click', (e, b, d) => {
                                 var siblings = b.parent().children();
@@ -426,15 +455,43 @@ app
                     display none
                     min-height 50px
                     position relative
+                :show
+                    css
+                        display block
+                    {
+                        setTimeout(_ => {
+                            app.ws.api.get_projects();
+                        }, 100);
+                    }
+                :hide
+                    css
+                        display none
+                #project_list
+                    {
+                        project_list = project_list.sort(util.sort_compare_newest_first);
+                        block.child('content').html('');
+                        for (var p in project_list) {
+                            var project_block_new = Block('project-item', `project_${project_list[p]._id.toString()}`).data(project_list[p]);
+                            block.child('content').add(project_block_new);
+                        }
+                    }
+                #star_project
+                    {
+                        var ch = block.child(`content/project_${star_project.id}`);
+                        if (ch)
+                            ch.data({
+                                featured: star_project.starred
+                            });
+                    }
                 button new_project_button
                     css
                         position absolute
-                        top 18px
+                        top 19px
                         right 15px
                         z-index 11
-                        min-width 45px
-                        width 45px
-                        height 45px
+                        min-width 42px
+                        width 42px
+                        height 42px
                         border none
                         outline none
                     class mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--primary new_project_button
@@ -493,6 +550,8 @@ app
                     css
                         width 100%
                         height auto
+                        text-align center
+                        padding-top 15px
             div domains
                 css
                     width 100%
@@ -500,12 +559,28 @@ app
                     display none
                     min-height 50px
                     position relative
+                :show
+                    css
+                        display block
+                    {
+                        setTimeout(_ => {
+                            app.ws.api.get_domains();
+                        }, 100);
+                    }
+                :hide
+                    css
+                        display none
                 button new_domain_button
                     css
                         position absolute
-                        top 20px
+                        top 19px
                         right 15px
                         z-index 11
+                        min-width 42px
+                        width 42px
+                        height 42px
+                        border none
+                        outline none
                     class mdl-button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary new_project_button
                     div content
                         text text
@@ -562,12 +637,28 @@ app
                     display none
                     min-height 50px
                     position relative
+                :show
+                    css
+                        display block
+                    {
+                        setTimeout(_ => {
+                            app.ws.api.get_resources();
+                        }, 100);
+                    }
+                :hide
+                    css
+                        display none
                 button new_resource_button
                     css
                         position absolute
-                        top 20px
+                        top 19px
                         right 15px
                         z-index 11
+                        min-width 42px
+                        width 42px
+                        height 42px
+                        border none
+                        outline none
                     class mdl-button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary new_project_button
                     div content
                         text text

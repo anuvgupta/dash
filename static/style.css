@@ -166,14 +166,14 @@ br.break {
 
 .modal_text_input_label {
     font-size: 18px;
-    width: 75px;
+    width: 115px;
     display: inline-block;
     margin-left: 10px;
 }
 .modal_text_input {
     font-size: 18px;
     margin: 1px 0;
-    width: calc(100% - 100px);
+    width: calc(100% - 140px);
     padding: 5px 10px;
     box-sizing: border-box;
 }

@@ -9,29 +9,72 @@ var app = {
             background: "#f1f1f1"
         },
         display_modal: {
+            disconnected: _ => {
+                bootbox.confirm({
+                    centerVertical: true,
+                    title: "Disconnected",
+                    message: "Refresh page?",
+                    callback: (result) => {
+                        if (result) window.location.reload();
+                    }
+                })
+            },
             new_project: _ => {
                 bootbox.confirm({
                     centerVertical: true,
                     title: '<span class="modal_title">Create Project</span>',
                     message: `<div id='new_project_display_modal'>` +
-                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">ID:</span>&nbsp;` +
-                        `<input placeholder="project-abc" class="modal_text_input" id="np_modal_slug_input" type='text' name='np_modal_slug'/></div>` +
                         `<div style="margin: 3px 0;"><span class="modal_text_input_label">Name:</span>&nbsp;` +
                         `<input placeholder="Project ABC" class="modal_text_input" id="np_modal_name_input" type='text' name='np_modal_name'/></div>` +
-                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Repo:</span>&nbsp;` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Identifier:</span>&nbsp;` +
+                        `<input placeholder="project-abc" class="modal_text_input" id="np_modal_slug_input" type='text' name='np_modal_slug'/></div>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Repository:</span>&nbsp;` +
                         `<input placeholder="https://github.com/u/project-abc" class="modal_text_input" id="np_modal_repo_input" type='text' name='np_modal_repo'/></div>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Description:</span>&nbsp;` +
+                        `<input placeholder="Lorem ipsum dolor sit amet..." class="modal_text_input" id="np_modal_desc_input" type='text' name='np_modal_desc'/></div>` +
                         `<div style="height: 8px"></div></div>`,
                     callback: (result) => {
                         if (result) {
                             var slug = (`${$('#new_project_display_modal #np_modal_slug_input')[0].value}`).trim();
                             var name = (`${$('#new_project_display_modal #np_modal_name_input')[0].value}`).trim();
                             var repo = (`${$('#new_project_display_modal #np_modal_repo_input')[0].value}`).trim();
+                            var desc = (`${$('#new_project_display_modal #np_modal_desc_input')[0].value}`).trim();
                             if (slug == "" || name == "") return false;
-                            app.ws.api.new_project(slug, name, repo);
+                            app.ws.api.new_project(slug, name, repo, desc);
                         }
                         return true;
                     }
                 });
+            },
+            generic_confirm: (title, message) => {
+                bootbox.confirm({
+                    centerVertical: true,
+                    title: `<span class="modal_title">${title}</span>`,
+                    message: (`${message}`),
+                    callback: (result) => {
+                        if (result) {
+                            setTimeout(_ => {
+                                app.ws.api.get_projects();
+                            }, 100);
+                            return true;
+                        }
+                    }
+                })
+            },
+            new_project_res: (message) => {
+                bootbox.confirm({
+                    centerVertical: true,
+                    title: '<span class="modal_title">Create Project</span>',
+                    message: (`${message}`),
+                    callback: (result) => {
+                        if (result) {
+                            setTimeout(_ => {
+                                app.ws.api.get_projects();
+                            }, 100);
+                            return true;
+                        }
+                    }
+                })
             }
         },
         init: (callback) => {
@@ -97,14 +140,7 @@ var app = {
             });
             socket.addEventListener('close', e => {
                 console.log('[ws] socket disconnected');
-                bootbox.confirm({
-                    centerVertical: true,
-                    title: "Disconnected",
-                    message: "Refresh page?",
-                    callback: (result) => {
-                        if (result) window.location.reload();
-                    }
-                })
+                app.ui.display_modal.disconnected();
             });
             window.addEventListener('beforeunload', e => {
                 // socket.close(1001);
@@ -142,11 +178,26 @@ var app = {
                 util.delete_cookie('token');
                 window.location.reload();
             },
-            new_project: (slug, name, repo) => {
+            new_project: (slug, name, repo, desc) => {
                 app.ws.send('new_project', {
                     slug: slug,
                     name: name,
-                    repo: repo
+                    repo: repo,
+                    desc: desc
+                });
+            },
+            get_projects: () => {
+                app.ws.send('get_projects', {});
+            },
+            get_domains: () => {
+                app.ws.send('get_domains', {});
+            },
+            get_resources: () => {
+                app.ws.send('get_resources', {});
+            },
+            star_project: (id) => {
+                app.ws.send('star_project', {
+                    id: id
                 });
             }
         }
