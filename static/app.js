@@ -5,7 +5,7 @@ var app = {
     ui: {
         block: Block('div', 'app'),
         colors: {
-            primary: "rgba(67, 133, 243, 0.99)", // rgba(219, 43, 58, 0.85)
+            primary: "rgba(20, 125, 252, 0.9)", //"rgba(0, 123, 255, 0.9)", // "rgba(67, 133, 243, 0.99)", // rgba(219, 43, 58, 0.85)
             background: "#f1f1f1"
         },
         display_modal: {
@@ -83,6 +83,9 @@ var app = {
             setTimeout(_ => {
                 app.ui.block.css('opacity', '1');
                 app.ui.block.on('ready');
+                setTimeout(_ => {
+                    window.componentHandler.upgradeDom();
+                }, 100);
             }, 100);
             setTimeout(_ => {
                 Block.queries();
