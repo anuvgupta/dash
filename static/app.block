@@ -697,7 +697,10 @@ app
                                 opacity 0.32
                         :click
                             {
-                                block.parent(1).on('deselect_project');
+                                block.parent().sibling('detail').on('hide_editors');
+                                setTimeout(_ => {
+                                    block.parent(1).on('deselect_project');
+                                }, 50);
                             }
                         image x
                             src /img/x_b.png
@@ -732,6 +735,7 @@ app
                                 description: project.description,
                                 public: project.public,
                                 featured: project.featured,
+                                link: project.link
                             });
                         }
                     #name
@@ -773,6 +777,26 @@ app
                                 val: featured === true ? 'on' : 'off'
                             });
                         }
+                    #link
+                        {
+                            var link_alt = link;
+                            var link_alt_alt = link_alt;
+                            if (link_alt == '') {
+                                link_alt = '<span class="text_placeholder" style="letter-spacing:0.8px;">offline</span>';
+                                link_alt_alt = '#';
+                                block.child('subcontent/project_info/link/value/text').css('color', '#222');
+                            } else block.child('subcontent/project_info/link/value/text').css('color', 'rgba(10, 115, 242, 0.95)');
+                            block.child('subcontent/project_info/link/value/text').html(`${link_alt}`).attribute('href', `${link_alt_alt}`);
+                            block.child('subcontent/project_info/link/value_editor').attribute('value', `${link}`); 
+                        }
+                    :hide_editors
+                        {
+                            block.child('subcontent/project_info/name/value_editor').on('hide');
+                            block.child('subcontent/project_info/slug/value_editor').on('hide');
+                            block.child('subcontent/project_info/tagline/value_editor').on('hide');
+                            block.child('subcontent/project_info/description/value_editor').on('hide');
+                            block.child('subcontent/project_info/link/value_editor').on('hide');
+                        }
                     :receive_project_update
                         {
                             var old_data = block.key('project');
@@ -798,6 +822,10 @@ app
                             }
                             if (old_data.featured != new_data.featured) {
                                 block.data({ featured: new_data.featured });
+                            }
+                            if (old_data.link != new_data.link) {
+                                block.data({ link: new_data.link, });
+                                block.child('subcontent/project_info/link/value_editor').on('hide');
                             }
                             block.key('project', new_data);
                         }
@@ -1245,11 +1273,14 @@ app
                                     css
                                         height 25.2px
                                         padding-left 1px
-                                    text text
-                                        val https://projectzero.ml
+                                    a text
+                                        html https://projectzero.anuv.me
+                                        href https://projectzero.anuv.me
                                         class value_text
+                                        target _blank
                                         css
                                             font-size 20px
+                                            font-weight 300
                                     :mouseover
                                         {
                                             if (block.child('edit_button').key('showing') == 'off')
@@ -1275,7 +1306,7 @@ app
                                             }
                                 input value_editor
                                     class value_editor
-                                    placeholder https://projectzero.ml
+                                    placeholder https://projectzero.anuv.me
                                     css
                                         display none
                                         height 27px
