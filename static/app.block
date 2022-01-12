@@ -84,6 +84,7 @@ app
            var current_project = block.child('main/content/projects/detail').key('project');
            if (current_project && current_project._id == update_project_res.data.id)
                block.child('main/content/projects/detail').on('receive_project_update', update_project_res.data.project);
+               block.child('main/content/projects').data({ update_project: update_project_res.data.project });
         }
 
     div background
@@ -484,6 +485,8 @@ app
                 #project_list
                     {
                         project_list = project_list.sort(util.sort_compare_newest_first);
+                        block.key('project_list', project_list);
+
                         block.child('content').html('');
                         for (var p in project_list) {
                             var project_block_new = Block('project-item', `project_${project_list[p]._id.toString()}`).data(project_list[p]).key('project_metadata', project_list[p]);
@@ -513,7 +516,7 @@ app
                             .sibling('detail').css('display', 'block')
                             .data({ project: select_project })
                         ;
-                        block.child('title/text').html(`Projects&nbsp;&nbsp;/&nbsp;&nbsp;<span class='b600'>${select_project.name}</span>`);
+                        block.child('title').data({ subproject: `${select_project.name}` });
                         block.child('new_project_button').css('display', 'none');
                         block.child('project_filter').css('display', 'none');
                         block.child('close').on('show');
@@ -523,7 +526,7 @@ app
                         block.child('detail').css('display', 'none')
                             .sibling('content').css('display', 'block')
                         ;
-                        block.child('title/text').html('').data('Projects');
+                        block.child('title').on('back');
                         block.child('new_project_button').css('display', 'inline-block');
                         block.child('project_filter').css('display', 'block');
                         block.child('close').on('hide');
@@ -533,6 +536,20 @@ app
                                 window.componentHandler.upgradeDom();
                             }, 20);
                         }, 5);
+                    }
+                #update_project
+                    {
+                        //console.log('update_project', update_project);
+                        var project_list = block.key('project_list');
+                        for (var p in project_list) {
+                            if (project_list[p]._id == update_project._id) {
+                                project_list[p] = update_project;
+                                break;
+                            }
+                        }
+                        block.data({
+                            project_list: project_list
+                        });
                     }
                 button new_project_button
                     css
@@ -586,6 +603,15 @@ app
                             font-size 30px
                             color #333
                         val Projects
+                    #subproject
+                        {
+                            block.child('text').html(`Projects&nbsp;&nbsp;/&nbsp;&nbsp;<span class='b600'>${subproject}</span>`);
+                        }
+                    :back
+                        {
+                            block.child('text').html('').data('Projects');
+                            event.stopPropagation();
+                        }
                 div divider
                     css
                         //width 100%
@@ -675,6 +701,9 @@ app
                         {
                             block.child('subcontent/project_info/name/value/text').html('').data(`${name}`);
                             block.child('subcontent/project_info/name/value_editor').attribute('value', `${name}`);
+                            block.sibling('title').data({
+                                subproject: `${name}`
+                            });
                         }
                     #slug
                         {
@@ -892,7 +921,6 @@ app
                                                 block.on('hide');
                                             }
                                         }
-                            
                             div tagline
                                 class value_edge
                                 text label
