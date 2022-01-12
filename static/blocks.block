@@ -188,6 +188,101 @@
         }
 
 // app-specific blocks
+!menu-item
+    init
+        {
+            var block = Block("div")
+                .key('select', '0')
+                .css({
+                    width: '100%',
+                    height: '70px',
+                    borderBottom: '1px solid #f0f0f0',
+                    backgroundColor: 'white',
+                    transition: 'background-color 0.15s ease',
+                    cursor: 'pointer',
+                    position: 'relative',
+                    zIndex: '10'
+                })
+                .on('mouseover', (e, b, d) => {
+                    if (b.key('select') == '0')
+                        b.css('background-color', '#f8f8f8');
+                })
+                .on('mouseout', (e, b, d) => {
+                    if (b.key('select') == '0')
+                        b.css('background-color', 'white');
+                })
+                .on('select', (e, b, d) => {
+                    b.key('select', '1');
+                    b.css('background-color', '#f2f2f2');
+                    b.parent().sibling('content').child('' + b.mark()).on('show');
+                })
+                .on('deselect', (e, b, d) => {
+                    b.key('select', '0');
+                    b.css('background-color', 'white');
+                    b.parent().sibling('content').child('' + b.mark()).on('hide');
+                })
+                .on('click', (e, b, d) => {
+                    var siblings = b.parent().children();
+                    for (var s in siblings) {
+                        if (siblings.hasOwnProperty(s) && s != b.mark())
+                            siblings[s].on('deselect');
+                    }
+                    b.on('select');
+                })
+                .add(Block('block', 'img')
+                    .css({
+                        width: '80px',
+                        float: 'left'
+                    })
+                    .add(Block('image', 1)
+                        .data({
+                            src: 'img/gear_b.png',
+                            height: '27px',
+                            width: '27px'
+                        })
+                        .css({
+                            margin: '0 auto',
+                            opacity: '0.7'
+                        })
+                    )
+                )
+                .add(Block('block', 'txt')
+                    .css({
+                        width: 'auto',
+                        float: 'left'
+                    })
+                    .add(Block('text', 1)
+                        .data("Title")
+                        .css({
+                            fontSize: '23px',
+                            fontWeight: '300',
+                            color: '#222',
+                            marginLeft: '-3px'
+                        })
+                    )
+                )
+            ;
+            return block;
+        }
+    load
+        {
+            data('val', val => {
+                block.child('txt/text').html('').data(`${val}`);
+            });
+            data('icon', icon => {
+                if (icon == "temp")
+                    icon = "gear_b.png";
+                block.child('img/image').data({
+                    src: `img/${icon}`
+                });
+            });
+            data('icon_size', icon_size => {
+                block.child('img/image').data({
+                    height: icon_size,
+                    width: icon_size
+                });
+            });
+        }
 !edit-button
     init
         {

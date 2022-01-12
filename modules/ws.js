@@ -187,13 +187,13 @@ var init = _ => {
     ws_server.bind("sign_in", (client, req) => {
         var success = false;
         var jwt_token = null;
-        if (req.password && req.password.toLowerCase() == global.config.secret.toLowerCase()) {
+        if (req.password && req.password.trim() == global.config.secret.trim()) {
             success = true;
             jwt_token = ws_server.authenticate_client(client);
         }
         ws_server.send_to_client("sign_in_res", {
             success: success,
-            message: (success ? null : "invalid token"),
+            message: (success ? null : "incorrect password"),
             data: { token: jwt_token }
         }, client, false);
     }, false);
