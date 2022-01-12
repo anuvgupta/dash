@@ -253,3 +253,8 @@ input.value_editor {
     width: auto;
     height: 35px;
 }
+
+span.text_placeholder {
+    font-style: italic;
+    opacity: 0.8;
+}

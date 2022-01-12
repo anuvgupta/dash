@@ -621,7 +621,16 @@
                         })
                     )
                     .add(Block('text', 'spacer')
-                        .data(' – ')
+                        .on('update', (e, b, d) => {
+                            var tagline_exists = _block.key('tagline') && _block.key('tagline').trim().length > 0;
+                            var desc_exists = _block.key('description') && _block.key('description').trim().length > 0;
+                            if (tagline_exists && desc_exists) b.css('display', 'inline-block');
+                            e.stopPropagation();
+                        })
+                        .html('&nbsp;–&nbsp;')
+                        .css({
+                            display: 'none'
+                        })
                     )
                     .add(Block('text', 'desc')
                         .data('_')
@@ -727,10 +736,12 @@
             data('description', (description) => {
                 block.key('description', description.toString());
                 block.child('description/desc').html('').data(description);
+                block.child('description/spacer').on('update');
             });
             data('tagline', (tagline) => {
                 block.key('tagline', tagline.toString());
                 block.child('description/tag').html('').data(tagline);
+                block.child('description/spacer').on('update');
             });
             data('featured', featured => {
                 block.key('featured', featured);
@@ -750,11 +761,11 @@
             });
             data('link', link => {
                 block.key('link', link);
-                block.child('menu_top/button_middle/button_wrap/button').on('enable');
+                block.child('menu_top/button_middle/button_wrap/button').on(link == '' ? 'disable' : 'enable');
             });
             data('repo', repo => {
                 block.key('repo', repo);
-                block.child('menu_top/button_left/button_wrap/button').on('enable');
+                block.child('menu_top/button_left/button_wrap/button').on(repo == '' ? 'disable' : 'enable');
             });
             data('ts_created', ts_created => {
                 block.key('ts_created', ts_created);
