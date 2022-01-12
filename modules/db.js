@@ -85,6 +85,7 @@ var api = {
         });
     },
     toggle_star_project: (id, resolve) => {
+        var ts_now = (new Date()).getTime();
         mongo_api.collection('project').findOne({ _id: mongo_oid(id) }, (e, result1) => {
             if (e) {
                 err(`error finding project ${id}`, e.message ? e.message : e);
@@ -95,7 +96,8 @@ var api = {
                     var new_val = !(result1.featured);
                     mongo_api.collection('project').updateOne({ _id: mongo_oid(id) }, {
                         $set: {
-                            featured: new_val
+                            featured: new_val,
+                            ts_updated: ts_now
                         }
                     }, (e2, result2) => {
                         if (e2) {
@@ -110,6 +112,7 @@ var api = {
         });
     },
     update_project: (id, update, resolve) => {
+        var ts_now = (new Date()).getTime();
         mongo_api.collection('project').findOne({ _id: mongo_oid(id) }, (e, result1) => {
             if (e) {
                 err(`error finding project ${id}`, e.message ? e.message : e);
@@ -117,6 +120,9 @@ var api = {
             } else {
                 if (!result1) resolve(null, result1);
                 else {
+                    if (!update.hasOwnProperty('ts_updated')) {
+                        update.ts_updated = ts_now;
+                    }
                     mongo_api.collection('project').updateOne({ _id: mongo_oid(id) }, {
                         $set: update
                     }, (e2, result2) => {

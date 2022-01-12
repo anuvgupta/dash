@@ -509,6 +509,22 @@ app
                             ch.data({
                                 featured: star_project.starred
                             });
+                        block.data({
+                            update_project_field: {
+                                id: star_project.id,
+                                field: 'featured',
+                                val: star_project.starred
+                            }
+                        });
+                        /*
+                        var current_project_info = block.child('detail').key('project');
+                        if (current_project_info && star_project.id == current_project_info._id) {
+                            current_project_info.featured = star_project.starred;
+                            block.data({
+                                update_project: current_project_info
+                            });
+                        }
+                        */
                     }
                 #select_project
                     {
@@ -544,6 +560,20 @@ app
                         for (var p in project_list) {
                             if (project_list[p]._id == update_project._id) {
                                 project_list[p] = update_project;
+                                break;
+                            }
+                        }
+                        block.data({
+                            project_list: project_list
+                        });
+                    }
+                #update_project_field
+                    {
+                        //console.log('update_project', update_project);
+                        var project_list = block.key('project_list');
+                        for (var p in project_list) {
+                            if (project_list[p]._id == update_project_field.id) {
+                                project_list[p][update_project_field.field] = update_project_field.val;
                                 break;
                             }
                         }
@@ -700,7 +730,8 @@ app
                                 slug: project.slug,
                                 tagline: project.tagline,
                                 description: project.description,
-                                public: project.public
+                                public: project.public,
+                                featured: project.featured,
                             });
                         }
                     #name
@@ -732,6 +763,12 @@ app
                                 val: public === true ? 'on' : 'off'
                             });
                         }
+                    #featured
+                        {
+                            block.child('subcontent/project_info/featured/value/switch').data({
+                                val: featured === true ? 'on' : 'off'
+                            });
+                        }
                     :receive_project_update
                         {
                             var old_data = block.key('project');
@@ -753,7 +790,10 @@ app
                                 block.child('subcontent/project_info/description/value_editor').on('hide');
                             }
                             if (old_data.public != new_data.public) {
-                                block.data({ public: new_data.public, });
+                                block.data({ public: new_data.public });
+                            }
+                            if (old_data.featured != new_data.featured) {
+                                block.data({ featured: new_data.featured });
                             }
                             block.key('project', new_data);
                         }
@@ -1114,6 +1154,8 @@ app
                                 class value_edge
                                 css
                                     width 50%
+                                    display inline-block
+                                    vertical-align top
                                 text label
                                     val Visibility
                                     class label_desc
@@ -1139,10 +1181,50 @@ app
                                         :modified
                                             {
                                                 //console.log('updated to ' + block.key('state'));
-                                                if (data.hasOwnProperty('locked') && data.locked == true) return;
                                                 var value = block.key('state') === true;
+                                                block.data({ label: (value ? 'Public' : 'Private') });
+                                                if (data.hasOwnProperty('locked') && data.locked == true) return;
                                                 block.parent(4).on('send_project_update', {
                                                     public: value
+                                                });
+                                                event.stopPropagation();
+                                            }
+                            div featured
+                                class value_edge
+                                css
+                                    width 50%
+                                    display inline-block
+                                    vertical-align top
+                                text label
+                                    val Featured
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    switch switch
+                                        val on
+                                        label Promoted
+                                        css
+                                            margin 0
+                                        {
+                                            block.child('label').css({
+                                                minWidth: '70px',
+                                                marginRight: '6px',
+                                                fontWeight: '300'
+                                            });
+                                        }
+                                        :modified
+                                            {
+                                                //console.log('updated to ' + block.key('state'));
+                                                var value = block.key('state') === true;
+                                                block.data({ label: (value ? 'Promoted' : 'Standard') });
+                                                if (data.hasOwnProperty('locked') && data.locked == true) return;
+                                                block.parent(4).on('send_project_update', {
+                                                    featured: value
                                                 });
                                                 event.stopPropagation();
                                             }
