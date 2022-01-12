@@ -645,6 +645,9 @@ app
                         css
                             display table
                             pointer-events auto
+                        {
+                            event.stopPropagation();
+                        }
                     button close_button
                         css
                             width 24px
@@ -652,16 +655,16 @@ app
                             border none
                             background-color rgba(255, 255, 255, 0)
                             outline none
-                            opacity 0.48
+                            opacity 0.32
                             cursor pointer
                             border-radius 100%
                             transition opacity 0.2s ease
                         :mouseover
                             css
-                                opacity 0.75
+                                opacity 0.68
                         :mouseout
                             css
-                                opacity 0.48
+                                opacity 0.32
                         :click
                             {
                                 block.parent(1).on('deselect_project');
@@ -694,7 +697,10 @@ app
                             block.key('project', project);
                             block.data({
                                 name: project.name,
-                                slug: project.slug
+                                slug: project.slug,
+                                tagline: project.tagline,
+                                description: project.description,
+                                public: project.public
                             });
                         }
                     #name
@@ -710,6 +716,22 @@ app
                             block.child('subcontent/project_info/slug/value/text').html('').data(`${slug}`);
                             block.child('subcontent/project_info/slug/value_editor').attribute('value', `${slug}`);
                         }
+                    #tagline
+                        {
+                            block.child('subcontent/project_info/tagline/value/text').html('').data(`${tagline}`);
+                            block.child('subcontent/project_info/tagline/value_editor').attribute('value', `${tagline}`);
+                        }
+                    #description
+                        {
+                            block.child('subcontent/project_info/description/value/text').html('').data(`${description}`);
+                            block.child('subcontent/project_info/description/value_editor').attribute('value', `${description}`);
+                        }
+                    #public
+                        {
+                            block.child('subcontent/project_info/public/value/switch').data({
+                                val: public === true ? 'on' : 'off'
+                            });
+                        }
                     :receive_project_update
                         {
                             var old_data = block.key('project');
@@ -721,6 +743,17 @@ app
                             if (old_data.slug != new_data.slug) {
                                 block.data({ slug: new_data.slug, });
                                 block.child('subcontent/project_info/slug/value_editor').on('hide');
+                            }
+                            if (old_data.tagline != new_data.tagline) {
+                                block.data({ tagline: new_data.tagline, });
+                                block.child('subcontent/project_info/tagline/value_editor').on('hide');
+                            }
+                            if (old_data.description != new_data.description) {
+                                block.data({ description: new_data.description, });
+                                block.child('subcontent/project_info/description/value_editor').on('hide');
+                            }
+                            if (old_data.public != new_data.public) {
+                                block.data({ public: new_data.public, });
                             }
                             block.key('project', new_data);
                         }
@@ -748,6 +781,7 @@ app
                             div title
                                 css
                                     height auto
+                                    min-height 50px
                                     width 100%
                                     position absolute
                                     top 24px
@@ -781,6 +815,8 @@ app
                                 text label
                                     val Name
                                     class label_desc
+                                    css
+                                        margin-bottom 3px
                                 block value
                                     {
                                         block.__child('content').css('text-align', 'left');
@@ -805,7 +841,7 @@ app
                                         // this is an edit button
                                         css
                                             margin-left 12px
-                                            padding-top 3px
+                                            padding-top 4px
                                         :click
                                             {
                                                 //block.parent(2).data('');
@@ -819,13 +855,14 @@ app
                                             }
                                 input value_editor
                                     class value_editor
-                                    placeholder Project Name
+                                    placeholder Project Zero
                                     css
                                         display none
                                         height 27px
                                         margin-top -2px
                                         margin-left -2px
                                         margin-bottom 2px
+                                        width 85%
                                     :hide
                                         {
                                             block.css('display', 'none').sibling('value').css('display', 'table');
@@ -879,7 +916,7 @@ app
                                     edit-button edit_button
                                         css
                                             margin-left 12px
-                                            padding-top 3px
+                                            padding-top 4px
                                         :click
                                             {
                                                 block.parent().css('display', 'none')
@@ -891,13 +928,14 @@ app
                                             }
                                 input value_editor
                                     class value_editor
-                                    placeholder Project ID
+                                    placeholder project-zero
                                     css
                                         display none
                                         height 27px
-                                        margin-top -2px
+                                        margin-top -2.5px
                                         margin-left -2px
-                                        margin-bottom 2px
+                                        margin-bottom 2.5px
+                                        width 85%
                                     :hide
                                         {
                                             block.css('display', 'none').sibling('value').css('display', 'table');
@@ -926,21 +964,188 @@ app
                                 text label
                                     val Tagline
                                     class label_desc
-                                text text
-                                    val Lorem ipsum dolor sit amet
-                                    class value_text
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
                                     css
+                                        height 25.2px
+                                        padding-left 1px
+                                    text text
+                                        val Lorem ipsum dolor sit amet
+                                        class value_text
+                                        css
+                                            font-size 20px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 5px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('project').tagline;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 50);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder Lorem ipsum dolor sit amet
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
                                         font-size 20px
+                                        width 90%
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                if (value.length > 0) {
+                                                    block.parent(3).on('send_project_update', {
+                                                        tagline: value
+                                                    });
+                                                }
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
                             div description
                                 class value_edge
                                 text label
                                     val Description
                                     class label_desc
-                                text text
-                                    val Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                    class value_text
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
                                     css
+                                        height 25.2px
+                                    text text
+                                        val Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        class value_text
+                                        css
+                                            font-size 17px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 3px
+                                            height 17px
+                                            width 17px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('project').description;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 50);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
                                         font-size 17px
+                                        width 90%
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                if (value.length > 0) {
+                                                    block.parent(3).on('send_project_update', {
+                                                        description: value
+                                                    });
+                                                }
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div public
+                                class value_edge
+                                css
+                                    width 50%
+                                text label
+                                    val Visibility
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    switch switch
+                                        val on
+                                        label Public
+                                        css
+                                            margin 0
+                                        {
+                                            block.child('label').css({
+                                                minWidth: '50px',
+                                                marginRight: '6px',
+                                                fontWeight: '300'
+                                            });
+                                        }
+                                        :modified
+                                            {
+                                                //console.log('updated to ' + block.key('state'));
+                                                if (data.hasOwnProperty('locked') && data.locked == true) return;
+                                                var value = block.key('state') === true;
+                                                block.parent(4).on('send_project_update', {
+                                                    public: value
+                                                });
+                                                event.stopPropagation();
+                                            }
                             div end_spacer
                                 css
                                     height 15px
