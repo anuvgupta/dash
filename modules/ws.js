@@ -222,7 +222,7 @@ var init = _ => {
                 return ws_server.return_event_error("get_projects", "database error", client);
             return ws_server.return_event_data("get_projects", { list: result1 }, client);
         });
-    })
+    });
     ws_server.bind("star_project", (client, req) => {
         var id = req.id ? (`${req.id}`).trim() : '';
         if (id != '') {
@@ -236,7 +236,22 @@ var init = _ => {
                 });
             });
         }
-    })
+    });
+    ws_server.bind("update_project", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        var update = req.update ? JSON.parse(JSON.stringify(req.update)) : null;
+        if (id != '' && update != null && Object.keys(update).length > 0) {
+            m.db.get_project(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("update_project", "database error", client);
+                if (result1 == null)
+                    return ws_server.return_event_error("update_project", "project not found", client);
+                m.db.update_project(id, update, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("update_project", "database error", client);
+                    return ws_server.return_event_data("update_project", { id: id, project: result2 }, client);
+                });
+            });
+        }
+    });
 };
 var api = {};
 

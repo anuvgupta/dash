@@ -32,6 +32,7 @@ var api = {
             featured: false,
             domains: [],
             link: '',
+            tagline: (`${desc.split(' ').splice(0, 8).join(' ')}...`),
             description: desc,
             ts_created: timestamp,
             ts_updated: timestamp,
@@ -91,7 +92,6 @@ var api = {
             } else {
                 if (!result1) resolve(null, result1);
                 else {
-                    console.log(result1);
                     var new_val = !(result1.featured);
                     mongo_api.collection('project').updateOne({ _id: mongo_oid(id) }, {
                         $set: {
@@ -103,6 +103,36 @@ var api = {
                             resolve(false, e2);
                         } else {
                             resolve(true, new_val);
+                        }
+                    });
+                }
+            }
+        });
+    },
+    update_project: (id, update, resolve) => {
+        mongo_api.collection('project').findOne({ _id: mongo_oid(id) }, (e, result1) => {
+            if (e) {
+                err(`error finding project ${id}`, e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (!result1) resolve(null, result1);
+                else {
+                    mongo_api.collection('project').updateOne({ _id: mongo_oid(id) }, {
+                        $set: update
+                    }, (e2, result2) => {
+                        if (e2) {
+                            err(`error updating project ${id}`, e2.message ? e2.message : e2);
+                            resolve(false, e2);
+                        } else {
+                            mongo_api.collection('project').findOne({ _id: mongo_oid(id) }, (e3, result3) => {
+                                if (e3) {
+                                    err(`error finding project ${id} after update`, e3.message ? e3.message : e3);
+                                    resolve(false, e3);
+                                } else {
+                                    if (!result3) resolve(null, result3);
+                                    else resolve(true, result3);
+                                }
+                            });
                         }
                     });
                 }

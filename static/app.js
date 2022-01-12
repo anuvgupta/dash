@@ -157,6 +157,7 @@ var app = {
             app.ws.socket.send(app.ws.encode_msg(event, data, token));
         },
         api: {
+            // auth
             cookie_login_flag: false,
             cookie_login: _ => {
                 app.ws.api.cookie_login_flag = true;
@@ -181,6 +182,10 @@ var app = {
                 util.delete_cookie('token');
                 window.location.reload();
             },
+            // projects
+            get_projects: () => {
+                app.ws.send('get_projects', {});
+            },
             new_project: (slug, name, repo, desc) => {
                 app.ws.send('new_project', {
                     slug: slug,
@@ -189,41 +194,61 @@ var app = {
                     desc: desc
                 });
             },
-            get_projects: () => {
-                app.ws.send('get_projects', {});
-            },
-            get_domains: () => {
-                app.ws.send('get_domains', {});
-            },
-            get_resources: () => {
-                app.ws.send('get_resources', {});
-            },
             star_project: (id) => {
                 app.ws.send('star_project', {
                     id: id
                 });
-            }
+            },
+            update_project: (id, update) => {
+                app.ws.send('update_project', {
+                    id: id,
+                    update: update
+                });
+            },
+            // domains
+            get_domains: () => {
+                app.ws.send('get_domains', {});
+            },
+            // resources
+            get_resources: () => {
+                app.ws.send('get_resources', {});
+            },
+            // applications
+            get_applications: () => {
+                app.ws.send('get_applications', {});
+            },
+            // ideas
+            get_ideas: () => {
+                app.ws.send('get_ideas', {});
+            },
         }
     },
     main: {
         init: _ => {
             console.clear();
-            console.log('[main] loading...');
+            console.log("[main] loading...");
             setTimeout(_ => {
                 app.ui.block.load(_ => {
                     app.ui.block.load(_ => {
-                        console.log('[main] blocks loaded');
-                        console.log('[main] socket connecting');
+                        console.log("[main] blocks loaded");
+                        console.log("[main] socket connecting");
                         app.ws.connect(_ => {
                             app.ui.init(_ => {
-                                console.log('[main] ready');
+                                console.log("[main] ready");
                                 setTimeout(app.ws.api.cookie_login, 100);
+                                setTimeout(app.main.test, 50)
                             });
                         });
                     }, 'app', 'jQuery');
                 }, 'blocks', 'jQuery');
             }, 300);
-        }
+        },
+        test: _ => {
+            console.log("[main] testing...");
+            setTimeout(_ => {
+                $('#manage_project_button_61d95372fca540b6c5b777ab')[0].click();
+            }, 300);
+        },
     }
 };
 
