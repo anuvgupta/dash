@@ -640,7 +640,9 @@ app
                                 description: project.description,
                                 public: project.public,
                                 featured: project.featured,
-                                link: project.link
+                                link: project.link,
+                                img: project.img,
+                                img_invert: project.img_invert
                             });
                         }
                     #name
@@ -694,6 +696,18 @@ app
                             block.child('subcontent/project_info/link/value/text').html(`${link_alt}`).attribute('href', `${link_alt_alt}`);
                             block.child('subcontent/project_info/link/value_editor').attribute('value', `${link}`); 
                         }
+                    #img
+                        {
+                            block.child('subcontent/project_info/image').data({
+                                update: img ? (`${img}`).trim() : ''
+                            });
+                        }
+                    #img_invert
+                        {
+                            block.child('subcontent/project_info/image').data({
+                                update_invert: img_invert
+                            });
+                        }
                     :hide_editors
                         {
                             block.child('subcontent/project_info/name/value_editor').on('hide');
@@ -731,6 +745,12 @@ app
                             if (old_data.link != new_data.link) {
                                 block.data({ link: new_data.link, });
                                 block.child('subcontent/project_info/link/value_editor').on('hide');
+                            }
+                            if (old_data.img != new_data.img) {
+                                block.data({ img: new_data.img, });
+                            }
+                            if (old_data.img_invert != new_data.img_invert) {
+                                block.data({ img_invert: new_data.img_invert, });
                             }
                             block.key('project', new_data);
                         }
@@ -839,7 +859,7 @@ app
                                         margin-top -2px
                                         margin-left -2px
                                         margin-bottom 2px
-                                        width 85%
+                                        width 55%
                                     :hide
                                         {
                                             block.css('display', 'none').sibling('value').css('display', 'table');
@@ -912,7 +932,7 @@ app
                                         margin-top -2.5px
                                         margin-left -2px
                                         margin-bottom 2.5px
-                                        width 85%
+                                        width 55%
                                     :hide
                                         {
                                             block.css('display', 'none').sibling('value').css('display', 'table');
@@ -1246,6 +1266,76 @@ app
                             div end_spacer
                                 css
                                     height 15px
+                            block image
+                                css
+                                    height 130px
+                                    width 130px
+                                    position absolute
+                                    top 80px
+                                    right 55px
+                                    border-radius 7px
+                                    opacity 0.99
+                                    transition opacity 0.2s ease
+                                    cursor pointer
+                                #update
+                                    {
+                                        block.key('img_path', update);
+                                        var data = {
+                                            src: '/img/gear_bg.jpg',
+                                            css: {
+                                                opacity: '0.9'
+                                            }
+                                        };
+                                        if (update && update.trim() != '') {
+                                            console.log(update);
+                                            data.src = update;
+                                            data.css.opacity = '0.97';
+                                        }
+                                        block.child('img').data(data);
+                                    }
+                                #update_invert
+                                    {
+                                        block.key('img_invert', update_invert);
+                                    }
+                                :mouseover
+                                    css
+                                        opacity 0.8
+                                    edit
+                                        css
+                                            opacity 0.85
+                                :mouseout
+                                    css
+                                        opacity 0.99
+                                    edit
+                                        css
+                                            opacity 0
+                                :click
+                                    {
+                                        var url = '';
+                                        if (block.key('img_path'))
+                                            url = block.key('img_path');
+                                        app.ui.display_modal.edit_project_image(block.parent(2).key('project')._id.toString(), url, block.key('img_invert'));
+                                    }
+                                image img
+                                    src /img/gear_bg.jpg
+                                    height 130px
+                                    width 130px
+                                    css
+                                        border-radius 7px
+                                        position absolute
+                                        top 0
+                                        left 0
+                                        opacity 0.9
+                                image edit
+                                    src /img/edit_b.png
+                                    height 25px
+                                    width 25px
+                                    css
+                                        margin 0 auto
+                                        position relative
+                                        z-index 100
+                                        opacity 0
+                                
             div applications
                 css
                     width 100%

@@ -19,17 +19,32 @@ var app = {
                     }
                 })
             },
+            generic_confirm: (title, message) => {
+                bootbox.confirm({
+                    centerVertical: true,
+                    title: `<span class="modal_title">${title}</span>`,
+                    message: (`${message}`),
+                    callback: (result) => {
+                        if (result) {
+                            setTimeout(_ => {
+                                app.ws.api.get_projects();
+                            }, 100);
+                            return true;
+                        }
+                    }
+                })
+            },
             new_project: _ => {
                 bootbox.confirm({
                     centerVertical: true,
                     title: '<span class="modal_title">Create Project</span>',
                     message: `<div id='new_project_display_modal'>` +
                         `<div style="margin: 3px 0;"><span class="modal_text_input_label">Name:</span>&nbsp;` +
-                        `<input placeholder="Project ABC" class="modal_text_input" id="np_modal_name_input" type='text' name='np_modal_name'/></div>` +
+                        `<input placeholder="Project Zero" class="modal_text_input" id="np_modal_name_input" type='text' name='np_modal_name'/></div>` +
                         `<div style="margin: 3px 0;"><span class="modal_text_input_label">Identifier:</span>&nbsp;` +
-                        `<input placeholder="project-abc" class="modal_text_input" id="np_modal_slug_input" type='text' name='np_modal_slug'/></div>` +
+                        `<input placeholder="project-zero" class="modal_text_input" id="np_modal_slug_input" type='text' name='np_modal_slug'/></div>` +
                         `<div style="margin: 3px 0;"><span class="modal_text_input_label">Repository:</span>&nbsp;` +
-                        `<input placeholder="https://github.com/u/project-abc" class="modal_text_input" id="np_modal_repo_input" type='text' name='np_modal_repo'/></div>` +
+                        `<input placeholder="https://github.com/u/project-zero" class="modal_text_input" id="np_modal_repo_input" type='text' name='np_modal_repo'/></div>` +
                         `<div style="margin: 3px 0;"><span class="modal_text_input_label">Description:</span>&nbsp;` +
                         `<input placeholder="Lorem ipsum dolor sit amet..." class="modal_text_input" id="np_modal_desc_input" type='text' name='np_modal_desc'/></div>` +
                         `<div style="height: 8px"></div></div>`,
@@ -46,21 +61,6 @@ var app = {
                     }
                 });
             },
-            generic_confirm: (title, message) => {
-                bootbox.confirm({
-                    centerVertical: true,
-                    title: `<span class="modal_title">${title}</span>`,
-                    message: (`${message}`),
-                    callback: (result) => {
-                        if (result) {
-                            setTimeout(_ => {
-                                app.ws.api.get_projects();
-                            }, 100);
-                            return true;
-                        }
-                    }
-                })
-            },
             new_project_res: (message) => {
                 bootbox.confirm({
                     centerVertical: true,
@@ -75,7 +75,31 @@ var app = {
                         }
                     }
                 })
-            }
+            },
+            edit_project_image: (id, url, invert) => {
+                bootbox.confirm({
+                    centerVertical: true,
+                    title: '<span class="modal_title">Update Project</span>',
+                    message: `<div id='update_project_img_display_modal'>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Image URL:</span>&nbsp;` +
+                        `<input value='${url}' placeholder="/img/projects/project-zero.png" class="modal_text_input" id="up_modal_imgurl_input" type='text' name='up_modal_imgurl'/></div>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Invert BG:</span>&nbsp;` +
+                        `<input ${invert ? 'checked' : ''} value='invert' style="margin-left: 5px; position: relative; top: 2px;" class="modal_checkbox_input" id="up_modal_invertbg_input" type='checkbox' name='up_modal_invertbg'/>` +
+                        `<label for="up_modal_invertbg">&nbsp;&nbsp;&nbsp;Invert image when used as a background</label></div>` +
+                        `<div style="height: 8px"></div></div>`,
+                    callback: (result) => {
+                        if (result) {
+                            var img_url = (`${$('#update_project_img_display_modal #up_modal_imgurl_input')[0].value}`).trim();
+                            var invert_bg = $('#update_project_img_display_modal #up_modal_invertbg_input')[0].checked;
+                            app.ws.api.update_project(id, {
+                                img: img_url,
+                                img_invert: invert_bg
+                            });
+                        }
+                        return true;
+                    }
+                });
+            },
         },
         init: (callback) => {
             app.ui.block.fill(document.body);

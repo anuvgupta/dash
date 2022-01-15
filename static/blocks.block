@@ -354,7 +354,8 @@
                         backgroundSize: 'cover',
                         boxSizing: 'border-box',
                         borderRadius: '7px',
-                        opacity: '0.025',
+                        opacity: '0.03',
+                        //filter:'invert()',
                         backgroundColor: 'white'
                     })
                 )
@@ -872,7 +873,16 @@
             });
             data('img', img => {
                 block.key('img', img);
-                //console.log(img);
-                block.child('bg').css('background-image', `url(${img.trim()})`);
+                block.child('bg').css({
+                    backgroundImage: `url(${img.trim()})`,
+                    opacity: '0.04',
+                    filter: 'invert()'
+                });
+            });
+            data('img_invert', img_invert => {
+                block.key('img_invert', img_invert);
+                block.child('bg').css({
+                    filter: img_invert == true ? 'invert()' : 'none'
+                });
             });
         }
