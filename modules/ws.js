@@ -252,6 +252,20 @@ var init = _ => {
             });
         }
     });
+    ws_server.bind("delete_project", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        if (id != '') {
+            m.db.get_project(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("delete_project", "database error", client);
+                if (result1 == null)
+                    return ws_server.return_event_error("delete_project", "project not found", client);
+                m.db.delete_project(id, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("delete_project", "database error", client);
+                    return ws_server.return_event_data("delete_project", { id: id }, client);
+                });
+            });
+        }
+    });
 };
 var api = {};
 

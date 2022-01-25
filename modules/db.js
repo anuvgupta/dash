@@ -145,6 +145,18 @@ var api = {
             }
         });
     },
+    delete_project: (id, resolve) => {
+        mongo_api.collection('project').deleteOne({ _id: mongo_oid(id) }, (e, coll1) => {
+            if (e) {
+                err(`error finding project ${id}`, e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (!coll1 || coll1.result.n != 1)
+                    resolve(null, coll1);
+                else resolve(true, coll1);
+            }
+        });
+    },
     // domains
     create_domain: (domain, sld, tld, resolve) => {
         // domain/full name (google.com), second-level domain (google), tld (com)

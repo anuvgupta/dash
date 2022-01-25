@@ -274,3 +274,13 @@ a:hover {
 div.bootbox.modal {
     text-align: left;
 }
+
+button.menu-button {
+    outline: none;
+    border: none;
+    background-color: rgba(50, 50, 50, 0);
+    transition: background-color 0.15s ease;
+}
+button.menu-button:hover {
+    background-color: rgba(50, 50, 50, 0.05);
+}

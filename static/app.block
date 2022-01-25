@@ -67,7 +67,14 @@ app
                     project_list: get_projects_res.data.list
                 });
             } else {
-                app.ui.display_modal.generic_confirm('Load Projects', `Error - ${util.capitalize(get_projects_res.message ? get_projects_res.message : 'unknown error')}`);
+                app.ui.display_modal.generic_confirm('Load Projects', `Error - ${util.capitalize(get_projects_res.message ? get_projects_res.message : 'unknown error')}`, (result) => {
+                    if (result) {
+                        setTimeout(_ => {
+                            app.ws.api.get_projects();
+                        }, 100);
+                        return true;
+                    }
+                });
             }
         }
 
@@ -85,6 +92,15 @@ app
            if (current_project && current_project._id == update_project_res.data.id)
                block.child('main/content/projects/detail').on('receive_project_update', update_project_res.data.project);
                block.child('main/content/projects').data({ update_project: update_project_res.data.project });
+        }
+
+    #delete_project_res
+        {
+            if (delete_project_res.success === true) {
+                block.child('main/content/projects').data({
+                    delete_project: delete_project_res.data.id
+                });
+            }
         }
 
     div background
@@ -400,12 +416,13 @@ app
                         if (project_list.length > 2)
                             block.child('content').css('text-align', 'center');
                         else block.child('content').css('text-align', 'left');
+                        Block.queries();
                         setTimeout(_ => {
                             Block.queries();
                             setTimeout(_ => {
                                 window.componentHandler.upgradeDom();
                             }, 20);
-                        }, 5);
+                        }, 10);
                     }
                 #star_project
                     {
@@ -485,6 +502,16 @@ app
                         block.data({
                             project_list: project_list
                         });
+                    }
+                #delete_project
+                    {
+                        var project_info = block.child('detail').key('project');
+                        if (project_info && project_info._id == delete_project) {
+                            block.child('close/close_button').on('click');
+                            setTimeout(_ => {
+                                app.ws.api.get_projects();
+                            }, 100);
+                        }
                     }
                 button new_project_button
                     css
@@ -710,11 +737,14 @@ app
                         }
                     :hide_editors
                         {
-                            block.child('subcontent/project_info/name/value_editor').on('hide');
-                            block.child('subcontent/project_info/slug/value_editor').on('hide');
-                            block.child('subcontent/project_info/tagline/value_editor').on('hide');
-                            block.child('subcontent/project_info/description/value_editor').on('hide');
-                            block.child('subcontent/project_info/link/value_editor').on('hide');
+                            //setTimeout(_ => {
+                                block.child('subcontent/project_info/name/value_editor').on('hide');
+                                block.child('subcontent/project_info/slug/value_editor').on('hide');
+                                block.child('subcontent/project_info/tagline/value_editor').on('hide');
+                                block.child('subcontent/project_info/description/value_editor').on('hide');
+                                block.child('subcontent/project_info/link/value_editor').on('hide');
+                                block.child('subcontent/project_info/more_menu').on('hide');
+                            //}, 200);
                         }
                     :receive_project_update
                         {
@@ -757,6 +787,25 @@ app
                     :send_project_update
                         {
                             app.ws.api.update_project(block.key('project')._id, data);
+                            event.stopPropagation();
+                        }
+                    :delete_project
+                        {
+                            //console.log('delete_project');
+                            var project_info = block.key('project');
+                            if (project_info) {
+                                app.ui.display_modal.generic_confirm("Delete Project", `Permanently delete project "${project_info.name}"?`, (result) => {
+                                    if (result) {
+                                        var confirm = window.confirm(`This action is not reversible — are you sure about deleting project "${project_info.name}"?`);
+                                        if (confirm) {
+                                            setTimeout(_ => {
+                                                app.ws.api.delete_project(project_info._id);
+                                            }, 100);
+                                        }
+                                        return true;
+                                    }
+                                });
+                            }
                             event.stopPropagation();
                         }
                     div subcontent
@@ -1272,11 +1321,13 @@ app
                                     width 130px
                                     position absolute
                                     top 80px
-                                    right 55px
+                                    right 40px
                                     border-radius 7px
                                     opacity 0.99
                                     transition opacity 0.2s ease
                                     cursor pointer
+                                    -webkit-box-shadow 1px 1px 2px 1px rgba(94,94,94,0.05)
+                                    box-shadow 1px 1px 2px 1px rgba(94,94,94,0.05)
                                 #update
                                     {
                                         block.key('img_path', update);
@@ -1296,13 +1347,14 @@ app
                                 #update_invert
                                     {
                                         block.key('img_invert', update_invert);
+                                        block.child('edit').css('filter', update_invert ? 'invert()' : 'none');
                                     }
                                 :mouseover
                                     css
                                         opacity 0.8
                                     edit
                                         css
-                                            opacity 0.85
+                                            opacity 0.95
                                 :mouseout
                                     css
                                         opacity 0.99
@@ -1335,7 +1387,126 @@ app
                                         position relative
                                         z-index 100
                                         opacity 0
-                                
+                            block more_menu_button_wrap
+                                css
+                                    position absolute
+                                    height 40px
+                                    width 40px
+                                    top 20px
+                                    right 22px
+                                button more_menu_button
+                                    css
+                                        outline none
+                                        border none
+                                        background-color rgba(255,255,255,0)
+                                        height 33px
+                                        width 33px
+                                        margin 0 auto
+                                        opacity 0.8
+                                        padding 0
+                                        display block
+                                    image img
+                                        src /img/more_b.png
+                                        height 33px
+                                        width 33px
+                                        css
+                                            margin 0 auto
+                                    :click
+                                        {
+                                            block.parent().sibling('more_menu').on('toggle');
+                                        }
+                                    :mouseover
+                                        css
+                                            opacity 0.65
+                                    :mouseout
+                                        css
+                                            opacity 0.8
+                            div more_menu
+                                $showing no
+                                :toggle
+                                    {
+                                        if (block.key('showing') === 'yes') {
+                                            block.on('hide');
+                                        } else {
+                                            block.on('show');
+                                        }
+                                    }
+                                :show
+                                    {
+                                        block.key('showing', 'yes');
+                                        block.css({ display: 'block' });
+                                        event.stopPropagation();
+                                    }
+                                :hide
+                                    {
+                                        block.key('showing', 'no');
+                                        block.css({ display: 'none' });
+                                        event.stopPropagation();
+                                    }
+                                css
+                                    position absolute
+                                    height 90px
+                                    width 85px
+                                    top 0
+                                    right -86px
+                                    border-radius 4px
+                                    border 1px solid #efefef
+                                    background-color white
+                                    display none
+                                    -webkit-box-shadow 1px 1px 4px 1px rgba(74,74,74,0.06)
+                                    box-shadow 1px 1px 4px 1px rgba(74,74,74,0.06)
+                                    font-size 12.5px
+                                    letter-spacing 0.8px
+                                    opacity 0.98
+                                div menu-item-1
+                                    css
+                                        height 30px
+                                        border-bottom 1px solid #eee
+                                        box-sizing border-box
+                                        border-radius 4px 4px 0 0
+                                    button button
+                                        class menu-button
+                                        css
+                                            height 100%
+                                            width 100%
+                                        html Lorem
+                                        :click
+                                            {
+                                                console.log('Lorem');
+                                            }
+                                div menu-item-2
+                                    css
+                                        height 30px
+                                        border-bottom 1px solid #eee
+                                        box-sizing border-box
+                                    button button
+                                        class menu-button
+                                        css
+                                            height 100%
+                                            width 100%
+                                        html Ipsum
+                                        :click
+                                            {
+                                                console.log('Ipsum');
+                                            }
+                                div menu-item-3
+                                    css
+                                        height 30px
+                                        border-bottom none
+                                        box-sizing border-box
+                                        border-radius 0 0 4px 4px
+                                    button button
+                                        class menu-button
+                                        css
+                                            height 100%
+                                            width 100%
+                                            color rgb(209, 36, 36)
+                                        html Delete
+                                        :click
+                                            {
+                                                //console.log('Delete');
+                                                block.parent(4).on('delete_project');
+                                            }
             div applications
                 css
                     width 100%

@@ -19,19 +19,12 @@ var app = {
                     }
                 })
             },
-            generic_confirm: (title, message) => {
+            generic_confirm: (title, message, callback) => {
                 bootbox.confirm({
                     centerVertical: true,
                     title: `<span class="modal_title">${title}</span>`,
                     message: (`${message}`),
-                    callback: (result) => {
-                        if (result) {
-                            setTimeout(_ => {
-                                app.ws.api.get_projects();
-                            }, 100);
-                            return true;
-                        }
-                    }
+                    callback: callback
                 })
             },
             new_project: _ => {
@@ -229,6 +222,11 @@ var app = {
                     update: update
                 });
             },
+            delete_project: (id) => {
+                app.ws.send('delete_project', {
+                    id: id
+                });
+            },
             // domains
             get_domains: () => {
                 app.ws.send('get_domains', {});
@@ -270,7 +268,7 @@ var app = {
         test: _ => {
             console.log("[main] testing...");
             setTimeout(_ => {
-                $('#manage_project_button_61d95372fca540b6c5b777ab')[0].click();
+                $('#manage_project_button_61f07dcc4dfe93526f26155f')[0].click();
             }, 300);
         },
     }
