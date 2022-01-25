@@ -1334,7 +1334,7 @@ app
                                         var data = {
                                             src: '/img/gear_bg.jpg',
                                             css: {
-                                                opacity: '0.9'
+                                                opacity: '0.75'
                                             }
                                         };
                                         if (update && update.trim() != '') {
@@ -1347,14 +1347,18 @@ app
                                 #update_invert
                                     {
                                         block.key('img_invert', update_invert);
-                                        block.child('edit').css('filter', update_invert ? 'invert()' : 'none');
+                                        block.child('edit').css({
+                                            'filter': update_invert ? 'invert()' : 'none'
+                                        });
+                                        block.key('edit_opacity', update_invert ? '1' : '0.6');
                                     }
+                                $edit_opacity 0.95
                                 :mouseover
                                     css
-                                        opacity 0.8
-                                    edit
-                                        css
-                                            opacity 0.95
+                                        opacity 0.94
+                                    {
+                                        block.child('edit').css('opacity', block.key('edit_opacity'));
+                                    }
                                 :mouseout
                                     css
                                         opacity 0.99
@@ -1387,6 +1391,7 @@ app
                                         position relative
                                         z-index 100
                                         opacity 0
+                                        transition opacity 0.15s ease
                             block more_menu_button_wrap
                                 css
                                     position absolute
