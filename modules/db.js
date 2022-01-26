@@ -26,6 +26,7 @@ var api = {
             slug: slug,
             name: name,
             repo: repo,
+            docs: '',
             public: public,
             img: null,
             icon: null,

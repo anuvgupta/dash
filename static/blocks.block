@@ -254,7 +254,7 @@
                     .add(Block('text', 1)
                         .data("Title")
                         .css({
-                            fontSize: '23px',
+                            fontSize: '22px',
                             fontWeight: '300',
                             color: '#222',
                             marginLeft: '-3px'
@@ -335,7 +335,7 @@
                     '-webkit-box-shadow': '2px 2px 5px 2px rgba(64,64,64,0.1)',
                     'box-shadow': '2px 2px 5px 2px rgba(64,64,64,0.1)',
                     display: 'inline-block',
-                    margin: '5px 10px 15px 10px',
+                    margin: '5px 12px 20px 12px',
                     textAlign: 'left',
                     boxSizing: 'border-box',
                     padding: '20px 22px 20px 26px',

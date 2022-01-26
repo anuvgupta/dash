@@ -694,7 +694,8 @@ app
                                 link: project.link,
                                 img: project.img,
                                 img_invert: project.img_invert,
-                                repo: project.repo
+                                repo: project.repo,
+                                docs: project.docs
                             });
                         }
                     #name
@@ -762,7 +763,7 @@ app
                         }
                     #repo
                         {
-                            console.log(repo);
+                            //console.log(repo);
                             var repo_alt = repo;
                             var repo_alt_alt = repo_alt;
                             if (repo_alt == '') {
@@ -772,6 +773,22 @@ app
                             } else block.child('subcontent/project_code/repo/value/text').css('color', 'rgba(10, 115, 242, 0.95)');
                             block.child('subcontent/project_code/repo/value/text').html(`${repo_alt}`).attribute('href', `${repo_alt_alt}`);
                             block.child('subcontent/project_code/repo/value_editor').attribute('value', `${repo}`); 
+                        }
+                    #docs
+                        {
+                            var docs_alt = docs;
+                            var docs_alt_alt = docs_alt;
+                            if (docs_alt == '') {
+                                docs_alt = '<span class="text_placeholder" style="letter-spacing:0.8px;">N/A</span>';
+                                docs_alt_alt = '#';
+                                block.child('subcontent/project_code/docs/value/text').css('color', '#222');
+                            } else {
+                                block.child('subcontent/project_code/docs/value/text').css('color', 'rgba(10, 115, 242, 0.95)');
+                                var length_limit = 37;
+                                if (docs_alt.length > length_limit) docs_alt = docs_alt.substring(0, length_limit - 2) + '...';
+                            }
+                            block.child('subcontent/project_code/docs/value/text').html(`${docs_alt}`).attribute('href', `${docs_alt_alt}`);
+                            block.child('subcontent/project_code/docs/value_editor').attribute('value', `${docs}`); 
                         }
                     :hide_editors
                         {
@@ -824,6 +841,10 @@ app
                             if (old_data.repo != new_data.repo) {
                                 block.data({ repo: new_data.repo, });
                                 block.child('subcontent/project_code/repo/value_editor').on('hide');
+                            }
+                            if (old_data.docs != new_data.docs) {
+                                block.data({ docs: new_data.docs, });
+                                block.child('subcontent/project_code/docs/value_editor').on('hide');
                             }
                             block.key('project', new_data);
                         }
@@ -1441,7 +1462,7 @@ app
                                         height 33px
                                         width 33px
                                         margin 0 auto
-                                        opacity 0.8
+                                        opacity 0.65
                                         padding 0
                                         display block
                                     image img
@@ -1456,10 +1477,10 @@ app
                                         }
                                     :mouseover
                                         css
-                                            opacity 0.65
+                                            opacity 0.8
                                     :mouseout
                                         css
-                                            opacity 0.8
+                                            opacity 0.65
                             div more_menu
                                 $showing no
                                 :toggle
@@ -1547,6 +1568,121 @@ app
                                                 //console.log('Delete');
                                                 block.parent(4).on('delete_project');
                                             }
+                        div project_apps
+                            class project_detail_section
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Applications
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/tree_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                     height 80px
+                            div repo
+                                class value_edge
+                                text label
+                                    val Repo
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                        padding-left 1px
+                                    a text
+                                        html https://github.com/u/projectzero
+                                        href https://github.com/u/projectzero
+                                        class value_text
+                                        target _blank
+                                        css
+                                            font-size 20px
+                                            font-weight 300
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 5px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('project').repo;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 50);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder https://github.com/u/projectzero
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 20px
+                                        width 90%
+                                        letter-spacing normal
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_project_update', {
+                                                        repo: value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div end_spacer
+                                css
+                                    height 15px
+                        
                         div project_code
                             class project_detail_section
                             div title
@@ -1578,7 +1714,7 @@ app
                                         opacity 0.6
                             div spacer
                                 css
-                                     height 80px
+                                        height 80px
                             div repo
                                 class value_edge
                                 text label
@@ -1658,45 +1794,10 @@ app
                                                 block.on('hide');
                                             }
                                         }
-                            div end_spacer
-                                css
-                                    height 15px
-                        div project_code2
-                            class project_detail_section
-                            div title
-                                css
-                                    height auto
-                                    min-height 50px
-                                    width 100%
-                                    position absolute
-                                    top 24px
-                                    left 0
-                                text text
-                                    val Code
-                                    css
-                                        position absolute
-                                        font-size 27px
-                                        letter-spacing 1px
-                                        opacity 0.95
-                                        top 7px
-                                        left 85px
-                                        font-weight 400
-                                image icon
-                                    src /img/code_b.png
-                                    height 35px
-                                    width 35px
-                                    css
-                                        position absolute
-                                        top 1px
-                                        left 28px
-                                        opacity 0.6
-                            div spacer
-                                css
-                                     height 80px
-                            div repo
+                            div docs
                                 class value_edge
                                 text label
-                                    val Repo
+                                    val Docs
                                     class label_desc
                                 block value
                                     {
@@ -1707,8 +1808,8 @@ app
                                         height 25.2px
                                         padding-left 1px
                                     a text
-                                        html https://github.com/u/projectzero
-                                        href https://github.com/u/projectzero
+                                        html https://projectzero.anuv.me/docs
+                                        href https://projectzero.anuv.me/docs
                                         class value_text
                                         target _blank
                                         css
@@ -1732,14 +1833,14 @@ app
                                             {
                                                 block.parent().css('display', 'none')
                                                     .sibling('value_editor').css('display', 'block');
-                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('project').repo;
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('project').docs;
                                                 setTimeout(_ => {
                                                     block.parent().sibling('value_editor').node().select();
                                                 }, 50);
                                             }
                                 input value_editor
                                     class value_editor
-                                    placeholder https://github.com/u/projectzero
+                                    placeholder https://projectzero.anuv.me/docs
                                     css
                                         display none
                                         height 27px
@@ -1763,7 +1864,7 @@ app
                                                 value = (`${value}`).trim();
                                                 //if (value.length > 0) {
                                                     block.parent(3).on('send_project_update', {
-                                                        repo: value
+                                                        docs: value
                                                     });
                                                 //}
                                                 setTimeout(_ => { block.on('hide'); }, 250);
@@ -1775,7 +1876,8 @@ app
                             div end_spacer
                                 css
                                     height 15px
-                        div project_code3
+                    
+                        div project_domains
                             class project_detail_section
                             div title
                                 css
@@ -1786,7 +1888,7 @@ app
                                     top 24px
                                     left 0
                                 text text
-                                    val Code
+                                    val Domains
                                     css
                                         position absolute
                                         font-size 27px
@@ -1796,7 +1898,7 @@ app
                                         left 85px
                                         font-weight 400
                                 image icon
-                                    src /img/code_b.png
+                                    src /img/globe_b.png
                                     height 35px
                                     width 35px
                                     css
@@ -1831,118 +1933,7 @@ app
                             div end_spacer
                                 css
                                     height 15px
-                        div project_code4
-                            class project_detail_section
-                            div title
-                                css
-                                    height auto
-                                    min-height 50px
-                                    width 100%
-                                    position absolute
-                                    top 24px
-                                    left 0
-                                text text
-                                    val Code
-                                    css
-                                        position absolute
-                                        font-size 27px
-                                        letter-spacing 1px
-                                        opacity 0.95
-                                        top 7px
-                                        left 85px
-                                        font-weight 400
-                                image icon
-                                    src /img/code_b.png
-                                    height 35px
-                                    width 35px
-                                    css
-                                        position absolute
-                                        top 1px
-                                        left 28px
-                                        opacity 0.6
-                            div spacer
-                                css
-                                     height 80px
-                            div repo
-                                class value_edge
-                                text label
-                                    val Repo
-                                    class label_desc
-                                block value
-                                    {
-                                        block.__child('content').css('text-align', 'left');
-                                    }
-                                    class value_text_wrap
-                                    css
-                                        height 25.2px
-                                        padding-left 1px
-                                    a text
-                                        html https://github.com/u/projectzero
-                                        href https://github.com/u/projectzero
-                                        class value_text
-                                        target _blank
-                                        css
-                                            font-size 20px
-                                            font-weight 300
-                            div end_spacer
-                                css
-                                    height 15px
-                        div project_code5
-                            class project_detail_section
-                            div title
-                                css
-                                    height auto
-                                    min-height 50px
-                                    width 100%
-                                    position absolute
-                                    top 24px
-                                    left 0
-                                text text
-                                    val Code
-                                    css
-                                        position absolute
-                                        font-size 27px
-                                        letter-spacing 1px
-                                        opacity 0.95
-                                        top 7px
-                                        left 85px
-                                        font-weight 400
-                                image icon
-                                    src /img/code_b.png
-                                    height 35px
-                                    width 35px
-                                    css
-                                        position absolute
-                                        top 1px
-                                        left 28px
-                                        opacity 0.6
-                            div spacer
-                                css
-                                     height 80px
-                            div repo
-                                class value_edge
-                                text label
-                                    val Repo
-                                    class label_desc
-                                block value
-                                    {
-                                        block.__child('content').css('text-align', 'left');
-                                    }
-                                    class value_text_wrap
-                                    css
-                                        height 25.2px
-                                        padding-left 1px
-                                    a text
-                                        html https://github.com/u/projectzero
-                                        href https://github.com/u/projectzero
-                                        class value_text
-                                        target _blank
-                                        css
-                                            font-size 20px
-                                            font-weight 300
-                            div end_spacer
-                                css
-                                    height 15px
+
             div applications
                 css
                     width 100%

@@ -5,7 +5,7 @@ var app = {
     ui: {
         block: Block('div', 'app'),
         colors: {
-            primary: "rgba(20, 125, 252, 0.9)", //"rgba(0, 123, 255, 0.9)", // "rgba(67, 133, 243, 0.99)", // rgba(219, 43, 58, 0.85)
+            primary: "rgba(20, 125, 252, 0.97)", //"rgba(0, 123, 255, 0.9)", // "rgba(67, 133, 243, 0.99)", // rgba(219, 43, 58, 0.85)
             background: "#f1f1f1"
         },
         display_modal: {
