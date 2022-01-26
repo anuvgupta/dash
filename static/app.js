@@ -5,7 +5,7 @@ var app = {
     ui: {
         block: Block('div', 'app'),
         colors: {
-            primary: "rgba(20, 125, 252, 0.97)", //"rgba(0, 123, 255, 0.9)", // "rgba(67, 133, 243, 0.99)", // rgba(219, 43, 58, 0.85)
+            primary: "rgba(20, 125, 252, 0.94)", //"rgba(0, 123, 255, 0.9)", // "rgba(67, 133, 243, 0.99)", // rgba(219, 43, 58, 0.85)
             background: "#f1f1f1"
         },
         display_modal: {
@@ -258,7 +258,7 @@ var app = {
                             app.ui.init(_ => {
                                 console.log("[main] ready");
                                 setTimeout(app.ws.api.cookie_login, 100);
-                                setTimeout(app.main.test, 50)
+                                setTimeout(app.main.test, app.main.test_delay)
                             });
                         });
                     }, 'app', 'jQuery');
@@ -271,6 +271,7 @@ var app = {
                 $('#manage_project_button_61f07dcc4dfe93526f26155f')[0].click();
             }, 300);
         },
+        test_delay: 100,
     }
 };
 

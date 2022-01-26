@@ -191,7 +191,8 @@
 !menu-item
     init
         {
-            var block = Block("div")
+            var block;
+            block = Block("div")
                 .key('select', '0')
                 .css({
                     width: '100%',
@@ -212,6 +213,9 @@
                         b.css('background-color', 'white');
                 })
                 .on('select', (e, b, d) => {
+                    if (b.key('select') == '1') {
+                        b.on('second_click');
+                    }
                     b.key('select', '1');
                     b.css('background-color', '#f2f2f2');
                     b.parent().sibling('content').child('' + b.mark()).on('show');

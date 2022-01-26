@@ -18,7 +18,7 @@ app
 
     :ready
         {
-            console.log('ready');
+            console.log('[block] ready');
         }
 
     #sign_in_res
@@ -362,6 +362,12 @@ app
                 icon project_b.svg
                 icon_size 26px
                 //icon dashboard_l_b.png
+                :second_click
+                    {
+                        var projects_block = block.parent().sibling('content').child('projects');
+                        if (projects_block.key('active_view') == 'detail') 
+                            projects_block.child('close/close_button').on('click');
+                    }
             menu-item applications
                 val Applications
                 icon tree_b.png
@@ -386,7 +392,9 @@ app
                     block.css('padding-left', (block.sibling('menu').$().width() + padding_plus) + 'px');
                     block.css('padding-right', (5 + padding_plus) + 'px');
                 }
+            
             div projects
+                $active_view content
                 css
                     width 100%
                     height auto
@@ -451,6 +459,7 @@ app
                     }
                 #select_project
                     {
+                        block.key('active_view', 'detail');
                         block.child('content').css('display', 'none')
                             .sibling('detail').css('display', 'block')
                             .data({ project: select_project })
@@ -463,6 +472,7 @@ app
                     }
                 :deselect_project
                     {
+                        block.key('active_view', 'content');
                         block.child('detail').css('display', 'none')
                             .sibling('content').css('display', 'block')
                         ;
@@ -672,7 +682,7 @@ app
                         }
                     :update_grid
                         {
-                            console.log('update_grid');
+                            //console.log('update_grid');
                             // set up masonry grid
                             $('div.masonry-grid-container').masonry({
                                 // options
@@ -1393,7 +1403,7 @@ app
                                             }
                                         };
                                         if (update && update.trim() != '') {
-                                            console.log(update);
+                                            //console.log(update);
                                             data.src = update;
                                             data.css.opacity = '0.97';
                                         }
@@ -1682,7 +1692,6 @@ app
                             div end_spacer
                                 css
                                     height 15px
-                        
                         div project_code
                             class project_detail_section
                             div title
@@ -1876,7 +1885,6 @@ app
                             div end_spacer
                                 css
                                     height 15px
-                    
                         div project_domains
                             class project_detail_section
                             div title
@@ -2012,6 +2020,7 @@ app
                     css
                         width 100%
                         height auto
+            
             div domains
                 css
                     width 100%
@@ -2090,6 +2099,7 @@ app
                     css
                         width 100%
                         height auto
+            
             div resources
                 css
                     width 100%
@@ -2168,6 +2178,7 @@ app
                     css
                         width 100%
                         height auto
+            
             div ideas
                 css
                     width 100%
