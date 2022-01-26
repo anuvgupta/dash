@@ -348,7 +348,8 @@ app
             css
                 top 0
                 left 0
-                width 343px
+                width 312px 
+                //width 343px
                 height 100%
                 background-color white
                 border-right none
@@ -458,6 +459,7 @@ app
                         block.child('new_project_button').css('display', 'none');
                         block.child('project_filter').css('display', 'none');
                         block.child('close').on('show');
+                        block.child('detail').on('update_grid');
                     }
                 :deselect_project
                     {
@@ -652,11 +654,33 @@ app
                         width 100%
                         height auto
                         text-align left
-                        padding-top 15px
-                        padding-left 10px
-                        padding-right 10px
+                        padding-top 1px
+                        padding-left 1px
+                        padding-right 1px
                         box-sizing border-box
                         display none
+                    $reload_grid yes
+                    @query window width != 0
+                        {
+                            if (block.key('reload_grid') === 'yes') {
+                                block.key('reload_grid', 'no');
+                                block.on('update_grid');
+                                setTimeout(_ => {
+                                    block.key('reload_grid', 'yes');
+                                }, 50);
+                            }
+                        }
+                    :update_grid
+                        {
+                            console.log('update_grid');
+                            // set up masonry grid
+                            $('div.masonry-grid-container').masonry({
+                                // options
+                                itemSelector: 'div.masonry-grid-container div.project_detail_section',
+                                columnWidth: 455
+                            });
+                            event.stopPropagation();
+                        }
                     #project
                         {
                             block.key('project', project);
@@ -669,7 +693,8 @@ app
                                 featured: project.featured,
                                 link: project.link,
                                 img: project.img,
-                                img_invert: project.img_invert
+                                img_invert: project.img_invert,
+                                repo: project.repo
                             });
                         }
                     #name
@@ -735,6 +760,19 @@ app
                                 update_invert: img_invert
                             });
                         }
+                    #repo
+                        {
+                            console.log(repo);
+                            var repo_alt = repo;
+                            var repo_alt_alt = repo_alt;
+                            if (repo_alt == '') {
+                                repo_alt = '<span class="text_placeholder" style="letter-spacing:0.8px;">N/A</span>';
+                                repo_alt_alt = '#';
+                                block.child('subcontent/project_code/repo/value/text').css('color', '#222');
+                            } else block.child('subcontent/project_code/repo/value/text').css('color', 'rgba(10, 115, 242, 0.95)');
+                            block.child('subcontent/project_code/repo/value/text').html(`${repo_alt}`).attribute('href', `${repo_alt_alt}`);
+                            block.child('subcontent/project_code/repo/value_editor').attribute('value', `${repo}`); 
+                        }
                     :hide_editors
                         {
                             //setTimeout(_ => {
@@ -743,6 +781,7 @@ app
                                 block.child('subcontent/project_info/tagline/value_editor').on('hide');
                                 block.child('subcontent/project_info/description/value_editor').on('hide');
                                 block.child('subcontent/project_info/link/value_editor').on('hide');
+                                block.child('subcontent/project_code/repo/value_editor').on('hide');
                                 block.child('subcontent/project_info/more_menu').on('hide');
                             //}, 200);
                         }
@@ -782,6 +821,10 @@ app
                             if (old_data.img_invert != new_data.img_invert) {
                                 block.data({ img_invert: new_data.img_invert, });
                             }
+                            if (old_data.repo != new_data.repo) {
+                                block.data({ repo: new_data.repo, });
+                                block.child('subcontent/project_code/repo/value_editor').on('hide');
+                            }
                             block.key('project', new_data);
                         }
                     :send_project_update
@@ -809,21 +852,11 @@ app
                             event.stopPropagation();
                         }
                     div subcontent
+                        class masonry-grid-container
                         css
-                            padding 4px 6px
+                            padding 1px 1px
                         div project_info
-                            css
-                                min-height 300px
-                                height auto
-                                width 450px
-                                background-color white
-                                border-radius 7px
-                                -webkit-box-shadow 2px 2px 5px 2px rgba(64,64,64,0.1)
-                                box-shadow 2px 2px 5px 2px rgba(64,64,64,0.1)
-                                position relative
-                                padding-left 40px
-                                padding-right 35px
-                                padding-bottom 10px
+                            class project_detail_section
                             div title
                                 css
                                     height auto
@@ -1288,6 +1321,7 @@ app
                                         margin-left -2px
                                         margin-bottom 2px
                                         font-size 20px
+                                        letter-spacing normal
                                         width 90%
                                     :hide
                                         {
@@ -1512,6 +1546,576 @@ app
                                                 //console.log('Delete');
                                                 block.parent(4).on('delete_project');
                                             }
+                        div project_code
+                            class project_detail_section
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Code
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/code_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                     height 80px
+                            div repo
+                                class value_edge
+                                text label
+                                    val Repo
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                        padding-left 1px
+                                    a text
+                                        html https://github.com/u/projectzero
+                                        href https://github.com/u/projectzero
+                                        class value_text
+                                        target _blank
+                                        css
+                                            font-size 20px
+                                            font-weight 300
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 5px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('project').repo;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 50);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder https://github.com/u/projectzero
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 20px
+                                        width 90%
+                                        letter-spacing normal
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_project_update', {
+                                                        repo: value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div end_spacer
+                                css
+                                    height 15px
+                        div project_code2
+                            class project_detail_section
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Code
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/code_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                     height 80px
+                            div repo
+                                class value_edge
+                                text label
+                                    val Repo
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                        padding-left 1px
+                                    a text
+                                        html https://github.com/u/projectzero
+                                        href https://github.com/u/projectzero
+                                        class value_text
+                                        target _blank
+                                        css
+                                            font-size 20px
+                                            font-weight 300
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 5px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('project').repo;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 50);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder https://github.com/u/projectzero
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 20px
+                                        width 90%
+                                        letter-spacing normal
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_project_update', {
+                                                        repo: value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div end_spacer
+                                css
+                                    height 15px
+                        div project_code3
+                            class project_detail_section
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Code
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/code_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                     height 80px
+                            div repo
+                                class value_edge
+                                text label
+                                    val Repo
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                        padding-left 1px
+                                    a text
+                                        html https://github.com/u/projectzero
+                                        href https://github.com/u/projectzero
+                                        class value_text
+                                        target _blank
+                                        css
+                                            font-size 20px
+                                            font-weight 300
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 5px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('project').repo;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 50);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder https://github.com/u/projectzero
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 20px
+                                        width 90%
+                                        letter-spacing normal
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_project_update', {
+                                                        repo: value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div end_spacer
+                                css
+                                    height 15px
+                        div project_code4
+                            class project_detail_section
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Code
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/code_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                     height 80px
+                            div repo
+                                class value_edge
+                                text label
+                                    val Repo
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                        padding-left 1px
+                                    a text
+                                        html https://github.com/u/projectzero
+                                        href https://github.com/u/projectzero
+                                        class value_text
+                                        target _blank
+                                        css
+                                            font-size 20px
+                                            font-weight 300
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 5px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('project').repo;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 50);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder https://github.com/u/projectzero
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 20px
+                                        width 90%
+                                        letter-spacing normal
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_project_update', {
+                                                        repo: value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div end_spacer
+                                css
+                                    height 15px
+                        div project_code5
+                            class project_detail_section
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Code
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/code_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                     height 80px
+                            div repo
+                                class value_edge
+                                text label
+                                    val Repo
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                        padding-left 1px
+                                    a text
+                                        html https://github.com/u/projectzero
+                                        href https://github.com/u/projectzero
+                                        class value_text
+                                        target _blank
+                                        css
+                                            font-size 20px
+                                            font-weight 300
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 5px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('project').repo;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 50);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder https://github.com/u/projectzero
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 20px
+                                        width 90%
+                                        letter-spacing normal
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_project_update', {
+                                                        repo: value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div end_spacer
+                                css
+                                    height 15px
             div applications
                 css
                     width 100%
