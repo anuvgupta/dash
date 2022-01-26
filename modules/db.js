@@ -158,6 +158,19 @@ var api = {
             }
         });
     },
+    project_summary: (resolve) => {
+        mongo_api.collection('project').find({
+            public: true,
+        }).toArray((e, result1) => {
+            if (e) {
+                err("error summarizing projects", e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (result1) resolve(true, result1);
+                else resolve(null, result1);
+            }
+        });
+    },
     // domains
     create_domain: (domain, sld, tld, resolve) => {
         // domain/full name (google.com), second-level domain (google), tld (com)

@@ -16,10 +16,43 @@ var err = null;
 
 
 /* MODULE */
+
 var http_server = null;
 var express_api = null;
 var http_port = null;
-var init = _ => { };
+
+function web_return_data(req, res, data) {
+    res.status(200);
+    res.setHeader('content-type', 'application/json');
+    res.send(JSON.stringify(data, null, 2));
+    return null;
+}
+
+function web_return_error(req, res, code, msg) {
+    res.status(code);
+    res.setHeader('content-type', 'application/json');
+    res.send(JSON.stringify({
+        status: code,
+        message: msg
+    }, null, 2));
+}
+
+var init = _ => {
+    express_api.get("/api/projects", (req, res) => {
+        m.db.project_summary((success, result) => {
+            if (success && result) {
+                for (var r in result) {
+                    delete result[r]['_id'];
+                    delete result[r]['public'];
+                    delete result[r]['domains'];
+                }
+                web_return_data(req, res, {
+                    project_summary: result
+                });
+            } else web_return_error(req, res, 500, "server error");
+        });
+    });
+};
 var api = {};
 
 
