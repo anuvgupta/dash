@@ -6,8 +6,8 @@
     "scripts": {
         "start": "node dash-cloud.js prod",
         "test": "nodemon --ignore 'mongodb/*' --ignore 'static/*' dash-cloud.js dev ",
-        "start daemon": "node dash-daemon.js prod",
-        "test daemon": "nodemon --ignore 'mongodb/*' --ignore 'static/*' dash-daemon.js dev "
+        "start-daemon": "node dash-daemon.js prod",
+        "test-daemon": "nodemon --ignore 'mongodb/*' --ignore 'static/*' dash-daemon.js dev "
     },
     "author": "",
     "license": "ISC",
