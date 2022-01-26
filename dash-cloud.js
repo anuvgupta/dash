@@ -1,5 +1,5 @@
 /* DASHBOARD */
-// project dashboard – server
+// project dashboard – cloud server
 
 /* IMPORTS */
 const fs = require("fs");
@@ -14,7 +14,7 @@ const body_parser = require("body-parser");
 /* ENVIRONMENT */
 global.args = process.argv.slice(2);
 global.env = global.args[0] == "prod" ? "prod" : "dev";
-global.config = JSON.parse(fs.readFileSync('./config.json', { encoding: 'utf8', flag: 'r' }));
+global.config = JSON.parse(fs.readFileSync('./cloud-config.json', { encoding: 'utf8', flag: 'r' }));
 global.http_port = global.env == "dev" ? 8000 : global.config.http_port;
 global.ws_port = global.env == "dev" ? 8080 : global.config.ws_port;
 global.mdb_port = global.env == "dev" ? 27017 : global.config.mdb_port;
@@ -38,6 +38,7 @@ fs.readdirSync(path.join(__dirname, "modules")).forEach(module_id => {
 
 /* MAIN */
 console.log("DASHBOARD");
+console.log("[svc] cloud");
 modules.utils.init("utils");
 for (var module_id in modules) {
     if (modules[module_id].hasOwnProperty('init') && modules[module_id].init &&
