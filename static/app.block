@@ -654,9 +654,9 @@ app
                         width 100%
                         height auto
                         text-align left
-                        padding-top 1px
-                        padding-left 1px
-                        padding-right 1px
+                        padding-top 0
+                        padding-left 2px
+                        padding-right 0
                         box-sizing border-box
                         display none
                     $reload_grid yes
@@ -1497,6 +1497,7 @@ app
                                     font-size 12.5px
                                     letter-spacing 0.8px
                                     opacity 0.98
+                                    z-index 200
                                 div menu-item-1
                                     css
                                         height 30px
@@ -1827,64 +1828,6 @@ app
                                         css
                                             font-size 20px
                                             font-weight 300
-                                    :mouseover
-                                        {
-                                            if (block.child('edit_button').key('showing') == 'off')
-                                                block.child('edit_button').on('show');
-                                        }
-                                    :mouseout
-                                        {
-                                            if (block.child('edit_button').key('showing') == 'on')
-                                                block.child('edit_button').on('hide');
-                                        }
-                                    edit-button edit_button
-                                        css
-                                            margin-left 14px
-                                            padding-top 5px
-                                        :click
-                                            {
-                                                block.parent().css('display', 'none')
-                                                    .sibling('value_editor').css('display', 'block');
-                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('project').repo;
-                                                setTimeout(_ => {
-                                                    block.parent().sibling('value_editor').node().select();
-                                                }, 50);
-                                            }
-                                input value_editor
-                                    class value_editor
-                                    placeholder https://github.com/u/projectzero
-                                    css
-                                        display none
-                                        height 27px
-                                        margin-top -1px
-                                        margin-left -2px
-                                        margin-bottom 2px
-                                        font-size 20px
-                                        width 90%
-                                        letter-spacing normal
-                                    :hide
-                                        {
-                                            block.css('display', 'none').sibling('value').css('display', 'table');
-                                            event.stopPropagation();
-                                        }
-                                    :keyup
-                                        {
-                                            if (event.keyCode == 13) {
-                                                // enter
-                                                var value = block.node().value;
-                                                if (!value) value = '';
-                                                value = (`${value}`).trim();
-                                                //if (value.length > 0) {
-                                                    block.parent(3).on('send_project_update', {
-                                                        repo: value
-                                                    });
-                                                //}
-                                                setTimeout(_ => { block.on('hide'); }, 250);
-                                            } else if (event.keyCode == 27) {
-                                                // escape
-                                                block.on('hide');
-                                            }
-                                        }
                             div end_spacer
                                 css
                                     height 15px
@@ -1941,64 +1884,6 @@ app
                                         css
                                             font-size 20px
                                             font-weight 300
-                                    :mouseover
-                                        {
-                                            if (block.child('edit_button').key('showing') == 'off')
-                                                block.child('edit_button').on('show');
-                                        }
-                                    :mouseout
-                                        {
-                                            if (block.child('edit_button').key('showing') == 'on')
-                                                block.child('edit_button').on('hide');
-                                        }
-                                    edit-button edit_button
-                                        css
-                                            margin-left 14px
-                                            padding-top 5px
-                                        :click
-                                            {
-                                                block.parent().css('display', 'none')
-                                                    .sibling('value_editor').css('display', 'block');
-                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('project').repo;
-                                                setTimeout(_ => {
-                                                    block.parent().sibling('value_editor').node().select();
-                                                }, 50);
-                                            }
-                                input value_editor
-                                    class value_editor
-                                    placeholder https://github.com/u/projectzero
-                                    css
-                                        display none
-                                        height 27px
-                                        margin-top -1px
-                                        margin-left -2px
-                                        margin-bottom 2px
-                                        font-size 20px
-                                        width 90%
-                                        letter-spacing normal
-                                    :hide
-                                        {
-                                            block.css('display', 'none').sibling('value').css('display', 'table');
-                                            event.stopPropagation();
-                                        }
-                                    :keyup
-                                        {
-                                            if (event.keyCode == 13) {
-                                                // enter
-                                                var value = block.node().value;
-                                                if (!value) value = '';
-                                                value = (`${value}`).trim();
-                                                //if (value.length > 0) {
-                                                    block.parent(3).on('send_project_update', {
-                                                        repo: value
-                                                    });
-                                                //}
-                                                setTimeout(_ => { block.on('hide'); }, 250);
-                                            } else if (event.keyCode == 27) {
-                                                // escape
-                                                block.on('hide');
-                                            }
-                                        }
                             div end_spacer
                                 css
                                     height 15px
@@ -2055,64 +1940,6 @@ app
                                         css
                                             font-size 20px
                                             font-weight 300
-                                    :mouseover
-                                        {
-                                            if (block.child('edit_button').key('showing') == 'off')
-                                                block.child('edit_button').on('show');
-                                        }
-                                    :mouseout
-                                        {
-                                            if (block.child('edit_button').key('showing') == 'on')
-                                                block.child('edit_button').on('hide');
-                                        }
-                                    edit-button edit_button
-                                        css
-                                            margin-left 14px
-                                            padding-top 5px
-                                        :click
-                                            {
-                                                block.parent().css('display', 'none')
-                                                    .sibling('value_editor').css('display', 'block');
-                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('project').repo;
-                                                setTimeout(_ => {
-                                                    block.parent().sibling('value_editor').node().select();
-                                                }, 50);
-                                            }
-                                input value_editor
-                                    class value_editor
-                                    placeholder https://github.com/u/projectzero
-                                    css
-                                        display none
-                                        height 27px
-                                        margin-top -1px
-                                        margin-left -2px
-                                        margin-bottom 2px
-                                        font-size 20px
-                                        width 90%
-                                        letter-spacing normal
-                                    :hide
-                                        {
-                                            block.css('display', 'none').sibling('value').css('display', 'table');
-                                            event.stopPropagation();
-                                        }
-                                    :keyup
-                                        {
-                                            if (event.keyCode == 13) {
-                                                // enter
-                                                var value = block.node().value;
-                                                if (!value) value = '';
-                                                value = (`${value}`).trim();
-                                                //if (value.length > 0) {
-                                                    block.parent(3).on('send_project_update', {
-                                                        repo: value
-                                                    });
-                                                //}
-                                                setTimeout(_ => { block.on('hide'); }, 250);
-                                            } else if (event.keyCode == 27) {
-                                                // escape
-                                                block.on('hide');
-                                            }
-                                        }
                             div end_spacer
                                 css
                                     height 15px
