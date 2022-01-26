@@ -263,6 +263,7 @@ app
             display none
             height 100%
             width 100%
+            overflow hidden
         div bar
             css
                 box-shadow rgba(50, 50, 50, 0.3) 0px 2px 4px
@@ -469,6 +470,9 @@ app
                         block.child('project_filter').css('display', 'none');
                         block.child('close').on('show');
                         block.child('detail').on('update_grid');
+                        setTimeout(_ => {
+                            Block.queries();
+                        }, 50);
                     }
                 :deselect_project
                     {
@@ -659,6 +663,13 @@ app
                         padding-left 10px
                         padding-right 10px
                         box-sizing border-box
+                        overflow-x hidden
+                        overflow-y auto
+                        -webkit-overflow-scrolling touch
+                    @query window width != 0
+                        {
+                            block.css('height', (window.innerHeight - block.$().offset().top - 14) + 'px');
+                        }
                 div detail
                     css
                         width 100%
@@ -669,9 +680,13 @@ app
                         padding-right 0
                         box-sizing border-box
                         display none
+                        overflow-x hidden
+                        overflow-y auto
+                        -webkit-overflow-scrolling touch
                     $reload_grid yes
                     @query window width != 0
                         {
+                            block.css('height', (window.innerHeight - block.$().offset().top - 14) + 'px');
                             if (block.key('reload_grid') === 'yes') {
                                 block.key('reload_grid', 'no');
                                 block.on('update_grid');
