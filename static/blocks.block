@@ -745,7 +745,8 @@
                     .css({
                         maxHeight: '120px',
                         height: '100%',
-                        width: '99%'
+                        width: '99%',
+                        transition: 'height 0.05s ease, max-height 0.05s ease'
                     })
                     .query('window width != 0', function (event, block, data) {
                         block.css('max-height', `calc(100% - ${3 - 3 + ((5 + block.sibling('description').$().height() + 20 + 20 + 10) + 45)}px)`);
@@ -753,7 +754,7 @@
                     .add(Block('block', 'content')
                         .add(Block('div', 'mdl_button_container')
                             .css({
-                                height: '50px',
+                                height: '45px',
                                 width: '150px',
                                 margin: '0 auto',
                             })
@@ -888,5 +889,270 @@
                 block.child('bg').css({
                     filter: img_invert == true ? 'invert()' : 'none'
                 });
+            });
+        }
+!resource-item
+    init
+        {
+            var block = Block('div');
+            var _block = block;
+            block
+                .css({
+                    width: '390px',
+                    height: '415px',
+                    borderRadius: '8px',
+                    backgroundColor: 'white',
+                    '-webkit-box-shadow': '2px 2px 5px 2px rgba(64,64,64,0.1)',
+                    'box-shadow': '2px 2px 5px 2px rgba(64,64,64,0.1)',
+                    display: 'inline-block',
+                    margin: '5px 12px 20px 12px',
+                    textAlign: 'left',
+                    boxSizing: 'border-box',
+                    padding: '25px 32px 25px 36px',
+                    position: 'relative',
+                    verticalAlign: 'top'
+                })
+                .add(Block('div', 'spacer0')
+                    .css({
+                        height: '8px'
+                    })
+                )
+                .add(Block('div', 'name')
+                    .css({
+                        fontSize: '27px',
+                        fontWeight: '500',  // 600
+                        opacity: '0.95',
+                        letterSpacing: '1px'
+                    })
+                    .add(Block('text', 1)
+                        .data('_')
+                    )
+                )
+                .add(Block('div', 'spacer1')
+                    .css({
+                        height: '20px'
+                    })
+                )
+                .add(Block('div', 'description')
+                    .css({
+                        fontSize: '17px',
+                        fontWeight: '300',
+                        margin: '10px 2px 5px 5px',
+                        opacity: '0.9',
+                        letterSpacing: '0.5px',
+                        lineHeight: '24px'
+                    })
+                    .add(Block('text', 'tag')
+                        .data('_')
+                        .css({
+                            fontWeight: '500'
+                        })
+                    )
+                    .add(Block('text', 'spacer')
+                        .on('update', (e, b, d) => {
+                            var tagline_exists = _block.key('tagline') && _block.key('tagline').trim().length > 0;
+                            var desc_exists = _block.key('description') && _block.key('description').trim().length > 0;
+                            if (tagline_exists && desc_exists) b.css('display', 'inline-block');
+                            e.stopPropagation();
+                        })
+                        .html('&nbsp;–&nbsp;')
+                        .css({
+                            display: 'none'
+                        })
+                    )
+                    .add(Block('text', 'desc')
+                        .data('_')
+                    )
+                )
+                .add(Block('div', 'spacer2')
+                    .css({
+                        height: '5px'
+                    })
+                )
+                .add(Block('div', 'status')
+                    .css({
+                        width: '100%',
+                        height: '80px',
+                        marginTop: '14px'
+                    })
+                    .add(Block('block', 'light')
+                        .css({
+                            width: '27%',
+                            height: '100%',
+                            float: 'left'
+                        })
+                        .query('window width >= 665', function (event, block, data) {
+                            block.css('width', '27%');
+                        })
+                        .query('window width < 665', function (event, block, data) {
+                            block.css('width', '23%');
+                        })
+                        .add(Block('div', 'circle')
+                            .css({
+                                borderRadius: '100%',
+                                height: '19px',
+                                width: '19px',
+                                backgroundColor: '#ddd',
+                                border: '1px solid #eee',
+                                margin: '0 0 0 auto'
+                            })
+                        )
+                    )
+                    .add(Block('div', 'labels')
+                        .css({
+                            width: '73%',
+                            height: '100%',
+                            float: 'left',
+                            paddingLeft: '25px',
+                            boxSizing: 'border-box'
+                        })
+                        .add(Block('div', 'type')
+                            .css({
+                                height: '50%',
+                                width: '100%'
+                            })
+                            .add(Block('text', 1)
+                                .data('Cloud VPS')
+                                .css({
+                                    display: 'block',
+                                    textAlign: 'left',
+                                    paddingTop: '17px',
+                                    fontSize: '21px',
+                                    color: '#222'
+                                })
+                            )
+                        )
+                        .add(Block('div', 'status')
+                            .css({
+                                height: '50%',
+                                width: '100%'
+                            })
+                            .add(Block('text', 1)
+                                .data('Status some time ago')
+                                .css({
+                                    display: 'block',
+                                    textAlign: 'left',
+                                    fontSize: '14px',
+                                    color: '#888',
+                                    fontStyle: 'italic',
+                                    paddingTop: '2px'
+                                })
+                            )
+                        )
+                    )
+                )
+                .add(Block('div', 'resource_content')
+                    .css({
+                        maxHeight: '120px',
+                        height: '100%',
+                        width: '99%',
+                        transition: 'height 0.05s ease, max-height 0.05s ease'
+                    })
+                    .query('window width != 0', function (event, block, data) {
+                        block.css('max-height', `calc(100% - ${3 - 3 + ((5 + block.sibling('description').$().height() + 20 + 20 + 10) + 45 + 85 + 10 + 12 + 20)}px)`);
+                    })
+                    .add(Block('block', 'content')
+                        .add(Block('div', 'mdl_button_container')
+                            .css({
+                                height: '65px',
+                                width: '150px',
+                                margin: '0 auto',
+                            })
+                            .add(Block('button', 1)
+                                .class('mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect')
+                                .html('Manage')
+                                .css({
+                                    backgroundColor: app.ui.colors.primary,
+                                    color: 'white',
+                                    letterSpacing: '2.5px',
+                                    fontSize: '12px',
+                                    fontWeight: '500',
+                                    paddingLeft: '25px',
+                                    paddingRight: '25px',
+                                    opacity: '1',
+                                    transition: 'opacity 0.2s ease',
+                                    height: '65px',  // 42px
+                                    outline: 'none'
+                                })
+                                .on('mouseover', (e, b, d) => {
+                                    b.css('opacity', '0.8');
+                                })
+                                .on('mouseout', (e, b, d) => {
+                                    b.css('opacity', '1');
+                                })
+                                .on('click', (e, b, d) => {
+                                    var resource_metadata = null;
+                                    resource_metadata = _block.key('resource_metadata');
+                                    if (resource_metadata) {
+                                        _block.parent(1).data({
+                                            select_resource: resource_metadata
+                                        });
+                                    }
+                                })
+                            )
+                        )
+                    )
+                )
+                .add(Block('div', 'created_year')
+                    .css({
+                        position: 'absolute',
+                        bottom: '27px',
+                        right: '32px',
+                        width: '40px',
+                        height: '20px',
+                        fontSize: '19px',
+                        opacity: '0.9'
+                    })
+                    .add(Block('text', 1)
+                        .data(`${(new Date()).getFullYear()}`)
+                    )
+                )
+                .add(Block('div', 'last_updated_msg')
+                    .css({
+                        position: 'absolute',
+                        bottom: '27px',
+                        left: '34px',
+                        width: '100px',
+                        height: '20px',
+                        fontSize: '14px',
+                        opacity: '0.85'
+                    })
+                    .add(Block('text', 1)
+                        .data('Some time ago')
+                    )
+                )
+            ;
+            return block;
+        }
+    load
+        {
+            data('_id', (_id) => {
+                block.key('id', _id.toString());
+                block.child('resource_content/content/mdl_button_container/button').id(`manage_resource_button_${_id.toString()}`);
+            });
+            data('name', (name) => {
+                block.key('name', name.toString());
+                block.child('name/text').html('').data(name);
+            });
+            data('link', link => {
+                block.key('link', link);
+                //block.child('menu_top/button_middle/button_wrap/button').on(link == '' ? 'disable' : 'enable');
+            });
+            data('ts_created', ts_created => {
+                block.key('ts_created', ts_created);
+                //block.child('created_year/text').html('').data(`${(new Date(ts_created)).getFullYear()}`);
+            });
+            data('ts_updated', ts_updated => {
+                block.key('ts_updated', ts_updated);
+                //block.child('last_updated_msg/text').html('').data(`${util.capitalize(util.duration_desc(ts_updated))}`);
+            });
+            data('specs', specs => {
+                block.key('specs', specs);
+                var desc_string = `${specs.cpu} CPU${specs.cpu == 1 ? '' : 's'} – ${specs.memory}GB RAM – ${specs.storage}GB SSD${specs.location == '' ? '' : ' – '}${specs.location}`;
+                block.key('tagline', "");
+                block.child('description/tag').html('');
+                block.key('description', desc_string.toString());
+                block.child('description/desc').html('').data(desc_string);
+                block.child('description/spacer').on('update');
             });
         }

@@ -266,6 +266,32 @@ var init = _ => {
             });
         }
     });
+
+    // resources
+    ws_server.bind("new_resource", (client, req) => {
+        var slug = req.slug ? (`${req.slug}`).trim() : '';
+        var name = req.name ? (`${req.name}`).trim() : '';
+        var link = req.link ? (`${req.link}`).trim() : '';
+        var ip = req.ip ? (`${req.ip}`).trim() : '';
+        if (slug != '' && name != '') {
+            m.db.get_resource(null, slug, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("new_resource", "database error", client);
+                if (result1 != null && slug == result1.slug)
+                    return ws_server.return_event_error("new_resource", "identifier already taken", client);
+                m.db.create_resource(slug, name, link, ip, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("new_resource", "database error", client);
+                    return ws_server.return_event_data("new_resource", { id: result2, slug: slug }, client);
+                });
+            });
+        }
+    });
+    ws_server.bind("get_resources", (client, req) => {
+        m.db.get_resources((success1, result1) => {
+            if (success1 === false || result1 === null)
+                return ws_server.return_event_error("get_resources", "database error", client);
+            return ws_server.return_event_data("get_resources", { list: result1 }, client);
+        });
+    });
 };
 var api = {};
 

@@ -227,15 +227,24 @@ var api = {
         });
     },
     // resources
-    // resources
-    create_resource: (slug, name, provider, resolve) => {
+    create_resource: (slug, name, link, ip, resolve) => {
         const timestamp = Date.now();
         mongo_api.collection('resource').insertOne({
             slug: slug,
             name: name,
-            repo: "",
+            link: link,
+            ip: ip,
+            provider: "",
+            private_ip: "",
+            specs: {
+                cpu: 0,
+                memory: 0,
+                storage: 0,
+                location: ""
+            },
             domains: [],
-            provider: provider,
+            status: "new",
+            status_time: -1,
             ts_created: timestamp,
             ts_updated: timestamp,
         }, (e, result1) => {

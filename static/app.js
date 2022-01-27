@@ -10,14 +10,17 @@ var app = {
         },
         display_modal: {
             disconnected: _ => {
-                bootbox.confirm({
-                    centerVertical: true,
-                    title: "Disconnected",
-                    message: "Refresh page?",
-                    callback: (result) => {
-                        if (result) window.location.reload();
-                    }
-                })
+                bootbox.hideAll();
+                setTimeout(_ => {
+                    bootbox.confirm({
+                        centerVertical: true,
+                        title: "Disconnected",
+                        message: "Refresh page?",
+                        callback: (result) => {
+                            if (result) window.location.reload();
+                        }
+                    });
+                }, 200);
             },
             generic_confirm: (title, message, callback) => {
                 bootbox.confirm({
@@ -92,6 +95,48 @@ var app = {
                         return true;
                     }
                 });
+            },
+            new_resource: _ => {
+                bootbox.confirm({
+                    centerVertical: true,
+                    title: '<span class="modal_title">Create Resource</span>',
+                    message: `<div id='new_resource_display_modal'>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Name:</span>&nbsp;` +
+                        `<input placeholder="Resource Zero" class="modal_text_input" id="nr_modal_name_input" type='text' name='nr_modal_name'/></div>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Identifier:</span>&nbsp;` +
+                        `<input placeholder="resource-zero" class="modal_text_input" id="nr_modal_slug_input" type='text' name='nr_modal_slug'/></div>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Console:</span>&nbsp;` +
+                        `<input placeholder="https://console.aws.amazon.com/ec2/v2/home?..." class="modal_text_input" id="nr_modal_link_input" type='text' name='nr_modal_link'/></div>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">IP Address:</span>&nbsp;` +
+                        `<input placeholder="127.0.0.1" class="modal_text_input" id="nr_modal_ip_input" type='text' name='nr_modal_ip'/></div>` +
+                        `<div style="height: 8px"></div></div>`,
+                    callback: (result) => {
+                        if (result) {
+                            var slug = (`${$('#new_resource_display_modal #nr_modal_slug_input')[0].value}`).trim();
+                            var name = (`${$('#new_resource_display_modal #nr_modal_name_input')[0].value}`).trim();
+                            var link = (`${$('#new_resource_display_modal #nr_modal_link_input')[0].value}`).trim();
+                            var ip = (`${$('#new_resource_display_modal #nr_modal_ip_input')[0].value}`).trim();
+                            if (slug == "" || name == "") return false;
+                            app.ws.api.new_resource(slug, name, link, ip);
+                        }
+                        return true;
+                    }
+                });
+            },
+            new_resource_res: (message) => {
+                bootbox.confirm({
+                    centerVertical: true,
+                    title: '<span class="modal_title">Create Resource</span>',
+                    message: (`${message}`),
+                    callback: (result) => {
+                        if (result) {
+                            setTimeout(_ => {
+                                app.ws.api.get_resources();
+                            }, 100);
+                            return true;
+                        }
+                    }
+                })
             },
         },
         init: (callback) => {
@@ -235,6 +280,14 @@ var app = {
             get_resources: () => {
                 app.ws.send('get_resources', {});
             },
+            new_resource: (slug, name, link, ip) => {
+                app.ws.send('new_resource', {
+                    slug: slug,
+                    name: name,
+                    link: link,
+                    ip: ip
+                });
+            },
             // applications
             get_applications: () => {
                 app.ws.send('get_applications', {});
@@ -268,7 +321,7 @@ var app = {
         test: _ => {
             console.log("[main] testing...");
             setTimeout(_ => {
-                $('#manage_project_button_61f07dcc4dfe93526f26155f')[0].click();
+                // $('#manage_project_button_61f07dcc4dfe93526f26155f')[0].click();
             }, 300);
         },
         test_delay: 100,

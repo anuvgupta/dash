@@ -103,6 +103,34 @@ app
             }
         }
 
+    #new_resource_res
+        {
+            if (new_resource_res.success) {
+                app.ui.display_modal.new_resource_res(`Created resource "${new_resource_res.data.slug}" (${new_resource_res.data.id})`);
+            } else {
+                app.ui.display_modal.new_resource_res(`<span style="color: #a60a0a; opacity: 0.9;">${util.capitalize(new_resource_res.message ? new_resource_res.message : 'unknown error')}.</span>`);
+            }
+        }
+
+    #get_resources_res
+        {
+            if (get_resources_res.success) {
+                //console.log(get_resources_res.data.list);
+                block.child('main/content/resources').data({
+                    resource_list: get_resources_res.data.list
+                });
+            } else {
+                app.ui.display_modal.generic_confirm('Load Resources', `Error - ${util.capitalize(get_resources_res.message ? get_resources_res.message : 'unknown error')}`, (result) => {
+                    if (result) {
+                        setTimeout(_ => {
+                            app.ws.api.get_resources();
+                        }, 100);
+                        return true;
+                    }
+                });
+            }
+        }
+
     div background
         css
             position absolute
@@ -375,6 +403,12 @@ app
             menu-item resources
                 val Resources
                 icon board_b.png
+                :second_click
+                    {
+                        var projects_block = block.parent().sibling('content').child('resources');
+                        if (projects_block.key('active_view') == 'detail')
+                            projects_block.child('close/close_button').on('click');
+                    }
             menu-item domains
                 val Domains
                 icon globe_b.png
@@ -407,6 +441,9 @@ app
                         display block
                     {
                         setTimeout(_ => {
+                            //Block.queries();
+                        }, 2);
+                        setTimeout(_ => {
                             app.ws.api.get_projects();
                         }, 100);
                     }
@@ -426,7 +463,7 @@ app
                         if (project_list.length > 2)
                             block.child('content').css('text-align', 'center');
                         else block.child('content').css('text-align', 'left');
-                        Block.queries();
+                        //Block.queries();
                         setTimeout(_ => {
                             Block.queries();
                             setTimeout(_ => {
@@ -2137,6 +2174,61 @@ app
                 :hide
                     css
                         display none
+                #resource_list
+                    {
+                        resource_list = resource_list.sort(util.sort_compare_newest_first);
+                        block.key('resource_list', resource_list);
+
+                        block.child('content').html('');
+                        for (var r in resource_list) {
+                            var resource_block_new = Block('resource-item', `resource_${resource_list[r]._id.toString()}`).data(resource_list[r]).key('resource_metadata', resource_list[r]);
+                            block.child('content').add(resource_block_new);
+                        }
+                        if (resource_list.length > 2)
+                            block.child('content').css('text-align', 'center');
+                        else block.child('content').css('text-align', 'left');
+                        Block.queries();
+                        setTimeout(_ => {
+                            Block.queries();
+                            setTimeout(_ => {
+                                window.componentHandler.upgradeDom();
+                            }, 20);
+                        }, 10);
+                    }
+                #select_resource
+                    {
+                        console.log(select_resource);
+                        block.key('active_view', 'detail');
+                        block.child('content').css('display', 'none')
+                            .sibling('detail').css('display', 'block')
+                            .data({ resource: select_resource })
+                        ;
+                        block.child('title').data({ subresource: `${select_resource.name}` });
+                        block.child('new_resource_button').css('display', 'none');
+                        block.child('resource_filter').css('display', 'none');
+                        block.child('close').on('show');
+                        block.child('detail').on('update_grid');
+                        setTimeout(_ => {
+                            Block.queries();
+                        }, 50);
+                    }
+                :deselect_resource
+                    {
+                        block.key('active_view', 'content');
+                        block.child('detail').css('display', 'none')
+                            .sibling('content').css('display', 'block')
+                        ;
+                        block.child('title').on('back');
+                        block.child('new_resource_button').css('display', 'inline-block');
+                        block.child('resource_filter').css('display', 'block');
+                        block.child('close').on('hide');
+                        setTimeout(_ => {
+                            Block.queries();
+                            setTimeout(_ => {
+                                window.componentHandler.upgradeDom();
+                            }, 20);
+                        }, 5);
+                    }
                 button new_resource_button
                     css
                         position absolute
@@ -2152,6 +2244,10 @@ app
                     div content
                         text text
                             val +
+                    :click
+                        {
+                            app.ui.display_modal.new_resource();
+                        }
                     {
                         block.css("background-color", app.ui.colors.primary);
                     }
@@ -2193,11 +2289,88 @@ app
                     hr hr
                         css
                             width 100%
+                block close
+                    css
+                        height 40px
+                        width 40px
+                        position absolute
+                        top 29px
+                        right 12px
+                        display none
+                        pointer-events none
+                        z-index 50
+                    :hide
+                        css 
+                            display none
+                            pointer-events none
+                        {
+                            event.stopPropagation();
+                        }
+                    :show
+                        css
+                            display table
+                            pointer-events auto
+                        {
+                            event.stopPropagation();
+                        }
+                    button close_button
+                        css
+                            width 24px
+                            heigth 24px
+                            border none
+                            background-color rgba(255, 255, 255, 0)
+                            outline none
+                            opacity 0.32
+                            cursor pointer
+                            border-radius 100%
+                            transition opacity 0.2s ease
+                        :mouseover
+                            css
+                                opacity 0.68
+                        :mouseout
+                            css
+                                opacity 0.32
+                        :click
+                            {
+                                block.parent().sibling('detail').on('hide_editors');
+                                setTimeout(_ => {
+                                    block.parent(1).on('deselect_resource');
+                                }, 50);
+                            }
+                        image x
+                            src /img/x_b.png
+                            height 24px
+                            width 24px
                 div content
                     css
                         width 100%
                         height auto
-            
+                        text-align center
+                        padding-top 15px
+                        padding-left 10px
+                        padding-right 10px
+                        box-sizing border-box
+                        overflow-x hidden
+                        overflow-y auto
+                        -webkit-overflow-scrolling touch
+                    @query window width != 0
+                        {
+                            block.css('height', (window.innerHeight - block.$().offset().top - 14) + 'px');
+                        }
+                div detail
+                    css
+                        width 100%
+                        height auto
+                        text-align left
+                        padding-top 0
+                        padding-left 2px
+                        padding-right 0
+                        box-sizing border-box
+                        display none
+                        overflow-x hidden
+                        overflow-y auto
+                        -webkit-overflow-scrolling touch
+
             div ideas
                 css
                     width 100%
