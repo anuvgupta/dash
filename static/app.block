@@ -312,6 +312,7 @@ app
                 height 72px
                 opacity 0.985
                 z-index 101
+                cursor crosshair
             {
                 block.css("background-color", app.ui.colors.primary);
             }
@@ -321,6 +322,7 @@ app
                     margin-left 33px
                     margin-right 16px
                     float left
+                    cursor crosshair
                 //class mdc-touch-target-wrapper
                 //button button
                     //css
@@ -354,6 +356,7 @@ app
                         font-weight 400
                         text-align left
                         margin-bottom 1px
+                        cursor crosshair
             block logout
                 css
                     width 70px
