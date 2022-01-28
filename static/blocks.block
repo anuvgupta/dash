@@ -342,7 +342,7 @@
                     margin: '5px 12px 20px 12px',
                     textAlign: 'left',
                     boxSizing: 'border-box',
-                    padding: '20px 22px 20px 26px',
+                    padding: '20px 22px 20px 32px',
                     position: 'relative',
                     verticalAlign: 'top'
                 })
@@ -742,11 +742,11 @@
                     })
                 )
                 .add(Block('div', 'project_content')
+                    .class('project-content')
                     .css({
                         maxHeight: '120px',
                         height: '100%',
                         width: '99%',
-                        transition: 'height 0.05s ease, max-height 0.05s ease'
                     })
                     .query('window width != 0', function (event, block, data) {
                         block.css('max-height', `calc(100% - ${3 - 3 + ((5 + block.sibling('description').$().height() + 20 + 20 + 10) + 45)}px)`);
@@ -811,7 +811,7 @@
                     .css({
                         position: 'absolute',
                         bottom: '25px',
-                        left: '30px',
+                        left: '33px',
                         width: '100px',
                         height: '20px',
                         fontSize: '14px',
@@ -878,11 +878,12 @@
             });
             data('img', img => {
                 block.key('img', img);
-                block.child('bg').css({
-                    backgroundImage: `url(${img.trim()})`,
-                    opacity: '0.04',
-                    filter: 'invert()'
-                });
+                if (img.trim() != '') {
+                    block.child('bg').css({
+                        backgroundImage: `url(${img.trim()})`,
+                        opacity: '0.04',
+                    });
+                }
             });
             data('img_invert', img_invert => {
                 block.key('img_invert', img_invert);
@@ -912,6 +913,23 @@
                     position: 'relative',
                     verticalAlign: 'top'
                 })
+                .add(Block('div', 'bg')
+                    .css({
+                        position: 'absolute',
+                        top: '0',
+                        left: '0',
+                        width: '100%',
+                        height: '100%',
+                        zIndex: '0',
+                        background: 'url(/img/gear_bg.jpg) no-repeat center center',
+                        backgroundSize: 'cover',
+                        boxSizing: 'border-box',
+                        borderRadius: '7px',
+                        opacity: '0.02',
+                        //filter:'invert()',
+                        backgroundColor: 'white'
+                    })
+                )
                 .add(Block('div', 'spacer0')
                     .css({
                         height: '8px'
@@ -1042,11 +1060,11 @@
                     )
                 )
                 .add(Block('div', 'resource_content')
+                    .class('resource-content')
                     .css({
                         maxHeight: '120px',
                         height: '100%',
                         width: '99%',
-                        transition: 'height 0.05s ease, max-height 0.05s ease'
                     })
                     .query('window width != 0', function (event, block, data) {
                         block.css('max-height', `calc(100% - ${3 - 3 + ((5 + block.sibling('description').$().height() + 20 + 20 + 10) + 45 + 85 + 10 + 12 + 20)}px)`);

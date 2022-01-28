@@ -288,6 +288,17 @@ var app = {
                     ip: ip
                 });
             },
+            update_resource: (id, update) => {
+                app.ws.send('update_resource', {
+                    id: id,
+                    update: update
+                });
+            },
+            delete_resource: (id) => {
+                app.ws.send('delete_resource', {
+                    id: id
+                });
+            },
             // applications
             get_applications: () => {
                 app.ws.send('get_applications', {});

@@ -32,7 +32,6 @@ app
                 }
             });
         }
-    
     #auth_res
         {
             if (auth_res.success) {
@@ -40,7 +39,7 @@ app
                 block.child('main').css('display', 'block');
                 setTimeout(_ => {
                     block.child('main/menu/projects').$().click();
-                }, 50);
+                }, 20);
             } else {
                 //console.log('fail');
                 block.child('login').css('display', 'table');
@@ -58,7 +57,6 @@ app
                 app.ui.display_modal.new_project_res(`<span style="color: #a60a0a; opacity: 0.9;">${util.capitalize(new_project_res.message ? new_project_res.message : 'unknown error')}.</span>`);
             }
         }
-
     #get_projects_res
         {
             if (get_projects_res.success) {
@@ -71,13 +69,12 @@ app
                     if (result) {
                         setTimeout(_ => {
                             app.ws.api.get_projects();
-                        }, 100);
+                        }, 30);
                         return true;
                     }
                 });
             }
         }
-
     #star_project_res
         {
             //console.log(star_project_res.data.id, star_project_res.data.starred);
@@ -85,15 +82,13 @@ app
                 star_project: star_project_res.data
             });
         }
-
     #update_project_res
         {
            var current_project = block.child('main/content/projects/detail').key('project');
            if (current_project && current_project._id == update_project_res.data.id)
                block.child('main/content/projects/detail').on('receive_project_update', update_project_res.data.project);
-               block.child('main/content/projects').data({ update_project: update_project_res.data.project });
+               block.child('main/content/projects').data({ update_project_local: update_project_res.data.project });
         }
-
     #delete_project_res
         {
             if (delete_project_res.success === true) {
@@ -111,7 +106,6 @@ app
                 app.ui.display_modal.new_resource_res(`<span style="color: #a60a0a; opacity: 0.9;">${util.capitalize(new_resource_res.message ? new_resource_res.message : 'unknown error')}.</span>`);
             }
         }
-
     #get_resources_res
         {
             if (get_resources_res.success) {
@@ -124,12 +118,28 @@ app
                     if (result) {
                         setTimeout(_ => {
                             app.ws.api.get_resources();
-                        }, 100);
+                        }, 30);
                         return true;
                     }
                 });
             }
         }
+    #update_resource_res
+        {
+           var current_resource = block.child('main/content/resources/detail').key('resource');
+           if (current_resource && current_resource._id == update_resource_res.data.id)
+               block.child('main/content/resources/detail').on('receive_resource_update', update_resource_res.data.resource);
+               block.child('main/content/resources').data({ update_resource_local: update_resource_res.data.resource });
+        }
+    #delete_resource_res
+        {
+            if (delete_resource_res.success === true) {
+                block.child('main/content/resources').data({
+                    delete_resource: delete_resource_res.data.id
+                });
+            }
+        }
+
 
     div background
         css
@@ -445,7 +455,7 @@ app
                         }, 2);
                         setTimeout(_ => {
                             app.ws.api.get_projects();
-                        }, 100);
+                        }, 10);
                     }
                 :hide
                     css
@@ -463,12 +473,16 @@ app
                         if (project_list.length > 2)
                             block.child('content').css('text-align', 'center');
                         else block.child('content').css('text-align', 'left');
+                        if (project_list.length == 0) {
+                            var msg = 'No projects found.';
+                            block.child('content').html(`<div style="margin: 0 auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
+                        }
                         //Block.queries();
                         setTimeout(_ => {
                             Block.queries();
                             setTimeout(_ => {
                                 window.componentHandler.upgradeDom();
-                            }, 20);
+                            }, 10);
                         }, 10);
                     }
                 #star_project
@@ -479,7 +493,7 @@ app
                                 featured: star_project.starred
                             });
                         block.data({
-                            update_project_field: {
+                            update_project_field_local: {
                                 id: star_project.id,
                                 field: 'featured',
                                 val: star_project.starred
@@ -490,7 +504,7 @@ app
                         if (current_project_info && star_project.id == current_project_info._id) {
                             current_project_info.featured = star_project.starred;
                             block.data({
-                                update_project: current_project_info
+                                update_project_local: current_project_info
                             });
                         }
                         */
@@ -502,14 +516,14 @@ app
                             .sibling('detail').css('display', 'block')
                             .data({ project: select_project })
                         ;
-                        block.child('title').data({ subproject: `${select_project.name}` });
+                        block.child('title').data({ select_project_name: `${select_project.name}` });
                         block.child('new_project_button').css('display', 'none');
                         block.child('project_filter').css('display', 'none');
                         block.child('close').on('show');
                         block.child('detail').on('update_grid');
                         setTimeout(_ => {
                             Block.queries();
-                        }, 50);
+                        }, 10);
                     }
                 :deselect_project
                     {
@@ -525,16 +539,16 @@ app
                             Block.queries();
                             setTimeout(_ => {
                                 window.componentHandler.upgradeDom();
-                            }, 20);
+                            }, 10);
                         }, 5);
                     }
-                #update_project
+                #update_project_local
                     {
-                        //console.log('update_project', update_project);
+                        //console.log('update_project_local', update_project_local);
                         var project_list = block.key('project_list');
                         for (var p in project_list) {
-                            if (project_list[p]._id == update_project._id) {
-                                project_list[p] = update_project;
+                            if (project_list[p]._id == update_project_local._id) {
+                                project_list[p] = update_project_local;
                                 break;
                             }
                         }
@@ -542,13 +556,13 @@ app
                             project_list: project_list
                         });
                     }
-                #update_project_field
+                #update_project_field_local
                     {
-                        //console.log('update_project', update_project);
+                        //console.log('update_project_field_local', update_project_field_local);
                         var project_list = block.key('project_list');
                         for (var p in project_list) {
-                            if (project_list[p]._id == update_project_field.id) {
-                                project_list[p][update_project_field.field] = update_project_field.val;
+                            if (project_list[p]._id == update_project_field_local.id) {
+                                project_list[p][update_project_field_local.field] = update_project_field_local.val;
                                 break;
                             }
                         }
@@ -563,7 +577,7 @@ app
                             block.child('close/close_button').on('click');
                             setTimeout(_ => {
                                 app.ws.api.get_projects();
-                            }, 100);
+                            }, 20);
                         }
                     }
                 button new_project_button
@@ -618,9 +632,9 @@ app
                             font-size 30px
                             color #333
                         val Projects
-                    #subproject
+                    #select_project_name
                         {
-                            block.child('text').html(`Projects&nbsp;&nbsp;/&nbsp;&nbsp;<span class='b600'>${subproject}</span>`);
+                            block.child('text').html(`Projects&nbsp;&nbsp;/&nbsp;&nbsp;<span class='b600'>${select_project_name}</span>`);
                         }
                     :back
                         {
@@ -685,7 +699,7 @@ app
                                 block.parent().sibling('detail').on('hide_editors');
                                 setTimeout(_ => {
                                     block.parent(1).on('deselect_project');
-                                }, 50);
+                                }, 10);
                             }
                         image x
                             src /img/x_b.png
@@ -729,7 +743,7 @@ app
                                 block.on('update_grid');
                                 setTimeout(_ => {
                                     block.key('reload_grid', 'yes');
-                                }, 50);
+                                }, 100);
                             }
                         }
                     :update_grid
@@ -738,7 +752,7 @@ app
                             // set up masonry grid
                             $('div.masonry-grid-container').masonry({
                                 // options
-                                itemSelector: 'div.masonry-grid-container div.project_detail_section',
+                                itemSelector: 'div.masonry-grid-container div.dashboard_detail_section',
                                 columnWidth: 455
                             });
                             event.stopPropagation();
@@ -765,7 +779,7 @@ app
                             block.child('subcontent/project_info/name/value/text').html('').data(`${name}`);
                             block.child('subcontent/project_info/name/value_editor').attribute('value', `${name}`);
                             block.sibling('title').data({
-                                subproject: `${name}`
+                                select_project_name: `${name}`
                             });
                         }
                     #slug
@@ -807,7 +821,11 @@ app
                                 link_alt = '<span class="text_placeholder" style="letter-spacing:0.8px;">offline</span>';
                                 link_alt_alt = '#';
                                 block.child('subcontent/project_info/link/value/text').css('color', '#222');
-                            } else block.child('subcontent/project_info/link/value/text').css('color', 'rgba(10, 115, 242, 0.95)');
+                            } else {
+                                block.child('subcontent/project_info/link/value/text').css('color', 'rgba(10, 115, 242, 0.95)');
+                                var length_limit = 37;
+                                if (link_alt.length > length_limit) link_alt = link_alt.substring(0, length_limit - 2) + '...';
+                            }
                             block.child('subcontent/project_info/link/value/text').html(`${link_alt}`).attribute('href', `${link_alt_alt}`);
                             block.child('subcontent/project_info/link/value_editor').attribute('value', `${link}`); 
                         }
@@ -832,7 +850,11 @@ app
                                 repo_alt = '<span class="text_placeholder" style="letter-spacing:0.8px;">N/A</span>';
                                 repo_alt_alt = '#';
                                 block.child('subcontent/project_code/repo/value/text').css('color', '#222');
-                            } else block.child('subcontent/project_code/repo/value/text').css('color', 'rgba(10, 115, 242, 0.95)');
+                            } else {
+                                block.child('subcontent/project_code/repo/value/text').css('color', 'rgba(10, 115, 242, 0.95)');
+                                var length_limit = 37;
+                                if (repo_alt.length > length_limit) repo_alt = repo_alt.substring(0, length_limit - 2) + '...';
+                            }
                             block.child('subcontent/project_code/repo/value/text').html(`${repo_alt}`).attribute('href', `${repo_alt_alt}`);
                             block.child('subcontent/project_code/repo/value_editor').attribute('value', `${repo}`); 
                         }
@@ -926,7 +948,7 @@ app
                                         if (confirm) {
                                             setTimeout(_ => {
                                                 app.ws.api.delete_project(project_info._id);
-                                            }, 100);
+                                            }, 30);
                                         }
                                         return true;
                                     }
@@ -939,7 +961,7 @@ app
                         css
                             padding 1px 1px
                         div project_info
-                            class project_detail_section
+                            class dashboard_detail_section
                             div title
                                 css
                                     height auto
@@ -1013,7 +1035,7 @@ app
                                                 block.parent().sibling('value_editor').node().value = block.parent(4).key('project').name;
                                                 setTimeout(_ => {
                                                     block.parent().sibling('value_editor').node().select();
-                                                }, 50);
+                                                }, 15);
                                             }
                                 input value_editor
                                     class value_editor
@@ -1086,7 +1108,7 @@ app
                                                 block.parent().sibling('value_editor').node().value = block.parent(4).key('project').slug;
                                                 setTimeout(_ => {
                                                     block.parent().sibling('value_editor').node().select();
-                                                }, 50);
+                                                }, 15);
                                             }
                                 input value_editor
                                     class value_editor
@@ -1160,7 +1182,7 @@ app
                                                 block.parent().sibling('value_editor').node().value = block.parent(4).key('project').tagline;
                                                 setTimeout(_ => {
                                                     block.parent().sibling('value_editor').node().select();
-                                                }, 50);
+                                                }, 15);
                                             }
                                 input value_editor
                                     class value_editor
@@ -1236,7 +1258,7 @@ app
                                                 block.parent().sibling('value_editor').node().value = block.parent(4).key('project').description;
                                                 setTimeout(_ => {
                                                     block.parent().sibling('value_editor').node().select();
-                                                }, 50);
+                                                }, 15);
                                             }
                                 input value_editor
                                     class value_editor
@@ -1392,7 +1414,7 @@ app
                                                 block.parent().sibling('value_editor').node().value = block.parent(4).key('project').link;
                                                 setTimeout(_ => {
                                                     block.parent().sibling('value_editor').node().select();
-                                                }, 50);
+                                                }, 15);
                                             }
                                 input value_editor
                                     class value_editor
@@ -1631,7 +1653,7 @@ app
                                                 block.parent(4).on('delete_project');
                                             }
                         div project_apps
-                            class project_detail_section
+                            class dashboard_detail_section
                             div title
                                 css
                                     height auto
@@ -1706,7 +1728,7 @@ app
                                                 block.parent().sibling('value_editor').node().value = block.parent(4).key('project').repo;
                                                 setTimeout(_ => {
                                                     block.parent().sibling('value_editor').node().select();
-                                                }, 50);
+                                                }, 15);
                                             }
                                 input value_editor
                                     class value_editor
@@ -1747,7 +1769,7 @@ app
                                 css
                                     height 15px
                         div project_code
-                            class project_detail_section
+                            class dashboard_detail_section
                             div title
                                 css
                                     height auto
@@ -1820,7 +1842,7 @@ app
                                                 block.parent().sibling('value_editor').node().value = block.parent(4).key('project').repo;
                                                 setTimeout(_ => {
                                                     block.parent().sibling('value_editor').node().select();
-                                                }, 50);
+                                                }, 15);
                                             }
                                 input value_editor
                                     class value_editor
@@ -1899,7 +1921,7 @@ app
                                                 block.parent().sibling('value_editor').node().value = block.parent(4).key('project').docs;
                                                 setTimeout(_ => {
                                                     block.parent().sibling('value_editor').node().select();
-                                                }, 50);
+                                                }, 15);
                                             }
                                 input value_editor
                                     class value_editor
@@ -1940,7 +1962,7 @@ app
                                 css
                                     height 15px
                         div project_domains
-                            class project_detail_section
+                            class dashboard_detail_section
                             div title
                                 css
                                     height auto
@@ -2011,7 +2033,7 @@ app
                     {
                         setTimeout(_ => {
                             app.ws.api.get_applications();
-                        }, 100);
+                        }, 20);
                     }
                 :hide
                     css
@@ -2090,7 +2112,7 @@ app
                     {
                         setTimeout(_ => {
                             app.ws.api.get_domains();
-                        }, 100);
+                        }, 20);
                     }
                 :hide
                     css
@@ -2157,6 +2179,7 @@ app
                         height auto
             
             div resources
+                $active_view content
                 css
                     width 100%
                     height auto
@@ -2169,7 +2192,7 @@ app
                     {
                         setTimeout(_ => {
                             app.ws.api.get_resources();
-                        }, 100);
+                        }, 20);
                     }
                 :hide
                     css
@@ -2187,30 +2210,34 @@ app
                         if (resource_list.length > 2)
                             block.child('content').css('text-align', 'center');
                         else block.child('content').css('text-align', 'left');
+                        if (resource_list.length == 0) {
+                            var msg = 'No resources found.';
+                            block.child('content').html(`<div style="margin: 0 auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
+                        }
                         Block.queries();
                         setTimeout(_ => {
                             Block.queries();
                             setTimeout(_ => {
                                 window.componentHandler.upgradeDom();
-                            }, 20);
+                            }, 10);
                         }, 10);
                     }
                 #select_resource
                     {
-                        console.log(select_resource);
+                        //console.log(select_resource);
                         block.key('active_view', 'detail');
                         block.child('content').css('display', 'none')
                             .sibling('detail').css('display', 'block')
                             .data({ resource: select_resource })
                         ;
-                        block.child('title').data({ subresource: `${select_resource.name}` });
+                        block.child('title').data({ select_resource_name: `${select_resource.name}` });
                         block.child('new_resource_button').css('display', 'none');
                         block.child('resource_filter').css('display', 'none');
                         block.child('close').on('show');
                         block.child('detail').on('update_grid');
                         setTimeout(_ => {
                             Block.queries();
-                        }, 50);
+                        }, 10);
                     }
                 :deselect_resource
                     {
@@ -2226,9 +2253,48 @@ app
                             Block.queries();
                             setTimeout(_ => {
                                 window.componentHandler.upgradeDom();
-                            }, 20);
+                            }, 10);
                         }, 5);
                     }
+                #update_resource_local
+                    {
+                        //console.log('update_resource_local', update_resource_local);
+                        var resource_list = block.key('resource_list');
+                        for (var r in resource_list) {
+                            if (resource_list[r]._id == update_resource_local._id) {
+                                resource_list[r] = update_resource_local;
+                                break;
+                            }
+                        }
+                        block.data({
+                            resource_list: resource_list
+                        });
+                    }
+                #update_resource_field
+                    {
+                        //console.log('update_resource_field', update_resource_field);
+                        var resource_list = block.key('resource_list');
+                        for (var r in resource_list) {
+                            if (resource_list[r]._id == update_resource_field.id) {
+                                resource_list[r][update_resource_field.field] = update_resource_field.val;
+                                break;
+                            }
+                        }
+                        block.data({
+                            resource_list: resource_list
+                        });
+                    }
+                #delete_resource
+                    {
+                        var resource_info = block.child('detail').key('resource');
+                        if (resource_info && resource_info._id == delete_resource) {
+                            block.child('close/close_button').on('click');
+                            setTimeout(_ => {
+                                app.ws.api.get_resources();
+                            }, 20);
+                        }
+                    }
+                
                 button new_resource_button
                     css
                         position absolute
@@ -2277,6 +2343,15 @@ app
                             font-size 30px
                             color #333
                         val Resources
+                    #select_resource_name
+                        {
+                            block.child('text').html(`Resources&nbsp;&nbsp;/&nbsp;&nbsp;<span class='b600'>${select_resource_name}</span>`);
+                        }
+                    :back
+                        {
+                            block.child('text').html('').data('Resources');
+                            event.stopPropagation();
+                        }
                 div divider
                     css
                         //width 100%
@@ -2335,7 +2410,7 @@ app
                                 block.parent().sibling('detail').on('hide_editors');
                                 setTimeout(_ => {
                                     block.parent(1).on('deselect_resource');
-                                }, 50);
+                                }, 15);
                             }
                         image x
                             src /img/x_b.png
@@ -2370,6 +2445,1056 @@ app
                         overflow-x hidden
                         overflow-y auto
                         -webkit-overflow-scrolling touch
+                    $reload_grid yes
+                    @query window width != 0
+                        {
+                            block.css('height', (window.innerHeight - block.$().offset().top - 14) + 'px');
+                            if (block.key('reload_grid') === 'yes') {
+                                block.key('reload_grid', 'no');
+                                block.on('update_grid');
+                                setTimeout(_ => {
+                                    block.key('reload_grid', 'yes');
+                                }, 100);
+                            }
+                        }
+                    :update_grid
+                        {
+                            //console.log('update_grid');
+                            // set up masonry grid
+                            $('div.masonry-grid-container').masonry({
+                                // options
+                                itemSelector: 'div.masonry-grid-container div.dashboard_detail_section',
+                                columnWidth: 455
+                            });
+                            event.stopPropagation();
+                        }
+                    #resource
+                        {
+                            block.key('resource', resource);
+                            block.data({
+                                name: resource.name,
+                                slug: resource.slug,
+                                link: resource.link,
+                                specs: resource.specs,
+                                ip: resource.ip
+                            });
+                        }
+                    #name
+                        {
+                            block.child('subcontent/resource_info/name/value/text').html('').data(`${name}`);
+                            block.child('subcontent/resource_info/name/value_editor').attribute('value', `${name}`);
+                            block.sibling('title').data({
+                                select_resource_name: `${name}`
+                            });
+                        }
+                    #slug
+                        {
+                            block.child('subcontent/resource_info/slug/value/text').html('').data(`${slug}`);
+                            block.child('subcontent/resource_info/slug/value_editor').attribute('value', `${slug}`);
+                        }
+                    #ip
+                        {
+                            var ip_alt = ip;
+                            var ip_alt_alt = ip_alt;
+                            if (ip_alt == '') {
+                                ip_alt = '<span class="text_placeholder" style="letter-spacing:0.8px;">N/A</span>';
+                                ip_alt_alt = '#';
+                                block.child('subcontent/resource_info/ip/value/text').css('color', '#222');
+                            } else block.child('subcontent/resource_info/ip/value/text').css('color', 'rgba(10, 115, 242, 0.95)');
+                            block.child('subcontent/resource_info/ip/value/text').html(`${ip_alt}`).attribute('href', `${window.location.protocol}//${ip_alt_alt}`);
+                            block.child('subcontent/resource_info/ip/value_editor').attribute('value', `${ip}`); 
+                        }
+                    #link
+                        {
+                            var link_alt = link;
+                            var link_alt_alt = link_alt;
+                            if (link_alt == '') {
+                                link_alt = '<span class="text_placeholder" style="letter-spacing:0.8px;">N/A</span>';
+                                link_alt_alt = '#';
+                                block.child('subcontent/resource_info/link/value/text').css('color', '#222');
+                            } else {
+                                block.child('subcontent/resource_info/link/value/text').css('color', 'rgba(10, 115, 242, 0.95)');
+                                var length_limit = 37;
+                                if (link_alt.length > length_limit) link_alt = link_alt.substring(0, length_limit - 2) + '...';
+                            }
+                            block.child('subcontent/resource_info/link/value/text').html(`${link_alt}`).attribute('href', `${link_alt_alt}`);
+                            block.child('subcontent/resource_info/link/value_editor').attribute('value', `${link}`); 
+                        }
+                    :hide_editors
+                        {
+                            //setTimeout(_ => {
+                                block.child('subcontent/resource_info/name/value_editor').on('hide');
+                                block.child('subcontent/resource_info/slug/value_editor').on('hide');
+                                block.child('subcontent/resource_info/ip/value_editor').on('hide');
+                                block.child('subcontent/resource_info/link/value_editor').on('hide');
+                                block.child('subcontent/resource_info/more_menu').on('hide');
+                            //}, 200);
+                        }
+                    :receive_resource_update
+                        {
+                            var old_data = block.key('resource');
+                            var new_data = data;
+                            if (old_data.name != new_data.name) {
+                                block.data({ name: new_data.name, });
+                                block.child('subcontent/resource_info/name/value_editor').on('hide');
+                            }
+                            if (old_data.slug != new_data.slug) {
+                                block.data({ slug: new_data.slug, });
+                                block.child('subcontent/resource_info/slug/value_editor').on('hide');
+                            }
+                            if (old_data.ip != new_data.ip) {
+                                block.data({ ip: new_data.ip, });
+                                block.child('subcontent/resource_info/ip/value_editor').on('hide');
+                            }
+                            if (old_data.link != new_data.link) {
+                                block.data({ link: new_data.link, });
+                                block.child('subcontent/resource_info/link/value_editor').on('hide');
+                            }
+                            block.key('resource', new_data);
+                        }
+                    :send_resource_update
+                        {
+                            app.ws.api.update_resource(block.key('resource')._id, data);
+                            event.stopPropagation();
+                        }
+                    :delete_resource
+                        {
+                            //console.log('delete_resource');
+                            var resource_info = block.key('resource');
+                            if (resource_info) {
+                                app.ui.display_modal.generic_confirm("Delete Resource", `Permanently delete resource "${resource_info.name}"?`, (result) => {
+                                    if (result) {
+                                        var confirm = window.confirm(`This action is not reversible — are you sure about deleting resource "${resource_info.name}"?`);
+                                        if (confirm) {
+                                            setTimeout(_ => {
+                                                app.ws.api.delete_resource(resource_info._id);
+                                            }, 30);
+                                        }
+                                        return true;
+                                    }
+                                });
+                            }
+                            event.stopPropagation();
+                        }
+                    div subcontent
+                        class masonry-grid-container
+                        css
+                            padding 1px 1px
+                        div resource_info
+                            class dashboard_detail_section
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Resource
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/board_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                     height 80px
+                            div name
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Name
+                                    class label_desc
+                                    css
+                                        margin-bottom 3px
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val Resource Zero
+                                        class value_text
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        // this is an edit button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                //block.parent(2).data('');
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                //console.log(block.parent(4).key('resource').name);
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('resource').name;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder Resource Zero
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        width 55%
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                if (value.length > 0) {
+                                                    block.parent(3).on('send_resource_update', {
+                                                        name: value
+                                                    });
+                                                }
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div slug
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Identifier
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val resource-zero
+                                        class value_text
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('resource').slug;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder resource-zero
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2.5px
+                                        margin-left -2px
+                                        margin-bottom 2.5px
+                                        width 55%
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                if (value.length > 0) {
+                                                    block.parent(3).on('send_resource_update', {
+                                                        slug: value
+                                                    });
+                                                }
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div ip
+                                class value_edge
+                                text label
+                                    val IP Address
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                        padding-left 1px
+                                    a text
+                                        html 127.0.0.1
+                                        href http://127.0.0.1
+                                        class value_text
+                                        target _blank
+                                        css
+                                            font-size 20px
+                                            font-weight 300
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 5px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('resource').ip;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder 127.0.0.1
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 20px
+                                        width 90%
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_resource_update', {
+                                                        ip: value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div link
+                                class value_edge
+                                text label
+                                    val Console
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                        padding-left 1px
+                                    a text
+                                        html https://console.aws.amazon.com/ec2/v2/home?...
+                                        href https://console.aws.amazon.com/ec2/v2/home?...
+                                        class value_text
+                                        target _blank
+                                        css
+                                            font-size 20px
+                                            font-weight 300
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 5px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('resource').link;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder https://projectzero.anuv.me
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 20px
+                                        letter-spacing normal
+                                        width 90%
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_project_update', {
+                                                        link: value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div end_spacer
+                                css
+                                    height 15px
+                            block image
+                                css
+                                    height 130px
+                                    width 130px
+                                    position absolute
+                                    top 80px
+                                    right 40px
+                                    border-radius 7px
+                                    opacity 0.99
+                                    transition opacity 0.2s ease
+                                    cursor pointer
+                                    -webkit-box-shadow 1px 1px 2px 1px rgba(94,94,94,0.05)
+                                    box-shadow 1px 1px 2px 1px rgba(94,94,94,0.05)
+                                    display none
+                                #update
+                                    {
+                                        block.key('img_path', update);
+                                        var data = {
+                                            src: '/img/gear_bg.jpg',
+                                            css: {
+                                                opacity: '0.75'
+                                            }
+                                        };
+                                        if (update && update.trim() != '') {
+                                            //console.log(update);
+                                            data.src = update;
+                                            data.css.opacity = '0.97';
+                                        }
+                                        block.child('img').data(data);
+                                    }
+                                #update_invert
+                                    {
+                                        block.key('img_invert', update_invert);
+                                        block.child('edit').css({
+                                            'filter': update_invert ? 'invert()' : 'none'
+                                        });
+                                        block.key('edit_opacity', update_invert ? '1' : '0.6');
+                                    }
+                                $edit_opacity 0.95
+                                :mouseover
+                                    css
+                                        opacity 0.94
+                                    {
+                                        block.child('edit').css('opacity', block.key('edit_opacity'));
+                                    }
+                                :mouseout
+                                    css
+                                        opacity 0.99
+                                    edit
+                                        css
+                                            opacity 0
+                                :click
+                                    {
+                                        //var url = '';
+                                        //if (block.key('img_path'))
+                                        //    url = block.key('img_path');
+                                        //app.ui.display_modal.edit_project_image(block.parent(2).key('project')._id.toString(), url, block.key('img_invert'));
+                                    }
+                                image img
+                                    src /img/gear_bg.jpg
+                                    height 130px
+                                    width 130px
+                                    css
+                                        border-radius 7px
+                                        position absolute
+                                        top 0
+                                        left 0
+                                        opacity 0.9
+                                image edit
+                                    src /img/edit_b.png
+                                    height 25px
+                                    width 25px
+                                    css
+                                        margin 0 auto
+                                        position relative
+                                        z-index 100
+                                        opacity 0
+                                        transition opacity 0.15s ease
+                            block more_menu_button_wrap
+                                css
+                                    position absolute
+                                    height 40px
+                                    width 40px
+                                    top 20px
+                                    right 22px
+                                button more_menu_button
+                                    css
+                                        outline none
+                                        border none
+                                        background-color rgba(255,255,255,0)
+                                        height 33px
+                                        width 33px
+                                        margin 0 auto
+                                        opacity 0.65
+                                        padding 0
+                                        display block
+                                    image img
+                                        src /img/more_b.png
+                                        height 33px
+                                        width 33px
+                                        css
+                                            margin 0 auto
+                                    :click
+                                        {
+                                            block.parent().sibling('more_menu').on('toggle');
+                                        }
+                                    :mouseover
+                                        css
+                                            opacity 0.8
+                                    :mouseout
+                                        css
+                                            opacity 0.65
+                            div more_menu
+                                $showing no
+                                :toggle
+                                    {
+                                        if (block.key('showing') === 'yes') {
+                                            block.on('hide');
+                                        } else {
+                                            block.on('show');
+                                        }
+                                    }
+                                :show
+                                    {
+                                        block.key('showing', 'yes');
+                                        block.css({ display: 'block' });
+                                        event.stopPropagation();
+                                    }
+                                :hide
+                                    {
+                                        block.key('showing', 'no');
+                                        block.css({ display: 'none' });
+                                        event.stopPropagation();
+                                    }
+                                css
+                                    position absolute
+                                    height 90px
+                                    width 85px
+                                    top 0
+                                    right -86px
+                                    border-radius 4px
+                                    border 1px solid #efefef
+                                    background-color white
+                                    display none
+                                    -webkit-box-shadow 1px 1px 4px 1px rgba(74,74,74,0.06)
+                                    box-shadow 1px 1px 4px 1px rgba(74,74,74,0.06)
+                                    font-size 12.5px
+                                    letter-spacing 0.8px
+                                    opacity 0.98
+                                    z-index 200
+                                div menu-item-1
+                                    css
+                                        height 30px
+                                        border-bottom 1px solid #eee
+                                        box-sizing border-box
+                                        border-radius 4px 4px 0 0
+                                    button button
+                                        class menu-button
+                                        css
+                                            height 100%
+                                            width 100%
+                                        html Lorem
+                                        :click
+                                            {
+                                                console.log('Lorem');
+                                            }
+                                div menu-item-2
+                                    css
+                                        height 30px
+                                        border-bottom 1px solid #eee
+                                        box-sizing border-box
+                                    button button
+                                        class menu-button
+                                        css
+                                            height 100%
+                                            width 100%
+                                        html Ipsum
+                                        :click
+                                            {
+                                                console.log('Ipsum');
+                                            }
+                                div menu-item-3
+                                    css
+                                        height 30px
+                                        border-bottom none
+                                        box-sizing border-box
+                                        border-radius 0 0 4px 4px
+                                    button button
+                                        class menu-button
+                                        css
+                                            height 100%
+                                            width 100%
+                                            color rgb(209, 36, 36)
+                                        html Delete
+                                        :click
+                                            {
+                                                //console.log('Delete');
+                                                block.parent(4).on('delete_resource');
+                                            }
+                        div resource_apps
+                            css
+                                display none
+                            class dashboard_detail_section
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Applications
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/tree_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                     height 80px
+                            div repo
+                                css
+                                    display none
+                                class value_edge
+                                text label
+                                    val Repo
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                        padding-left 1px
+                                    a text
+                                        html https://github.com/u/projectzero
+                                        href https://github.com/u/projectzero
+                                        class value_text
+                                        target _blank
+                                        css
+                                            font-size 20px
+                                            font-weight 300
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 5px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('project').repo;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder https://github.com/u/projectzero
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 20px
+                                        width 90%
+                                        letter-spacing normal
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_project_update', {
+                                                        repo: value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div end_spacer
+                                css
+                                    height 15px
+                        div resource_code
+                            css
+                                display none
+                            class dashboard_detail_section
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Code
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/code_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                        height 80px
+                            div repo
+                                class value_edge
+                                text label
+                                    val Repo
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                        padding-left 1px
+                                    a text
+                                        html https://github.com/u/projectzero
+                                        href https://github.com/u/projectzero
+                                        class value_text
+                                        target _blank
+                                        css
+                                            font-size 20px
+                                            font-weight 300
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 5px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('project').repo;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder https://github.com/u/projectzero
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 20px
+                                        width 90%
+                                        letter-spacing normal
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_project_update', {
+                                                        repo: value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div docs
+                                class value_edge
+                                text label
+                                    val Docs
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                        padding-left 1px
+                                    a text
+                                        html https://projectzero.anuv.me/docs
+                                        href https://projectzero.anuv.me/docs
+                                        class value_text
+                                        target _blank
+                                        css
+                                            font-size 20px
+                                            font-weight 300
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 5px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('project').docs;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder https://projectzero.anuv.me/docs
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 20px
+                                        width 90%
+                                        letter-spacing normal
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_project_update', {
+                                                        docs: value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div end_spacer
+                                css
+                                    height 15px
+                        div resource_domains
+                            css
+                                display none
+                            class dashboard_detail_section
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Domains
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/globe_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                     height 80px
+                            div repo
+                                css
+                                    display none
+                                class value_edge
+                                text label
+                                    val Repo
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                        padding-left 1px
+                                    a text
+                                        html https://github.com/u/projectzero
+                                        href https://github.com/u/projectzero
+                                        class value_text
+                                        target _blank
+                                        css
+                                            font-size 20px
+                                            font-weight 300
+                            div end_spacer
+                                css
+                                    height 15px
 
             div ideas
                 css
@@ -2384,7 +3509,7 @@ app
                     {
                         setTimeout(_ => {
                             app.ws.api.get_ideas();
-                        }, 100);
+                        }, 20);
                     }
                 :hide
                     css

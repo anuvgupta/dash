@@ -285,7 +285,7 @@ button.menu-button:hover {
     background-color: rgba(50, 50, 50, 0.05);
 }
 
-div.project_detail_section {
+div.dashboard_detail_section {
     margin-right: 10px;
     margin-left: 10px;
     margin-top: 20px;
@@ -302,4 +302,19 @@ div.project_detail_section {
     padding-bottom: 10px;
     display: inline-block;
     vertical-align: top;
+}
+
+div.resource-content {
+    transition: height 0.2s ease, max-height 0.2s ease;
+}
+
+div.project-content {
+    transition: height 0.35s ease, max-height 0.35s ease;
+}
+
+span.noItemsMessage {
+    letter-spacing: 1.3px;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 21px;
 }

@@ -280,6 +280,40 @@ var api = {
             }
         });
     },
+    update_resource: (id, update, resolve) => {
+        var ts_now = (new Date()).getTime();
+        mongo_api.collection('resource').findOne({ _id: mongo_oid(id) }, (e, result1) => {
+            if (e) {
+                err(`error finding resource ${id}`, e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (!result1) resolve(null, result1);
+                else {
+                    if (!update.hasOwnProperty('ts_updated')) {
+                        update.ts_updated = ts_now;
+                    }
+                    mongo_api.collection('resource').updateOne({ _id: mongo_oid(id) }, {
+                        $set: update
+                    }, (e2, result2) => {
+                        if (e2) {
+                            err(`error updating resource ${id}`, e2.message ? e2.message : e2);
+                            resolve(false, e2);
+                        } else {
+                            mongo_api.collection('resource').findOne({ _id: mongo_oid(id) }, (e3, result3) => {
+                                if (e3) {
+                                    err(`error finding resource ${id} after update`, e3.message ? e3.message : e3);
+                                    resolve(false, e3);
+                                } else {
+                                    if (!result3) resolve(null, result3);
+                                    else resolve(true, result3);
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        });
+    },
     delete_resource: (id, slug, resolve) => {
         var _find = {};
         if (id != null) _find['_id'] = mongo_oid(id);
