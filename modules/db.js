@@ -73,6 +73,7 @@ var api = {
             }
         });
     },
+    /*
     delete_project: (id, slug, resolve) => {
         var _find = {};
         if (id != null) _find['_id'] = mongo_oid(id);
@@ -85,33 +86,7 @@ var api = {
             } else resolve(result1.deletedCount == 1, result1);
         });
     },
-    toggle_star_project: (id, resolve) => {
-        var ts_now = (new Date()).getTime();
-        mongo_api.collection('project').findOne({ _id: mongo_oid(id) }, (e, result1) => {
-            if (e) {
-                err(`error finding project ${id}`, e.message ? e.message : e);
-                resolve(false, e);
-            } else {
-                if (!result1) resolve(null, result1);
-                else {
-                    var new_val = !(result1.featured);
-                    mongo_api.collection('project').updateOne({ _id: mongo_oid(id) }, {
-                        $set: {
-                            featured: new_val,
-                            ts_updated: ts_now
-                        }
-                    }, (e2, result2) => {
-                        if (e2) {
-                            err(`error toggling star for project ${id}`, e2.message ? e2.message : e2);
-                            resolve(false, e2);
-                        } else {
-                            resolve(true, new_val);
-                        }
-                    });
-                }
-            }
-        });
-    },
+    */
     update_project: (id, update, resolve) => {
         var ts_now = (new Date()).getTime();
         mongo_api.collection('project').findOne({ _id: mongo_oid(id) }, (e, result1) => {
@@ -155,6 +130,33 @@ var api = {
                 if (!coll1 || coll1.result.n != 1)
                     resolve(null, coll1);
                 else resolve(true, coll1);
+            }
+        });
+    },
+    toggle_star_project: (id, resolve) => {
+        var ts_now = (new Date()).getTime();
+        mongo_api.collection('project').findOne({ _id: mongo_oid(id) }, (e, result1) => {
+            if (e) {
+                err(`error finding project ${id}`, e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (!result1) resolve(null, result1);
+                else {
+                    var new_val = !(result1.featured);
+                    mongo_api.collection('project').updateOne({ _id: mongo_oid(id) }, {
+                        $set: {
+                            featured: new_val,
+                            ts_updated: ts_now
+                        }
+                    }, (e2, result2) => {
+                        if (e2) {
+                            err(`error toggling star for project ${id}`, e2.message ? e2.message : e2);
+                            resolve(false, e2);
+                        } else {
+                            resolve(true, new_val);
+                        }
+                    });
+                }
             }
         });
     },
@@ -242,6 +244,7 @@ var api = {
                 storage: 0,
                 location: ""
             },
+            primary_domain: null,
             domains: [],
             status: "new",
             status_time: -1,
@@ -249,7 +252,7 @@ var api = {
             ts_updated: timestamp,
         }, (e, result1) => {
             if (e) {
-                err(`error creating resource with name ${domain}`, e.message ? e.message : e);
+                err(`error creating resource with name ${name}`, e.message ? e.message : e);
                 resolve(false, e);
             } else resolve(true, result1.insertedId);
         });
@@ -322,6 +325,102 @@ var api = {
         mongo_api.collection('resource').deleteOne(_find, (e, result1) => {
             if (e) {
                 err(`error deleting resource ${id} | ${slug}`, e.message ? e.message : e);
+                resolve(false, e);
+            } else resolve(result1.deletedCount == 1, result1);
+        });
+    },
+    // applications
+    create_application: (slug, name, description, resolve) => {
+        const timestamp = Date.now();
+        mongo_api.collection('application').insertOne({
+            slug: slug,
+            name: name,
+            description: description,
+            host: null,
+            port: null,
+            environment: {},
+            ecosystem: {},
+            primary_domain: null,
+            domains: [],
+            status: "new",
+            status_time: -1,
+            ts_created: timestamp,
+            ts_updated: timestamp,
+        }, (e, result1) => {
+            if (e) {
+                err(`error creating application with name ${name}`, e.message ? e.message : e);
+                resolve(false, e);
+            } else resolve(true, result1.insertedId);
+        });
+    },
+    get_application: (id, slug, resolve) => {
+        var _find = {};
+        if (id != null) _find['_id'] = mongo_oid(id);
+        else if (slug != null) _find['slug'] = slug;
+        else return resolve(false, { message: "get_application requires either id or slug" });
+        mongo_api.collection('application').findOne(_find, (e, result1) => {
+            if (e) {
+                err(`error finding application ${id} | ${slug}`, e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (result1) resolve(true, result1);
+                else resolve(null, result1);
+            }
+        });
+    },
+    get_applications: (resolve) => {
+        mongo_api.collection('application').find({}).toArray((e, result1) => {
+            if (e) {
+                err("error finding applications", e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (result1) resolve(true, result1);
+                else resolve(null, result1);
+            }
+        });
+    },
+    update_application: (id, update, resolve) => {
+        var ts_now = (new Date()).getTime();
+        mongo_api.collection('application').findOne({ _id: mongo_oid(id) }, (e, result1) => {
+            if (e) {
+                err(`error finding application ${id}`, e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (!result1) resolve(null, result1);
+                else {
+                    if (!update.hasOwnProperty('ts_updated')) {
+                        update.ts_updated = ts_now;
+                    }
+                    mongo_api.collection('application').updateOne({ _id: mongo_oid(id) }, {
+                        $set: update
+                    }, (e2, result2) => {
+                        if (e2) {
+                            err(`error updating application ${id}`, e2.message ? e2.message : e2);
+                            resolve(false, e2);
+                        } else {
+                            mongo_api.collection('application').findOne({ _id: mongo_oid(id) }, (e3, result3) => {
+                                if (e3) {
+                                    err(`error finding application ${id} after update`, e3.message ? e3.message : e3);
+                                    resolve(false, e3);
+                                } else {
+                                    if (!result3) resolve(null, result3);
+                                    else resolve(true, result3);
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        });
+    },
+    delete_application: (id, slug, resolve) => {
+        var _find = {};
+        if (id != null) _find['_id'] = mongo_oid(id);
+        else if (slug != null) _find['slug'] = slug;
+        else return resolve(false, { message: "delete_application requires either id or slug" });
+        mongo_api.collection('application').deleteOne(_find, (e, result1) => {
+            if (e) {
+                err(`error deleting application ${id} | ${slug}`, e.message ? e.message : e);
                 resolve(false, e);
             } else resolve(result1.deletedCount == 1, result1);
         });

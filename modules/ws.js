@@ -223,20 +223,6 @@ var init = _ => {
             return ws_server.return_event_data("get_projects", { list: result1 }, client);
         });
     });
-    ws_server.bind("star_project", (client, req) => {
-        var id = req.id ? (`${req.id}`).trim() : '';
-        if (id != '') {
-            m.db.get_project(id, null, (success1, result1) => {
-                if (success1 === false) return ws_server.return_event_error("star_project", "database error", client);
-                if (result1 == null)
-                    return ws_server.return_event_error("star_project", "project not found", client);
-                m.db.toggle_star_project(id, (success2, result2) => {
-                    if (success2 === false) return ws_server.return_event_error("star_project", "database error", client);
-                    return ws_server.return_event_data("star_project", { id: id, starred: result2 }, client);
-                });
-            });
-        }
-    });
     ws_server.bind("update_project", (client, req) => {
         var id = req.id ? (`${req.id}`).trim() : '';
         var update = req.update ? JSON.parse(JSON.stringify(req.update)) : null;
@@ -262,6 +248,20 @@ var init = _ => {
                 m.db.delete_project(id, (success2, result2) => {
                     if (success2 === false) return ws_server.return_event_error("delete_project", "database error", client);
                     return ws_server.return_event_data("delete_project", { id: id }, client);
+                });
+            });
+        }
+    });
+    ws_server.bind("star_project", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        if (id != '') {
+            m.db.get_project(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("star_project", "database error", client);
+                if (result1 == null)
+                    return ws_server.return_event_error("star_project", "project not found", client);
+                m.db.toggle_star_project(id, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("star_project", "database error", client);
+                    return ws_server.return_event_data("star_project", { id: id, starred: result2 }, client);
                 });
             });
         }
@@ -308,6 +308,60 @@ var init = _ => {
         }
     });
     ws_server.bind("delete_resource", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        if (id != '') {
+            m.db.get_resource(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("delete_resource", "database error", client);
+                if (result1 == null)
+                    return ws_server.return_event_error("delete_resource", "resource not found", client);
+                m.db.delete_resource(id, null, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("delete_resource", "database error", client);
+                    return ws_server.return_event_data("delete_resource", { id: id }, client);
+                });
+            });
+        }
+    });
+
+    // applications
+    ws_server.bind("new_application", (client, req) => {
+        var slug = req.slug ? (`${req.slug}`).trim() : '';
+        var name = req.name ? (`${req.name}`).trim() : '';
+        var description = req.description ? (`${req.description}`).trim() : '';
+        if (slug != '' && name != '') {
+            m.db.get_application(null, slug, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("new_application", "database error", client);
+                if (result1 != null && slug == result1.slug)
+                    return ws_server.return_event_error("new_application", "identifier already taken", client);
+                m.db.create_resource(slug, name, description, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("new_application", "database error", client);
+                    return ws_server.return_event_data("new_application", { id: result2, slug: slug }, client);
+                });
+            });
+        }
+    });
+    ws_server.bind("get_applications", (client, req) => {
+        m.db.get_applications((success1, result1) => {
+            if (success1 === false || result1 === null)
+                return ws_server.return_event_error("get_applications", "database error", client);
+            return ws_server.return_event_data("get_applications", { list: result1 }, client);
+        });
+    });
+    ws_server.bind("update_application", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        var update = req.update ? JSON.parse(JSON.stringify(req.update)) : null;
+        if (id != '' && update != null && Object.keys(update).length > 0) {
+            m.db.get_application(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("update_application", "database error", client);
+                if (result1 == null)
+                    return ws_server.return_event_error("update_application", "application not found", client);
+                m.db.update_application(id, update, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("update_application", "database error", client);
+                    return ws_server.return_event_data("update_application", { id: id, resource: result2 }, client);
+                });
+            });
+        }
+    });
+    ws_server.bind("delete_application", (client, req) => {
         var id = req.id ? (`${req.id}`).trim() : '';
         if (id != '') {
             m.db.get_resource(id, null, (success1, result1) => {
