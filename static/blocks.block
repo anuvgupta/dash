@@ -1166,11 +1166,11 @@
             });
             data('specs', specs => {
                 block.key('specs', specs);
-                var desc_string = `${specs.cpu} CPU${specs.cpu == 1 ? '' : 's'} – ${specs.memory}GB RAM – ${specs.storage}GB SSD${specs.location == '' ? '' : ' – '}${specs.location}`;
+                var desc_string = `${specs.cpu} CPU${specs.cpu == 1 ? '' : 's'} – ${specs.memory}GB RAM – ${specs.storage}GB SSD${specs.location == '' ? '' : '<br/>'}${specs.location}`;
                 block.key('tagline', "");
                 block.child('description/tag').html('');
                 block.key('description', desc_string.toString());
-                block.child('description/desc').html('').data(desc_string);
+                block.child('description/desc').html(desc_string.toString());
                 block.child('description/spacer').on('update');
             });
         }
