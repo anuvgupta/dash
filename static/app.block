@@ -2526,7 +2526,7 @@ app
                     #specs
                         {
                             // cpu
-                            block.child('subcontent/resource_specs/cpu/value/text').html('').data(`${specs.cpu} CPUs`);
+                            block.child('subcontent/resource_specs/cpu/value/text').html('').data(`${specs.cpu} CPU${specs.cpu == 1 ? '' : 's'}`);
                             block.child('subcontent/resource_specs/cpu/value_editor').attribute('value', `${specs.cpu}`);
                             // memory
                             block.child('subcontent/resource_specs/memory/value/text').html('').data(`${specs.memory}GB RAM`);
