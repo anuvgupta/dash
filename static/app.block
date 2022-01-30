@@ -2626,6 +2626,7 @@ app
                                 ip: resource.ip,
                                 private_ip: resource.private_ip,
                                 provider: resource.provider,
+                                type: resource.type,
                             });
                         }
                     #name
@@ -2702,13 +2703,22 @@ app
                         {
                             block.child('subcontent/resource_info/provider/value/text').data({ choose: `${provider}`});
                         }
+                    #type
+                        {
+                            block.child('subcontent/resource_specs/type/value/text').data({ choose: `${type}`});
+                        }
                     :hide_editors
                         {
                             //setTimeout(_ => {
                                 block.child('subcontent/resource_info/name/value_editor').on('hide');
                                 block.child('subcontent/resource_info/slug/value_editor').on('hide');
                                 block.child('subcontent/resource_info/ip/value_editor').on('hide');
+                                block.child('subcontent/resource_info/private_ip/value_editor').on('hide');
                                 block.child('subcontent/resource_info/link/value_editor').on('hide');
+                                block.child('subcontent/resource_specs/cpu/value_editor').on('hide');
+                                block.child('subcontent/resource_specs/memory/value_editor').on('hide');
+                                block.child('subcontent/resource_specs/storage/value_editor').on('hide');
+                                block.child('subcontent/resource_specs/location/value_editor').on('hide');
                                 block.child('subcontent/resource_info/more_menu').on('hide');
                             //}, 200);
                         }
@@ -2755,6 +2765,10 @@ app
                             if (old_data.provider != new_data.provider) {
                                 block.data({ provider: new_data.provider, });
                                 block.child('subcontent/resource_info/provider/value/text').node().blur();
+                            }
+                            if (old_data.type != new_data.type) {
+                                block.data({ type: new_data.type, });
+                                block.child('subcontent/resource_specs/type/value/text').node().blur();
                             }
                             block.key('resource', new_data);
                         }
@@ -3127,6 +3141,50 @@ app
                                                 block.on('hide');
                                             }
                                         }
+                            div provider
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Provider
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    select text
+                                        name resource_provider_select
+                                        class value_select
+                                        :change
+                                            {
+                                                var provider_val = block.node().value;
+                                                block.parent(4).on('send_resource_update', {
+                                                    provider: provider_val
+                                                });
+                                            }
+                                        #choose
+                                            {
+                                                var children = block.children();
+                                                for (var c in children)
+                                                    children[c].node().removeAttribute('selected');
+                                                block.child(choose).attribute('selected', 'selected');
+                                            }
+                                        option none
+                                            html None
+                                            value none
+                                            selected selected
+                                        {
+                                            for (var p in app.main.config.cloud.providers) {
+                                                var provider = app.main.config.cloud.providers[p];
+                                                block.add(Block('option', provider[0]).data({
+                                                    value: provider[0],
+                                                    html: provider[1]
+                                                }));
+                                            }
+                                        }
                             div link
                                 class value_edge
                                 text label
@@ -3204,50 +3262,6 @@ app
                                             } else if (event.keyCode == 27) {
                                                 // escape
                                                 block.on('hide');
-                                            }
-                                        }
-                            div provider
-                                class value_edge
-                                css
-                                    margin-bottom 20px
-                                text label
-                                    val Provider
-                                    class label_desc
-                                block value
-                                    {
-                                        block.__child('content').css('text-align', 'left');
-                                    }
-                                    class value_text_wrap
-                                    css
-                                        height 25.2px
-                                    select text
-                                        name resource_provider_select
-                                        class value_select
-                                        :change
-                                            {
-                                                var provider_val = block.node().value;
-                                                block.parent(4).on('send_resource_update', {
-                                                    provider: provider_val
-                                                });
-                                            }
-                                        #choose
-                                            {
-                                                var children = block.children();
-                                                for (var c in children)
-                                                    children[c].node().removeAttribute('selected');
-                                                block.child(choose).attribute('selected', 'selected');
-                                            }
-                                        option none
-                                            html None
-                                            value none
-                                            selected selected
-                                        {
-                                            for (var p in app.main.config.cloud.providers) {
-                                                var provider = app.main.config.cloud.providers[p];
-                                                block.add(Block('option', provider[0]).data({
-                                                    value: provider[0],
-                                                    html: provider[1]
-                                                }));
                                             }
                                         }
                             div end_spacer
@@ -3791,6 +3805,50 @@ app
                                             } else if (event.keyCode == 27) {
                                                 // escape
                                                 block.on('hide');
+                                            }
+                                        }
+                            div type
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Type
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    select text
+                                        name resource_type_select
+                                        class value_select
+                                        :change
+                                            {
+                                                var type_val = block.node().value;
+                                                block.parent(4).on('send_resource_update', {
+                                                    type: type_val
+                                                });
+                                            }
+                                        #choose
+                                            {
+                                                var children = block.children();
+                                                for (var c in children)
+                                                    children[c].node().removeAttribute('selected');
+                                                block.child(choose).attribute('selected', 'selected');
+                                            }
+                                        option none
+                                            html None
+                                            value none
+                                            selected selected
+                                        {
+                                            for (var t in app.main.config.cloud.resource.types) {
+                                                var type = app.main.config.cloud.resource.types[t];
+                                                block.add(Block('option', type[0]).data({
+                                                    value: type[0],
+                                                    html: type[1][0]
+                                                }));
                                             }
                                         }
                             div end_spacer

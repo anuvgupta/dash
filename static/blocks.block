@@ -948,14 +948,14 @@
                 )
                 .add(Block('div', 'spacer1')
                     .css({
-                        height: '20px'
+                        height: '18px'
                     })
                 )
                 .add(Block('div', 'description')
                     .css({
                         fontSize: '17px',
                         fontWeight: '300',
-                        margin: '10px 2px 5px 5px',
+                        margin: '7px 2px 5px 5px',
                         opacity: '0.9',
                         letterSpacing: '0.5px',
                         lineHeight: '24px'
@@ -970,12 +970,14 @@
                         .on('update', (e, b, d) => {
                             var tagline_exists = _block.key('tagline') && _block.key('tagline').trim().length > 0;
                             var desc_exists = _block.key('description') && _block.key('description').trim().length > 0;
-                            if (tagline_exists && desc_exists) b.css('display', 'inline-block');
+                            if (tagline_exists && desc_exists) b.css('display', 'block');
                             e.stopPropagation();
                         })
-                        .html('&nbsp;–&nbsp;')
+                        //.html('&nbsp;–&nbsp;')
+                        .html('')
                         .css({
-                            display: 'none'
+                            display: 'none',
+                            height: '2px'
                         })
                     )
                     .add(Block('text', 'desc')
@@ -991,7 +993,8 @@
                     .css({
                         width: '100%',
                         height: '80px',
-                        marginTop: '14px'
+                        marginTop: '8px',
+                        marginBottom: '7px'
                     })
                     .add(Block('block', 'light')
                         .css({
@@ -1156,21 +1159,33 @@
                 block.key('link', link);
                 //block.child('menu_top/button_middle/button_wrap/button').on(link == '' ? 'disable' : 'enable');
             });
-            data('ts_created', ts_created => {
-                block.key('ts_created', ts_created);
-                //block.child('created_year/text').html('').data(`${(new Date(ts_created)).getFullYear()}`);
-            });
-            data('ts_updated', ts_updated => {
-                block.key('ts_updated', ts_updated);
-                //block.child('last_updated_msg/text').html('').data(`${util.capitalize(util.duration_desc(ts_updated))}`);
+            data('type', type => {
+                block.key('type', type);
+                var tag_string = "";
+                for (var t in app.main.config.cloud.resource.types) {
+                    var type_arr = app.main.config.cloud.resource.types[t];
+                    if (type_arr[0] == type) {
+                        tag_string = `${type_arr[1][0]}`;
+                        break;
+                    }
+                }
+                block.key('tagline', `${tag_string}`);
+                block.child('description/tag').html(`${tag_string}`);
+                block.child('description/spacer').on('update');
             });
             data('specs', specs => {
                 block.key('specs', specs);
                 var desc_string = `${specs.cpu} CPU${specs.cpu == 1 ? '' : 's'} – ${specs.memory}GB RAM – ${specs.storage}GB SSD${specs.location == '' ? '' : '<br/>'}${specs.location}`;
-                block.key('tagline', "");
-                block.child('description/tag').html('');
                 block.key('description', desc_string.toString());
                 block.child('description/desc').html(desc_string.toString());
                 block.child('description/spacer').on('update');
+            });
+            data('ts_created', ts_created => {
+                block.key('ts_created', ts_created);
+                block.child('created_year/text').html('').data(`${(new Date(ts_created)).getFullYear()}`);
+            });
+            data('ts_updated', ts_updated => {
+                block.key('ts_updated', ts_updated);
+                block.child('last_updated_msg/text').html('').data(`${util.capitalize(util.duration_desc(ts_updated))}`);
             });
         }

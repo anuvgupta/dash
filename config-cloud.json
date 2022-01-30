@@ -11,6 +11,12 @@
     },
     "env": {
         "cloud": {
+            "resource": {
+                "types": [
+                    ["vm", ["Virtual Machine", "VM"]],
+                    ["ct", ["Container", "CTR"]]
+                ]
+            },
             "providers": [
                 ["aws-lightsail", "AWS Lightsail"],
                 ["aws-ec2", "AWS Elastic Compute"],
