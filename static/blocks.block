@@ -667,8 +667,9 @@
                                         b.css('opacity', '0.7');
                                 })
                                 .on('click', (e, b, d) => {
-                                    if (b.key('disabled') == 'no')
-                                        console.log('code');
+                                    if (b.key('disabled') == 'no') {
+                                        //console.log('code');
+                                    }
                                 })
                                 .add(Block('image', 1)
                                     .data({
@@ -960,6 +961,31 @@
                         letterSpacing: '0.5px',
                         lineHeight: '24px'
                     })
+                    .add(Block('text', 'pretag')
+                        .html('_')
+                        .css({
+                            display: 'none',
+                            fontWeight: '500'
+                        })
+                    )
+                    .add(Block('text', 'prespacer')
+                        .key('default_value', '&nbsp;–&nbsp;')
+                        .html('&nbsp;–&nbsp;')
+                        .on('update', (e, b, d) => {
+                            //console.log('provider', _block.key('pretagline'));
+                            //console.log('type', _block.key('tagline'));
+                            var provider_exists = _block.key('pretagline') && _block.key('pretagline').trim().length > 0;
+                            var type_exists = _block.key('tagline') && _block.key('tagline').trim().length > 0;
+                            if (provider_exists && type_exists) b.html(b.key('default_value')).css('display', 'inline-block');
+                            else if (provider_exists) b.html('').css('display', 'block');
+                            else b.css('display', 'none')
+                            e.stopPropagation();
+                        })
+                        .css({
+                            display: 'none',
+                            fontWeight: '500'
+                        })
+                    )
                     .add(Block('text', 'tag')
                         .data('_')
                         .css({
@@ -971,6 +997,7 @@
                             var tagline_exists = _block.key('tagline') && _block.key('tagline').trim().length > 0;
                             var desc_exists = _block.key('description') && _block.key('description').trim().length > 0;
                             if (tagline_exists && desc_exists) b.css('display', 'block');
+                            else b.css('display', 'none')
                             e.stopPropagation();
                         })
                         //.html('&nbsp;–&nbsp;')
@@ -998,12 +1025,12 @@
                     })
                     .add(Block('block', 'light')
                         .css({
-                            width: '27%',
+                            width: '25%',
                             height: '100%',
                             float: 'left'
                         })
                         .query('window width >= 665', function (event, block, data) {
-                            block.css('width', '27%');
+                            block.css('width', '25%');
                         })
                         .query('window width < 665', function (event, block, data) {
                             block.css('width', '23%');
@@ -1033,7 +1060,7 @@
                                 width: '100%'
                             })
                             .add(Block('text', 1)
-                                .data('Cloud VM')
+                                .data('Cloud Resource')
                                 .css({
                                     display: 'block',
                                     textAlign: 'left',
@@ -1159,19 +1186,39 @@
                 block.key('link', link);
                 //block.child('menu_top/button_middle/button_wrap/button').on(link == '' ? 'disable' : 'enable');
             });
-            data('type', type => {
-                block.key('type', type);
-                var tag_string = "";
-                for (var t in app.main.config.cloud.resource.types) {
-                    var type_arr = app.main.config.cloud.resource.types[t];
-                    if (type_arr[0] == type) {
-                        tag_string = `${type_arr[1][0]}`;
+            data('provider', provider => {
+                block.key('provider', provider);
+                var provider_string = "";
+                for (var p in app.main.config.cloud.providers) {
+                    var provider_arr = app.main.config.cloud.providers[p];
+                    if (provider_arr[0] == provider) {
+                        provider_string = `${provider_arr[1]}`;
                         break;
                     }
                 }
-                block.key('tagline', `${tag_string}`);
-                block.child('description/tag').html(`${tag_string}`);
+                block.key('pretagline', `${provider_string}`);
+                block.child('description/pretag').html(`${provider_string}`).css('display', 'inline-block');
+                block.child('description/prespacer').on('update');
+            });
+            data('type', type => {
+                block.key('type', type);
+                var tag_string = "";
+                var tag_string_long = "";
+                for (var t in app.main.config.cloud.resource.types) {
+                    var type_arr = app.main.config.cloud.resource.types[t];
+                    if (type_arr[0] == type) {
+                        tag_string = `${type_arr[1][1]}`;
+                        tag_string_long = `${type_arr[1][0]}`;;
+                        break;
+                    }
+                }
+                block.key('tagline', `${tag_string_long}`);
+                block.child('description/tag').html(`${tag_string_long}`);
                 block.child('description/spacer').on('update');
+                block.child('description/prespacer').on('update');
+                if (tag_string == "") tag_string = "Resource";
+                block.key('status_type', `Cloud ${tag_string}`);
+                block.child('status/labels/type/text').html('').data(`Cloud ${tag_string}`);
             });
             data('specs', specs => {
                 block.key('specs', specs);

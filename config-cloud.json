@@ -19,8 +19,8 @@
             },
             "providers": [
                 ["aws-lightsail", "AWS Lightsail"],
-                ["aws-ec2", "AWS Elastic Compute"],
-                ["gcp-compute", "GCP Compute Engine"],
+                ["aws-ec2", "AWS EC2"],
+                ["gcp-compute", "GCP Compute"],
                 ["azure-compute", "Azure Compute"],
                 ["digitalocean", "DigitalOcean"],
                 ["heroku", "Heroku"]

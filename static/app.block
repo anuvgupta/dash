@@ -3004,6 +3004,7 @@ app
                                         css
                                             font-size 20px
                                             font-weight 300
+                                            letter-spacing 0.6px
                                     :mouseover
                                         {
                                             if (block.child('edit_button').key('showing') == 'off')
@@ -3038,7 +3039,8 @@ app
                                         margin-bottom 2px
                                         font-size 20px
                                         width 90%
-                                        letter-spacing normal
+                                        //letter-spacing normal
+                                        letter-spacing 0.6px
                                     :hide
                                         {
                                             block.css('display', 'none').sibling('value').css('display', 'table');
@@ -3083,6 +3085,7 @@ app
                                         css
                                             font-size 20px
                                             font-weight 300
+                                            letter-spacing 0.6px
                                     :mouseover
                                         {
                                             if (block.child('edit_button').key('showing') == 'off')
@@ -3117,7 +3120,8 @@ app
                                         margin-bottom 2px
                                         font-size 20px
                                         width 90%
-                                        letter-spacing normal
+                                        //letter-spacing normal
+                                        letter-spacing 0.6px
                                     :hide
                                         {
                                             block.css('display', 'none').sibling('value').css('display', 'table');
