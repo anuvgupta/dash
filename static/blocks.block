@@ -1030,7 +1030,7 @@
                                 width: '100%'
                             })
                             .add(Block('text', 1)
-                                .data('Cloud VPS')
+                                .data('Cloud VM')
                                 .css({
                                     display: 'block',
                                     textAlign: 'left',

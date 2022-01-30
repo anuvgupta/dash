@@ -105,8 +105,8 @@ var app = {
                         `<input placeholder="Resource Zero" class="modal_text_input" id="nr_modal_name_input" type='text' name='nr_modal_name'/></div>` +
                         `<div style="margin: 3px 0;"><span class="modal_text_input_label">Identifier:</span>&nbsp;` +
                         `<input placeholder="resource-zero" class="modal_text_input" id="nr_modal_slug_input" type='text' name='nr_modal_slug'/></div>` +
-                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">IP Address:</span>&nbsp;` +
-                        `<input placeholder="127.0.0.1" class="modal_text_input" id="nr_modal_ip_input" type='text' name='nr_modal_ip'/></div>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">External IP:</span>&nbsp;` +
+                        `<input placeholder="142.250.189.174" class="modal_text_input" id="nr_modal_ip_input" type='text' name='nr_modal_ip'/></div>` +
                         `<div style="margin: 3px 0;"><span class="modal_text_input_label">Console:</span>&nbsp;` +
                         `<input placeholder="https://console.aws.amazon.com/ec2/v2/home?..." class="modal_text_input" id="nr_modal_link_input" type='text' name='nr_modal_link'/></div>` +
                         `<div style="height: 8px"></div></div>`,
@@ -310,6 +310,7 @@ var app = {
         }
     },
     main: {
+        config: {},
         init: _ => {
             console.clear();
             console.log("[main] loading...");

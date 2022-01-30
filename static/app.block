@@ -140,6 +140,47 @@ app
             }
         }
 
+    #new_application_res
+        {
+            if (new_application_res.success) {
+                app.ui.display_modal.new_application_res(`Created application "${new_application_res.data.slug}" (${new_application_res.data.id})`);
+            } else {
+                app.ui.display_modal.new_application_res(`<span style="color: #a60a0a; opacity: 0.9;">${util.capitalize(new_application_res.message ? new_application_res.message : 'unknown error')}.</span>`);
+            }
+        }
+    #get_applications_res
+        {
+            if (get_applications_res.success) {
+                //console.log(get_applications_res.data.list);
+                block.child('main/content/applications').data({
+                    resource_list: get_applications_res.data.list
+                });
+            } else {
+                app.ui.display_modal.generic_confirm('Load Applications', `Error - ${util.capitalize(get_applications_res.message ? get_applications_res.message : 'unknown error')}`, (result) => {
+                    if (result) {
+                        setTimeout(_ => {
+                            app.ws.api.get_applications();
+                        }, 30);
+                        return true;
+                    }
+                });
+            }
+        }
+    #update_application_res
+        {
+           var current_application = block.child('main/content/applications/detail').key('application');
+           if (current_application && current_application._id == update_application_res.data.id)
+               block.child('main/content/applications/detail').on('receive_application_update', update_application_res.data.application);
+               block.child('main/content/applications').data({ update_application_local: update_application_res.data.application });
+        }
+    #delete_application_res
+        {
+            if (delete_application_res.success === true) {
+                block.child('main/content/applications').data({
+                    delete_application: delete_application_res.data.id
+                });
+            }
+        }
 
     div background
         css
@@ -2024,6 +2065,7 @@ app
                                     height 15px
                         
             div applications
+                $active_view content
                 css
                     width 100%
                     height auto
@@ -2041,7 +2083,105 @@ app
                 :hide
                     css
                         display none
-                button new_domain_button
+                #application_list
+                    {
+                        application_list = application_list.sort(util.sort_compare_newest_first);
+                        block.key('application_list', application_list);
+
+                        block.child('content').html('');
+                        for (var a in application_list) {
+                            var application_block_new = Block('application-item', `application_${application_list[a]._id.toString()}`).data(application_list[a]).key('application_metadata', application_list[a]);
+                            block.child('content').add(application_block_new);
+                        }
+                        if (application_list.length > 2)
+                            block.child('content').css('text-align', 'center');
+                        else block.child('content').css('text-align', 'left');
+                        if (application_list.length == 0) {
+                            var msg = 'No applications found.';
+                            block.child('content').html(`<div style="margin: 0 auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
+                        }
+                        Block.queries();
+                        setTimeout(_ => {
+                            Block.queries();
+                            setTimeout(_ => {
+                                window.componentHandler.upgradeDom();
+                            }, 10);
+                        }, 10);
+                    }
+                #select_application
+                    {
+                        //console.log(select_application);
+                        block.key('active_view', 'detail');
+                        block.child('content').css('display', 'none')
+                            .sibling('detail').css('display', 'block')
+                            .data({ resource: select_application })
+                        ;
+                        block.child('title').data({ select_application_name: `${select_application.name}` });
+                        block.child('new_application_button').css('display', 'none');
+                        block.child('application_filter').css('display', 'none');
+                        block.child('close').on('show');
+                        block.child('detail').on('update_grid');
+                        setTimeout(_ => {
+                            Block.queries();
+                        }, 10);
+                    }
+                :deselect_application
+                    {
+                        block.key('active_view', 'content');
+                        block.child('detail').css('display', 'none')
+                            .sibling('content').css('display', 'block')
+                        ;
+                        block.child('title').on('back');
+                        block.child('new_application_button').css('display', 'inline-block');
+                        block.child('application_filter').css('display', 'block');
+                        block.child('close').on('hide');
+                        setTimeout(_ => {
+                            Block.queries();
+                            setTimeout(_ => {
+                                window.componentHandler.upgradeDom();
+                            }, 10);
+                        }, 5);
+                    }
+                #update_application_local
+                    {
+                        //console.log('update_application_local', update_application_local);
+                        var application_list = block.key('application_list');
+                        for (var a in application_list) {
+                            if (application_list[a]._id == update_application_local._id) {
+                                application_list[a] = update_application_local;
+                                break;
+                            }
+                        }
+                        block.data({
+                            application_list: application_list
+                        });
+                    }
+                #update_application_field
+                    {
+                        //console.log('update_application_field', update_application_field);
+                        var application_list = block.key('application_list');
+                        for (var a in application_list) {
+                            if (application_list[a]._id == update_application_field.id) {
+                                application_list[a][update_application_field.field] = update_application_field.val;
+                                break;
+                            }
+                        }
+                        block.data({
+                            application_list: application_list
+                        });
+                    }
+                #delete_application
+                    {
+                        var application_info = block.child('detail').key('application');
+                        if (application_info && application_info._id == delete_application) {
+                            block.child('close/close_button').on('click');
+                            setTimeout(_ => {
+                                app.ws.api.get_applications();
+                            }, 20);
+                        }
+                    }
+
+                button new_application_button
                     css
                         position absolute
                         top 19px
@@ -2056,10 +2196,14 @@ app
                     div content
                         text text
                             val +
+                    :click
+                        {
+                            app.ui.display_modal.new_application();
+                        }
                     {
                         block.css("background-color", app.ui.colors.primary);
                     }
-                div domain_filter
+                div application_filter
                     css
                         position absolute
                         top 23px
@@ -2479,7 +2623,9 @@ app
                                 slug: resource.slug,
                                 link: resource.link,
                                 specs: resource.specs,
-                                ip: resource.ip
+                                ip: resource.ip,
+                                private_ip: resource.private_ip,
+                                provider: resource.provider,
                             });
                         }
                     #name
@@ -2506,6 +2652,18 @@ app
                             } else block.child('subcontent/resource_info/ip/value/text').css('color', 'rgba(10, 115, 242, 0.95)');
                             block.child('subcontent/resource_info/ip/value/text').html(`${ip_alt}`).attribute('href', `${window.location.protocol}//${ip_alt_alt}`);
                             block.child('subcontent/resource_info/ip/value_editor').attribute('value', `${ip}`); 
+                        }
+                    #private_ip
+                        {
+                            var private_ip_alt = private_ip;
+                            var private_ip_alt_alt = private_ip_alt;
+                            if (private_ip_alt == '') {
+                                private_ip_alt = '<span class="text_placeholder" style="letter-spacing:0.8px;">N/A</span>';
+                                private_ip_alt_alt = '#';
+                                block.child('subcontent/resource_info/private_ip/value/text').css('color', '#222');
+                            } else block.child('subcontent/resource_info/private_ip/value/text').css('color', 'rgba(10, 115, 242, 0.95)');
+                            block.child('subcontent/resource_info/private_ip/value/text').html(`${private_ip_alt}`).attribute('href', `${window.location.protocol}//${private_ip_alt_alt}`);
+                            block.child('subcontent/resource_info/private_ip/value_editor').attribute('value', `${private_ip}`); 
                         }
                     #link
                         {
@@ -2540,6 +2698,10 @@ app
                             block.child('subcontent/resource_specs/location/value/text').html(`${location_alt}`);
                             block.child('subcontent/resource_specs/location/value_editor').attribute('value', `${specs.location}`);
                         }
+                    #provider
+                        {
+                            block.child('subcontent/resource_info/provider/value/text').data({ choose: `${provider}`});
+                        }
                     :hide_editors
                         {
                             //setTimeout(_ => {
@@ -2566,6 +2728,10 @@ app
                                 block.data({ ip: new_data.ip, });
                                 block.child('subcontent/resource_info/ip/value_editor').on('hide');
                             }
+                            if (old_data.private_ip != new_data.private_ip) {
+                                block.data({ private_ip: new_data.private_ip, });
+                                block.child('subcontent/resource_info/private_ip/value_editor').on('hide');
+                            }
                             if (old_data.link != new_data.link) {
                                 block.data({ link: new_data.link, });
                                 block.child('subcontent/resource_info/link/value_editor').on('hide');
@@ -2585,6 +2751,10 @@ app
                             if (old_data.specs.location != new_data.specs.location) {
                                 block.data({ specs: new_data.specs, });
                                 block.child('subcontent/resource_specs/location/value_editor').on('hide');
+                            }
+                            if (old_data.provider != new_data.provider) {
+                                block.data({ provider: new_data.provider, });
+                                block.child('subcontent/resource_info/provider/value/text').node().blur();
                             }
                             block.key('resource', new_data);
                         }
@@ -2802,7 +2972,86 @@ app
                             div ip
                                 class value_edge
                                 text label
-                                    val IP Address
+                                    val External IP
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                        padding-left 1px
+                                    a text
+                                        html 142.250.189.174
+                                        href http://142.250.189.174
+                                        class value_text
+                                        target _blank
+                                        css
+                                            font-size 20px
+                                            font-weight 300
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 5px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('resource').ip;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder 142.250.189.174
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 20px
+                                        width 90%
+                                        letter-spacing normal
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_resource_update', {
+                                                        ip: value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div private_ip
+                                class value_edge
+                                text label
+                                    val Internal IP
                                     class label_desc
                                 block value
                                     {
@@ -2838,7 +3087,7 @@ app
                                             {
                                                 block.parent().css('display', 'none')
                                                     .sibling('value_editor').css('display', 'block');
-                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('resource').ip;
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('resource').private_ip;
                                                 setTimeout(_ => {
                                                     block.parent().sibling('value_editor').node().select();
                                                 }, 15);
@@ -2854,6 +3103,7 @@ app
                                         margin-bottom 2px
                                         font-size 20px
                                         width 90%
+                                        letter-spacing normal
                                     :hide
                                         {
                                             block.css('display', 'none').sibling('value').css('display', 'table');
@@ -2868,7 +3118,7 @@ app
                                                 value = (`${value}`).trim();
                                                 //if (value.length > 0) {
                                                     block.parent(3).on('send_resource_update', {
-                                                        ip: value
+                                                        private_ip: value
                                                     });
                                                 //}
                                                 setTimeout(_ => { block.on('hide'); }, 250);
@@ -2954,6 +3204,50 @@ app
                                             } else if (event.keyCode == 27) {
                                                 // escape
                                                 block.on('hide');
+                                            }
+                                        }
+                            div provider
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Provider
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    select text
+                                        name resource_provider_select
+                                        class value_select
+                                        :change
+                                            {
+                                                var provider_val = block.node().value;
+                                                block.parent(4).on('send_resource_update', {
+                                                    provider: provider_val
+                                                });
+                                            }
+                                        #choose
+                                            {
+                                                var children = block.children();
+                                                for (var c in children)
+                                                    children[c].node().removeAttribute('selected');
+                                                block.child(choose).attribute('selected', 'selected');
+                                            }
+                                        option none
+                                            html None
+                                            value none
+                                            selected selected
+                                        {
+                                            for (var p in app.main.config.cloud.providers) {
+                                                var provider = app.main.config.cloud.providers[p];
+                                                block.add(Block('option', provider[0]).data({
+                                                    value: provider[0],
+                                                    html: provider[1]
+                                                }));
                                             }
                                         }
                             div end_spacer

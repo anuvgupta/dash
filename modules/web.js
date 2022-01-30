@@ -53,7 +53,16 @@ var init = _ => {
         });
     });
 };
-var api = {};
+var api = {
+    get_cloud_config: _ => {
+        const config_dup = JSON.parse(JSON.stringify(global.config.env));
+        return config_dup;
+    },
+    export_cloud_config: _ => {
+        const encoded_data = Buffer.from(JSON.stringify(api.get_cloud_config())).toString('base64');
+        return `JSON.parse(atob("${encoded_data}"))`;
+    }
+};
 
 
 
@@ -67,6 +76,7 @@ module.exports = {
         log("initializing");
         http_port = global.http_port;
         express_api = express();
+        express_api.set('view engine', 'ejs');
         http_server = http.Server(express_api);
         express_api.use(body_parser.json());
         express_api.use(body_parser.urlencoded({ extended: true }));
@@ -77,7 +87,10 @@ module.exports = {
         });
         express_api.use(express.static("static"));
         express_api.get("/", (req, res) => {
-            res.sendFile(__dirname + "/static/index.html");
+            // res.sendFile(__dirname + "/static/index.html");
+            res.render('app', {
+                export_cloud_config: api.export_cloud_config
+            });
         });
         module.exports.api.exit = resolve => {
             log("exit");

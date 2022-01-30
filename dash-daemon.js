@@ -11,7 +11,7 @@ const body_parser = require("body-parser");
 /* ENVIRONMENT */
 global.args = process.argv.slice(2);
 global.env = global.args[0] == "prod" ? "prod" : "dev";
-global.config = JSON.parse(fs.readFileSync('./daemon-config.json', { encoding: 'utf8', flag: 'r' }));
+global.config = JSON.parse(fs.readFileSync('./config-daemon.json', { encoding: 'utf8', flag: 'r' }));
 
 /* MODULES */
 // TODO: process management, ws client, report heartbeats

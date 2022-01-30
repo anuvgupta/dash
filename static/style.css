@@ -226,6 +226,17 @@ span.value_text {
     cursor: pointer;
 }
 
+select.value_select {
+    opacity: 0.9;
+    font-size: 18px;
+    letter-spacing: 0.6px;
+    font-weight: 300;
+    cursor: pointer;
+    padding: 4px 6px;
+    outline: none;
+    width: 60%;
+}
+
 div.value_edge {
     margin-bottom: 18px;
 }

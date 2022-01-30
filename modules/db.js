@@ -237,6 +237,7 @@ var api = {
             link: link,
             ip: ip,
             provider: "",
+            type: "",
             private_ip: "",
             specs: {
                 cpu: 0,

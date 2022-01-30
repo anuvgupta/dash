@@ -14,7 +14,7 @@ const body_parser = require("body-parser");
 /* ENVIRONMENT */
 global.args = process.argv.slice(2);
 global.env = global.args[0] == "prod" ? "prod" : "dev";
-global.config = JSON.parse(fs.readFileSync('./cloud-config.json', { encoding: 'utf8', flag: 'r' }));
+global.config = JSON.parse(fs.readFileSync('./config-cloud.json', { encoding: 'utf8', flag: 'r' }));
 global.http_port = global.env == "dev" ? 8000 : global.config.http_port;
 global.ws_port = global.env == "dev" ? 8080 : global.config.ws_port;
 global.mdb_port = global.env == "dev" ? 27017 : global.config.mdb_port;
