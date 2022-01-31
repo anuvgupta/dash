@@ -375,8 +375,65 @@ var init = _ => {
             });
         }
     });
+
+    // daemon
+    ws_server.bind("sync_daemon", (client, req) => {
+        var daemon_key = req.daemon_key ? (`${req.daemon_key}`).trim() : '';
+        if (daemon_key != '') {
+            m.db.get_resource_by_key(daemon_key, (success1, result1) => {
+                if (success1 === false)
+                    return ws_server.return_event_error("identify_daemon", "database error", client);
+                if (result1 == null)
+                    return ws_server.return_event_error("identify_daemon", "resource not found", client);
+                ws_server.authenticate_client(client);
+                ws_server.group_client(client, 'daemon');
+                ws_server.set_client_object(client, result1._id.toString());
+                ws_server.return_event_data("identify_daemon", {
+                    id: result1._id.toString(),
+                    daemon_key: daemon_key,
+                    resource: result1
+                }, client);
+            });
+        }
+    }, false);
+    ws_server.bind('hb_daemon', (client, req) => {
+        m.db.get_resource(ws_server.get_client_object(client), null, (success, resource) => {
+            if (success === false || success === null || resource === false || resource === null) return;
+            // log(`hb_daemon | client ${client.id} - resource ${client.o_id} heartbeat`);
+            var now = (new Date()).getTime();
+            m.db.set_resource_status(client.o_id, "online", now, (success2, result1) => {
+                if (success2 === false || success2 === null || result1 === false || result1 === null) return;
+                if (resource.status != "online") {
+                    ws_server.send_to_group("resource_status", {
+                        id: resource._id.toString(),
+                        status: "online",
+                        status_time: now
+                    }, "app");
+                }
+            });
+        });
+    }, false);
 };
-var api = {};
+var api = {
+    broadcast_resource_hb: _ => {
+        ws_server.send_to_group("hb", null, "daemon");
+    },
+    update_resource_status: (resource_id, status, status_time) => {
+        ws_server.send_to_group("resource_status", {
+            id: resource_id,
+            status: status,
+            status_time: status_time
+        }, "app");
+        if (status === "offline") {
+            for (var cl in ws_server.clients) {
+                if (ws_server.clients.hasOwnProperty(cl) && ws_server.clients[cl].o_id && ws_server.clients[cl].o_id.toString() == resource_id) {
+                    ws_server.clients[cl].socket.close();
+                    delete ws_server.clients[cl];
+                }
+            }
+        }
+    }
+};
 
 
 

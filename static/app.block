@@ -2627,6 +2627,7 @@ app
                                 private_ip: resource.private_ip,
                                 provider: resource.provider,
                                 type: resource.type,
+                                daemon_key: resource.daemon_key
                             });
                         }
                     #name
@@ -2707,6 +2708,11 @@ app
                         {
                             block.child('subcontent/resource_specs/type/value/text').data({ choose: `${type}`});
                         }
+                    #daemon_key
+                        {
+                            block.child('subcontent/resource_daemon/daemon_key/value/text').html('').data(`${daemon_key}`);
+                            block.child('subcontent/resource_daemon/daemon_key/value_editor').attribute('value', `${daemon_key}`);
+                        }
                     :hide_editors
                         {
                             //setTimeout(_ => {
@@ -2719,6 +2725,7 @@ app
                                 block.child('subcontent/resource_specs/memory/value_editor').on('hide');
                                 block.child('subcontent/resource_specs/storage/value_editor').on('hide');
                                 block.child('subcontent/resource_specs/location/value_editor').on('hide');
+                                block.child('subcontent/resource_daemon/daemon_key/value_editor').on('hide');
                                 block.child('subcontent/resource_info/more_menu').on('hide');
                             //}, 200);
                         }
@@ -2769,6 +2776,10 @@ app
                             if (old_data.type != new_data.type) {
                                 block.data({ type: new_data.type, });
                                 block.child('subcontent/resource_specs/type/value/text').node().blur();
+                            }
+                            if (old_data.daemon_key != new_data.daemon_key) {
+                                block.data({ daemon_key: new_data.daemon_key, });
+                                block.child('subcontent/resource_daemon/daemon_key/value_editor').on('hide');
                             }
                             block.key('resource', new_data);
                         }
@@ -3470,6 +3481,171 @@ app
                                                 //console.log('Delete');
                                                 block.parent(4).on('delete_resource');
                                             }
+                        div resource_daemon
+                            class dashboard_detail_section
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Daemon
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/gear_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                     height 80px
+                            div daemon_key
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Key
+                                    class label_desc
+                                    css
+                                        margin-bottom 3px
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val a1cd4
+                                        class value_text
+                                        css
+                                            letter-spacing 1.4px
+                                            font-size 24px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        // this is an edit button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                //block.parent(2).data('');
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                //console.log(block.parent(4).key('resource').daemon_key);
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('resource').daemon_key;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder a1cd4
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        width 55%
+                                        letter-spacing 1.4px
+                                        font-size 24px
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                if (value.length > 0) {
+                                                    block.parent(3).on('send_resource_update', {
+                                                        daemon_key: value
+                                                    });
+                                                }
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div status
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Status
+                                    class label_desc
+                                    css
+                                        margin-bottom 3px
+                                div value
+                                    class value_text_wrap
+                                    css
+                                        height 32px
+                                        width 100%
+                                    block light
+                                        css
+                                            width 30px
+                                            height 100%
+                                            float left
+                                        div circle
+                                            css
+                                                border-radius 100%
+                                                height 17px
+                                                width 17px
+                                                background-color #ddd
+                                                border 1px solid #eee
+                                                margin 0 0 0 auto
+                                    div labels
+                                        css
+                                            width 73%
+                                            height 100%
+                                            float left
+                                            padding-left 18px
+                                            box-sizing border-box
+                                        block status
+                                            css
+                                                height 100%
+                                                width 100%
+                                            text text
+                                                val Status some time ago
+                                                css
+                                                    display block
+                                                    text-align left
+                                                    font-size 14px
+                                                    color #888
+                                                    font-style italic
+                                                    padding-top 2px
+                            div end_spacer
+                                css
+                                    height 15px
                         div resource_specs
                             class dashboard_detail_section
                             div title

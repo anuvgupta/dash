@@ -236,9 +236,10 @@ var api = {
             name: name,
             link: link,
             ip: ip,
-            provider: "",
-            type: "",
+            provider: "none",
+            type: "none",
             private_ip: "",
+            daemon_key: m.utils.rand_id(5),
             specs: {
                 cpu: 0,
                 memory: 0,
@@ -275,6 +276,34 @@ var api = {
     },
     get_resources: (resolve) => {
         mongo_api.collection('resource').find({}).toArray((e, result1) => {
+            if (e) {
+                err("error finding resources", e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (result1) resolve(true, result1);
+                else resolve(null, result1);
+            }
+        });
+    },
+    get_resource_by_key: (daemon_key, resolve) => {
+        mongo_api.collection('resource').findOne({
+            daemon_key: daemon_key
+        }, (e, result1) => {
+            if (e) {
+                err(`error finding resource by key "${daemon_key}"`, e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (result1) resolve(true, result1);
+                else resolve(null, result1);
+            }
+        });
+    },
+    get_online_resources: (resolve) => {
+        mongo_api.collection('resource').find({
+            status: {
+                $in: ['online', 'desync']
+            }
+        }).toArray((e, result1) => {
             if (e) {
                 err("error finding resources", e.message ? e.message : e);
                 resolve(false, e);
@@ -328,6 +357,34 @@ var api = {
                 err(`error deleting resource ${id} | ${slug}`, e.message ? e.message : e);
                 resolve(false, e);
             } else resolve(result1.deletedCount == 1, result1);
+        });
+    },
+    set_resource_status: (resource_id, status_text, status_time, resolve) => {
+        mongo_api.collection('resource').updateOne({ _id: mongo_oid(resource_id) }, {
+            $set: {
+                status: status_text,
+                status_time: status_time !== null ? status_time : (new Date()).getTime()
+            }
+        }, (error1, result1) => {
+            if (error1) {
+                err(`error - update resource status for resource ${resource_id}`, error1);
+                resolve(false);
+            } else {
+                if (result1.matchedCount < 1) {
+                    err(`error - update resource status for resource ${resource_id} (not found)`);
+                    resolve(false);
+                } else resolve(result1);
+            }
+        });
+    },
+    update_resource_status: (resource_ids, status, resolve) => {
+        mongo_api.collection('resource').updateMany({ _id: { $in: resource_ids } }, { $set: { status: status } }, (error1, result1) => {
+            if (error1) {
+                err(`failed to update resource status to ${status} for resources ${resource_ids}`, error1);
+                if (resolve) resolve(false, error1);
+            } else {
+                if (resolve) resolve(true, result1);
+            }
         });
     },
     // applications
