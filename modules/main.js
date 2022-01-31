@@ -17,18 +17,18 @@ var err = null;
 var init = _ => { };
 var main = _ => {
     m.utils.delay(_ => {
-        log('starting device monitor');
-        m.main.device_monitor();
+        log('starting resource monitor');
+        m.main.resource_monitor();
     }, 1000);
 };
 var api = {
     device_desync_timeout: 5,
     device_disconnect_timeout: 8,
-    device_monitor_interval: 0.5,
-    device_monitor: _ => {
+    resource_monitor_interval: 0.5,
+    resource_monitor: _ => {
         m.ws.broadcast_resource_hb();
         m.db.get_online_resources((success, resources) => {
-            console.log(resources);
+            // console.log(resources);
             if (success === false || success === null || resources === null || resources === false) return;
             var modify_disconnect_resource_ids = [];
             var modify_desync_resource_ids = [];
@@ -48,8 +48,8 @@ var api = {
             m.db.update_resource_status(modify_disconnect_resource_ids, "offline");
         });
         m.utils.delay(_ => {
-            m.main.device_monitor();
-        }, m.main.device_monitor_interval * 1000);
+            m.main.resource_monitor();
+        }, m.main.resource_monitor_interval * 1000);
     },
 };
 
