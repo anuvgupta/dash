@@ -55,21 +55,19 @@ var util = {
         if (deltaSec < 5) {
             outputString += "now";
         } else if (deltaSec < 60) {
-            outputString += "" + parseInt(Math.floor(parseFloat(deltaSec) / 5.0) * 5.0) + " seconds ago";
+            outputString += `${parseInt(Math.floor(parseFloat(deltaSec) / 5.0) * 5.0)} seconds ago`;
         } else if (deltaSec < 3600) {
             var mins = parseInt(deltaSec / 60);
-            if (mins == 1) {
-                outputString += "" + mins + " minute ago";
-            } else {
-                outputString += "" + mins + " minutes ago";
-            }
-        } else {
+            outputString += `${mins} minute${mins == 1 ? '' : 's'} ago`;
+        } else if (deltaSec < 86400) {
             var hrs = parseInt(deltaSec / 3600);
-            if (hrs == 1) {
-                outputString += "" + hrs + " hour ago";
-            } else {
-                outputString += "" + hrs + " hours ago";
-            }
+            outputString += `${hrs} hour${hrs == 1 ? '' : 's'} ago`;
+        } else if (deltaSec < 604800) {
+            var days = parseInt(deltaSec / 86400);
+            outputString += `${days} day${days == 1 ? '' : 's'} ago`;
+        } else {
+            var weeks = parseInt(deltaSec / 604800);
+            outputString += `${weeks} week${weeks == 1 ? '' : 's'} ago`;
         }
         return outputString;
     },

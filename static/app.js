@@ -16,13 +16,16 @@ var app = {
                 default: "#dddddd",
             }
         },
+        ui_interval: null,
         ui_interval_length: 5,
         run_ui_intervals: _ => {
-            app.ui.block.child('main/content/resources/detail').on('status_update');
+            app.ui.block.child('main/content/projects/content').on('status_update');
             app.ui.block.child('main/content/resources/content').on('status_update');
+            app.ui.block.child('main/content/resources/detail').on('status_update');
         },
         register_ui_intervals: _ => {
-            setInterval(app.ui.run_ui_intervals, app.ui.ui_interval_length * 1000);
+            if (app.ui.ui_interval != null) clearInterval(app.ui.ui_interval);
+            app.ui.ui_interval = setInterval(app.ui.run_ui_intervals, app.ui.ui_interval_length * 1000);
         },
         get_status_color: (status) => {
             if (app.ui.colors.status.hasOwnProperty(status))

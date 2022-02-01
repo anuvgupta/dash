@@ -822,6 +822,12 @@
                         .data('Some time ago')
                     )
                 )
+                .on('status_update', (e, b, d) => {
+                    _block.data({
+                        ts_updated: block.key('ts_updated')
+                    });
+                    e.stopPropagation();
+                })
             ;
             return block;
         }

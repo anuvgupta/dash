@@ -783,6 +783,14 @@ app
                         {
                             block.css('height', (window.innerHeight - block.$().offset().top - 14) + 'px');
                         }
+                    :status_update
+                        {
+                            var children = block.children();
+                            for (var c in children) {
+                                children[c].on('status_update');
+                            }
+                            event.stopPropagation();
+                        }
                 div detail
                     css
                         width 100%
