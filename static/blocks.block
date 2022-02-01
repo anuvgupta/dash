@@ -1066,7 +1066,8 @@
                                     textAlign: 'left',
                                     paddingTop: '17px',
                                     fontSize: '21px',
-                                    color: '#222'
+                                    color: '#222',
+                                    letterSpacing: '1px'
                                 })
                             )
                         )
@@ -1169,6 +1170,19 @@
                         .data('Some time ago')
                     )
                 )
+                .on('status_update', (e, b, d) => {
+                    var status_code = _block.key('status');
+                    var status_time = _block.key('status_time');
+                    var status_final_text = "Status some time ago";
+                    var status_final_color = app.ui.colors.status.default;
+                    if (status_code != null && status_time != null) {
+                        status_final_text = status_code.charAt(0).toUpperCase() + status_code.slice(1) + " " + (status_code == "online" ? "now" : util.duration_desc(status_time));
+                        status_final_color = app.ui.get_status_color(status_code);
+                    }
+                    _block.child('status/labels/status/text').html('').data(status_final_text);
+                    _block.child('status/light/circle').css('background-color', status_final_color);
+                    e.stopPropagation();
+                })
             ;
             return block;
         }
@@ -1226,6 +1240,16 @@
                 block.key('description', desc_string.toString());
                 block.child('description/desc').html(desc_string.toString());
                 block.child('description/spacer').on('update');
+            });
+            data('status', status => {
+                block.key('status', status);
+                //console.log('received status update on preview block', JSON.stringify(status));
+                block.on('status_update');
+            });
+            data('status_time', status_time => {
+                block.key('status_time', status_time);
+                //console.log('received status_time update on preview block', JSON.stringify(status_time));
+                block.on('status_update');
             });
             data('ts_created', ts_created => {
                 block.key('ts_created', ts_created);

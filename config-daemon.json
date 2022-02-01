@@ -2,5 +2,6 @@
     "cloud_socket": "localhost:8080",
     "secure": false,
     "ws_reconnect_interval": 5000,
-    "resource_key": "a3sG7"
+    "ws_heartbeat_log": false,
+    "resource_key": "a3sG8"
 }

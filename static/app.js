@@ -6,7 +6,28 @@ var app = {
         block: Block('div', 'app'),
         colors: {
             primary: "rgba(20, 125, 252, 0.94)", //"rgba(0, 123, 255, 0.9)", // "rgba(67, 133, 243, 0.99)", // rgba(219, 43, 58, 0.85)
-            background: "#f1f1f1"
+            background: "#f1f1f1",
+            status: {
+                new: "#dddddd",
+                online: "rgba(85, 196, 110, 1)",
+                offline: "rgba(237, 69, 61, 1)",
+                desync: "#f7bb0a",
+                override: "rgba(40, 124, 246, 1)",
+                default: "#dddddd",
+            }
+        },
+        ui_interval_length: 5,
+        run_ui_intervals: _ => {
+            app.ui.block.child('main/content/resources/detail').on('status_update');
+            app.ui.block.child('main/content/resources/content').on('status_update');
+        },
+        register_ui_intervals: _ => {
+            setInterval(app.ui.run_ui_intervals, app.ui.ui_interval_length * 1000);
+        },
+        get_status_color: (status) => {
+            if (app.ui.colors.status.hasOwnProperty(status))
+                return app.ui.colors.status[status];
+            return app.ui.colors.status.default;
         },
         display_modal: {
             disconnected: _ => {
@@ -145,6 +166,7 @@ var app = {
             setTimeout(_ => {
                 app.ui.block.css('opacity', '1');
                 app.ui.block.on('ready');
+                setTimeout(app.ui.register_ui_intervals, 50);
                 setTimeout(_ => {
                     window.componentHandler.upgradeDom();
                 }, 100);

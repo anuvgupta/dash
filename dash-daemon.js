@@ -36,7 +36,7 @@ const utils = {
     logger: (module, err = false) => {
         return (...args) => {
             args = Array.prototype.slice.call(args);
-            args.unshift(`[${module}]`);
+            args.unshift(`${err ? '* ' : ''}[${module}]${err ? ' ERROR:' : ''}`);
             target = err ? console.error : console.log;
             target.apply(null, args);
         }
@@ -76,7 +76,7 @@ const app = {
         app.ws.exit(_ => {
             // app.web.exit(_ => {
             if (resolve) resolve();
-            process.exit(e);
+            process.exit(0);
             // });
         });
     }
@@ -128,9 +128,6 @@ const ws = {
                     ws.err("failed to identify with dash cloud");
                 }
                 break;
-            case 'phue_gateway_req':
-                // ws.api.handle_phue_gateway_req(data.id, data.request);
-                break;
             case 'hb':
                 ws.api.hb_respond();
                 break;
@@ -144,7 +141,7 @@ const ws = {
             ws.send('sync_daemon', { daemon_key: app.config.resource_key });
         },
         hb_respond: _ => {
-            ws.send('hb_daemon', {});
+            ws.send('hb_daemon', {}, global.config.ws_heartbeat_log === false);
         }
     },
     initialize_client: resolve => {
@@ -156,12 +153,13 @@ const ws = {
             if (resolve) resolve();
         });
         ws.socket.addEventListener('error', e => {
-            ws.log("socket error ", e.message);
+            ws.err("socket error ", e.message);
         });
         ws.socket.addEventListener('message', e => {
             var d = ws.decode_msg(e.data);
             if (d != null) {
-                ws.log("socket received:", d.event, d.data);
+                if (d.event != 'hb' || global.config.ws_heartbeat_log === true)
+                    ws.log("socket received:", d.event, d.data);
                 ws.handle(d.event, d.data);
             } else {
                 ws.log("socket received:", "invalid message", e.data);

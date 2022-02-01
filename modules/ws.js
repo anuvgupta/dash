@@ -39,7 +39,7 @@ var ws_server = {
     // bind handler to client event
     bind: (event, handler, auth_req = true) => {
         ws_server.events[event] = (client, req, auth) => {
-            if (!auth_req || (client.auth && ws_server.verify_token(auth)))
+            if (!auth_req || (client.auth && (ws_server.verify_token(auth) || client.type == 'daemon')))
                 handler(client, req, auth);
         };
     },
@@ -135,7 +135,8 @@ var ws_server = {
                     if (!d.hasOwnProperty('data') || !d.data) d.data = null;
                     if (!d.hasOwnProperty('auth') || !d.auth) d.auth = null;
                     // console.log('    ', d.event, d.data);
-                    log(`client ${client.id} – message: ${d.event}`, d.data);
+                    if (d.event != 'hb_daemon' || global.config.ws_heartbeat_log === true)
+                        log(`client ${client.id} – message: ${d.event}`, d.data);
                     // handle various events
                     if (ws_server.events.hasOwnProperty(d.event))
                         ws_server.events[d.event](client, d.data, d.auth);
@@ -382,13 +383,13 @@ var init = _ => {
         if (daemon_key != '') {
             m.db.get_resource_by_key(daemon_key, (success1, result1) => {
                 if (success1 === false)
-                    return ws_server.return_event_error("identify_daemon", "database error", client);
+                    return ws_server.return_event_error("sync_daemon", "database error", client, false);
                 if (result1 == null)
-                    return ws_server.return_event_error("identify_daemon", "resource not found", client);
+                    return ws_server.return_event_error("sync_daemon", "resource not found", client, false);
                 ws_server.authenticate_client(client);
                 ws_server.group_client(client, 'daemon');
                 ws_server.set_client_object(client, result1._id.toString());
-                ws_server.return_event_data("identify_daemon", {
+                ws_server.return_event_data("sync_daemon", {
                     id: result1._id.toString(),
                     daemon_key: daemon_key,
                     resource: result1
@@ -400,10 +401,11 @@ var init = _ => {
         m.db.get_resource(ws_server.get_client_object(client), null, (success, resource) => {
             if (success === false || success === null || resource === false || resource === null) return;
             // log(`hb_daemon | client ${client.id} - resource ${client.o_id} heartbeat`);
+            // if (resource.status != "online") { // putting this line here doesn't work because we need to update the status time for the device monitor to keep the status as online
             var now = (new Date()).getTime();
             m.db.set_resource_status(client.o_id, "online", now, (success2, result1) => {
                 if (success2 === false || success2 === null || result1 === false || result1 === null) return;
-                if (resource.status != "online") {
+                if (resource.status != "online") {  // putting this line here works because it protects the UI from spam about the resource status while allowing the db to update the status
                     ws_server.send_to_group("resource_status", {
                         id: resource._id.toString(),
                         status: "online",
@@ -411,8 +413,9 @@ var init = _ => {
                     }, "app");
                 }
             });
+            // }
         });
-    }, false);
+    });
 };
 var api = {
     broadcast_resource_hb: _ => {
