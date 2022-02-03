@@ -333,7 +333,7 @@ var init = _ => {
                 if (success1 === false) return ws_server.return_event_error("new_application", "database error", client);
                 if (result1 != null && slug == result1.slug)
                     return ws_server.return_event_error("new_application", "identifier already taken", client);
-                m.db.create_resource(slug, name, description, (success2, result2) => {
+                m.db.create_application(slug, name, description, (success2, result2) => {
                     if (success2 === false) return ws_server.return_event_error("new_application", "database error", client);
                     return ws_server.return_event_data("new_application", { id: result2, slug: slug }, client);
                 });
@@ -357,7 +357,7 @@ var init = _ => {
                     return ws_server.return_event_error("update_application", "application not found", client);
                 m.db.update_application(id, update, (success2, result2) => {
                     if (success2 === false) return ws_server.return_event_error("update_application", "database error", client);
-                    return ws_server.return_event_data("update_application", { id: id, resource: result2 }, client);
+                    return ws_server.return_event_data("update_application", { id: id, application: result2 }, client);
                 });
             });
         }
@@ -365,13 +365,13 @@ var init = _ => {
     ws_server.bind("delete_application", (client, req) => {
         var id = req.id ? (`${req.id}`).trim() : '';
         if (id != '') {
-            m.db.get_resource(id, null, (success1, result1) => {
-                if (success1 === false) return ws_server.return_event_error("delete_resource", "database error", client);
+            m.db.get_application(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("delete_application", "database error", client);
                 if (result1 == null)
-                    return ws_server.return_event_error("delete_resource", "resource not found", client);
-                m.db.delete_resource(id, null, (success2, result2) => {
-                    if (success2 === false) return ws_server.return_event_error("delete_resource", "database error", client);
-                    return ws_server.return_event_data("delete_resource", { id: id }, client);
+                    return ws_server.return_event_error("delete_application", "application not found", client);
+                m.db.delete_application(id, null, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("delete_application", "database error", client);
+                    return ws_server.return_event_data("delete_application", { id: id }, client);
                 });
             });
         }

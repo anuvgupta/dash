@@ -162,6 +162,45 @@ var app = {
                     }
                 })
             },
+            new_application: _ => {
+                bootbox.confirm({
+                    centerVertical: true,
+                    title: '<span class="modal_title">Create Application</span>',
+                    message: `<div id='new_application_display_modal'>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Name:</span>&nbsp;` +
+                        `<input placeholder="Application Zero" class="modal_text_input" id="na_modal_name_input" type='text' name='na_modal_name'/></div>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Identifier:</span>&nbsp;` +
+                        `<input placeholder="application-zero" class="modal_text_input" id="na_modal_slug_input" type='text' name='na_modal_slug'/></div>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Description:</span>&nbsp;` +
+                        `<input placeholder="Lorem ipsum dolor sit amet..." class="modal_text_input" id="na_modal_desc_input" type='text' name='na_modal_desc'/></div>` +
+                        `<div style="height: 8px"></div></div>`,
+                    callback: (result) => {
+                        if (result) {
+                            var slug = (`${$('#new_application_display_modal #na_modal_slug_input')[0].value}`).trim();
+                            var name = (`${$('#new_application_display_modal #na_modal_name_input')[0].value}`).trim();
+                            var desc = (`${$('#new_application_display_modal #na_modal_desc_input')[0].value}`).trim();
+                            if (slug == "" || name == "") return false;
+                            app.ws.api.new_application(slug, name, desc);
+                        }
+                        return true;
+                    }
+                });
+            },
+            new_application_res: (message) => {
+                bootbox.confirm({
+                    centerVertical: true,
+                    title: '<span class="modal_title">Create Application</span>',
+                    message: (`${message}`),
+                    callback: (result) => {
+                        if (result) {
+                            setTimeout(_ => {
+                                app.ws.api.get_applications();
+                            }, 100);
+                            return true;
+                        }
+                    }
+                })
+            },
         },
         init: (callback) => {
             app.ui.block.fill(document.body);
@@ -327,6 +366,24 @@ var app = {
             // applications
             get_applications: () => {
                 app.ws.send('get_applications', {});
+            },
+            new_application: (slug, name, desc, ip) => {
+                app.ws.send('new_application', {
+                    slug: slug,
+                    name: name,
+                    desc: desc
+                });
+            },
+            update_application: (id, update) => {
+                app.ws.send('update_application', {
+                    id: id,
+                    update: update
+                });
+            },
+            delete_application: (id) => {
+                app.ws.send('delete_application', {
+                    id: id
+                });
             },
             // ideas
             get_ideas: () => {

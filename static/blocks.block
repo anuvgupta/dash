@@ -1266,3 +1266,582 @@
                 block.child('last_updated_msg/text').html('').data(`${util.capitalize(util.duration_desc(ts_updated))}`);
             });
         }
+
+!application-item
+    init
+        {
+            var block = Block('div');
+            var _block = block;
+            block
+                .css({
+                    width: '400px',
+                    height: '230px',
+                    borderRadius: '7px',
+                    backgroundColor: 'white',
+                    '-webkit-box-shadow': '2px 2px 5px 2px rgba(64,64,64,0.1)',
+                    'box-shadow': '2px 2px 5px 2px rgba(64,64,64,0.1)',
+                    display: 'inline-block',
+                    margin: '5px 12px 20px 12px',
+                    textAlign: 'left',
+                    boxSizing: 'border-box',
+                    padding: '20px 22px 20px 32px',
+                    position: 'relative',
+                    verticalAlign: 'top'
+                })
+                .add(Block('div', 'bg')
+                    .css({
+                        position: 'absolute',
+                        top: '0',
+                        left: '0',
+                        width: '100%',
+                        height: '100%',
+                        zIndex: '0',
+                        background: 'url(/img/gear_bg.jpg) no-repeat center center',
+                        backgroundSize: 'cover',
+                        boxSizing: 'border-box',
+                        borderRadius: '7px',
+                        opacity: '0.02',
+                        //filter:'invert()',
+                        backgroundColor: 'white'
+                    })
+                )
+                .add(Block('div', 'menu_top')
+                    .css({
+                        top: '21px',
+                        right: '23px',
+                        width: '105px',
+                        height: '40px',
+                        position: 'absolute',
+                        zIndex: '100',
+                        display: 'none'
+                    })
+                    .add(Block('block', 'button_left')
+                        .css({
+                            position: 'absolute',
+                            left: '0',
+                            top: '0',
+                            width: '35px',
+                        })
+                        .add(Block('div', 'button_wrap')
+                            .css({
+                                height: '30px',
+                                width: '30px',
+                                display: 'inline-block'
+                            })
+                            .add(Block('button', 1)
+                                .key('disabled', 'no')
+                                .css({
+                                    height: '30px',
+                                    width: '30px',
+                                    outline: 'none',
+                                    border: 'none',
+                                    padding: '0',
+                                    opacity: '0.7',
+                                    transition: 'opacity 0.15s ease',
+                                    backgroundColor: 'rgba(255,255,255,0)'
+                                })
+                                .on('disable', (e, b, d) => {
+                                    b.key('disabled', 'yes');
+                                    b.css({
+                                        opacity: '0.5',
+                                        pointerEvents: 'none'
+                                    });
+                                })
+                                .on('enable', (e, b, d) => {
+                                    b.key('disabled', 'no');
+                                    b.css({
+                                        opacity: '0.7',
+                                        pointerEvents: 'auto'
+                                    });
+                                })
+                                .on('disable')
+                                .on('mouseover', (e, b, d) => {
+                                    if (b.key('disabled') == 'no')
+                                        b.css('opacity', '1');
+                                })
+                                .on('mouseout', (e, b, d) => {
+                                    if (b.key('disabled') == 'no')
+                                        b.css('opacity', '0.7');
+                                })
+                                .on('click', (e, b, d) => {
+                                    if (b.key('disabled') == 'no') {
+                                        var repo = _block.key('repo');
+                                        if (repo != null && repo != '' && repo.trim() != '') {
+                                            b.child('a').data({ href: `${repo.trim()}` }).node().click();
+                                        }
+                                    }
+                                })
+                                .add(Block('image', 1)
+                                    .data({
+                                        height: '30px',
+                                        width: '30px',
+                                        src: '/img/code_b.png',
+                                        css: {
+                                            backgroundColor: 'rgba(255,255,255,0)'
+                                        }
+                                    })
+                                )
+                                .add(Block('a', 1)
+                                    .css({
+                                        display: 'none',
+                                    })
+                                    .data({
+                                        href: '#',
+                                        target: '_blank'
+                                    })
+                                )
+                            )
+                        )
+                    )
+                    .add(Block('block', 'button_middle')
+                        .css({
+                            position: 'absolute',
+                            left: '35px',
+                            top: '0',
+                            width: '35px',
+                        })
+                        .add(Block('div', 'button_wrap')
+                            .css({
+                                height: '27px',
+                                width: '27px',
+                                display: 'inline-block'
+                            })
+                            .add(Block('button', 1)
+                                .key('disabled', 'no')
+                                .css({
+                                    height: '27px',
+                                    width: '27px',
+                                    outline: 'none',
+                                    border: 'none',
+                                    padding: '0',
+                                    opacity: '0.7',
+                                    transition: 'opacity 0.15s ease',
+                                    backgroundColor: 'rgba(255,255,255,0)'
+                                })
+                                .on('disable', (e, b, d) => {
+                                    b.key('disabled', 'yes');
+                                    b.css({
+                                        opacity: '0.5',
+                                        pointerEvents: 'none'
+                                    });
+                                })
+                                .on('enable', (e, b, d) => {
+                                    b.key('disabled', 'no');
+                                    b.css({
+                                        opacity: '0.7',
+                                        pointerEvents: 'auto'
+                                    });
+                                })
+                                .on('disable')
+                                .on('mouseover', (e, b, d) => {
+                                    if (b.key('disabled') == 'no')
+                                        b.css('opacity', '0.9');
+                                })
+                                .on('mouseout', (e, b, d) => {
+                                    if (b.key('disabled') == 'no')
+                                        b.css('opacity', '0.7');
+                                })
+                                .on('click', (e, b, d) => {
+                                    if (b.key('disabled') == 'no') {
+                                        var link = _block.key('link');
+                                        if (link != null && link != '' && link.trim() != '') {
+                                            b.child('a').data({ href: `${link.trim()}` }).node().click();
+                                        }
+                                    }
+                                })
+                                .add(Block('image', 1)
+                                    .data({
+                                        height: '27px',
+                                        width: '27px',
+                                        src: '/img/public_b.png',
+                                        css: {
+                                            backgroundColor: 'rgba(255,255,255,0)'
+                                        }
+                                    })
+                                )
+                                .add(Block('a', 1)
+                                    .css({
+                                        display: 'none',
+                                    })
+                                    .data({
+                                        href: '#',
+                                        target: '_blank'
+                                    })
+                                )
+                            )
+                        )
+                    )
+                    .add(Block('block', 'button_right')
+                        .css({
+                            position: 'absolute',
+                            right: '0',
+                            top: '0',
+                            width: '35px',
+                        })
+                        .add(Block('div', 'button_wrap')
+                            .css({
+                                height: '30px',
+                                width: '30px',
+                                display: 'inline-block'
+                            })
+                            .add(Block('button', 1)
+                                .key('disabled', 'no')
+                                .css({
+                                    height: '30px',
+                                    width: '30px',
+                                    outline: 'none',
+                                    border: 'none',
+                                    padding: '0',
+                                    opacity: '0.7',
+                                    transition: 'opacity 0.15s ease',
+                                    backgroundColor: 'rgba(255,255,255,0)'
+                                })
+                                .on('disable', (e, b, d) => {
+                                    b.key('disabled', 'yes');
+                                    b.css({
+                                        opacity: '0.5',
+                                        pointerEvents: 'none'
+                                    });
+                                })
+                                .on('enable', (e, b, d) => {
+                                    b.key('disabled', 'no');
+                                    b.css({
+                                        opacity: '0.7',
+                                        pointerEvents: 'auto'
+                                    });
+                                })
+                                .on('enable')
+                                .on('mouseover', (e, b, d) => {
+                                    if (b.key('disabled') == 'no') {
+                                        b.css('opacity', '0.9');
+                                        if (_block.key('featured') === false) {
+                                            b.child('image').data({
+                                                src: '/img/bookmark_new_b.png'
+                                            });
+                                        }
+                                    }
+                                })
+                                .on('mouseout', (e, b, d) => {
+                                    if (b.key('disabled') == 'no')
+                                        b.css('opacity', '0.7');
+                                    if (_block.key('featured') === false) {
+                                        b.child('image').data({
+                                            src: '/img/bookmark_ol_b.png'
+                                        });
+                                    } else {
+                                        b.child('image').data({
+                                            src: '/img/bookmark_b.png'
+                                        });
+                                    }
+                                })
+                                .on('click', (e, b, d) => {
+                                    if (b.key('disabled') == 'no') {
+                                        app.ws.api.star_project(_block.key('id'));
+                                    }
+                                })
+                                .add(Block('image', 1)
+                                    .data({
+                                        height: '30px',
+                                        width: '30px',
+                                        src: '/img/bookmark_ol_b.png',
+                                        css: {
+                                            backgroundColor: 'rgba(255,255,255,0)'
+                                        }
+                                    })
+                                )
+                            )
+                        )
+                    )
+                )
+                .add(Block('div', 'menu_extra')
+                    .css({
+                        top: '20px',
+                        right: '130px',
+                        width: '35px',
+                        height: '40px',
+                        position: 'absolute',
+                        display: 'none'
+                    })
+                    .add(Block('block', 'button_leftmost')
+                        .css({
+                            position: 'absolute',
+                            right: '0',
+                            top: '0',
+                            width: '35px',
+                        })
+                        .add(Block('div', 'button_wrap')
+                            .css({
+                                height: '23px',
+                                width: '23px',
+                                display: 'inline-block'
+                            })
+                            .add(Block('button', 1)
+                                .key('disabled', 'no')
+                                .css({
+                                    height: '23px',
+                                    width: '23px',
+                                    outline: 'none',
+                                    border: 'none',
+                                    padding: '0',
+                                    opacity: '0.7',
+                                    transition: 'opacity 0.15s ease'
+                                })
+                                .on('disable', (e, b, d) => {
+                                    b.key('disabled', 'yes');
+                                    b.css({
+                                        opacity: '0.5',
+                                        pointerEvents: 'none'
+                                    });
+                                })
+                                .on('enable', (e, b, d) => {
+                                    b.key('disabled', 'no');
+                                    b.css({
+                                        opacity: '0.7',
+                                        pointerEvents: 'auto'
+                                    });
+                                })
+                                .on('disable')
+                                .on('mouseover', (e, b, d) => {
+                                    if (b.key('disabled') == 'no')
+                                        b.css('opacity', '0.9');
+                                })
+                                .on('mouseout', (e, b, d) => {
+                                    if (b.key('disabled') == 'no')
+                                        b.css('opacity', '0.7');
+                                })
+                                .on('click', (e, b, d) => {
+                                    if (b.key('disabled') == 'no') {
+                                        //console.log('code');
+                                    }
+                                })
+                                .add(Block('image', 1)
+                                    .data({
+                                        height: '23px',
+                                        width: '23px',
+                                        src: '/img/launch_b.png',
+                                        css: {
+                                            backgroundColor: 'white'
+                                        }
+                                    })
+                                )
+                            )
+                        )
+                    )
+                )
+                .add(Block('div', 'spacer0')
+                    .css({
+                        height: '8px'
+                    })
+                )
+                .add(Block('div', 'name')
+                    .css({
+                        fontSize: '27px',
+                        fontWeight: '500',  // 600
+                        opacity: '0.95',
+                        letterSpacing: '1px'
+                    })
+                    .add(Block('text', 1)
+                        .data('_')
+                    )
+                )
+                .add(Block('div', 'spacer1')
+                    .css({
+                        height: '20px'
+                    })
+                )
+                .add(Block('div', 'description')
+                    .css({
+                        fontSize: '17px',
+                        fontWeight: '300',
+                        margin: '10px 2px 5px 5px',
+                        opacity: '0.9',
+                        letterSpacing: '0.5px',
+                        lineHeight: '24px'
+                    })
+                    .add(Block('text', 'tag')
+                        .data('_')
+                        .css({
+                            fontWeight: '500',
+                            display: 'none'
+                        })
+                    )
+                    .add(Block('text', 'spacer')
+                        .on('update', (e, b, d) => {
+                            /*
+                            var tagline_exists = _block.key('tagline') && _block.key('tagline').trim().length > 0;
+                            var desc_exists = _block.key('description') && _block.key('description').trim().length > 0;
+                            if (tagline_exists && desc_exists) b.css('display', 'inline-block');
+                            e.stopPropagation();
+                            */
+                        })
+                        .html('&nbsp;–&nbsp;')
+                        .css({
+                            display: 'none'
+                        })
+                    )
+                    .add(Block('text', 'desc')
+                        .data('_')
+                    )
+                )
+                .add(Block('div', 'spacer2')
+                    .css({
+                        height: '5px'
+                    })
+                )
+                .add(Block('div', 'application_content')
+                    .class('application-content')
+                    .css({
+                        maxHeight: '120px',
+                        height: '100%',
+                        width: '99%',
+                    })
+                    .query('window width != 0', function (event, block, data) {
+                        block.css('max-height', `calc(100% - ${3 - 3 + ((5 + block.sibling('description').$().height() + 20 + 20 + 10) + 45)}px)`);
+                    })
+                    .add(Block('block', 'content')
+                        .add(Block('div', 'mdl_button_container')
+                            .css({
+                                height: '45px',
+                                width: '150px',
+                                margin: '0 auto',
+                            })
+                            .add(Block('button', 1)
+                                .class('mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect')
+                                .html('Manage')
+                                .css({
+                                    backgroundColor: app.ui.colors.primary,
+                                    color: 'white',
+                                    letterSpacing: '2.5px',
+                                    fontSize: '12px',
+                                    fontWeight: '500',
+                                    paddingLeft: '25px',
+                                    paddingRight: '25px',
+                                    opacity: '1',
+                                    transition: 'opacity 0.2s ease',
+                                    height: '42px',
+                                    outline: 'none'
+                                })
+                                .on('mouseover', (e, b, d) => {
+                                    b.css('opacity', '0.8');
+                                })
+                                .on('mouseout', (e, b, d) => {
+                                    b.css('opacity', '1');
+                                })
+                                .on('click', (e, b, d) => {
+                                    var application_metadata = null;
+                                    application_metadata =  _block.key('application_metadata');
+                                    if (application_metadata) {
+                                        _block.parent(1).data({
+                                            select_application: application_metadata
+                                        });
+                                    }
+                                })
+                            )
+                        )
+                    )
+                )
+                .add(Block('div', 'created_year')
+                    .css({
+                        position: 'absolute',
+                        bottom: '25px',
+                        right: '30px',
+                        width: '40px',
+                        height: '20px',
+                        fontSize: '19px',
+                        opacity: '0.9'
+                    })
+                    .add(Block('text', 1)
+                        .data(`${(new Date()).getFullYear()}`)
+                    )
+                )
+                .add(Block('div', 'last_updated_msg')
+                    .css({
+                        position: 'absolute',
+                        bottom: '25px',
+                        left: '33px',
+                        width: '100px',
+                        height: '20px',
+                        fontSize: '14px',
+                        opacity: '0.85'
+                    })
+                    .add(Block('text', 1)
+                        .data('Some time ago')
+                    )
+                )
+                .on('status_update', (e, b, d) => {
+                    _block.data({
+                        ts_updated: block.key('ts_updated')
+                    });
+                    e.stopPropagation();
+                })
+            ;
+            return block;
+        }
+    load
+        {
+            data('_id', (_id) => {
+                block.key('id', _id.toString());
+                block.child('application_content/content/mdl_button_container/button').id(`manage_application_button_${_id.toString()}`);
+            });
+            data('name', (name) => {
+                block.key('name', name.toString());
+                block.child('name/text').html('').data(name);
+            });
+            data('description', (description) => {
+                block.key('description', description.toString());
+                block.child('description/desc').html('').data(description);
+                block.child('description/spacer').on('update');
+            });
+            data('tagline', (tagline) => {
+                block.key('tagline', tagline.toString());
+                block.child('description/tag').html('').data(tagline);
+                block.child('description/spacer').on('update');
+            });
+            data('featured', featured => {
+                block.key('featured', featured);
+                var img = '/img/bookmark';
+                if (featured) {
+                    img += '_b.png';
+                } else {
+                    img += '_ol_b.png';
+                }
+                block.child('menu_top/button_right/button_wrap/button/image').data({ src: img });
+            });
+            data('public', public => {
+                var img_src = '/img/public' + (public === true ? '' : '_off') + '_b.png';
+                block.child('menu_top/button_middle/button_wrap/button/image').data({
+                    src: img_src
+                });
+            });
+            data('link', link => {
+                block.key('link', link);
+                block.child('menu_top/button_middle/button_wrap/button').on(link == '' ? 'disable' : 'enable');
+            });
+            data('repo', repo => {
+                block.key('repo', repo);
+                block.child('menu_top/button_left/button_wrap/button').on(repo == '' ? 'disable' : 'enable');
+            });
+            data('ts_created', ts_created => {
+                block.key('ts_created', ts_created);
+                block.child('created_year/text').html('').data(`${(new Date(ts_created)).getFullYear()}`);
+            });
+            data('ts_updated', ts_updated => {
+                block.key('ts_updated', ts_updated);
+                block.child('last_updated_msg/text').html('').data(`${util.capitalize(util.duration_desc(ts_updated))}`);
+            });
+            data('img', img => {
+                block.key('img', img);
+                if (img.trim() != '') {
+                    block.child('bg').css({
+                        backgroundImage: `url(${img.trim()})`,
+                        opacity: '0.04',
+                    });
+                }
+            });
+            data('img_invert', img_invert => {
+                block.key('img_invert', img_invert);
+                block.child('bg').css({
+                    filter: img_invert == true ? 'invert()' : 'none'
+                });
+            });
+        }

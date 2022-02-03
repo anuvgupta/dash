@@ -400,8 +400,6 @@ var api = {
             ecosystem: {},
             primary_domain: null,
             domains: [],
-            status: "new",
-            status_time: -1,
             ts_created: timestamp,
             ts_updated: timestamp,
         }, (e, result1) => {

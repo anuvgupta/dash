@@ -153,7 +153,7 @@ app
             if (get_applications_res.success) {
                 //console.log(get_applications_res.data.list);
                 block.child('main/content/applications').data({
-                    resource_list: get_applications_res.data.list
+                    application_list: get_applications_res.data.list
                 });
             } else {
                 app.ui.display_modal.generic_confirm('Load Applications', `Error - ${util.capitalize(get_applications_res.message ? get_applications_res.message : 'unknown error')}`, (result) => {
@@ -472,6 +472,12 @@ app
             menu-item applications
                 val Applications
                 icon tree_b.png
+                :second_click
+                    {
+                        var applications_block = block.parent().sibling('content').child('applications');
+                        if (applications_block.key('active_view') == 'detail') 
+                            applications_block.child('close/close_button').on('click');
+                    }
             menu-item resources
                 val Resources
                 icon board_b.png
@@ -537,7 +543,7 @@ app
                         else block.child('content').css('text-align', 'left');
                         if (project_list.length == 0) {
                             var msg = 'No projects found.';
-                            block.child('content').html(`<div style="margin: 0 auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
+                            block.child('content').html(`<div style="margin: 30px auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
                         }
                         //Block.queries();
                         setTimeout(_ => {
@@ -2124,7 +2130,7 @@ app
                         else block.child('content').css('text-align', 'left');
                         if (application_list.length == 0) {
                             var msg = 'No applications found.';
-                            block.child('content').html(`<div style="margin: 0 auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
+                            block.child('content').html(`<div style="margin: 30px auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
                         }
                         Block.queries();
                         setTimeout(_ => {
@@ -2140,7 +2146,7 @@ app
                         block.key('active_view', 'detail');
                         block.child('content').css('display', 'none')
                             .sibling('detail').css('display', 'block')
-                            .data({ resource: select_application })
+                            .data({ application: select_application })
                         ;
                         block.child('title').data({ select_application_name: `${select_application.name}` });
                         block.child('new_application_button').css('display', 'none');
@@ -2170,7 +2176,7 @@ app
                     }
                 #update_application_local
                     {
-                        //console.log('update_application_local', update_application_local);
+                        console.log('update_application_local', update_application_local);
                         var application_list = block.key('application_list');
                         for (var a in application_list) {
                             if (application_list[a]._id == update_application_local._id) {
@@ -2206,7 +2212,6 @@ app
                             }, 20);
                         }
                     }
-
                 button new_application_button
                     css
                         position absolute
@@ -2255,6 +2260,15 @@ app
                             font-size 30px
                             color #333
                         val Applications
+                    #select_application_name
+                        {
+                            block.child('text').html(`Applications&nbsp;&nbsp;/&nbsp;&nbsp;<span class='b600'>${select_application_name}</span>`);
+                        }
+                    :back
+                        {
+                            block.child('text').html('').data('Applications');
+                            event.stopPropagation();
+                        }
                 div divider
                     css
                         //width 100%
@@ -2267,11 +2281,569 @@ app
                     hr hr
                         css
                             width 100%
+                block close
+                    css
+                        height 40px
+                        width 40px
+                        position absolute
+                        top 29px
+                        right 12px
+                        display none
+                        pointer-events none
+                        z-index 50
+                    :hide
+                        css 
+                            display none
+                            pointer-events none
+                        {
+                            event.stopPropagation();
+                        }
+                    :show
+                        css
+                            display table
+                            pointer-events auto
+                        {
+                            event.stopPropagation();
+                        }
+                    button close_button
+                        css
+                            width 24px
+                            heigth 24px
+                            border none
+                            background-color rgba(255, 255, 255, 0)
+                            outline none
+                            opacity 0.32
+                            cursor pointer
+                            border-radius 100%
+                            transition opacity 0.2s ease
+                        :mouseover
+                            css
+                                opacity 0.68
+                        :mouseout
+                            css
+                                opacity 0.32
+                        :click
+                            {
+                                block.parent().sibling('detail').on('hide_editors');
+                                setTimeout(_ => {
+                                    block.parent(1).on('deselect_application');
+                                }, 10);
+                            }
+                        image x
+                            src /img/x_b.png
+                            height 24px
+                            width 24px
                 div content
                     css
                         width 100%
                         height auto
-            
+                div detail
+                    css
+                        width 100%
+                        height auto
+                        text-align left
+                        padding-top 0
+                        padding-left 2px
+                        padding-right 0
+                        box-sizing border-box
+                        display none
+                        overflow-x hidden
+                        overflow-y auto
+                        -webkit-overflow-scrolling touch
+                    $reload_grid yes
+                    @query window width != 0
+                        {
+                            block.css('height', (window.innerHeight - block.$().offset().top - 14) + 'px');
+                            if (block.key('reload_grid') === 'yes') {
+                                block.key('reload_grid', 'no');
+                                block.on('update_grid');
+                                setTimeout(_ => {
+                                    block.key('reload_grid', 'yes');
+                                }, 100);
+                            }
+                        }
+                    :update_grid
+                        {
+                            //console.log('update_grid');
+                            // set up masonry grid
+                            $('div.masonry-grid-container').masonry({
+                                // options
+                                itemSelector: 'div.masonry-grid-container div.dashboard_detail_section',
+                                columnWidth: 455
+                            });
+                            event.stopPropagation();
+                        }
+                    #application
+                        {
+                            block.key('application', application);
+                            block.data({
+                                name: application.name,
+                                slug: application.slug,
+                                description: application.description,
+                            });
+                        }
+                    #name
+                        {
+                            block.child('subcontent/application_info/name/value/text').html('').data(`${name}`);
+                            block.child('subcontent/application_info/name/value_editor').attribute('value', `${name}`);
+                            block.sibling('title').data({
+                                select_application_name: `${name}`
+                            });
+                        }
+                    #slug
+                        {
+                            block.child('subcontent/application_info/slug/value/text').html('').data(`${slug}`);
+                            block.child('subcontent/application_info/slug/value_editor').attribute('value', `${slug}`);
+                        }
+                    #description
+                        {
+                            var description_alt = description;
+                            if (description_alt == '') description_alt = '<span class="text_placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>';
+                            block.child('subcontent/application_info/description/value/text').html(`${description_alt}`);
+                            block.child('subcontent/application_info/description/value_editor').attribute('value', `${description}`);
+                        }
+                    
+                    :hide_editors
+                        {
+                            //setTimeout(_ => {
+                                block.child('subcontent/application_info/name/value_editor').on('hide');
+                                block.child('subcontent/application_info/slug/value_editor').on('hide');
+                                block.child('subcontent/application_info/description/value_editor').on('hide');
+                                block.child('subcontent/application_info/more_menu').on('hide');
+                            //}, 200);
+                        }
+                    :receive_application_update
+                        {
+                            var old_data = block.key('application');
+                            var new_data = data;
+                            if (old_data.name != new_data.name) {
+                                block.data({ name: new_data.name, });
+                                block.child('subcontent/application_info/name/value_editor').on('hide');
+                            }
+                            if (old_data.slug != new_data.slug) {
+                                block.data({ slug: new_data.slug, });
+                                block.child('subcontent/application_info/slug/value_editor').on('hide');
+                            }
+                            if (old_data.description != new_data.description) {
+                                block.data({ description: new_data.description, });
+                                block.child('subcontent/application_info/description/value_editor').on('hide');
+                            }
+                            block.key('application', new_data);
+                        }
+                    :send_application_update
+                        {
+                            app.ws.api.update_application(block.key('application')._id, data);
+                            event.stopPropagation();
+                        }
+                    :delete_application
+                        {
+                            //console.log('delete_application');
+                            var application_info = block.key('application');
+                            console.log(application_info);
+                            if (application_info) {
+                                app.ui.display_modal.generic_confirm("Delete Application", `Permanently delete application "${application_info.name}"?`, (result) => {
+                                    if (result) {
+                                        var confirm = window.confirm(`This action is not reversible — are you sure about deleting application "${application_info.name}"?`);
+                                        if (confirm) {
+                                            setTimeout(_ => {
+                                                app.ws.api.delete_application(application_info._id);
+                                            }, 30);
+                                        }
+                                        return true;
+                                    }
+                                });
+                            }
+                            event.stopPropagation();
+                        }
+                    div subcontent
+                        class masonry-grid-container
+                        css
+                            padding 1px 1px
+                        div application_info
+                            class dashboard_detail_section
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Application
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/tree_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                     height 80px
+                            div name
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Name
+                                    class label_desc
+                                    css
+                                        margin-bottom 3px
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val Application Zero
+                                        class value_text
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        // this is an edit button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                //block.parent(2).data('');
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                //console.log(block.parent(4).key('application').name);
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').name;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder Application Zero
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        width 55%
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                if (value.length > 0) {
+                                                    block.parent(3).on('send_application_update', {
+                                                        name: value
+                                                    });
+                                                }
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div slug
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Identifier
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val application-zero
+                                        class value_text
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').slug;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder application-zero
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2.5px
+                                        margin-left -2px
+                                        margin-bottom 2.5px
+                                        width 55%
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                if (value.length > 0) {
+                                                    block.parent(3).on('send_application_update', {
+                                                        slug: value
+                                                    });
+                                                }
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div description
+                                class value_edge
+                                text label
+                                    val Description
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        class value_text
+                                        css
+                                            font-size 17px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 3px
+                                            height 17px
+                                            width 17px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').description;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 17px
+                                        width 90%
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_application_update', {
+                                                        description: value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div end_spacer
+                                css
+                                    height 15px
+                            block more_menu_button_wrap
+                                css
+                                    position absolute
+                                    height 40px
+                                    width 40px
+                                    top 20px
+                                    right 22px
+                                button more_menu_button
+                                    css
+                                        outline none
+                                        border none
+                                        background-color rgba(255,255,255,0)
+                                        height 33px
+                                        width 33px
+                                        margin 0 auto
+                                        opacity 0.65
+                                        padding 0
+                                        display block
+                                    image img
+                                        src /img/more_b.png
+                                        height 33px
+                                        width 33px
+                                        css
+                                            margin 0 auto
+                                    :click
+                                        {
+                                            block.parent().sibling('more_menu').on('toggle');
+                                        }
+                                    :mouseover
+                                        css
+                                            opacity 0.8
+                                    :mouseout
+                                        css
+                                            opacity 0.65
+                            div more_menu
+                                $showing no
+                                :toggle
+                                    {
+                                        if (block.key('showing') === 'yes') {
+                                            block.on('hide');
+                                        } else {
+                                            block.on('show');
+                                        }
+                                    }
+                                :show
+                                    {
+                                        block.key('showing', 'yes');
+                                        block.css({ display: 'block' });
+                                        event.stopPropagation();
+                                    }
+                                :hide
+                                    {
+                                        block.key('showing', 'no');
+                                        block.css({ display: 'none' });
+                                        event.stopPropagation();
+                                    }
+                                css
+                                    position absolute
+                                    height 90px
+                                    width 85px
+                                    top 0
+                                    right -86px
+                                    border-radius 4px
+                                    border 1px solid #efefef
+                                    background-color white
+                                    display none
+                                    -webkit-box-shadow 1px 1px 4px 1px rgba(74,74,74,0.06)
+                                    box-shadow 1px 1px 4px 1px rgba(74,74,74,0.06)
+                                    font-size 12.5px
+                                    letter-spacing 0.8px
+                                    opacity 0.98
+                                    z-index 200
+                                div menu-item-1
+                                    css
+                                        height 30px
+                                        border-bottom 1px solid #eee
+                                        box-sizing border-box
+                                        border-radius 4px 4px 0 0
+                                    button button
+                                        class menu-button
+                                        css
+                                            height 100%
+                                            width 100%
+                                        html Lorem
+                                        :click
+                                            {
+                                                console.log('Lorem');
+                                            }
+                                div menu-item-2
+                                    css
+                                        height 30px
+                                        border-bottom 1px solid #eee
+                                        box-sizing border-box
+                                    button button
+                                        class menu-button
+                                        css
+                                            height 100%
+                                            width 100%
+                                        html Ipsum
+                                        :click
+                                            {
+                                                console.log('Ipsum');
+                                            }
+                                div menu-item-3
+                                    css
+                                        height 30px
+                                        border-bottom none
+                                        box-sizing border-box
+                                        border-radius 0 0 4px 4px
+                                    button button
+                                        class menu-button
+                                        css
+                                            height 100%
+                                            width 100%
+                                            color rgb(209, 36, 36)
+                                        html Delete
+                                        :click
+                                            {
+                                                //console.log('Delete');
+                                                block.parent(4).on('delete_application');
+                                            }
+                        
+
             div domains
                 css
                     width 100%
@@ -2385,7 +2957,7 @@ app
                         else block.child('content').css('text-align', 'left');
                         if (resource_list.length == 0) {
                             var msg = 'No resources found.';
-                            block.child('content').html(`<div style="margin: 0 auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
+                            block.child('content').html(`<div style="margin: 30px auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
                         }
                         Block.queries();
                         setTimeout(_ => {
