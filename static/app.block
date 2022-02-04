@@ -471,7 +471,7 @@ app
                     }
             menu-item applications
                 val Applications
-                icon tree_b.png
+                icon api_b.png
                 :second_click
                     {
                         var applications_block = block.parent().sibling('content').child('applications');
@@ -490,6 +490,9 @@ app
             menu-item domains
                 val Domains
                 icon globe_b.png
+            menu-item sitemap
+                val Sitemap
+                icon tree_b.png
             menu-item ideas
                 val Ideas
                 icon lightbulb_b.png
@@ -1942,7 +1945,7 @@ app
                                         left 85px
                                         font-weight 400
                                 image icon
-                                    src /img/tree_b.png
+                                    src /img/api_b.png
                                     height 35px
                                     width 35px
                                     css
@@ -2223,7 +2226,7 @@ app
                         height 42px
                         border none
                         outline none
-                    class mdl-button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary new_project_button
+                    class mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--primary new_project_button
                     div content
                         text text
                             val +
@@ -2480,7 +2483,7 @@ app
                                         left 85px
                                         font-weight 400
                                 image icon
-                                    src /img/tree_b.png
+                                    src /img/api_b.png
                                     height 35px
                                     width 35px
                                     css
@@ -2843,7 +2846,6 @@ app
                                                 block.parent(4).on('delete_application');
                                             }
                         
-
             div domains
                 css
                     width 100%
@@ -2873,7 +2875,7 @@ app
                         height 42px
                         border none
                         outline none
-                    class mdl-button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary new_project_button
+                    class mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--primary new_project_button
                     div content
                         text text
                             val +
@@ -3073,7 +3075,7 @@ app
                         height 42px
                         border none
                         outline none
-                    class mdl-button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary new_project_button
+                    class mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--primary new_project_button
                     div content
                         text text
                             val +
@@ -4720,7 +4722,7 @@ app
                                         left 85px
                                         font-weight 400
                                 image icon
-                                    src /img/tree_b.png
+                                    src /img/api_b.png
                                     height 35px
                                     width 35px
                                     css
@@ -4903,7 +4905,7 @@ app
                         height 42px
                         border none
                         outline none
-                    class mdl-button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary new_project_button
+                    class mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--primary new_project_button
                     div content
                         text text
                             val +
@@ -4953,3 +4955,83 @@ app
                         width 100%
                         height auto
             
+            div sitemap
+                css
+                    width 100%
+                    height auto
+                    display none
+                    min-height 50px
+                    position relative
+                :show
+                    css
+                        display block
+                    {
+                        setTimeout(_ => {
+                            app.ws.api.get_sitemap();
+                        }, 20);
+                    }
+                :hide
+                    css
+                        display none
+                button new_sitemap_button
+                    css
+                        position absolute
+                        top 19px
+                        right 15px
+                        z-index 11
+                        min-width 42px
+                        width 42px
+                        height 42px
+                        border none
+                        outline none
+                        display none
+                    class mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--primary new_project_button
+                    div content
+                        text text
+                            val +
+                    {
+                        block.css("background-color", app.ui.colors.primary);
+                    }
+                div sitemap_filter
+                    css
+                        position absolute
+                        top 23px
+                        right 80px
+                        z-index 11
+                        display none
+                    select filter_options
+                        css
+                            height 35px
+                            width 110px
+                            padding 0px 10px
+                            letter-spacing 0.9px
+                        option all
+                            value all
+                            html All
+                div title
+                    css
+                        position absolute
+                        top 34px
+                        left 15px
+                        z-index 11
+                    text text
+                        css
+                            font-size 30px
+                            color #333
+                        val Sitemap
+                div divider
+                    css
+                        //width 100%
+                        box-sizing border-box
+                        margin 0 10px
+                        padding-top 58px
+                        opacity 0.75
+                        position relative
+                        z-index 10
+                    hr hr
+                        css
+                            width 100%
+                div content
+                    css
+                        width 100%
+                        height auto

@@ -389,6 +389,10 @@ var app = {
             get_ideas: () => {
                 app.ws.send('get_ideas', {});
             },
+            // sitemap
+            get_sitemap: () => {
+                app.ws.send('get_sitemap', {});
+            }
         }
     },
     main: {
