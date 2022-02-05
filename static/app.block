@@ -113,6 +113,9 @@ app
                 block.child('main/content/resources').data({
                     resource_list: get_resources_res.data.list
                 });
+                block.child('main/content/applications/detail/subcontent/application_info/host').data({
+                    resource_list: get_resources_res.data.list
+                });
             } else {
                 app.ui.display_modal.generic_confirm('Load Resources', `Error - ${util.capitalize(get_resources_res.message ? get_resources_res.message : 'unknown error')}`, (result) => {
                     if (result) {
@@ -2157,8 +2160,11 @@ app
                         block.child('close').on('show');
                         block.child('detail').on('update_grid');
                         setTimeout(_ => {
-                            Block.queries();
+                            app.ws.api.get_resources();
                         }, 10);
+                        setTimeout(_ => {
+                            Block.queries();
+                        }, 30);
                     }
                 :deselect_application
                     {
@@ -2383,6 +2389,9 @@ app
                                 name: application.name,
                                 slug: application.slug,
                                 description: application.description,
+                                port: application.port,
+                                host: application.host,
+                                ecosystem: application.ecosystem,
                             });
                         }
                     #name
@@ -2405,13 +2414,75 @@ app
                             block.child('subcontent/application_info/description/value/text').html(`${description_alt}`);
                             block.child('subcontent/application_info/description/value_editor').attribute('value', `${description}`);
                         }
-                    
+                    #port
+                        {
+                            //console.log(port);
+                            var port_alt = `:${port}`;
+                            if (port === null) {
+                                port = '80';
+                                port_alt = '<span class="text_placeholder">:80</span>';
+                            }
+                            block.child('subcontent/application_ecosystem/port/value/text').html(`${port_alt}`);
+                            block.child('subcontent/application_ecosystem/port/value_editor').attribute('value', `${port}`);
+                        }
+                    #host
+                        {
+                            block.child('subcontent/application_info/host/value/text').data({ choose: `${host}`});
+                        }
+                    #ecosystem
+                        {
+                            var cwd = ecosystem.cwd;
+                            var cwd_alt = cwd;
+                            if (cwd_alt == '') cwd_alt = '<span class="text_placeholder">/var/www/application-zero</span>';
+                            block.child('subcontent/application_ecosystem/cwd/value/text').html(`${cwd_alt}`);
+                            block.child('subcontent/application_ecosystem/cwd/value_editor').attribute('value', `${cwd}`);
+
+                            var script = ecosystem.script;
+                            var script_alt = script;
+                            if (script_alt == '') script_alt = '<span class="text_placeholder">application-zero.sh</span>';
+                            block.child('subcontent/application_ecosystem/script/value/text').html(`${script_alt}`);
+                            block.child('subcontent/application_ecosystem/script/value_editor').attribute('value', `${script}`);
+
+                            var interpreter = ecosystem.interpreter;
+                            var interpreter_alt = interpreter;
+                            if (interpreter_alt == '') interpreter_alt = '<span class="text_placeholder">#!/bin/bash</span>';
+                            block.child('subcontent/application_ecosystem/interpreter/value/text').html(`${interpreter_alt}`);
+                            block.child('subcontent/application_ecosystem/interpreter/value_editor').attribute('value', `${interpreter}`);
+
+                            var out_file = ecosystem.out_file;
+                            var out_file_alt = out_file;
+                            if (out_file_alt == '') out_file_alt = '<span class="text_placeholder">application-zero.log</span>';
+                            block.child('subcontent/application_ecosystem/out_file/value/text').html(`${out_file_alt}`);
+                            block.child('subcontent/application_ecosystem/out_file/value_editor').attribute('value', `${out_file}`);
+
+                            var error_file = ecosystem.error_file;
+                            var error_file_alt = error_file;
+                            if (error_file_alt == '') error_file_alt = '<span class="text_placeholder">application-zero.log</span>';
+                            block.child('subcontent/application_ecosystem/error_file/value/text').html(`${error_file_alt}`);
+                            block.child('subcontent/application_ecosystem/error_file/value_editor').attribute('value', `${error_file}`);
+
+                            var max_memory_restart = ecosystem.max_memory_restart;
+                            var max_memory_restart_alt = max_memory_restart;
+                            if (max_memory_restart_alt == '') max_memory_restart_alt = '<span class="text_placeholder">5M</span>';
+                            block.child('subcontent/application_ecosystem/max_memory_restart/value/text').html(`${max_memory_restart_alt}`);
+                            block.child('subcontent/application_ecosystem/max_memory_restart/value_editor').attribute('value', `${max_memory_restart}`);
+
+                            var restart_delay = ecosystem.restart_delay;
+                            var restart_delay_alt = `${restart_delay}ms`;
+                            if (restart_delay == '') restart_delay_alt = '<span class="text_placeholder">500ms</span>';
+                            block.child('subcontent/application_ecosystem/restart_delay/value/text').html(`${restart_delay_alt}`);
+                            block.child('subcontent/application_ecosystem/restart_delay/value_editor').attribute('value', `${restart_delay}`);
+                        }
                     :hide_editors
                         {
                             //setTimeout(_ => {
                                 block.child('subcontent/application_info/name/value_editor').on('hide');
                                 block.child('subcontent/application_info/slug/value_editor').on('hide');
                                 block.child('subcontent/application_info/description/value_editor').on('hide');
+                                block.child('subcontent/application_ecosystem/port/value_editor').on('hide');
+                                block.child('subcontent/application_ecosystem/cwd/value_editor').on('hide');
+                                block.child('subcontent/application_ecosystem/script/value_editor').on('hide');
+                                block.child('subcontent/application_ecosystem/interpreter/value_editor').on('hide');
                                 block.child('subcontent/application_info/more_menu').on('hide');
                             //}, 200);
                         }
@@ -2430,6 +2501,42 @@ app
                             if (old_data.description != new_data.description) {
                                 block.data({ description: new_data.description, });
                                 block.child('subcontent/application_info/description/value_editor').on('hide');
+                            }
+                            if (old_data.port != new_data.port) {
+                                block.data({ port: new_data.port, });
+                                block.child('subcontent/application_ecosystem/port/value_editor').on('hide');
+                            }
+                            if (old_data.host != new_data.host) {
+                                block.data({ host: new_data.host, });
+                                block.child('subcontent/application_info/host/value/text').node().blur();
+                            }
+                            if (old_data.ecosystem.cwd != new_data.ecosystem.cwd) {
+                                block.data({ ecosystem: new_data.ecosystem, });
+                                block.child('subcontent/application_ecosystem/cwd/value/text').node().blur();
+                            }
+                            if (old_data.ecosystem.script != new_data.ecosystem.script) {
+                                block.data({ ecosystem: new_data.ecosystem, });
+                                block.child('subcontent/application_ecosystem/script/value/text').node().blur();
+                            }
+                            if (old_data.ecosystem.interpreter != new_data.ecosystem.interpreter) {
+                                block.data({ ecosystem: new_data.ecosystem, });
+                                block.child('subcontent/application_ecosystem/interpreter/value/text').node().blur();
+                            }
+                            if (old_data.ecosystem.out_file != new_data.ecosystem.out_file) {
+                                block.data({ ecosystem: new_data.ecosystem, });
+                                block.child('subcontent/application_ecosystem/out_file/value/text').node().blur();
+                            }
+                            if (old_data.ecosystem.error_file != new_data.ecosystem.error_file) {
+                                block.data({ ecosystem: new_data.ecosystem, });
+                                block.child('subcontent/application_ecosystem/error_file/value/text').node().blur();
+                            }
+                            if (old_data.ecosystem.max_memory_restart != new_data.ecosystem.max_memory_restart) {
+                                block.data({ ecosystem: new_data.ecosystem, });
+                                block.child('subcontent/application_ecosystem/max_memory_restart/value/text').node().blur();
+                            }
+                            if (old_data.ecosystem.restart_delay != new_data.ecosystem.restart_delay) {
+                                block.data({ ecosystem: new_data.ecosystem, });
+                                block.child('subcontent/application_ecosystem/restart_delay/value/text').node().blur();
                             }
                             block.key('application', new_data);
                         }
@@ -2721,6 +2828,73 @@ app
                                                 block.on('hide');
                                             }
                                         }
+                            div host
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Host
+                                    class label_desc
+                                #resource_list
+                                    {
+                                        block.child('value').data({
+                                            resource_list: resource_list
+                                        });
+                                    }
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    select text
+                                        name application_host_select
+                                        class value_select
+                                        :change
+                                            {
+                                                var type_val = block.node().value;
+                                                block.parent(4).on('send_application_update', {
+                                                    host: type_val
+                                                });
+                                            }
+                                        #choose
+                                            {
+                                                //console.log('choose');
+                                                var children = block.children();
+                                                //console.log(children);
+                                                for (var c in children)
+                                                    children[c].node().removeAttribute('selected');
+                                                block.key('last_chosen', choose);
+                                                if (block.child('choose') == null) {
+                                                    block.child('none').attribute('selected', 'selected');
+                                                } else block.child(choose).attribute('selected', 'selected');
+                                            }
+                                        option none
+                                            html None
+                                            value none
+                                            selected selected
+                                    #resource_list
+                                        {
+                                            //console.log('resource list');
+                                            block.child('text').html('');
+                                            block.child('text').add(Block('option', 'none').data({
+                                                value: 'none',
+                                                html: 'None'
+                                            }));
+                                            for (var r in resource_list) {
+                                                var resource = resource_list[r];
+                                                //console.log(resource);
+                                                block.child('text').add(Block('option', resource._id).data({
+                                                    value: resource._id,
+                                                    html: resource.slug
+                                                }));
+                                            }
+                                            var last_chosen = block.child('text').key('last_chosen');
+                                            if (last_chosen != null && block.child('text').child(last_chosen) != null) {
+                                                block.child('text').child(last_chosen).attribute('selected', 'selected');
+                                            }
+                                        }
                             div end_spacer
                                 css
                                     height 15px
@@ -2845,6 +3019,853 @@ app
                                                 //console.log('Delete');
                                                 block.parent(4).on('delete_application');
                                             }
+                        div application_ecosystem
+                            class dashboard_detail_section
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Ecosystem
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/ethernet_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                     height 80px
+                            div cwd
+                                class value_edge
+                                text label
+                                    val Path
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val /var/www/application-zero
+                                        class value_text
+                                        css
+                                            font-size 17px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 3px
+                                            height 17px
+                                            width 17px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').ecosystem.cwd;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder /var/www/application-zero
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 17px
+                                        width 90%
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_application_update', {
+                                                        'ecosystem.cwd': value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div script
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Script
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val application-zero.sh
+                                        class value_text
+                                        css
+                                            font-size 22px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').ecosystem.script;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder application-zero.sh
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2.5px
+                                        margin-left -2px
+                                        margin-bottom 2.5px
+                                        width 55%
+                                        font-size 22px
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_application_update', {
+                                                        'ecosystem.script': value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div interpreter
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Interpreter
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val #!/bin/bash
+                                        class value_text
+                                        css
+                                            font-size 20px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').ecosystem.interpreter;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder #!/bin/bash
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2.5px
+                                        margin-left -2px
+                                        margin-bottom 2.5px
+                                        width 55%
+                                        font-size 20px
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_application_update', {
+                                                        'ecosystem.interpreter': value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div port
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Port
+                                    class label_desc
+                                    css
+                                        margin-bottom 3px
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val :80
+                                        class value_text
+                                        css
+                                            font-size 21px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        // this is an edit button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                //block.parent(2).data('');
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                //console.log(block.parent(4).key('application').port);
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').port;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder 80
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        width 55%
+                                        font-size 21px
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                if (value === '') value = null;
+                                                else value = parseInt((`${value}`).trim());
+                                                if (value == null || (value != NaN && value >= 0)) {
+                                                    block.parent(3).on('send_application_update', {
+                                                        'port': value
+                                                    });
+                                                }
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div out_file
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Output Log
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val application-zero.log
+                                        class value_text
+                                        css
+                                            font-size 19px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').ecosystem.out_file;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder application-zero.log
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2.5px
+                                        margin-left -2px
+                                        margin-bottom 2.5px
+                                        width 55%
+                                        font-size 19px
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_application_update', {
+                                                        'ecosystem.out_file': value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div error_file
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Error Log
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val application-zero.log
+                                        class value_text
+                                        css
+                                            font-size 19px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').ecosystem.error_file;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder application-zero.log
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2.5px
+                                        margin-left -2px
+                                        margin-bottom 2.5px
+                                        width 55%
+                                        font-size 19px
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_application_update', {
+                                                        'ecosystem.error_file': value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div max_memory_restart
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Memory Limit
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val 5M
+                                        class value_text
+                                        css
+                                            font-size 22px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').ecosystem.max_memory_restart;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder 5M
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2.5px
+                                        margin-left -2px
+                                        margin-bottom 2.5px
+                                        width 55%
+                                        font-size 22px
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_application_update', {
+                                                        'ecosystem.max_memory_restart': value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div restart_delay
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Restart Delay
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val 500ms
+                                        class value_text
+                                        css
+                                            font-size 22px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').ecosystem.restart_delay;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder 500ms
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2.5px
+                                        margin-left -2px
+                                        margin-bottom 2.5px
+                                        width 55%
+                                        font-size 22px
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_application_update', {
+                                                        'ecosystem.restart_delay': value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div end_spacer
+                                css
+                                    height 15px
+                        div application_process
+                            class dashboard_detail_section
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Process
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/gear_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                     height 80px
+                            div signals
+                                class value_edge
+                                css
+                                    width 99%
+                                    margin-bottom 10px
+                                text label
+                                    val Signals
+                                    class label_desc
+                                block start
+                                    css
+                                        width 29%
+                                        display inline-table
+                                        vertical-align top
+                                        height 50px
+                                    div start_wrap
+                                        css
+                                            height 80%
+                                            width 80%
+                                            margin 0 auto
+                                        block label_wrap
+                                            css
+                                                display inline-table
+                                                width calc(100% - 38px)
+                                                font-size 20px
+                                            text text
+                                                val Start
+                                                css
+                                                    cursor default
+                                        block image_wrap
+                                            css
+                                                width 38px
+                                                display inline-table
+                                            image image
+                                                src /img/play_b.png
+                                                height 38px
+                                                width 38px
+                                                css
+                                                    opacity 0.7
+                                                    transition opacity 0.2s ease
+                                                    cursor pointer
+                                                :mouseover
+                                                    css
+                                                        opacity 0.95
+                                                :mouseout
+                                                    css
+                                                        opacity 0.7
+                                                :click
+                                                    {
+                                                        var application_id = block.parent(6).key('application')._id;
+                                                        app.ws.api.signal_application(application_id, 'start');
+                                                    }
+                                block restart
+                                    css
+                                        width 40%
+                                        display inline-table
+                                        vertical-align top
+                                        height 50px
+                                    div restart_wrap
+                                        css
+                                            height 80%
+                                            width 80%
+                                            margin 0 auto
+                                        block label_wrap
+                                            css
+                                                display inline-table
+                                                width calc(100% - 36px)
+                                                font-size 20px
+                                            text text
+                                                val Restart
+                                                css
+                                                    cursor default
+                                        block image_wrap
+                                            css
+                                                width 36px
+                                                display inline-table
+                                            image image
+                                                src /img/restart_b.png
+                                                height 36px
+                                                width 36px
+                                                css
+                                                    opacity 0.7
+                                                    transition opacity 0.2s ease
+                                                    cursor pointer
+                                                :mouseover
+                                                    css
+                                                        opacity 0.95
+                                                :mouseout
+                                                    css
+                                                        opacity 0.7
+                                                :click
+                                                    {
+                                                        var application_id = block.parent(6).key('application')._id;
+                                                        app.ws.api.signal_application(application_id, 'restart');
+                                                    }
+                                block stop
+                                    css
+                                        width 30%
+                                        display inline-table
+                                        vertical-align top
+                                        height 50px
+                                    div stop_wrap
+                                        css
+                                            height 80%
+                                            width 80%
+                                            margin 0 auto
+                                        block label_wrap
+                                            css
+                                                display inline-table
+                                                width calc(100% - 38px)
+                                                font-size 20px
+                                            text text
+                                                val Stop
+                                                css
+                                                    cursor default
+                                        block image_wrap
+                                            css
+                                                width 38px
+                                                display inline-table
+                                            image image
+                                                src /img/stop_b.png
+                                                height 38px
+                                                width 38px
+                                                css
+                                                    opacity 0.7
+                                                    transition opacity 0.2s ease
+                                                    cursor pointer
+                                                :mouseover
+                                                    css
+                                                        opacity 0.95
+                                                :mouseout
+                                                    css
+                                                        opacity 0.7
+                                                :click
+                                                    {
+                                                        var application_id = block.parent(6).key('application')._id;
+                                                        app.ws.api.signal_application(application_id, 'stop');
+                                                    }
+                            div logs
+                                class value_edge
+                                text label
+                                    val Logs
+                                    class label_desc
+                                div log_output
+                                    class application_log_output
+                                    css
+                                        overflow-y auto
+                                        overflow-x hidden
+                                        min-height 220px
+                                        height 350px
+                                        width 100%
+                                        background-color #f9f9f9
+                                        border-radius 4px
+                                        border 1px solid #eee
+                                        margin-top 6px
+                                        //overflow-wrap break-word
+                                        //word-break break-all
+                                        box-sizing border-box
+                                        padding 8px 12px
+                                    div placeholder_line
+                                        class application_log_output_line
+                                        css
+                                            font-style italic
+                                        html Stream application logs.
+                            div end_spacer
+                                css
+                                    height 15px
                         
             div domains
                 css
@@ -3063,7 +4084,6 @@ app
                             }, 20);
                         }
                     }
-                
                 button new_resource_button
                     css
                         position absolute
@@ -4136,6 +5156,8 @@ app
                                             }
                         div resource_daemon
                             class dashboard_detail_section
+                            css
+                                min-height 200px
                             div title
                                 css
                                     height auto

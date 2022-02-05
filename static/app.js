@@ -371,7 +371,7 @@ var app = {
                 app.ws.send('new_application', {
                     slug: slug,
                     name: name,
-                    desc: desc
+                    description: desc
                 });
             },
             update_application: (id, update) => {
@@ -383,6 +383,12 @@ var app = {
             delete_application: (id) => {
                 app.ws.send('delete_application', {
                     id: id
+                });
+            },
+            signal_application: (id, signal) => {
+                app.ws.send('signal_application', {
+                    id: id,
+                    signal: signal
                 });
             },
             // ideas
@@ -414,7 +420,7 @@ var app = {
                         });
                     }, 'app', 'jQuery');
                 }, 'blocks', 'jQuery');
-            }, 300);
+            }, 250);
         },
         test: _ => {
             console.log("[main] testing...");

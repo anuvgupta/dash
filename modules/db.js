@@ -394,10 +394,19 @@ var api = {
             slug: slug,
             name: name,
             description: description,
-            host: null,
+            host: "none",
             port: null,
             environment: {},
-            ecosystem: {},
+            ecosystem: {
+                name: slug,
+                script: "",
+                cwd: "",
+                error_file: `${slug}.log`,
+                out_file: `${slug}.log`,
+                interpreter: "",
+                max_memory_restart: "100M",
+                restart_delay: "3000"
+            },
             primary_domain: null,
             domains: [],
             ts_created: timestamp,
@@ -444,9 +453,10 @@ var api = {
             } else {
                 if (!result1) resolve(null, result1);
                 else {
-                    if (!update.hasOwnProperty('ts_updated')) {
+                    if (update.hasOwnProperty('slug'))
+                        update['ecosystem.name'] = update.slug;
+                    if (!update.hasOwnProperty('ts_updated'))
                         update.ts_updated = ts_now;
-                    }
                     mongo_api.collection('application').updateOne({ _id: mongo_oid(id) }, {
                         $set: update
                     }, (e2, result2) => {

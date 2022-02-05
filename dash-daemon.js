@@ -43,6 +43,11 @@ const utils = {
     },
 };
 
+// database
+const db = {
+    ecosystem: {}
+};
+
 // main class
 const app = {
 
@@ -63,6 +68,12 @@ const app = {
             // });
         }, 50);
     },
+
+    // module methods
+    process_signal: (application_id, signal) => {
+
+    },
+
     // module infra
     ws: null, web: null,
     link: resolve => {
@@ -124,9 +135,11 @@ const ws = {
             case 'sync_daemon_res':
                 if (success === true) {
                     ws.log(`identified with dash cloud as resource "${data.resource.name}" (${data.id})`);
-                } else {
-                    ws.err("failed to identify with dash cloud");
-                }
+                } else ws.err("failed to identify with dash cloud");
+                break;
+            case 'signal':
+                ws.log(`received signal "${data.signal}" for application "${data.application}"`);
+                app.process_signal(data.application, data.signal);
                 break;
             case 'hb':
                 ws.api.hb_respond();

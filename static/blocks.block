@@ -1275,7 +1275,7 @@
             block
                 .css({
                     width: '390px',
-                    height: '230px',
+                    height: '240px',
                     borderRadius: '7px',
                     backgroundColor: 'white',
                     '-webkit-box-shadow': '2px 2px 5px 2px rgba(64,64,64,0.1)',

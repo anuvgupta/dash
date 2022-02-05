@@ -212,6 +212,7 @@ span.label_desc {
     font-size: 12px;
     letter-spacing: 0.6px;
     margin-bottom: 1px;
+    cursor: default;
 }
 
 div.value_text_wrap {
@@ -331,4 +332,9 @@ span.noItemsMessage {
     font-style: italic;
     font-weight: 500;
     font-size: 21px;
+}
+
+div.application_log_output div.application_log_output_line {
+    margin-bottom: 4px;
+    font-family: 'Courier New', Courier, monospace;
 }

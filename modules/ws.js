@@ -376,6 +376,30 @@ var init = _ => {
             });
         }
     });
+    ws_server.bind("signal_application", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        var signal = req.signal ? (`${req.signal}`).trim() : '';
+        if (id != '' && signal != null && signal != '') {
+            m.db.get_application(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("signal_application", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("signal_application", "application not found", client);
+                var application_resource_id = result1.host;
+                if (application_resource_id != 'none') {
+                    m.db.get_resource(application_resource_id, null, (success2, result2) => {
+                        if (success2 === false) return ws_server.return_event_error("signal_application", "database error", client);
+                        if (result2 == null) return ws_server.return_event_error("signal_application", "resource not found", client);
+                        var ws_daemon_client = m.ws.get_daemon_client(application_resource_id);
+                        if (ws_daemon_client != null && ws_server.clients.hasOwnProperty(ws_daemon_client.id)) {
+                            ws_server.send_to_client('signal', {
+                                signal: signal,
+                                application: id
+                            }, ws_daemon_client);
+                        }
+                    });
+                }
+            });
+        }
+    });
 
     // daemon
     ws_server.bind("sync_daemon", (client, req) => {
@@ -435,6 +459,20 @@ var api = {
                 }
             }
         }
+    },
+    get_daemon_client: (resource_id) => {
+        for (var c_id in ws_server.clients) {
+            if (
+                ws_server.clients.hasOwnProperty(c_id) &&
+                ws_server.clients[c_id] !== null &&
+                (ws_server.clients[c_id].auth) &&
+                ws_server.clients[c_id].type == 'daemon' &&
+                ws_server.clients[c_id].o_id == resource_id
+            ) {
+                return ws_server.clients[c_id];
+            }
+        }
+        return null;
     }
 };
 
