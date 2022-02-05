@@ -3,5 +3,6 @@
     "secure": false,
     "ws_reconnect_interval": 5000,
     "ws_heartbeat_log": false,
-    "resource_key": "a3sG8"
+    "pm2_daemon_mode": true,
+    "resource_key": "oCr0G"
 }

@@ -3,6 +3,7 @@
 
 /* IMPORTS */
 const fs = require("fs");
+const pm2 = require("pm2");
 const path = require("path");
 const websocket = require("ws");
 const readline = require("readline");
@@ -61,17 +62,48 @@ const app = {
         // console.log(`${app.name.toUpperCase()}`);
         utils.delay(_ => {
             app.log("initializing");
-            // web.init(_ => {
-            ws.init(_ => {
-                app.log("ready");
+            pm.init(_ => {
+                ws.init(_ => {
+                    app.log("ready");
+                });
             });
-            // });
         }, 50);
     },
 
     // module methods
     process_signal: (application_id, signal) => {
-
+        app.log(`processing signal for app ${application_id}: "${signal}"`);
+        if (db.ecosystem.hasOwnProperty(application_id)) {
+            app.log(`found application ${application_id}`);
+            app.log(db.ecosystem[application_id]);
+        } else {
+            // TODO: queue signal for processing later? or maybe not
+        }
+    },
+    refresh_ecosystem: (ecosystem) => {
+        app.log("refreshing ecosystem");
+        for (var e in db.ecosystem) {
+            if (db.ecosystem.hasOwnProperty(e)) {
+                if (ecosystem.hasOwnProperty(e)) {
+                    app.log(`refreshing application "${e}"`);
+                    db.ecosystem[e] = JSON.parse(JSON.stringify(ecosystem[e]));
+                } else {
+                    app.log(`removing application "${e}"`);
+                    // TODO: stop and remove the application
+                    db.ecosystem[e] = null;
+                    delete db.ecosystem[e];
+                }
+            }
+        }
+        for (var e in ecosystem) {
+            if (ecosystem.hasOwnProperty(e)) {
+                if (!db.ecosystem.hasOwnProperty(e)) {
+                    app.log(`adding application "${e}"`);
+                    db.ecosystem[e] = JSON.parse(JSON.stringify(ecosystem[e]));
+                }
+            }
+        }
+        // console.log(db.ecosystem);
     },
 
     // module infra
@@ -137,6 +169,10 @@ const ws = {
                     ws.log(`identified with dash cloud as resource "${data.resource.name}" (${data.id})`);
                 } else ws.err("failed to identify with dash cloud");
                 break;
+            case 'ecosystem':
+                ws.log('received ecosystem update');
+                app.refresh_ecosystem(data.ecosystem);
+                break;
             case 'signal':
                 ws.log(`received signal "${data.signal}" for application "${data.application}"`);
                 app.process_signal(data.application, data.signal);
@@ -198,6 +234,34 @@ const ws = {
     }
 };
 
+// process manager
+const pm = {
+    init: resolve => {
+        pm.log("initializing");
+        pm2.connect(!(global.config.pm2_daemon_mode), resolve);
+    },
+    start_process: () => {
+
+    },
+    stop_process: () => {
+
+    },
+    restart_process: () => {
+
+    },
+    delete_process: () => {
+
+    },
+    // module infra
+    log: utils.logger('pm'),
+    err: utils.logger('pm', true),
+    exit: resolve => {
+        pm.log("exit");
+        pm2.disconnect()
+        if (resolve) resolve();
+    }
+};
+
 /* MAIN */
 console.log("DASHBOARD");
 console.log("[svc] daemon");
@@ -216,7 +280,6 @@ process.on('SIGUSR2', _ => {
     console.log('[process] restart 2');
     app.exit();
 });
-// modules.utils.delay(modules.main.main, 500);
 
 // entry point
 app.link(app.main);

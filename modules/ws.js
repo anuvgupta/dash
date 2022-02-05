@@ -355,8 +355,14 @@ var init = _ => {
                 if (success1 === false) return ws_server.return_event_error("update_application", "database error", client);
                 if (result1 == null)
                     return ws_server.return_event_error("update_application", "application not found", client);
+                var host_resource = result1.host;
                 m.db.update_application(id, update, (success2, result2) => {
                     if (success2 === false) return ws_server.return_event_error("update_application", "database error", client);
+                    if (host_resource != 'none') m.ws.refresh_daemon_ecosystem(host_resource);
+                    if (result2.host != host_resource && result2.host != 'none') {
+                        host_resource = result2.host;
+                        m.ws.refresh_daemon_ecosystem(host_resource);
+                    }
                     return ws_server.return_event_data("update_application", { id: id, application: result2 }, client);
                 });
             });
@@ -410,14 +416,16 @@ var init = _ => {
                     return ws_server.return_event_error("sync_daemon", "database error", client, false);
                 if (result1 == null)
                     return ws_server.return_event_error("sync_daemon", "resource not found", client, false);
+                var resource_id = result1._id.toString();
                 ws_server.authenticate_client(client);
                 ws_server.group_client(client, 'daemon');
-                ws_server.set_client_object(client, result1._id.toString());
+                ws_server.set_client_object(client, resource_id);
                 ws_server.return_event_data("sync_daemon", {
-                    id: result1._id.toString(),
+                    id: resource_id,
                     daemon_key: daemon_key,
                     resource: result1
                 }, client);
+                m.ws.refresh_daemon_ecosystem(resource_id);
             });
         }
     }, false);
@@ -473,6 +481,16 @@ var api = {
             }
         }
         return null;
+    },
+    refresh_daemon_ecosystem: (resource_id) => {
+        var daemon_client = m.ws.get_daemon_client(resource_id);
+        if (daemon_client === null) return;
+        m.db.get_daemon_ecosystem(resource_id, (success, result) => {
+            if (success === false || success === null) return;
+            ws_server.send_to_client('ecosystem', {
+                ecosystem: result
+            }, daemon_client);
+        });
     }
 };
 

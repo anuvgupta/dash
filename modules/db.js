@@ -491,6 +491,23 @@ var api = {
             } else resolve(result1.deletedCount == 1, result1);
         });
     },
+    get_daemon_ecosystem: (resource_id, resolve) => {
+        mongo_api.collection('application').find({
+            host: resource_id
+        }).toArray((e, result1) => {
+            if (e) {
+                err(`error finding applications with resource id ${resource_id}`, e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (result1) {
+                    var ecosystems = {};
+                    for (var r in result1)
+                        ecosystems[result1[r]._id.toString()] = result1[r].ecosystem;
+                    resolve(true, ecosystems);
+                } else resolve(null, result1);
+            }
+        });
+    }
 };
 
 

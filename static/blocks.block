@@ -1237,8 +1237,8 @@
                 block.child('description/spacer').on('update');
                 block.child('description/prespacer').on('update');
                 if (tag_string == "") tag_string = "Resource";
-                block.key('status_type', `Cloud ${tag_string}`);
-                block.child('status/labels/type/text').html('').data(`Cloud ${tag_string}`);
+                block.key('status_type', `${tag_string}`);
+                block.child('status/labels/type/text').html('').data(`${tag_string}`);
             });
             data('specs', specs => {
                 block.key('specs', specs);

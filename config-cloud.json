@@ -14,8 +14,10 @@
         "cloud": {
             "resource": {
                 "types": [
-                    ["vm", ["Virtual Machine", "VM"]],
-                    ["ct", ["Container", "CTR"]]
+                    ["vm", ["Cloud Virtual Machine", "Cloud VM"]],
+                    ["ct", ["Cloud Container", "Cloud CTR"]],
+                    ["lt", ["Laptop Computer", "Laptop"]],
+                    ["pc", ["Personal Computer", "PC"]]
                 ]
             },
             "providers": [
