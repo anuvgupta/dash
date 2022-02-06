@@ -2169,6 +2169,9 @@ app
                             app.ws.api.get_resources();
                         }, 10);
                         setTimeout(_ => {
+                            app.ws.api.signal_application(select_application._id, 'tail');
+                        }, 20);
+                        setTimeout(_ => {
                             Block.queries();
                         }, 30);
                     }
@@ -2182,6 +2185,9 @@ app
                         block.child('new_application_button').css('display', 'inline-block');
                         block.child('application_filter').css('display', 'block');
                         block.child('close').on('hide');
+                        setTimeout(_ => {
+                            app.ws.api.signal_application(select_application._id, 'untail');
+                        }, 20);
                         setTimeout(_ => {
                             Block.queries();
                             setTimeout(_ => {

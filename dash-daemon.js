@@ -6,8 +6,9 @@ const fs = require("fs");
 const pm2 = require("pm2");
 const path = require("path");
 const websocket = require("ws");
+const split2 = require('split2');
 const readline = require("readline");
-const body_parser = require("body-parser");
+const tf = require('@logdna/tail-file');
 
 /* ENVIRONMENT */
 global.args = process.argv.slice(2);
@@ -270,6 +271,31 @@ const pm = {
         });
     },
     delete_process: (ecosystem) => {
+
+    },
+    tail_process: (ecosystem) => {
+        const output_log_path = path.join(ecosystem.cwd, ecosystem.out_file);
+        pm.log(output_log_path);
+        const error_log_path = path.join(ecosystem.cwd, ecosystem.error_file);
+        const tail = new tf(output_log_path);
+        tail
+            .on('tail_error', (err) => {
+                pm.error('error tailing file', err);
+                throw err;
+            })
+            .start()
+            .catch((err) => {
+                console.error('error tailing file - cannot start, check file exists', err);
+                throw err;
+            });
+
+        tail
+            .pipe(split2())
+            .on('data', (line) => {
+                console.log(line)
+            });
+    },
+    untail_process: (ecosystem) => {
 
     },
     // module infra

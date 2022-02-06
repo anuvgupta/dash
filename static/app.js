@@ -230,7 +230,7 @@ var app = {
                 ? 'wss://'
                 : 'ws://') +
             document.domain +
-            (document.domain == 'localhost' ? ':8080' : ((location.protocol === 'https:' ? ':443' : ':80') + '/socket')),
+            (document.domain == 'localhost' ? ':3001' : ((location.protocol === 'https:' ? ':443' : ':80') + '/socket')),
         encode_msg: (e, d, a = "") => {
             return JSON.stringify({
                 event: e,
