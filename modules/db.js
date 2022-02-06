@@ -395,7 +395,7 @@ var api = {
             name: name,
             description: description,
             host: "none",
-            port: null,
+            port: "",
             environment: {},
             ecosystem: {
                 name: slug,

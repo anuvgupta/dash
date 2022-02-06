@@ -184,6 +184,12 @@ app
                 });
             }
         }
+    #signal_application_res_daemon_res
+        {
+            if (signal_application_res_daemon_res.success) {
+                console.log('TODO: display in toast', signal_application_res_daemon_res.data);
+            } else console.err(signal_application_res_daemon_res)
+        }
 
     #resource_status
         {
@@ -2418,7 +2424,7 @@ app
                         {
                             //console.log(port);
                             var port_alt = `:${port}`;
-                            if (port === null) {
+                            if (port === null || port == "") {
                                 port = '80';
                                 port_alt = '<span class="text_placeholder">:80</span>';
                             }
@@ -3348,6 +3354,7 @@ app
                                                 // enter
                                                 var value = block.node().value;
                                                 if (!value) value = '';
+                                                /*
                                                 if (value === '') value = null;
                                                 else value = parseInt((`${value}`).trim());
                                                 if (value == null || (value != NaN && value >= 0)) {
@@ -3355,6 +3362,13 @@ app
                                                         'port': value
                                                     });
                                                 }
+                                                */
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_application_update', {
+                                                        'port': value
+                                                    });
+                                                //}
                                                 setTimeout(_ => { block.on('hide'); }, 250);
                                             } else if (event.keyCode == 27) {
                                                 // escape

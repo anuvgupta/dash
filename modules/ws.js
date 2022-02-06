@@ -406,6 +406,24 @@ var init = _ => {
             });
         }
     });
+    ws_server.bind("signal_application_res_daemon", (client, req) => {
+        var application_id = req.application_id ? (`${req.application_id}`).trim() : '';
+        var success = req.success && req.success === true;
+        var message = req.message ? (`${req.message}`).trim() : '';
+        if (application_id != '' && message != '') {
+            m.db.get_application(application_id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("signal_application_res_daemon", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("signal_application_res_daemon", "application not found", client);
+                ws_server.send_to_group("signal_application_res_daemon_res", {
+                    success: true,
+                    data: {
+                        success: success,
+                        message: message
+                    }
+                }, "app");
+            });
+        }
+    });
 
     // daemon
     ws_server.bind("sync_daemon", (client, req) => {

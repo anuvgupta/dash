@@ -59,7 +59,6 @@ const app = {
 
     // main method
     main: _ => {
-        // console.log(`${app.name.toUpperCase()}`);
         utils.delay(_ => {
             app.log("initializing");
             pm.init(_ => {
@@ -71,12 +70,16 @@ const app = {
     },
 
     // module methods
-    process_signal: (application_id, signal) => {
+    process_signal: (application_id, signal, resolve) => {
         app.log(`processing signal for app ${application_id}: "${signal}"`);
         if (db.ecosystem.hasOwnProperty(application_id)) {
             app.log(`found application ${application_id}`);
-            app.log(db.ecosystem[application_id]);
+            var app_ecosystem = db.ecosystem[application_id];
+            // app.log(app_ecosystem);
+            resolve(true, `application "${app_ecosystem.name}" received signal "${signal}"`);
+            pm[`${signal}_process`] && pm[`${signal}_process`](app_ecosystem);
         } else {
+            resolve(false, 'application metadata not in local ecosystem');
             // TODO: queue signal for processing later? or maybe not
         }
     },
@@ -175,7 +178,9 @@ const ws = {
                 break;
             case 'signal':
                 ws.log(`received signal "${data.signal}" for application "${data.application}"`);
-                app.process_signal(data.application, data.signal);
+                app.process_signal(data.application, data.signal, (success, message) => {
+                    ws.api.signal_respond(data.application, success, message);
+                });
                 break;
             case 'hb':
                 ws.api.hb_respond();
@@ -191,6 +196,12 @@ const ws = {
         },
         hb_respond: _ => {
             ws.send('hb_daemon', {}, global.config.ws_heartbeat_log === false);
+        },
+        signal_respond: (application_id, success, message) => {
+            ws.send('signal_application_res_daemon', {
+                application_id: application_id,
+                success: success, message: message
+            });
         }
     },
     initialize_client: resolve => {
@@ -240,16 +251,25 @@ const pm = {
         pm.log("initializing");
         pm2.connect(!(global.config.pm2_daemon_mode), resolve);
     },
-    start_process: () => {
-
+    start_process: (ecosystem) => {
+        pm2.start(ecosystem, (error, env) => {
+            console.log('error', error);
+            console.log('env', env);
+        });
     },
-    stop_process: () => {
-
+    stop_process: (ecosystem) => {
+        pm2.stop(ecosystem.name, (error, env) => {
+            console.log('error', error);
+            console.log('env', env);
+        });
     },
-    restart_process: () => {
-
+    restart_process: (ecosystem) => {
+        pm2.restart(ecosystem.name, (error, env) => {
+            console.log('error', error);
+            console.log('env', env);
+        });
     },
-    delete_process: () => {
+    delete_process: (ecosystem) => {
 
     },
     // module infra
