@@ -509,6 +509,20 @@ var api = {
                 } else resolve(null, result1);
             }
         });
+    },
+    get_applications_by_resource: (resource_id, resolve) => {
+        mongo_api.collection('application').find({
+            host: resource_id
+        }).toArray((e, result1) => {
+            if (e) {
+                err(`error finding applications with resource id ${resource_id}`, e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (result1) {
+                    resolve(true, result1);
+                } else resolve(null, result1);
+            }
+        });
     }
 };
 

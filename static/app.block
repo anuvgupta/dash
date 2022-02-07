@@ -127,12 +127,25 @@ app
                 });
             }
         }
+    #get_resource_res
+        {
+            block.data({
+                update_resource_res: {
+                    success: get_resource_res.success,
+                    data: {
+                        id: get_resource_res.data.resource._id,
+                        resource: get_resource_res.data.resource
+                    }
+                }
+            });
+        }
     #update_resource_res
         {
-           var current_resource = block.child('main/content/resources/detail').key('resource');
-           if (current_resource && current_resource._id == update_resource_res.data.id)
-               block.child('main/content/resources/detail').on('receive_resource_update', update_resource_res.data.resource);
-               block.child('main/content/resources').data({ update_resource_local: update_resource_res.data.resource });
+            var current_resource = block.child('main/content/resources/detail').key('resource');
+            if (current_resource && current_resource._id == update_resource_res.data.id) {
+                block.child('main/content/resources/detail').on('receive_resource_update', update_resource_res.data.resource);
+            }
+            block.child('main/content/resources').data({ update_resource_local: update_resource_res.data.resource });
         }
     #delete_resource_res
         {
@@ -171,10 +184,11 @@ app
         }
     #update_application_res
         {
-           var current_application = block.child('main/content/applications/detail').key('application');
-           if (current_application && current_application._id == update_application_res.data.id)
-               block.child('main/content/applications/detail').on('receive_application_update', update_application_res.data.application);
-               block.child('main/content/applications').data({ update_application_local: update_application_res.data.application });
+            var current_application = block.child('main/content/applications/detail').key('application');
+            if (current_application && current_application._id == update_application_res.data.application._id) {
+                block.child('main/content/applications/detail').on('receive_application_update', update_application_res.data.application);
+            }
+            block.child('main/content/applications').data({ update_application_local: update_application_res.data.application });
         }
     #delete_application_res
         {
@@ -2236,7 +2250,7 @@ app
                     }
                 #update_application_local
                     {
-                        console.log('update_application_local', update_application_local);
+                        //console.log('update_application_local', update_application_local);
                         var application_list = block.key('application_list');
                         for (var a in application_list) {
                             if (application_list[a]._id == update_application_local._id) {
@@ -2557,6 +2571,7 @@ app
                         }
                     :receive_application_update
                         {
+                            //console.log('receive_application_update', data);
                             var old_data = block.key('application');
                             var new_data = data;
                             if (old_data.name != new_data.name) {
@@ -2578,6 +2593,10 @@ app
                             if (old_data.host != new_data.host) {
                                 block.data({ host: new_data.host, });
                                 block.child('subcontent/application_info/host/value/text').node().blur();
+                                setTimeout(_ => {
+                                    app.ws.api.signal_application(new_data._id, 'tail');
+                                    app.ws.api.get_application_status(new_data._id);
+                                }, 50);
                             }
                             if (old_data.ecosystem.cwd != new_data.ecosystem.cwd) {
                                 block.data({ ecosystem: new_data.ecosystem, });
@@ -2935,13 +2954,13 @@ app
                                             }
                                         #choose
                                             {
-                                                //console.log('choose');
+                                                //console.log('choose', choose);
                                                 var children = block.children();
                                                 //console.log(children);
                                                 for (var c in children)
                                                     children[c].node().removeAttribute('selected');
                                                 block.key('last_chosen', choose);
-                                                if (block.child('choose') == null) {
+                                                if (block.child(choose) == null) {
                                                     block.child('none').attribute('selected', 'selected');
                                                 } else block.child(choose).attribute('selected', 'selected');
                                             }
@@ -4251,6 +4270,9 @@ app
                         block.child('close').on('show');
                         block.child('detail').on('update_grid');
                         setTimeout(_ => {
+                            app.ws.api.get_resource(select_resource._id);
+                        }, 20);
+                        setTimeout(_ => {
                             Block.queries();
                         }, 10);
                     }
@@ -4515,7 +4537,7 @@ app
                     #resource
                         {
                             block.key('resource', resource);
-                            block.data({
+                            var resource_update = {
                                 name: resource.name,
                                 slug: resource.slug,
                                 link: resource.link,
@@ -4526,8 +4548,11 @@ app
                                 type: resource.type,
                                 daemon_key: resource.daemon_key,
                                 status: resource.status,
-                                status_time: resource.status_time
-                            });
+                                status_time: resource.status_time,
+                            };
+                            if (resource.hasOwnProperty('applications'))
+                                resource_update.applications = resource.applications;
+                            block.data(resource_update);
                         }
                     #name
                         {
@@ -4622,6 +4647,10 @@ app
                             //console.log(status_time);
                             block.child('subcontent/resource_daemon/status').key('status_time', status_time).on('status_update');
                         }
+                    #applications
+                        {
+                            console.log('received resource applications', applications);
+                        }
                     :status_update
                         {
                             block.child('subcontent/resource_daemon/status').on('status_update');
@@ -4701,6 +4730,7 @@ app
                             if (old_data.status_time != new_data.status_time) {
                                 block.data({ status_time: new_data.status_time });
                             }
+                            block.data({ applications: new_data.applications });
                             block.key('resource', new_data);
                         }
                     :send_resource_update

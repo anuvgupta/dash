@@ -11,10 +11,11 @@ var app = {
                 new: "#dddddd",
                 online: "rgba(85, 196, 110, 1)",
                 offline: "rgba(237, 69, 61, 1)",
-                stopped: "rgba(237, 69, 61, 1)",
                 desync: "#f7bb0a",
                 override: "rgba(40, 124, 246, 1)",
                 default: "#dddddd",
+                stopped: "rgba(237, 69, 61, 1)",
+                removed: "rgba(237, 69, 61, 1)",
             }
         },
         ui_interval: null,
@@ -345,6 +346,11 @@ var app = {
             // resources
             get_resources: () => {
                 app.ws.send('get_resources', {});
+            },
+            get_resource: (id) => {
+                app.ws.send('get_resource', {
+                    id: id,
+                });
             },
             new_resource: (slug, name, link, ip) => {
                 app.ws.send('new_resource', {

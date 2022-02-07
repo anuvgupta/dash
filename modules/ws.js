@@ -293,6 +293,19 @@ var init = _ => {
             return ws_server.return_event_data("get_resources", { list: result1 }, client);
         });
     });
+    ws_server.bind("get_resource", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        m.db.get_resource(id, null, (success1, result1) => {
+            if (success1 === false || result1 === null)
+                return ws_server.return_event_error("get_resource", "database error", client);
+            m.db.get_applications_by_resource(id, (success2, result2) => {
+                if (success2 === false || result2 === null)
+                    return ws_server.return_event_error("get_resource", "database error", client);
+                result1.applications = result2;
+                return ws_server.return_event_data("get_resource", { resource: result1 }, client);
+            });
+        });
+    });
     ws_server.bind("update_resource", (client, req) => {
         var id = req.id ? (`${req.id}`).trim() : '';
         var update = req.update ? JSON.parse(JSON.stringify(req.update)) : null;
@@ -356,9 +369,12 @@ var init = _ => {
                 if (result1 == null)
                     return ws_server.return_event_error("update_application", "application not found", client);
                 var host_resource = result1.host;
+                var app_identifier_slug = result1.slug;
                 m.db.update_application(id, update, (success2, result2) => {
                     if (success2 === false) return ws_server.return_event_error("update_application", "database error", client);
-                    if (host_resource != 'none') m.ws.refresh_daemon_ecosystem(host_resource);
+                    if (host_resource != 'none') {
+                        m.ws.refresh_daemon_ecosystem(host_resource);
+                    }
                     if (result2.host != host_resource && result2.host != 'none') {
                         host_resource = result2.host;
                         m.ws.refresh_daemon_ecosystem(host_resource);

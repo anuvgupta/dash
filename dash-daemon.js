@@ -97,16 +97,23 @@ const app = {
             if (db.ecosystem.hasOwnProperty(e)) {
                 if (ecosystem.hasOwnProperty(e)) {
                     app.log(`refreshing application "${e}"`);
-                    db.ecosystem[e] = JSON.parse(JSON.stringify(ecosystem[e]));
+                    var ecosystem_old = JSON.parse(JSON.stringify(db.ecosystem[e]));
+                    var ecosystem_new = JSON.parse(JSON.stringify(ecosystem[e]));
+                    if (ecosystem_new.name != ecosystem_old.name) {
+                        pm.delete_process(ecosystem_old, e, (success) => {
+                            db.ecosystem[e] = ecosystem_new;
+                        });
+                    }
+                    db.ecosystem[e] = ecosystem_new;
                 } else {
                     app.log(`removing application "${e}"`);
                     // stop and remove the application
-                    pm.stop_process(db.ecosystem[e], e, (success) => {
-                        pm.delete_process(db.ecosystem[e], e, (success) => {
-                            db.ecosystem[e] = null;
-                            delete db.ecosystem[e];
-                        });
+                    // pm.stop_process(db.ecosystem[e], e, (success) => {
+                    pm.delete_process(db.ecosystem[e], e, (success) => {
+                        db.ecosystem[e] = null;
+                        delete db.ecosystem[e];
                     });
+                    // });
                 }
             }
         }
@@ -301,40 +308,50 @@ const pm = {
     },
     start_process: (ecosystem, app_id, resolve = null) => {
         pm2.start(ecosystem, (error, env) => {
-            // console.log('error', error);
+            if (error) console.error(error);
             // console.log('env', env);
-            var status = env[0].pm2_env.status;
+            var status = "";
+            if (!error && env[0]) status = env[0].pm2_env.status;
             ws.api.return_application_status(app_id, error == null, status, Date.now());
             if (resolve) resolve(error == null);
         });
     },
     stop_process: (ecosystem, app_id, resolve = null) => {
         pm2.stop(ecosystem.name, (error, env) => {
-            // console.log('error', error);
+            if (error) console.error(error);
             // console.log('env', env);
-            var status = env[0].pm2_env.status;
+            var status = "";
+            if (!error && env[0]) status = env[0].pm2_env.status;
             ws.api.return_application_status(app_id, error == null, status, Date.now());
             if (resolve) resolve(error == null);
         });
     },
     restart_process: (ecosystem, app_id, resolve = null) => {
         pm2.restart(ecosystem.name, (error, env) => {
-            // console.log('error', error);
+            if (error) console.error(error);
             // console.log('env', env);
-            var status = env[0].pm2_env.status;
+            var status = "";
+            if (!error && env[0]) status = env[0].pm2_env.status;
             ws.api.return_application_status(app_id, error == null, status, Date.now());
             if (resolve) resolve(error == null);
         });
     },
     delete_process: (ecosystem, app_id, resolve = null) => {
-        // TODO: use pm2 to delete process
-        if (resolve) resolve(true);
+        pm2.delete(ecosystem.name, (error, env) => {
+            if (error) console.error(error);
+            // console.log('env', env);
+            var status = "";
+            if (!error) status = "removed";
+            ws.api.return_application_status(app_id, error == null, status, Date.now());
+            if (resolve) resolve(error == null);
+        });
     },
     describe_process: (ecosystem, app_id, resolve = null) => {
         pm2.describe(ecosystem.name, (error, env) => {
-            // console.log('error', error);
+            if (error) console.error(error);
             // console.log('env', env);
-            var status = env[0].pm2_env.status;
+            var status = "";
+            if (!error && env[0]) status = env[0].pm2_env.status;
             if (resolve) resolve(error == null, status, Date.now());
         });
     },
@@ -343,7 +360,7 @@ const pm = {
         const output_log_path = path.join(ecosystem.cwd, ecosystem.out_file);
         const error_log_path = path.join(ecosystem.cwd, ecosystem.error_file);
         fs.readFile(output_log_path, 'utf8', (err, data) => {
-            if (err) { console.err(err); return; }
+            if (err) { console.error(err); return; }
             var lines = data.split('\n');
             var line_lim = lines.length - global.config.log_tf_load_lines;
             if (line_lim < 0) line_lim = 0;
