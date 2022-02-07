@@ -20,6 +20,10 @@ global.config = JSON.parse(fs.readFileSync('./config-daemon.json', { encoding: '
 
 // utilities
 const utils = {
+    input: readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    }),
     delay: (callback, timeout) => {
         setTimeout(_ => {
             process.nextTick(callback);
@@ -62,9 +66,11 @@ const app = {
     main: _ => {
         utils.delay(_ => {
             app.log("initializing");
-            pm.init(_ => {
-                ws.init(_ => {
-                    app.log("ready");
+            cli.init(_ => {
+                pm.init(_ => {
+                    ws.init(_ => {
+                        app.log("ready");
+                    });
                 });
             });
         }, 50);
@@ -77,8 +83,9 @@ const app = {
             app.log(`found application ${application_id}`);
             var app_ecosystem = db.ecosystem[application_id];
             // app.log(app_ecosystem);
-            resolve(true, `application "${app_ecosystem.name}" received signal "${signal}"`);
-            pm[`${signal}_process`] && pm[`${signal}_process`](app_ecosystem);
+            pm[`${signal}_process`] && pm[`${signal}_process`](app_ecosystem, application_id, (success = true) => {
+                resolve(success, `<b>${app_ecosystem.name}</b> received <b>${signal.toUpperCase()}</b>`);
+            });
         } else {
             resolve(false, 'application metadata not in local ecosystem');
             // TODO: queue signal for processing later? or maybe not
@@ -203,6 +210,20 @@ const ws = {
                 application_id: application_id,
                 success: success, message: message
             });
+        },
+        tail_application_stream: (application_id, log_line, now_ts) => {
+            ws.send('tail_application_stream', {
+                app_id: application_id,
+                log_line: log_line,
+                now_ts: now_ts
+            });
+        },
+        tail_application_stream_intro: (application_id, log_lines) => {
+            // console.log(application_id, log_lines);
+            ws.send('tail_application_stream_intro', {
+                app_id: application_id,
+                log_lines: log_lines,
+            });
         }
     },
     initialize_client: resolve => {
@@ -252,51 +273,70 @@ const pm = {
         pm.log("initializing");
         pm2.connect(!(global.config.pm2_daemon_mode), resolve);
     },
-    start_process: (ecosystem) => {
+    start_process: (ecosystem, app_id, resolve = null) => {
         pm2.start(ecosystem, (error, env) => {
-            console.log('error', error);
-            console.log('env', env);
+            // console.log('error', error);
+            // console.log('env', env);
+            if (resolve) resolve(error == null);
         });
     },
-    stop_process: (ecosystem) => {
+    stop_process: (ecosystem, app_id, resolve = null) => {
         pm2.stop(ecosystem.name, (error, env) => {
-            console.log('error', error);
-            console.log('env', env);
+            // console.log('error', error);
+            // console.log('env', env);
+            if (resolve) resolve(error == null);
         });
     },
-    restart_process: (ecosystem) => {
+    restart_process: (ecosystem, app_id, resolve = null) => {
         pm2.restart(ecosystem.name, (error, env) => {
-            console.log('error', error);
-            console.log('env', env);
+            // console.log('error', error);
+            // console.log('env', env);
+            if (resolve) resolve(error == null);
         });
     },
-    delete_process: (ecosystem) => {
-
+    delete_process: (ecosystem, app_id, resolve = null) => {
+        if (resolve) resolve(true);
     },
-    tail_process: (ecosystem) => {
+    tail_process_context: {},
+    tail_process: (ecosystem, app_id, resolve = null) => {
         const output_log_path = path.join(ecosystem.cwd, ecosystem.out_file);
-        pm.log(output_log_path);
         const error_log_path = path.join(ecosystem.cwd, ecosystem.error_file);
-        const tail = new tf(output_log_path);
-        tail
-            .on('tail_error', (err) => {
-                pm.error('error tailing file', err);
-                throw err;
-            })
-            .start()
-            .catch((err) => {
-                console.error('error tailing file - cannot start, check file exists', err);
-                throw err;
-            });
-
-        tail
-            .pipe(split2())
-            .on('data', (line) => {
-                console.log(line)
-            });
+        fs.readFile(output_log_path, 'utf8', (err, data) => {
+            if (err) { console.err(err); return; }
+            var lines = data.split('\n');
+            var line_lim = lines.length - global.config.log_tf_load_lines;
+            if (line_lim < 0) line_lim = 0;
+            lines = lines.slice(line_lim);
+            ws.api.tail_application_stream_intro(app_id, lines.join('\n'));
+            pm.untail_process(ecosystem, app_id);
+            pm.tail_process_context[app_id] = new tf(output_log_path);
+            pm.tail_process_context[app_id]
+                .on('tail_error', (err) => {
+                    pm.error('error tailing file', err);
+                    throw err;
+                })
+                .start()
+                .catch((err) => {
+                    console.error('error tailing file - cannot start, check file exists', err);
+                    throw err;
+                });
+            pm.tail_process_context[app_id]
+                .pipe(split2())
+                .on('data', (line) => {
+                    const now_ts = Date.now();
+                    ws.api.tail_application_stream(app_id, line, now_ts);
+                });
+        });
+        if (output_log_path != error_log_path) {
+            // TODO: also tail the error log if its a different file
+        }
     },
-    untail_process: (ecosystem) => {
-
+    untail_process: (ecosystem, app_id, resolve = null) => {
+        if (pm.tail_process_context.hasOwnProperty(app_id) && pm.tail_process_context[app_id] != null) {
+            pm.tail_process_context[app_id].quit();
+            pm.tail_process_context[app_id] = null;
+            delete pm.tail_process_context[app_id];
+        }
     },
     // module infra
     log: utils.logger('pm'),
@@ -304,6 +344,47 @@ const pm = {
     exit: resolve => {
         pm.log("exit");
         pm2.disconnect()
+        if (resolve) resolve();
+    }
+};
+
+// command line interface
+const cli = {
+    init: resolve => {
+        cli.log("initializing");
+        utils.input.on('line', (line) => {
+            var line_text = '';
+            line = line.trim();
+            if (line != '') {
+                line_text = line;
+                line = line.split(' ');
+                if (line[0] == "db" || line[0] == "database") {
+                    if (line[1] == "save") {
+                        // database.save(line[2] && line[2] == "pretty");
+                    }
+                } else if (line[0] == "test") {
+                    cli.log('running tests');
+                } else if (line[0] == "code") {
+                    if (line.length > 1 && line[1] != "") {
+                        line_text = line_text.substring(4);
+                        var ret = eval(line_text);
+                        if (ret !== undefined) cli.log(ret);
+                    }
+                } else if (line[0] == "clear" || line[0] == "c") {
+                    console.clear();
+                } else if (line[0] == "exit" || line[0] == "quit" || line[0] == "q") {
+                    app.exit(_ => {
+                        cli.log("bye");
+                    }, 0);
+                }
+            }
+        });
+        if (resolve) resolve();
+    },
+    log: utils.logger('cli'),
+    err: utils.logger('cli', true),
+    exit: resolve => {
+        cli.log("exit");
         if (resolve) resolve();
     }
 };

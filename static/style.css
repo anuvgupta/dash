@@ -335,6 +335,15 @@ span.noItemsMessage {
 }
 
 div.application_log_output div.application_log_output_line {
-    margin-bottom: 4px;
+    margin-bottom: 2px;
+    border-radius: 2px;
+    padding: 1px 4px 1px 5px;
+    transition: background-color 1.2s ease-in-out;
+    background-color: rgba(70, 70, 70, 0.4);
+}
+
+div.application_log_output div.application_log_output_line span {
+    font-size: 14px;
     font-family: 'Courier New', Courier, monospace;
+    letter-spacing: -0.4px;
 }

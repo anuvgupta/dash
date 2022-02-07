@@ -402,6 +402,17 @@ var init = _ => {
                             }, ws_daemon_client);
                         }
                     });
+                } else {
+                    if (signal != 'tail' && signal != 'untail') {
+                        ws_server.send_to_client('signal_application_res_daemon_res', {
+                            success: true,
+                            data: {
+                                success: false,
+                                message: 'No host selected!',
+                                application_id: id
+                            }
+                        }, client);
+                    }
                 }
             });
         }
@@ -418,10 +429,31 @@ var init = _ => {
                     success: true,
                     data: {
                         success: success,
-                        message: message
+                        message: message,
+                        application_id: application_id
                     }
                 }, "app");
             });
+        }
+    });
+    ws_server.bind("tail_application_stream", (client, req) => {
+        var app_id = req.app_id ? (`${req.app_id}`).trim() : '';
+        var log_line = req.log_line ? (`${req.log_line}`).trim() : '';
+        var now_ts = req.now_ts;
+        if (app_id != '' && log_line != '') {
+            ws_server.send_to_group("tail_app_stream_line", {
+                app_id: app_id, log_line: log_line, now_ts: now_ts
+            }, "app");
+        }
+    });
+    ws_server.bind("tail_application_stream_intro", (client, req) => {
+        var app_id = req.app_id ? (`${req.app_id}`).trim() : '';
+        var log_lines = req.log_lines ? (`${req.log_lines}`).trim() : '';
+        // console.log(app_id, log_lines);
+        if (app_id != '') {
+            ws_server.send_to_group("tail_app_stream_lines", {
+                app_id: app_id, log_lines: log_lines
+            }, "app");
         }
     });
 

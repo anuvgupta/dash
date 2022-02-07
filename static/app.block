@@ -187,7 +187,13 @@ app
     #signal_application_res_daemon_res
         {
             if (signal_application_res_daemon_res.success) {
-                console.log('TODO: display in toast', signal_application_res_daemon_res.data);
+                var current_application = block.child('main/content/applications/detail').key('application');
+                if (current_application && current_application._id == signal_application_res_daemon_res.data.application_id) {
+                    block.child('main/content/applications/detail/subcontent/application_process/signal_toast').data({
+                        summon: signal_application_res_daemon_res.data.message,
+                        color: signal_application_res_daemon_res.data.success === false ? '#b3443b' : '#3b8251'
+                    });
+                }
             } else console.err(signal_application_res_daemon_res)
         }
 
@@ -207,6 +213,34 @@ app
                     vals: [ resource_status.status, resource_status.status_time ]
                 }
             });
+        }
+    #tail_app_stream_line
+        {
+            var current_application = block.child('main/content/applications/detail').key('application');
+            if (current_application && current_application._id == tail_app_stream_line.app_id) {
+                block.child('main/content/applications/detail/subcontent/application_process/logs').data({
+                    line:  {
+                        value: tail_app_stream_line.log_line,
+                        timestamp: tail_app_stream_line.now_ts
+                    }
+                });
+            }
+        }
+    #tail_app_stream_lines
+        {
+            var current_application = block.child('main/content/applications/detail').key('application');
+            if (current_application && current_application._id == tail_app_stream_lines.app_id) {
+                tail_app_stream_lines.log_lines = tail_app_stream_lines.log_lines.split('\n');
+                for (var l in tail_app_stream_lines.log_lines) {
+                    var log_line = tail_app_stream_lines.log_lines[l];
+                    block.child('main/content/applications/detail/subcontent/application_process/logs').data({
+                    line:  {
+                        value: log_line,
+                        timestamp: l
+                    }
+                });
+                }
+            }
         }
 
     div background
@@ -2177,6 +2211,7 @@ app
                     }
                 :deselect_application
                     {
+                        console.log('deselect_application');
                         block.key('active_view', 'content');
                         block.child('detail').css('display', 'none')
                             .sibling('content').css('display', 'block')
@@ -2185,8 +2220,9 @@ app
                         block.child('new_application_button').css('display', 'inline-block');
                         block.child('application_filter').css('display', 'block');
                         block.child('close').on('hide');
+                        block.child('detail/subcontent/application_process/logs/log_output').on('reset');
                         setTimeout(_ => {
-                            app.ws.api.signal_application(select_application._id, 'untail');
+                            app.ws.api.signal_application(block.child('detail').key('application')._id, 'untail');
                         }, 20);
                         setTimeout(_ => {
                             Block.queries();
@@ -2496,6 +2532,7 @@ app
                                 block.child('subcontent/application_ecosystem/script/value_editor').on('hide');
                                 block.child('subcontent/application_ecosystem/interpreter/value_editor').on('hide');
                                 block.child('subcontent/application_info/more_menu').on('hide');
+                                block.child('subcontent/application_process/signal_toast').on('hide');
                             //}, 200);
                         }
                     :receive_application_update
@@ -3862,6 +3899,24 @@ app
                                 text label
                                     val Logs
                                     class label_desc
+                                #line
+                                    {
+                                        block.child('log_output').add(Block('div', 'line_' + line.timestamp)
+                                            .class('application_log_output_line')
+                                            //.html(`${line.value}`)
+                                            .add(Block('text', 1).data(`${line.value}`))
+                                            .on('release', (e, b, d) => {
+                                                setTimeout(_ => {
+                                                    b.css('background-color', 'rgba(50,50,50,0)');
+                                                }, 50);
+                                            })
+                                            .on('release')
+                                        );
+                                        setTimeout(_ => {
+                                            $log_output = block.child('log_output').$();
+                                            $log_output.scrollTop($log_output[0].scrollHeight);
+                                        }, 55);
+                                    }
                                 div log_output
                                     class application_log_output
                                     css
@@ -3878,11 +3933,94 @@ app
                                         //word-break break-all
                                         box-sizing border-box
                                         padding 8px 12px
-                                    div placeholder_line
-                                        class application_log_output_line
+                                    :reset
+                                        {
+                                            block.html('').add(Block('div', 'placeholder_line')
+                                                .class('application_log_output_line')
+                                                .css({
+                                                    'font-style': 'italic',
+                                                    'text-decoration': 'underline',
+                                                    //'font-weight': '600',
+                                                    'letter-spacing': '0.7px',
+                                                    'background-color': 'rgba(50,50,50,0)'
+                                                })
+                                                .add(Block('text', 1)
+                                                    .data('Stream application logs.')
+                                                )
+                                            );
+                                            event.stopPropagation();
+                                        }
+                                    {
+                                        block.on('reset');
+                                    }
+                            div signal_toast
+                                css
+                                    position absolute
+                                    top 5px
+                                    right 18px
+                                    width 200px
+                                    background-color #333
+                                    opacity 0
+                                    border-radius 3px
+                                    height 40px
+                                    -webkit-box-shadow 2px 2px 5px 2px rgba(44, 44, 44, 0.2)
+                                    box-shadow 2px 2px 5px 2px rgba(44, 44, 44, 0.2)
+                                    transition opacity 0.2s ease, top 0.25s ease, background-color 0.1s ease
+                                    cursor pointer
+                                #color
+                                    {
+                                        block.css('background-color', `${color}`);
+                                    }
+                                #val
+                                    {
+                                        block.child('content/text').html(val);
+                                    }
+                                #summon
+                                    {
+                                        const _b = block;
+                                        _b.data(summon);
+                                        _b.on('show');
+                                        setTimeout(_ => {
+                                            _b.on('hide');
+                                        }, 5000);
+                                    }
+                                :show
+                                    css
+                                        top 22px
+                                        opacity 0.9
+                                    {
+                                        block.key('toggled', 'yes');
+                                        event.stopPropagation();
+                                    }
+                                :hide
+                                    css
+                                        top 5px
+                                        opacity 0
+                                    {
+                                        block.key('toggled', 'no');
+                                        event.stopPropagation();
+                                    }
+                                $toggled no
+                                :toggle
+                                    {
+                                        if (block.key('toggled') == 'no') {
+                                            block.on('show');
+                                        } else {
+                                            block.on('hide');
+                                        }
+                                        event.stopPropagation();
+                                    }
+                                :click
+                                    {
+                                        block.on('toggle');
+                                    }
+                                block content
+                                    text text
+                                        val This is a toast!
                                         css
-                                            font-style italic
-                                        html Stream application logs.
+                                            color white
+                                            letter-spacing 0.1px
+                                            cursor pointer
                             div end_spacer
                                 css
                                     height 15px
