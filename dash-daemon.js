@@ -190,6 +190,21 @@ const ws = {
                     ws.api.signal_respond(data.application, success, message);
                 });
                 break;
+            case 'get_application_status':
+                ws.log(`server requested process status for application "${data.application}"`);
+                // app.process_signal(data.application, data.signal, (success, message) => {
+                //     ws.api.signal_respond(data.application, success, message);
+                // });
+                var application_id = data.application;
+                if (db.ecosystem.hasOwnProperty(application_id)) {
+                    app.log(`found application ${application_id}`);
+                    var app_ecosystem = db.ecosystem[application_id];
+                    pm.describe_process(app_ecosystem, application_id, (success, status, timestamp) => {
+                        app.log('describe_process', success, status, timestamp);
+                        ws.api.return_application_status(application_id, success, status, timestamp);
+                    });
+                }
+                break;
             case 'hb':
                 ws.api.hb_respond();
                 break;
@@ -223,6 +238,13 @@ const ws = {
             ws.send('tail_application_stream_intro', {
                 app_id: application_id,
                 log_lines: log_lines,
+            });
+        },
+        return_application_status: (application_id, success, status, timestamp) => {
+            ws.send('return_application_status', {
+                application_id: application_id,
+                success: success, timestamp: timestamp,
+                status: status
             });
         }
     },
@@ -296,6 +318,14 @@ const pm = {
     },
     delete_process: (ecosystem, app_id, resolve = null) => {
         if (resolve) resolve(true);
+    },
+    describe_process: (ecosystem, app_id, resolve = null) => {
+        pm2.describe(ecosystem.name, (error, env) => {
+            // console.log('error', error);
+            // console.log('env', env);
+            var status = env[0].pm2_env.status;
+            if (resolve) resolve(error == null, status, Date.now());
+        });
     },
     tail_process_context: {},
     tail_process: (ecosystem, app_id, resolve = null) => {

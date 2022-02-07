@@ -391,6 +391,11 @@ var app = {
                     signal: signal
                 });
             },
+            get_application_status: (id) => {
+                app.ws.send('get_application_status', {
+                    id: id,
+                });
+            },
             // ideas
             get_ideas: () => {
                 app.ws.send('get_ideas', {});

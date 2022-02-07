@@ -196,6 +196,11 @@ app
                 }
             } else console.err(signal_application_res_daemon_res)
         }
+    #return_application_status
+        {
+            console.log(return_application_status);
+            // TODO: actually handle application status (represent in the process widget)
+        }
 
     #resource_status
         {
@@ -2204,6 +2209,9 @@ app
                         }, 10);
                         setTimeout(_ => {
                             app.ws.api.signal_application(select_application._id, 'tail');
+                        }, 20);
+                        setTimeout(_ => {
+                            app.ws.api.get_application_status(select_application._id);
                         }, 20);
                         setTimeout(_ => {
                             Block.queries();

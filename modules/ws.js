@@ -456,6 +456,42 @@ var init = _ => {
             }, "app");
         }
     });
+    ws_server.bind("get_application_status", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        if (id != '') {
+            m.db.get_application(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("get_application_status", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("get_application_status", "application not found", client);
+                var application_resource_id = result1.host;
+                if (application_resource_id != 'none') {
+                    m.db.get_resource(application_resource_id, null, (success2, result2) => {
+                        if (success2 === false) return ws_server.return_event_error("get_application_status", "database error", client);
+                        if (result2 == null) return ws_server.return_event_error("get_application_status", "resource not found", client);
+                        var ws_daemon_client = m.ws.get_daemon_client(application_resource_id);
+                        if (ws_daemon_client != null && ws_server.clients.hasOwnProperty(ws_daemon_client.id)) {
+                            ws_server.send_to_client('get_application_status', {
+                                application: id
+                            }, ws_daemon_client);
+                        }
+                    });
+                }
+            });
+        }
+    });
+    ws_server.bind("return_application_status", (client, req) => {
+        var app_id = req.application_id ? (`${req.application_id}`).trim() : '';
+        var status = req.status ? (`${req.status}`).trim() : '';
+        var success = req.success === true;
+        var timestamp = req.timestamp;
+        console.log(app_id, status, success, timestamp);
+        if (app_id != '' && status != '') {
+            ws_server.send_to_group("return_application_status", {
+                app_id: app_id, status: status,
+                success: success,
+                timestamp: timestamp
+            }, "app");
+        }
+    });
 
     // daemon
     ws_server.bind("sync_daemon", (client, req) => {
