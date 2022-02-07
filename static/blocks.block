@@ -1266,7 +1266,6 @@
                 block.child('last_updated_msg/text').html('').data(`${util.capitalize(util.duration_desc(ts_updated))}`);
             });
         }
-
 !application-item
     init
         {
@@ -1843,5 +1842,105 @@
                 block.child('bg').css({
                     filter: img_invert == true ? 'invert()' : 'none'
                 });
+            });
+        }
+!resource-application-list-item
+    init
+        {
+            var block = Block('block');
+            block
+                .__child('content')
+                    .css('text-align', 'left')
+                    .__parent()
+                .css({
+                    height: '40px',
+                    width: '100%',
+                    marginBottom: '3px',
+                    borderBottom: '1px solid #eee',
+                    position: 'relative',
+                    //backgroundColor: 'red' ? 
+                })
+                .add(Block('text', 1)
+                    .css({
+                        fontSize: '15px',
+                        letterSpacing: '0.6px'
+                    })
+                )
+                .add(Block('block', 'port')
+                    .__child('content')
+                        .css('text-align', 'right')
+                        .__parent()
+                    .css({
+                        position: 'absolute',
+                        right: '45px',
+                        top: '0',
+                        width: 'auto'
+                    })
+                    .add(Block('text', 1)
+                        .html('<span class="text_placeholder">:80</span>')
+                        .css({
+                            'padding': '0 3px',
+                            fontSize: '15px',
+                            letterSpacing: '0.8px'
+                        })
+                    )
+                )
+                .add(Block('block', 'manage')
+                    .css({
+                        position: 'absolute',
+                        right: '0',
+                        top: '0',
+                        width: '40px'
+                    })
+                    .add(Block('block', 'wrap')
+                        .css({
+                            width: '30px',
+                            height: '30px',
+                            margin: '0 auto'
+                        })
+                        .add(Block('image', 1)
+                            .data({
+                                src: '/img/launch_b.png',
+                                height: '22px',
+                                width: '22px',
+                                css: {
+                                    margin: '0 auto',
+                                    opacity: '0.6',
+                                    transition: 'opacity 0.2s ease',
+                                    cursor: 'pointer'
+                                }
+                            })
+                            .on('mouseover', (e, b, d) => {
+                                b.css('opacity', '0.85');
+                            })
+                            .on('mouseout', (e, b, d) => {
+                                b.css('opacity', '0.6');
+                            })
+                            .on('click', (e, b, d) => {
+                                block.parent().data({
+                                    manage: block.key('id')
+                                });
+                            })
+                        )
+                    )
+                )
+            ;
+            return block;
+        }
+    load
+        {
+            data('_id', (_id) => {
+                block.key('id', _id.toString());
+            });
+            data('name', (name) => {
+                block.key('name', name.toString());
+                block.child('text').html('').data(name);
+            });
+            data('port', (port) => {
+                block.key('port', port);
+                //block.child('name/text').html('').data(name);
+            });
+            data('first', (first) => {
+                block.key('first', first);
             });
         }
