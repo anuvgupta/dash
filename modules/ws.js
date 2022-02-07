@@ -479,17 +479,29 @@ var init = _ => {
         }
     });
     ws_server.bind("return_application_status", (client, req) => {
-        var app_id = req.application_id ? (`${req.application_id}`).trim() : '';
+        var id = req.application_id ? (`${req.application_id}`).trim() : '';
         var status = req.status ? (`${req.status}`).trim() : '';
         var success = req.success === true;
         var timestamp = req.timestamp;
-        console.log(app_id, status, success, timestamp);
-        if (app_id != '' && status != '') {
-            ws_server.send_to_group("return_application_status", {
-                app_id: app_id, status: status,
-                success: success,
-                timestamp: timestamp
-            }, "app");
+        // console.log(id, status, success, timestamp);
+        if (id != '' && status != '' && success) {
+            var update = {
+                status: status,
+                status_time: timestamp
+            };
+            if (id != '' && update != null && Object.keys(update).length > 0) {
+                m.db.get_application(id, null, (success1, result1) => {
+                    if (success1 === false || result1 == null) return;
+                    m.db.update_application(id, update, (success2, result2) => {
+                        if (success2 === false) return;
+                        ws_server.send_to_group("update_application_res", {
+                            success: true, data: {
+                                id: id, application: result2
+                            }
+                        }, "app");
+                    });
+                });
+            }
         }
     });
 

@@ -196,11 +196,6 @@ app
                 }
             } else console.err(signal_application_res_daemon_res)
         }
-    #return_application_status
-        {
-            console.log(return_application_status);
-            // TODO: actually handle application status (represent in the process widget)
-        }
 
     #resource_status
         {
@@ -2448,6 +2443,8 @@ app
                                 port: application.port,
                                 host: application.host,
                                 ecosystem: application.ecosystem,
+                                status: application.status,
+                                status_time: application.status_time
                             });
                         }
                     #name
@@ -2529,6 +2526,21 @@ app
                             block.child('subcontent/application_ecosystem/restart_delay/value/text').html(`${restart_delay_alt}`);
                             block.child('subcontent/application_ecosystem/restart_delay/value_editor').attribute('value', `${restart_delay}`);
                         }
+                    #status
+                        {
+                            //console.log(status);
+                            block.child('subcontent/application_process/status').key('status', status).on('status_update');
+                        }
+                    #status_time
+                        {
+                            //console.log(status_time);
+                            block.child('subcontent/application_process/status').key('status_time', status_time).on('status_update');
+                        }
+                    :status_update
+                        {
+                            block.child('subcontent/application_process/status').on('status_update');
+                            event.stopPropagation();
+                        }
                     :hide_editors
                         {
                             //setTimeout(_ => {
@@ -2594,6 +2606,12 @@ app
                             if (old_data.ecosystem.restart_delay != new_data.ecosystem.restart_delay) {
                                 block.data({ ecosystem: new_data.ecosystem, });
                                 block.child('subcontent/application_ecosystem/restart_delay/value/text').node().blur();
+                            }
+                            if (old_data.status != new_data.status) {
+                                block.data({ status: new_data.status });
+                            }
+                            if (old_data.status_time != new_data.status_time) {
+                                block.data({ status_time: new_data.status_time });
                             }
                             block.key('application', new_data);
                         }
@@ -3765,6 +3783,69 @@ app
                             div spacer
                                 css
                                      height 80px
+                            div status
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                :status_update
+                                    {
+                                        var status_code = block.key('status');
+                                        var status_time = block.key('status_time');
+                                        var status_final_text = "Status some time ago";
+                                        var status_final_color = app.ui.colors.status.default;
+                                        //console.log(Date.now() - status_time);
+                                        //console.log(util.duration_desc(status_time));
+                                        if (status_code != null && status_time != null) {
+                                            status_final_text = status_code.charAt(0).toUpperCase() + status_code.slice(1) + " " + (status_code == "online" && (Date.now() - status_time < 5000) ? "now" : util.duration_desc(status_time));
+                                            status_final_color = app.ui.get_status_color(status_code);
+                                        }
+                                        block.child('value/labels/status/text').html('').data(status_final_text);
+                                        block.child('value/light/circle').css('background-color', status_final_color);
+                                        event.stopPropagation();
+                                    }
+                                text label
+                                    val Status
+                                    class label_desc
+                                    css
+                                        margin-bottom 3px
+                                div value
+                                    class value_text_wrap
+                                    css
+                                        height 32px
+                                        width 100%
+                                    block light
+                                        css
+                                            width 30px
+                                            height 100%
+                                            float left
+                                        div circle
+                                            css
+                                                border-radius 100%
+                                                height 17px
+                                                width 17px
+                                                background-color #ddd
+                                                border 1px solid #eee
+                                                margin 0 0 0 auto
+                                    div labels
+                                        css
+                                            width 73%
+                                            height 100%
+                                            float left
+                                            padding-left 18px
+                                            box-sizing border-box
+                                        block status
+                                            css
+                                                height 100%
+                                                width 100%
+                                            text text
+                                                val Status some time ago
+                                                css
+                                                    display block
+                                                    text-align left
+                                                    font-size 14px
+                                                    color #888
+                                                    font-style italic
+                                                    //padding-top 2px
                             div signals
                                 class value_edge
                                 css

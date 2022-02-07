@@ -100,9 +100,13 @@ const app = {
                     db.ecosystem[e] = JSON.parse(JSON.stringify(ecosystem[e]));
                 } else {
                     app.log(`removing application "${e}"`);
-                    // TODO: stop and remove the application
-                    db.ecosystem[e] = null;
-                    delete db.ecosystem[e];
+                    // stop and remove the application
+                    pm.stop_process(db.ecosystem[e], e, (success) => {
+                        pm.delete_process(db.ecosystem[e], e, (success) => {
+                            db.ecosystem[e] = null;
+                            delete db.ecosystem[e];
+                        });
+                    });
                 }
             }
         }
@@ -299,6 +303,8 @@ const pm = {
         pm2.start(ecosystem, (error, env) => {
             // console.log('error', error);
             // console.log('env', env);
+            var status = env[0].pm2_env.status;
+            ws.api.return_application_status(app_id, error == null, status, Date.now());
             if (resolve) resolve(error == null);
         });
     },
@@ -306,6 +312,8 @@ const pm = {
         pm2.stop(ecosystem.name, (error, env) => {
             // console.log('error', error);
             // console.log('env', env);
+            var status = env[0].pm2_env.status;
+            ws.api.return_application_status(app_id, error == null, status, Date.now());
             if (resolve) resolve(error == null);
         });
     },
@@ -313,10 +321,13 @@ const pm = {
         pm2.restart(ecosystem.name, (error, env) => {
             // console.log('error', error);
             // console.log('env', env);
+            var status = env[0].pm2_env.status;
+            ws.api.return_application_status(app_id, error == null, status, Date.now());
             if (resolve) resolve(error == null);
         });
     },
     delete_process: (ecosystem, app_id, resolve = null) => {
+        // TODO: use pm2 to delete process
         if (resolve) resolve(true);
     },
     describe_process: (ecosystem, app_id, resolve = null) => {

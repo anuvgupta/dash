@@ -11,6 +11,7 @@ var app = {
                 new: "#dddddd",
                 online: "rgba(85, 196, 110, 1)",
                 offline: "rgba(237, 69, 61, 1)",
+                stopped: "rgba(237, 69, 61, 1)",
                 desync: "#f7bb0a",
                 override: "rgba(40, 124, 246, 1)",
                 default: "#dddddd",
@@ -22,6 +23,7 @@ var app = {
             app.ui.block.child('main/content/projects/content').on('status_update');
             app.ui.block.child('main/content/resources/content').on('status_update');
             app.ui.block.child('main/content/resources/detail').on('status_update');
+            app.ui.block.child('main/content/applications/detail').on('status_update');
         },
         register_ui_intervals: _ => {
             if (app.ui.ui_interval != null) clearInterval(app.ui.ui_interval);
