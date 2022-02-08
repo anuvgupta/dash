@@ -239,6 +239,54 @@ var init = _ => {
             });
         }
     });
+    ws_server.bind("associate_project_application", (client, req) => {
+        var project_id = req.project_id ? (`${req.project_id}`).trim() : '';
+        var application_id = req.application_id ? (`${req.application_id}`).trim() : '';
+        if (project_id != '' && application_id != '') {
+            m.db.get_project(project_id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("associate_project_app", "database error", client);
+                if (result1 == null)
+                    return ws_server.return_event_error("associate_project_app", "project not found", client);
+                m.db.get_application(application_id, null, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("associate_project_app", "database error", client);
+                    if (result2 == null)
+                        return ws_server.return_event_error("associate_project_app", "application not found", client);
+                    var update = { applications: result1.applications };
+                    if (!update.applications.includes(application_id))
+                        update.applications.push(application_id);
+                    m.db.update_project(project_id, update, (success3, result3) => {
+                        if (success3 === false) return ws_server.return_event_error("associate_project_app", "database error", client);
+                        return ws_server.return_event_data("update_project", { id: project_id, project: result3 }, client);
+                    });
+                });
+            });
+        }
+    });
+    ws_server.bind("deassociate_project_application", (client, req) => {
+        var project_id = req.project_id ? (`${req.project_id}`).trim() : '';
+        var application_id = req.application_id ? (`${req.application_id}`).trim() : '';
+        if (project_id != '' && application_id != '') {
+            m.db.get_project(project_id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("deassociate_project_application", "database error", client);
+                if (result1 == null)
+                    return ws_server.return_event_error("deassociate_project_application", "project not found", client);
+                m.db.get_application(application_id, null, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("deassociate_project_application", "database error", client);
+                    if (result2 == null)
+                        return ws_server.return_event_error("deassociate_project_application", "application not found", client);
+                    var update = { applications: [] };
+                    for (var a in result1.applications) {
+                        if (result1.applications[a] != application_id)
+                            update.applications.push(result1.applications[a]);
+                    }
+                    m.db.update_project(project_id, update, (success3, result3) => {
+                        if (success3 === false) return ws_server.return_event_error("deassociate_project_application", "database error", client);
+                        return ws_server.return_event_data("update_project", { id: project_id, project: result3 }, client);
+                    });
+                });
+            });
+        }
+    });
     ws_server.bind("delete_project", (client, req) => {
         var id = req.id ? (`${req.id}`).trim() : '';
         if (id != '') {
@@ -354,10 +402,24 @@ var init = _ => {
         }
     });
     ws_server.bind("get_applications", (client, req) => {
+        var launch_app_id = req.hasOwnProperty('launch') ? (`${req.launch}`).trim() : '';
+        var associate_project_id = req.hasOwnProperty('associate') ? (`${req.associate}`).trim() : '';
         m.db.get_applications((success1, result1) => {
             if (success1 === false || result1 === null)
                 return ws_server.return_event_error("get_applications", "database error", client);
-            return ws_server.return_event_data("get_applications", { list: result1 }, client);
+            var ret_data = { list: result1 };
+            if (launch_app_id != "") {
+                for (var r in result1) {
+                    if (result1[r]._id.toString() == launch_app_id) {
+                        ret_data.launch = result1[r];
+                        break;
+                    }
+                }
+            }
+            if (associate_project_id != "") {
+                ret_data.associate = associate_project_id;
+            }
+            return ws_server.return_event_data("get_applications", ret_data, client);
         });
     });
     ws_server.bind("update_application", (client, req) => {

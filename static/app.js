@@ -204,6 +204,30 @@ var app = {
                     }
                 })
             },
+            associate_project_app: (project_id, apps_list = []) => {
+                apps_list = apps_list.sort(util.sort_compare_newest_first);
+                var apps_options = '';
+                for (var a in apps_list)
+                    apps_options += `<option value="${apps_list[a]._id}">${apps_list[a].name}</option>`;
+                bootbox.confirm({
+                    centerVertical: true,
+                    title: '<span class="modal_title">Update Project</span>',
+                    message: `<div id='update_project_display_modal'>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Application:</span>&nbsp;` +
+                        `<select class="modal_select_input" id="up_modal_app_input" name='ip_modal_app'/>` +
+                        `<option value="none" selected>None</option>` +
+                        `${apps_options}` +
+                        `</select</div><div style="height: 8px"></div></div>`,
+                    callback: (result) => {
+                        if (result) {
+                            var new_app_id = (`${$('#update_project_display_modal #up_modal_app_input')[0].value}`).trim();
+                            if (new_app_id == "" || new_app_id == "none") return false;
+                            app.ws.api.associate_project_app(project_id, new_app_id);
+                        }
+                        return true;
+                    }
+                });
+            }
         },
         init: (callback) => {
             app.ui.block.fill(document.body);
@@ -372,8 +396,11 @@ var app = {
                 });
             },
             // applications
-            get_applications: () => {
-                app.ws.send('get_applications', {});
+            get_applications: (launch = null, associate = null) => {
+                var data = {};
+                if (launch != null) data.launch = launch;
+                if (associate != null) data.associate = associate;
+                app.ws.send('get_applications', data);
             },
             new_application: (slug, name, desc, ip) => {
                 app.ws.send('new_application', {
@@ -402,6 +429,18 @@ var app = {
             get_application_status: (id) => {
                 app.ws.send('get_application_status', {
                     id: id,
+                });
+            },
+            associate_project_app: (project_id, application_id) => {
+                app.ws.send('associate_project_application', {
+                    project_id: project_id,
+                    application_id: application_id
+                });
+            },
+            deassociate_project_app: (project_id, application_id) => {
+                app.ws.send('deassociate_project_application', {
+                    project_id: project_id,
+                    application_id: application_id
                 });
             },
             // ideas

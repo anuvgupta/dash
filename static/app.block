@@ -171,6 +171,31 @@ app
                 block.child('main/content/applications').data({
                     application_list: get_applications_res.data.list
                 });
+                block.child('main/content/projects/detail/subcontent/project_apps/list').data({
+                    application_details: get_applications_res.data.list
+                });
+                if (get_applications_res.data.hasOwnProperty('launch') && get_applications_res.data.launch != '') {
+                    //console.log('LAUNCH APP ' + get_applications_res.data.launch._id);
+                    app.ui.block.child('main/content/applications').on('deselect_application');
+                    setTimeout(_ => {
+                        app.ui.block.child('main/content/applications').data({
+                            select_application: get_applications_res.data.launch
+                        });
+                        setTimeout(_ => {
+                            app.ui.block.child('main/menu/applications').on('click');
+                            setTimeout(_ => {
+                                app.ui.block.child('main/content/applications/detail').on('update_grid');
+                            }, 15);
+                        }, 20);
+                    }, 30);
+                }
+                if (get_applications_res.data.hasOwnProperty('associate') && get_applications_res.data.associate != '') {
+                    //console.log('ASSOCIATE PROJECT ' + get_applications_res.data.associate);
+                    app.ui.block.child('main/content/applications').on('deselect_application');
+                    setTimeout(_ => {
+                        app.ui.display_modal.associate_project_app(get_applications_res.data.associate, get_applications_res.data.list);
+                    }, 30);
+                }
             } else {
                 app.ui.display_modal.generic_confirm('Load Applications', `Error - ${util.capitalize(get_applications_res.message ? get_applications_res.message : 'unknown error')}`, (result) => {
                     if (result) {
@@ -651,7 +676,7 @@ app
                         block.child('detail').on('update_grid');
                         setTimeout(_ => {
                             Block.queries();
-                        }, 10);
+                        }, 15);
                     }
                 :deselect_project
                     {
@@ -907,7 +932,8 @@ app
                                 img: project.img,
                                 img_invert: project.img_invert,
                                 repo: project.repo,
-                                docs: project.docs
+                                docs: project.docs,
+                                applications: project.applications
                             });
                         }
                     #name
@@ -1010,6 +1036,13 @@ app
                             block.child('subcontent/project_code/docs/value/text').html(`${docs_alt}`).attribute('href', `${docs_alt_alt}`);
                             block.child('subcontent/project_code/docs/value_editor').attribute('value', `${docs}`); 
                         }
+                    #applications
+                        {
+                            //console.log('received project applications', applications);
+                            block.child('subcontent/project_apps/list').data({
+                                applications: applications
+                            });
+                        }
                     :hide_editors
                         {
                             //setTimeout(_ => {
@@ -1066,6 +1099,7 @@ app
                                 block.data({ docs: new_data.docs, });
                                 block.child('subcontent/project_code/docs/value_editor').on('hide');
                             }
+                            block.data({ applications: new_data.applications });
                             block.key('project', new_data);
                         }
                     :send_project_update
@@ -1983,6 +2017,8 @@ app
                                     height 15px
                         div project_apps
                             class dashboard_detail_section
+                            css
+                                min-height 100px
                             div title
                                 css
                                     height auto
@@ -2012,91 +2048,138 @@ app
                                         opacity 0.6
                             div spacer
                                 css
-                                     height 80px
-                            div repo
+                                    height 80px
+                            div associate
                                 css
-                                    display none
-                                class value_edge
-                                text label
-                                    val Repo
-                                    class label_desc
-                                block value
-                                    {
-                                        block.__child('content').css('text-align', 'left');
-                                    }
-                                    class value_text_wrap
+                                    position absolute
+                                    top 24px
+                                    right 25px
+                                    width 40px
+                                    height 40px
+                                block plus
                                     css
-                                        height 25.2px
-                                        padding-left 1px
-                                    a text
-                                        html https://github.com/u/projectzero
-                                        href https://github.com/u/projectzero
-                                        class value_text
-                                        target _blank
-                                        css
-                                            font-size 20px
-                                            font-weight 300
+                                        opacity 0.6
+                                        transition opacity 0.2s ease
                                     :mouseover
-                                        {
-                                            if (block.child('edit_button').key('showing') == 'off')
-                                                block.child('edit_button').on('show');
-                                        }
-                                    :mouseout
-                                        {
-                                            if (block.child('edit_button').key('showing') == 'on')
-                                                block.child('edit_button').on('hide');
-                                        }
-                                    edit-button edit_button
                                         css
-                                            margin-left 14px
-                                            padding-top 5px
+                                            opacity 0.9
+                                    :mouseout
+                                        css
+                                            opacity 0.6
+                                    image image
+                                        src /img/add_b.png
+                                        height 30px
+                                        width 30px
+                                        css
+                                            cursor pointer
                                         :click
                                             {
-                                                block.parent().css('display', 'none')
-                                                    .sibling('value_editor').css('display', 'block');
-                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('project').repo;
+
+                                                var project = app.ui.block.child('main/content/projects/detail').key('project');
+                                                if (project) {
+                                                    setTimeout(_ => {
+                                                        app.ws.api.get_applications(null, project._id);
+                                                    }, 10);
+                                                }
+                                                event.stopPropagation();
+                                            }
+                            div list
+                                css
+                                    //background-color red
+                                    width 100%
+                                    max-height 250px
+                                    height auto
+                                    min-height 45px
+                                    overflow-x none
+                                    overflow-y auto
+                                #manage
+                                    {
+                                        setTimeout(_ => {
+                                            app.ws.api.get_applications(manage);
+                                        }, 30);
+                                    }
+                                #del
+                                    {
+                                        app.ui.display_modal.generic_confirm("Remove Project App", `Deassociate app "${del.app_name}" from this project?`, (result) => {
+                                            if (result) {
                                                 setTimeout(_ => {
-                                                    block.parent().sibling('value_editor').node().select();
-                                                }, 15);
+                                                    app.ws.api.deassociate_project_app(block.parent(2).key('project')._id, del.app_id);
+                                                }, 10);
+                                                return true;
                                             }
-                                input value_editor
-                                    class value_editor
-                                    placeholder https://github.com/u/projectzero
-                                    css
-                                        display none
-                                        height 27px
-                                        margin-top -1px
-                                        margin-left -2px
-                                        margin-bottom 2px
-                                        font-size 20px
-                                        width 90%
-                                        letter-spacing normal
-                                    :hide
-                                        {
-                                            block.css('display', 'none').sibling('value').css('display', 'table');
-                                            event.stopPropagation();
-                                        }
-                                    :keyup
-                                        {
-                                            if (event.keyCode == 13) {
-                                                // enter
-                                                var value = block.node().value;
-                                                if (!value) value = '';
-                                                value = (`${value}`).trim();
-                                                //if (value.length > 0) {
-                                                    block.parent(3).on('send_project_update', {
-                                                        repo: value
-                                                    });
-                                                //}
-                                                setTimeout(_ => { block.on('hide'); }, 250);
-                                            } else if (event.keyCode == 27) {
-                                                // escape
-                                                block.on('hide');
+                                        });
+                                    }
+                                #application_details
+                                    {
+                                        var children = block.children();
+                                        for (var c in children) {
+                                            for (var a in application_details) {
+                                                var application_detail = application_details[a];
+                                                if (application_detail._id == children[c].key('id')) {
+                                                    children[c].data(application_detail)
+                                                }
                                             }
                                         }
+                                    }
+                                #applications
+                                    {
+                                        if (applications == undefined || !applications)
+                                            applications = [];
+                                        //console.log(applications);
+                                        if (applications.length <= 0) {
+                                            block
+                                                .html('')
+                                                .css({
+                                                    textAlign: 'center',
+                                                    paddingTop: '15px',
+                                                    paddingBottom: '10px',
+                                                    minHeight: '45px',
+                                                    borderTop: 'none',
+                                                })
+                                                .add(Block('text', 1)
+                                                    .html('No applications associated with project.')
+                                                    .css({
+                                                        letterSpacing: '1.3px',
+                                                        fontSize: '16px',
+                                                        color: '#333',
+                                                        fontStyle: 'italic',
+                                                    })
+                                                )
+                                            ;
+                                        } else {
+                                            block
+                                                .html('')
+                                                .css({
+                                                    textAlign: 'left',
+                                                    paddingTop: '0',
+                                                    paddingBottom: '0',
+                                                    minHeight: '105px',
+                                                    borderTop: '1px solid #f6f6f6',
+                                                })
+                                            ;
+                                            var first = true;
+                                            for (var a in applications) {
+                                                var application = applications[a];
+                                                block.add(Block('project-application-list-item', `project_app_${application}`)
+                                                    .data({
+                                                        _id: application,
+                                                        first: first
+                                                    })
+                                                );
+                                                first = false;
+                                            }
+                                        }
+                                        block.parent(2).on('update_grid');
+                                        setTimeout(_ => {
+                                            Block.queries();
+                                        }, 10);
+                                        setTimeout(_ => {
+                                            app.ws.api.get_applications();
+                                        }, 10);
+                                    }
                             div end_spacer
                                 css
-                                    height 15px
+                                    height 40px
                         div project_domains
                             class dashboard_detail_section
                             div title
@@ -2228,25 +2311,27 @@ app
                     }
                 :deselect_application
                     {
-                        console.log('deselect_application');
-                        block.key('active_view', 'content');
-                        block.child('detail').css('display', 'none')
-                            .sibling('content').css('display', 'block')
-                        ;
-                        block.child('title').on('back');
-                        block.child('new_application_button').css('display', 'inline-block');
-                        block.child('application_filter').css('display', 'block');
-                        block.child('close').on('hide');
-                        block.child('detail/subcontent/application_process/logs/log_output').on('reset');
-                        setTimeout(_ => {
-                            app.ws.api.signal_application(block.child('detail').key('application')._id, 'untail');
-                        }, 20);
-                        setTimeout(_ => {
-                            Block.queries();
+                        //console.log('deselect_application');
+                        if (block.key('active_view') != 'content') {
+                            block.key('active_view', 'content');
+                            block.child('detail').css('display', 'none')
+                                .sibling('content').css('display', 'block')
+                            ;
+                            block.child('title').on('back');
+                            block.child('new_application_button').css('display', 'inline-block');
+                            block.child('application_filter').css('display', 'block');
+                            block.child('close').on('hide');
+                            block.child('detail/subcontent/application_process/logs/log_output').on('reset');
                             setTimeout(_ => {
-                                window.componentHandler.upgradeDom();
-                            }, 10);
-                        }, 5);
+                                app.ws.api.signal_application(block.child('detail').key('application')._id, 'untail');
+                            }, 20);
+                            setTimeout(_ => {
+                                Block.queries();
+                                setTimeout(_ => {
+                                    window.componentHandler.upgradeDom();
+                                }, 10);
+                            }, 5);
+                        }
                     }
                 #update_application_local
                     {
@@ -6044,10 +6129,13 @@ app
                                     max-height 250px
                                     height auto
                                     min-height 45px
+                                    overflow-x none
+                                    overflow-y auto
                                 #manage
                                     {
-                                        // TODO: select app and launch apps page
-                                        console.log('launch app ' + manage);
+                                        setTimeout(_ => {
+                                            app.ws.api.get_applications(manage);
+                                        }, 30);
                                     }
                                 #applications
                                     {
@@ -6058,7 +6146,8 @@ app
                                                     textAlign: 'center',
                                                     paddingTop: '15px',
                                                     paddingBottom: '10px',
-                                                    minHeight: '45px'
+                                                    minHeight: '45px',
+                                                    borderTop: 'none',
                                                 })
                                                 .add(Block('text', 1)
                                                     .html('No applications found on resource.')
@@ -6077,7 +6166,8 @@ app
                                                     textAlign: 'left',
                                                     paddingTop: '0',
                                                     paddingBottom: '0',
-                                                    minHeight: '105px'
+                                                    minHeight: '105px',
+                                                    borderTop: '1px solid #f6f6f6',
                                                 })
                                             ;
                                             var first = true;
@@ -6098,7 +6188,7 @@ app
                                     }
                             div end_spacer
                                 css
-                                    height 45px
+                                    height 40px
                         div resource_domains
                             class dashboard_detail_section
                             div title

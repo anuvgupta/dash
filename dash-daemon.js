@@ -16,7 +16,6 @@ global.env = global.args[0] == "prod" ? "prod" : "dev";
 global.config = JSON.parse(fs.readFileSync('./config-daemon.json', { encoding: 'utf8', flag: 'r' }));
 
 /* MODULES */
-// TODO: process management, ws client, report heartbeats
 
 // utilities
 const utils = {
@@ -87,7 +86,7 @@ const app = {
                 resolve(success, `<b>${app_ecosystem.name}</b> received <b>${signal.toUpperCase()}</b>`);
             });
         } else {
-            resolve(false, 'application metadata not in local ecosystem');
+            resolve(false, `App ${app_ecosystem.name} not in ecosystem`);
             // TODO: queue signal for processing later? or maybe not
         }
     },
@@ -109,6 +108,7 @@ const app = {
                     app.log(`removing application "${e}"`);
                     // stop and remove the application
                     // pm.stop_process(db.ecosystem[e], e, (success) => {
+                    // stop_process is commented out because pm2's delete command does stop the app first
                     pm.delete_process(db.ecosystem[e], e, (success) => {
                         db.ecosystem[e] = null;
                         delete db.ecosystem[e];
@@ -129,9 +129,9 @@ const app = {
     },
 
     // module infra
-    ws: null, web: null,
+    ws: null, pm: null,
     link: resolve => {
-        app.ws = ws;  // app.web = web;
+        app.ws = ws; app.pm = pm;
         if (resolve) resolve();
     },
     log: utils.logger('main'),
@@ -139,10 +139,10 @@ const app = {
     exit: resolve => {
         app.log("exit");
         app.ws.exit(_ => {
-            // app.web.exit(_ => {
-            if (resolve) resolve();
-            process.exit(0);
-            // });
+            app.pm.exit(_ => {
+                if (resolve) resolve();
+                process.exit(0);
+            });
         });
     }
 };
