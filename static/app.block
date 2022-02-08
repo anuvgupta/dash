@@ -260,7 +260,8 @@ app
                 block.child('main/content/applications/detail/subcontent/application_process/logs').data({
                     line:  {
                         value: tail_app_stream_line.log_line,
-                        timestamp: tail_app_stream_line.now_ts
+                        timestamp: tail_app_stream_line.now_ts,
+                        initial: false,
                     }
                 });
             }
@@ -273,10 +274,11 @@ app
                 for (var l in tail_app_stream_lines.log_lines) {
                     var log_line = tail_app_stream_lines.log_lines[l];
                     block.child('main/content/applications/detail/subcontent/application_process/logs').data({
-                    line:  {
-                        value: log_line,
-                        timestamp: l
-                    }
+                        line:  {
+                            value: log_line,
+                            timestamp: l,
+                            initial: true
+                        }
                 });
                 }
             }
@@ -3438,7 +3440,7 @@ app
                                 #line
                                     {
                                         block.child('log_output').add(Block('div', 'line_' + line.timestamp)
-                                            .class('application_log_output_line')
+                                            .class((line.hasOwnProperty('initial') && line.initial === true) ? 'application_log_output_line_initial' : 'application_log_output_line')
                                             //.html(`${line.value}`)
                                             .add(Block('text', 1).data(`${line.value}`))
                                             .on('release', (e, b, d) => {
@@ -3472,7 +3474,7 @@ app
                                     :reset
                                         {
                                             block.html('').add(Block('div', 'placeholder_line')
-                                                .class('application_log_output_line')
+                                                .class('application_log_output_line_initial')
                                                 .css({
                                                     'font-style': 'italic',
                                                     'text-decoration': 'underline',
