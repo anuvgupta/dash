@@ -333,6 +333,9 @@ div.project-content {
 div.application-content {
     transition: height 0.35s ease, max-height 0.35s ease;
 }
+div.domain-content {
+    transition: height 0.35s ease, max-height 0.35s ease;
+}
 
 span.noItemsMessage {
     letter-spacing: 1.3px;

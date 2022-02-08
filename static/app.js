@@ -227,7 +227,40 @@ var app = {
                         return true;
                     }
                 });
-            }
+            },
+            new_domain: _ => {
+                bootbox.confirm({
+                    centerVertical: true,
+                    title: '<span class="modal_title">Create Domain</span>',
+                    message: `<div id='create_domain_display_modal'>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Domain:</span>&nbsp;` +
+                        `<input placeholder="domainzero.com" class="modal_text_input" id="cd_modal_domain_input" type='text' name='cd_modal_domain'/></div>` +
+                        `<div style="height: 8px"></div></div>`,
+                    callback: (result) => {
+                        if (result) {
+                            var domain = (`${$('#create_domain_display_modal #cd_modal_domain_input')[0].value}`).trim();
+                            if (domain == "") return false;
+                            app.ws.api.new_domain(domain);
+                        }
+                        return true;
+                    }
+                });
+            },
+            new_domain_res: (message) => {
+                bootbox.confirm({
+                    centerVertical: true,
+                    title: '<span class="modal_title">Create Domain</span>',
+                    message: (`${message}`),
+                    callback: (result) => {
+                        if (result) {
+                            setTimeout(_ => {
+                                app.ws.api.get_domains();
+                            }, 100);
+                            return true;
+                        }
+                    }
+                })
+            },
         },
         init: (callback) => {
             app.ui.block.fill(document.body);
@@ -366,6 +399,22 @@ var app = {
             // domains
             get_domains: () => {
                 app.ws.send('get_domains', {});
+            },
+            new_domain: (domain) => {
+                app.ws.send('new_domain', {
+                    domain: domain
+                });
+            },
+            update_domain: (id, update) => {
+                app.ws.send('update_domain', {
+                    id: id,
+                    update: update
+                });
+            },
+            delete_domain: (id) => {
+                app.ws.send('delete_domain', {
+                    id: id
+                });
             },
             // resources
             get_resources: () => {

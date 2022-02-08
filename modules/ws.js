@@ -384,6 +384,75 @@ var init = _ => {
         }
     });
 
+    // domains
+    ws_server.bind("new_domain", (client, req) => {
+        var domain = req.domain ? (`${req.domain}`).trim() : '';
+        if (domain != '') {
+            m.db.get_domain(null, domain, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("new_domain", "database error", client);
+                if (result1 != null && domain == result1.domain)
+                    return ws_server.return_event_error("new_domain", "domain already taken", client);
+                var domain_list = domain.split('.');
+                var sld = domain_list.slice(0, domain_list.length - 1).join('.');
+                var tld = domain_list[domain_list.length - 1];
+                m.db.create_domain(domain, sld, tld, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("new_domain", "database error", client);
+                    return ws_server.return_event_data("new_domain", { id: result2, domain: domain }, client);
+                });
+            });
+        }
+    });
+    ws_server.bind("get_domains", (client, req) => {
+        m.db.get_domains((success1, result1) => {
+            if (success1 === false || result1 === null)
+                return ws_server.return_event_error("get_domains", "database error", client);
+            return ws_server.return_event_data("get_domains", { list: result1 }, client);
+        });
+    });
+    ws_server.bind("get_domain", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        m.db.get_domain(id, null, (success1, result1) => {
+            if (success1 === false || result1 === null)
+                return ws_server.return_event_error("get_domain", "database error", client);
+            return ws_server.return_event_data("get_domain", { domain: result1 }, client);
+        });
+    });
+    ws_server.bind("update_domain", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        var update = req.update ? JSON.parse(JSON.stringify(req.update)) : null;
+        if (id != '' && update != null && Object.keys(update).length > 0) {
+            if (update.hasOwnProperty('domain') && !update.hasOwnProperty('twoLevel') && !update.hasOwnProperty('topLevel')) {
+                // domain only
+            } else if (!update.hasOwnProperty('domain') && update.hasOwnProperty('twoLevel') && !update.hasOwnProperty('topLevel')) {
+                // twolevel only
+            } else if (!update.hasOwnProperty('domain') && !update.hasOwnProperty('twoLevel') && update.hasOwnProperty('topLevel')) {
+                // toplevel only
+            }
+            // TODO: above here update the full domain when updating parts, and update the parts when updating the full
+            m.db.get_domain(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("update_domain", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("update_domain", "resource not found", client);
+                m.db.update_domain(id, update, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("update_domain", "database error", client);
+                    return ws_server.return_event_data("update_domain", { id: id, domain: result2 }, client);
+                });
+            });
+        }
+    });
+    ws_server.bind("delete_domain", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        if (id != '') {
+            m.db.get_domain(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("delete_domain", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("delete_domain", "resource not found", client);
+                m.db.delete_domain(id, null, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("delete_domain", "database error", client);
+                    return ws_server.return_event_data("delete_domain", { id: id }, client);
+                });
+            });
+        }
+    });
+
     // applications
     ws_server.bind("new_application", (client, req) => {
         var slug = req.slug ? (`${req.slug}`).trim() : '';

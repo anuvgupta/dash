@@ -283,6 +283,49 @@ app
                 }
             }
         }
+    
+    #new_domain_res
+            {
+                if (new_domain_res.success) {
+                    app.ui.display_modal.new_domain_res(`Created domain "${new_domain_res.data.domain}" (${new_domain_res.data.id})`);
+                } else {
+                    app.ui.display_modal.new_domain_res(`<span style="color: #a60a0a; opacity: 0.9;">${util.capitalize(new_domain_res.message ? new_domain_res.message : 'unknown error')}.</span>`);
+                }
+            }
+    #get_domains_res
+        {
+            if (get_domains_res.success) {
+                //console.log(get_domains_res.data.list);
+                block.child('main/content/domains').data({
+                    domain_list: get_domains_res.data.list
+                });
+            } else {
+                app.ui.display_modal.generic_confirm('Load Domains', `Error - ${util.capitalize(get_domains_res.message ? get_domains_res.message : 'unknown error')}`, (result) => {
+                    if (result) {
+                        setTimeout(_ => {
+                            app.ws.api.get_domains();
+                        }, 30);
+                        return true;
+                    }
+                });
+            }
+        }
+    #update_domain_res
+        {
+           var current_domain = block.child('main/content/domains/detail').key('domain');
+           if (current_domain && current_domain._id == update_domain_res.data.id)
+               block.child('main/content/domains/detail').on('receive_domain_update', update_domain_res.data.domain);
+               block.child('main/content/domains').data({ update_domain_local: update_domain_res.data.domain });
+        }
+    #delete_domain_res
+        {
+            if (delete_domain_res.success === true) {
+                block.child('main/content/domains').data({
+                    delete_domain: delete_domain_res.data.id
+                });
+            }
+        }
+
 
     div background
         css
@@ -574,6 +617,12 @@ app
             menu-item domains
                 val Domains
                 icon globe_b.png
+                :second_click
+                    {
+                        var domains_block = block.parent().sibling('content').child('domains');
+                        if (domains_block.key('active_view') == 'detail')
+                            domains_block.child('close/close_button').on('click');
+                    }
             menu-item sitemap
                 val Sitemap
                 icon tree_b.png
@@ -630,7 +679,7 @@ app
                         else block.child('content').css('text-align', 'left');
                         if (project_list.length == 0) {
                             var msg = 'No projects found.';
-                            block.child('content').html(`<div style="margin: 30px auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
+                            block.child('content').html(`<div style="margin: 20px auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
                         }
                         //Block.queries();
                         setTimeout(_ => {
@@ -2102,7 +2151,7 @@ app
                                     }
                                 #del
                                     {
-                                        app.ui.display_modal.generic_confirm("Remove Project App", `Deassociate app "${del.app_name}" from this project?`, (result) => {
+                                        app.ui.display_modal.generic_confirm("Update Project", `Deassociate app "${del.app_name}" from this project?`, (result) => {
                                             if (result) {
                                                 setTimeout(_ => {
                                                     app.ws.api.deassociate_project_app(block.parent(2).key('project')._id, del.app_id);
@@ -2275,7 +2324,7 @@ app
                         else block.child('content').css('text-align', 'left');
                         if (application_list.length == 0) {
                             var msg = 'No applications found.';
-                            block.child('content').html(`<div style="margin: 30px auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
+                            block.child('content').html(`<div style="margin: 20px auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
                         }
                         Block.queries();
                         setTimeout(_ => {
@@ -2498,6 +2547,14 @@ app
                     css
                         width 100%
                         height auto
+                        text-align center
+                        padding-top 15px
+                        padding-left 10px
+                        padding-right 10px
+                        box-sizing border-box
+                        overflow-x hidden
+                        overflow-y auto
+                        -webkit-overflow-scrolling touch
                 div detail
                     css
                         width 100%
@@ -3471,6 +3528,7 @@ app
                                         //word-break break-all
                                         box-sizing border-box
                                         padding 8px 12px
+                                        -webkit-overflow-scrolling touch
                                     :reset
                                         {
                                             block.html('').add(Block('div', 'placeholder_line')
@@ -4219,8 +4277,9 @@ app
                             div end_spacer
                                 css
                                     height 15px
-                        
+
             div domains
+                $active_view content
                 css
                     width 100%
                     height auto
@@ -4238,6 +4297,110 @@ app
                 :hide
                     css
                         display none
+                #domain_list
+                    {
+                        //console.log('DOMAIN LIST');
+                        domain_list = domain_list.sort(util.sort_compare_newest_first);
+                        block.key('domain_list', domain_list);
+
+                        block.child('content').html('');
+                        for (var a in domain_list) {
+                            var domain_block_new = Block('domain-item', `domain_${domain_list[a]._id.toString()}`).data(domain_list[a]).key('domain_metadata', domain_list[a]);
+                            block.child('content').add(domain_block_new);
+                        }
+                        if (domain_list.length > 2)
+                            block.child('content').css('text-align', 'center');
+                        else block.child('content').css('text-align', 'left');
+                        if (domain_list.length == 0) {
+                            var msg = 'No domains found.';
+                            block.child('content').html(`<div style="margin: 20px auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
+                        }
+                        Block.queries();
+                        setTimeout(_ => {
+                            Block.queries();
+                            setTimeout(_ => {
+                                window.componentHandler.upgradeDom();
+                            }, 10);
+                        }, 10);
+                    }
+                #select_domain
+                    {
+                        //console.log(select_domain);
+                        block.key('active_view', 'detail');
+                        block.child('content').css('display', 'none')
+                            .sibling('detail').css('display', 'block')
+                            .data({ domain: select_domain })
+                        ;
+                        block.child('title').data({ select_domain_name: `${select_domain.domain}` });
+                        block.child('new_domain_button').css('display', 'none');
+                        block.child('domain_filter').css('display', 'none');
+                        block.child('close').on('show');
+                        block.child('detail').on('update_grid');
+                        //setTimeout(_ => {
+                        //    app.ws.api.get_resources();
+                        //}, 10);
+                        setTimeout(_ => {
+                            Block.queries();
+                        }, 30);
+                    }
+                :deselect_domain
+                    {
+                        //console.log('deselect_domain');
+                        if (block.key('active_view') != 'content') {
+                            block.key('active_view', 'content');
+                            block.child('detail').css('display', 'none')
+                                .sibling('content').css('display', 'block')
+                            ;
+                            block.child('title').on('back');
+                            block.child('new_domain_button').css('display', 'inline-block');
+                            block.child('domain_filter').css('display', 'block');
+                            block.child('close').on('hide');
+                            setTimeout(_ => {
+                                Block.queries();
+                                setTimeout(_ => {
+                                    window.componentHandler.upgradeDom();
+                                }, 10);
+                            }, 5);
+                        }
+                    }
+                #update_domain_local
+                    {
+                        //console.log('update_domain_local', update_domain_local);
+                        var domain_list = block.key('domain_list');
+                        for (var a in domain_list) {
+                            if (domain_list[a]._id == update_domain_local._id) {
+                                domain_list[a] = update_domain_local;
+                                break;
+                            }
+                        }
+                        block.data({
+                            domain_list: domain_list
+                        });
+                    }
+                #update_domain_field
+                    {
+                        //console.log('update_domain_field', update_domain_field);
+                        var domain_list = block.key('domain_list');
+                        for (var a in domain_list) {
+                            if (domain_list[a]._id == update_domain_field.id) {
+                                domain_list[a][update_domain_field.field] = update_domain_field.val;
+                                break;
+                            }
+                        }
+                        block.data({
+                            domain_list: domain_list
+                        });
+                    }
+                #delete_domain
+                    {
+                        var domain_info = block.child('detail').key('domain');
+                        if (domain_info && domain_info._id == delete_domain) {
+                            block.child('close/close_button').on('click');
+                            setTimeout(_ => {
+                                app.ws.api.get_domains();
+                            }, 20);
+                        }
+                    }
                 button new_domain_button
                     css
                         position absolute
@@ -4253,6 +4416,10 @@ app
                     div content
                         text text
                             val +
+                    :click
+                        {
+                            app.ui.display_modal.new_domain();
+                        }
                     {
                         block.css("background-color", app.ui.colors.primary);
                     }
@@ -4282,6 +4449,15 @@ app
                             font-size 30px
                             color #333
                         val Domains
+                    #select_domain_name
+                        {
+                            block.child('text').html(`Domains&nbsp;&nbsp;/&nbsp;&nbsp;<span class='b600'>${select_domain_name}</span>`);
+                        }
+                    :back
+                        {
+                            block.child('text').html('').data('Domains');
+                            event.stopPropagation();
+                        }
                 div divider
                     css
                         //width 100%
@@ -4294,11 +4470,580 @@ app
                     hr hr
                         css
                             width 100%
+                block close
+                    css
+                        height 40px
+                        width 40px
+                        position absolute
+                        top 29px
+                        right 12px
+                        display none
+                        pointer-events none
+                        z-index 50
+                    :hide
+                        css 
+                            display none
+                            pointer-events none
+                        {
+                            event.stopPropagation();
+                        }
+                    :show
+                        css
+                            display table
+                            pointer-events auto
+                        {
+                            event.stopPropagation();
+                        }
+                    button close_button
+                        css
+                            width 24px
+                            heigth 24px
+                            border none
+                            background-color rgba(255, 255, 255, 0)
+                            outline none
+                            opacity 0.32
+                            cursor pointer
+                            border-radius 100%
+                            transition opacity 0.2s ease
+                        :mouseover
+                            css
+                                opacity 0.68
+                        :mouseout
+                            css
+                                opacity 0.32
+                        :click
+                            {
+                                block.parent().sibling('detail').on('hide_editors');
+                                setTimeout(_ => {
+                                    block.parent(1).on('deselect_domain');
+                                }, 10);
+                            }
+                        image x
+                            src /img/x_b.png
+                            height 24px
+                            width 24px
                 div content
                     css
                         width 100%
                         height auto
-            
+                        text-align center
+                        padding-top 15px
+                        padding-left 10px
+                        padding-right 10px
+                        box-sizing border-box
+                        overflow-x hidden
+                        overflow-y auto
+                        -webkit-overflow-scrolling touch
+                div detail
+                    css
+                        width 100%
+                        height auto
+                        text-align left
+                        padding-top 0
+                        padding-left 2px
+                        padding-right 0
+                        box-sizing border-box
+                        display none
+                        overflow-x hidden
+                        overflow-y auto
+                        -webkit-overflow-scrolling touch
+                    $reload_grid yes
+                    @query window width != 0
+                        {
+                            block.css('height', (window.innerHeight - block.$().offset().top - 14) + 'px');
+                            if (block.key('reload_grid') === 'yes') {
+                                block.key('reload_grid', 'no');
+                                block.on('update_grid');
+                                setTimeout(_ => {
+                                    block.key('reload_grid', 'yes');
+                                }, 100);
+                            }
+                        }
+                    :update_grid
+                        {
+                            //console.log('update_grid');
+                            // set up masonry grid
+                            $('div.masonry-grid-container').masonry({
+                                // options
+                                itemSelector: 'div.masonry-grid-container div.dashboard_detail_section',
+                                columnWidth: 455
+                            });
+                            event.stopPropagation();
+                        }
+                    #domain
+                        {
+                            block.key('domain', domain);
+                            block.data({
+                                domain_name: domain.domain,
+                                twoLevel: domain.twoLevel,
+                                topLevel: domain.topLevel,
+                            });
+                        }
+                    #domain_name
+                        {
+                            block.child('subcontent/domain_info/domain/value/text').html('').data(`${domain_name}`);
+                            block.child('subcontent/domain_info/domain/value_editor').attribute('value', `${domain_name}`);
+                            block.sibling('title').data({
+                                select_domain_name: `${domain_name}`
+                            });
+                        }
+                    #twoLevel
+                        {
+                            block.child('subcontent/domain_info/twoLevel/value/text').html('').data(`${twoLevel}`);
+                            block.child('subcontent/domain_info/twoLevel/value_editor').attribute('value', `${twoLevel}`);
+                        }
+                    #topLevel
+                        {
+                            block.child('subcontent/domain_info/topLevel/value/text').html('').data(`${topLevel}`);
+                            block.child('subcontent/domain_info/topLevel/value_editor').attribute('value', `${topLevel}`);
+                        }
+                    :hide_editors
+                        {
+                            //setTimeout(_ => {
+                                block.child('subcontent/domain_info/domain/value_editor').on('hide');
+                                block.child('subcontent/domain_info/twoLevel/value_editor').on('hide');
+                                block.child('subcontent/domain_info/topLevel/value_editor').on('hide');
+                                block.child('subcontent/domain_info/more_menu').on('hide');
+                            //}, 200);
+                        }
+                    :receive_domain_update
+                        {
+                            //console.log('receive_domain_update', data);
+                            var old_data = block.key('domain');
+                            var new_data = data;
+                            if (old_data.domain != new_data.domain) {
+                                block.data({ domain_name: new_data.domain, });
+                                block.child('subcontent/domain_info/domain/value_editor').on('hide');
+                            }
+                            if (old_data.twoLevel != new_data.twoLevel) {
+                                block.data({ twoLevel: new_data.twoLevel, });
+                                block.child('subcontent/domain_info/twoLevel/value_editor').on('hide');
+                            }
+                            if (old_data.topLevel != new_data.topLevel) {
+                                block.data({ topLevel: new_data.topLevel, });
+                                block.child('subcontent/domain_info/topLevel/value_editor').on('hide');
+                            }
+                            block.key('domain', new_data);
+                        }
+                    :send_domain_update
+                        {
+                            app.ws.api.update_domain(block.key('domain')._id, data);
+                            event.stopPropagation();
+                        }
+                    :delete_domain
+                        {
+                            //console.log('delete_domain');
+                            var domain_info = block.key('domain');
+                            console.log(domain_info);
+                            if (domain_info) {
+                                app.ui.display_modal.generic_confirm("Delete domain", `Permanently delete domain "${domain_info.domain}"?`, (result) => {
+                                    if (result) {
+                                        var confirm = window.confirm(`This action is not reversible — are you sure about deleting domain "${domain_info.domain}"?`);
+                                        if (confirm) {
+                                            setTimeout(_ => {
+                                                app.ws.api.delete_domain(domain_info._id);
+                                            }, 30);
+                                        }
+                                        return true;
+                                    }
+                                });
+                            }
+                            event.stopPropagation();
+                        }
+                    div subcontent
+                        class masonry-grid-container
+                        css
+                            padding 1px 1px
+                        div domain_info
+                            class dashboard_detail_section
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Domain
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/api_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                     height 80px
+                            div domain
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Domain
+                                    class label_desc
+                                    css
+                                        margin-bottom 3px
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val domainzero.com
+                                        class value_text
+                                        css
+                                            font-size 26px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        // this is an edit button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                //block.parent(2).data('');
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                //console.log(block.parent(4).key('domain').domain);
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('domain').domain;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder domainzero.com
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        width 55%
+                                        font-size 26px
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                if (value.length > 0) {
+                                                    block.parent(3).on('send_domain_update', {
+                                                        domain: value
+                                                    });
+                                                }
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div twoLevel
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Second Level
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val domainzero
+                                        class value_text
+                                        css
+                                            font-size 26px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('domain').twoLevel;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder domainzero
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2.5px
+                                        margin-left -2px
+                                        margin-bottom 2.5px
+                                        width 55%
+                                        font-size 26px
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                if (value.length > 0) {
+                                                    block.parent(3).on('send_domain_update', {
+                                                        twoLevel: value
+                                                    });
+                                                }
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div topLevel
+                                class value_edge
+                                text label
+                                    val Top Level
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val com
+                                        class value_text
+                                        css
+                                            font-size 26px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 3px
+                                            height 17px
+                                            width 17px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('domain').topLevel;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder com
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        width 90%
+                                        font-size 26px
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_domain_update', {
+                                                        topLevel: value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div end_spacer
+                                css
+                                    height 15px
+                            block more_menu_button_wrap
+                                css
+                                    position absolute
+                                    height 40px
+                                    width 40px
+                                    top 20px
+                                    right 22px
+                                button more_menu_button
+                                    css
+                                        outline none
+                                        border none
+                                        background-color rgba(255,255,255,0)
+                                        height 33px
+                                        width 33px
+                                        margin 0 auto
+                                        opacity 0.65
+                                        padding 0
+                                        display block
+                                    image img
+                                        src /img/more_b.png
+                                        height 33px
+                                        width 33px
+                                        css
+                                            margin 0 auto
+                                    :click
+                                        {
+                                            block.parent().sibling('more_menu').on('toggle');
+                                        }
+                                    :mouseover
+                                        css
+                                            opacity 0.8
+                                    :mouseout
+                                        css
+                                            opacity 0.65
+                            div more_menu
+                                $showing no
+                                :toggle
+                                    {
+                                        if (block.key('showing') === 'yes') {
+                                            block.on('hide');
+                                        } else {
+                                            block.on('show');
+                                        }
+                                    }
+                                :show
+                                    {
+                                        block.key('showing', 'yes');
+                                        block.css({ display: 'block' });
+                                        event.stopPropagation();
+                                    }
+                                :hide
+                                    {
+                                        block.key('showing', 'no');
+                                        block.css({ display: 'none' });
+                                        event.stopPropagation();
+                                    }
+                                css
+                                    position absolute
+                                    height 90px
+                                    width 85px
+                                    top 0
+                                    right -86px
+                                    border-radius 4px
+                                    border 1px solid #efefef
+                                    background-color white
+                                    display none
+                                    -webkit-box-shadow 1px 1px 4px 1px rgba(74,74,74,0.06)
+                                    box-shadow 1px 1px 4px 1px rgba(74,74,74,0.06)
+                                    font-size 12.5px
+                                    letter-spacing 0.8px
+                                    opacity 0.98
+                                    z-index 200
+                                div menu-item-1
+                                    css
+                                        height 30px
+                                        border-bottom 1px solid #eee
+                                        box-sizing border-box
+                                        border-radius 4px 4px 0 0
+                                    button button
+                                        class menu-button
+                                        css
+                                            height 100%
+                                            width 100%
+                                        html Lorem
+                                        :click
+                                            {
+                                                console.log('Lorem');
+                                            }
+                                div menu-item-2
+                                    css
+                                        height 30px
+                                        border-bottom 1px solid #eee
+                                        box-sizing border-box
+                                    button button
+                                        class menu-button
+                                        css
+                                            height 100%
+                                            width 100%
+                                        html Ipsum
+                                        :click
+                                            {
+                                                console.log('Ipsum');
+                                            }
+                                div menu-item-3
+                                    css
+                                        height 30px
+                                        border-bottom none
+                                        box-sizing border-box
+                                        border-radius 0 0 4px 4px
+                                    button button
+                                        class menu-button
+                                        css
+                                            height 100%
+                                            width 100%
+                                            color rgb(209, 36, 36)
+                                        html Delete
+                                        :click
+                                            {
+                                                //console.log('Delete');
+                                                block.parent(4).on('delete_domain');
+                                            }
+                        
             div resources
                 $active_view content
                 css
@@ -4333,7 +5078,7 @@ app
                         else block.child('content').css('text-align', 'left');
                         if (resource_list.length == 0) {
                             var msg = 'No resources found.';
-                            block.child('content').html(`<div style="margin: 30px auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
+                            block.child('content').html(`<div style="margin: 20px auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
                         }
                         Block.queries();
                         setTimeout(_ => {
@@ -6328,6 +7073,14 @@ app
                     css
                         width 100%
                         height auto
+                        text-align center
+                        padding-top 15px
+                        padding-left 10px
+                        padding-right 10px
+                        box-sizing border-box
+                        overflow-x hidden
+                        overflow-y auto
+                        -webkit-overflow-scrolling touch
             
             div sitemap
                 css
@@ -6409,3 +7162,11 @@ app
                     css
                         width 100%
                         height auto
+                        text-align center
+                        padding-top 15px
+                        padding-left 10px
+                        padding-right 10px
+                        box-sizing border-box
+                        overflow-x hidden
+                        overflow-y auto
+                        -webkit-overflow-scrolling touch
