@@ -4675,7 +4675,7 @@ app
                                         left 85px
                                         font-weight 400
                                 image icon
-                                    src /img/api_b.png
+                                    src /img/globe_b.png
                                     height 35px
                                     width 35px
                                     css

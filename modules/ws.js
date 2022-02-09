@@ -392,10 +392,8 @@ var init = _ => {
                 if (success1 === false) return ws_server.return_event_error("new_domain", "database error", client);
                 if (result1 != null && domain == result1.domain)
                     return ws_server.return_event_error("new_domain", "domain already taken", client);
-                var domain_list = domain.split('.');
-                var sld = domain_list.slice(0, domain_list.length - 1).join('.');
-                var tld = domain_list[domain_list.length - 1];
-                m.db.create_domain(domain, sld, tld, (success2, result2) => {
+                var domain_split = m.utils.split_domain(domain);
+                m.db.create_domain(domain, domain_split.sld, domain_split.tld, (success2, result2) => {
                     if (success2 === false) return ws_server.return_event_error("new_domain", "database error", client);
                     return ws_server.return_event_data("new_domain", { id: result2, domain: domain }, client);
                 });
@@ -421,17 +419,21 @@ var init = _ => {
         var id = req.id ? (`${req.id}`).trim() : '';
         var update = req.update ? JSON.parse(JSON.stringify(req.update)) : null;
         if (id != '' && update != null && Object.keys(update).length > 0) {
-            if (update.hasOwnProperty('domain') && !update.hasOwnProperty('twoLevel') && !update.hasOwnProperty('topLevel')) {
-                // domain only
-            } else if (!update.hasOwnProperty('domain') && update.hasOwnProperty('twoLevel') && !update.hasOwnProperty('topLevel')) {
-                // twolevel only
-            } else if (!update.hasOwnProperty('domain') && !update.hasOwnProperty('twoLevel') && update.hasOwnProperty('topLevel')) {
-                // toplevel only
-            }
-            // TODO: above here update the full domain when updating parts, and update the parts when updating the full
             m.db.get_domain(id, null, (success1, result1) => {
                 if (success1 === false) return ws_server.return_event_error("update_domain", "database error", client);
-                if (result1 == null) return ws_server.return_event_error("update_domain", "resource not found", client);
+                if (result1 == null) return ws_server.return_event_error("update_domain", "domain not found", client);
+                if (update.hasOwnProperty('domain') && !update.hasOwnProperty('twoLevel') && !update.hasOwnProperty('topLevel')) {
+                    // domain only
+                    var domain_split = m.utils.split_domain(update.domain);
+                    update.twoLevel = domain_split.sld;
+                    update.topLevel = domain_split.tld;
+                } else if (!update.hasOwnProperty('domain') && update.hasOwnProperty('twoLevel') && !update.hasOwnProperty('topLevel')) {
+                    // twolevel only
+                    update.domain = ([update.twoLevel, result1.topLevel]).join('.');
+                } else if (!update.hasOwnProperty('domain') && !update.hasOwnProperty('twoLevel') && update.hasOwnProperty('topLevel')) {
+                    // toplevel only
+                    update.domain = ([result1.twoLevel, update.topLevel]).join('.');
+                }
                 m.db.update_domain(id, update, (success2, result2) => {
                     if (success2 === false) return ws_server.return_event_error("update_domain", "database error", client);
                     return ws_server.return_event_data("update_domain", { id: id, domain: result2 }, client);

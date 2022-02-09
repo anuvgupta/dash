@@ -81,5 +81,12 @@ module.exports = {
             })];
         return key;
     },
-    api: {}
+    api: {
+        split_domain: (domain) => {
+            var domain_list = domain.split('.');
+            var sld = domain_list.slice(0, domain_list.length - 1).join('.');
+            var tld = domain_list[domain_list.length - 1];
+            return { sld: sld, tld: tld };
+        }
+    }
 };
