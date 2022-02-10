@@ -261,6 +261,30 @@ var app = {
                     }
                 })
             },
+            associate_resource_domain: (resource_id, domains_list = []) => {
+                domains_list = domains_list.sort(util.sort_compare_newest_first);
+                var domains_options = '';
+                for (var d in domains_list)
+                    domains_options += `<option value="${domains_list[d]._id}">${domains_list[d].domain}</option>`;
+                bootbox.confirm({
+                    centerVertical: true,
+                    title: '<span class="modal_title">Update Resource</span>',
+                    message: `<div id='update_resource_display_modal'>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Domain:</span>&nbsp;` +
+                        `<select class="modal_select_input" id="ur_modal_domain_input" name='ur_modal_domain'/>` +
+                        `<option value="none" selected>None</option>` +
+                        `${domains_options}` +
+                        `</select</div><div style="height: 8px"></div></div>`,
+                    callback: (result) => {
+                        if (result) {
+                            var new_domain_id = (`${$('#update_resource_display_modal #ur_modal_domain_input')[0].value}`).trim();
+                            if (new_domain_id == "" || new_domain_id == "none") return false;
+                            app.ws.api.associate_resource_domain(resource_id, new_domain_id);
+                        }
+                        return true;
+                    }
+                });
+            },
         },
         init: (callback) => {
             app.ui.block.fill(document.body);
@@ -397,8 +421,11 @@ var app = {
                 });
             },
             // domains
-            get_domains: () => {
-                app.ws.send('get_domains', {});
+            get_domains: (launch = null, associate = null) => {
+                var data = {};
+                if (launch != null) data.launch = launch;
+                if (associate != null) data.associate = associate;
+                app.ws.send('get_domains', data);
             },
             new_domain: (domain) => {
                 app.ws.send('new_domain', {
@@ -424,6 +451,18 @@ var app = {
             remove_domain_subdomain: (id, remove_subdomain) => {
                 app.ws.send('remove_domain_subdomain', {
                     id: id, remove_subdomain: remove_subdomain
+                });
+            },
+            associate_resource_domain: (resource_id, domain_id) => {
+                app.ws.send('associate_resource_domain', {
+                    resource_id: resource_id,
+                    domain_id: domain_id
+                });
+            },
+            deassociate_resource_domain: (resource_id, domain_id) => {
+                app.ws.send('deassociate_resource_domain', {
+                    resource_id: resource_id,
+                    domain_id: domain_id
                 });
             },
             // resources

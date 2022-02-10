@@ -392,6 +392,54 @@ var init = _ => {
             });
         }
     });
+    ws_server.bind("associate_resource_domain", (client, req) => {
+        var resource_id = req.resource_id ? (`${req.resource_id}`).trim() : '';
+        var domain_id = req.domain_id ? (`${req.domain_id}`).trim() : '';
+        if (resource_id != '' && domain_id != '') {
+            m.db.get_resource(resource_id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("associate_resource_domain", "database error", client);
+                if (result1 == null)
+                    return ws_server.return_event_error("associate_resource_domain", "resource not found", client);
+                m.db.get_domain(domain_id, null, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("associate_resource_domain", "database error", client);
+                    if (result2 == null)
+                        return ws_server.return_event_error("associate_resource_domain", "domain not found", client);
+                    var update = { domains: result1.domains };
+                    if (!update.domains.includes(domain_id))
+                        update.domains.push(domain_id);
+                    m.db.update_resource(resource_id, update, (success3, result3) => {
+                        if (success3 === false) return ws_server.return_event_error("associate_resource_domain", "database error", client);
+                        return ws_server.return_event_data("update_resource", { id: resource_id, resource: result3 }, client);
+                    });
+                });
+            });
+        }
+    });
+    ws_server.bind("deassociate_resource_domain", (client, req) => {
+        var resource_id = req.resource_id ? (`${req.resource_id}`).trim() : '';
+        var domain_id = req.domain_id ? (`${req.domain_id}`).trim() : '';
+        if (resource_id != '' && domain_id != '') {
+            m.db.get_resource(resource_id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("deassociate_resource_domain", "database error", client);
+                if (result1 == null)
+                    return ws_server.return_event_error("deassociate_resource_domain", "resource not found", client);
+                m.db.get_domain(domain_id, null, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("deassociate_resource_domain", "database error", client);
+                    if (result2 == null)
+                        return ws_server.return_event_error("deassociate_resource_domain", "domain not found", client);
+                    var update = { domains: [] };
+                    for (var d in result1.domains) {
+                        if (result1.domains[d] != domain_id)
+                            update.domains.push(result1.domains[d]);
+                    }
+                    m.db.update_resource(resource_id, update, (success3, result3) => {
+                        if (success3 === false) return ws_server.return_event_error("deassociate_resource_domain", "database error", client);
+                        return ws_server.return_event_data("update_resource", { id: resource_id, resource: result3 }, client);
+                    });
+                });
+            });
+        }
+    });
 
     // domains
     ws_server.bind("new_domain", (client, req) => {
@@ -410,10 +458,24 @@ var init = _ => {
         }
     });
     ws_server.bind("get_domains", (client, req) => {
+        var launch_domain_id = req.hasOwnProperty('launch') ? (`${req.launch}`).trim() : '';
+        var associate_resource_id = req.hasOwnProperty('associate') ? (`${req.associate}`).trim() : '';
         m.db.get_domains((success1, result1) => {
             if (success1 === false || result1 === null)
                 return ws_server.return_event_error("get_domains", "database error", client);
-            return ws_server.return_event_data("get_domains", { list: result1 }, client);
+            var ret_data = { list: result1 };
+            if (launch_domain_id != "") {
+                for (var r in result1) {
+                    if (result1[r]._id.toString() == launch_domain_id) {
+                        ret_data.launch = result1[r];
+                        break;
+                    }
+                }
+            }
+            if (associate_resource_id != "") {
+                ret_data.associate = associate_resource_id;
+            }
+            return ws_server.return_event_data("get_domains", ret_data, client);
         });
     });
     ws_server.bind("get_domain", (client, req) => {

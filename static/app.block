@@ -299,6 +299,31 @@ app
                 block.child('main/content/domains').data({
                     domain_list: get_domains_res.data.list
                 });
+                block.child('main/content/resources/detail/subcontent/resource_domains/list').data({
+                    domain_details: get_domains_res.data.list
+                });
+                if (get_domains_res.data.hasOwnProperty('launch') && get_domains_res.data.launch != '') {
+                    //console.log('LAUNCH DOMAIN ' + get_domains_res.data.launch._id);
+                    app.ui.block.child('main/content/domains').on('deselect_domain');
+                    setTimeout(_ => {
+                        app.ui.block.child('main/content/domains').data({
+                            select_domain: get_domains_res.data.launch
+                        });
+                        setTimeout(_ => {
+                            app.ui.block.child('main/menu/domains').on('click');
+                            setTimeout(_ => {
+                                app.ui.block.child('main/content/domains/detail').on('update_grid');
+                            }, 15);
+                        }, 20);
+                    }, 30);
+                }
+                if (get_domains_res.data.hasOwnProperty('associate') && get_domains_res.data.associate != '') {
+                    //console.log('ASSOCIATE RESOURCE ' + get_domains_res.data.associate);
+                    app.ui.block.child('main/content/domains').on('deselect_domain');
+                    setTimeout(_ => {
+                        app.ui.display_modal.associate_resource_domain(get_domains_res.data.associate, get_domains_res.data.list);
+                    }, 30);
+                }
             } else {
                 app.ui.display_modal.generic_confirm('Load Domains', `Error - ${util.capitalize(get_domains_res.message ? get_domains_res.message : 'unknown error')}`, (result) => {
                     if (result) {
@@ -4616,12 +4641,7 @@ app
                                             .data(`${subdomains[s]}.${domain_info.domain}`)
                                             .add(Block('image', 'img')
                                                 .class('subdomain_delete_button')
-                                                .css({
-                                                    display: 'none',
-                                                    right: '-30px',
-                                                    top: '5.5px',
-                                                    position: 'absolute'
-                                                })
+                                                .css('display', 'none')
                                                 .data({
                                                     src: '/img/x_b.png',
                                                     height: '20px',
@@ -5549,6 +5569,8 @@ app
                             };
                             if (resource.hasOwnProperty('applications'))
                                 resource_update.applications = resource.applications;
+                            if (resource.hasOwnProperty('domains'))
+                                resource_update.domains = resource.domains;
                             block.data(resource_update);
                         }
                     #name
@@ -5651,6 +5673,13 @@ app
                                 applications: applications
                             });
                         }
+                    #domains
+                        {
+                            //console.log('received resource domains', domains);
+                            block.child('subcontent/resource_domains/list').data({
+                                domains: domains
+                            });
+                        }
                     :status_update
                         {
                             block.child('subcontent/resource_daemon/status').on('status_update');
@@ -5730,7 +5759,10 @@ app
                             if (old_data.status_time != new_data.status_time) {
                                 block.data({ status_time: new_data.status_time });
                             }
-                            block.data({ applications: new_data.applications });
+                            if (new_data.hasOwnProperty('applications')) 
+                                block.data({ applications: new_data.applications });
+                            if (new_data.hasOwnProperty('domains')) 
+                                block.data({ domains: new_data.domains });
                             block.key('resource', new_data);
                         }
                     :send_resource_update
@@ -7103,6 +7135,8 @@ app
                                     height 40px
                         div resource_domains
                             class dashboard_detail_section
+                            css
+                                min-height 100px
                             div title
                                 css
                                     height auto
@@ -7132,33 +7166,138 @@ app
                                         opacity 0.6
                             div spacer
                                 css
-                                     height 80px
-                            div repo
+                                    height 80px
+                            div associate
                                 css
-                                    display none
-                                class value_edge
-                                text label
-                                    val Repo
-                                    class label_desc
-                                block value
-                                    {
-                                        block.__child('content').css('text-align', 'left');
-                                    }
-                                    class value_text_wrap
+                                    position absolute
+                                    top 24px
+                                    right 25px
+                                    width 40px
+                                    height 40px
+                                block plus
                                     css
-                                        height 25.2px
-                                        padding-left 1px
-                                    a text
-                                        html https://github.com/u/projectzero
-                                        href https://github.com/u/projectzero
-                                        class value_text
-                                        target _blank
+                                        opacity 0.6
+                                        transition opacity 0.2s ease
+                                    :mouseover
                                         css
-                                            font-size 20px
-                                            font-weight 300
+                                            opacity 0.9
+                                    :mouseout
+                                        css
+                                            opacity 0.6
+                                    image image
+                                        src /img/add_b.png
+                                        height 30px
+                                        width 30px
+                                        css
+                                            cursor pointer
+                                        :click
+                                            {
+
+                                                var resource = app.ui.block.child('main/content/resources/detail').key('resource');
+                                                if (resource) {
+                                                    setTimeout(_ => {
+                                                        app.ws.api.get_domains(null, resource._id);
+                                                    }, 10);
+                                                }
+                                                event.stopPropagation();
+                                            }
+                            div list
+                                css
+                                    //background-color red
+                                    width 100%
+                                    max-height 250px
+                                    height auto
+                                    min-height 45px
+                                    overflow-x none
+                                    overflow-y auto
+                                #manage
+                                    {
+                                        setTimeout(_ => {
+                                            app.ws.api.get_domains(manage);
+                                        }, 30);
+                                    }
+                                #del
+                                    {
+                                        app.ui.display_modal.generic_confirm("Update Resource", `Deassociate domain "${del.domain_name}" from this resource?`, (result) => {
+                                            if (result) {
+                                                setTimeout(_ => {
+                                                    app.ws.api.deassociate_resource_domain(block.parent(2).key('resource')._id, del.domain_id);
+                                                }, 10);
+                                                return true;
+                                            }
+                                        });
+                                    }
+                                #domain_details
+                                    {
+                                        var children = block.children();
+                                        for (var c in children) {
+                                            for (var d in domain_details) {
+                                                var domain_detail = domain_details[d];
+                                                if (domain_detail._id == children[c].key('id')) {
+                                                    children[c].data(domain_detail)
+                                                }
+                                            }
+                                        }
+                                    }
+                                #domains
+                                    {
+                                        if (domains == undefined || !domains)
+                                            domains = [];
+                                        //console.log(domains);
+                                        if (domains.length <= 0) {
+                                            block
+                                                .html('')
+                                                .css({
+                                                    textAlign: 'center',
+                                                    paddingTop: '15px',
+                                                    paddingBottom: '10px',
+                                                    minHeight: '45px',
+                                                    borderTop: 'none',
+                                                })
+                                                .add(Block('text', 1)
+                                                    .html('No domains associated with resource.')
+                                                    .css({
+                                                        letterSpacing: '1.3px',
+                                                        fontSize: '16px',
+                                                        color: '#333',
+                                                        fontStyle: 'italic',
+                                                    })
+                                                )
+                                            ;
+                                        } else {
+                                            block
+                                                .html('')
+                                                .css({
+                                                    textAlign: 'left',
+                                                    paddingTop: '0',
+                                                    paddingBottom: '0',
+                                                    minHeight: '105px',
+                                                    borderTop: '1px solid #f6f6f6',
+                                                })
+                                            ;
+                                            var first = true;
+                                            for (var d in domains) {
+                                                var domain_id = domains[d];
+                                                block.add(Block('resource-domain-list-item', `resource_domain_${domain_id}`)
+                                                    .data({
+                                                        _id: domain_id,
+                                                        first: first
+                                                    })
+                                                );
+                                                first = false;
+                                            }
+                                        }
+                                        block.parent(2).on('update_grid');
+                                        setTimeout(_ => {
+                                            Block.queries();
+                                        }, 10);
+                                        setTimeout(_ => {
+                                            app.ws.api.get_domains();
+                                        }, 10);
+                                    }
                             div end_spacer
                                 css
-                                    height 15px
+                                    height 40px
                         
             div ideas
                 css

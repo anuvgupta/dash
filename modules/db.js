@@ -31,7 +31,6 @@ var api = {
             img: null,
             icon: null,
             featured: false,
-            domains: [],
             applications: [],
             link: '',
             tagline: (`${desc.split(' ').splice(0, 8).join(' ')}...`),

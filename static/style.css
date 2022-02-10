@@ -376,6 +376,9 @@ div.subdomain_delete_button {
     cursor: pointer;
     transition: opacity 0.15s ease;
     opacity: 0.3;
+    right: -30px;
+    top: 5.5px;
+    position: absolute;
 }
 
 div.subdomain_delete_button:hover {
