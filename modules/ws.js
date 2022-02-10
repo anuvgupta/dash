@@ -463,6 +463,44 @@ var init = _ => {
             });
         }
     });
+    ws_server.bind("update_domain_subdomains", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        var new_subdomain = req.new_subdomain ? (`${req.new_subdomain}`).trim() : '';
+        if (id != '' && new_subdomain != '') {
+            m.db.get_domain(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("update_domain", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("update_domain", "domain not found", client);
+                var update = { subdomains: result1.subdomains };
+                if (!update.subdomains.includes(new_subdomain))
+                    update.subdomains.push(new_subdomain);
+                m.db.update_domain(id, update, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("update_domain", "database error", client);
+                    return ws_server.return_event_data("update_domain", { id: id, domain: result2 }, client);
+                });
+            });
+        }
+    });
+    ws_server.bind("remove_domain_subdomain", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        var remove_subdomain = req.remove_subdomain ? (`${req.remove_subdomain}`).trim() : '';
+        if (id != '' && remove_subdomain != '') {
+            m.db.get_domain(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("update_domain", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("update_domain", "domain not found", client);
+                var update = { subdomains: result1.subdomains };
+                if (update.subdomains.includes(remove_subdomain)) {
+                    for (var i = 0; i < update.subdomains.length; i++) {
+                        if (update.subdomains[i] === remove_subdomain)
+                            update.subdomains.splice(i, 1);
+                    }
+                }
+                m.db.update_domain(id, update, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("update_domain", "database error", client);
+                    return ws_server.return_event_data("update_domain", { id: id, domain: result2 }, client);
+                });
+            });
+        }
+    });
 
     // applications
     ws_server.bind("new_application", (client, req) => {

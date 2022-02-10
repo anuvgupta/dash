@@ -416,6 +416,16 @@ var app = {
                     id: id
                 });
             },
+            update_domain_subdomains: (id, new_subdomain) => {
+                app.ws.send('update_domain_subdomains', {
+                    id: id, new_subdomain: new_subdomain
+                });
+            },
+            remove_domain_subdomain: (id, remove_subdomain) => {
+                app.ws.send('remove_domain_subdomain', {
+                    id: id, remove_subdomain: remove_subdomain
+                });
+            },
             // resources
             get_resources: () => {
                 app.ws.send('get_resources', {});

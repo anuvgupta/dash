@@ -4577,6 +4577,7 @@ app
                                 domain_name: domain.domain,
                                 twoLevel: domain.twoLevel,
                                 topLevel: domain.topLevel,
+                                subdomains: domain.subdomains
                             });
                         }
                     #domain_name
@@ -4596,6 +4597,54 @@ app
                         {
                             block.child('subcontent/domain_info/topLevel/value/text').html('').data(`${topLevel}`);
                             block.child('subcontent/domain_info/topLevel/value_editor').attribute('value', `${topLevel}`);
+                        }
+                    #subdomains
+                        {
+                            var domain_info = block.key('domain');
+                            var subdomains_block = block.child('subcontent/domain_sub/subdomains');
+                            if (subdomains.length > 0 && domain_info != null) {
+                                subdomains_block.child('value/text').html('');
+                                for (var s in subdomains) {
+                                    subdomains_block.child('value/text').add(Block('div', `subdomain_${s}`)
+                                        .key('subdomain', subdomains[s])
+                                        .key('index', s)
+                                        .add(Block('text', 1)
+                                            .css({
+                                                position: 'relative',
+                                                width: 'auto'
+                                            })
+                                            .data(`${subdomains[s]}.${domain_info.domain}`)
+                                            .add(Block('image', 'img')
+                                                .class('subdomain_delete_button')
+                                                .css({
+                                                    display: 'none',
+                                                    right: '-30px',
+                                                    top: '5.5px',
+                                                    position: 'absolute'
+                                                })
+                                                .data({
+                                                    src: '/img/x_b.png',
+                                                    height: '20px',
+                                                    width: '20px',
+                                                })
+                                            )
+                                        )
+                                        .on('mouseover', (e, b, d) => {
+                                            b.child('text/img').css('display', 'block');
+                                        })
+                                        .on('mouseout', (e, b, d) => {
+                                            b.child('text/img').css('display', 'none');
+                                        })
+                                        .on('click', (e, b, d) => {
+                                            setTimeout(_ => {
+                                                app.ws.api.remove_domain_subdomain(block.key('domain')._id, b.key('subdomain'));
+                                            }, 20);
+                                        })
+                                    );
+                                }
+                            } else {
+                                subdomains_block.child('value/text').html('<span class="text_placeholder" style="font-size: 18px;">No subdomains found.</span>');
+                            }
                         }
                     :hide_editors
                         {
@@ -4623,11 +4672,20 @@ app
                                 block.data({ topLevel: new_data.topLevel, });
                                 block.child('subcontent/domain_info/topLevel/value_editor').on('hide');
                             }
+                            //if (old_data.subdomains.length != new_data.subdomains.length) {
+                                block.data({ subdomains: new_data.subdomains, });
+                                block.child('subcontent/domain_sub/add_subdomain/value_editor').on('refresh');
+                            //}
                             block.key('domain', new_data);
                         }
                     :send_domain_update
                         {
                             app.ws.api.update_domain(block.key('domain')._id, data);
+                            event.stopPropagation();
+                        }
+                    :add_subdomain
+                        {
+                            app.ws.api.update_domain_subdomains(block.key('domain')._id, data.new_subdomain);
                             event.stopPropagation();
                         }
                     :delete_domain
@@ -4703,7 +4761,7 @@ app
                                     css
                                         height 25.2px
                                     text text
-                                        val domainzero.com
+                                        val domain.com
                                         class value_text
                                         css
                                             font-size 26px
@@ -4735,7 +4793,7 @@ app
                                             }
                                 input value_editor
                                     class value_editor
-                                    placeholder domainzero.com
+                                    placeholder domain.com
                                     css
                                         display none
                                         height 27px
@@ -4782,7 +4840,7 @@ app
                                     css
                                         height 25.2px
                                     text text
-                                        val domainzero
+                                        val domain
                                         class value_text
                                         css
                                             font-size 26px
@@ -4811,7 +4869,7 @@ app
                                             }
                                 input value_editor
                                     class value_editor
-                                    placeholder domainzero
+                                    placeholder domain
                                     css
                                         display none
                                         height 27px
@@ -5043,7 +5101,114 @@ app
                                                 //console.log('Delete');
                                                 block.parent(4).on('delete_domain');
                                             }
-                        
+                        div domain_sub
+                            class dashboard_detail_section
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Subdomains
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/domain_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                     height 80px
+                            div subdomains
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Subdomains
+                                    class label_desc
+                                    css
+                                        margin-bottom 0px
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val sub.domain.com
+                                        class value_text
+                                        css
+                                            font-size 23px
+                                            line-height 28px
+                                            letter-spacing 1.2px
+                            div add_subdomain
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Add Subdomain
+                                    class label_desc
+                                    css
+                                        margin-bottom 3px
+                                input value_editor
+                                    class value_editor
+                                    placeholder sub.domain.com
+                                    css
+                                        height 27px
+                                        margin-top -2px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        width 55%
+                                        font-size 24px
+                                        letter-spacing 1.2px
+                                    :hide
+                                        {
+                                            block.css('display', 'none'); //.sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :refresh
+                                        {
+                                            block.node().value = '';
+                                            block.node().blur();
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                if (value.length > 0) {
+                                                    block.parent(3).on('add_subdomain', {
+                                                        new_subdomain: value
+                                                    });
+                                                }
+                                                //setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div end_spacer
+                                css
+                                    height 15px
+                            
             div resources
                 $active_view content
                 css

@@ -371,3 +371,13 @@ div.application_log_output div.application_log_output_line_initial span {
     font-family: 'Courier New', Courier, monospace;
     letter-spacing: -0.4px;
 }
+
+div.subdomain_delete_button {
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+    opacity: 0.3;
+}
+
+div.subdomain_delete_button:hover {
+    opacity: 0.6;
+}

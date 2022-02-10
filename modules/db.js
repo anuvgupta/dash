@@ -182,6 +182,7 @@ var api = {
             domain: domain,
             twoLevel: sld,
             topLevel: tld,
+            subdomains: [],
             ts_created: timestamp,
             ts_updated: timestamp
         }, (e, result1) => {
