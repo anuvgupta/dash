@@ -285,6 +285,30 @@ var app = {
                     }
                 });
             },
+            associate_application_domain: (application_id, domains_list = []) => {
+                domains_list = domains_list.sort(util.sort_compare_newest_first);
+                var domains_options = '';
+                for (var d in domains_list)
+                    domains_options += `<option value="${domains_list[d]._id}">${domains_list[d].domain}</option>`;
+                bootbox.confirm({
+                    centerVertical: true,
+                    title: '<span class="modal_title">Update Application</span>',
+                    message: `<div id='update_application_display_modal'>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Domain:</span>&nbsp;` +
+                        `<select class="modal_select_input" id="ua_modal_domain_input" name='ua_modal_domain'/>` +
+                        `<option value="none" selected>None</option>` +
+                        `${domains_options}` +
+                        `</select</div><div style="height: 8px"></div></div>`,
+                    callback: (result) => {
+                        if (result) {
+                            var new_domain_id = (`${$('#update_application_display_modal #ua_modal_domain_input')[0].value}`).trim();
+                            if (new_domain_id == "" || new_domain_id == "none") return false;
+                            app.ws.api.associate_application_domain(application_id, new_domain_id);
+                        }
+                        return true;
+                    }
+                });
+            },
         },
         init: (callback) => {
             app.ui.block.fill(document.body);
@@ -420,11 +444,24 @@ var app = {
                     id: id
                 });
             },
+            associate_project_app: (project_id, application_id) => {
+                app.ws.send('associate_project_application', {
+                    project_id: project_id,
+                    application_id: application_id
+                });
+            },
+            deassociate_project_app: (project_id, application_id) => {
+                app.ws.send('deassociate_project_application', {
+                    project_id: project_id,
+                    application_id: application_id
+                });
+            },
             // domains
-            get_domains: (launch = null, associate = null) => {
+            get_domains: (launch = null, associate_resource = null, associate_application = null) => {
                 var data = {};
                 if (launch != null) data.launch = launch;
-                if (associate != null) data.associate = associate;
+                if (associate_resource != null) data.associate_resource = associate_resource;
+                if (associate_application != null) data.associate_application = associate_application;
                 app.ws.send('get_domains', data);
             },
             new_domain: (domain) => {
@@ -453,18 +490,6 @@ var app = {
                     id: id, remove_subdomain: remove_subdomain
                 });
             },
-            associate_resource_domain: (resource_id, domain_id) => {
-                app.ws.send('associate_resource_domain', {
-                    resource_id: resource_id,
-                    domain_id: domain_id
-                });
-            },
-            deassociate_resource_domain: (resource_id, domain_id) => {
-                app.ws.send('deassociate_resource_domain', {
-                    resource_id: resource_id,
-                    domain_id: domain_id
-                });
-            },
             // resources
             get_resources: () => {
                 app.ws.send('get_resources', {});
@@ -491,6 +516,18 @@ var app = {
             delete_resource: (id) => {
                 app.ws.send('delete_resource', {
                     id: id
+                });
+            },
+            associate_resource_domain: (resource_id, domain_id) => {
+                app.ws.send('associate_resource_domain', {
+                    resource_id: resource_id,
+                    domain_id: domain_id
+                });
+            },
+            deassociate_resource_domain: (resource_id, domain_id) => {
+                app.ws.send('deassociate_resource_domain', {
+                    resource_id: resource_id,
+                    domain_id: domain_id
                 });
             },
             // applications
@@ -529,16 +566,16 @@ var app = {
                     id: id,
                 });
             },
-            associate_project_app: (project_id, application_id) => {
-                app.ws.send('associate_project_application', {
-                    project_id: project_id,
-                    application_id: application_id
+            associate_application_domain: (application_id, domain_id) => {
+                app.ws.send('associate_application_domain', {
+                    application_id: application_id,
+                    domain_id: domain_id
                 });
             },
-            deassociate_project_app: (project_id, application_id) => {
-                app.ws.send('deassociate_project_application', {
-                    project_id: project_id,
-                    application_id: application_id
+            deassociate_application_domain: (application_id, domain_id) => {
+                app.ws.send('deassociate_application_domain', {
+                    application_id: application_id,
+                    domain_id: domain_id
                 });
             },
             // ideas

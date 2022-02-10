@@ -459,7 +459,8 @@ var init = _ => {
     });
     ws_server.bind("get_domains", (client, req) => {
         var launch_domain_id = req.hasOwnProperty('launch') ? (`${req.launch}`).trim() : '';
-        var associate_resource_id = req.hasOwnProperty('associate') ? (`${req.associate}`).trim() : '';
+        var associate_resource_id = req.hasOwnProperty('associate_resource') ? (`${req.associate_resource}`).trim() : '';
+        var associate_application_id = req.hasOwnProperty('associate_application') ? (`${req.associate_application}`).trim() : '';
         m.db.get_domains((success1, result1) => {
             if (success1 === false || result1 === null)
                 return ws_server.return_event_error("get_domains", "database error", client);
@@ -472,9 +473,10 @@ var init = _ => {
                     }
                 }
             }
-            if (associate_resource_id != "") {
-                ret_data.associate = associate_resource_id;
-            }
+            if (associate_resource_id != "")
+                ret_data.associate_resource = associate_resource_id;
+            if (associate_application_id != "")
+                ret_data.associate_application = associate_application_id;
             return ws_server.return_event_data("get_domains", ret_data, client);
         });
     });
@@ -779,6 +781,54 @@ var init = _ => {
                     });
                 });
             }
+        }
+    });
+    ws_server.bind("associate_application_domain", (client, req) => {
+        var application_id = req.application_id ? (`${req.application_id}`).trim() : '';
+        var domain_id = req.domain_id ? (`${req.domain_id}`).trim() : '';
+        if (application_id != '' && domain_id != '') {
+            m.db.get_application(application_id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("associate_application_domain", "database error", client);
+                if (result1 == null)
+                    return ws_server.return_event_error("associate_application_domain", "application not found", client);
+                m.db.get_domain(domain_id, null, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("associate_application_domain", "database error", client);
+                    if (result2 == null)
+                        return ws_server.return_event_error("associate_application_domain", "domain not found", client);
+                    var update = { domains: result1.domains };
+                    if (!update.domains.includes(domain_id))
+                        update.domains.push(domain_id);
+                    m.db.update_application(application_id, update, (success3, result3) => {
+                        if (success3 === false) return ws_server.return_event_error("associate_application_domain", "database error", client);
+                        return ws_server.return_event_data("update_application", { id: application_id, application: result3 }, client);
+                    });
+                });
+            });
+        }
+    });
+    ws_server.bind("deassociate_application_domain", (client, req) => {
+        var application_id = req.application_id ? (`${req.application_id}`).trim() : '';
+        var domain_id = req.domain_id ? (`${req.domain_id}`).trim() : '';
+        if (application_id != '' && domain_id != '') {
+            m.db.get_application(application_id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("deassociate_application_domain", "database error", client);
+                if (result1 == null)
+                    return ws_server.return_event_error("deassociate_application_domain", "application not found", client);
+                m.db.get_domain(domain_id, null, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("deassociate_application_domain", "database error", client);
+                    if (result2 == null)
+                        return ws_server.return_event_error("deassociate_application_domain", "domain not found", client);
+                    var update = { domains: [] };
+                    for (var d in result1.domains) {
+                        if (result1.domains[d] != domain_id)
+                            update.domains.push(result1.domains[d]);
+                    }
+                    m.db.update_application(application_id, update, (success3, result3) => {
+                        if (success3 === false) return ws_server.return_event_error("deassociate_application_domain", "database error", client);
+                        return ws_server.return_event_data("update_application", { id: application_id, application: result3 }, client);
+                    });
+                });
+            });
         }
     });
 

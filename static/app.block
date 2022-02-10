@@ -302,6 +302,9 @@ app
                 block.child('main/content/resources/detail/subcontent/resource_domains/list').data({
                     domain_details: get_domains_res.data.list
                 });
+                block.child('main/content/applications/detail/subcontent/application_domains/list').data({
+                    domain_details: get_domains_res.data.list
+                });
                 if (get_domains_res.data.hasOwnProperty('launch') && get_domains_res.data.launch != '') {
                     //console.log('LAUNCH DOMAIN ' + get_domains_res.data.launch._id);
                     app.ui.block.child('main/content/domains').on('deselect_domain');
@@ -317,11 +320,18 @@ app
                         }, 20);
                     }, 30);
                 }
-                if (get_domains_res.data.hasOwnProperty('associate') && get_domains_res.data.associate != '') {
-                    //console.log('ASSOCIATE RESOURCE ' + get_domains_res.data.associate);
+                if (get_domains_res.data.hasOwnProperty('associate_resource') && get_domains_res.data.associate_resource != '') {
+                    //console.log('ASSOCIATE RESOURCE ' + get_domains_res.data.associate_resource);
                     app.ui.block.child('main/content/domains').on('deselect_domain');
                     setTimeout(_ => {
-                        app.ui.display_modal.associate_resource_domain(get_domains_res.data.associate, get_domains_res.data.list);
+                        app.ui.display_modal.associate_resource_domain(get_domains_res.data.associate_resource, get_domains_res.data.list);
+                    }, 30);
+                }
+                if (get_domains_res.data.hasOwnProperty('associate_application') && get_domains_res.data.associate_application != '') {
+                    //console.log('ASSOCIATE APPLICATION ' + get_domains_res.data.associate_application);
+                    app.ui.block.child('main/content/domains').on('deselect_domain');
+                    setTimeout(_ => {
+                        app.ui.display_modal.associate_application_domain(get_domains_res.data.associate_application, get_domains_res.data.list);
                     }, 30);
                 }
             } else {
@@ -2626,6 +2636,7 @@ app
                                 port: application.port,
                                 host: application.host,
                                 ecosystem: application.ecosystem,
+                                domains: application.domains,
                                 status: application.status,
                                 status_time: application.status_time
                             });
@@ -2708,6 +2719,13 @@ app
                             if (restart_delay == '') restart_delay_alt = '<span class="text_placeholder">500ms</span>';
                             block.child('subcontent/application_ecosystem/restart_delay/value/text').html(`${restart_delay_alt}`);
                             block.child('subcontent/application_ecosystem/restart_delay/value_editor').attribute('value', `${restart_delay}`);
+                        }
+                    #domains
+                        {
+                            //console.log('received application domains', domains);
+                            block.child('subcontent/application_domains/list').data({
+                                domains: domains
+                            });
                         }
                     #status
                         {
@@ -2795,6 +2813,8 @@ app
                                 block.data({ ecosystem: new_data.ecosystem, });
                                 block.child('subcontent/application_ecosystem/restart_delay/value/text').node().blur();
                             }
+                            if (new_data.hasOwnProperty('domains')) 
+                                block.data({ domains: new_data.domains });
                             if (old_data.status != new_data.status) {
                                 block.data({ status: new_data.status });
                             }
@@ -4302,6 +4322,171 @@ app
                             div end_spacer
                                 css
                                     height 15px
+                        div application_domains
+                            class dashboard_detail_section
+                            css
+                                min-height 100px
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Domains
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/globe_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                    height 80px
+                            div associate
+                                css
+                                    position absolute
+                                    top 24px
+                                    right 25px
+                                    width 40px
+                                    height 40px
+                                block plus
+                                    css
+                                        opacity 0.6
+                                        transition opacity 0.2s ease
+                                    :mouseover
+                                        css
+                                            opacity 0.9
+                                    :mouseout
+                                        css
+                                            opacity 0.6
+                                    image image
+                                        src /img/add_b.png
+                                        height 30px
+                                        width 30px
+                                        css
+                                            cursor pointer
+                                        :click
+                                            {
+
+                                                var application = app.ui.block.child('main/content/applications/detail').key('application');
+                                                if (application) {
+                                                    setTimeout(_ => {
+                                                        app.ws.api.get_domains(null, null, application._id);
+                                                    }, 10);
+                                                }
+                                                event.stopPropagation();
+                                            }
+                            div list
+                                css
+                                    //background-color red
+                                    width 100%
+                                    max-height 250px
+                                    height auto
+                                    min-height 45px
+                                    overflow-x none
+                                    overflow-y auto
+                                #manage
+                                    {
+                                        setTimeout(_ => {
+                                            app.ws.api.get_domains(manage);
+                                        }, 30);
+                                    }
+                                #del
+                                    {
+                                        app.ui.display_modal.generic_confirm("Update Application", `Deassociate domain "${del.domain_name}" from this application?`, (result) => {
+                                            if (result) {
+                                                setTimeout(_ => {
+                                                    app.ws.api.deassociate_application_domain(block.parent(2).key('application')._id, del.domain_id);
+                                                }, 10);
+                                                return true;
+                                            }
+                                        });
+                                    }
+                                #domain_details
+                                    {
+                                        var children = block.children();
+                                        for (var c in children) {
+                                            for (var d in domain_details) {
+                                                var domain_detail = domain_details[d];
+                                                if (domain_detail._id == children[c].key('id')) {
+                                                    children[c].data(domain_detail)
+                                                }
+                                            }
+                                        }
+                                    }
+                                #domains
+                                    {
+                                        if (domains == undefined || !domains)
+                                            domains = [];
+                                        //console.log(domains);
+                                        if (domains.length <= 0) {
+                                            block
+                                                .html('')
+                                                .css({
+                                                    textAlign: 'center',
+                                                    paddingTop: '15px',
+                                                    paddingBottom: '10px',
+                                                    minHeight: '45px',
+                                                    borderTop: 'none',
+                                                })
+                                                .add(Block('text', 1)
+                                                    .html('No domains associated with application.')
+                                                    .css({
+                                                        letterSpacing: '1.3px',
+                                                        fontSize: '16px',
+                                                        color: '#333',
+                                                        fontStyle: 'italic',
+                                                    })
+                                                )
+                                            ;
+                                        } else {
+                                            block
+                                                .html('')
+                                                .css({
+                                                    textAlign: 'left',
+                                                    paddingTop: '0',
+                                                    paddingBottom: '0',
+                                                    minHeight: '105px',
+                                                    borderTop: '1px solid #f6f6f6',
+                                                })
+                                            ;
+                                            var first = true;
+                                            for (var d in domains) {
+                                                var domain_id = domains[d];
+                                                block.add(Block('application-domain-list-item', `application_domain_${domain_id}`)
+                                                    .data({
+                                                        _id: domain_id,
+                                                        first: first
+                                                    })
+                                                );
+                                                first = false;
+                                            }
+                                        }
+                                        block.parent(2).on('update_grid');
+                                        setTimeout(_ => {
+                                            Block.queries();
+                                        }, 10);
+                                        setTimeout(_ => {
+                                            app.ws.api.get_domains();
+                                        }, 10);
+                                    }
+                            div end_spacer
+                                css
+                                    height 40px
 
             div domains
                 $active_view content
