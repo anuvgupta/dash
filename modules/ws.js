@@ -115,6 +115,10 @@ var ws_server = {
         }, client, auth_req);
         return true;
     },
+    // delete client object
+    delete_client: (client_id) => {
+        delete ws_server.clients[client_id];
+    },
     // initialize server
     init: _ => {
         // attach server socket events
@@ -125,7 +129,9 @@ var ws_server = {
                 id: "_c_" + m.utils.rand_id(),
                 o_id: null,
                 auth: false,
-                type: "app"
+                type: "app",
+                events: { disconnect: null },
+                memory: {}
             };
             log(`client ${client.id} – connected`);
             // client socket event handlers
@@ -148,7 +154,10 @@ var ws_server = {
             });
             client.socket.addEventListener("close", (c, r) => {
                 log(`client ${client.id} – disconnected`);
-                delete ws_server.clients[client.id]; // remove client object on disconnect
+                var disconnect_event = client.events.disconnect;
+                if (disconnect_event != null) disconnect_event(_ => {
+                    ws_server.delete_client(client.id); // remove client object on disconnect
+                }); else ws_server.delete_client(client.id);
             });
             // add client object to client object list
             ws_server.clients[client.id] = client;
@@ -546,9 +555,28 @@ var init = _ => {
                         var ws_daemon_client = m.ws.get_daemon_client(application_resource_id);
                         if (ws_daemon_client != null && ws_server.clients.hasOwnProperty(ws_daemon_client.id)) {
                             ws_server.send_to_client('signal', {
-                                signal: signal,
-                                application: id
+                                signal: signal, application: id
                             }, ws_daemon_client);
+                            if (signal == 'tail') {
+                                if (!client.memory.hasOwnProperty('tailed_applications'))
+                                    client.memory.tailed_applications = {};
+                                client.memory.tailed_applications[id] = null;
+                                if (client.events.disconnect == null) client.events.disconnect = ((resolve = null) => {
+                                    log(`client ${client.id} disconnected --> untailing apps: ${Object.keys(client.memory.tailed_applications)}`);
+                                    for (var tailed_app_id in client.memory.tailed_applications) {
+                                        ws_server.send_to_client('signal', {
+                                            signal: 'untail', application: tailed_app_id
+                                        }, ws_daemon_client);
+                                    }
+                                    if (resolve) resolve();
+                                });
+                            } else if (signal == 'untail') {
+                                if (client.memory.hasOwnProperty('tailed_applications')) {
+                                    if (client.memory.tailed_applications.hasOwnProperty(id)) {
+                                        delete client.memory.tailed_applications[id];
+                                    }
+                                }
+                            }
                         }
                     });
                 } else {
@@ -738,7 +766,8 @@ var api = {
                 ecosystem: result
             }, daemon_client);
         });
-    }
+    },
+    ws_server: ws_server
 };
 
 
