@@ -443,6 +443,7 @@ var api = {
                 error_file: `${slug}.log`,
                 out_file: `${slug}.log`,
                 interpreter: "",
+                args: "",
                 max_memory_restart: "100M",
                 restart_delay: "3000"
             },

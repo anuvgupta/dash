@@ -307,6 +307,7 @@ const pm = {
         pm2.connect(!(global.config.pm2_daemon_mode), resolve);
     },
     start_process: (ecosystem, app_id, resolve = null) => {
+        console.log(ecosystem);
         pm2.start(ecosystem, (error, env) => {
             if (error) console.error(error);
             // console.log('env', env);

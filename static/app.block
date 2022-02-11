@@ -1138,6 +1138,7 @@ app
                                 block.child('subcontent/project_info/description/value_editor').on('hide');
                                 block.child('subcontent/project_info/link/value_editor').on('hide');
                                 block.child('subcontent/project_code/repo/value_editor').on('hide');
+                                block.child('subcontent/project_code/docs/value_editor').on('hide');
                                 block.child('subcontent/project_info/more_menu').on('hide');
                             //}, 200);
                         }
@@ -2624,8 +2625,8 @@ app
                                 port = '80';
                                 port_alt = '<span class="text_placeholder">:80</span>';
                             }
-                            block.child('subcontent/application_ecosystem/port/value/text').html(`${port_alt}`);
-                            block.child('subcontent/application_ecosystem/port/value_editor').attribute('value', `${port}`);
+                            block.child('subcontent/application_info/port/value/text').html(`${port_alt}`);
+                            block.child('subcontent/application_info/port/value_editor').attribute('value', `${port}`);
                         }
                     #host
                         {
@@ -2674,6 +2675,12 @@ app
                             if (restart_delay == '') restart_delay_alt = '<span class="text_placeholder">500ms</span>';
                             block.child('subcontent/application_ecosystem/restart_delay/value/text').html(`${restart_delay_alt}`);
                             block.child('subcontent/application_ecosystem/restart_delay/value_editor').attribute('value', `${restart_delay}`);
+
+                            var args = ecosystem.args;
+                            var args_alt = `${args}`;
+                            if (args_alt == '') args_alt = '<span class="text_placeholder">--flagA arg0 arg1 arg2</span>';
+                            block.child('subcontent/application_ecosystem/args/value/text').html(`${args_alt}`);
+                            block.child('subcontent/application_ecosystem/args/value_editor').attribute('value', `${args}`);
                         }
                     #domains
                         {
@@ -2738,14 +2745,19 @@ app
                                 block.child('subcontent/application_info/name/value_editor').on('hide');
                                 block.child('subcontent/application_info/slug/value_editor').on('hide');
                                 block.child('subcontent/application_info/description/value_editor').on('hide');
-                                block.child('subcontent/application_ecosystem/port/value_editor').on('hide');
+                                block.child('subcontent/application_info/port/value_editor').on('hide');
                                 block.child('subcontent/application_ecosystem/cwd/value_editor').on('hide');
+                                block.child('subcontent/application_ecosystem/args/value_editor').on('hide');
+                                block.child('subcontent/application_ecosystem/out_file/value_editor').on('hide');
+                                block.child('subcontent/application_ecosystem/error_file/value_editor').on('hide');
                                 block.child('subcontent/application_ecosystem/script/value_editor').on('hide');
                                 block.child('subcontent/application_ecosystem/interpreter/value_editor').on('hide');
-                                block.child('subcontent/application_info/more_menu').on('hide');
+                                block.child('subcontent/application_ecosystem/max_memory_restart/value_editor').on('hide');
+                                block.child('subcontent/application_ecosystem/restart_delay/value_editor').on('hide');
                                 block.child('subcontent/application_process/signal_toast').on('hide');
-                                block.child('subcontent/application_proxy/https_cert').on('hide');
-                                block.child('subcontent/application_proxy/https_cert_key').on('hide');
+                                block.child('subcontent/application_proxy/https_cert/value_editor').on('hide');
+                                block.child('subcontent/application_proxy/https_cert_key/value_editor').on('hide');
+                                block.child('subcontent/application_info/more_menu').on('hide');
                             //}, 200);
                         }
                     :receive_application_update
@@ -2767,7 +2779,7 @@ app
                             }
                             if (old_data.port != new_data.port) {
                                 block.data({ port: new_data.port, });
-                                block.child('subcontent/application_ecosystem/port/value_editor').on('hide');
+                                block.child('subcontent/application_info/port/value_editor').on('hide');
                             }
                             if (old_data.host != new_data.host) {
                                 block.data({ host: new_data.host, });
@@ -2805,6 +2817,10 @@ app
                             if (old_data.ecosystem.restart_delay != new_data.ecosystem.restart_delay) {
                                 update_ecosystem = true;
                                 block.child('subcontent/application_ecosystem/restart_delay/value/text').node().blur();
+                            }
+                            if (old_data.ecosystem.args != new_data.ecosystem.args) {
+                                update_ecosystem = true;
+                                block.child('subcontent/application_ecosystem/args/value/text').node().blur();
                             }
                             if (update_ecosystem)
                                 block.data({ ecosystem: new_data.ecosystem, });
@@ -3203,6 +3219,96 @@ app
                                             var last_chosen = block.child('text').key('last_chosen');
                                             if (last_chosen != null && block.child('text').child(last_chosen) != null) {
                                                 block.child('text').child(last_chosen).attribute('selected', 'selected');
+                                            }
+                                        }
+                            div port
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Port
+                                    class label_desc
+                                    css
+                                        margin-bottom 3px
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val :80
+                                        class value_text
+                                        css
+                                            font-size 21px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        // this is an edit button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                //block.parent(2).data('');
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                //console.log(block.parent(4).key('application').port);
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').port;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder 80
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        width 55%
+                                        font-size 21px
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                /*
+                                                if (value === '') value = null;
+                                                else value = parseInt((`${value}`).trim());
+                                                if (value == null || (value != NaN && value >= 0)) {
+                                                    block.parent(3).on('send_application_update', {
+                                                        'port': value
+                                                    });
+                                                }
+                                                */
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_application_update', {
+                                                        'port': value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
                                             }
                                         }
                             div end_spacer
@@ -3991,15 +4097,13 @@ app
                                                 block.on('hide');
                                             }
                                         }
-                            div port
+                            div args
                                 class value_edge
                                 css
                                     margin-bottom 20px
                                 text label
-                                    val Port
+                                    val Arguments
                                     class label_desc
-                                    css
-                                        margin-bottom 3px
                                 block value
                                     {
                                         block.__child('content').css('text-align', 'left');
@@ -4008,10 +4112,10 @@ app
                                     css
                                         height 25.2px
                                     text text
-                                        val :80
+                                        val --flagA arg0 arg1 arg2
                                         class value_text
                                         css
-                                            font-size 21px
+                                            font-size 20px
                                     :mouseover
                                         {
                                             if (block.child('edit_button').key('showing') == 'off')
@@ -4023,32 +4127,29 @@ app
                                                 block.child('edit_button').on('hide');
                                         }
                                     edit-button edit_button
-                                        // this is an edit button
                                         css
                                             margin-left 12px
                                             padding-top 4px
                                         :click
                                             {
-                                                //block.parent(2).data('');
                                                 block.parent().css('display', 'none')
                                                     .sibling('value_editor').css('display', 'block');
-                                                //console.log(block.parent(4).key('application').port);
-                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').port;
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').ecosystem.args;
                                                 setTimeout(_ => {
                                                     block.parent().sibling('value_editor').node().select();
                                                 }, 15);
                                             }
                                 input value_editor
                                     class value_editor
-                                    placeholder 80
+                                    placeholder --flagA arg0 arg1 arg2
                                     css
                                         display none
                                         height 27px
-                                        margin-top -2px
+                                        margin-top -2.5px
                                         margin-left -2px
-                                        margin-bottom 2px
+                                        margin-bottom 2.5px
                                         width 55%
-                                        font-size 21px
+                                        font-size 20px
                                     :hide
                                         {
                                             block.css('display', 'none').sibling('value').css('display', 'table');
@@ -4060,19 +4161,10 @@ app
                                                 // enter
                                                 var value = block.node().value;
                                                 if (!value) value = '';
-                                                /*
-                                                if (value === '') value = null;
-                                                else value = parseInt((`${value}`).trim());
-                                                if (value == null || (value != NaN && value >= 0)) {
-                                                    block.parent(3).on('send_application_update', {
-                                                        'port': value
-                                                    });
-                                                }
-                                                */
                                                 value = (`${value}`).trim();
                                                 //if (value.length > 0) {
                                                     block.parent(3).on('send_application_update', {
-                                                        'port': value
+                                                        'ecosystem.args': value
                                                     });
                                                 //}
                                                 setTimeout(_ => { block.on('hide'); }, 250);
@@ -6353,7 +6445,6 @@ app
                             block.child('subcontent/resource_software/www_root/value/text').html(`${www_root_alt}`);
                             block.child('subcontent/resource_software/www_root/value_editor').attribute('value', `${software.www_root}`);
                         }
-                    
                     :status_update
                         {
                             block.child('subcontent/resource_daemon/status').on('status_update');
@@ -6371,6 +6462,10 @@ app
                                 block.child('subcontent/resource_specs/memory/value_editor').on('hide');
                                 block.child('subcontent/resource_specs/storage/value_editor').on('hide');
                                 block.child('subcontent/resource_specs/location/value_editor').on('hide');
+                                block.child('subcontent/resource_software/app_root/value_editor').on('hide');
+                                block.child('subcontent/resource_software/nginx_root/value_editor').on('hide');
+                                block.child('subcontent/resource_software/apache_root/value_editor').on('hide');
+                                block.child('subcontent/resource_software/www_root/value_editor').on('hide');
                                 block.child('subcontent/resource_daemon/daemon_key/value_editor').on('hide');
                                 block.child('subcontent/resource_info/more_menu').on('hide');
                             //}, 200);

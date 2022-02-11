@@ -22,8 +22,8 @@ var main = _ => {
     }, 1000);
 };
 var api = {
-    device_desync_timeout: 4,
-    device_disconnect_timeout: 8,
+    resource_desync_timeout: 4,
+    resource_disconnect_timeout: 8,
     resource_monitor_interval: 0.5,
     resource_monitor: _ => {
         m.ws.broadcast_resource_hb();
@@ -35,10 +35,10 @@ var api = {
             for (var r in resources) {
                 var delta = (new Date()).getTime() - resources[r].status_time;
                 // console.log('time between heartbeats', delta);
-                if (delta >= m.main.device_disconnect_timeout * 1000) {
+                if (delta >= m.main.resource_disconnect_timeout * 1000) {
                     modify_disconnect_resource_ids.push(resources[r]._id);
                     m.ws.update_resource_status(resources[r]._id.toString(), "offline", resources[r].status_time, resources[r].user_id);
-                } else if (delta >= m.main.device_desync_timeout * 1000) {
+                } else if (delta >= m.main.resource_desync_timeout * 1000) {
                     if (resources[r].status != "desync") {
                         modify_desync_resource_ids.push(resources[r]._id);
                         m.ws.update_resource_status(resources[r]._id.toString(), "desync", resources[r].status_time, resources[r].user_id);
