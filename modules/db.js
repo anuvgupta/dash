@@ -440,6 +440,16 @@ var api = {
                 max_memory_restart: "100M",
                 restart_delay: "3000"
             },
+            proxy: {
+                www: false,
+                htaccess_deny: false,
+                https_enable: false,
+                https_force: false,
+                https_cert: "",
+                https_cert_key: "",
+                ws_enable: false,
+                ws_enable_path: "socket"
+            },
             primary_domain: { id: '', sub: '' },
             domains: [],
             status: "new",
