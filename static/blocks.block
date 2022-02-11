@@ -2518,6 +2518,49 @@
                         })
                     )
                 )
+                .add(Block('block', 'link')
+                    .css({
+                        position: 'absolute',
+                        right: '66px',
+                        top: '0',
+                        width: '40px'
+                    })
+                    .key('toggled', 'no')
+                    .add(Block('block', 'wrap')
+                        .css({
+                            width: '30px',
+                            height: '30px',
+                            margin: '0 auto'
+                        })
+                        .add(Block('image', 1)
+                            .data({
+                                src: '/img/link_b.png',
+                                height: '22px',
+                                width: '22px',
+                                css: {
+                                    margin: '0 auto',
+                                    opacity: '0.2',
+                                    transition: 'opacity 0.2s ease',
+                                    cursor: 'pointer'
+                                }
+                            })
+                            .on('mouseover', (e, b, d) => {
+                                if (b.parent(1).key('toggled') == 'yes') {
+                                    b.css('opacity', '0.8');
+                                } else b.css('opacity', '0.2');
+                            })
+                            .on('mouseout', (e, b, d) => {
+                                if (b.parent(1).key('toggled') == 'yes') {
+                                    b.css('opacity', '0.6');
+                                } else b.css('opacity', '0.2');
+                            })
+                            .on('click', (e, b, d) => {
+                                if (b.parent(1).key('toggled') == 'yes')
+                                    block.parent().data({ link: block.key('id') });
+                            })
+                        )
+                    )
+                )
                 .add(Block('block', 'delete')
                     .css({
                         position: 'absolute',
@@ -2616,6 +2659,18 @@
                 var port_alt = (`:${port}`).trim();
                 if (port_alt == ':') port_alt = '<span class="text_placeholder" style="opacity: 0.7;">:80</span>';
                 block.child('port/text').html(port_alt);
+            });
+            data('primary_domain', (primary_domain) => {
+                //console.log(primary_domain);
+                block.key('primary_domain', primary_domain);
+                if (primary_domain.id && primary_domain.id != "") {
+                    block.child('link').key('toggled', 'yes');
+                    block.child('link/wrap/image').css('opacity', '0.6');
+                } else {
+                    block.child('link').key('toggled', 'no');
+                    block.child('link/wrap/image').css('opacity', '0.2');
+
+                }
             });
             data('first', (first) => {
                 block.key('first', first);

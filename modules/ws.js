@@ -324,6 +324,40 @@ var init = _ => {
             });
         }
     });
+    ws_server.bind("link_project_demo", (client, req) => {
+        var project_id = req.project_id ? (`${req.project_id}`).trim() : '';
+        var application_id = req.application_id ? (`${req.application_id}`).trim() : '';
+        if (project_id != '' && application_id != '') {
+            m.db.get_project(project_id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("link_project_demo", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("link_project_demo", "project not found", client);
+                m.db.get_application(application_id, null, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("link_project_demo", "database error", client);
+                    if (result2 == null) return ws_server.return_event_error("link_project_demo", "application not found", client);
+                    if (result2.primary_domain && result2.primary_domain.id && result2.primary_domain.id != '') {
+                        if (result2.domains.includes(result2.primary_domain.id)) {
+                            m.db.get_domain(result2.primary_domain.id, null, (success3, result3) => {
+                                if (success3 === false) return ws_server.return_event_error("link_project_demo", "database error", client);
+                                if (result3 == null) return ws_server.return_event_error("link_project_demo", "domain not found", client);
+                                if (result3.domain && result3.domain != '') {
+                                    var sub = result2.primary_domain.sub ? result2.primary_domain.sub : '';
+                                    var link = `http://${sub == '' ? '' : sub + '.'}${result3.domain}/`;
+                                    log(link, result1.link);
+                                    if (link === result1.link) link = '';
+                                    var update = { link: link };
+                                    m.db.update_project(project_id, update, (success4, result4) => {
+                                        if (success4 === false || success4 === null) return ws_server.return_event_error("link_project_demo", "database error", client);
+                                        return ws_server.return_event_data("update_project", { id: project_id, project: result4 }, client);
+                                    });
+                                }
+                            });
+                        }
+                    }
+
+                });
+            });
+        }
+    });
 
     // resources
     ws_server.bind("new_resource", (client, req) => {

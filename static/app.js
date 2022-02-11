@@ -456,6 +456,12 @@ var app = {
                     application_id: application_id
                 });
             },
+            link_project_demo: (project_id, application_id) => {
+                app.ws.send('link_project_demo', {
+                    project_id: project_id,
+                    application_id: application_id
+                });
+            },
             // domains
             get_domains: (launch = null, associate_resource = null, associate_application = null) => {
                 var data = {};

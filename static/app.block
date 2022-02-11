@@ -1910,6 +1910,8 @@ app
                                             }
                         div project_code
                             class dashboard_detail_section
+                            css
+                                min-height 100px
                             div title
                                 css
                                     height auto
@@ -2101,6 +2103,9 @@ app
                             div end_spacer
                                 css
                                     height 15px
+                            div end_spacer_again
+                                css
+                                    height 7px
                         div project_apps
                             class dashboard_detail_section
                             css
@@ -2194,6 +2199,12 @@ app
                                                 return true;
                                             }
                                         });
+                                    }
+                                #link
+                                    {
+                                        setTimeout(_ => {
+                                            app.ws.api.link_project_demo(block.parent(2).key('project')._id, link);
+                                        }, 10);
                                     }
                                 #application_details
                                     {
