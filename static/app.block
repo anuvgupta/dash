@@ -2592,7 +2592,8 @@ app
                                 domains: application.domains,
                                 primary_domain: application.primary_domain,
                                 status: application.status,
-                                status_time: application.status_time
+                                status_time: application.status_time,
+                                proxy: application.proxy
                             });
                         }
                     #name
@@ -2825,7 +2826,7 @@ app
                             }
                             if (update_proxy)
                                 block.data({ proxy: new_data.proxy, });
-                            if (new_data.hasOwnProperty('domains')) 
+                            if (new_data.hasOwnProperty('domains') && (!old_data.hasOwnProperty('domains') || JSON.stringify(old_data.domains) != JSON.stringify(new_data.domains))) 
                                 block.data({ domains: new_data.domains });
                             if (new_data.hasOwnProperty('primary_domain')) 
                                 block.data({ primary_domain: new_data.primary_domain });
@@ -4637,13 +4638,13 @@ app
                                         height 25.2px
                                     switch switch
                                         val on
-                                        label On
+                                        label Enable
                                         css
                                             margin 0
                                         {
                                             block.child('label').css({
-                                                minWidth: '55px',
-                                                marginRight: '6px',
+                                                //minWidth: '55px',
+                                                marginRight: '10px',
                                                 fontWeight: '300'
                                             });
                                         }
@@ -4651,7 +4652,7 @@ app
                                             {
                                                 //console.log('updated to ' + block.key('state'));
                                                 var value = block.key('state') === true;
-                                                block.data({ label: (value ? 'On' : 'Off') });
+                                                block.data({ label: (value ? 'Enable' : 'Disable') });
                                                 if (data.hasOwnProperty('locked') && data.locked == true) return;
                                                 block.parent(4).on('send_application_update', {
                                                     'proxy.www': value
@@ -4676,13 +4677,13 @@ app
                                         height 25.2px
                                     switch switch
                                         val on
-                                        label On
+                                        label Enable
                                         css
                                             margin 0
                                         {
                                             block.child('label').css({
-                                                minWidth: '55px',
-                                                marginRight: '6px',
+                                                //minWidth: '55px',
+                                                marginRight: '10px',
                                                 fontWeight: '300'
                                             });
                                         }
@@ -4690,7 +4691,7 @@ app
                                             {
                                                 //console.log('updated to ' + block.key('state'));
                                                 var value = block.key('state') === true;
-                                                block.data({ label: (value ? 'On' : 'Off') });
+                                                block.data({ label: (value ? 'Enable' : 'Disable') });
                                                 if (data.hasOwnProperty('locked') && data.locked == true) return;
                                                 block.parent(4).on('send_application_update', {
                                                     'proxy.https_enable': value
@@ -4779,7 +4780,6 @@ app
                                 css
                                     height 40px
                         
-
             div domains
                 $active_view content
                 css

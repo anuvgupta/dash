@@ -2759,7 +2759,7 @@
                                 } else b.css('opacity', '0.2');
                             })
                             .on('click', (e, b, d) => {
-                                if (block.key('selected') === true) {
+                                if (block.key('selected') === true || b.parent(1).key('toggled') == 'yes') {
                                     block.parent().data({ link: '' });
                                 } else {
                                     block.parent().data({ link: block.key('id') });
@@ -2868,7 +2868,6 @@
                 block.child('port/text').html(port_alt);
             });
             data('selected', (selected) => {
-                //console.log(selected);
                 block.key('selected', selected === true);
                 block.child('link').key('toggled', (selected === true ? 'yes' : 'no'));
                 block.child('link/wrap/image').css('opacity', (selected === true ? '0.65' : '0.2'));
@@ -2983,7 +2982,7 @@
                                     } else b.css('opacity', '0.2');
                                 })
                                 .on('click', (e, b, d) => {
-                                    if (block.key('selected') === true) {
+                                    if (block.key('selected') === true || b.parent(1).key('toggled') == 'yes') {
                                         block.parent().data({ link_sub: {
                                             id: '', sub: ''
                                         } });
