@@ -2697,6 +2697,25 @@ app
                             //console.log(status_time);
                             block.child('subcontent/application_process/status').key('status_time', status_time).on('status_update');
                         }
+                    #proxy
+                        {
+                            // www
+                            block.child('subcontent/application_proxy/www/value/switch').data({
+                                val: proxy.www === true ? 'on' : 'off'
+                            });
+                            // htaccess_deny
+                            block.child('subcontent/application_proxy/htaccess_deny/value/switch').data({
+                                val: proxy.htaccess_deny === true ? 'on' : 'off'
+                            });
+                            // https_enable
+                            block.child('subcontent/application_proxy/https_enable/value/switch').data({
+                                val: proxy.https_enable === true ? 'on' : 'off'
+                            });
+                            // https_force
+                            block.child('subcontent/application_proxy/https_force/value/switch').data({
+                                val: proxy.https_force === true ? 'on' : 'off'
+                            });
+                        }
                     :status_update
                         {
                             block.child('subcontent/application_process/status').on('status_update');
@@ -2745,34 +2764,67 @@ app
                                     app.ws.api.get_application_status(new_data._id);
                                 }, 50);
                             }
+                            var update_ecosystem = false;
                             if (old_data.ecosystem.cwd != new_data.ecosystem.cwd) {
-                                block.data({ ecosystem: new_data.ecosystem, });
+                                update_ecosystem = true;
                                 block.child('subcontent/application_ecosystem/cwd/value/text').node().blur();
                             }
                             if (old_data.ecosystem.script != new_data.ecosystem.script) {
-                                block.data({ ecosystem: new_data.ecosystem, });
+                                update_ecosystem = true;
                                 block.child('subcontent/application_ecosystem/script/value/text').node().blur();
                             }
                             if (old_data.ecosystem.interpreter != new_data.ecosystem.interpreter) {
-                                block.data({ ecosystem: new_data.ecosystem, });
+                                update_ecosystem = true;
                                 block.child('subcontent/application_ecosystem/interpreter/value/text').node().blur();
                             }
                             if (old_data.ecosystem.out_file != new_data.ecosystem.out_file) {
-                                block.data({ ecosystem: new_data.ecosystem, });
+                                update_ecosystem = true;
                                 block.child('subcontent/application_ecosystem/out_file/value/text').node().blur();
                             }
                             if (old_data.ecosystem.error_file != new_data.ecosystem.error_file) {
-                                block.data({ ecosystem: new_data.ecosystem, });
+                                update_ecosystem = true;
                                 block.child('subcontent/application_ecosystem/error_file/value/text').node().blur();
                             }
                             if (old_data.ecosystem.max_memory_restart != new_data.ecosystem.max_memory_restart) {
-                                block.data({ ecosystem: new_data.ecosystem, });
+                                update_ecosystem = true;
                                 block.child('subcontent/application_ecosystem/max_memory_restart/value/text').node().blur();
                             }
                             if (old_data.ecosystem.restart_delay != new_data.ecosystem.restart_delay) {
-                                block.data({ ecosystem: new_data.ecosystem, });
+                                update_ecosystem = true;
                                 block.child('subcontent/application_ecosystem/restart_delay/value/text').node().blur();
                             }
+                            if (update_ecosystem)
+                                block.data({ ecosystem: new_data.ecosystem, });
+                            var update_proxy = false;
+                            if (old_data.proxy.www != new_data.proxy.www) {
+                                update_proxy = true;
+                            }
+                            if (old_data.proxy.htaccess_deny != new_data.proxy.htaccess_deny) {
+                                update_proxy = true;
+                            }
+                            if (old_data.proxy.https_enable != new_data.proxy.https_enable) {
+                                update_proxy = true;
+                            }
+                            if (old_data.proxy.https_force != new_data.proxy.https_force) {
+                                update_proxy = true;
+                            }
+                            if (old_data.proxy.https_cert != new_data.proxy.https_cert) {
+                                update_proxy = true;
+                                block.child('subcontent/application_proxy/https_cert/value/text').node().blur();
+                            }
+                            if (old_data.proxy.https_cert_key != new_data.proxy.https_cert_key) {
+                                update_proxy = true;
+                                block.child('subcontent/application_proxy/https_cert_key/value/text').node().blur();
+                            }
+                            if (old_data.proxy.ws_enable != new_data.proxy.ws_enable) {
+                                update_proxy = true;
+                            }
+                            if (old_data.proxy.ws_enable_path != new_data.proxy.ws_enable_path) {
+                                update_proxy = true;
+                                block.child('subcontent/application_proxy/ws_enable_path/value/text').node().blur();
+                            }
+                            if (update_proxy)
+                                block.data({ proxy: new_data.proxy, });
                             if (new_data.hasOwnProperty('domains')) 
                                 block.data({ domains: new_data.domains });
                             if (new_data.hasOwnProperty('primary_domain')) 
@@ -4533,6 +4585,200 @@ app
                             div end_spacer
                                 css
                                     height 40px
+                        div application_proxy
+                            class dashboard_detail_section
+                            css
+                                min-height 100px
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Proxy
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/nginx_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                    height 80px
+                            div www
+                                class value_edge
+                                css
+                                    width 50%
+                                    display inline-block
+                                    vertical-align top
+                                text label
+                                    val WWW Alias
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    switch switch
+                                        val on
+                                        label On
+                                        css
+                                            margin 0
+                                        {
+                                            block.child('label').css({
+                                                minWidth: '55px',
+                                                marginRight: '6px',
+                                                fontWeight: '300'
+                                            });
+                                        }
+                                        :modified
+                                            {
+                                                //console.log('updated to ' + block.key('state'));
+                                                var value = block.key('state') === true;
+                                                block.data({ label: (value ? 'On' : 'Off') });
+                                                if (data.hasOwnProperty('locked') && data.locked == true) return;
+                                                block.parent(4).on('send_application_update', {
+                                                    'proxy.www': value
+                                                });
+                                                event.stopPropagation();
+                                            }
+                            div https_enable
+                                class value_edge
+                                css
+                                    width 50%
+                                    display inline-block
+                                    vertical-align top
+                                text label
+                                    val HTTPS Enable
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    switch switch
+                                        val on
+                                        label On
+                                        css
+                                            margin 0
+                                        {
+                                            block.child('label').css({
+                                                minWidth: '55px',
+                                                marginRight: '6px',
+                                                fontWeight: '300'
+                                            });
+                                        }
+                                        :modified
+                                            {
+                                                //console.log('updated to ' + block.key('state'));
+                                                var value = block.key('state') === true;
+                                                block.data({ label: (value ? 'On' : 'Off') });
+                                                if (data.hasOwnProperty('locked') && data.locked == true) return;
+                                                block.parent(4).on('send_application_update', {
+                                                    'proxy.https_enable': value
+                                                });
+                                                event.stopPropagation();
+                                            }
+                            div htaccess_deny
+                                class value_edge
+                                css
+                                    width 50%
+                                    display inline-block
+                                    vertical-align top
+                                text label
+                                    val HTAccess Deny 
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    switch switch
+                                        val on
+                                        label Deny
+                                        css
+                                            margin 0
+                                        {
+                                            block.child('label').css({
+                                                minWidth: '75px',
+                                                marginRight: '6px',
+                                                fontWeight: '300'
+                                            });
+                                        }
+                                        :modified
+                                            {
+                                                //console.log('updated to ' + block.key('state'));
+                                                var value = block.key('state') === true;
+                                                block.data({ label: (value ? 'Deny' : 'Allow') });
+                                                if (data.hasOwnProperty('locked') && data.locked == true) return;
+                                                block.parent(4).on('send_application_update', {
+                                                    'proxy.htaccess_deny': value
+                                                });
+                                                event.stopPropagation();
+                                            }
+                            div https_force
+                                class value_edge
+                                css
+                                    width 50%
+                                    display inline-block
+                                    vertical-align top
+                                text label
+                                    val HTTPS Force
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    switch switch
+                                        val on
+                                        label Force
+                                        css
+                                            margin 0
+                                        {
+                                            block.child('label').css({
+                                                minWidth: '75px',
+                                                marginRight: '6px',
+                                                fontWeight: '300'
+                                            });
+                                        }
+                                        :modified
+                                            {
+                                                //console.log('updated to ' + block.key('state'));
+                                                var value = block.key('state') === true;
+                                                block.data({ label: (value ? 'Force' : 'Allow') });
+                                                if (data.hasOwnProperty('locked') && data.locked == true) return;
+                                                block.parent(4).on('send_application_update', {
+                                                    'proxy.https_force': value
+                                                });
+                                                event.stopPropagation();
+                                            }
+                            div end_spacer
+                                css
+                                    height 40px
+                        
 
             div domains
                 $active_view content

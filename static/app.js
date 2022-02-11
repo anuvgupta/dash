@@ -619,9 +619,9 @@ var app = {
             console.log("[main] testing...");
             setTimeout(_ => {
                 // $('#manage_project_button_61f07dcc4dfe93526f26155f')[0].click();
-                app.ui.block.child('main/menu/resources').node().click();
+                app.ui.block.child('main/menu/applications').node().click();
                 setTimeout(_ => {
-                    $('#manage_resource_button_62044e039dedbb1fda4748a2')[0].click();
+                    $('#manage_application_button_62044dc89dedbb1fda4748a1')[0].click();
                 }, 200);
             }, 100);
         },
