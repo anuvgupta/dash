@@ -619,7 +619,11 @@ var app = {
             console.log("[main] testing...");
             setTimeout(_ => {
                 // $('#manage_project_button_61f07dcc4dfe93526f26155f')[0].click();
-            }, 300);
+                app.ui.block.child('main/menu/resources').node().click();
+                setTimeout(_ => {
+                    $('#manage_resource_button_62044e039dedbb1fda4748a2')[0].click();
+                }, 200);
+            }, 100);
         },
         test_delay: 100,
     }

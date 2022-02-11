@@ -277,7 +277,13 @@ var api = {
                 cpu: 0,
                 memory: 0,
                 storage: 0,
-                location: ""
+                location: "",
+            },
+            software: {
+                app_root: "",
+                nginx_root: "",
+                apache_root: "",
+                www_root: "",
             },
             primary_domain: { id: '', sub: '' },
             domains: [],

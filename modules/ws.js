@@ -648,17 +648,30 @@ var init = _ => {
                     return ws_server.return_event_error("update_application", "application not found", client);
                 var host_resource = result1.host;
                 var app_identifier_slug = result1.slug;
-                m.db.update_application(id, update, (success2, result2) => {
-                    if (success2 === false) return ws_server.return_event_error("update_application", "database error", client);
-                    if (host_resource != 'none') {
-                        m.ws.refresh_daemon_ecosystem(host_resource);
-                    }
-                    if (result2.host != host_resource && result2.host != 'none') {
-                        host_resource = result2.host;
-                        m.ws.refresh_daemon_ecosystem(host_resource);
-                    }
-                    return ws_server.return_event_data("update_application", { id: id, application: result2 }, client);
-                });
+                var _next = (update_obj) => {
+                    m.db.update_application(id, update_obj, (success2, result2) => {
+                        if (success2 === false) return ws_server.return_event_error("update_application", "database error", client);
+                        if (host_resource != 'none')
+                            m.ws.refresh_daemon_ecosystem(host_resource);
+                        if (result2.host != host_resource && result2.host != 'none') {
+                            host_resource = result2.host;
+                            m.ws.refresh_daemon_ecosystem(host_resource);
+                        }
+                        return ws_server.return_event_data("update_application", { id: id, application: result2 }, client);
+                    });
+                };
+                if (host_resource != 'none') {
+                    if (update.hasOwnProperty('ecosystem.cwd')) {
+                        if (update['ecosystem.cwd'].includes('$app_root')) {
+                            m.db.get_resource(host_resource, null, (success3, result3) => {
+                                if (success3 === null || success3 === null) return _next(update);
+                                if (result3.software.app_root == "") return _next(update);
+                                update['ecosystem.cwd'] = update['ecosystem.cwd'].replace('$app_root', result3.software.app_root);
+                                return _next(update);
+                            });
+                        } else return _next(update);
+                    } else return _next(update);
+                } else return _next(update);
             });
         }
     });

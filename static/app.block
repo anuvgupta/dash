@@ -5798,11 +5798,11 @@ app
                                 primary_domain: resource.primary_domain,
                                 status: resource.status,
                                 status_time: resource.status_time,
+                                software: resource.software,
+                                domains: resource.domains
                             };
                             if (resource.hasOwnProperty('applications'))
                                 resource_update.applications = resource.applications;
-                            if (resource.hasOwnProperty('domains'))
-                                resource_update.domains = resource.domains;
                             block.data(resource_update);
                         }
                     #name
@@ -5918,6 +5918,30 @@ app
                                 domains: domains
                             });
                         }
+                    #software
+                        {
+                            // app_root
+                            var app_root_alt = software.app_root;
+                            if (app_root_alt == '') app_root_alt = '<span class="text_placeholder">~/dash</span>';
+                            block.child('subcontent/resource_software/app_root/value/text').html(`${app_root_alt}`);
+                            block.child('subcontent/resource_software/app_root/value_editor').attribute('value', `${software.app_root}`);
+                            // nginx_root
+                            var nginx_root_alt = software.nginx_root;
+                            if (nginx_root_alt == '') nginx_root_alt = '<span class="text_placeholder">/etc/nginx</span>';
+                            block.child('subcontent/resource_software/nginx_root/value/text').html(`${nginx_root_alt}`);
+                            block.child('subcontent/resource_software/nginx_root/value_editor').attribute('value', `${software.nginx_root}`);
+                            // apache_root
+                            var apache_root_alt = software.apache_root;
+                            if (apache_root_alt == '') apache_root_alt = '<span class="text_placeholder">/etc/apache2</span>';
+                            block.child('subcontent/resource_software/apache_root/value/text').html(`${apache_root_alt}`);
+                            block.child('subcontent/resource_software/apache_root/value_editor').attribute('value', `${software.apache_root}`);
+                            // www_root
+                            var www_root_alt = software.www_root;
+                            if (www_root_alt == '') www_root_alt = '<span class="text_placeholder">/var/www</span>';
+                            block.child('subcontent/resource_software/www_root/value/text').html(`${www_root_alt}`);
+                            block.child('subcontent/resource_software/www_root/value_editor').attribute('value', `${software.www_root}`);
+                        }
+                    
                     :status_update
                         {
                             block.child('subcontent/resource_daemon/status').on('status_update');
@@ -5963,22 +5987,25 @@ app
                                 block.data({ link: new_data.link, });
                                 block.child('subcontent/resource_info/link/value_editor').on('hide');
                             }
+                            var update_specs = false;
                             if (old_data.specs.cpu != new_data.specs.cpu) {
-                                block.data({ specs: new_data.specs, });
+                                update_specs = true;
                                 block.child('subcontent/resource_specs/cpu/value_editor').on('hide');
                             }
                             if (old_data.specs.memory != new_data.specs.memory) {
-                                block.data({ specs: new_data.specs, });
+                                update_specs = true;
                                 block.child('subcontent/resource_specs/memory/value_editor').on('hide');
                             }
                             if (old_data.specs.storage != new_data.specs.storage) {
-                                block.data({ specs: new_data.specs, });
+                                update_specs = true;
                                 block.child('subcontent/resource_specs/storage/value_editor').on('hide');
                             }
                             if (old_data.specs.location != new_data.specs.location) {
-                                block.data({ specs: new_data.specs, });
+                                update_specs = true;
                                 block.child('subcontent/resource_specs/location/value_editor').on('hide');
                             }
+                            if (update_specs)
+                                block.data({ specs: new_data.specs, });
                             if (old_data.provider != new_data.provider) {
                                 block.data({ provider: new_data.provider, });
                                 block.child('subcontent/resource_info/provider/value/text').node().blur();
@@ -5997,6 +6024,25 @@ app
                             if (old_data.status_time != new_data.status_time) {
                                 block.data({ status_time: new_data.status_time });
                             }
+                            var update_software = false;
+                            if (old_data.software.app_root != new_data.software.app_root) {
+                                update_software = true;
+                                block.child('subcontent/resource_software/app_root/value_editor').on('hide');
+                            }
+                            if (old_data.software.nginx_root != new_data.software.nginx_root) {
+                                update_software = true;
+                                block.child('subcontent/resource_software/nginx_root/value_editor').on('hide');
+                            }
+                            if (old_data.software.apache_root != new_data.software.apache_root) {
+                                update_software = true;
+                                block.child('subcontent/resource_software/apache_root/value_editor').on('hide');
+                            }
+                            if (old_data.software.www_root != new_data.software.www_root) {
+                                update_software = true;
+                                block.child('subcontent/resource_software/www_root/value_editor').on('hide');
+                            }
+                            if (update_software)
+                                block.data({ software: new_data.software, });
                             if (new_data.hasOwnProperty('applications')) 
                                 block.data({ applications: new_data.applications });
                             if (new_data.hasOwnProperty('domains')) 
@@ -6703,10 +6749,8 @@ app
                                                 //console.log('Delete');
                                                 block.parent(4).on('delete_resource');
                                             }
-                        div resource_daemon
+                        div resource_software
                             class dashboard_detail_section
-                            css
-                                min-height 200px
                             div title
                                 css
                                     height auto
@@ -6716,7 +6760,7 @@ app
                                     top 24px
                                     left 0
                                 text text
-                                    val Daemon
+                                    val Software
                                     css
                                         position absolute
                                         font-size 27px
@@ -6726,7 +6770,7 @@ app
                                         left 85px
                                         font-weight 400
                                 image icon
-                                    src /img/gear_b.png
+                                    src /img/code_b.png
                                     height 35px
                                     width 35px
                                     css
@@ -6736,16 +6780,12 @@ app
                                         opacity 0.6
                             div spacer
                                 css
-                                     height 80px
-                            div daemon_key
+                                        height 80px
+                            div app_root
                                 class value_edge
-                                css
-                                    margin-bottom 20px
                                 text label
-                                    val Key
+                                    val App Root
                                     class label_desc
-                                    css
-                                        margin-bottom 3px
                                 block value
                                     {
                                         block.__child('content').css('text-align', 'left');
@@ -6754,11 +6794,10 @@ app
                                     css
                                         height 25.2px
                                     text text
-                                        val a1cd4
+                                        val ~/dash
                                         class value_text
                                         css
-                                            letter-spacing 1.4px
-                                            font-size 24px
+                                            font-size 17px
                                     :mouseover
                                         {
                                             if (block.child('edit_button').key('showing') == 'off')
@@ -6770,33 +6809,31 @@ app
                                                 block.child('edit_button').on('hide');
                                         }
                                     edit-button edit_button
-                                        // this is an edit button
                                         css
-                                            margin-left 12px
-                                            padding-top 4px
+                                            margin-left 14px
+                                            padding-top 3px
+                                            height 17px
+                                            width 17px
                                         :click
                                             {
-                                                //block.parent(2).data('');
                                                 block.parent().css('display', 'none')
                                                     .sibling('value_editor').css('display', 'block');
-                                                //console.log(block.parent(4).key('resource').daemon_key);
-                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('resource').daemon_key;
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('resource').software.app_root;
                                                 setTimeout(_ => {
                                                     block.parent().sibling('value_editor').node().select();
                                                 }, 15);
                                             }
                                 input value_editor
                                     class value_editor
-                                    placeholder a1cd4
+                                    placeholder ~/dash
                                     css
                                         display none
                                         height 27px
-                                        margin-top -2px
+                                        margin-top -1px
                                         margin-left -2px
                                         margin-bottom 2px
-                                        width 55%
-                                        letter-spacing 1.4px
-                                        font-size 24px
+                                        font-size 17px
+                                        width 90%
                                     :hide
                                         {
                                             block.css('display', 'none').sibling('value').css('display', 'table');
@@ -6809,78 +6846,245 @@ app
                                                 var value = block.node().value;
                                                 if (!value) value = '';
                                                 value = (`${value}`).trim();
-                                                if (value.length > 0) {
+                                                //if (value.length > 0) {
                                                     block.parent(3).on('send_resource_update', {
-                                                        daemon_key: value
+                                                        'software.app_root': value
                                                     });
-                                                }
+                                                //}
                                                 setTimeout(_ => { block.on('hide'); }, 250);
                                             } else if (event.keyCode == 27) {
                                                 // escape
                                                 block.on('hide');
                                             }
                                         }
-                            div status
+                            div nginx_root
                                 class value_edge
-                                css
-                                    margin-bottom 20px
-                                :status_update
-                                    {
-                                        var status_code = block.key('status');
-                                        var status_time = block.key('status_time');
-                                        var status_final_text = "Status some time ago";
-                                        var status_final_color = app.ui.colors.status.default;
-                                        if (status_code != null && status_time != null) {
-                                            status_final_text = status_code.charAt(0).toUpperCase() + status_code.slice(1) + " " + (status_code == "online" ? "now" : util.duration_desc(status_time));
-                                            status_final_color = app.ui.get_status_color(status_code);
-                                        }
-                                        block.child('value/labels/status/text').html('').data(status_final_text);
-                                        block.child('value/light/circle').css('background-color', status_final_color);
-                                        event.stopPropagation();
-                                    }
                                 text label
-                                    val Status
+                                    val NGINX Root
                                     class label_desc
-                                    css
-                                        margin-bottom 3px
-                                div value
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
                                     class value_text_wrap
                                     css
-                                        height 32px
-                                        width 100%
-                                    block light
+                                        height 25.2px
+                                    text text
+                                        val /etc/nginx
+                                        class value_text
                                         css
-                                            width 30px
-                                            height 100%
-                                            float left
-                                        div circle
-                                            css
-                                                border-radius 100%
-                                                height 17px
-                                                width 17px
-                                                background-color #ddd
-                                                border 1px solid #eee
-                                                margin 0 0 0 auto
-                                    div labels
+                                            font-size 17px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
                                         css
-                                            width 73%
-                                            height 100%
-                                            float left
-                                            padding-left 18px
-                                            box-sizing border-box
-                                        block status
-                                            css
-                                                height 100%
-                                                width 100%
-                                            text text
-                                                val Status some time ago
-                                                css
-                                                    display block
-                                                    text-align left
-                                                    font-size 14px
-                                                    color #888
-                                                    font-style italic
-                                                    //padding-top 2px
+                                            margin-left 14px
+                                            padding-top 3px
+                                            height 17px
+                                            width 17px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('resource').software.nginx_root;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder /etc/nginx
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 17px
+                                        width 90%
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_resource_update', {
+                                                        'software.nginx_root': value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div apache_root
+                                class value_edge
+                                text label
+                                    val Apache Root
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val /etc/apache2
+                                        class value_text
+                                        css
+                                            font-size 17px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 3px
+                                            height 17px
+                                            width 17px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('resource').software.apache_root;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder /etc/apache2
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 17px
+                                        width 90%
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_resource_update', {
+                                                        'software.apache_root': value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div www_root
+                                class value_edge
+                                text label
+                                    val WWW Root
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val /var/www
+                                        class value_text
+                                        css
+                                            font-size 17px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 3px
+                                            height 17px
+                                            width 17px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('resource').software.www_root;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder /var/www
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 17px
+                                        width 90%
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_resource_update', {
+                                                        'software.www_root': value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
                             div end_spacer
                                 css
                                     height 15px
@@ -7272,107 +7476,6 @@ app
                             div end_spacer
                                 css
                                     height 15px
-                        div resource_apps
-                            class dashboard_detail_section
-                            css
-                                min-height 100px
-                            div title
-                                css
-                                    height auto
-                                    min-height 50px
-                                    width 100%
-                                    position absolute
-                                    top 24px
-                                    left 0
-                                text text
-                                    val Applications
-                                    css
-                                        position absolute
-                                        font-size 27px
-                                        letter-spacing 1px
-                                        opacity 0.95
-                                        top 7px
-                                        left 85px
-                                        font-weight 400
-                                image icon
-                                    src /img/api_b.png
-                                    height 35px
-                                    width 35px
-                                    css
-                                        position absolute
-                                        top 1px
-                                        left 28px
-                                        opacity 0.6
-                            div spacer
-                                css
-                                    height 80px
-                            div list
-                                css
-                                    //background-color red
-                                    width 100%
-                                    max-height 250px
-                                    height auto
-                                    min-height 45px
-                                    overflow-x none
-                                    overflow-y auto
-                                #manage
-                                    {
-                                        setTimeout(_ => {
-                                            app.ws.api.get_applications(manage);
-                                        }, 30);
-                                    }
-                                #applications
-                                    {
-                                        if (applications.length <= 0) {
-                                            block
-                                                .html('')
-                                                .css({
-                                                    textAlign: 'center',
-                                                    paddingTop: '15px',
-                                                    paddingBottom: '10px',
-                                                    minHeight: '45px',
-                                                    borderTop: 'none',
-                                                })
-                                                .add(Block('text', 1)
-                                                    .html('No applications found on resource.')
-                                                    .css({
-                                                        letterSpacing: '1.3px',
-                                                        fontSize: '16px',
-                                                        color: '#333',
-                                                        fontStyle: 'italic',
-                                                    })
-                                                )
-                                            ;
-                                        } else {
-                                            block
-                                                .html('')
-                                                .css({
-                                                    textAlign: 'left',
-                                                    paddingTop: '0',
-                                                    paddingBottom: '0',
-                                                    minHeight: '105px',
-                                                    borderTop: '1px solid #f6f6f6',
-                                                })
-                                            ;
-                                            var first = true;
-                                            for (var a in applications) {
-                                                var application = applications[a];
-                                                block.add(Block('resource-application-list-item', `resource_app_${application._id}`)
-                                                    .data(application).data({
-                                                        first: first
-                                                    })
-                                                );
-                                                first = false;
-                                            }
-                                        }
-                                        block.parent(2).on('update_grid');
-                                        setTimeout(_ => {
-                                            Block.queries();
-                                        }, 10);
-                                    }
-                            div end_spacer
-                                css
-                                    height 40px
                         div resource_domains
                             class dashboard_detail_section
                             css
@@ -7432,7 +7535,6 @@ app
                                             cursor pointer
                                         :click
                                             {
-
                                                 var resource = app.ui.block.child('main/content/resources/detail').key('resource');
                                                 if (resource) {
                                                     setTimeout(_ => {
@@ -7567,6 +7669,288 @@ app
                             div end_spacer
                                 css
                                     height 40px
+                        div resource_apps
+                            class dashboard_detail_section
+                            css
+                                min-height 100px
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Applications
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/api_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                    height 80px
+                            div list
+                                css
+                                    //background-color red
+                                    width 100%
+                                    max-height 250px
+                                    height auto
+                                    min-height 45px
+                                    overflow-x none
+                                    overflow-y auto
+                                #manage
+                                    {
+                                        setTimeout(_ => {
+                                            app.ws.api.get_applications(manage);
+                                        }, 30);
+                                    }
+                                #applications
+                                    {
+                                        if (applications.length <= 0) {
+                                            block
+                                                .html('')
+                                                .css({
+                                                    textAlign: 'center',
+                                                    paddingTop: '15px',
+                                                    paddingBottom: '10px',
+                                                    minHeight: '45px',
+                                                    borderTop: 'none',
+                                                })
+                                                .add(Block('text', 1)
+                                                    .html('No applications found on resource.')
+                                                    .css({
+                                                        letterSpacing: '1.3px',
+                                                        fontSize: '16px',
+                                                        color: '#333',
+                                                        fontStyle: 'italic',
+                                                    })
+                                                )
+                                            ;
+                                        } else {
+                                            block
+                                                .html('')
+                                                .css({
+                                                    textAlign: 'left',
+                                                    paddingTop: '0',
+                                                    paddingBottom: '0',
+                                                    minHeight: '105px',
+                                                    borderTop: '1px solid #f6f6f6',
+                                                })
+                                            ;
+                                            var first = true;
+                                            for (var a in applications) {
+                                                var application = applications[a];
+                                                block.add(Block('resource-application-list-item', `resource_app_${application._id}`)
+                                                    .data(application).data({
+                                                        first: first
+                                                    })
+                                                );
+                                                first = false;
+                                            }
+                                        }
+                                        block.parent(2).on('update_grid');
+                                        setTimeout(_ => {
+                                            Block.queries();
+                                        }, 10);
+                                    }
+                            div end_spacer
+                                css
+                                    height 40px
+                        div resource_daemon
+                            class dashboard_detail_section
+                            css
+                                min-height 200px
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Daemon
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/gear_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                     height 80px
+                            div daemon_key
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                text label
+                                    val Key
+                                    class label_desc
+                                    css
+                                        margin-bottom 3px
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val a1cd4
+                                        class value_text
+                                        css
+                                            letter-spacing 1.4px
+                                            font-size 24px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        // this is an edit button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                //block.parent(2).data('');
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                //console.log(block.parent(4).key('resource').daemon_key);
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('resource').daemon_key;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder a1cd4
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        width 55%
+                                        letter-spacing 1.4px
+                                        font-size 24px
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                if (value.length > 0) {
+                                                    block.parent(3).on('send_resource_update', {
+                                                        daemon_key: value
+                                                    });
+                                                }
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div status
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                :status_update
+                                    {
+                                        var status_code = block.key('status');
+                                        var status_time = block.key('status_time');
+                                        var status_final_text = "Status some time ago";
+                                        var status_final_color = app.ui.colors.status.default;
+                                        if (status_code != null && status_time != null) {
+                                            status_final_text = status_code.charAt(0).toUpperCase() + status_code.slice(1) + " " + (status_code == "online" ? "now" : util.duration_desc(status_time));
+                                            status_final_color = app.ui.get_status_color(status_code);
+                                        }
+                                        block.child('value/labels/status/text').html('').data(status_final_text);
+                                        block.child('value/light/circle').css('background-color', status_final_color);
+                                        event.stopPropagation();
+                                    }
+                                text label
+                                    val Status
+                                    class label_desc
+                                    css
+                                        margin-bottom 3px
+                                div value
+                                    class value_text_wrap
+                                    css
+                                        height 32px
+                                        width 100%
+                                    block light
+                                        css
+                                            width 30px
+                                            height 100%
+                                            float left
+                                        div circle
+                                            css
+                                                border-radius 100%
+                                                height 17px
+                                                width 17px
+                                                background-color #ddd
+                                                border 1px solid #eee
+                                                margin 0 0 0 auto
+                                    div labels
+                                        css
+                                            width 73%
+                                            height 100%
+                                            float left
+                                            padding-left 18px
+                                            box-sizing border-box
+                                        block status
+                                            css
+                                                height 100%
+                                                width 100%
+                                            text text
+                                                val Status some time ago
+                                                css
+                                                    display block
+                                                    text-align left
+                                                    font-size 14px
+                                                    color #888
+                                                    font-style italic
+                                                    //padding-top 2px
+                            div end_spacer
+                                css
+                                    height 15px
                         
             div ideas
                 css
