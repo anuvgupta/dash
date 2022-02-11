@@ -2266,64 +2266,6 @@ app
                             div end_spacer
                                 css
                                     height 40px
-                        div project_domains
-                            class dashboard_detail_section
-                            div title
-                                css
-                                    height auto
-                                    min-height 50px
-                                    width 100%
-                                    position absolute
-                                    top 24px
-                                    left 0
-                                text text
-                                    val Domains
-                                    css
-                                        position absolute
-                                        font-size 27px
-                                        letter-spacing 1px
-                                        opacity 0.95
-                                        top 7px
-                                        left 85px
-                                        font-weight 400
-                                image icon
-                                    src /img/globe_b.png
-                                    height 35px
-                                    width 35px
-                                    css
-                                        position absolute
-                                        top 1px
-                                        left 28px
-                                        opacity 0.6
-                            div spacer
-                                css
-                                     height 80px
-                            div repo
-                                css
-                                    display none
-                                class value_edge
-                                text label
-                                    val Repo
-                                    class label_desc
-                                block value
-                                    {
-                                        block.__child('content').css('text-align', 'left');
-                                    }
-                                    class value_text_wrap
-                                    css
-                                        height 25.2px
-                                        padding-left 1px
-                                    a text
-                                        html https://github.com/u/projectzero
-                                        href https://github.com/u/projectzero
-                                        class value_text
-                                        target _blank
-                                        css
-                                            font-size 20px
-                                            font-weight 300
-                            div end_spacer
-                                css
-                                    height 15px
                         
             div applications
                 $active_view content
@@ -2637,6 +2579,7 @@ app
                                 host: application.host,
                                 ecosystem: application.ecosystem,
                                 domains: application.domains,
+                                primary_domain: application.primary_domain,
                                 status: application.status,
                                 status_time: application.status_time
                             });
@@ -2727,6 +2670,12 @@ app
                                 domains: domains
                             });
                         }
+                    #primary_domain
+                        {
+                            block.child('subcontent/application_domains/list').data({
+                                primary: primary_domain
+                            });
+                        }
                     #status
                         {
                             //console.log(status);
@@ -2815,6 +2764,8 @@ app
                             }
                             if (new_data.hasOwnProperty('domains')) 
                                 block.data({ domains: new_data.domains });
+                            if (new_data.hasOwnProperty('primary_domain')) 
+                                block.data({ primary_domain: new_data.primary_domain });
                             if (old_data.status != new_data.status) {
                                 block.data({ status: new_data.status });
                             }
@@ -4405,6 +4356,17 @@ app
                                             app.ws.api.get_domains(manage);
                                         }, 30);
                                     }
+                                #link
+                                    {
+                                        console.log(link);
+                                        setTimeout(_ => {
+                                            block.parent(2).on('send_application_update', {
+                                                primary_domain: {
+                                                    id: link, sub: ''
+                                                }
+                                            });
+                                        }, 10);
+                                    }
                                 #del
                                     {
                                         app.ui.display_modal.generic_confirm("Update Application", `Deassociate domain "${del.domain_name}" from this application?`, (result) => {
@@ -4415,6 +4377,18 @@ app
                                                 return true;
                                             }
                                         });
+                                    }
+                                #primary
+                                    {
+                                        block.key('primary', primary);
+                                        var children = block.children();
+                                        for (var c in children) {
+                                            if (children[c].mark() == `application_domain_${primary.id}`) {
+                                                children[c].data({ selected: true });
+                                            } else {
+                                                children[c].data({ selected: false });
+                                            }
+                                        }
                                     }
                                 #domain_details
                                     {
@@ -4464,13 +4438,16 @@ app
                                                     borderTop: '1px solid #f6f6f6',
                                                 })
                                             ;
+                                            var primary_domain = block.key('primary');
                                             var first = true;
                                             for (var d in domains) {
                                                 var domain_id = domains[d];
+                                                var primary_domain_sel = primary_domain && primary_domain.hasOwnProperty('id') && primary_domain.id === domain_id;
                                                 block.add(Block('application-domain-list-item', `application_domain_${domain_id}`)
                                                     .data({
                                                         _id: domain_id,
-                                                        first: first
+                                                        first: first,
+                                                        //selected: primary_domain_sel
                                                     })
                                                 );
                                                 first = false;
@@ -5749,6 +5726,7 @@ app
                                 provider: resource.provider,
                                 type: resource.type,
                                 daemon_key: resource.daemon_key,
+                                primary_domain: resource.primary_domain,
                                 status: resource.status,
                                 status_time: resource.status_time,
                             };
@@ -5858,6 +5836,12 @@ app
                                 applications: applications
                             });
                         }
+                    #primary_domain
+                        {
+                            block.child('subcontent/resource_domains/list').data({
+                                primary: primary_domain
+                            });
+                        }
                     #domains
                         {
                             //console.log('received resource domains', domains);
@@ -5948,6 +5932,8 @@ app
                                 block.data({ applications: new_data.applications });
                             if (new_data.hasOwnProperty('domains')) 
                                 block.data({ domains: new_data.domains });
+                            if (new_data.hasOwnProperty('primary_domain')) 
+                                block.data({ primary_domain: new_data.primary_domain });
                             block.key('resource', new_data);
                         }
                     :send_resource_update
@@ -7401,6 +7387,32 @@ app
                                             app.ws.api.get_domains(manage);
                                         }, 30);
                                     }
+                                #link
+                                    {
+                                        console.log(link);
+                                        setTimeout(_ => {
+                                            block.parent(2).on('send_resource_update', {
+                                                primary_domain: {
+                                                    id: link, sub: ''
+                                                }
+                                            });
+                                        }, 10);
+                                    }
+                                #primary
+                                    {
+                                        block.key('primary', primary);
+                                        if (primary && primary.id) {
+                                            console.log(primary);
+                                            var children = block.children();
+                                            for (var c in children) {
+                                                if (children[c].mark() == `resource_domain_${primary.id}`) {
+                                                    children[c].data({ selected: true });
+                                                } else {
+                                                    children[c].data({ selected: false });
+                                                }
+                                            }
+                                        }
+                                    }
                                 #del
                                     {
                                         app.ui.display_modal.generic_confirm("Update Resource", `Deassociate domain "${del.domain_name}" from this resource?`, (result) => {
@@ -7460,13 +7472,16 @@ app
                                                     borderTop: '1px solid #f6f6f6',
                                                 })
                                             ;
+                                            var primary_domain = block.key('primary');
                                             var first = true;
                                             for (var d in domains) {
                                                 var domain_id = domains[d];
+                                                var primary_domain_sel = primary_domain && primary_domain.hasOwnProperty('id') && primary_domain.id === domain_id;
                                                 block.add(Block('resource-domain-list-item', `resource_domain_${domain_id}`)
                                                     .data({
                                                         _id: domain_id,
-                                                        first: first
+                                                        first: first,
+                                                        //selected: primary_domain_sel
                                                     })
                                                 );
                                                 first = false;

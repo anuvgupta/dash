@@ -281,7 +281,7 @@ var api = {
                 storage: 0,
                 location: ""
             },
-            primary_domain: null,
+            primary_domain: { id: '', sub: '' },
             domains: [],
             status: "new",
             status_time: -1,
@@ -442,7 +442,7 @@ var api = {
                 max_memory_restart: "100M",
                 restart_delay: "3000"
             },
-            primary_domain: null,
+            primary_domain: { id: '', sub: '' },
             domains: [],
             status: "new",
             status_time: -1,
