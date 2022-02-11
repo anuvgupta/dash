@@ -2813,7 +2813,7 @@
                 block.child('port/text').html(port_alt);
             });
             data('selected', (selected) => {
-                console.log(selected);
+                //console.log(selected);
                 block.key('selected', selected === true);
                 block.child('link').key('toggled', (selected === true ? 'yes' : 'no'));
                 block.child('link/wrap/image').css('opacity', (selected === true ? '0.65' : '0.2'));
@@ -2878,9 +2878,16 @@
                                     cursor: 'pointer',
                                     textAlign: 'left'
                                 })
-                                .add(Block('option', 'none')
-                                    .html('None').attribute('value', 'none')
+                                .add(Block('option', '__none__')
+                                    .html('None').attribute('value', '__none__')
                                 )
+                                .on('input', (e, b, d) => {
+                                    if (block.key('selected') === true) {
+                                        block.parent().data({ link_sub: {
+                                            id: block.key('id'), sub: b.node().value === '__none__' ? '' : b.node().value
+                                        } });
+                                    }
+                                })
                             )
                         )
                     )
@@ -2922,9 +2929,16 @@
                                 })
                                 .on('click', (e, b, d) => {
                                     if (block.key('selected') === true) {
-                                        block.parent().data({ link: '' });
+                                        block.parent().data({ link_sub: {
+                                            id: '', sub: ''
+                                        } });
                                     } else {
-                                        block.parent().data({ link: block.key('id') });
+                                        var sub = '';
+                                        sub = block.child('block/subdomain/select_wrap/select').node().value;
+                                        if (sub == '__none__') sub = '';
+                                        block.parent().data({ link_sub: {
+                                            id: block.key('id'), sub: sub
+                                        } });
                                     }
                                 })
                             )
@@ -3043,13 +3057,32 @@
                 var domain = block.key('domain_name');
                 if (!domain) domain = '';
                 var select_block = block.child('block/subdomain/select_wrap/select');
-                select_block.html('').add(Block('option', 'none')
-                    .html('None').attribute('value', 'none')
+                select_block.html('').add(Block('option', '__none__')
+                    .html('None').attribute('value', '__none__')
                 );
                 for (var s in subdomains) {
                     select_block.add(Block('option', subdomains[s])
                         .html(`${subdomains[s]}.${domain}`).attribute('value', subdomains[s])
                     );
+                }
+                if (block.key('sub') != '' && block.key('sub') != null) {
+                    block.data({ sub: block.key('sub') });
+                }
+            });
+            data('sub', sub => {
+                block.key('sub', sub);
+                //console.log(sub);
+                var select_block = block.child('block/subdomain/select_wrap/select');
+                var children = select_block.children();
+                for (var c in children) {
+                    children[c].node().removeAttribute('selected');
+                }
+                if (select_block.child(sub) != null) {
+                    select_block.child(sub).attribute('selected', 'selected');
+                    select_block.node().value = sub;
+                } else {
+                    select_block.child('__none__').attribute('selected', 'selected');
+                    select_block.node().value = '__none__';
                 }
             });
             data('first', (first) => {

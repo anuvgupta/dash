@@ -2783,7 +2783,7 @@ app
                         {
                             //console.log('delete_application');
                             var application_info = block.key('application');
-                            console.log(application_info);
+                            //console.log(application_info);
                             if (application_info) {
                                 app.ui.display_modal.generic_confirm("Delete Application", `Permanently delete application "${application_info.name}"?`, (result) => {
                                     if (result) {
@@ -4358,7 +4358,7 @@ app
                                     }
                                 #link
                                     {
-                                        console.log(link);
+                                        //console.log(link);
                                         setTimeout(_ => {
                                             block.parent(2).on('send_application_update', {
                                                 primary_domain: {
@@ -4366,6 +4366,17 @@ app
                                                 }
                                             });
                                         }, 10);
+                                    }
+                                #link_sub
+                                    {
+                                        //console.log('link_sub', link_sub);
+                                        //setTimeout(_ => {
+                                            block.parent(2).on('send_application_update', {
+                                                primary_domain: {
+                                                    id: link_sub.id, sub: link_sub.sub
+                                                }
+                                            });
+                                        //}, 10);
                                     }
                                 #del
                                     {
@@ -4384,9 +4395,15 @@ app
                                         var children = block.children();
                                         for (var c in children) {
                                             if (children[c].mark() == `application_domain_${primary.id}`) {
-                                                children[c].data({ selected: true });
+                                                children[c].data({
+                                                    selected: true,
+                                                    sub: primary.sub == '' ? '__none__' : primary.sub
+                                                });
                                             } else {
-                                                children[c].data({ selected: false });
+                                                children[c].data({
+                                                    selected: false,
+                                                    sub: '__none__'
+                                                });
                                             }
                                         }
                                     }
@@ -4443,10 +4460,12 @@ app
                                             for (var d in domains) {
                                                 var domain_id = domains[d];
                                                 var primary_domain_sel = primary_domain && primary_domain.hasOwnProperty('id') && primary_domain.id === domain_id;
+                                                var primary_domain_sub = primary_domain && primary_domain.hasOwnProperty('sub') && primary_domain.id === domain_id ? primary_domain.sub : '__none__';
                                                 block.add(Block('application-domain-list-item', `application_domain_${domain_id}`)
                                                     .data({
                                                         _id: domain_id,
                                                         first: first,
+                                                        sub: primary_domain_sub,
                                                         //selected: primary_domain_sel
                                                     })
                                                 );
@@ -4874,7 +4893,7 @@ app
                         {
                             //console.log('delete_domain');
                             var domain_info = block.key('domain');
-                            console.log(domain_info);
+                            //console.log(domain_info);
                             if (domain_info) {
                                 app.ui.display_modal.generic_confirm("Delete domain", `Permanently delete domain "${domain_info.domain}"?`, (result) => {
                                     if (result) {
@@ -7389,7 +7408,7 @@ app
                                     }
                                 #link
                                     {
-                                        console.log(link);
+                                        //console.log(link);
                                         setTimeout(_ => {
                                             block.parent(2).on('send_resource_update', {
                                                 primary_domain: {
@@ -7402,7 +7421,7 @@ app
                                     {
                                         block.key('primary', primary);
                                         if (primary && primary.id) {
-                                            console.log(primary);
+                                            //console.log(primary);
                                             var children = block.children();
                                             for (var c in children) {
                                                 if (children[c].mark() == `resource_domain_${primary.id}`) {
