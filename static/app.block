@@ -3498,6 +3498,8 @@ app
                                                     }
                             div logs
                                 class value_edge
+                                css
+                                    position relative
                                 text label
                                     val Logs
                                     class label_desc
@@ -3519,6 +3521,43 @@ app
                                             $log_output.scrollTop($log_output[0].scrollHeight);
                                         }, 55);
                                     }
+                                div log_refresh
+                                    css
+                                        position absolute
+                                        top 0
+                                        right 1px
+                                        height 20px
+                                        width 20px
+                                        border-radius 90%
+                                        opacity 0.4
+                                        cursor pointer
+                                        transition opacity 0.2s ease
+                                    image image
+                                        src /img/refresh_b.png
+                                        height 20px
+                                        width 20px
+                                    :mouseover
+                                        css
+                                            opacity 0.8
+                                    :mouseout
+                                        css
+                                            opacity 0.4
+                                    :click
+                                        {
+                                            block.sibling('log_output').on('reset');
+                                            var app_info = block.parent(3).key('application');
+                                            setTimeout(_ => {
+                                                setTimeout(_ => {
+                                                    app.ws.api.signal_application(app_info._id, 'tail');
+                                                }, 20);
+                                                setTimeout(_ => {
+                                                    app.ws.api.get_application_status(app_info._id);
+                                                }, 20);
+                                                setTimeout(_ => {
+                                                    Block.queries();
+                                                }, 30);
+                                            }, 20);
+                                        }
                                 div log_output
                                     class application_log_output
                                     css
@@ -5366,7 +5405,7 @@ app
                                         class value_text
                                         css
                                             font-size 23px
-                                            line-height 28px
+                                            line-height 31px
                                             letter-spacing 1.2px
                             div add_subdomain
                                 class value_edge

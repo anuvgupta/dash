@@ -73,8 +73,7 @@ var api = {
             }
         });
     },
-    /*
-    delete_project: (id, slug, resolve) => {
+    delete_project_by_identifier: (id, slug, resolve) => {
         var _find = {};
         if (id != null) _find['_id'] = mongo_oid(id);
         else if (slug != null) _find['slug'] = slug;
@@ -86,7 +85,6 @@ var api = {
             } else resolve(result1.deletedCount == 1, result1);
         });
     },
-    */
     update_project: (id, update, resolve) => {
         var ts_now = (new Date()).getTime();
         mongo_api.collection('project').findOne({ _id: mongo_oid(id) }, (e, result1) => {
