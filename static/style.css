@@ -384,3 +384,15 @@ div.subdomain_delete_button {
 div.subdomain_delete_button:hover {
     opacity: 0.6;
 }
+
+div.tech_delete_button {
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+    opacity: 0.3;
+    right: -30px;
+    top: 6.5px;
+    position: absolute;
+}
+div.tech_delete_button:hover {
+    opacity: 0.6;
+}

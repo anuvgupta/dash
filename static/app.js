@@ -462,6 +462,16 @@ var app = {
                     application_id: application_id
                 });
             },
+            update_project_tech: (project_id, tech_item, tech_section) => {
+                app.ws.send('update_project_tech', {
+                    id: project_id, tech_item: tech_item, tech_section: tech_section
+                });
+            },
+            remove_project_tech: (project_id, tech_item, tech_section) => {
+                app.ws.send('remove_project_tech', {
+                    id: project_id, tech_item: tech_item, tech_section: tech_section
+                });
+            },
             // domains
             get_domains: (launch = null, associate_resource = null, associate_application = null) => {
                 var data = {};
@@ -618,11 +628,11 @@ var app = {
         test: _ => {
             console.log("[main] testing...");
             setTimeout(_ => {
-                // $('#manage_project_button_61f07dcc4dfe93526f26155f')[0].click();
-                app.ui.block.child('main/menu/applications').node().click();
-                setTimeout(_ => {
-                    $('#manage_application_button_62044dc89dedbb1fda4748a1')[0].click();
-                }, 200);
+                $('#manage_project_button_62044d639dedbb1fda4748a0')[0].click();
+                // app.ui.block.child('main/menu/applications').node().click();
+                // setTimeout(_ => {
+                //     $('#manage_application_button_62044dc89dedbb1fda4748a1')[0].click();
+                // }, 200);
             }, 100);
         },
         test_delay: 100,

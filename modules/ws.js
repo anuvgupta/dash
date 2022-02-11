@@ -358,6 +358,50 @@ var init = _ => {
             });
         }
     });
+    ws_server.bind("update_project_tech", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        var tech_item = req.tech_item ? (`${req.tech_item}`).trim() : '';
+        var tech_section = req.tech_section ? (`${req.tech_section}`).trim() : '';
+        if (id != '' && tech_item != '' && tech_section != '') {
+            m.db.get_project(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("update_project", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("update_project", "project not found", client);
+                var update = {};
+                var update_key = `tech.${tech_section}`;
+                update[update_key] = result1.tech[tech_section];
+                if (!update[update_key].includes(tech_item))
+                    update[update_key].push(tech_item);
+                m.db.update_project(id, update, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("update_project", "database error", client);
+                    return ws_server.return_event_data("update_project", { id: id, project: result2 }, client);
+                });
+            });
+        }
+    });
+    ws_server.bind("remove_project_tech", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        var tech_item = req.tech_item ? (`${req.tech_item}`).trim() : '';
+        var tech_section = req.tech_section ? (`${req.tech_section}`).trim() : '';
+        if (id != '' && tech_item != '' && tech_section != '') {
+            m.db.get_project(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("update_project", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("update_project", "project not found", client);
+                var update = {};
+                var update_key = `tech.${tech_section}`;
+                update[update_key] = result1.tech[tech_section];
+                if (update[update_key].includes(tech_item)) {
+                    for (var i = 0; i < update[update_key].length; i++) {
+                        if (update[update_key][i] === tech_item)
+                            update[update_key].splice(i, 1);
+                    }
+                }
+                m.db.update_project(id, update, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("update_project", "database error", client);
+                    return ws_server.return_event_data("update_project", { id: id, project: result2 }, client);
+                });
+            });
+        }
+    });
 
     // resources
     ws_server.bind("new_resource", (client, req) => {

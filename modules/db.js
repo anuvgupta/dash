@@ -33,7 +33,12 @@ var api = {
             featured: false,
             applications: [],
             link: '',
-            tagline: (`${desc.split(' ').splice(0, 8).join(' ')}...`),
+            tech: {
+                primary: [],
+                secondary: [],
+                languages: []
+            },
+            tagline: (`${desc.split(' ').splice(0, 6).join(' ')}...`),
             description: desc,
             ts_created: timestamp,
             ts_updated: timestamp,
