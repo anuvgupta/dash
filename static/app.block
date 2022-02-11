@@ -2716,6 +2716,16 @@ app
                             block.child('subcontent/application_proxy/https_force/value/switch').data({
                                 val: proxy.https_force === true ? 'on' : 'off'
                             });
+                            // https_cert
+                            var https_cert_alt = proxy.https_cert;
+                            if (https_cert_alt == '') https_cert_alt = '<span class="text_placeholder">/etc/letsencrypt/live/certificate/domain.com/fullchain.pem</span>';
+                            block.child('subcontent/application_proxy/https_cert/value/text').html(`${https_cert_alt}`);
+                            block.child('subcontent/application_proxy/https_cert/value_editor').attribute('value', `${proxy.https_cert}`);
+                            // https_cert_key
+                            var https_cert_key_alt = proxy.https_cert_key;
+                            if (https_cert_key_alt == '') https_cert_key_alt = '<span class="text_placeholder">/etc/letsencrypt/live/certificate/domain.com/privkey.pem</span>';
+                            block.child('subcontent/application_proxy/https_cert_key/value/text').html(`${https_cert_key_alt}`);
+                            block.child('subcontent/application_proxy/https_cert_key/value_editor').attribute('value', `${proxy.https_cert_key}`);
                         }
                     :status_update
                         {
@@ -2734,6 +2744,8 @@ app
                                 block.child('subcontent/application_ecosystem/interpreter/value_editor').on('hide');
                                 block.child('subcontent/application_info/more_menu').on('hide');
                                 block.child('subcontent/application_process/signal_toast').on('hide');
+                                block.child('subcontent/application_proxy/https_cert').on('hide');
+                                block.child('subcontent/application_proxy/https_cert_key').on('hide');
                             //}, 200);
                         }
                     :receive_application_update
@@ -4776,6 +4788,160 @@ app
                                                 });
                                                 event.stopPropagation();
                                             }
+                            div https_cert
+                                class value_edge
+                                text label
+                                    val HTTPS Certificate
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val /etc/letsencrypt/live/certificate/domain.com/fullchain.pem
+                                        class value_text
+                                        css
+                                            font-size 17px
+                                            word-break break-all
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 3px
+                                            height 17px
+                                            width 17px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').proxy.https_cert;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder /etc/letsencrypt/live/certificate/domain.com/fullchain.pem
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 17px
+                                        width 90%
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_application_update', {
+                                                        'proxy.https_cert': value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            div https_cert_key
+                                class value_edge
+                                text label
+                                    val HTTPS Certificate Key
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val /etc/letsencrypt/live/certificate/domain.com/privkey.pem
+                                        class value_text
+                                        css
+                                            font-size 17px
+                                            word-break break-all
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 3px
+                                            height 17px
+                                            width 17px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').proxy.https_cert_key;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder /etc/letsencrypt/live/certificate/domain.com/privkey.pem
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 17px
+                                        width 90%
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_application_update', {
+                                                        'proxy.https_cert_key': value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
                             div end_spacer
                                 css
                                     height 40px
