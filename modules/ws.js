@@ -922,6 +922,68 @@ var init = _ => {
             });
         }
     });
+    ws_server.bind("push_application_proxy", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        if (id != '') {
+            m.db.get_application(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("push_application_proxy", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("push_application_proxy", "application not found", client);
+                var application_resource_id = result1.host;
+                if (application_resource_id != 'none') {
+                    m.db.get_resource(application_resource_id, null, (success2, result2) => {
+                        if (success2 === false) return ws_server.return_event_error("push_application_proxy", "database error", client);
+                        if (result2 == null) return ws_server.return_event_error("push_application_proxy", "resource not found", client);
+                        if (result2.software.nginx_root != "") {
+                            var ws_daemon_client = m.ws.get_daemon_client(application_resource_id);
+                            if (ws_daemon_client != null && ws_server.clients.hasOwnProperty(ws_daemon_client.id)) {
+                                var nginx_site_config = m.main.gen_nginx_proxy_config(result1.proxy);
+                                ws_server.send_to_client('proxy_config', {
+                                    application: id,
+                                    proxy_settings: result1.proxy,
+                                    nginx_root: result2.software.nginx_root,
+                                    nginx_config: nginx_site_config
+                                }, ws_daemon_client);
+                            }
+                        } else {
+                            ws_server.send_to_client('push_application_proxy_res_daemon_res', {
+                                success: true, data: {
+                                    success: false,
+                                    message: 'No host NGINX root!',
+                                    application_id: id
+                                }
+                            }, client);
+                        }
+                    });
+                } else {
+                    ws_server.send_to_client('push_application_proxy_res_daemon_res', {
+                        success: true, data: {
+                            success: false,
+                            message: 'No host selected!',
+                            application_id: id
+                        }
+                    }, client);
+                }
+            });
+        }
+    });
+    ws_server.bind("push_application_proxy_res_daemon", (client, req) => {
+        var application_id = req.application_id ? (`${req.application_id}`).trim() : '';
+        var success = req.success && req.success === true;
+        var message = req.message ? (`${req.message}`).trim() : '';
+        if (application_id != '' && message != '') {
+            m.db.get_application(application_id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("push_application_proxy_res_daemon", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("push_application_proxy_res_daemon", "application not found", client);
+                ws_server.send_to_group("push_application_proxy_res_daemon_res", {
+                    success: true, data: {
+                        success: success,
+                        message: message,
+                        application_id: application_id
+                    }
+                }, "app");
+            });
+        }
+    });
 
     // daemon
     ws_server.bind("sync_daemon", (client, req) => {

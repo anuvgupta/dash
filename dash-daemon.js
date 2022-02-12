@@ -90,6 +90,18 @@ const app = {
             // TODO: queue signal for processing later? or maybe not
         }
     },
+    process_proxy_config: (application_id, nginx_root, nginx_config, proxy_settings, resolve) => {
+        app.log(`processing nginx proxy for app ${application_id}`);
+        if (db.ecosystem.hasOwnProperty(application_id)) {
+            app.log(`found application ${application_id}`);
+            var app_ecosystem = db.ecosystem[application_id];
+            var app_name = app_ecosystem.name;
+            // pm[`${signal}_process`] && pm[`${signal}_process`](app_ecosystem, application_id, (success = true) => {
+            //     resolve(success, `<b>${app_ecosystem.name}</b> received <b>${signal.toUpperCase()}</b>`);
+            // });
+            console.log(nginx_config);
+        } else resolve(false, `App ${app_ecosystem.name} not in ecosystem`);
+    },
     refresh_ecosystem: (ecosystem) => {
         app.log("refreshing ecosystem");
         for (var e in db.ecosystem) {
@@ -216,6 +228,12 @@ const ws = {
                     });
                 }
                 break;
+            case 'proxy_config':
+                ws.log(`received nginx proxy config for application "${data.application}"`);
+                app.process_proxy_config(data.application, data.nginx_root, data.nginx_config, data.proxy_settings, (success, message) => {
+                    ws.api.proxy_config_respond(data.application, success, message);
+                });
+                break;
             case 'hb':
                 ws.api.hb_respond();
                 break;
@@ -233,6 +251,12 @@ const ws = {
         },
         signal_respond: (application_id, success, message) => {
             ws.send('signal_application_res_daemon', {
+                application_id: application_id,
+                success: success, message: message
+            });
+        },
+        proxy_config_respond: (application_id, success, message) => {
+            ws.send('push_application_proxy_res_daemon', {
                 application_id: application_id,
                 success: success, message: message
             });

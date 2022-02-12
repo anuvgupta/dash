@@ -52,6 +52,11 @@ var api = {
             m.main.resource_monitor();
         }, m.main.resource_monitor_interval * 1000);
     },
+    gen_nginx_proxy_config: (proxy_settings) => {
+        if (proxy_settings) return null;
+        var proxy_config_text = '';
+        return (proxy_config_text != '' ? proxy_config_text : null);
+    }
 };
 
 

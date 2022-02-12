@@ -594,6 +594,11 @@ var app = {
                     domain_id: domain_id
                 });
             },
+            push_application_proxy: (id) => {
+                app.ws.send('push_application_proxy', {
+                    id: id,
+                });
+            },
             // ideas
             get_ideas: () => {
                 app.ws.send('get_ideas', {});
@@ -630,11 +635,11 @@ var app = {
             setTimeout(_ => {
                 // $('#manage_project_button_62044d639dedbb1fda4748a0')[0].click();
 
-                // app.ui.block.child('main/menu/applications').node().click();
-                // setTimeout(_ => {
-                //     $('#manage_application_button_62044dc89dedbb1fda4748a1')[0].click();
-                // }, 200);
-            }, 100);
+                app.ui.block.child('main/menu/applications').node().click();
+                setTimeout(_ => {
+                    $('#manage_application_button_62044dc89dedbb1fda4748a1')[0].click();
+                }, 300);
+            }, 200);
         },
         test_delay: 100,
     }
