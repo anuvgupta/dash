@@ -628,7 +628,8 @@ var app = {
         test: _ => {
             console.log("[main] testing...");
             setTimeout(_ => {
-                $('#manage_project_button_62044d639dedbb1fda4748a0')[0].click();
+                // $('#manage_project_button_62044d639dedbb1fda4748a0')[0].click();
+
                 // app.ui.block.child('main/menu/applications').node().click();
                 // setTimeout(_ => {
                 //     $('#manage_application_button_62044dc89dedbb1fda4748a1')[0].click();

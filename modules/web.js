@@ -41,13 +41,26 @@ var init = _ => {
     express_api.get("/api/projects", (req, res) => {
         m.db.project_summary((success, result) => {
             if (success && result) {
-                for (var r in result) {
-                    delete result[r]['_id'];
-                    delete result[r]['public'];
-                    delete result[r]['domains'];
+                for (var p in result.projects) {
+                    delete result.projects[p]['_id'];
+                    delete result.projects[p]['public'];
+                    delete result.projects[p]['applications'];
+                    delete result.projects[p]['domains'];
+                }
+                for (var a in result.applications) {
+                    result.applications[a] = {
+                        slug: result.applications[a].slug,
+                        name: result.applications[a].name,
+                        description: result.applications[a].description,
+                        status: result.applications[a].status,
+                        status_time: result.applications[a].status_time,
+                        ts_created: result.applications[a].ts_created,
+                        ts_updated: result.applications[a].ts_updated
+                    };
                 }
                 web_return_data(req, res, {
-                    project_summary: result
+                    projects: result.projects,
+                    applications: result.applications
                 });
             } else web_return_error(req, res, 500, "server error");
         });

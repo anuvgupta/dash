@@ -171,8 +171,30 @@ var api = {
                 err("error summarizing projects", e.message ? e.message : e);
                 resolve(false, e);
             } else {
-                if (result1) resolve(true, result1);
-                else resolve(null, result1);
+                if (result1) {
+                    console.log(result1);
+                    var app_ids = [];
+                    for (var p in result1)
+                        app_ids = app_ids.concat(result1[p].applications);
+                    for (var a in app_ids)
+                        app_ids[a] = mongo_oid(app_ids[a]);
+                    mongo_api.collection('application').find({
+                        _id: { $in: app_ids },
+                    }).toArray((e2, result2) => {
+                        console.log(result2);
+                        if (e2) {
+                            err("error summarizing projects - retrieving applications", e2.message ? e2.message : e2);
+                            resolve(false, e2);
+                        } else {
+                            if (result2) {
+                                resolve(true, {
+                                    projects: result1,
+                                    applications: result2
+                                });
+                            } else resolve(null, result2);
+                        }
+                    });
+                } else resolve(null, result2);
             }
         });
     },
