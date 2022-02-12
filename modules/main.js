@@ -64,17 +64,15 @@ var api = {
         for (var d in domains) {
             var domain_name = domains[d].domain;
             server_names += domain_name + ' ';
-            if ((domain_name.match(/\./g) || []).length == 1)
+            if (proxy_settings.www === true && (domain_name.match(/\./g) || []).length == 1)
                 server_names += `www.${domain_name} `;
         }
         server_names = server_names.trim();
         if (server_names == '') return null;
         // generate nginx config object
         var proxy_config_obj = {
-            'server': {
-                'listen': [
-                    "80", "[::]:80"
-                ],
+            'server': [{
+                'listen': ["80", "[::]:80"],
                 'server_name': `${server_names}`,
                 'location /': {
                     'proxy_pass': `http://127.0.0.1:${port[0]}`,
@@ -85,10 +83,33 @@ var api = {
                         "X-Forwarded-Proto $scheme"
                     ],
                 }
-            }
+            }]
         };
+        if (proxy_settings.htaccess_deny === true) {
+            proxy_config_obj['server'][0]['location ~ /\\.ht'] = {
+                'deny': "all"
+            };
+        }
         if (proxy_settings.ws_enable === true) {
-            // TODO: set up websocket forwarding
+            var ws_endpoint = "";
+            if (proxy_settings.ws_enable_path.trim() != '') {
+                ws_endpoint = proxy_settings.ws_enable_path.trim();
+                proxy_config_obj['server'][0][`location /${ws_endpoint}`] = JSON.parse(JSON.stringify(proxy_config_obj['server'][0]['location /']));
+            }
+            proxy_config_obj['server'][0][`location /${ws_endpoint}`] = Object.assign(proxy_config_obj['server'][0][`location /${ws_endpoint}`], {
+                'proxy_pass': `http://127.0.0.1:${port.length >= 2 && ws_endpoint != '' ? port[1] : port[0]}`,
+                'proxy_http_version': "1.1",
+                'proxy_set_header': ['Upgrade $http_upgrade', 'Connection $connection_upgrade'].concat(proxy_config_obj['server'][0][`location /${ws_endpoint}`]['proxy_set_header']),
+                'proxy_connect_timeout': "7d",
+                'proxy_send_timeout': "7d",
+                'proxy_read_timeout': "7d"
+            });
+        }
+        if (proxy_settings.https_enable === true) {
+            // TODO: duplicate regular config, modify listening port, add ssl cert
+        }
+        if (proxy_settings.https_force === true) {
+            proxy_config_obj['server']['location /']['return'] = "301 https://$host$request_uri";
         }
         log(proxy_config_obj);
         return proxy_config_obj;

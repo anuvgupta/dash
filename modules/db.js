@@ -207,6 +207,11 @@ var api = {
             twoLevel: sld,
             topLevel: tld,
             subdomains: [],
+            certificate: {
+                host: "",
+                cert_path: "",
+                cert_key_path: ""
+            },
             ts_created: timestamp,
             ts_updated: timestamp
         }, (e, result1) => {
