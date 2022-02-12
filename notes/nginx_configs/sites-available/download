@@ -1,0 +1,17 @@
+# download
+server {
+        listen 80;
+        listen [::]:80;
+
+        server_name download.anuv.me dl.anuv.me;
+
+        root /home/ubuntu/nodejs-apps/download;
+        index index.html;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+	location ~ /\.ht {
+                deny all;
+        }
+}

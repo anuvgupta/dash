@@ -1,0 +1,148 @@
+{
+    "apps": [
+        {
+            "name": "moon",
+            "script": "/home/ubuntu/nodejs-apps/moon/moon.js",
+            "cwd": "/home/ubuntu/nodejs-apps/moon",
+            "error_file": "/home/ubuntu/nodejs-apps/moon/moon.log",
+            "out_file": "/home/ubuntu/nodejs-apps/moon/moon.log",
+            "interpreter": "/usr/local/bin/node",
+            "args": "prod",
+            "max_memory_restart": "200M",
+            "restart_delay": "3000"
+        },
+        {
+            "name": "phue-gateway",
+            "script": "/home/ubuntu/nodejs-apps/phue-gateway/external/gateway-external.js",
+            "cwd": "/home/ubuntu/nodejs-apps/phue-gateway/external",
+            "error_file": "/home/ubuntu/nodejs-apps/phue-gateway/external/gateway-external.log",
+            "out_file": "/home/ubuntu/nodejs-apps/phue-gateway/external/gateway-external.log",
+            "interpreter": "/usr/local/bin/node",
+            "args": "prod",
+            "max_memory_restart": "200M",
+            "restart_delay": "3000"
+        },
+        {
+            "name": "simplicity-frontend",
+            "script": "/home/ubuntu/nodejs-apps/simplicity-cloud/frontend/serve.sh",
+            "cwd": "/home/ubuntu/nodejs-apps/simplicity-cloud/frontend",
+            "error_file": "/home/ubuntu/nodejs-apps/simplicity-cloud/frontend/frontend.log",
+            "out_file": "/home/ubuntu/nodejs-apps/simplicity-cloud/frontend/frontend.log",
+            "interpreter": "/bin/bash",
+            "max_memory_restart": "100M",
+            "restart_delay": "3000"
+        },
+        {
+            "name": "simplicity-backend",
+            "script": "/home/ubuntu/nodejs-apps/simplicity-cloud/serve.sh",
+            "cwd": "/home/ubuntu/nodejs-apps/simplicity-cloud",
+            "error_file": "/home/ubuntu/nodejs-apps/simplicity-cloud/backend.log",
+            "out_file": "/home/ubuntu/nodejs-apps/simplicity-cloud/backend.log",
+            "interpreter": "/bin/bash",
+            "max_memory_restart": "100M",
+            "restart_delay": "3000"
+        },
+        {
+            "name": "games",
+            "script": "/home/ubuntu/nodejs-apps/games/games.js",
+            "cwd": "/home/ubuntu/nodejs-apps/games",
+            "error_file": "/home/ubuntu/nodejs-apps/games/games.log",
+            "out_file": "/home/ubuntu/nodejs-apps/games/games.log",
+            "interpreter": "/usr/local/bin/node",
+            "args": "prod",
+            "max_memory_restart": "100M",
+            "restart_delay": "3000"
+        },
+        {
+            "name": "monarch-game",
+            "script": "/home/ubuntu/nodejs-apps/monarch-game/game.js",
+            "cwd": "/home/ubuntu/nodejs-apps/monarch-game",
+            "error_file": "/home/ubuntu/nodejs-apps/monarch-game/game.log",
+            "out_file": "/home/ubuntu/nodejs-apps/monarch-game/game.log",
+            "interpreter": "/usr/local/bin/node",
+            "max_memory_restart": "100M",
+            "restart_delay": "3000"
+        },
+        {
+            "name": "uncurated",
+            "script": "/home/ubuntu/nodejs-apps/uncurated/web.js",
+            "cwd": "/home/ubuntu/nodejs-apps/uncurated",
+            "error_file": "/home/ubuntu/nodejs-apps/uncurated/web.log",
+            "out_file": "/home/ubuntu/nodejs-apps/uncurated/web.log",
+            "interpreter": "/usr/local/bin/node",
+            "max_memory_restart": "100M",
+            "restart_delay": "3000"
+        },
+        {
+            "name": "nestor",
+            "script": "/home/ubuntu/nodejs-apps/nestor/backend/nestor.js",
+            "cwd": "/home/ubuntu/nodejs-apps/nestor/backend",
+            "error_file": "/home/ubuntu/nodejs-apps/nestor/backend/nestor.log",
+            "out_file": "/home/ubuntu/nodejs-apps/nestor/backend/nestor.log",
+            "interpreter": "/usr/local/bin/node",
+            "args": "prod",
+            "max_memory_restart": "100M",
+            "restart_delay": "3000"
+        },
+        {
+            "name": "led-lights",
+            "script": "/home/ubuntu/nodejs-apps/led-lights/ledlights.js",
+            "cwd": "/home/ubuntu/nodejs-apps/led-lights",
+            "error_file": "/home/ubuntu/nodejs-apps/led-lights/ledlights.log",
+            "out_file": "/home/ubuntu/nodejs-apps/led-lights/ledlights.log",
+            "interpreter": "/usr/local/bin/node",
+            "max_memory_restart": "100M",
+            "restart_delay": "3000"
+        },
+        {
+            "name": "rokutv-remote",
+            "script": "/home/ubuntu/nodejs-apps/rokutv-remote/roku.js",
+            "cwd": "/home/ubuntu/nodejs-apps/rokutv-remote",
+            "error_file": "/home/ubuntu/nodejs-apps/rokutv-remote/roku.log",
+            "out_file": "/home/ubuntu/nodejs-apps/rokutv-remote/roku.log",
+            "interpreter": "/usr/local/bin/node",
+            "max_memory_restart": "100M",
+            "restart_delay": "3000"
+        },
+        {
+            "name": "tcp-chat",
+            "script": "/home/ubuntu/nodejs-apps/tcp-chat/chat.js",
+            "cwd": "/home/ubuntu/nodejs-apps/tcp-chat",
+            "error_file": "/home/ubuntu/nodejs-apps/tcp-chat/chat.log",
+            "out_file": "/home/ubuntu/nodejs-apps/tcp-chat/chat.log",
+            "interpreter": "/usr/local/bin/node",
+            "max_memory_restart": "100M",
+            "restart_delay": "3000"
+        },
+        {
+            "name": "rubbr-sio",
+            "script": "/home/ubuntu/nodejs-apps/rubbr-sio/rubbr.js",
+            "cwd": "/home/ubuntu/nodejs-apps/rubbr-sio",
+            "error_file": "/home/ubuntu/nodejs-apps/rubbr-sio/rubbr.log",
+            "out_file": "/home/ubuntu/nodejs-apps/rubbr-sio/rubbr.log",
+            "interpreter": "/usr/local/bin/node",
+            "max_memory_restart": "100M",
+            "restart_delay": "3000"
+        },
+        {
+            "name": "messenger",
+            "script": "/home/ubuntu/nodejs-apps/messenger/app.js",
+            "cwd": "/home/ubuntu/nodejs-apps/messenger",
+            "error_file": "/home/ubuntu/nodejs-apps/messenger/app.log",
+            "out_file": "/home/ubuntu/nodejs-apps/messenger/app.log",
+            "interpreter": "/usr/local/bin/node",
+            "max_memory_restart": "100M",
+            "restart_delay": "3000"
+        },
+        {
+            "name": "tokens",
+            "script": "/home/ubuntu/nodejs-apps/tokens/tokens.js",
+            "cwd": "/home/ubuntu/nodejs-apps/tokens",
+            "error_file": "/home/ubuntu/nodejs-apps/tokens/tokens.log",
+            "out_file": "/home/ubuntu/nodejs-apps/tokens/tokens.log",
+            "interpreter": "/usr/local/bin/node",
+            "max_memory_restart": "100M",
+            "restart_delay": "3000"
+        }
+    ]
+}
