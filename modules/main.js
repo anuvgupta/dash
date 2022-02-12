@@ -52,9 +52,53 @@ var api = {
             m.main.resource_monitor();
         }, m.main.resource_monitor_interval * 1000);
     },
-    gen_nginx_proxy_config: (proxy_settings) => {
-        if (proxy_settings) return null;
+    gen_nginx_proxy_config: (proxy_settings, application, host_resource, domains) => {
+        if (!proxy_settings) return null;
+        // parse port(s)
+        var port = application.port ? application.port.trim() : '';
+        if (port == '') return null;
+        port = port.split('/');
+        if (port.length <= 0) return null;
+        // create server name list
+        var server_names = '';
+        for (var d in domains) {
+            var domain_name = domains[d].domain;
+            server_names += domain_name + ' ';
+            if ((domain_name.match(/\./g) || []).length == 1)
+                server_names += `www.${domain_name} `;
+        }
+        server_names = server_names.trim();
+        if (server_names == '') return null;
+        // generate nginx config object
+        var proxy_config_obj = {
+            'server': {
+                'listen': [
+                    "80", "[::]:80"
+                ],
+                'server_name': `${server_names}`,
+                'location /': {
+                    'proxy_pass': `http://127.0.0.1:${port[0]}`,
+                    'proxy_set_header': [
+                        "Host $host",
+                        "X-Real-IP $remote_addr",
+                        "X-Forwarded-For $proxy_add_x_forwarded_for",
+                        "X-Forwarded-Proto $scheme"
+                    ],
+                }
+            }
+        };
+        if (proxy_settings.ws_enable === true) {
+            // TODO: set up websocket forwarding
+        }
+        log(proxy_config_obj);
+        return proxy_config_obj;
+        return null;
+    },
+    convert_nginx_proxy_config_obj: (proxy_config_obj) => {
+        if (!proxy_config_obj) return null;
         var proxy_config_text = '';
+        proxy_config_text += 'server {';
+        proxy_config_text += "}";
         return (proxy_config_text != '' ? proxy_config_text : null);
     }
 };

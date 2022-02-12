@@ -242,6 +242,20 @@ var api = {
             }
         });
     },
+    get_domains_by_ids: (ids, resolve) => {
+        for (var i in ids) ids[i] = mongo_oid(ids[i]);
+        mongo_api.collection('domain').find({
+            _id: { $in: ids }
+        }).toArray((e, result1) => {
+            if (e) {
+                err("error finding domains", e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (result1) resolve(true, result1);
+                else resolve(null, result1);
+            }
+        });
+    },
     update_domain: (id, update, resolve) => {
         var ts_now = (new Date()).getTime();
         mongo_api.collection('domain').findOne({ _id: mongo_oid(id) }, (e, result1) => {
@@ -482,7 +496,8 @@ var api = {
                 https_cert: "",
                 https_cert_key: "",
                 ws_enable: false,
-                ws_enable_path: "socket"
+                ws_enable_path: "socket",
+                nginx_config_export: "",
             },
             primary_domain: { id: '', sub: '' },
             domains: [],
