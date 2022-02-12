@@ -390,9 +390,21 @@ div.tech_delete_button {
     transition: opacity 0.15s ease;
     opacity: 0.3;
     right: -30px;
-    top: 6.5px;
+    top: 6px;
     position: absolute;
 }
 div.tech_delete_button:hover {
+    opacity: 0.6;
+}
+
+div.tech_delete_button_small {
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+    opacity: 0.3;
+    right: -30px;
+    top: 2.5px;
+    position: absolute;
+}
+div.tech_delete_button_small:hover {
     opacity: 0.6;
 }
