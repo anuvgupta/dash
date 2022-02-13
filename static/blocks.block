@@ -2352,6 +2352,7 @@
         {
             data('_id', (_id) => {
                 block.key('id', _id.toString());
+                block.child('domain_content/content/mdl_button_container/button').id(`manage_domain_button_${_id.toString()}`);
             });
             data('domain', (domain) => {
                 block.key('domain', domain.toString());
@@ -3138,6 +3139,350 @@
                     select_block.child('__none__').attribute('selected', 'selected');
                     select_block.node().value = '__none__';
                 }
+            });
+            data('first', (first) => {
+                block.key('first', first);
+            });
+        }
+!domain-certificate-list-item
+    init
+        {
+            var block = Block('div');
+            block
+                .css({
+                    height: '160px',
+                    width: '100%',
+                    marginBottom: '3px',
+                })
+                .add(Block('div', 'block')
+                    .css({
+                        height: '100%',
+                        borderBottom: '1px solid #f6f6f6',
+                        position: 'relative',
+                        width: '100%',
+                    })
+                    .add(Block('div', 'spacer')
+                        .css({ height: '12px' })
+                    )
+                    .add(Block('text', 1)
+                        .css({
+                            fontSize: '16px',
+                            letterSpacing: '0.6px',
+                            paddingLeft: '7px',
+                            color: '#444',
+                        })
+                    )
+                    .add(Block('div', 'subdomain')
+                        .css({
+                            display: 'inline-block',
+                            marginLeft: '15px',
+                            height: '27px',
+                            width: '150px',
+                        })
+                        .add(Block('select', 1)
+                            .css({
+                                'padding': '0 3px',
+                                fontSize: '14px',
+                                letterSpacing: '1px',
+                                color: '#444',
+                                fontWeight: '300',
+                                height: '100%',
+                                width: '100%',
+                                borderRadius: '3px',
+                                cursor: 'pointer',
+                                textAlign: 'left'
+                            })
+                            .add(Block('option', '__default__')
+                                .html('Default').attribute('value', '__default__')
+                            )
+                            .on('input', (e, b, d) => {
+                                block.parent().data({ update_item: {
+                                    id: block.key('id'),
+                                    update: {
+                                        subdomain: b.node().value === '__default__' ? '' : b.node().value
+                                    }
+                                } });
+                            })
+                        )
+                    )
+                    .add(Block('div', 'cert_path')
+                        .class('value_edge')
+                        .css({ marginTop: '15px' })
+                        .add(Block('text', 'label')
+                            .data('SSL Certificate')
+                            .class('label_desc')
+                            .css({
+                                fontSize: '10px',
+                                marginBottom: '0',
+                                height: '14px',
+                            })
+                        )
+                        .add(Block('div', 'value')
+                            .class('value_text_wrap')
+                            .css('height', '10px')
+                            .add(Block('text', 'text')
+                                .data('/etc/letsencrypt/live/certificate/domain.com/fullchain.pem')
+                                .class('value_text')
+                                .css({
+                                    fontSize: '12px',
+                                    wordBreak: 'break-all'
+                                })
+                            )
+                            .on('mouseover', (e, b, d) => {
+                                if (b.child('edit_button').key('showing') == 'off')
+                                    b.child('edit_button').on('show');
+                            })
+                            .on('mouseout', (e, b, d) => {
+                                if (b.child('edit_button').key('showing') == 'on')
+                                    b.child('edit_button').on('hide');
+                            })
+                            .add(Block('edit-button', 'edit_button')
+                                .css({
+                                    marginLeft: '14px',
+                                    paddingTop: '3px',
+                                    height: '17px',
+                                    width: '17px',
+                                })
+                                .on('click', (e, b, d) => {
+                                    b.parent().css('display', 'none')
+                                        .sibling('value_editor').css('display', 'block');
+                                    b.parent().sibling('value_editor').node().value = block.key('cert_path');
+                                    setTimeout(_ => {
+                                        b.parent().sibling('value_editor').node().select();
+                                    }, 15);
+                                })
+                            )
+                        )
+                        .add(Block('input', 'value_editor')
+                            .class('value_editor')
+                            .attribute('placeholder', '/etc/letsencrypt/live/certificate/domain.com/fullchain.pem')
+                            .css({
+                                display: 'none',
+                                height: '25px',
+                                marginTop: '-1px',
+                                marginLeft: '-2px',
+                                marginBottom: '2px',
+                                fontSize: '12px',
+                                width: '90%'
+                            })
+                            .on('hide', (e, b, d) => {
+                                b.css('display', 'none').sibling('value').css('display', 'table');
+                                e.stopPropagation();
+                            })
+                            .on('keyup', (e, b, d) => {
+                                if (e.keyCode == 13) {
+                                    // enter
+                                    var value = b.node().value;
+                                    if (!value) value = '';
+                                    value = (`${value}`).trim();
+                                    //if (value.length > 0) {
+                                        block.parent().data({ update_item: {
+                                            id: block.key('id'),
+                                            update: {
+                                                cert_path: value
+                                            }
+                                        } });
+                                    //}
+                                    setTimeout(_ => { b.on('hide'); }, 250);
+                                } else if (e.keyCode == 27) {
+                                    // escape
+                                    b.on('hide');
+                                }
+                                e.stopPropagation();
+                            })
+                        )
+                    )
+                    .add(Block('div', 'cert_key_path')
+                        .class('value_edge')
+                        .css({marginTop: '10px'})
+                        .add(Block('text', 'label')
+                            .data('SSL Certificate Key')
+                            .class('label_desc')
+                            .css({
+                                fontSize: '10px',
+                                marginBottom: '0',
+                                height: '14px',
+                            })
+                        )
+                        .add(Block('div', 'value')
+                            .class('value_text_wrap')
+                            .css('height', '10px')
+                            .add(Block('text', 'text')
+                                .data('/etc/letsencrypt/live/certificate/domain.com/privkey.pem')
+                                .class('value_text')
+                                .css({
+                                    fontSize: '12px',
+                                    wordBreak: 'break-all'
+                                })
+                            )
+                            .on('mouseover', (e, b, d) => {
+                                if (b.child('edit_button').key('showing') == 'off')
+                                    b.child('edit_button').on('show');
+                            })
+                            .on('mouseout', (e, b, d) => {
+                                if (b.child('edit_button').key('showing') == 'on')
+                                    b.child('edit_button').on('hide');
+                            })
+                            .add(Block('edit-button', 'edit_button')
+                                .css({
+                                    marginLeft: '14px',
+                                    paddingTop: '3px',
+                                    height: '17px',
+                                    width: '17px',
+                                })
+                                .on('click', (e, b, d) => {
+                                    b.parent().css('display', 'none')
+                                        .sibling('value_editor').css('display', 'block');
+                                    b.parent().sibling('value_editor').node().value = block.key('cert_key_path');
+                                    setTimeout(_ => {
+                                        b.parent().sibling('value_editor').node().select();
+                                    }, 15);
+                                })
+                            )
+                        )
+                        .add(Block('input', 'value_editor')
+                            .class('value_editor')
+                            .attribute('placeholder', '/etc/letsencrypt/live/certificate/domain.com/fullchain.pem')
+                            .css({
+                                display: 'none',
+                                height: '25px',
+                                marginTop: '-1px',
+                                marginLeft: '-2px',
+                                marginBottom: '2px',
+                                fontSize: '12px',
+                                width: '90%'
+                            })
+                            .on('hide', (e, b, d) => {
+                                b.css('display', 'none').sibling('value').css('display', 'table');
+                                e.stopPropagation();
+                            })
+                            .on('keyup', (e, b, d) => {
+                                if (e.keyCode == 13) {
+                                    // enter
+                                    var value = b.node().value;
+                                    if (!value) value = '';
+                                    value = (`${value}`).trim();
+                                    //if (value.length > 0) {
+                                        block.parent().data({ update_item: {
+                                            id: block.key('id'),
+                                            update: {
+                                                cert_key_path: value
+                                            }
+                                        } });
+                                    //}
+                                    setTimeout(_ => { b.on('hide'); }, 250);
+                                } else if (e.keyCode == 27) {
+                                    // escape
+                                    b.on('hide');
+                                }
+                                e.stopPropagation();
+                            })
+                        )
+                    )
+                    .add(Block('block', 'delete')
+                        .css({
+                            position: 'absolute',
+                            right: '1px',
+                            top: '3px',
+                            width: '40px',
+                            height: '40px'
+                        })
+                        .add(Block('block', 'wrap')
+                            .css({
+                                width: '30px',
+                                height: '30px',
+                                margin: '0 auto'
+                            })
+                            .add(Block('image', 1)
+                                .data({
+                                    src: '/img/delete_b.png',
+                                    height: '22px',
+                                    width: '22px',
+                                    css: {
+                                        margin: '0 auto',
+                                        opacity: '0.6',
+                                        transition: 'opacity 0.2s ease',
+                                        cursor: 'pointer'
+                                    }
+                                })
+                                .on('mouseover', (e, b, d) => {
+                                    b.css('opacity', '0.85');
+                                })
+                                .on('mouseout', (e, b, d) => {
+                                    b.css('opacity', '0.6');
+                                })
+                                .on('click', (e, b, d) => {
+                                    block.parent().data({
+                                        del: block.key('id')
+                                    });
+                                })
+                            )
+                        )
+                    )
+                )
+            ;
+            return block;
+        }
+    load
+        {
+            data('_id', (_id) => {
+                block.key('id', _id.toString());
+                _id = parseInt(_id);
+                block.child('block/text').html('').data(`#${_id + 1}`);
+            });
+            data('domain', (domain) => {
+                block.key('domain_name', domain.toString());
+                var subdomains = block.key('subdomains');
+                if (subdomains)
+                    block.data({ subdomains: subdomains });
+            });
+            data('subdomains', (subdomains) => {
+                block.key('subdomains', subdomains);
+                var domain = block.key('domain_name');
+                if (!domain) domain = '';
+                var select_block = block.child('block/subdomain/select');
+                select_block.html('').add(Block('option', '__default__')
+                    .html(`${domain == '' ? 'Default' : domain}`).attribute('value', '__default__')
+                );
+                for (var s in subdomains) {
+                    select_block.add(Block('option', subdomains[s])
+                        .html(`${subdomains[s]}.${domain}`).attribute('value', subdomains[s])
+                    );
+                }
+                if (block.key('sub') != '' && block.key('sub') != null) {
+                    block.data({ sub: block.key('sub') });
+                }
+            });
+            data('subdomain', sub => {
+                block.key('sub', sub);
+                var select_block = block.child('block/subdomain/select');
+                var children = select_block.children();
+                for (var c in children) {
+                    children[c].node().removeAttribute('selected');
+                }
+                if (select_block.child(sub) != null) {
+                    select_block.child(sub).attribute('selected', 'selected');
+                    select_block.node().value = sub;
+                } else {
+                    select_block.child('__default__').attribute('selected', 'selected');
+                    select_block.node().value = '__default__';
+                }
+            });
+            data('cert_path', cert_path => {
+                block.key('cert_path', cert_path);
+                var value_alt = `${cert_path}`;
+                if (value_alt == '')
+                    value_alt = "<span class='text_placeholder'>/etc/letsencrypt/live/certificate/domain.com/fullchain.pem</span>";
+                block.child('block/cert_path/value/text').html(`${value_alt}`);
+                block.child('block/cert_path/value_editor').attribute('value', `${cert_path}`);
+            });
+            data('cert_key_path', cert_key_path => {
+                block.key('cert_key_path', cert_key_path);
+                var value_alt = `${cert_key_path}`;
+                if (value_alt == '')
+                    value_alt = "<span class='text_placeholder'>/etc/letsencrypt/live/certificate/domain.com/privkey.pem</span>";
+                block.child('block/cert_key_path/value/text').html(`${value_alt}`);
+                block.child('block/cert_key_path/value_editor').attribute('value', `${cert_key_path}`);
             });
             data('first', (first) => {
                 block.key('first', first);

@@ -506,6 +506,21 @@ var app = {
                     id: id, remove_subdomain: remove_subdomain
                 });
             },
+            add_domain_certificate: (id) => {
+                app.ws.send('add_domain_certificate', {
+                    id: id,
+                });
+            },
+            remove_domain_certificate: (id, cert_idx) => {
+                app.ws.send('remove_domain_certificate', {
+                    id: id, cert_index: cert_idx
+                });
+            },
+            update_domain_certificate: (id, cert_idx, update) => {
+                app.ws.send('update_domain_certificate', {
+                    id: id, cert_idx: cert_idx, update: update
+                });
+            },
             // resources
             get_resources: () => {
                 app.ws.send('get_resources', {});
@@ -635,9 +650,14 @@ var app = {
             setTimeout(_ => {
                 // $('#manage_project_button_62044d639dedbb1fda4748a0')[0].click();
 
-                app.ui.block.child('main/menu/applications').node().click();
+                // app.ui.block.child('main/menu/applications').node().click();
+                // setTimeout(_ => {
+                //     $('#manage_application_button_62044dc89dedbb1fda4748a1')[0].click();
+                // }, 300);
+
+                app.ui.block.child('main/menu/domains').node().click();
                 setTimeout(_ => {
-                    $('#manage_application_button_62044dc89dedbb1fda4748a1')[0].click();
+                    $('#manage_domain_button_62084a7ddb1f7411ede8d588')[0].click();
                 }, 300);
             }, 200);
         },

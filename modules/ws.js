@@ -643,6 +643,60 @@ var init = _ => {
             });
         }
     });
+    ws_server.bind("add_domain_certificate", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        if (id != '') {
+            m.db.get_domain(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("update_domain", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("update_domain", "domain not found", client);
+                var update = {
+                    certificates: result1.certificates.concat([{
+                        host: "", subdomain: "",
+                        cert_path: "", cert_key_path: ""
+                    }])
+                };
+                m.db.update_domain(id, update, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("update_domain", "database error", client);
+                    return ws_server.return_event_data("update_domain", { id: id, domain: result2 }, client);
+                });
+            });
+        }
+    });
+    ws_server.bind("remove_domain_certificate", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        var cert_index = req.cert_index;
+        if (id != '' && cert_index >= 0) {
+            m.db.get_domain(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("update_domain", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("update_domain", "domain not found", client);
+                var update = { certificates: result1.certificates };
+                if (update.certificates.length >= cert_index + 1) {
+                    update.certificates.splice(cert_index, 1);
+                }
+                m.db.update_domain(id, update, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("update_domain", "database error", client);
+                    return ws_server.return_event_data("update_domain", { id: id, domain: result2 }, client);
+                });
+            });
+        }
+    });
+    ws_server.bind("update_domain_certificate", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        var cert_idx = parseInt(req.cert_idx);
+        var update_obj = req.update;
+        if (id != '' && cert_idx >= 0 && Object.keys(update_obj).length > 0) {
+            m.db.get_domain(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("update_domain", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("update_domain", "domain not found", client);
+                var update = { certificates: result1.certificates };
+                update.certificates[cert_idx] = Object.assign(update.certificates[cert_idx], update_obj);
+                m.db.update_domain(id, update, (success2, result2) => {
+                    if (success2 === false) return ws_server.return_event_error("update_domain", "database error", client);
+                    return ws_server.return_event_data("update_domain", { id: id, domain: result2 }, client);
+                });
+            });
+        }
+    });
 
     // applications
     ws_server.bind("new_application", (client, req) => {

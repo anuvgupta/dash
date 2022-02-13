@@ -207,11 +207,7 @@ var api = {
             twoLevel: sld,
             topLevel: tld,
             subdomains: [],
-            certificate: {
-                host: "",
-                cert_path: "",
-                cert_key_path: ""
-            },
+            certificates: [],
             ts_created: timestamp,
             ts_updated: timestamp
         }, (e, result1) => {
@@ -498,8 +494,6 @@ var api = {
                 htaccess_deny: false,
                 https_enable: false,
                 https_force: false,
-                https_cert: "",
-                https_cert_key: "",
                 ws_enable: false,
                 ws_enable_path: "socket",
                 nginx_config_export: "",
