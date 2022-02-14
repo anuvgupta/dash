@@ -5429,8 +5429,9 @@ app
                                     {
                                         block.key('primary', primary);
                                         var children = block.children();
+                                        var domain_id = primary.split('.')[0];
                                         for (var c in children) {
-                                            if (children[c].mark() == `application_domain_${primary}`) {
+                                            if (primary != '' && (children[c].mark() == `application_domain_${primary}` || children[c].mark().includes(`application_domain_${primary}_`))) {
                                                 children[c].data({
                                                     selected: true,
                                                 });
@@ -5501,7 +5502,7 @@ app
                                                     domain_id = domain_string_split[0];
                                                     domain_sub = domain_string.slice(domain_string.indexOf('.') + 1);
                                                 }
-                                                var primary_domain_sel = primary_domain && primary_domain === domain_string;
+                                                var primary_domain_sel = primary_domain && (primary_domain === domain_string);
                                                 block.add(Block('application-domain-list-item', `application_domain_${domain_string}_${d}`)
                                                     .data({
                                                         idx: d,
