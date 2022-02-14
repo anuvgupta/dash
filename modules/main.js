@@ -71,10 +71,13 @@ var api = {
         if (server_names == '') return null;
         // generate nginx config object
         var proxy_config_obj = {
+            __keys: ['server'],
             'server': [{
+                __keys: ['listen', 'server_name', 'location /'],
                 'listen': ["80", "[::]:80"],
                 'server_name': `${server_names}`,
                 'location /': {
+                    __keys: ['proxy_pass', 'proxy_set_header'],
                     'proxy_pass': `http://127.0.0.1:${port[0]}`,
                     'proxy_set_header': [
                         "Host $host",
@@ -82,34 +85,53 @@ var api = {
                         "X-Forwarded-For $proxy_add_x_forwarded_for",
                         "X-Forwarded-Proto $scheme"
                     ],
-                }
+                },
             }]
         };
-        if (proxy_settings.htaccess_deny === true) {
-            proxy_config_obj['server'][0]['location ~ /\\.ht'] = {
-                'deny': "all"
-            };
-        }
         if (proxy_settings.ws_enable === true) {
             var ws_endpoint = "";
+            var ws_endpoint_key = `location /${ws_endpoint}`;
             if (proxy_settings.ws_enable_path.trim() != '') {
                 ws_endpoint = proxy_settings.ws_enable_path.trim();
-                proxy_config_obj['server'][0][`location /${ws_endpoint}`] = JSON.parse(JSON.stringify(proxy_config_obj['server'][0]['location /']));
+                ws_endpoint_key = `location /${ws_endpoint}`;
+                proxy_config_obj['server'][0][ws_endpoint_key] = JSON.parse(JSON.stringify(proxy_config_obj['server'][0]['location /']));
             }
-            proxy_config_obj['server'][0][`location /${ws_endpoint}`] = Object.assign(proxy_config_obj['server'][0][`location /${ws_endpoint}`], {
+            proxy_config_obj['server'][0][ws_endpoint_key] = Object.assign(proxy_config_obj['server'][0][ws_endpoint_key], {
                 'proxy_pass': `http://127.0.0.1:${port.length >= 2 && ws_endpoint != '' ? port[1] : port[0]}`,
                 'proxy_http_version': "1.1",
-                'proxy_set_header': ['Upgrade $http_upgrade', 'Connection $connection_upgrade'].concat(proxy_config_obj['server'][0][`location /${ws_endpoint}`]['proxy_set_header']),
+                'proxy_set_header': ['Upgrade $http_upgrade', 'Connection $connection_upgrade'].concat(proxy_config_obj['server'][0][ws_endpoint_key]['proxy_set_header']),
                 'proxy_connect_timeout': "7d",
                 'proxy_send_timeout': "7d",
                 'proxy_read_timeout': "7d"
             });
+            proxy_config_obj['server'][0][ws_endpoint_key].__keys.splice(1, 0, 'proxy_http_version');
+            proxy_config_obj['server'][0][ws_endpoint_key].__keys.push('proxy_connect_timeout', 'proxy_send_timeout', 'proxy_read_timeout');
+            if (!proxy_config_obj['server'][0].__keys.includes(ws_endpoint_key))
+                proxy_config_obj['server'][0].__keys.push(ws_endpoint_key);
+            var upgrade_key = 'map $http_upgrade $connection_upgrade';
+            proxy_config_obj[upgrade_key] = { 'default': "upgrade", "''": "close" };
+            proxy_config_obj.__keys.unshift(upgrade_key);
+        }
+        if (proxy_settings.htaccess_deny === true) {
+            var htdeny_key = 'location ~ /\\.ht';
+            proxy_config_obj['server'][0][htdeny_key] = { 'deny': "all" };
+            proxy_config_obj['server'][0].__keys.push(htdeny_key);
         }
         if (proxy_settings.https_enable === true) {
-            // TODO: duplicate regular config, modify listening port, add ssl cert
+            // TODO: duplicate regular config, modify listening port, add ssl certs
+            var domain_certificates = [];
+            // for (var d in domains) {
+            //     for (var c in domains[d].certificates) {
+            //         domains[d].certificates[c].domain = domains[d].domain;
+            //         domains[d].certificates[c].domain_full = `${domains[d].certificates[c].subdomain == '' ? '' : domains[d].certificates[c].subdomain + '.'}${domains[d].domain}`;
+            //     }
+            //     domain_certificates = domain_certificates.concat(domains[d].certificates);
+            // }
+            log(domain_certificates);
         }
         if (proxy_settings.https_force === true) {
             proxy_config_obj['server']['location /']['return'] = "301 https://$host$request_uri";
+            proxy_config_obj['server']['location /'].__keys.push('return');
         }
         log(proxy_config_obj);
         return proxy_config_obj;

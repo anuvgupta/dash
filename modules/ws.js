@@ -651,7 +651,7 @@ var init = _ => {
                 if (result1 == null) return ws_server.return_event_error("update_domain", "domain not found", client);
                 var update = {
                     certificates: result1.certificates.concat([{
-                        host: "", subdomain: "",
+                        host: "", subdomains: [],
                         cert_path: "", cert_key_path: ""
                     }])
                 };

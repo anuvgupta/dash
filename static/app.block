@@ -3158,8 +3158,8 @@ app
                                 block.child('subcontent/application_ecosystem/max_memory_restart/value_editor').on('hide');
                                 block.child('subcontent/application_ecosystem/restart_delay/value_editor').on('hide');
                                 block.child('subcontent/application_process/signal_toast').on('hide');
-                                block.child('subcontent/application_proxy/https_cert/value_editor').on('hide');
-                                block.child('subcontent/application_proxy/https_cert_key/value_editor').on('hide');
+                                //block.child('subcontent/application_proxy/https_cert/value_editor').on('hide');
+                                //block.child('subcontent/application_proxy/https_cert_key/value_editor').on('hide');
                                 block.child('subcontent/application_info/more_menu').on('hide');
                             //}, 200);
                         }
@@ -6588,7 +6588,7 @@ app
                                                 block.add(Block('domain-certificate-list-item', `domain_cert_${c}`)
                                                     .data(Object.assign({
                                                         _id: c, first: first, domain: domain_info.domain,
-                                                        subdomains: domain_info.subdomains,
+                                                        subdomains_available: domain_info.subdomains,
                                                     }, certificates[c]))
                                                 );
                                                 first = false;
