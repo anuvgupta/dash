@@ -997,25 +997,40 @@ var init = _ => {
                         if (success2 === false) return ws_server.return_event_error("push_application_proxy", "database error", client);
                         if (result2 == null) return ws_server.return_event_error("push_application_proxy", "resource not found", client);
                         if (result2.software.nginx_root != "") {
-                            m.db.get_domains_by_ids(result1.domains, (success3, result3) => {
+                            var domain_id_list = [];
+                            for (var d in result1.domains) {
+                                var item = result1.domains[d];
+                                if (item.includes('.')) item = item.split('.')[0];
+                                if (!domain_id_list.includes(item)) domain_id_list.push(item);
+                            }
+                            m.db.get_domains_by_ids(domain_id_list, (success3, result3) => {
                                 if (success3 === false) return ws_server.return_event_error("push_application_proxy", "database error", client);
                                 if (result3 == null) return ws_server.return_event_error("push_application_proxy", "domains not found", client);
                                 var nginx_site_config = m.main.gen_nginx_proxy_config(result1.proxy, result1, result2, result3);
-                                var nginx_site_config_export = m.main.convert_nginx_proxy_config_obj(nginx_site_config);
-                                log(nginx_site_config_export);
-                                var ws_daemon_client = m.ws.get_daemon_client(application_resource_id);
-                                if (ws_daemon_client != null && ws_server.clients.hasOwnProperty(ws_daemon_client.id)) {
-                                    ws_server.send_to_client('proxy_config', {
-                                        application: id,
-                                        proxy_settings: result1.proxy,
-                                        nginx_root: result2.software.nginx_root,
-                                        nginx_config: nginx_site_config_export
-                                    }, ws_daemon_client);
+                                if (nginx_site_config != null) {
+                                    var nginx_site_config_export = m.main.convert_nginx_proxy_config_obj(nginx_site_config);
+                                    var ws_daemon_client = m.ws.get_daemon_client(application_resource_id);
+                                    if (ws_daemon_client != null && ws_server.clients.hasOwnProperty(ws_daemon_client.id)) {
+                                        ws_server.send_to_client('proxy_config', {
+                                            application: id,
+                                            proxy_settings: result1.proxy,
+                                            nginx_root: result2.software.nginx_root,
+                                            nginx_config: nginx_site_config_export
+                                        }, ws_daemon_client);
+                                    } else {
+                                        ws_server.send_to_client('push_application_proxy_res_daemon_res', {
+                                            success: true, data: {
+                                                success: false,
+                                                message: 'Host daemon is offline!',
+                                                application_id: id
+                                            }
+                                        }, client);
+                                    }
                                 } else {
                                     ws_server.send_to_client('push_application_proxy_res_daemon_res', {
                                         success: true, data: {
                                             success: false,
-                                            message: 'Host daemon is offline!',
+                                            message: `${m.main.gen_nginx_proxy_config_error != '' ? m.main.gen_nginx_proxy_config_error : 'Unknown Error'}!`,
                                             application_id: id
                                         }
                                     }, client);

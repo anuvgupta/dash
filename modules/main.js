@@ -83,23 +83,53 @@ var api = {
             m.main.resource_monitor();
         }, m.main.resource_monitor_interval * 1000);
     },
+    gen_nginx_proxy_config_error: '',
     gen_nginx_proxy_config: (proxy_settings, application, host_resource, domains) => {
-        if (!proxy_settings) return null;
+        if (!proxy_settings) {
+            api.gen_nginx_proxy_config_error = 'No proxy settings';
+            return null;
+        }
         // parse port(s)
         var port = application.port ? application.port.trim() : '';
-        if (port == '') return null;
+        if (port == '') {
+            api.gen_nginx_proxy_config_error = 'No app port';
+            return null;
+        }
         port = port.split('/');
-        if (port.length <= 0) return null;
+        if (port.length <= 0) {
+            api.gen_nginx_proxy_config_error = 'Invalid app port';
+            return null;
+        }
         // create server name list
         var server_names = '';
-        for (var d in domains) {
-            var domain_name = domains[d].domain;
-            server_names += domain_name + ' ';
-            if (proxy_settings.www === true && (domain_name.match(/\./g) || []).length == 1)
-                server_names += `www.${domain_name} `;
+        var server_names_list = [];
+        for (var ad in application.domains) {
+            var d_id = application.domains[ad].split('.')[0];
+            var d_sub = application.domains[ad].includes('.') ? application.domains[ad].slice(application.domains[ad].indexOf('.') + 1) : '';
+            for (var d in domains) {
+                if (d_id == domains[d]._id.toString()) {
+                    var domain_name = domains[d].domain;
+                    if (d_sub == '') {
+                        server_names += domain_name + ' ';
+                        server_names_list.push(domain_name);
+                        if (proxy_settings.www === true && (domain_name.match(/\./g) || []).length == 1) {
+                            var www_alias = `www.${domain_name}`;
+                            server_names += `${www_alias} `;
+                            server_names_list.push(www_alias);
+                        }
+                    } else {
+                        var sub_name = `${d_sub}.${domain_name}`;
+                        server_names += `${sub_name} `;
+                        server_names_list.push(sub_name);
+                    }
+                }
+            }
         }
         server_names = server_names.trim();
-        if (server_names == '') return null;
+        if (server_names == '') {
+            api.gen_nginx_proxy_config_error = 'No app domains';
+            return null;
+        }
         // generate nginx config object
         var proxy_config_obj = {
             __keys: ['server'],
@@ -149,16 +179,46 @@ var api = {
             proxy_config_obj['server'][0].__keys.push(htdeny_key);
         }
         if (proxy_settings.https_enable === true) {
-            // TODO: duplicate regular config, modify listening port, add ssl certs
-            var domain_certificates = [];
-            // for (var d in domains) {
-            //     for (var c in domains[d].certificates) {
-            //         domains[d].certificates[c].domain = domains[d].domain;
-            //         domains[d].certificates[c].domain_full = `${domains[d].certificates[c].subdomain == '' ? '' : domains[d].certificates[c].subdomain + '.'}${domains[d].domain}`;
-            //     }
-            //     domain_certificates = domain_certificates.concat(domains[d].certificates);
-            // }
-            log(domain_certificates);
+            var cert_sub_map = {};
+            var cert_key_map = {}
+            for (var d in domains) {
+                for (var c in domains[d].certificates) {
+                    var cert = domains[d].certificates[c];
+                    if (cert.host === host_resource.slug) {
+                        var cert_path = cert.cert_path;
+                        if (!cert_sub_map.hasOwnProperty(cert_path))
+                            cert_sub_map[cert_path] = [];
+                        cert_sub_map[cert_path].push.apply(cert_sub_map[cert_path], cert.subdomains);
+                        cert_key_map[cert_path] = cert.cert_key_path;
+                    }
+                }
+            }
+            // log(cert_sub_map);
+            for (var cert_path in cert_sub_map) {
+                var subdomains_matched = [];
+                // console.log('match between', cert_sub_map[cert_path], 'and', server_names_list);
+                for (var c_n in cert_sub_map[cert_path]) {
+                    var cert_name = cert_sub_map[cert_path][c_n];
+                    for (var s_n in server_names_list) {
+                        var server_name = server_names_list[s_n];
+                        // console.log(cert_name, server_name);
+                        if (cert_name === server_name || (cert_name[0] == '*' && cert_name[1] == '.' && cert_name.substring(cert_name.indexOf('.') + 1) == server_name.substring(server_name.indexOf('.') + 1)))
+                            subdomains_matched.push(server_name);
+                    }
+                }
+                // console.log(cert_path, subdomains_matched);
+                if (subdomains_matched.length <= 0) break;
+                var secure_server_obj = JSON.parse(JSON.stringify(proxy_config_obj['server'][0]));
+                secure_server_obj.__keys.splice(2, 0, 'ssl', 'ssl_certificate', 'ssl_certificate_key');
+                secure_server_obj = Object.assign(secure_server_obj, {
+                    'server_name': subdomains_matched.join(' '),
+                    'listen': ["443 ssl", "[::]:443 ssl"],
+                    'ssl_certificate': `${cert_path}`,
+                    'ssl_certificate_key': `${cert_key_map[cert_path]}`,
+                    'ssl': "on",
+                });
+                proxy_config_obj['server'].push(secure_server_obj);
+            }
         }
         if (proxy_settings.https_force === true) {
             proxy_config_obj['server'][0]['location /']['return'] = "301 https://$host$request_uri";
@@ -174,7 +234,6 @@ var api = {
         proxy_config_text = parse_nginx_config_obj(proxy_config_obj);
         return (proxy_config_text != '' ? proxy_config_text : null);
     },
-
 
 };
 

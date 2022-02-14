@@ -3192,6 +3192,12 @@ app
                                     app.ws.api.get_application_status(new_data._id);
                                 }, 50);
                             }
+                            if (old_data.status != new_data.status) {
+                                block.data({ status: new_data.status });
+                            }
+                            if (old_data.status_time != new_data.status_time) {
+                                block.data({ status_time: new_data.status_time });
+                            }
                             var update_ecosystem = false;
                             if (old_data.ecosystem.cwd != new_data.ecosystem.cwd) {
                                 update_ecosystem = true;
@@ -3253,12 +3259,6 @@ app
                                 block.data({ domains: new_data.domains });
                             if (new_data.hasOwnProperty('primary_domain') && new_data.primary_domain != old_data.primary_domain) 
                                 block.data({ primary_domain: new_data.primary_domain });
-                            if (old_data.status != new_data.status) {
-                                block.data({ status: new_data.status });
-                            }
-                            if (old_data.status_time != new_data.status_time) {
-                                block.data({ status_time: new_data.status_time });
-                            }
                             block.key('application', new_data);
                         }
                     :send_application_update
@@ -6549,7 +6549,7 @@ app
                             div list
                                 css
                                     width 100%
-                                    max-height 250px
+                                    max-height 350px
                                     height auto
                                     min-height 45px
                                     overflow-x none
