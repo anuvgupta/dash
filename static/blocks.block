@@ -3225,6 +3225,19 @@
                                 })
                                 .on('click', (e, b, d) => {
                                     console.log(`add subdomain ${b.parent().sibling('select').node().value} to certificate ${block.key('id')}`);
+                                    var subdomains = block.key('subdomains');
+                                    if (!subdomains) subdomains = [];
+                                    var domain_name = block.key('domain_name');
+                                    var add_subdomain = b.parent().sibling('select').node().value;
+                                    if (add_subdomain == '__default__') add_subdomain = domain_name;
+                                    else add_subdomain = `${add_subdomain}.${domain_name}`;
+                                    if (!subdomains.includes(add_subdomain)) subdomains.push(add_subdomain);
+                                    block.parent().data({ update_item: {
+                                        id: block.key('id'),
+                                        update: {
+                                            subdomains: subdomains
+                                        }
+                                    } });
                                 })
                             )
                         )
@@ -3255,6 +3268,76 @@
                                     wordBreak: 'break-all'
                                 })
                             )
+                            .on('mouseover', (e, b, d) => {
+                                if (b.child('edit_button').key('showing') == 'off')
+                                    b.child('edit_button').on('show');
+                            })
+                            .on('mouseout', (e, b, d) => {
+                                if (b.child('edit_button').key('showing') == 'on')
+                                    b.child('edit_button').on('hide');
+                            })
+                            .add(Block('edit-button', 'edit_button')
+                                .css({
+                                    marginLeft: '14px',
+                                    paddingTop: '3px',
+                                    height: '17px',
+                                    width: '17px',
+                                })
+                                .on('click', (e, b, d) => {
+                                    b.parent().css('display', 'none')
+                                        .sibling('value_editor').css('display', 'block');
+                                    b.parent().sibling('value_editor').node().value = block.key('subdomains').join(', ');
+                                    setTimeout(_ => {
+                                        b.parent().sibling('value_editor').node().select();
+                                    }, 15);
+                                })
+                            )
+                        )
+                        .add(Block('input', 'value_editor')
+                            .class('value_editor')
+                            .attribute('placeholder', 'sub.domain.com')
+                            .css({
+                                display: 'none',
+                                height: '25px',
+                                marginTop: '-1px',
+                                marginLeft: '-2px',
+                                marginBottom: '2px',
+                                fontSize: '12px',
+                                width: '90%'
+                            })
+                            .on('hide', (e, b, d) => {
+                                b.css('display', 'none').sibling('value').css('display', 'table');
+                                e.stopPropagation();
+                            })
+                            .on('keyup', (e, b, d) => {
+                                if (e.keyCode == 13) {
+                                    // enter
+                                    var value = b.node().value;
+                                    if (!value) value = '';
+                                    value = (`${value}`).trim();
+                                    value = value.split(',');
+                                    for (var v in value) value[v] = value[v].trim();
+                                    for (var v = 0; v < value.length; v++) {
+                                        if (value[v] == '') {
+                                            value.splice(v, 1);
+                                            v = 0;
+                                        }
+                                    };
+                                    //if (value.length > 0) {
+                                        block.parent().data({ update_item: {
+                                            id: block.key('id'),
+                                            update: {
+                                                subdomains: value
+                                            }
+                                        } });
+                                    //}
+                                    setTimeout(_ => { b.on('hide'); }, 250);
+                                } else if (e.keyCode == 27) {
+                                    // escape
+                                    b.on('hide');
+                                }
+                                e.stopPropagation();
+                            })
                         )
                     )
                     .add(Block('div', 'host')
@@ -3601,10 +3684,12 @@
             data('subdomains', subdomains => {
                 block.key('subdomains', subdomains);
                 console.log(subdomains);
-                var value_alt = `${subdomains.join(', ')}`;
+                var value = `${subdomains.join(', ')}`;
+                var value_alt = `${value}`;
                 if (subdomains.length <= 0)
                     value_alt = "<span class='text_placeholder'>No subdomains found.</span>";
                 block.child('block/subdomain_list/value/text').html(`${value_alt}`);
+                block.child('block/subdomain_list/value_editor').attribute('value', `${value}`);
             });
             data('cert_path', cert_path => {
                 block.key('cert_path', cert_path);

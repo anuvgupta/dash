@@ -164,9 +164,9 @@ var api = {
             proxy_config_obj['server'][0]['location /']['return'] = "301 https://$host$request_uri";
             proxy_config_obj['server'][0]['location /'].__keys.push('return');
         }
-        log(proxy_config_obj);
+        // log(proxy_config_obj);
         return proxy_config_obj;
-        return null;
+        // return null;
     },
     convert_nginx_proxy_config_obj: (proxy_config_obj) => {
         if (!proxy_config_obj) return null;
