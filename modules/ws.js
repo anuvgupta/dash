@@ -1002,6 +1002,14 @@ var init = _ => {
                                         nginx_root: result2.software.nginx_root,
                                         nginx_config: nginx_site_config_export
                                     }, ws_daemon_client);
+                                } else {
+                                    ws_server.send_to_client('push_application_proxy_res_daemon_res', {
+                                        success: true, data: {
+                                            success: false,
+                                            message: 'Host daemon is offline!',
+                                            application_id: id
+                                        }
+                                    }, client);
                                 }
                             });
                         } else {
