@@ -652,7 +652,8 @@ var app = {
 
                 app.ui.block.child('main/menu/applications').node().click();
                 setTimeout(_ => {
-                    $('#manage_application_button_62044dc89dedbb1fda4748a1')[0].click();
+                    // $('#manage_application_button_62044dc89dedbb1fda4748a1')[0].click();
+                    $('#manage_application_button_6209cb1797d24f113064678f')[0].click();
                 }, 300);
 
                 // app.ui.block.child('main/menu/domains').node().click();
