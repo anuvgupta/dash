@@ -1,0 +1,26 @@
+{
+    "apps": [
+        {
+            "name": "dash-cloud",
+            "script": "/home/ubuntu/dash/src/dash-cloud.js",
+            "cwd": "/home/ubuntu/dash/src",
+            "error_file": "/home/ubuntu/dash/src/dash-cloud.log",
+            "out_file": "/home/ubuntu/dash/src/dash-cloud.log",
+            "interpreter": "/usr/local/bin/node",
+            "max_memory_restart": "200M",
+            "restart_delay": "3000",
+            "args": ""
+        },
+        {
+            "name": "dash-daemon",
+            "script": "/home/ubuntu/dash/src/dash-daemon.js",
+            "cwd": "/home/ubuntu/dash/src",
+            "error_file": "/home/ubuntu/dash/src/dash-daemon.log",
+            "out_file": "/home/ubuntu/dash/src/dash-daemon.log",
+            "interpreter": "/usr/local/bin/node",
+            "max_memory_restart": "200M",
+            "restart_delay": "3000",
+            "args": ""
+        }
+    ]
+}
