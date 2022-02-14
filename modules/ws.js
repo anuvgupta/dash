@@ -334,13 +334,14 @@ var init = _ => {
                 m.db.get_application(application_id, null, (success2, result2) => {
                     if (success2 === false) return ws_server.return_event_error("link_project_demo", "database error", client);
                     if (result2 == null) return ws_server.return_event_error("link_project_demo", "application not found", client);
-                    if (result2.primary_domain && result2.primary_domain.id && result2.primary_domain.id != '') {
-                        if (result2.domains.includes(result2.primary_domain.id)) {
-                            m.db.get_domain(result2.primary_domain.id, null, (success3, result3) => {
+                    if (result2.primary_domain && result2.primary_domain != '') {
+                        if (result2.domains.includes(result2.primary_domain)) {
+                            var domain_id = result2.primary_domain.split('.')[0];
+                            m.db.get_domain(domain_id, null, (success3, result3) => {
                                 if (success3 === false) return ws_server.return_event_error("link_project_demo", "database error", client);
                                 if (result3 == null) return ws_server.return_event_error("link_project_demo", "domain not found", client);
                                 if (result3.domain && result3.domain != '') {
-                                    var sub = result2.primary_domain.sub ? result2.primary_domain.sub : '';
+                                    var sub = result2.primary_domain.includes('.') ? result2.primary_domain.slice(result2.primary_domain.indexOf('.') + 1) : '';
                                     var link = `http://${sub == '' ? '' : sub + '.'}${result3.domain}/`;
                                     log(link, result1.link);
                                     if (link === result1.link) link = '';
@@ -930,19 +931,26 @@ var init = _ => {
     });
     ws_server.bind("associate_application_domain", (client, req) => {
         var application_id = req.application_id ? (`${req.application_id}`).trim() : '';
-        var domain_id = req.domain_id ? (`${req.domain_id}`).trim() : '';
-        if (application_id != '' && domain_id != '') {
+        var domain_string = req.domain_string ? (`${req.domain_string}`).trim() : '';
+        if (application_id != '' && domain_string != '') {
             m.db.get_application(application_id, null, (success1, result1) => {
                 if (success1 === false) return ws_server.return_event_error("associate_application_domain", "database error", client);
                 if (result1 == null)
                     return ws_server.return_event_error("associate_application_domain", "application not found", client);
+                var domain_id = domain_string;
+                var domain_subdomain = '';
+                if (domain_string.includes('.')) {
+                    var domain_string_split = domain_string.split('.');
+                    domain_id = domain_string_split[0];
+                    domain_subdomain = domain_string.slice(domain_string.indexOf('.') + 1);
+                }
                 m.db.get_domain(domain_id, null, (success2, result2) => {
                     if (success2 === false) return ws_server.return_event_error("associate_application_domain", "database error", client);
                     if (result2 == null)
                         return ws_server.return_event_error("associate_application_domain", "domain not found", client);
                     var update = { domains: result1.domains };
-                    if (!update.domains.includes(domain_id))
-                        update.domains.push(domain_id);
+                    // if (!update.domains.includes(domain_string))
+                    update.domains.push(domain_string);
                     m.db.update_application(application_id, update, (success3, result3) => {
                         if (success3 === false) return ws_server.return_event_error("associate_application_domain", "database error", client);
                         return ws_server.return_event_data("update_application", { id: application_id, application: result3 }, client);
@@ -953,19 +961,20 @@ var init = _ => {
     });
     ws_server.bind("deassociate_application_domain", (client, req) => {
         var application_id = req.application_id ? (`${req.application_id}`).trim() : '';
-        var domain_id = req.domain_id ? (`${req.domain_id}`).trim() : '';
-        if (application_id != '' && domain_id != '') {
+        var domain_string = req.domain_string ? (`${req.domain_string}`).trim() : '';
+        if (application_id != '' && domain_string != '') {
             m.db.get_application(application_id, null, (success1, result1) => {
                 if (success1 === false) return ws_server.return_event_error("deassociate_application_domain", "database error", client);
                 if (result1 == null)
                     return ws_server.return_event_error("deassociate_application_domain", "application not found", client);
+                var domain_id = domain_string.split('.')[0];
                 m.db.get_domain(domain_id, null, (success2, result2) => {
                     if (success2 === false) return ws_server.return_event_error("deassociate_application_domain", "database error", client);
                     if (result2 == null)
                         return ws_server.return_event_error("deassociate_application_domain", "domain not found", client);
                     var update = { domains: [] };
                     for (var d in result1.domains) {
-                        if (result1.domains[d] != domain_id)
+                        if (result1.domains[d] != domain_string)
                             update.domains.push(result1.domains[d]);
                     }
                     m.db.update_application(application_id, update, (success3, result3) => {

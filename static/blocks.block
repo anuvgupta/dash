@@ -2664,7 +2664,7 @@
             data('primary_domain', (primary_domain) => {
                 //console.log(primary_domain);
                 block.key('primary_domain', primary_domain);
-                if (primary_domain.id && primary_domain.id != "") {
+                if (primary_domain && primary_domain != "") {
                     block.child('link').key('toggled', 'yes');
                     block.child('link/wrap/image').css('opacity', '0.6');
                 } else {
@@ -2937,6 +2937,10 @@
                                     .html('None').attribute('value', '__none__')
                                 )
                                 .on('input', (e, b, d) => {
+                                    block.parent().data({ update_item: {
+                                        id: block.key('id'), idx: block.key('idx'),
+                                        sub: b.node().value === '__none__' ? '' : b.node().value,
+                                    } });
                                     if (block.key('selected') === true) {
                                         block.parent().data({ link_sub: {
                                             id: block.key('id'), sub: b.node().value === '__none__' ? '' : b.node().value
@@ -3034,7 +3038,9 @@
                                     block.parent().data({
                                         del: {
                                             domain_id: block.key('id'),
-                                            domain_name: block.key('domain_name')
+                                            domain_name: block.key('domain_name'),
+                                            domain_string: block.key('domain_string'),
+                                            domain_sub: block.key('sub'),
                                         }
                                     });
                                 })
@@ -3086,8 +3092,14 @@
         }
     load
         {
+            data('domain_string', (domain_string) => {
+                block.key('domain_string', domain_string.toString());
+            });
             data('_id', (_id) => {
                 block.key('id', _id.toString());
+            });
+            data('idx', (idx) => {
+                block.key('idx', idx.toString());
             });
             data('domain', (domain) => {
                 block.key('domain_name', domain.toString());

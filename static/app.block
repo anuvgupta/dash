@@ -5385,9 +5385,7 @@ app
                                         //console.log(link);
                                         setTimeout(_ => {
                                             block.parent(2).on('send_application_update', {
-                                                primary_domain: {
-                                                    id: link, sub: ''
-                                                }
+                                                primary_domain: `${link}`
                                             });
                                         }, 10);
                                     }
@@ -5396,37 +5394,49 @@ app
                                         //console.log('link_sub', link_sub);
                                         //setTimeout(_ => {
                                             block.parent(2).on('send_application_update', {
-                                                primary_domain: {
-                                                    id: link_sub.id, sub: link_sub.sub
-                                                }
+                                                primary_domain: `${link_sub.id}${link_sub.sub == '' ? '' : '.'}${link_sub.sub}`
                                             });
                                         //}, 10);
                                     }
                                 #del
                                     {
-                                        app.ui.display_modal.generic_confirm("Update Application", `Deassociate domain "${del.domain_name}" from this application?`, (result) => {
+                                        app.ui.display_modal.generic_confirm("Update Application", `Deassociate domain "${del.domain_sub === '' ? '' : del.domain_sub + '.'}${del.domain_name}" from this application?`, (result) => {
                                             if (result) {
                                                 setTimeout(_ => {
-                                                    app.ws.api.deassociate_application_domain(block.parent(2).key('application')._id, del.domain_id);
+                                                    app.ws.api.deassociate_application_domain(block.parent(2).key('application')._id, del.domain_string);
                                                 }, 10);
                                                 return true;
                                             }
                                         });
+                                    }
+                                #update_item
+                                    {
+                                        var domains = block.parent(2).key('application').domains;
+                                        var primary_domain = block.parent(2).key('application').primary_domain;
+                                        update_item.idx = parseInt(update_item.idx);                                        
+                                        var domain_old = domains[update_item.idx];
+                                        domains[update_item.idx] = `${update_item.id}${update_item.sub === '' ? '' : '.' + update_item.sub}`;
+                                        var update_obj = {};
+                                        if (domain_old === primary_domain) {
+                                            update_obj['primary_domain'] = domains[update_item.idx];
+                                        }
+                                        update_obj['domains'] = domains;
+                                        setTimeout(_ => {
+                                            block.parent(2).on('send_application_update', update_obj);
+                                        }, 10);
                                     }
                                 #primary
                                     {
                                         block.key('primary', primary);
                                         var children = block.children();
                                         for (var c in children) {
-                                            if (children[c].mark() == `application_domain_${primary.id}`) {
+                                            if (children[c].mark() == `application_domain_${primary}`) {
                                                 children[c].data({
                                                     selected: true,
-                                                    sub: primary.sub == '' ? '__none__' : primary.sub
                                                 });
                                             } else {
                                                 children[c].data({
                                                     selected: false,
-                                                    sub: '__none__'
                                                 });
                                             }
                                         }
@@ -5434,9 +5444,10 @@ app
                                 #domain_details
                                     {
                                         var children = block.children();
-                                        for (var c in children) {
-                                            for (var d in domain_details) {
+                                        for (var d in domain_details) {
+                                            for (var c in children) {
                                                 var domain_detail = domain_details[d];
+                                                console.log(children[c].key('id'), domain_detail._id);
                                                 if (domain_detail._id == children[c].key('id')) {
                                                     children[c].data(domain_detail)
                                                 }
@@ -5482,15 +5493,23 @@ app
                                             var primary_domain = block.key('primary');
                                             var first = true;
                                             for (var d in domains) {
-                                                var domain_id = domains[d];
-                                                var primary_domain_sel = primary_domain && primary_domain.hasOwnProperty('id') && primary_domain.id === domain_id;
-                                                var primary_domain_sub = primary_domain && primary_domain.hasOwnProperty('sub') && primary_domain.id === domain_id ? primary_domain.sub : '__none__';
-                                                block.add(Block('application-domain-list-item', `application_domain_${domain_id}`)
+                                                var domain_string = domains[d];
+                                                var domain_id = domain_string;
+                                                var domain_sub = '';
+                                                if (domain_string.includes('.')) {
+                                                    domain_string_split = domain_string.split('.');
+                                                    domain_id = domain_string_split[0];
+                                                    domain_sub = domain_string.slice(domain_string.indexOf('.') + 1);
+                                                }
+                                                var primary_domain_sel = primary_domain && primary_domain === domain_string;
+                                                block.add(Block('application-domain-list-item', `application_domain_${domain_string}_${d}`)
                                                     .data({
+                                                        idx: d,
                                                         _id: domain_id,
+                                                        sub: domain_sub,
+                                                        domain_string: domain_string,
+                                                        //selected: primary_domain_sel,
                                                         first: first,
-                                                        sub: primary_domain_sub,
-                                                        //selected: primary_domain_sel
                                                     })
                                                 );
                                                 first = false;

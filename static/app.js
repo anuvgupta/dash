@@ -597,16 +597,16 @@ var app = {
                     id: id,
                 });
             },
-            associate_application_domain: (application_id, domain_id) => {
+            associate_application_domain: (application_id, domain_string) => {
                 app.ws.send('associate_application_domain', {
                     application_id: application_id,
-                    domain_id: domain_id
+                    domain_string: domain_string
                 });
             },
-            deassociate_application_domain: (application_id, domain_id) => {
+            deassociate_application_domain: (application_id, domain_string) => {
                 app.ws.send('deassociate_application_domain', {
                     application_id: application_id,
-                    domain_id: domain_id
+                    domain_string: domain_string
                 });
             },
             push_application_proxy: (id) => {
@@ -650,15 +650,15 @@ var app = {
             setTimeout(_ => {
                 // $('#manage_project_button_62044d639dedbb1fda4748a0')[0].click();
 
-                // app.ui.block.child('main/menu/applications').node().click();
-                // setTimeout(_ => {
-                //     $('#manage_application_button_62044dc89dedbb1fda4748a1')[0].click();
-                // }, 300);
-
-                app.ui.block.child('main/menu/domains').node().click();
+                app.ui.block.child('main/menu/applications').node().click();
                 setTimeout(_ => {
-                    $('#manage_domain_button_62084a7ddb1f7411ede8d588')[0].click();
+                    $('#manage_application_button_62044dc89dedbb1fda4748a1')[0].click();
                 }, 300);
+
+                // app.ui.block.child('main/menu/domains').node().click();
+                // setTimeout(_ => {
+                //     $('#manage_domain_button_62084a7ddb1f7411ede8d588')[0].click();
+                // }, 300);
             }, 200);
         },
         test_delay: 100,
