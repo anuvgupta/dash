@@ -21,6 +21,37 @@ var main = _ => {
         m.main.resource_monitor();
     }, 1000);
 };
+var indent_marker = '\t';
+var get_indents = (n = 1) => {
+    var indents_text = '';
+    for (var i = 0; i < n; i++)
+        indents_text += indent_marker;
+    return indents_text;
+};
+var parse_nginx_config_obj = (proxy_config_obj, proxy_config_key = null, indents = -1) => {
+    var eol = '\n';
+    var ret_text = '';
+    var typeof_type = typeof proxy_config_obj;
+    if (typeof_type === 'object') {
+        if (Array.isArray(proxy_config_obj)) {
+            ret_text = get_indents(indents) + '* ERROR * parser encountered unexpected array: [' + proxy_config_obj.join(', ') + ']' + eol;
+        } else { // object
+            if (proxy_config_key) ret_text += `${get_indents(indents)}${proxy_config_key} {` + eol;
+            var keys = (proxy_config_obj.hasOwnProperty('__keys') ? proxy_config_obj.__keys : Object.keys(proxy_config_obj));
+            for (var k in keys) {
+                if (Array.isArray(proxy_config_obj[keys[k]])) { // array
+                    for (var i in proxy_config_obj[keys[k]])
+                        ret_text += parse_nginx_config_obj(proxy_config_obj[keys[k]][i], keys[k], indents + 1);
+                } else ret_text += parse_nginx_config_obj(proxy_config_obj[keys[k]], keys[k], indents + 1);
+            }
+            if (proxy_config_key) ret_text += `${get_indents(indents)}}` + eol;
+        }
+    } else if (typeof_type === 'string' || typeof_type === 'number' || typeof_type === 'boolean') {
+        // string, number, boolean
+        ret_text = `${get_indents(indents)}${proxy_config_key ? proxy_config_key + ' ' : ''}${proxy_config_obj};` + eol;
+    }
+    return ret_text;
+};
 var api = {
     resource_desync_timeout: 4,
     resource_disconnect_timeout: 8,
@@ -130,8 +161,8 @@ var api = {
             log(domain_certificates);
         }
         if (proxy_settings.https_force === true) {
-            proxy_config_obj['server']['location /']['return'] = "301 https://$host$request_uri";
-            proxy_config_obj['server']['location /'].__keys.push('return');
+            proxy_config_obj['server'][0]['location /']['return'] = "301 https://$host$request_uri";
+            proxy_config_obj['server'][0]['location /'].__keys.push('return');
         }
         log(proxy_config_obj);
         return proxy_config_obj;
@@ -140,10 +171,11 @@ var api = {
     convert_nginx_proxy_config_obj: (proxy_config_obj) => {
         if (!proxy_config_obj) return null;
         var proxy_config_text = '';
-        proxy_config_text += 'server {';
-        proxy_config_text += "}";
+        proxy_config_text = parse_nginx_config_obj(proxy_config_obj);
         return (proxy_config_text != '' ? proxy_config_text : null);
-    }
+    },
+
+
 };
 
 

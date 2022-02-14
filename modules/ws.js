@@ -992,13 +992,15 @@ var init = _ => {
                                 if (success3 === false) return ws_server.return_event_error("push_application_proxy", "database error", client);
                                 if (result3 == null) return ws_server.return_event_error("push_application_proxy", "domains not found", client);
                                 var nginx_site_config = m.main.gen_nginx_proxy_config(result1.proxy, result1, result2, result3);
+                                var nginx_site_config_export = m.main.convert_nginx_proxy_config_obj(nginx_site_config);
+                                log(nginx_site_config_export);
                                 var ws_daemon_client = m.ws.get_daemon_client(application_resource_id);
                                 if (ws_daemon_client != null && ws_server.clients.hasOwnProperty(ws_daemon_client.id)) {
                                     ws_server.send_to_client('proxy_config', {
                                         application: id,
                                         proxy_settings: result1.proxy,
                                         nginx_root: result2.software.nginx_root,
-                                        nginx_config: nginx_site_config
+                                        nginx_config: nginx_site_config_export
                                     }, ws_daemon_client);
                                 }
                             });
