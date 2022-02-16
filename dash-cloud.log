@@ -1,0 +1,228 @@
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[db] connected to 27017 (db=dash)
+[main] ready
+[main] starting resource monitor
+[ws] client _c_xLOPHkLndK – connected
+[ws] client _c_xLOPHkLndK – message: get_applications {}
+[ws] client _c_xLOPHkLndK – disconnected
+[ws] client _c_SsJntpj29Z – connected
+[ws] client _c_SsJntpj29Z – message: get_applications {}
+[ws] client _c_SsJntpj29Z – disconnected
+[ws] client _c_xMbubzS0g1 – connected
+[ws] client _c_xMbubzS0g1 – message: get_applications {}
+[ws] client _c_xMbubzS0g1 – disconnected
+[ws] client _c_CPVzv8KvZH – connected
+[ws] client _c_CPVzv8KvZH – message: get_applications {}
+[ws] client _c_CPVzv8KvZH – message: sign_in {
+  password: [32m'0fcd568a5cb9bdb4677b69354b11ee415af8f784519cff3da49a26f84eaee7f2'[39m
+}
+[ws] client _c_CPVzv8KvZH – message: sign_in {
+  password: [32m'9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'[39m
+}
+[ws] client _c_CPVzv8KvZH – message: get_projects {}
+[ws] client _c_CPVzv8KvZH – message: get_applications {}
+[ws] client _c_CPVzv8KvZH – message: get_resources {}
+[ws] client _c_CPVzv8KvZH – message: get_domains {}
+[ws] client _c_CPVzv8KvZH – message: get_sitemap {}
+* [ws] ERROR: unknown event get_sitemap
+[ws] client _c_CPVzv8KvZH – message: get_ideas {}
+* [ws] ERROR: unknown event get_ideas
+[ws] client _c_CPVzv8KvZH – message: get_projects {}
+[ws] client _c_CPVzv8KvZH – message: get_applications {}
+[ws] client _c_CPVzv8KvZH – message: get_projects {}
+[ws] client _c_CPVzv8KvZH – disconnected
+[ws] client _c_P61QX1L2wt – connected
+[ws] client _c_P61QX1L2wt – message: auth {}
+[ws] client _c_P61QX1L2wt – message: get_projects {}
+[ws] client _c_P61QX1L2wt – disconnected
+[ws] client _c_8ROHMUszPs – connected
+[ws] client _c_8ROHMUszPs – message: auth {}
+[ws] client _c_8ROHMUszPs – message: get_projects {}
+[ws] client _c_8ROHMUszPs – disconnected
+[ws] client _c_sdvYfaGSpm – connected
+[ws] client _c_sdvYfaGSpm – message: auth {}
+[ws] client _c_sdvYfaGSpm – message: get_projects {}
+[ws] client _c_sdvYfaGSpm – disconnected
+[ws] client _c_0RafyU5RNb – connected
+[ws] client _c_0RafyU5RNb – message: auth {}
+[ws] client _c_0RafyU5RNb – message: get_projects {}
+[ws] client _c_0RafyU5RNb – disconnected
+[ws] client _c_0118QvEOTB – connected
+[ws] client _c_0118QvEOTB – message: auth {}
+[ws] client _c_0118QvEOTB – message: get_projects {}
+[ws] client _c_0118QvEOTB – message: get_applications {}
+[ws] client _c_0118QvEOTB – message: get_projects {}
+[ws] client _c_0118QvEOTB – message: get_domains {}
+[ws] client _c_0118QvEOTB – message: new_domain {
+  domain: [32m'anuv.me'[39m
+}
+[ws] client _c_0118QvEOTB – message: get_domains {}
+[ws] client _c_0118QvEOTB – message: update_domain_subdomains {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  new_subdomain: [32m'leds'[39m
+}
+[ws] client _c_0118QvEOTB – message: update_domain_subdomains {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  new_subdomain: [32m'nestor'[39m
+}
+[ws] client _c_0118QvEOTB – message: update_domain_subdomains {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  new_subdomain: [32m'rubbr'[39m
+}
+[ws] client _c_0118QvEOTB – message: add_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m
+}
+[ws] client _c_0118QvEOTB – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    subdomains: [
+      [32m'anuv.me'[39m
+    ]
+  }
+}
+[ws] client _c_0118QvEOTB – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    subdomains: [
+      [32m'anuv.me'[39m
+    ]
+  }
+}
+[ws] client _c_0118QvEOTB – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    subdomains: [
+      [32m'anuv.me'[39m,
+      [32m'*.anuv.me'[39m
+    ]
+  }
+}
+[ws] client _c_0118QvEOTB – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    subdomains: [
+      [32m'anuv.me'[39m,
+      [32m'*.anuv.me'[39m
+    ]
+  }
+}
+[ws] client _c_0118QvEOTB – message: get_resources {}
+[ws] client _c_0118QvEOTB – message: new_resource {
+  slug: [32m'lightsail'[39m,
+  name: [32m'Lightsail'[39m,
+  link: [32m'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB/'[39m,
+  ip: [32m'54.186.188.200'[39m
+}
+[ws] client _c_0118QvEOTB – message: get_resources {}
+[ws] client _c_0118QvEOTB – message: get_domains {}
+[ws] client _c_0118QvEOTB – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_0118QvEOTB – message: get_domains {}
+[ws] client _c_0118QvEOTB – message: update_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m,
+  update: {
+    link: [32m'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB'[39m
+  }
+}
+[ws] client _c_0118QvEOTB – message: get_domains {}
+[ws] client _c_0118QvEOTB – message: update_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m,
+  update: {
+    provider: [32m'aws-lightsail'[39m
+  }
+}
+[ws] client _c_0118QvEOTB – message: get_domains {}
+[ws] client _c_0118QvEOTB – message: update_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m,
+  update: {
+    private_ip: [32m'172.26.0.161'[39m
+  }
+}
+[ws] client _c_0118QvEOTB – message: get_domains {}
+[ws] client _c_0118QvEOTB – message: update_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m,
+  update: {
+    [32m'software.app_root'[39m: [32m'~/dash/apps'[39m
+  }
+}
+[ws] client _c_0118QvEOTB – message: get_domains {}
+[ws] client _c_0118QvEOTB – message: update_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m,
+  update: {
+    [32m'software.nginx_root'[39m: [32m'/etc/nginx'[39m
+  }
+}
+[ws] client _c_0118QvEOTB – message: get_domains {}
+[ws] client _c_0118QvEOTB – message: update_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m,
+  update: {
+    [32m'software.apache_root'[39m: [32m'/etc/apache2'[39m
+  }
+}
+[ws] client _c_0118QvEOTB – message: get_domains {}
+[ws] client _c_0118QvEOTB – message: update_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m,
+  update: {
+    [32m'software.www_root'[39m: [32m'/var/www'[39m
+  }
+}
+[ws] client _c_0118QvEOTB – message: get_domains {}
+[ws] client _c_0118QvEOTB – message: get_domains {
+  associate_resource: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_0118QvEOTB – message: update_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m,
+  update: {
+    daemon_key: [32m'X1F4K'[39m
+  }
+}
+[ws] client _c_0118QvEOTB – message: get_domains {}
+[ws] client _c_0118QvEOTB – message: update_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m,
+  update: {
+    daemon_key: [32m'X1F9K'[39m
+  }
+}
+[ws] client _c_0118QvEOTB – message: get_domains {}
+[ws] client _c_jvh3zIgliN – connected
+[ws] client _c_jvh3zIgliN – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_0118QvEOTB – message: get_resources {}
+[ws] client _c_0118QvEOTB – message: get_applications {}
+[ws] client _c_0118QvEOTB – message: get_resources {}
+[ws] client _c_0118QvEOTB – message: get_applications {}
+[ws] client _c_0118QvEOTB – message: new_application {
+  slug: [32m'led-lights'[39m,
+  name: [32m'LED Lights'[39m,
+  description: [32m'Audio-Reactive IoT LED light strip controller.'[39m
+}
+[ws] client _c_0118QvEOTB – message: get_applications {}
+[ws] client _c_0118QvEOTB – message: get_domains {}
+[ws] client _c_0118QvEOTB – disconnected
+[ws] client _c_s5c5jLOeUz – connected
+[ws] client _c_s5c5jLOeUz – message: auth {}
+[ws] client _c_s5c5jLOeUz – message: get_projects {}
+[ws] client _c_s5c5jLOeUz – message: get_applications {}
+[ws] client _c_s5c5jLOeUz – message: get_domains {}
+[ws] client _c_s5c5jLOeUz – disconnected
+[ws] client _c_aWPzZG4gma – connected
+[ws] client _c_aWPzZG4gma – message: auth {}
+[ws] client _c_aWPzZG4gma – message: get_projects {}
+[ws] client _c_aWPzZG4gma – message: get_applications {}
+[ws] client _c_aWPzZG4gma – message: get_domains {}
+[ws] client _c_jvh3zIgliN – disconnected

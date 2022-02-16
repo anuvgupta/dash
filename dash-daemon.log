@@ -1,0 +1,41 @@
+DASHBOARD
+[svc] daemon
+[main] initializing
+[cli] initializing
+[pm] initializing
+[ws] initializing
+[ws] socket connected
+[main] ready
+[ws] sending: sync_daemon { daemon_key: 'X1F9K' }
+[ws] socket received: sync_daemon_res {
+  success: true,
+  data: {
+    id: '620c8a4ef9ead118d5ce873b',
+    daemon_key: 'X1F9K',
+    resource: {
+      _id: '620c8a4ef9ead118d5ce873b',
+      slug: 'lightsail',
+      name: 'Lightsail',
+      link: 'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB',
+      ip: '54.186.188.200',
+      provider: 'aws-lightsail',
+      type: 'none',
+      private_ip: '172.26.0.161',
+      daemon_key: 'X1F9K',
+      specs: [Object],
+      software: [Object],
+      primary_domain: [Object],
+      domains: [],
+      status: 'new',
+      status_time: -1,
+      ts_created: 1644989006884,
+      ts_updated: 1644989208666
+    }
+  }
+}
+[ws] identified with dash cloud as resource "Lightsail" (620c8a4ef9ead118d5ce873b)
+[ws] socket received: ecosystem { ecosystem: {} }
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
