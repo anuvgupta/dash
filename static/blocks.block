@@ -3585,7 +3585,7 @@
                         )
                         .add(Block('input', 'value_editor')
                             .class('value_editor')
-                            .attribute('placeholder', '/etc/letsencrypt/live/domain.com/fullchain.pem')
+                            .attribute('placeholder', '/etc/letsencrypt/live/domain.com/privkey.pem')
                             .css({
                                 display: 'none',
                                 height: '25px',

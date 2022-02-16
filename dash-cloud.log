@@ -226,3 +226,3193 @@ DASHBOARD
 [ws] client _c_aWPzZG4gma – message: get_applications {}
 [ws] client _c_aWPzZG4gma – message: get_domains {}
 [ws] client _c_jvh3zIgliN – disconnected
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[main] starting resource monitor
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+[process] exit
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[main] starting resource monitor
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+[process] exit
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[main] starting resource monitor
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+[process] exit
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[main] starting resource monitor
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+[process] exit
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[main] starting resource monitor
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+[process] exit
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[main] starting resource monitor
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+[process] exit
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[ws] client _c_IoA5rNIR0b – connected
+[main] starting resource monitor
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+[process] exit
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[main] starting resource monitor
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+[process] exit
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[main] starting resource monitor
+[process] exit
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[main] starting resource monitor
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+[process] exit
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[main] starting resource monitor
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+[process] exit
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[main] starting resource monitor
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+[process] exit
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[main] starting resource monitor
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+[process] exit
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[main] starting resource monitor
+[process] exit
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[main] starting resource monitor
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+[process] exit
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[main] starting resource monitor
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+[process] exit
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[db] connected to 27017 (db=dash)
+[main] ready
+[main] starting resource monitor
+[ws] client _c_Ywu76FTFTu – connected
+[ws] client _c_Ywu76FTFTu – message: auth {}
+[ws] client _c_Ywu76FTFTu – message: get_projects {}
+[ws] client _c_Ywu76FTFTu – message: get_applications {}
+[ws] client _c_Ywu76FTFTu – message: get_domains {}
+[ws] client _c_Ywu76FTFTu – message: delete_application {
+  id: [32m'620c8ba1f9ead118d5ce873c'[39m
+}
+[ws] client _c_Ywu76FTFTu – message: get_applications {}
+[ws] client _c_Ywu76FTFTu – message: signal_application {
+  id: [32m'620c8ba1f9ead118d5ce873c'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_Ywu76FTFTu – disconnected
+[ws] client _c_BdgCnBjWdy – connected
+[ws] client _c_BdgCnBjWdy – message: auth {}
+[ws] client _c_BdgCnBjWdy – message: get_projects {}
+[ws] client _c_BdgCnBjWdy – message: get_applications {}
+[ws] client _c_BdgCnBjWdy – message: new_application {
+  slug: [32m'led-lights'[39m,
+  name: [32m'LED Lights'[39m,
+  description: [32m'Audio-reactive IoT LED lights.'[39m
+}
+[ws] client _c_BdgCnBjWdy – message: get_applications {}
+[ws] client _c_BdgCnBjWdy – message: get_domains {}
+[ws] client _c_BdgCnBjWdy – message: get_resources {}
+[ws] client _c_BdgCnBjWdy – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_BdgCnBjWdy – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_BdgCnBjWdy – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.www'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_BdgCnBjWdy – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.www'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_BdgCnBjWdy – message: get_domains {
+  associate_application: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_BdgCnBjWdy – message: associate_application_domain {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  domain_string: [32m'620c8996f9ead118d5ce873a'[39m
+}
+[ws] client _c_BdgCnBjWdy – message: get_domains {}
+[ws] client _c_BdgCnBjWdy – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    domains: [
+      [32m'620c8996f9ead118d5ce873a.leds'[39m
+    ]
+  }
+}
+[ws] client _c_BdgCnBjWdy – message: get_domains {}
+[ws] client _c_BdgCnBjWdy – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    primary_domain: [32m'620c8996f9ead118d5ce873a.leds'[39m
+  }
+}
+[ws] client _c_BdgCnBjWdy – message: get_resources {}
+[ws] client _c_BdgCnBjWdy – message: get_domains {}
+[ws] client _c_BdgCnBjWdy – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_BdgCnBjWdy – message: get_domains {}
+[ws] client _c_WBCAFLngwQ – connected
+[ws] client _c_WBCAFLngwQ – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_BdgCnBjWdy – disconnected
+[ws] client _c_Bpz4nTd9GC – connected
+[ws] client _c_Bpz4nTd9GC – message: auth {}
+[ws] client _c_Bpz4nTd9GC – message: get_projects {}
+[ws] client _c_Bpz4nTd9GC – message: get_applications {}
+[ws] client _c_Bpz4nTd9GC – message: get_domains {}
+[ws] client _c_Bpz4nTd9GC – message: get_resources {}
+[ws] client _c_Bpz4nTd9GC – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    host: [32m'620c8a4ef9ead118d5ce873b'[39m
+  }
+}
+[ws] client _c_Bpz4nTd9GC – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644990352483[39m,
+  status: [32m''[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'ecosystem.cwd'[39m: [32m'$app_root/led-lights'[39m
+  }
+}
+[ws] client _c_Bpz4nTd9GC – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'ecosystem.cwd'[39m: [32m'~/dash/apps/led-lights/nodejs_server'[39m
+  }
+}
+[ws] client _c_Bpz4nTd9GC – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'ecosystem.script'[39m: [32m'ledlights.js'[39m
+  }
+}
+[ws] client _c_Bpz4nTd9GC – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'ecosystem.interpreter'[39m: [32m'/usr/local/bin/node'[39m
+  }
+}
+[ws] client _c_Bpz4nTd9GC – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    port: [32m'3030/3031'[39m
+  }
+}
+[ws] client _c_Bpz4nTd9GC – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'ecosystem.args'[39m: [32m''[39m
+  }
+}
+[ws] client _c_Bpz4nTd9GC – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'start'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mfalse[39m,
+  timestamp: [33m1644990629593[39m,
+  status: [32m''[39m
+}
+[ws] client _c_WBCAFLngwQ – message: signal_application_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mfalse[39m,
+  message: [32m'<b>led-lights</b> received <b>START</b>'[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: get_domains {}
+[ws] client _c_Bpz4nTd9GC – message: get_sitemap {}
+* [ws] ERROR: unknown event get_sitemap
+[ws] client _c_Bpz4nTd9GC – message: get_resources {}
+[ws] client _c_Bpz4nTd9GC – message: get_domains {}
+[ws] client _c_Bpz4nTd9GC – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: get_domains {}
+[ws] client _c_Bpz4nTd9GC – message: update_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m,
+  update: {
+    [32m'software.app_root'[39m: [32m'/home/ubuntu/dash/apps'[39m
+  }
+}
+[ws] client _c_Bpz4nTd9GC – message: get_domains {}
+[ws] client _c_Bpz4nTd9GC – message: get_resources {}
+[ws] client _c_Bpz4nTd9GC – message: get_applications {}
+[ws] client _c_Bpz4nTd9GC – message: get_resources {}
+[ws] client _c_Bpz4nTd9GC – message: get_domains {}
+[ws] client _c_Bpz4nTd9GC – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: get_domains {}
+[ws] client _c_Bpz4nTd9GC – message: get_resources {}
+[ws] client _c_Bpz4nTd9GC – message: get_applications {}
+[ws] client _c_Bpz4nTd9GC – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'ecosystem.cwd'[39m: [32m'$app_root/led-lights/nodejs_server'[39m
+  }
+}
+[ws] client _c_Bpz4nTd9GC – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'start'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644990719408[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: signal_application_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>led-lights</b> received <b>START</b>'[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644990721439[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client sCSnl0XP6E – connected \n'[39m +
+    [32m'[ws] client sCSnl0XP6E – disconnected \n'[39m +
+    [32m'[ws] client 5uaz2C9GLV – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client 3vtNYWugVW – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client WT0fuiabqn – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'stop'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644990741432[39m,
+  status: [32m'stopped'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: signal_application_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>led-lights</b> received <b>STOP</b>'[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    host: [32m'none'[39m
+  }
+}
+[ws] client _c_WBCAFLngwQ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644990747095[39m,
+  status: [32m'removed'[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.www'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_Bpz4nTd9GC – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.https_enable'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_Bpz4nTd9GC – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.htaccess_deny'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_Bpz4nTd9GC – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.ws_enable'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_Bpz4nTd9GC – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    host: [32m'620c8a4ef9ead118d5ce873b'[39m
+  }
+}
+[ws] client _c_Bpz4nTd9GC – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client sCSnl0XP6E – connected \n'[39m +
+    [32m'[ws] client sCSnl0XP6E – disconnected \n'[39m +
+    [32m'[ws] client 5uaz2C9GLV – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client 3vtNYWugVW – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client WT0fuiabqn – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644990917728[39m,
+  status: [32m''[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'start'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644990918224[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: signal_application_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>led-lights</b> received <b>START</b>'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644990918733[39m
+}
+[ws] client _c_WBCAFLngwQ – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644990918737[39m
+}
+[ws] client _c_WBCAFLngwQ – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644990918741[39m
+}
+[ws] client _c_Bpz4nTd9GC – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_Bpz4nTd9GC – disconnected
+[ws] client _c_Bpz4nTd9GC disconnected --> untailing apps: 620c8f44373a770d6d44e9ae
+[ws] client _c_SM8K5eXOT1 – connected
+[ws] client _c_SM8K5eXOT1 – message: auth {}
+[ws] client _c_SM8K5eXOT1 – message: get_projects {}
+[ws] client _c_SM8K5eXOT1 – message: get_applications {}
+[ws] client _c_SM8K5eXOT1 – message: get_domains {}
+[ws] client _c_SM8K5eXOT1 – message: get_resources {}
+[ws] client _c_SM8K5eXOT1 – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_SM8K5eXOT1 – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644992014853[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client sCSnl0XP6E – connected \n'[39m +
+    [32m'[ws] client sCSnl0XP6E – disconnected \n'[39m +
+    [32m'[ws] client 5uaz2C9GLV – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client 3vtNYWugVW – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client WT0fuiabqn – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m
+}
+[ws] client _c_SM8K5eXOT1 – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'stop'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644992016332[39m,
+  status: [32m'stopped'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: signal_application_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>led-lights</b> received <b>STOP</b>'[39m
+}
+[ws] client _c_SM8K5eXOT1 – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    host: [32m'none'[39m
+  }
+}
+[ws] client _c_WBCAFLngwQ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644992018482[39m,
+  status: [32m'removed'[39m
+}
+[ws] client _c_SM8K5eXOT1 – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_SM8K5eXOT1 – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_SM8K5eXOT1 – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    host: [32m'620c8a4ef9ead118d5ce873b'[39m
+  }
+}
+[ws] client _c_SM8K5eXOT1 – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_SM8K5eXOT1 – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client sCSnl0XP6E – connected \n'[39m +
+    [32m'[ws] client sCSnl0XP6E – disconnected \n'[39m +
+    [32m'[ws] client 5uaz2C9GLV – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client 3vtNYWugVW – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client WT0fuiabqn – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644992719156[39m,
+  status: [32m''[39m
+}
+[ws] client _c_SM8K5eXOT1 – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    slug: [32m'led-lights'[39m
+  }
+}
+[ws] client _c_SM8K5eXOT1 – message: get_resources {}
+[ws] client _c_SM8K5eXOT1 – message: get_applications {}
+[ws] client _c_SM8K5eXOT1 – message: get_applications {}
+[ws] client _c_SM8K5eXOT1 – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_SM8K5eXOT1 – message: get_domains {}
+[ws] client _c_SM8K5eXOT1 – message: get_resources {}
+[ws] client _c_SM8K5eXOT1 – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_SM8K5eXOT1 – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client sCSnl0XP6E – connected \n'[39m +
+    [32m'[ws] client sCSnl0XP6E – disconnected \n'[39m +
+    [32m'[ws] client 5uaz2C9GLV – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client 3vtNYWugVW – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client WT0fuiabqn – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m
+}
+[ws] client _c_WBCAFLngwQ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644992753664[39m,
+  status: [32m''[39m
+}
+[ws] client _c_WBCAFLngwQ – disconnected
+[ws] client _c_BSAuOzQRzV – connected
+[ws] client _c_BSAuOzQRzV – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_SM8K5eXOT1 – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'start'[39m
+}
+[ws] client _c_BSAuOzQRzV – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644992779778[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_BSAuOzQRzV – message: signal_application_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>led-lights</b> received <b>START</b>'[39m
+}
+[ws] client _c_SM8K5eXOT1 – disconnected
+[ws] client _c_SM8K5eXOT1 disconnected --> untailing apps: 620c8f44373a770d6d44e9ae
+[ws] client _c_KhCwmiLnjh – connected
+[ws] client _c_KhCwmiLnjh – message: auth {}
+[ws] client _c_KhCwmiLnjh – message: get_projects {}
+[ws] client _c_KhCwmiLnjh – message: get_applications {}
+[ws] client _c_KhCwmiLnjh – message: get_domains {}
+[ws] client _c_KhCwmiLnjh – message: get_resources {}
+[ws] client _c_KhCwmiLnjh – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_KhCwmiLnjh – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_BSAuOzQRzV – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644992966818[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_BSAuOzQRzV – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client sCSnl0XP6E – connected \n'[39m +
+    [32m'[ws] client sCSnl0XP6E – disconnected \n'[39m +
+    [32m'[ws] client 5uaz2C9GLV – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client 3vtNYWugVW – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client WT0fuiabqn – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m
+}
+[ws] client _c_KhCwmiLnjh – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'restart'[39m
+}
+[ws] client _c_BSAuOzQRzV – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644992968053[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_BSAuOzQRzV – message: signal_application_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>led-lights</b> received <b>RESTART</b>'[39m
+}
+[ws] client _c_BSAuOzQRzV – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644992968839[39m
+}
+[ws] client _c_BSAuOzQRzV – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644992968843[39m
+}
+[ws] client _c_BSAuOzQRzV – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644992968847[39m
+}
+[ws] client _c_KhCwmiLnjh – message: get_domains {}
+[ws] client _c_KhCwmiLnjh – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    host: [32m'lightsail'[39m
+  }
+}
+[ws] client _c_KhCwmiLnjh – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    cert_path: [32m'/etc/letsencrypt/live/anuv.me/fullchain.pem'[39m
+  }
+}
+[ws] client _c_KhCwmiLnjh – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    cert_key_path: [32m'/etc/letsencrypt/live/anuv.me/privkey.pem'[39m
+  }
+}
+[ws] client _c_KhCwmiLnjh – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    cert_key_path: [32m''[39m
+  }
+}
+[ws] client _c_KhCwmiLnjh – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    cert_key_path: [32m'/etc/letsencrypt/live/anuv.me/privkey.pem'[39m
+  }
+}
+[ws] client _c_KhCwmiLnjh – disconnected
+[ws] client _c_KhCwmiLnjh disconnected --> untailing apps: 620c8f44373a770d6d44e9ae
+[ws] client _c_2Mz2cgGjyl – connected
+[ws] client _c_2Mz2cgGjyl – message: auth {}
+[ws] client _c_2Mz2cgGjyl – message: get_projects {}
+[ws] client _c_2Mz2cgGjyl – message: get_domains {}
+[ws] client _c_2Mz2cgGjyl – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    cert_path: [32m'/etc/letsencrypt/live/anuv.me/fullchain.pem'[39m
+  }
+}
+[ws] client _c_2Mz2cgGjyl – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    cert_key_path: [32m'/etc/letsencrypt/live/anuv.me/privkey.pem'[39m
+  }
+}
+[ws] client _c_2Mz2cgGjyl – message: get_domains {}
+[ws] client _c_2Mz2cgGjyl – message: get_resources {}
+[ws] client _c_2Mz2cgGjyl – message: get_domains {}
+[ws] client _c_2Mz2cgGjyl – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_2Mz2cgGjyl – message: get_domains {}
+[ws] client _c_2Mz2cgGjyl – message: get_applications {}
+[ws] client _c_2Mz2cgGjyl – message: get_domains {}
+[ws] client _c_2Mz2cgGjyl – message: get_domains {}
+[ws] client _c_2Mz2cgGjyl – message: new_domain {
+  domain: [32m'rubbr.ml'[39m
+}
+[ws] client _c_2Mz2cgGjyl – message: get_domains {}
+[ws] client _c_2Mz2cgGjyl – message: new_domain {
+  domain: [32m'monarchy.ml'[39m
+}
+[ws] client _c_2Mz2cgGjyl – message: get_domains {}
+[ws] client _c_2Mz2cgGjyl – message: new_domain {
+  domain: [32m'fitcheck.ml'[39m
+}
+[ws] client _c_2Mz2cgGjyl – message: get_domains {}
+[ws] client _c_2Mz2cgGjyl – message: new_domain {
+  domain: [32m'nstr.ml'[39m
+}
+[ws] client _c_2Mz2cgGjyl – message: get_domains {}
+[ws] client _c_2Mz2cgGjyl – message: new_domain {
+  domain: [32m'simplicitycloud.ml'[39m
+}
+[ws] client _c_2Mz2cgGjyl – message: get_domains {}
+[ws] client _c_2Mz2cgGjyl – message: get_domains {}
+[ws] client _c_2Mz2cgGjyl – message: update_domain_subdomains {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  new_subdomain: [32m'monarchy'[39m
+}
+[ws] client _c_2Mz2cgGjyl – message: update_domain_subdomains {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  new_subdomain: [32m'games'[39m
+}
+[ws] client _c_2Mz2cgGjyl – message: add_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m
+}
+[ws] client _c_2Mz2cgGjyl – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m1[39m,
+  update: {
+    subdomains: [
+      [32m'rubbr.anuv.me'[39m
+    ]
+  }
+}
+[ws] client _c_2Mz2cgGjyl – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m1[39m,
+  update: {
+    subdomains: [
+      [32m'rubbr.anuv.me'[39m
+    ]
+  }
+}
+[ws] client _c_2Mz2cgGjyl – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m1[39m,
+  update: {
+    host: [32m'lightsail'[39m
+  }
+}
+[ws] client _c_2Mz2cgGjyl – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m1[39m,
+  update: {
+    subdomains: [
+      [32m'rubbr.anuv.me'[39m
+    ]
+  }
+}
+[ws] client _c_2Mz2cgGjyl – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m1[39m,
+  update: {
+    cert_path: [32m'/etc/letsencrypt/live/rubbr.anuv.me/fullchain.pem'[39m
+  }
+}
+[ws] client _c_2Mz2cgGjyl – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m1[39m,
+  update: {
+    cert_key_path: [32m'/etc/letsencrypt/live/rubbr.anuv.me/privkey.pem'[39m
+  }
+}
+[ws] client _c_2Mz2cgGjyl – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m1[39m,
+  update: {
+    subdomains: [
+      [32m'pjs.rubbr.anuv.me'[39m,
+      [32m'*.rubbr.anuv.me'[39m
+    ]
+  }
+}
+[ws] client _c_2Mz2cgGjyl – disconnected
+[ws] client _c_12Kqfi6BcY – connected
+[ws] client _c_12Kqfi6BcY – message: auth {}
+[ws] client _c_12Kqfi6BcY – message: get_projects {}
+[ws] client _c_12Kqfi6BcY – message: get_applications {}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: get_resources {}
+[ws] client _c_12Kqfi6BcY – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_12Kqfi6BcY – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_BSAuOzQRzV – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client sCSnl0XP6E – connected \n'[39m +
+    [32m'[ws] client sCSnl0XP6E – disconnected \n'[39m +
+    [32m'[ws] client 5uaz2C9GLV – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client 3vtNYWugVW – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client WT0fuiabqn – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m
+}
+[ws] client _c_BSAuOzQRzV – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644993680465[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_12Kqfi6BcY – message: get_resources {}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: update_domain_subdomains {
+  id: [32m'620c9c03373a770d6d44e9af'[39m,
+  new_subdomain: [32m'pjs'[39m
+}
+[ws] client _c_12Kqfi6BcY – message: add_domain_certificate {
+  id: [32m'620c9c03373a770d6d44e9af'[39m
+}
+[ws] client _c_12Kqfi6BcY – message: update_domain_certificate {
+  id: [32m'620c9c03373a770d6d44e9af'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    subdomains: [
+      [32m'rubbr.ml'[39m
+    ]
+  }
+}
+[ws] client _c_12Kqfi6BcY – message: update_domain_certificate {
+  id: [32m'620c9c03373a770d6d44e9af'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    subdomains: [
+      [32m'rubbr.ml'[39m,
+      [32m'*.rubbr.ml'[39m
+    ]
+  }
+}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: update_domain_certificate {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  cert_idx: [33m1[39m,
+  update: {
+    subdomains: [
+      [32m'*.rubbr.anuv.me'[39m
+    ]
+  }
+}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: update_domain_certificate {
+  id: [32m'620c9c03373a770d6d44e9af'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    host: [32m'lightsail'[39m
+  }
+}
+[ws] client _c_12Kqfi6BcY – message: update_domain_certificate {
+  id: [32m'620c9c03373a770d6d44e9af'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    cert_path: [32m'/etc/letsencrypt/live/rubbr.ml/fullchain.pem'[39m
+  }
+}
+[ws] client _c_12Kqfi6BcY – message: update_domain_certificate {
+  id: [32m'620c9c03373a770d6d44e9af'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    cert_key_path: [32m'/etc/letsencrypt/live/rubbr.ml/privkey.pem'[39m
+  }
+}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: add_domain_certificate {
+  id: [32m'620c9c15373a770d6d44e9b1'[39m
+}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: update_domain_certificate {
+  id: [32m'620c9c15373a770d6d44e9b1'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    subdomains: [
+      [32m'fitcheck.ml'[39m
+    ]
+  }
+}
+[ws] client _c_12Kqfi6BcY – message: update_domain_certificate {
+  id: [32m'620c9c15373a770d6d44e9b1'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    subdomains: [
+      [32m'fitcheck.ml'[39m,
+      [32m'www.fitcheck.ml'[39m
+    ]
+  }
+}
+[ws] client _c_12Kqfi6BcY – message: update_domain_subdomains {
+  id: [32m'620c9c15373a770d6d44e9b1'[39m,
+  new_subdomain: [32m'www'[39m
+}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: update_domain_certificate {
+  id: [32m'620c9c15373a770d6d44e9b1'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    subdomains: []
+  }
+}
+[ws] client _c_12Kqfi6BcY – message: update_domain_certificate {
+  id: [32m'620c9c15373a770d6d44e9b1'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    subdomains: [
+      [32m'fitcheck.ml'[39m
+    ]
+  }
+}
+[ws] client _c_12Kqfi6BcY – message: update_domain_certificate {
+  id: [32m'620c9c15373a770d6d44e9b1'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    subdomains: [
+      [32m'fitcheck.ml'[39m,
+      [32m'www.fitcheck.ml'[39m
+    ]
+  }
+}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: update_domain_subdomains {
+  id: [32m'620c9c03373a770d6d44e9af'[39m,
+  new_subdomain: [32m'www'[39m
+}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: update_domain_subdomains {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  new_subdomain: [32m'www'[39m
+}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: update_domain_subdomains {
+  id: [32m'620c9c24373a770d6d44e9b3'[39m,
+  new_subdomain: [32m'www'[39m
+}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: update_domain_subdomains {
+  id: [32m'620c9c0c373a770d6d44e9b0'[39m,
+  new_subdomain: [32m'www'[39m
+}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: update_domain_subdomains {
+  id: [32m'620c9c1c373a770d6d44e9b2'[39m,
+  new_subdomain: [32m'www'[39m
+}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: update_domain_certificate {
+  id: [32m'620c9c15373a770d6d44e9b1'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    host: [32m'lightsail'[39m
+  }
+}
+[ws] client _c_12Kqfi6BcY – message: update_domain_certificate {
+  id: [32m'620c9c15373a770d6d44e9b1'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    cert_path: [32m'/etc/letsencrypt/live/fitcheck.ml/fullchain.pem'[39m
+  }
+}
+[ws] client _c_12Kqfi6BcY – message: update_domain_certificate {
+  id: [32m'620c9c15373a770d6d44e9b1'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    cert_key_path: [32m'/etc/letsencrypt/live/fitcheck.ml/privkey.pem'[39m
+  }
+}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – message: get_domains {}
+[ws] client _c_12Kqfi6BcY – disconnected
+[ws] client _c_12Kqfi6BcY disconnected --> untailing apps: 620c8f44373a770d6d44e9ae
+[ws] client _c_bWduyiqNKd – connected
+[ws] client _c_bWduyiqNKd – message: auth {}
+[ws] client _c_bWduyiqNKd – message: get_projects {}
+[ws] client _c_bWduyiqNKd – message: get_resources {}
+[ws] client _c_bWduyiqNKd – message: get_domains {}
+[ws] client _c_bWduyiqNKd – message: get_domains {}
+[ws] client _c_bWduyiqNKd – message: get_domains {}
+[ws] client _c_bWduyiqNKd – message: get_domains {}
+[ws] client _c_bWduyiqNKd – message: add_domain_certificate {
+  id: [32m'620c9c24373a770d6d44e9b3'[39m
+}
+[ws] client _c_bWduyiqNKd – message: update_domain_certificate {
+  id: [32m'620c9c24373a770d6d44e9b3'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    subdomains: [
+      [32m'simplicitycloud.ml'[39m
+    ]
+  }
+}
+[ws] client _c_bWduyiqNKd – message: update_domain_certificate {
+  id: [32m'620c9c24373a770d6d44e9b3'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    subdomains: [
+      [32m'simplicitycloud.ml'[39m,
+      [32m'www.simplicitycloud.ml'[39m
+    ]
+  }
+}
+[ws] client _c_bWduyiqNKd – message: update_domain_certificate {
+  id: [32m'620c9c24373a770d6d44e9b3'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    host: [32m'lightsail'[39m
+  }
+}
+[ws] client _c_bWduyiqNKd – message: update_domain_certificate {
+  id: [32m'620c9c24373a770d6d44e9b3'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    cert_path: [32m'/etc/letsencrypt/live/simplicitycloud.ml/fullchain.pem'[39m
+  }
+}
+[ws] client _c_bWduyiqNKd – message: update_domain_certificate {
+  id: [32m'620c9c24373a770d6d44e9b3'[39m,
+  cert_idx: [33m0[39m,
+  update: {
+    cert_key_path: [32m'/etc/letsencrypt/live/simplicitycloud.ml/privkey.pem'[39m
+  }
+}
+[ws] client _c_bWduyiqNKd – message: get_domains {}
+[ws] client _c_bWduyiqNKd – message: get_resources {}
+[ws] client _c_bWduyiqNKd – message: get_applications {}
+[ws] client _c_bWduyiqNKd – message: get_domains {}
+[ws] client _c_bWduyiqNKd – message: get_resources {}
+[ws] client _c_bWduyiqNKd – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_bWduyiqNKd – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_BSAuOzQRzV – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client sCSnl0XP6E – connected \n'[39m +
+    [32m'[ws] client sCSnl0XP6E – disconnected \n'[39m +
+    [32m'[ws] client 5uaz2C9GLV – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client 3vtNYWugVW – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client WT0fuiabqn – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m
+}
+[ws] client _c_BSAuOzQRzV – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644994009761[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_bWduyiqNKd – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'restart'[39m
+}
+[ws] client _c_BSAuOzQRzV – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644994022471[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_BSAuOzQRzV – message: signal_application_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>led-lights</b> received <b>RESTART</b>'[39m
+}
+[ws] client _c_BSAuOzQRzV – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644994023766[39m
+}
+[ws] client _c_BSAuOzQRzV – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644994023766[39m
+}
+[ws] client _c_BSAuOzQRzV – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644994023766[39m
+}
+[ws] client _c_bWduyiqNKd – message: get_domains {}
+[ws] client _c_bWduyiqNKd – message: get_domains {}
+[ws] client _c_bWduyiqNKd – message: get_applications {}
+[ws] client _c_bWduyiqNKd – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_bWduyiqNKd – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[main] starting resource monitor
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+[process] exit
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[main] ready
+[main] starting resource monitor
+TypeError: Cannot read property 'collection' of null
+    at Object.get_online_resources (/home/ubuntu/dash/src/dash/modules/db.js:383:19)
+    at Object.resource_monitor (/home/ubuntu/dash/src/dash/modules/main.js:61:14)
+    at /home/ubuntu/dash/src/dash/modules/main.js:21:16
+    at processTicksAndRejections (internal/process/task_queues.js:79:11)
+[process] exit
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[process] interrupt
+[main] unload
+[ws] exit
+[ws] server closed
+[web] exit
+[main] exit
+[process] exit
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[db] connected to 27017 (db=dash)
+[main] ready
+[main] starting resource monitor
+[ws] client _c_nnMnCvkXIV – connected
+[ws] client _c_nnMnCvkXIV – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_qm3dVO4uYH – connected
+[ws] client _c_qm3dVO4uYH – message: auth {}
+[ws] client _c_qm3dVO4uYH – message: get_projects {}
+[ws] client _c_qm3dVO4uYH – message: get_applications {}
+[ws] client _c_qm3dVO4uYH – message: get_domains {}
+[ws] client _c_qm3dVO4uYH – message: get_resources {}
+[ws] client _c_qm3dVO4uYH – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_nnMnCvkXIV – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[ws] client 5uaz2C9GLV – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client 3vtNYWugVW – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client WT0fuiabqn – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m
+}
+[ws] client _c_qm3dVO4uYH – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_nnMnCvkXIV – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644996381729[39m,
+  status: [32m''[39m
+}
+[ws] client _c_qm3dVO4uYH – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'restart'[39m
+}
+[ws] client _c_nnMnCvkXIV – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mfalse[39m,
+  timestamp: [33m1644996385364[39m,
+  status: [32m''[39m
+}
+[ws] client _c_nnMnCvkXIV – message: signal_application_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mfalse[39m,
+  message: [32m'<b>led-lights</b> received <b>RESTART</b>'[39m
+}
+[ws] client _c_qm3dVO4uYH – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'start'[39m
+}
+[ws] client _c_nnMnCvkXIV – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644996392621[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_nnMnCvkXIV – message: signal_application_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>led-lights</b> received <b>START</b>'[39m
+}
+[ws] client _c_nnMnCvkXIV – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644996393730[39m
+}
+[ws] client _c_nnMnCvkXIV – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644996393733[39m
+}
+[ws] client _c_nnMnCvkXIV – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644996393738[39m
+}
+[ws] client _c_qm3dVO4uYH – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'restart'[39m
+}
+[ws] client _c_nnMnCvkXIV – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644996396973[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_nnMnCvkXIV – message: signal_application_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>led-lights</b> received <b>RESTART</b>'[39m
+}
+[ws] client _c_nnMnCvkXIV – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644996397746[39m
+}
+[ws] client _c_nnMnCvkXIV – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644996397747[39m
+}
+[ws] client _c_nnMnCvkXIV – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644996397750[39m
+}
+[ws] client _c_qm3dVO4uYH – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_nnMnCvkXIV – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client WT0fuiabqn – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m
+}
+[ws] client _c_qm3dVO4uYH – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_nnMnCvkXIV – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644996399615[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_qm3dVO4uYH – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_nnMnCvkXIV – disconnected
+[ws] client _c_si9FHbj2T0 – connected
+[ws] client _c_si9FHbj2T0 – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_qm3dVO4uYH – disconnected
+[ws] client _c_qm3dVO4uYH disconnected --> untailing apps: 620c8f44373a770d6d44e9ae
+[ws] client _c_hFZVURnEtL – connected
+[ws] client _c_hFZVURnEtL – message: auth {}
+[ws] client _c_hFZVURnEtL – message: get_projects {}
+[ws] client _c_hFZVURnEtL – message: get_applications {}
+[ws] client _c_hFZVURnEtL – message: get_domains {}
+[ws] client _c_hFZVURnEtL – message: get_resources {}
+[ws] client _c_hFZVURnEtL – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_si9FHbj2T0 – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'[ws] client WT0fuiabqn – connected \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m
+}
+[ws] client _c_hFZVURnEtL – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_si9FHbj2T0 – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644996476854[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_hFZVURnEtL – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_si9FHbj2T0 – disconnected
+[ws] client _c_ljtGKo91G9 – connected
+[ws] client _c_ljtGKo91G9 – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_ljtGKo91G9 – disconnected
+[ws] client _c_5JwVrhWuRa – connected
+[ws] client _c_5JwVrhWuRa – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_hFZVURnEtL – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'restart'[39m
+}
+[ws] client _c_5JwVrhWuRa – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644996499679[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_5JwVrhWuRa – message: signal_application_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>led-lights</b> received <b>RESTART</b>'[39m
+}
+[ws] client _c_hFZVURnEtL – disconnected
+[ws] client _c_hFZVURnEtL disconnected --> untailing apps: 620c8f44373a770d6d44e9ae
+[ws] client _c_f9MbBAmEwg – connected
+[ws] client _c_f9MbBAmEwg – message: auth {}
+[ws] client _c_f9MbBAmEwg – message: get_projects {}
+[ws] client _c_f9MbBAmEwg – message: get_applications {}
+[ws] client _c_f9MbBAmEwg – message: get_domains {}
+[ws] client _c_f9MbBAmEwg – message: get_resources {}
+[ws] client _c_f9MbBAmEwg – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_5JwVrhWuRa – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m
+}
+[ws] client _c_f9MbBAmEwg – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_5JwVrhWuRa – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644996503950[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_f9MbBAmEwg – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_5JwVrhWuRa – disconnected
+[ws] client _c_dooEwGwZTq – connected
+[ws] client _c_dooEwGwZTq – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_f9MbBAmEwg – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.www'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_f9MbBAmEwg – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.https_enable'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_f9MbBAmEwg – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.htaccess_deny'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_f9MbBAmEwg – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.ws_enable'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_f9MbBAmEwg – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_f9MbBAmEwg – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.www'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_f9MbBAmEwg – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.htaccess_deny'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_f9MbBAmEwg – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.https_enable'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_f9MbBAmEwg – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.ws_enable'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_f9MbBAmEwg – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.ws_enable'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_f9MbBAmEwg – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_f9MbBAmEwg – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.ws_enable'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_f9MbBAmEwg – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_f9MbBAmEwg – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.ws_enable'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_f9MbBAmEwg – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_f9MbBAmEwg – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.ws_enable'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_f9MbBAmEwg – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_f9MbBAmEwg – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_dooEwGwZTq – disconnected
+[ws] client _c_mOs6oB8c7V – connected
+[ws] client _c_mOs6oB8c7V – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_f9MbBAmEwg – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_mOs6oB8c7V – disconnected
+[ws] client _c_ktS0OWOi1F – connected
+[ws] client _c_ktS0OWOi1F – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_f9MbBAmEwg – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_ktS0OWOi1F – disconnected
+[ws] client _c_4GNFsEMeC1 – connected
+[ws] client _c_4GNFsEMeC1 – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_4GNFsEMeC1 – disconnected
+[ws] client _c_MXeg45lRwD – connected
+[ws] client _c_MXeg45lRwD – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_f9MbBAmEwg – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_f9MbBAmEwg – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_MXeg45lRwD – disconnected
+[ws] client _c_wJx4drGeCk – connected
+[ws] client _c_wJx4drGeCk – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_f9MbBAmEwg – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_wJx4drGeCk – disconnected
+[ws] client _c_N66aUT173o – connected
+[ws] client _c_N66aUT173o – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_f9MbBAmEwg – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_N66aUT173o – disconnected
+[ws] client _c_98j2TaUJhh – connected
+[ws] client _c_98j2TaUJhh – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_f9MbBAmEwg – disconnected
+[ws] client _c_f9MbBAmEwg disconnected --> untailing apps: 620c8f44373a770d6d44e9ae
+[ws] client _c_jF6WeiyCv8 – connected
+[ws] client _c_jF6WeiyCv8 – message: auth {}
+[ws] client _c_jF6WeiyCv8 – message: get_projects {}
+[ws] client _c_98j2TaUJhh – disconnected
+[ws] client _c_6zCAD4Fgby – connected
+[ws] client _c_6zCAD4Fgby – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_jF6WeiyCv8 – message: get_applications {}
+[ws] client _c_jF6WeiyCv8 – message: get_domains {}
+[ws] client _c_jF6WeiyCv8 – message: get_resources {}
+[ws] client _c_jF6WeiyCv8 – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_6zCAD4Fgby – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m
+}
+[ws] client _c_jF6WeiyCv8 – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_6zCAD4Fgby – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644997298488[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_jF6WeiyCv8 – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_jF6WeiyCv8 – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.ws_enable'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_jF6WeiyCv8 – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.htaccess_deny'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_jF6WeiyCv8 – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.www'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_jF6WeiyCv8 – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.https_enable'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_jF6WeiyCv8 – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_jF6WeiyCv8 – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.www'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_jF6WeiyCv8 – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.https_enable'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_jF6WeiyCv8 – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.htaccess_deny'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_jF6WeiyCv8 – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.ws_enable'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_jF6WeiyCv8 – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_jF6WeiyCv8 – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_6zCAD4Fgby – disconnected
+[ws] client _c_hkfMgqQpYg – connected
+[ws] client _c_hkfMgqQpYg – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_jF6WeiyCv8 – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_jF6WeiyCv8 – disconnected
+[ws] client _c_jF6WeiyCv8 disconnected --> untailing apps: 620c8f44373a770d6d44e9ae
+[ws] client _c_Ckd0sRAmed – connected
+[ws] client _c_Ckd0sRAmed – message: sign_in {
+  password: [32m'9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'[39m
+}
+[ws] client _c_Ckd0sRAmed – message: get_projects {}
+[ws] client _c_Ckd0sRAmed – message: get_applications {}
+[ws] client _c_Ckd0sRAmed – message: get_domains {}
+[ws] client _c_Ckd0sRAmed – message: get_resources {}
+[ws] client _c_Ckd0sRAmed – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3004\n'[39m +
+    [32m'[http] listening on 3003\n'[39m
+}
+[ws] client _c_Ckd0sRAmed – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644997780733[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_Ckd0sRAmed – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'restart'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644997891997[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: signal_application_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>led-lights</b> received <b>RESTART</b>'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644997892766[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3030'[39m,
+  now_ts: [33m1644997892770[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3031'[39m,
+  now_ts: [33m1644997892774[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004834[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004835[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004840[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client DHl9rzzrTB – connected '[39m,
+  now_ts: [33m1644998004842[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client DHl9rzzrTB – authenticated '[39m,
+  now_ts: [33m1644998004845[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client DHl9rzzrTB '[39m,
+  now_ts: [33m1644998004847[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client DHl9rzzrTB '[39m,
+  now_ts: [33m1644998004850[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client DHl9rzzrTB – authenticated '[39m,
+  now_ts: [33m1644998004852[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client DHl9rzzrTB '[39m,
+  now_ts: [33m1644998004854[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client DHl9rzzrTB '[39m,
+  now_ts: [33m1644998004858[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client DHl9rzzrTB – disconnected '[39m,
+  now_ts: [33m1644998004858[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004862[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004864[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004864[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 8BVfYPh2wE – connected '[39m,
+  now_ts: [33m1644998004866[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 8BVfYPh2wE – authenticated '[39m,
+  now_ts: [33m1644998004868[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client 8BVfYPh2wE '[39m,
+  now_ts: [33m1644998004870[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client 8BVfYPh2wE '[39m,
+  now_ts: [33m1644998004871[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 8BVfYPh2wE – disconnected '[39m,
+  now_ts: [33m1644998004873[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client CcogBlXmBV – connected '[39m,
+  now_ts: [33m1644998004875[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client CcogBlXmBV – authenticated '[39m,
+  now_ts: [33m1644998004877[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client CcogBlXmBV '[39m,
+  now_ts: [33m1644998004877[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client CcogBlXmBV '[39m,
+  now_ts: [33m1644998004880[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004880[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004882[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004883[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client xoqNOXtfhP – connected '[39m,
+  now_ts: [33m1644998004885[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client xoqNOXtfhP – authenticated '[39m,
+  now_ts: [33m1644998004887[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client xoqNOXtfhP '[39m,
+  now_ts: [33m1644998004888[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client xoqNOXtfhP '[39m,
+  now_ts: [33m1644998004890[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client xoqNOXtfhP – disconnected '[39m,
+  now_ts: [33m1644998004891[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 490aI8LNK7 – connected '[39m,
+  now_ts: [33m1644998004891[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004894[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004896[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004897[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004898[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004900[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004903[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004905[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004908[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004908[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004910[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004912[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004913[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004913[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004916[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004919[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004919[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004922[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004922[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004924[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004924[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004927[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004927[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004930[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004932[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004933[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004933[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004933[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004937[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004938[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004940[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004942[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004944[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004945[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004947[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004948[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004950[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004952[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004953[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004955[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004955[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004958[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004960[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004960[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004963[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004963[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004966[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004966[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004968[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client sCSnl0XP6E – connected '[39m,
+  now_ts: [33m1644998004968[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client sCSnl0XP6E – disconnected '[39m,
+  now_ts: [33m1644998004970[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 5uaz2C9GLV – connected '[39m,
+  now_ts: [33m1644998004973[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004974[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004976[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004976[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 3vtNYWugVW – connected '[39m,
+  now_ts: [33m1644998004978[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004980[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004982[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004983[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client WT0fuiabqn – connected '[39m,
+  now_ts: [33m1644998004984[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004987[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004989[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004989[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004991[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004991[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004991[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004991[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004991[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004998[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004998[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998004998[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998004999[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998004999[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998005006[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998005009[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998005010[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998005013[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998005013[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998005015[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998005015[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998005018[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998005018[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3004'[39m,
+  now_ts: [33m1644998005019[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3003'[39m,
+  now_ts: [33m1644998005021[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'<<<<<<< HEAD'[39m,
+  now_ts: [33m1644998005021[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998005024[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3030'[39m,
+  now_ts: [33m1644998005027[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3031'[39m,
+  now_ts: [33m1644998005027[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'======='[39m,
+  now_ts: [33m1644998005030[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'>>>>>>> b69b17e06d585908a0d8fb187211421e9811b29d'[39m,
+  now_ts: [33m1644998005030[39m
+}
+[ws] client _c_Ckd0sRAmed – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'restart'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644998110817[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: signal_application_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>led-lights</b> received <b>RESTART</b>'[39m
+}
+[ws] client _c_Ckd0sRAmed – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'LED Lights\n[ws] listening on 3031\n[http] listening on 3030\n'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998112159[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3031'[39m,
+  now_ts: [33m1644998112161[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3030'[39m,
+  now_ts: [33m1644998112163[39m
+}
+[ws] client _c_Ckd0sRAmed – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644998112232[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client J2v21OzDTW – connected '[39m,
+  now_ts: [33m1644998121168[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client J2v21OzDTW – authenticated '[39m,
+  now_ts: [33m1644998123172[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client J2v21OzDTW '[39m,
+  now_ts: [33m1644998123173[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client J2v21OzDTW '[39m,
+  now_ts: [33m1644998123176[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client J2v21OzDTW – authenticated '[39m,
+  now_ts: [33m1644998123176[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client J2v21OzDTW '[39m,
+  now_ts: [33m1644998123179[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client J2v21OzDTW '[39m,
+  now_ts: [33m1644998123182[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client J2v21OzDTW – authenticated '[39m,
+  now_ts: [33m1644998123184[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client J2v21OzDTW '[39m,
+  now_ts: [33m1644998123186[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client J2v21OzDTW '[39m,
+  now_ts: [33m1644998123188[39m
+}
+[ws] client _c_Ckd0sRAmed – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'stop'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644998125280[39m,
+  status: [32m'stopped'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: signal_application_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>led-lights</b> received <b>STOP</b>'[39m
+}
+[ws] client _c_Ckd0sRAmed – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'restart'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1644998131089[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: signal_application_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>led-lights</b> received <b>RESTART</b>'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'LED Lights'[39m,
+  now_ts: [33m1644998132196[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] listening on 3031'[39m,
+  now_ts: [33m1644998132199[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[http] listening on 3030'[39m,
+  now_ts: [33m1644998132202[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 0aVpdgmLjC – connected '[39m,
+  now_ts: [33m1644998133208[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 0aVpdgmLjC – authenticated '[39m,
+  now_ts: [33m1644998135213[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client 0aVpdgmLjC '[39m,
+  now_ts: [33m1644998135215[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client 0aVpdgmLjC '[39m,
+  now_ts: [33m1644998135218[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 0aVpdgmLjC – authenticated '[39m,
+  now_ts: [33m1644998135220[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client 0aVpdgmLjC '[39m,
+  now_ts: [33m1644998135222[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client 0aVpdgmLjC '[39m,
+  now_ts: [33m1644998135224[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 0aVpdgmLjC – disconnected '[39m,
+  now_ts: [33m1644998136228[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client yQ3nwKbovy – connected '[39m,
+  now_ts: [33m1644998137233[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client yQ3nwKbovy – authenticated '[39m,
+  now_ts: [33m1644998137233[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client yQ3nwKbovy '[39m,
+  now_ts: [33m1644998137234[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client yQ3nwKbovy '[39m,
+  now_ts: [33m1644998137239[39m
+}
+[ws] client _c_Ckd0sRAmed – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.www'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_Ckd0sRAmed – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client yQ3nwKbovy – disconnected '[39m,
+  now_ts: [33m1644998179277[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client IztfVauU5R – connected '[39m,
+  now_ts: [33m1644998180281[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client IztfVauU5R – authenticated '[39m,
+  now_ts: [33m1644998181285[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client IztfVauU5R '[39m,
+  now_ts: [33m1644998181286[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client IztfVauU5R '[39m,
+  now_ts: [33m1644998181289[39m
+}
+[ws] client _c_Ckd0sRAmed – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.ws_enable_path'[39m: [32m'socket1'[39m
+  }
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client IztfVauU5R – disconnected '[39m,
+  now_ts: [33m1644998186294[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client gwrm56lj6u – connected '[39m,
+  now_ts: [33m1644998188301[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client gwrm56lj6u – authenticated '[39m,
+  now_ts: [33m1644998188304[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client gwrm56lj6u '[39m,
+  now_ts: [33m1644998188307[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client gwrm56lj6u '[39m,
+  now_ts: [33m1644998188310[39m
+}
+[ws] client _c_Ckd0sRAmed – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client gwrm56lj6u – disconnected '[39m,
+  now_ts: [33m1644998191316[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client RyxnxLAwBG – connected '[39m,
+  now_ts: [33m1644998193321[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client RyxnxLAwBG – authenticated '[39m,
+  now_ts: [33m1644998193324[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client RyxnxLAwBG '[39m,
+  now_ts: [33m1644998193327[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client RyxnxLAwBG '[39m,
+  now_ts: [33m1644998193327[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client RyxnxLAwBG – disconnected '[39m,
+  now_ts: [33m1644998209337[39m
+}
+[ws] client _c_Ckd0sRAmed – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.ws_enable_path'[39m: [32m'socket'[39m
+  }
+}
+[ws] client _c_Ckd0sRAmed – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client lMoq3zTLoP – connected '[39m,
+  now_ts: [33m1644998224351[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client lMoq3zTLoP – authenticated '[39m,
+  now_ts: [33m1644998226362[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client lMoq3zTLoP '[39m,
+  now_ts: [33m1644998226363[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client lMoq3zTLoP '[39m,
+  now_ts: [33m1644998226363[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client lMoq3zTLoP – authenticated '[39m,
+  now_ts: [33m1644998226363[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client lMoq3zTLoP '[39m,
+  now_ts: [33m1644998226369[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client lMoq3zTLoP '[39m,
+  now_ts: [33m1644998226369[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client lMoq3zTLoP – authenticated '[39m,
+  now_ts: [33m1644998226373[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client lMoq3zTLoP '[39m,
+  now_ts: [33m1644998226374[39m
+}
+[ws] client _c_hkfMgqQpYg – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client lMoq3zTLoP '[39m,
+  now_ts: [33m1644998226376[39m
+}
+[ws] client _c_Ckd0sRAmed – message: get_projects {}
+[ws] client _c_Ckd0sRAmed – message: new_project {
+  slug: [32m'a'[39m,
+  name: [32m'a'[39m,
+  repo: [32m'a'[39m,
+  desc: [32m'a'[39m
+}
+[ws] client _c_Ckd0sRAmed – message: get_projects {}
+[ws] client _c_Ckd0sRAmed – message: get_applications {}
+[ws] client _c_Ckd0sRAmed – message: get_applications {}
+[ws] client _c_Ckd0sRAmed – message: get_resources {}
+[ws] client _c_Ckd0sRAmed – message: get_domains {}
+[ws] client _c_Ckd0sRAmed – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_Ckd0sRAmed – message: get_domains {}
+[ws] client _c_Ckd0sRAmed – message: get_applications {}
+[ws] client _c_Ckd0sRAmed – message: get_projects {}
+[ws] client _c_Ckd0sRAmed – message: get_resources {}
+[ws] client _c_Ckd0sRAmed – message: get_applications {}
+[ws] client _c_Ckd0sRAmed – message: get_projects {}
+[ws] client _c_Ckd0sRAmed – message: get_resources {}
+[ws] client _c_Ckd0sRAmed – message: get_applications {}
+[ws] client _c_Ckd0sRAmed – message: get_resources {}
+[ws] client _c_Ckd0sRAmed – message: get_domains {}
