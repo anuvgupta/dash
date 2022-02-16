@@ -5970,3 +5970,56 @@ DASHBOARD
   log_line: '[ws] pattern list update sent to client lMoq3zTLoP ',
   now_ts: 1644998226376
 }
+[ws] socket received: signal { signal: 'untail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "untail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "untail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+[ws] socket connected
+[ws] sending: sync_daemon { daemon_key: 'X1F9K' }
+[ws] socket received: sync_daemon_res {
+  success: true,
+  data: {
+    id: '620c8a4ef9ead118d5ce873b',
+    daemon_key: 'X1F9K',
+    resource: {
+      _id: '620c8a4ef9ead118d5ce873b',
+      slug: 'lightsail',
+      name: 'Lightsail',
+      link: 'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB',
+      ip: '54.186.188.200',
+      provider: 'aws-lightsail',
+      type: 'none',
+      private_ip: '172.26.0.161',
+      daemon_key: 'X1F9K',
+      specs: [Object],
+      software: [Object],
+      primary_domain: [Object],
+      domains: [],
+      status: 'desync',
+      status_time: 1645001531625,
+      ts_created: 1644989006884,
+      ts_updated: 1644990703215
+    }
+  }
+}
+[ws] identified with dash cloud as resource "Lightsail" (620c8a4ef9ead118d5ce873b)
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"

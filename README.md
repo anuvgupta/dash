@@ -1,7 +1,7 @@
 # Dash
 
 Cloud project manager, application orchestrator, & internet presence dashboard.  
-Control your server.  
+Deploy live updates, monitor apps & resources, and plan projects – all in realtime from the cloud. 
 
 ## Features
 ***Dash** simplifies:*
@@ -13,7 +13,9 @@ Control your server.
     - Reverse proxy generation
  - Internet Presence
     - Web sitemap generation
-    - Domain map tracking
+    - Domain tracking
+
+***Most importantly,* Dash generates smart configurations for your projects based on the tangible & virtual entities you manage and model within.**
 
 ## Sections
  - **Projects**
@@ -62,11 +64,17 @@ Control your server.
  - Create/choose application root directory, for example `/home/ubuntu/dash/apps`
  - PM2 setup
     - Install `pm2` globally with `npm`
-    - Manually start apps in dash's `ecosystem.json` (dash-cloud & dash-daemon) as needed using `pm2 start ecosystem.json`
-    - 
+    - Manually start/stop apps from dash's `ecosystem.json` (dash-cloud & dash-daemon) as needed using `pm2 start ecosystem.json` and `pm2 stop APP_NAME`
+    - Dash's application management will bring up the other apps automatically with PM2
  - NGINX setup
-    - Install `nginx` with system package manager ie. `apt`
-    - Check `notes/nginx_configs` folder for example nginx main configuration
+    - Install `nginx` with system package manager (ie. `apt`)
+    - Check `notes/nginx_configs` folder for example `nginx.conf` main configuration
     - Ensure folders `/etx/nginx/sites-enabled` and `/etc/nginx/sites-available` exist
         - Ensure current `$USER` has write permissions to those folders
-    - 
+    - Ensure current `$USER` has the ability to start, stop, and restart the nginx service without requiring a password for sudo
+        - One possible solution
+            - Create/edit `/etc/sudoers.d/$USER` (ie. `/etc/sudoers.d/ubuntu`) to contain:
+                ```
+                ubuntu ALL=(ALL) NOPASSWD: /usr/sbin/service nginx start,/usr/sbin/service nginx stop,/usr/sbin/service nginx restart,/usr/sbin/service nginx reload
+                ```
+            - [Relevant StackOverflow Answer](https://stackoverflow.com/questions/3011067/restart-nginx-without-sudo#:~:text=Instructions%3A,to%20restart%20nginx%20without%20sudo.&text=Save%20by%20hitting%20ctrl%20%2B%20o,enter%20to%20confirm%20the%20default.)

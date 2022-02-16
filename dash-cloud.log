@@ -3416,3 +3416,23 @@ DASHBOARD
 [ws] client _c_Ckd0sRAmed – message: get_applications {}
 [ws] client _c_Ckd0sRAmed – message: get_resources {}
 [ws] client _c_Ckd0sRAmed – message: get_domains {}
+[ws] client _c_Ckd0sRAmed – message: get_resources {}
+[ws] client _c_Ckd0sRAmed – message: get_applications {}
+[ws] client _c_Ckd0sRAmed – message: get_projects {}
+[ws] client _c_Ckd0sRAmed – message: get_projects {}
+[ws] client _c_Ckd0sRAmed – message: get_applications {}
+[ws] client _c_Ckd0sRAmed – disconnected
+[ws] client _c_Ckd0sRAmed disconnected --> untailing apps: 620c8f44373a770d6d44e9ae
+[ws] client _c_RCKXfLhDZV – connected
+[ws] client _c_RCKXfLhDZV – message: auth {}
+[ws] client _c_RCKXfLhDZV – message: get_projects {}
+[ws] client _c_RCKXfLhDZV – disconnected
+[ws] client _c_hkfMgqQpYg – disconnected
+[ws] client _c_hEy24B6EQw – connected
+[ws] client _c_hEy24B6EQw – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_E88PC6G1xP – connected
+[ws] client _c_E88PC6G1xP – message: auth {}
+[ws] client _c_E88PC6G1xP – message: get_projects {}
+[ws] client _c_E88PC6G1xP – message: get_resources {}
