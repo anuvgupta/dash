@@ -6023,3 +6023,3189 @@ DASHBOARD
 [ws] received ecosystem update
 [main] refreshing ecosystem
 [main] refreshing application "620c8f44373a770d6d44e9ae"
+[ws] socket received: signal { signal: 'tail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "tail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "tail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] sending: tail_application_stream_intro {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_lines: '[ws] client lMoq3zTLoP – authenticated \n' +
+    '[ws] color palette update sent to client lMoq3zTLoP \n' +
+    '[ws] pattern list update sent to client lMoq3zTLoP \n' +
+    '[ws] client lMoq3zTLoP – authenticated \n' +
+    '[ws] color palette update sent to client lMoq3zTLoP \n' +
+    '[ws] pattern list update sent to client lMoq3zTLoP \n' +
+    '[ws] client lMoq3zTLoP – authenticated \n' +
+    '[ws] color palette update sent to client lMoq3zTLoP \n' +
+    '[ws] pattern list update sent to client lMoq3zTLoP \n' +
+    '[ws] client lMoq3zTLoP – disconnected \n' +
+    '[ws] client kQhIbeGfKv – connected \n' +
+    '[ws] client kQhIbeGfKv – authenticated \n' +
+    '[ws] color palette update sent to client kQhIbeGfKv \n' +
+    '[ws] pattern list update sent to client kQhIbeGfKv \n' +
+    '[ws] client kQhIbeGfKv – disconnected \n' +
+    '[ws] client bhq1UrvVDn – connected \n' +
+    '[ws] client bhq1UrvVDn – disconnected \n' +
+    '[ws] client vLYRWmwnu2 – connected \n' +
+    '[ws] client vLYRWmwnu2 – authenticated \n' +
+    '[ws] color palette update sent to client vLYRWmwnu2 \n' +
+    '[ws] pattern list update sent to client vLYRWmwnu2 \n' +
+    '[ws] client vLYRWmwnu2 – authenticated \n' +
+    '[ws] color palette update sent to client vLYRWmwnu2 \n' +
+    '[ws] pattern list update sent to client vLYRWmwnu2 \n'
+}
+[ws] socket received: get_application_status { application: '620c8f44373a770d6d44e9ae' }
+[ws] server requested process status for application "620c8f44373a770d6d44e9ae"
+[main] found application 620c8f44373a770d6d44e9ae
+[main] describe_process true online 1645001800031
+[ws] sending: return_application_status {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  timestamp: 1645001800031,
+  status: 'online'
+}
+[process] interrupt
+[main] exit
+[ws] exit
+[pm] exit
+[process] exit
+DASHBOARD
+[svc] daemon
+[main] initializing
+[cli] initializing
+[pm] initializing
+[ws] initializing
+[ws] socket connected
+[main] ready
+[ws] sending: sync_daemon { daemon_key: 'X1F9K' }
+[ws] socket received: sync_daemon_res {
+  success: true,
+  data: {
+    id: '620c8a4ef9ead118d5ce873b',
+    daemon_key: 'X1F9K',
+    resource: {
+      _id: '620c8a4ef9ead118d5ce873b',
+      slug: 'lightsail',
+      name: 'Lightsail',
+      link: 'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB',
+      ip: '54.186.188.200',
+      provider: 'aws-lightsail',
+      type: 'vm',
+      private_ip: '172.26.0.161',
+      daemon_key: 'X1F9K',
+      specs: [Object],
+      software: [Object],
+      primary_domain: [Object],
+      domains: [],
+      status: 'online',
+      status_time: 1645002124074,
+      ts_created: 1644989006884,
+      ts_updated: 1645001779394
+    }
+  }
+}
+[ws] identified with dash cloud as resource "Lightsail" (620c8a4ef9ead118d5ce873b)
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] adding application "620c8f44373a770d6d44e9ae"
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] socket received: signal { signal: 'untail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "untail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "untail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] socket received: signal { signal: 'tail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "tail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "tail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] sending: tail_application_stream_intro {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_lines: '[ws] pattern list update sent to client lMoq3zTLoP \n' +
+    '[ws] client lMoq3zTLoP – authenticated \n' +
+    '[ws] color palette update sent to client lMoq3zTLoP \n' +
+    '[ws] pattern list update sent to client lMoq3zTLoP \n' +
+    '[ws] client lMoq3zTLoP – disconnected \n' +
+    '[ws] client kQhIbeGfKv – connected \n' +
+    '[ws] client kQhIbeGfKv – authenticated \n' +
+    '[ws] color palette update sent to client kQhIbeGfKv \n' +
+    '[ws] pattern list update sent to client kQhIbeGfKv \n' +
+    '[ws] client kQhIbeGfKv – disconnected \n' +
+    '[ws] client bhq1UrvVDn – connected \n' +
+    '[ws] client bhq1UrvVDn – disconnected \n' +
+    '[ws] client vLYRWmwnu2 – connected \n' +
+    '[ws] client vLYRWmwnu2 – authenticated \n' +
+    '[ws] color palette update sent to client vLYRWmwnu2 \n' +
+    '[ws] pattern list update sent to client vLYRWmwnu2 \n' +
+    '[ws] client vLYRWmwnu2 – authenticated \n' +
+    '[ws] color palette update sent to client vLYRWmwnu2 \n' +
+    '[ws] pattern list update sent to client vLYRWmwnu2 \n' +
+    '[ws] client vLYRWmwnu2 – disconnected \n' +
+    '[ws] client fwsofkGr8N – connected \n' +
+    '[ws] client fwsofkGr8N – authenticated \n' +
+    '[ws] color palette update sent to client fwsofkGr8N \n' +
+    '[ws] pattern list update sent to client fwsofkGr8N \n'
+}
+[ws] socket received: get_application_status { application: '620c8f44373a770d6d44e9ae' }
+[ws] server requested process status for application "620c8f44373a770d6d44e9ae"
+[main] found application 620c8f44373a770d6d44e9ae
+[main] describe_process true online 1645002202303
+[ws] sending: return_application_status {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  timestamp: 1645002202303,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client fwsofkGr8N – disconnected ',
+  now_ts: 1645002219284
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client 8mjqvlBhNP – connected ',
+  now_ts: 1645002221291
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client 8mjqvlBhNP – authenticated ',
+  now_ts: 1645002221292
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] color palette update sent to client 8mjqvlBhNP ',
+  now_ts: 1645002221295
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] pattern list update sent to client 8mjqvlBhNP ',
+  now_ts: 1645002221298
+}
+[ws] socket received: signal { signal: 'tail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "tail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "tail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] sending: tail_application_stream_intro {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_lines: '[ws] client kQhIbeGfKv – connected \n' +
+    '[ws] client kQhIbeGfKv – authenticated \n' +
+    '[ws] color palette update sent to client kQhIbeGfKv \n' +
+    '[ws] pattern list update sent to client kQhIbeGfKv \n' +
+    '[ws] client kQhIbeGfKv – disconnected \n' +
+    '[ws] client bhq1UrvVDn – connected \n' +
+    '[ws] client bhq1UrvVDn – disconnected \n' +
+    '[ws] client vLYRWmwnu2 – connected \n' +
+    '[ws] client vLYRWmwnu2 – authenticated \n' +
+    '[ws] color palette update sent to client vLYRWmwnu2 \n' +
+    '[ws] pattern list update sent to client vLYRWmwnu2 \n' +
+    '[ws] client vLYRWmwnu2 – authenticated \n' +
+    '[ws] color palette update sent to client vLYRWmwnu2 \n' +
+    '[ws] pattern list update sent to client vLYRWmwnu2 \n' +
+    '[ws] client vLYRWmwnu2 – disconnected \n' +
+    '[ws] client fwsofkGr8N – connected \n' +
+    '[ws] client fwsofkGr8N – authenticated \n' +
+    '[ws] color palette update sent to client fwsofkGr8N \n' +
+    '[ws] pattern list update sent to client fwsofkGr8N \n' +
+    '[ws] client fwsofkGr8N – disconnected \n' +
+    '[ws] client 8mjqvlBhNP – connected \n' +
+    '[ws] client 8mjqvlBhNP – authenticated \n' +
+    '[ws] color palette update sent to client 8mjqvlBhNP \n' +
+    '[ws] pattern list update sent to client 8mjqvlBhNP \n'
+}
+[ws] socket received: get_application_status { application: '620c8f44373a770d6d44e9ae' }
+[ws] server requested process status for application "620c8f44373a770d6d44e9ae"
+[main] found application 620c8f44373a770d6d44e9ae
+[main] describe_process true online 1645002224665
+[ws] sending: return_application_status {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  timestamp: 1645002224665,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socke3',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socke3 {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socke3 {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client 8mjqvlBhNP – disconnected ',
+  now_ts: 1645002240657
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client xIPGaZ2ecF – connected ',
+  now_ts: 1645002255682
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: false,
+    ws_enable: false,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client xIPGaZ2ecF – disconnected ',
+  now_ts: 1645002262689
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client a2Ekm0ntqS – connected ',
+  now_ts: 1645002268698
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client a2Ekm0ntqS – disconnected ',
+  now_ts: 1645002269702
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client O947YSO7EY – connected ',
+  now_ts: 1645002271707
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: true,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\treturn 301 https://$host$request_uri;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: false,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client O947YSO7EY – disconnected ',
+  now_ts: 1645002285728
+}
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: false,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+[ws] socket connected
+[ws] sending: sync_daemon { daemon_key: 'X1F9K' }
+[ws] socket received: sync_daemon_res {
+  success: true,
+  data: {
+    id: '620c8a4ef9ead118d5ce873b',
+    daemon_key: 'X1F9K',
+    resource: {
+      _id: '620c8a4ef9ead118d5ce873b',
+      slug: 'lightsail',
+      name: 'Lightsail',
+      link: 'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB',
+      ip: '54.186.188.200',
+      provider: 'aws-lightsail',
+      type: 'vm',
+      private_ip: '172.26.0.161',
+      daemon_key: 'X1F9K',
+      specs: [Object],
+      software: [Object],
+      primary_domain: [Object],
+      domains: [],
+      status: 'desync',
+      status_time: 1645002361665,
+      ts_created: 1644989006884,
+      ts_updated: 1645001779394
+    }
+  }
+}
+[ws] identified with dash cloud as resource "Lightsail" (620c8a4ef9ead118d5ce873b)
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[ws] socket received: signal { signal: 'tail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "tail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "tail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] sending: tail_application_stream_intro {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_lines: '[ws] client vLYRWmwnu2 – connected \n' +
+    '[ws] client vLYRWmwnu2 – authenticated \n' +
+    '[ws] color palette update sent to client vLYRWmwnu2 \n' +
+    '[ws] pattern list update sent to client vLYRWmwnu2 \n' +
+    '[ws] client vLYRWmwnu2 – authenticated \n' +
+    '[ws] color palette update sent to client vLYRWmwnu2 \n' +
+    '[ws] pattern list update sent to client vLYRWmwnu2 \n' +
+    '[ws] client vLYRWmwnu2 – disconnected \n' +
+    '[ws] client fwsofkGr8N – connected \n' +
+    '[ws] client fwsofkGr8N – authenticated \n' +
+    '[ws] color palette update sent to client fwsofkGr8N \n' +
+    '[ws] pattern list update sent to client fwsofkGr8N \n' +
+    '[ws] client fwsofkGr8N – disconnected \n' +
+    '[ws] client 8mjqvlBhNP – connected \n' +
+    '[ws] client 8mjqvlBhNP – authenticated \n' +
+    '[ws] color palette update sent to client 8mjqvlBhNP \n' +
+    '[ws] pattern list update sent to client 8mjqvlBhNP \n' +
+    '[ws] client 8mjqvlBhNP – disconnected \n' +
+    '[ws] client xIPGaZ2ecF – connected \n' +
+    '[ws] client xIPGaZ2ecF – disconnected \n' +
+    '[ws] client a2Ekm0ntqS – connected \n' +
+    '[ws] client a2Ekm0ntqS – disconnected \n' +
+    '[ws] client O947YSO7EY – connected \n' +
+    '[ws] client O947YSO7EY – disconnected \n'
+}
+[ws] socket received: get_application_status { application: '620c8f44373a770d6d44e9ae' }
+[ws] server requested process status for application "620c8f44373a770d6d44e9ae"
+[main] found application 620c8f44373a770d6d44e9ae
+[main] describe_process true online 1645002389054
+[ws] sending: return_application_status {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  timestamp: 1645002389054,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "untail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "untail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] socket received: signal { signal: 'tail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "tail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "tail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] sending: tail_application_stream_intro {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_lines: '[ws] client vLYRWmwnu2 – connected \n' +
+    '[ws] client vLYRWmwnu2 – authenticated \n' +
+    '[ws] color palette update sent to client vLYRWmwnu2 \n' +
+    '[ws] pattern list update sent to client vLYRWmwnu2 \n' +
+    '[ws] client vLYRWmwnu2 – authenticated \n' +
+    '[ws] color palette update sent to client vLYRWmwnu2 \n' +
+    '[ws] pattern list update sent to client vLYRWmwnu2 \n' +
+    '[ws] client vLYRWmwnu2 – disconnected \n' +
+    '[ws] client fwsofkGr8N – connected \n' +
+    '[ws] client fwsofkGr8N – authenticated \n' +
+    '[ws] color palette update sent to client fwsofkGr8N \n' +
+    '[ws] pattern list update sent to client fwsofkGr8N \n' +
+    '[ws] client fwsofkGr8N – disconnected \n' +
+    '[ws] client 8mjqvlBhNP – connected \n' +
+    '[ws] client 8mjqvlBhNP – authenticated \n' +
+    '[ws] color palette update sent to client 8mjqvlBhNP \n' +
+    '[ws] pattern list update sent to client 8mjqvlBhNP \n' +
+    '[ws] client 8mjqvlBhNP – disconnected \n' +
+    '[ws] client xIPGaZ2ecF – connected \n' +
+    '[ws] client xIPGaZ2ecF – disconnected \n' +
+    '[ws] client a2Ekm0ntqS – connected \n' +
+    '[ws] client a2Ekm0ntqS – disconnected \n' +
+    '[ws] client O947YSO7EY – connected \n' +
+    '[ws] client O947YSO7EY – disconnected \n'
+}
+[ws] socket received: get_application_status { application: '620c8f44373a770d6d44e9ae' }
+[ws] server requested process status for application "620c8f44373a770d6d44e9ae"
+[main] found application 620c8f44373a770d6d44e9ae
+[main] describe_process true online 1645002469040
+[ws] sending: return_application_status {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  timestamp: 1645002469040,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client pI25M2xUzF – connected ',
+  now_ts: 1645002494042
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client pI25M2xUzF – disconnected ',
+  now_ts: 1645002497047
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client pUvIqhG0be – connected ',
+  now_ts: 1645002499061
+}
+[ws] socket received: signal { signal: 'untail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "untail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "untail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] socket received: signal { signal: 'tail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "tail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "tail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] sending: tail_application_stream_intro {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_lines: '[ws] pattern list update sent to client vLYRWmwnu2 \n' +
+    '[ws] client vLYRWmwnu2 – authenticated \n' +
+    '[ws] color palette update sent to client vLYRWmwnu2 \n' +
+    '[ws] pattern list update sent to client vLYRWmwnu2 \n' +
+    '[ws] client vLYRWmwnu2 – disconnected \n' +
+    '[ws] client fwsofkGr8N – connected \n' +
+    '[ws] client fwsofkGr8N – authenticated \n' +
+    '[ws] color palette update sent to client fwsofkGr8N \n' +
+    '[ws] pattern list update sent to client fwsofkGr8N \n' +
+    '[ws] client fwsofkGr8N – disconnected \n' +
+    '[ws] client 8mjqvlBhNP – connected \n' +
+    '[ws] client 8mjqvlBhNP – authenticated \n' +
+    '[ws] color palette update sent to client 8mjqvlBhNP \n' +
+    '[ws] pattern list update sent to client 8mjqvlBhNP \n' +
+    '[ws] client 8mjqvlBhNP – disconnected \n' +
+    '[ws] client xIPGaZ2ecF – connected \n' +
+    '[ws] client xIPGaZ2ecF – disconnected \n' +
+    '[ws] client a2Ekm0ntqS – connected \n' +
+    '[ws] client a2Ekm0ntqS – disconnected \n' +
+    '[ws] client O947YSO7EY – connected \n' +
+    '[ws] client O947YSO7EY – disconnected \n' +
+    '[ws] client pI25M2xUzF – connected \n' +
+    '[ws] client pI25M2xUzF – disconnected \n' +
+    '[ws] client pUvIqhG0be – connected \n'
+}
+[ws] socket received: get_application_status { application: '620c8f44373a770d6d44e9ae' }
+[ws] server requested process status for application "620c8f44373a770d6d44e9ae"
+[main] found application 620c8f44373a770d6d44e9ae
+[main] describe_process true online 1645002538644
+[ws] sending: return_application_status {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  timestamp: 1645002538644,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: false,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client pUvIqhG0be – disconnected ',
+  now_ts: 1645002580659
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client olfHnSidmd – connected ',
+  now_ts: 1645002581662
+}
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: false,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client olfHnSidmd – disconnected ',
+  now_ts: 1645002586666
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client 5cLQ2qF8iX – connected ',
+  now_ts: 1645002588670
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client 5cLQ2qF8iX – disconnected ',
+  now_ts: 1645002596679
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client O8UPsfKfhT – connected ',
+  now_ts: 1645002604689
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client O8UPsfKfhT – disconnected ',
+  now_ts: 1645002606693
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client 5vfgbCybM5 – connected ',
+  now_ts: 1645002608697
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client We8JAl8GWT – connected ',
+  now_ts: 1645002627710
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client We8JAl8GWT – disconnected ',
+  now_ts: 1645002628718
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client xYwxgupo0D – connected ',
+  now_ts: 1645002649732
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client xYwxgupo0D – authenticated ',
+  now_ts: 1645002652736
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] color palette update sent to client xYwxgupo0D ',
+  now_ts: 1645002652739
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] pattern list update sent to client xYwxgupo0D ',
+  now_ts: 1645002652742
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client xYwxgupo0D – authenticated ',
+  now_ts: 1645002652746
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] color palette update sent to client xYwxgupo0D ',
+  now_ts: 1645002652750
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] pattern list update sent to client xYwxgupo0D ',
+  now_ts: 1645002652752
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client xYwxgupo0D – authenticated ',
+  now_ts: 1645002652754
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] color palette update sent to client xYwxgupo0D ',
+  now_ts: 1645002652756
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] pattern list update sent to client xYwxgupo0D ',
+  now_ts: 1645002652758
+}
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: true,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\treturn 301 https://$host$request_uri;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client xYwxgupo0D – disconnected ',
+  now_ts: 1645002659763
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client 7sLrwt0D1o – connected ',
+  now_ts: 1645002660767
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client 7sLrwt0D1o – authenticated ',
+  now_ts: 1645002660767
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] color palette update sent to client 7sLrwt0D1o ',
+  now_ts: 1645002660772
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] pattern list update sent to client 7sLrwt0D1o ',
+  now_ts: 1645002660776
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client 7sLrwt0D1o – disconnected ',
+  now_ts: 1645002663784
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client 5vfgbCybM5 – disconnected ',
+  now_ts: 1645002664788
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client 5CRrRyApFD – connected ',
+  now_ts: 1645002665793
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client 5CRrRyApFD – authenticated ',
+  now_ts: 1645002665794
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] color palette update sent to client 5CRrRyApFD ',
+  now_ts: 1645002665794
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] pattern list update sent to client 5CRrRyApFD ',
+  now_ts: 1645002665797
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client 5CRrRyApFD – disconnected ',
+  now_ts: 1645002666801
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client 7TmWyZWXhj – connected ',
+  now_ts: 1645002667804
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client 7TmWyZWXhj – authenticated ',
+  now_ts: 1645002668809
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] color palette update sent to client 7TmWyZWXhj ',
+  now_ts: 1645002668809
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] pattern list update sent to client 7TmWyZWXhj ',
+  now_ts: 1645002668812
+}
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: false,
+    https_force: true,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\treturn 301 https://$host$request_uri;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client 7TmWyZWXhj – disconnected ',
+  now_ts: 1645002675821
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client ppQwRfIy4c – connected ',
+  now_ts: 1645002677822
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] client ppQwRfIy4c – authenticated ',
+  now_ts: 1645002677823
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] color palette update sent to client ppQwRfIy4c ',
+  now_ts: 1645002677823
+}
+[ws] sending: tail_application_stream {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_line: '[ws] pattern list update sent to client ppQwRfIy4c ',
+  now_ts: 1645002677828
+}
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[process] interrupt
+[main] exit
+[ws] exit
+[pm] exit
+[process] exit
+DASHBOARD
+[svc] daemon
+[main] initializing
+[cli] initializing
+[pm] initializing
+[ws] initializing
+[ws] socket connected
+[main] ready
+[ws] sending: sync_daemon { daemon_key: 'X1F9K' }
+[ws] socket received: sync_daemon_res {
+  success: true,
+  data: {
+    id: '620c8a4ef9ead118d5ce873b',
+    daemon_key: 'X1F9K',
+    resource: {
+      _id: '620c8a4ef9ead118d5ce873b',
+      slug: 'lightsail',
+      name: 'Lightsail',
+      link: 'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB',
+      ip: '54.186.188.200',
+      provider: 'aws-lightsail',
+      type: 'vm',
+      private_ip: '172.26.0.161',
+      daemon_key: 'X1F9K',
+      specs: [Object],
+      software: [Object],
+      primary_domain: [Object],
+      domains: [],
+      status: 'online',
+      status_time: 1645003008610,
+      ts_created: 1644989006884,
+      ts_updated: 1645001779394
+    }
+  }
+}
+[ws] identified with dash cloud as resource "Lightsail" (620c8a4ef9ead118d5ce873b)
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] adding application "620c8f44373a770d6d44e9ae"
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: push_application_proxy_res_daemon {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  message: ''
+}
+[ws] socket received: signal { signal: 'tail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "tail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "tail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] sending: tail_application_stream_intro {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_lines: '[ws] client xYwxgupo0D – authenticated \n' +
+    '[ws] color palette update sent to client xYwxgupo0D \n' +
+    '[ws] pattern list update sent to client xYwxgupo0D \n' +
+    '[ws] client xYwxgupo0D – disconnected \n' +
+    '[ws] client 7sLrwt0D1o – connected \n' +
+    '[ws] client 7sLrwt0D1o – authenticated \n' +
+    '[ws] color palette update sent to client 7sLrwt0D1o \n' +
+    '[ws] pattern list update sent to client 7sLrwt0D1o \n' +
+    '[ws] client 7sLrwt0D1o – disconnected \n' +
+    '[ws] client 5vfgbCybM5 – disconnected \n' +
+    '[ws] client 5CRrRyApFD – connected \n' +
+    '[ws] client 5CRrRyApFD – authenticated \n' +
+    '[ws] color palette update sent to client 5CRrRyApFD \n' +
+    '[ws] pattern list update sent to client 5CRrRyApFD \n' +
+    '[ws] client 5CRrRyApFD – disconnected \n' +
+    '[ws] client 7TmWyZWXhj – connected \n' +
+    '[ws] client 7TmWyZWXhj – authenticated \n' +
+    '[ws] color palette update sent to client 7TmWyZWXhj \n' +
+    '[ws] pattern list update sent to client 7TmWyZWXhj \n' +
+    '[ws] client 7TmWyZWXhj – disconnected \n' +
+    '[ws] client ppQwRfIy4c – connected \n' +
+    '[ws] client ppQwRfIy4c – authenticated \n' +
+    '[ws] color palette update sent to client ppQwRfIy4c \n' +
+    '[ws] pattern list update sent to client ppQwRfIy4c \n'
+}
+[ws] socket received: get_application_status { application: '620c8f44373a770d6d44e9ae' }
+[ws] server requested process status for application "620c8f44373a770d6d44e9ae"
+[main] found application 620c8f44373a770d6d44e9ae
+[main] describe_process true online 1645003080033
+[ws] sending: return_application_status {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  timestamp: 1645003080033,
+  status: 'online'
+}
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: push_application_proxy_res_daemon {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  message: ''
+}
+[process] interrupt
+[main] exit
+[ws] exit
+[pm] exit
+[process] exit
+DASHBOARD
+[svc] daemon
+[main] initializing
+[cli] initializing
+[pm] initializing
+[ws] initializing
+[ws] socket connected
+[main] ready
+[ws] sending: sync_daemon { daemon_key: 'X1F9K' }
+[ws] socket received: sync_daemon_res {
+  success: true,
+  data: {
+    id: '620c8a4ef9ead118d5ce873b',
+    daemon_key: 'X1F9K',
+    resource: {
+      _id: '620c8a4ef9ead118d5ce873b',
+      slug: 'lightsail',
+      name: 'Lightsail',
+      link: 'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB',
+      ip: '54.186.188.200',
+      provider: 'aws-lightsail',
+      type: 'vm',
+      private_ip: '172.26.0.161',
+      daemon_key: 'X1F9K',
+      specs: [Object],
+      software: [Object],
+      primary_domain: [Object],
+      domains: [],
+      status: 'online',
+      status_time: 1645003085860,
+      ts_created: 1644989006884,
+      ts_updated: 1645001779394
+    }
+  }
+}
+[ws] identified with dash cloud as resource "Lightsail" (620c8a4ef9ead118d5ce873b)
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] adding application "620c8f44373a770d6d44e9ae"
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: push_application_proxy_res_daemon {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  message: 'Proxy updated'
+}
+[process] interrupt
+[main] exit
+[ws] exit
+[pm] exit
+[process] exit
+DASHBOARD
+[svc] daemon
+[main] initializing
+[cli] initializing
+[pm] initializing
+[ws] initializing
+[ws] socket connected
+[main] ready
+[ws] sending: sync_daemon { daemon_key: 'X1F9K' }
+[ws] socket received: sync_daemon_res {
+  success: true,
+  data: {
+    id: '620c8a4ef9ead118d5ce873b',
+    daemon_key: 'X1F9K',
+    resource: {
+      _id: '620c8a4ef9ead118d5ce873b',
+      slug: 'lightsail',
+      name: 'Lightsail',
+      link: 'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB',
+      ip: '54.186.188.200',
+      provider: 'aws-lightsail',
+      type: 'vm',
+      private_ip: '172.26.0.161',
+      daemon_key: 'X1F9K',
+      specs: [Object],
+      software: [Object],
+      primary_domain: [Object],
+      domains: [],
+      status: 'online',
+      status_time: 1645003109895,
+      ts_created: 1644989006884,
+      ts_updated: 1645001779394
+    }
+  }
+}
+[ws] identified with dash cloud as resource "Lightsail" (620c8a4ef9ead118d5ce873b)
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] adding application "620c8f44373a770d6d44e9ae"
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: push_application_proxy_res_daemon {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  message: 'Proxy pushed'
+}
+[ws] socket received: signal { signal: 'restart', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "restart" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "restart"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] sending: return_application_status {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  timestamp: 1645003119790,
+  status: 'online'
+}
+[ws] sending: signal_application_res_daemon {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  message: '<b>led-lights</b> received <b>RESTART</b>'
+}
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: push_application_proxy_res_daemon {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  message: 'Proxy pushed'
+}
+[ws] socket received: signal { signal: 'tail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "tail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "tail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] sending: tail_application_stream_intro {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_lines: '[ws] client xYwxgupo0D – disconnected \n' +
+    '[ws] client 7sLrwt0D1o – connected \n' +
+    '[ws] client 7sLrwt0D1o – authenticated \n' +
+    '[ws] color palette update sent to client 7sLrwt0D1o \n' +
+    '[ws] pattern list update sent to client 7sLrwt0D1o \n' +
+    '[ws] client 7sLrwt0D1o – disconnected \n' +
+    '[ws] client 5vfgbCybM5 – disconnected \n' +
+    '[ws] client 5CRrRyApFD – connected \n' +
+    '[ws] client 5CRrRyApFD – authenticated \n' +
+    '[ws] color palette update sent to client 5CRrRyApFD \n' +
+    '[ws] pattern list update sent to client 5CRrRyApFD \n' +
+    '[ws] client 5CRrRyApFD – disconnected \n' +
+    '[ws] client 7TmWyZWXhj – connected \n' +
+    '[ws] client 7TmWyZWXhj – authenticated \n' +
+    '[ws] color palette update sent to client 7TmWyZWXhj \n' +
+    '[ws] pattern list update sent to client 7TmWyZWXhj \n' +
+    '[ws] client 7TmWyZWXhj – disconnected \n' +
+    '[ws] client ppQwRfIy4c – connected \n' +
+    '[ws] client ppQwRfIy4c – authenticated \n' +
+    '[ws] color palette update sent to client ppQwRfIy4c \n' +
+    '[ws] pattern list update sent to client ppQwRfIy4c \n' +
+    'LED Lights\n' +
+    '[ws] listening on 3031\n' +
+    '[http] listening on 3030\n'
+}
+[ws] socket received: get_application_status { application: '620c8f44373a770d6d44e9ae' }
+[ws] server requested process status for application "620c8f44373a770d6d44e9ae"
+[main] found application 620c8f44373a770d6d44e9ae
+[main] describe_process true online 1645003146825
+[ws] sending: return_application_status {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  timestamp: 1645003146825,
+  status: 'online'
+}
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: push_application_proxy_res_daemon {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  message: 'Proxy pushed'
+}
+[process] interrupt
+[main] exit
+[ws] exit
+[pm] exit
+[process] exit
+DASHBOARD
+[svc] daemon
+[main] initializing
+[cli] initializing
+[pm] initializing
+[ws] initializing
+[ws] socket connected
+[main] ready
+[ws] sending: sync_daemon { daemon_key: 'X1F9K' }
+[ws] socket received: sync_daemon_res {
+  success: true,
+  data: {
+    id: '620c8a4ef9ead118d5ce873b',
+    daemon_key: 'X1F9K',
+    resource: {
+      _id: '620c8a4ef9ead118d5ce873b',
+      slug: 'lightsail',
+      name: 'Lightsail',
+      link: 'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB',
+      ip: '54.186.188.200',
+      provider: 'aws-lightsail',
+      type: 'vm',
+      private_ip: '172.26.0.161',
+      daemon_key: 'X1F9K',
+      specs: [Object],
+      software: [Object],
+      primary_domain: [Object],
+      domains: [],
+      status: 'online',
+      status_time: 1645003152496,
+      ts_created: 1644989006884,
+      ts_updated: 1645001779394
+    }
+  }
+}
+[ws] identified with dash cloud as resource "Lightsail" (620c8a4ef9ead118d5ce873b)
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] adding application "620c8f44373a770d6d44e9ae"
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: push_application_proxy_res_daemon {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  message: 'Proxy pushed/linked'
+}
+[process] interrupt
+[main] exit
+[ws] exit
+[pm] exit
+[process] exit
+DASHBOARD
+[svc] daemon
+[main] initializing
+[cli] initializing
+[pm] initializing
+[ws] initializing
+[ws] socket connected
+[main] ready
+[ws] sending: sync_daemon { daemon_key: 'X1F9K' }
+[ws] socket received: sync_daemon_res {
+  success: true,
+  data: {
+    id: '620c8a4ef9ead118d5ce873b',
+    daemon_key: 'X1F9K',
+    resource: {
+      _id: '620c8a4ef9ead118d5ce873b',
+      slug: 'lightsail',
+      name: 'Lightsail',
+      link: 'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB',
+      ip: '54.186.188.200',
+      provider: 'aws-lightsail',
+      type: 'vm',
+      private_ip: '172.26.0.161',
+      daemon_key: 'X1F9K',
+      specs: [Object],
+      software: [Object],
+      primary_domain: [Object],
+      domains: [],
+      status: 'online',
+      status_time: 1645003164531,
+      ts_created: 1644989006884,
+      ts_updated: 1645001779394
+    }
+  }
+}
+[ws] identified with dash cloud as resource "Lightsail" (620c8a4ef9ead118d5ce873b)
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] adding application "620c8f44373a770d6d44e9ae"
+[ws] socket received: proxy_config {
+  application: '620c8f44373a770d6d44e9ae',
+  proxy_settings: {
+    www: false,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: false,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name leds.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3030;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3031;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620c8f44373a770d6d44e9ae"
+[main] processing nginx proxy for app 620c8f44373a770d6d44e9ae
+[main] found application 620c8f44373a770d6d44e9ae
+[main] writing config for app "led-lights" (620c8f44373a770d6d44e9ae) to location /etc/nginx/sites-available/dash-app_led-lights.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_led-lights.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: push_application_proxy_res_daemon {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  message: 'Proxy pushed & linked'
+}
+[ws] socket received: signal { signal: 'untail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "untail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "untail"
+[main] found application 620c8f44373a770d6d44e9ae

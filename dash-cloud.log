@@ -3436,3 +3436,1040 @@ DASHBOARD
 [ws] client _c_E88PC6G1xP – message: auth {}
 [ws] client _c_E88PC6G1xP – message: get_projects {}
 [ws] client _c_E88PC6G1xP – message: get_resources {}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: update_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m,
+  update: {
+    [32m'specs.cpu'[39m: [33m1[39m
+  }
+}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: update_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m,
+  update: {
+    [32m'specs.memory'[39m: [33m2[39m
+  }
+}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: update_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m,
+  update: {
+    [32m'specs.storage'[39m: [33m60[39m
+  }
+}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: update_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m,
+  update: {
+    [32m'specs.location'[39m: [32m'Oregon (us-west-2a)'[39m
+  }
+}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: update_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m,
+  update: {
+    type: [32m'vm'[39m
+  }
+}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: get_resources {}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: update_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m,
+  update: {
+    type: [32m'none'[39m
+  }
+}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: get_resources {}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: update_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m,
+  update: {
+    type: [32m'vm'[39m
+  }
+}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: get_resources {}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: get_resources {}
+[ws] client _c_E88PC6G1xP – message: get_applications {}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: get_resources {}
+[ws] client _c_E88PC6G1xP – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_E88PC6G1xP – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_hEy24B6EQw – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[ws] client lMoq3zTLoP – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client lMoq3zTLoP \n'[39m +
+    [32m'[ws] pattern list update sent to client lMoq3zTLoP \n'[39m +
+    [32m'[ws] client lMoq3zTLoP – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client lMoq3zTLoP \n'[39m +
+    [32m'[ws] pattern list update sent to client lMoq3zTLoP \n'[39m +
+    [32m'[ws] client lMoq3zTLoP – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client lMoq3zTLoP \n'[39m +
+    [32m'[ws] pattern list update sent to client lMoq3zTLoP \n'[39m +
+    [32m'[ws] client lMoq3zTLoP – disconnected \n'[39m +
+    [32m'[ws] client kQhIbeGfKv – connected \n'[39m +
+    [32m'[ws] client kQhIbeGfKv – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client kQhIbeGfKv \n'[39m +
+    [32m'[ws] pattern list update sent to client kQhIbeGfKv \n'[39m +
+    [32m'[ws] client kQhIbeGfKv – disconnected \n'[39m +
+    [32m'[ws] client bhq1UrvVDn – connected \n'[39m +
+    [32m'[ws] client bhq1UrvVDn – disconnected \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – connected \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] pattern list update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] pattern list update sent to client vLYRWmwnu2 \n'[39m
+}
+[ws] client _c_hEy24B6EQw – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645001800031[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_hEy24B6EQw – disconnected
+[ws] client _c_GIEeGZjSLG – connected
+[ws] client _c_GIEeGZjSLG – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_E88PC6G1xP – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_E88PC6G1xP – message: get_applications {}
+[ws] client _c_E88PC6G1xP – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_E88PC6G1xP – message: get_resources {}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: get_resources {}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: get_applications {}
+[ws] client _c_E88PC6G1xP – message: get_domains {}
+[ws] client _c_E88PC6G1xP – message: get_resources {}
+[ws] client _c_E88PC6G1xP – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_GIEeGZjSLG – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[ws] pattern list update sent to client lMoq3zTLoP \n'[39m +
+    [32m'[ws] client lMoq3zTLoP – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client lMoq3zTLoP \n'[39m +
+    [32m'[ws] pattern list update sent to client lMoq3zTLoP \n'[39m +
+    [32m'[ws] client lMoq3zTLoP – disconnected \n'[39m +
+    [32m'[ws] client kQhIbeGfKv – connected \n'[39m +
+    [32m'[ws] client kQhIbeGfKv – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client kQhIbeGfKv \n'[39m +
+    [32m'[ws] pattern list update sent to client kQhIbeGfKv \n'[39m +
+    [32m'[ws] client kQhIbeGfKv – disconnected \n'[39m +
+    [32m'[ws] client bhq1UrvVDn – connected \n'[39m +
+    [32m'[ws] client bhq1UrvVDn – disconnected \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – connected \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] pattern list update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] pattern list update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – disconnected \n'[39m +
+    [32m'[ws] client fwsofkGr8N – connected \n'[39m +
+    [32m'[ws] client fwsofkGr8N – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client fwsofkGr8N \n'[39m +
+    [32m'[ws] pattern list update sent to client fwsofkGr8N \n'[39m
+}
+[ws] client _c_E88PC6G1xP – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_GIEeGZjSLG – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645002202303[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_E88PC6G1xP – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.ws_enable_path'[39m: [32m'socket1'[39m
+  }
+}
+[ws] client _c_E88PC6G1xP – disconnected
+[ws] client _c_E88PC6G1xP disconnected --> untailing apps: 620c8f44373a770d6d44e9ae
+[ws] client _c_GIEeGZjSLG – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client fwsofkGr8N – disconnected '[39m,
+  now_ts: [33m1645002219284[39m
+}
+[ws] client _c_YlGJR5yuJI – connected
+[ws] client _c_YlGJR5yuJI – message: auth {}
+[ws] client _c_GIEeGZjSLG – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 8mjqvlBhNP – connected '[39m,
+  now_ts: [33m1645002221291[39m
+}
+[ws] client _c_GIEeGZjSLG – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 8mjqvlBhNP – authenticated '[39m,
+  now_ts: [33m1645002221292[39m
+}
+[ws] client _c_GIEeGZjSLG – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client 8mjqvlBhNP '[39m,
+  now_ts: [33m1645002221295[39m
+}
+[ws] client _c_GIEeGZjSLG – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client 8mjqvlBhNP '[39m,
+  now_ts: [33m1645002221298[39m
+}
+[ws] client _c_YlGJR5yuJI – message: get_projects {}
+[ws] client _c_YlGJR5yuJI – message: get_applications {}
+[ws] client _c_YlGJR5yuJI – message: get_domains {}
+[ws] client _c_YlGJR5yuJI – message: get_resources {}
+[ws] client _c_YlGJR5yuJI – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_GIEeGZjSLG – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[ws] client kQhIbeGfKv – connected \n'[39m +
+    [32m'[ws] client kQhIbeGfKv – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client kQhIbeGfKv \n'[39m +
+    [32m'[ws] pattern list update sent to client kQhIbeGfKv \n'[39m +
+    [32m'[ws] client kQhIbeGfKv – disconnected \n'[39m +
+    [32m'[ws] client bhq1UrvVDn – connected \n'[39m +
+    [32m'[ws] client bhq1UrvVDn – disconnected \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – connected \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] pattern list update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] pattern list update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – disconnected \n'[39m +
+    [32m'[ws] client fwsofkGr8N – connected \n'[39m +
+    [32m'[ws] client fwsofkGr8N – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client fwsofkGr8N \n'[39m +
+    [32m'[ws] pattern list update sent to client fwsofkGr8N \n'[39m +
+    [32m'[ws] client fwsofkGr8N – disconnected \n'[39m +
+    [32m'[ws] client 8mjqvlBhNP – connected \n'[39m +
+    [32m'[ws] client 8mjqvlBhNP – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client 8mjqvlBhNP \n'[39m +
+    [32m'[ws] pattern list update sent to client 8mjqvlBhNP \n'[39m
+}
+[ws] client _c_YlGJR5yuJI – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_GIEeGZjSLG – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645002224665[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_YlGJR5yuJI – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.ws_enable_path'[39m: [32m'socke3'[39m
+  }
+}
+[ws] client _c_YlGJR5yuJI – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_GIEeGZjSLG – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 8mjqvlBhNP – disconnected '[39m,
+  now_ts: [33m1645002240657[39m
+}
+[ws] client _c_YlGJR5yuJI – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.ws_enable_path'[39m: [32m'socket'[39m
+  }
+}
+[ws] client _c_YlGJR5yuJI – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_GIEeGZjSLG – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client xIPGaZ2ecF – connected '[39m,
+  now_ts: [33m1645002255682[39m
+}
+[ws] client _c_YlGJR5yuJI – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.ws_enable'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_YlGJR5yuJI – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_GIEeGZjSLG – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client xIPGaZ2ecF – disconnected '[39m,
+  now_ts: [33m1645002262689[39m
+}
+[ws] client _c_YlGJR5yuJI – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.ws_enable'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_YlGJR5yuJI – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_GIEeGZjSLG – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client a2Ekm0ntqS – connected '[39m,
+  now_ts: [33m1645002268698[39m
+}
+[ws] client _c_GIEeGZjSLG – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client a2Ekm0ntqS – disconnected '[39m,
+  now_ts: [33m1645002269702[39m
+}
+[ws] client _c_GIEeGZjSLG – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client O947YSO7EY – connected '[39m,
+  now_ts: [33m1645002271707[39m
+}
+[ws] client _c_YlGJR5yuJI – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.https_force'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_YlGJR5yuJI – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_YlGJR5yuJI – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.https_force'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_YlGJR5yuJI – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.https_enable'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_YlGJR5yuJI – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_GIEeGZjSLG – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client O947YSO7EY – disconnected '[39m,
+  now_ts: [33m1645002285728[39m
+}
+[ws] client _c_YlGJR5yuJI – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_YlGJR5yuJI – disconnected
+[ws] client _c_YlGJR5yuJI disconnected --> untailing apps: 620c8f44373a770d6d44e9ae
+[ws] client _c_GIEeGZjSLG – disconnected
+[ws] client _c_puL3ey1Fmo – connected
+[ws] client _c_puL3ey1Fmo – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_UyWGSICJBg – connected
+[ws] client _c_UyWGSICJBg – message: sign_in {
+  password: [32m'9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'[39m
+}
+[ws] client _c_UyWGSICJBg – message: get_projects {}
+[ws] client _c_UyWGSICJBg – message: get_applications {}
+[ws] client _c_UyWGSICJBg – message: get_domains {}
+[ws] client _c_UyWGSICJBg – message: get_resources {}
+[ws] client _c_UyWGSICJBg – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_UyWGSICJBg – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[ws] client vLYRWmwnu2 – connected \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] pattern list update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] pattern list update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – disconnected \n'[39m +
+    [32m'[ws] client fwsofkGr8N – connected \n'[39m +
+    [32m'[ws] client fwsofkGr8N – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client fwsofkGr8N \n'[39m +
+    [32m'[ws] pattern list update sent to client fwsofkGr8N \n'[39m +
+    [32m'[ws] client fwsofkGr8N – disconnected \n'[39m +
+    [32m'[ws] client 8mjqvlBhNP – connected \n'[39m +
+    [32m'[ws] client 8mjqvlBhNP – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client 8mjqvlBhNP \n'[39m +
+    [32m'[ws] pattern list update sent to client 8mjqvlBhNP \n'[39m +
+    [32m'[ws] client 8mjqvlBhNP – disconnected \n'[39m +
+    [32m'[ws] client xIPGaZ2ecF – connected \n'[39m +
+    [32m'[ws] client xIPGaZ2ecF – disconnected \n'[39m +
+    [32m'[ws] client a2Ekm0ntqS – connected \n'[39m +
+    [32m'[ws] client a2Ekm0ntqS – disconnected \n'[39m +
+    [32m'[ws] client O947YSO7EY – connected \n'[39m +
+    [32m'[ws] client O947YSO7EY – disconnected \n'[39m
+}
+[ws] client _c_puL3ey1Fmo – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645002389054[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_UyWGSICJBg – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.https_enable'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_UyWGSICJBg – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_UyWGSICJBg – disconnected
+[ws] client _c_UyWGSICJBg disconnected --> untailing apps: 620c8f44373a770d6d44e9ae
+[ws] client _c_FTYsqJJdu2 – connected
+[ws] client _c_FTYsqJJdu2 – message: sign_in {
+  password: [32m'9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'[39m
+}
+[ws] client _c_FTYsqJJdu2 – message: get_projects {}
+[ws] client _c_FTYsqJJdu2 – message: get_resources {}
+[ws] client _c_FTYsqJJdu2 – message: get_applications {}
+[ws] client _c_FTYsqJJdu2 – message: get_domains {}
+[ws] client _c_FTYsqJJdu2 – message: get_resources {}
+[ws] client _c_FTYsqJJdu2 – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[ws] client vLYRWmwnu2 – connected \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] pattern list update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] pattern list update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – disconnected \n'[39m +
+    [32m'[ws] client fwsofkGr8N – connected \n'[39m +
+    [32m'[ws] client fwsofkGr8N – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client fwsofkGr8N \n'[39m +
+    [32m'[ws] pattern list update sent to client fwsofkGr8N \n'[39m +
+    [32m'[ws] client fwsofkGr8N – disconnected \n'[39m +
+    [32m'[ws] client 8mjqvlBhNP – connected \n'[39m +
+    [32m'[ws] client 8mjqvlBhNP – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client 8mjqvlBhNP \n'[39m +
+    [32m'[ws] pattern list update sent to client 8mjqvlBhNP \n'[39m +
+    [32m'[ws] client 8mjqvlBhNP – disconnected \n'[39m +
+    [32m'[ws] client xIPGaZ2ecF – connected \n'[39m +
+    [32m'[ws] client xIPGaZ2ecF – disconnected \n'[39m +
+    [32m'[ws] client a2Ekm0ntqS – connected \n'[39m +
+    [32m'[ws] client a2Ekm0ntqS – disconnected \n'[39m +
+    [32m'[ws] client O947YSO7EY – connected \n'[39m +
+    [32m'[ws] client O947YSO7EY – disconnected \n'[39m
+}
+[ws] client _c_FTYsqJJdu2 – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_puL3ey1Fmo – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645002469040[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_FTYsqJJdu2 – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.https_enable'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_FTYsqJJdu2 – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client pI25M2xUzF – connected '[39m,
+  now_ts: [33m1645002494042[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client pI25M2xUzF – disconnected '[39m,
+  now_ts: [33m1645002497047[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client pUvIqhG0be – connected '[39m,
+  now_ts: [33m1645002499061[39m
+}
+[ws] client _c_FTYsqJJdu2 – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.https_enable'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_FTYsqJJdu2 – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_FTYsqJJdu2 – disconnected
+[ws] client _c_FTYsqJJdu2 disconnected --> untailing apps: 620c8f44373a770d6d44e9ae
+[ws] client _c_1Pd3Jdw4Dl – connected
+[ws] client _c_1Pd3Jdw4Dl – message: sign_in {
+  password: [32m'9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'[39m
+}
+[ws] client _c_1Pd3Jdw4Dl – message: get_projects {}
+[ws] client _c_1Pd3Jdw4Dl – message: get_applications {}
+[ws] client _c_1Pd3Jdw4Dl – message: get_domains {}
+[ws] client _c_1Pd3Jdw4Dl – message: get_resources {}
+[ws] client _c_1Pd3Jdw4Dl – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[ws] pattern list update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] pattern list update sent to client vLYRWmwnu2 \n'[39m +
+    [32m'[ws] client vLYRWmwnu2 – disconnected \n'[39m +
+    [32m'[ws] client fwsofkGr8N – connected \n'[39m +
+    [32m'[ws] client fwsofkGr8N – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client fwsofkGr8N \n'[39m +
+    [32m'[ws] pattern list update sent to client fwsofkGr8N \n'[39m +
+    [32m'[ws] client fwsofkGr8N – disconnected \n'[39m +
+    [32m'[ws] client 8mjqvlBhNP – connected \n'[39m +
+    [32m'[ws] client 8mjqvlBhNP – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client 8mjqvlBhNP \n'[39m +
+    [32m'[ws] pattern list update sent to client 8mjqvlBhNP \n'[39m +
+    [32m'[ws] client 8mjqvlBhNP – disconnected \n'[39m +
+    [32m'[ws] client xIPGaZ2ecF – connected \n'[39m +
+    [32m'[ws] client xIPGaZ2ecF – disconnected \n'[39m +
+    [32m'[ws] client a2Ekm0ntqS – connected \n'[39m +
+    [32m'[ws] client a2Ekm0ntqS – disconnected \n'[39m +
+    [32m'[ws] client O947YSO7EY – connected \n'[39m +
+    [32m'[ws] client O947YSO7EY – disconnected \n'[39m +
+    [32m'[ws] client pI25M2xUzF – connected \n'[39m +
+    [32m'[ws] client pI25M2xUzF – disconnected \n'[39m +
+    [32m'[ws] client pUvIqhG0be – connected \n'[39m
+}
+[ws] client _c_1Pd3Jdw4Dl – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_puL3ey1Fmo – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645002538644[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_1Pd3Jdw4Dl – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.https_enable'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_1Pd3Jdw4Dl – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client pUvIqhG0be – disconnected '[39m,
+  now_ts: [33m1645002580659[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client olfHnSidmd – connected '[39m,
+  now_ts: [33m1645002581662[39m
+}
+[ws] client _c_1Pd3Jdw4Dl – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client olfHnSidmd – disconnected '[39m,
+  now_ts: [33m1645002586666[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 5cLQ2qF8iX – connected '[39m,
+  now_ts: [33m1645002588670[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 5cLQ2qF8iX – disconnected '[39m,
+  now_ts: [33m1645002596679[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client O8UPsfKfhT – connected '[39m,
+  now_ts: [33m1645002604689[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client O8UPsfKfhT – disconnected '[39m,
+  now_ts: [33m1645002606693[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 5vfgbCybM5 – connected '[39m,
+  now_ts: [33m1645002608697[39m
+}
+[ws] client _c_1Pd3Jdw4Dl – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.https_enable'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_1Pd3Jdw4Dl – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client We8JAl8GWT – connected '[39m,
+  now_ts: [33m1645002627710[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client We8JAl8GWT – disconnected '[39m,
+  now_ts: [33m1645002628718[39m
+}
+[ws] client _c_1Pd3Jdw4Dl – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.https_force'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client xYwxgupo0D – connected '[39m,
+  now_ts: [33m1645002649732[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client xYwxgupo0D – authenticated '[39m,
+  now_ts: [33m1645002652736[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client xYwxgupo0D '[39m,
+  now_ts: [33m1645002652739[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client xYwxgupo0D '[39m,
+  now_ts: [33m1645002652742[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client xYwxgupo0D – authenticated '[39m,
+  now_ts: [33m1645002652746[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client xYwxgupo0D '[39m,
+  now_ts: [33m1645002652750[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client xYwxgupo0D '[39m,
+  now_ts: [33m1645002652752[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client xYwxgupo0D – authenticated '[39m,
+  now_ts: [33m1645002652754[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client xYwxgupo0D '[39m,
+  now_ts: [33m1645002652756[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client xYwxgupo0D '[39m,
+  now_ts: [33m1645002652758[39m
+}
+[ws] client _c_1Pd3Jdw4Dl – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client xYwxgupo0D – disconnected '[39m,
+  now_ts: [33m1645002659763[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 7sLrwt0D1o – connected '[39m,
+  now_ts: [33m1645002660767[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 7sLrwt0D1o – authenticated '[39m,
+  now_ts: [33m1645002660767[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client 7sLrwt0D1o '[39m,
+  now_ts: [33m1645002660772[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client 7sLrwt0D1o '[39m,
+  now_ts: [33m1645002660776[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 7sLrwt0D1o – disconnected '[39m,
+  now_ts: [33m1645002663784[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 5vfgbCybM5 – disconnected '[39m,
+  now_ts: [33m1645002664788[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 5CRrRyApFD – connected '[39m,
+  now_ts: [33m1645002665793[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 5CRrRyApFD – authenticated '[39m,
+  now_ts: [33m1645002665794[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client 5CRrRyApFD '[39m,
+  now_ts: [33m1645002665794[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client 5CRrRyApFD '[39m,
+  now_ts: [33m1645002665797[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 5CRrRyApFD – disconnected '[39m,
+  now_ts: [33m1645002666801[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 7TmWyZWXhj – connected '[39m,
+  now_ts: [33m1645002667804[39m
+}
+[ws] client _c_1Pd3Jdw4Dl – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.https_enable'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 7TmWyZWXhj – authenticated '[39m,
+  now_ts: [33m1645002668809[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client 7TmWyZWXhj '[39m,
+  now_ts: [33m1645002668809[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client 7TmWyZWXhj '[39m,
+  now_ts: [33m1645002668812[39m
+}
+[ws] client _c_1Pd3Jdw4Dl – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_1Pd3Jdw4Dl – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.https_force'[39m: [33mfalse[39m
+  }
+}
+[ws] client _c_1Pd3Jdw4Dl – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    [32m'proxy.https_enable'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_1Pd3Jdw4Dl – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client 7TmWyZWXhj – disconnected '[39m,
+  now_ts: [33m1645002675821[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client ppQwRfIy4c – connected '[39m,
+  now_ts: [33m1645002677822[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] client ppQwRfIy4c – authenticated '[39m,
+  now_ts: [33m1645002677823[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] color palette update sent to client ppQwRfIy4c '[39m,
+  now_ts: [33m1645002677823[39m
+}
+[ws] client _c_puL3ey1Fmo – message: tail_application_stream {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_line: [32m'[ws] pattern list update sent to client ppQwRfIy4c '[39m,
+  now_ts: [33m1645002677828[39m
+}
+[ws] client _c_1Pd3Jdw4Dl – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_puL3ey1Fmo – disconnected
+[ws] client _c_d3RZVC8yjh – connected
+[ws] client _c_d3RZVC8yjh – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_1Pd3Jdw4Dl – message: get_resources {}
+[ws] client _c_1Pd3Jdw4Dl – message: get_domains {}
+[ws] client _c_1Pd3Jdw4Dl – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_1Pd3Jdw4Dl – message: get_domains {}
+[ws] client _c_1Pd3Jdw4Dl – message: get_resources {}
+[ws] client _c_1Pd3Jdw4Dl – message: get_applications {}
+[ws] client _c_1Pd3Jdw4Dl – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_d3RZVC8yjh – message: push_application_proxy_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m''[39m
+}
+[ws] client _c_1Pd3Jdw4Dl – disconnected
+[ws] client _c_1Pd3Jdw4Dl disconnected --> untailing apps: 620c8f44373a770d6d44e9ae
+[ws] client _c_g7fg5bl93W – connected
+[ws] client _c_g7fg5bl93W – message: auth {}
+[ws] client _c_g7fg5bl93W – message: get_projects {}
+[ws] client _c_g7fg5bl93W – message: get_applications {}
+[ws] client _c_g7fg5bl93W – message: get_domains {}
+[ws] client _c_g7fg5bl93W – message: get_resources {}
+[ws] client _c_g7fg5bl93W – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_g7fg5bl93W – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_d3RZVC8yjh – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[ws] client xYwxgupo0D – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client xYwxgupo0D \n'[39m +
+    [32m'[ws] pattern list update sent to client xYwxgupo0D \n'[39m +
+    [32m'[ws] client xYwxgupo0D – disconnected \n'[39m +
+    [32m'[ws] client 7sLrwt0D1o – connected \n'[39m +
+    [32m'[ws] client 7sLrwt0D1o – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client 7sLrwt0D1o \n'[39m +
+    [32m'[ws] pattern list update sent to client 7sLrwt0D1o \n'[39m +
+    [32m'[ws] client 7sLrwt0D1o – disconnected \n'[39m +
+    [32m'[ws] client 5vfgbCybM5 – disconnected \n'[39m +
+    [32m'[ws] client 5CRrRyApFD – connected \n'[39m +
+    [32m'[ws] client 5CRrRyApFD – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client 5CRrRyApFD \n'[39m +
+    [32m'[ws] pattern list update sent to client 5CRrRyApFD \n'[39m +
+    [32m'[ws] client 5CRrRyApFD – disconnected \n'[39m +
+    [32m'[ws] client 7TmWyZWXhj – connected \n'[39m +
+    [32m'[ws] client 7TmWyZWXhj – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client 7TmWyZWXhj \n'[39m +
+    [32m'[ws] pattern list update sent to client 7TmWyZWXhj \n'[39m +
+    [32m'[ws] client 7TmWyZWXhj – disconnected \n'[39m +
+    [32m'[ws] client ppQwRfIy4c – connected \n'[39m +
+    [32m'[ws] client ppQwRfIy4c – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client ppQwRfIy4c \n'[39m +
+    [32m'[ws] pattern list update sent to client ppQwRfIy4c \n'[39m
+}
+[ws] client _c_d3RZVC8yjh – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645003080033[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_g7fg5bl93W – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_d3RZVC8yjh – message: push_application_proxy_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m''[39m
+}
+[ws] client _c_d3RZVC8yjh – disconnected
+[ws] client _c_ORPfzTZfMQ – connected
+[ws] client _c_ORPfzTZfMQ – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_g7fg5bl93W – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_ORPfzTZfMQ – message: push_application_proxy_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'Proxy updated'[39m
+}
+[ws] client _c_ORPfzTZfMQ – disconnected
+[ws] client _c_PULNm9J3Yt – connected
+[ws] client _c_PULNm9J3Yt – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_g7fg5bl93W – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_PULNm9J3Yt – message: push_application_proxy_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'Proxy pushed'[39m
+}
+[ws] client _c_g7fg5bl93W – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'restart'[39m
+}
+[ws] client _c_PULNm9J3Yt – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645003119790[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_PULNm9J3Yt – message: signal_application_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>led-lights</b> received <b>RESTART</b>'[39m
+}
+[ws] client _c_g7fg5bl93W – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_PULNm9J3Yt – message: push_application_proxy_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'Proxy pushed'[39m
+}
+[ws] client _c_g7fg5bl93W – disconnected
+[ws] client _c_g7fg5bl93W disconnected --> untailing apps: 620c8f44373a770d6d44e9ae
+[ws] client _c_qXjQf5P1Ic – connected
+[ws] client _c_qXjQf5P1Ic – message: auth {}
+[ws] client _c_qXjQf5P1Ic – message: get_projects {}
+[ws] client _c_qXjQf5P1Ic – message: get_resources {}
+[ws] client _c_qXjQf5P1Ic – message: get_applications {}
+[ws] client _c_qXjQf5P1Ic – message: get_domains {}
+[ws] client _c_qXjQf5P1Ic – message: get_resources {}
+[ws] client _c_qXjQf5P1Ic – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_PULNm9J3Yt – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[ws] client xYwxgupo0D – disconnected \n'[39m +
+    [32m'[ws] client 7sLrwt0D1o – connected \n'[39m +
+    [32m'[ws] client 7sLrwt0D1o – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client 7sLrwt0D1o \n'[39m +
+    [32m'[ws] pattern list update sent to client 7sLrwt0D1o \n'[39m +
+    [32m'[ws] client 7sLrwt0D1o – disconnected \n'[39m +
+    [32m'[ws] client 5vfgbCybM5 – disconnected \n'[39m +
+    [32m'[ws] client 5CRrRyApFD – connected \n'[39m +
+    [32m'[ws] client 5CRrRyApFD – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client 5CRrRyApFD \n'[39m +
+    [32m'[ws] pattern list update sent to client 5CRrRyApFD \n'[39m +
+    [32m'[ws] client 5CRrRyApFD – disconnected \n'[39m +
+    [32m'[ws] client 7TmWyZWXhj – connected \n'[39m +
+    [32m'[ws] client 7TmWyZWXhj – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client 7TmWyZWXhj \n'[39m +
+    [32m'[ws] pattern list update sent to client 7TmWyZWXhj \n'[39m +
+    [32m'[ws] client 7TmWyZWXhj – disconnected \n'[39m +
+    [32m'[ws] client ppQwRfIy4c – connected \n'[39m +
+    [32m'[ws] client ppQwRfIy4c – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client ppQwRfIy4c \n'[39m +
+    [32m'[ws] pattern list update sent to client ppQwRfIy4c \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3031\n'[39m +
+    [32m'[http] listening on 3030\n'[39m
+}
+[ws] client _c_qXjQf5P1Ic – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_PULNm9J3Yt – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645003146825[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_qXjQf5P1Ic – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_PULNm9J3Yt – message: push_application_proxy_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'Proxy pushed'[39m
+}
+[ws] client _c_PULNm9J3Yt – disconnected
+[ws] client _c_JNthlti4ZU – connected
+[ws] client _c_JNthlti4ZU – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_qXjQf5P1Ic – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_JNthlti4ZU – message: push_application_proxy_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'Proxy pushed/linked'[39m
+}
+[ws] client _c_JNthlti4ZU – disconnected
+[ws] client _c_UW0IiubZK5 – connected
+[ws] client _c_UW0IiubZK5 – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_qXjQf5P1Ic – message: push_application_proxy {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_UW0IiubZK5 – message: push_application_proxy_res_daemon {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  message: [32m'Proxy pushed & linked'[39m
+}
+[ws] client _c_qXjQf5P1Ic – message: get_resources {}
+[ws] client _c_qXjQf5P1Ic – message: get_applications {}
+[ws] client _c_qXjQf5P1Ic – message: get_applications {}
+[ws] client _c_qXjQf5P1Ic – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'untail'[39m
+}
