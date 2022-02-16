@@ -1,5 +1,5 @@
 {
-    "cloud_socket": "localhost:3001",
+    "cloud_socket": "dash.anuv.me/socket",
     "secure": false,
     "ws_reconnect_interval": 5000,
     "ws_heartbeat_log": false,

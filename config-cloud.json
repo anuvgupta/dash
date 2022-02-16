@@ -1,6 +1,6 @@
 {
-    "http_port": 3016,
-    "ws_port": 3017,
+    "http_port": 3000,
+    "ws_port": 3001,
     "mdb_port": 27017,
     "mongo_db_id": "dashboard",
     "ws_heartbeat_log": false,
