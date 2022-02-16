@@ -194,10 +194,10 @@ var api = {
                     }
                 }
             }
-            log(cert_sub_map);
+            // log(cert_sub_map);
             for (var cert_path in cert_sub_map) {
                 var subdomains_matched = [];
-                console.log('match between', cert_sub_map[cert_path], 'and', server_names_list);
+                // console.log('match between', cert_sub_map[cert_path], 'and', server_names_list);
                 for (var c_n in cert_sub_map[cert_path]) {
                     var cert_name = cert_sub_map[cert_path][c_n];
                     for (var s_n in server_names_list) {
@@ -207,7 +207,7 @@ var api = {
                             subdomains_matched.push(server_name);
                     }
                 }
-                console.log(cert_path, subdomains_matched);
+                // console.log(cert_path, subdomains_matched);
                 if (subdomains_matched.length <= 0) continue;
                 var secure_server_obj = JSON.parse(JSON.stringify(proxy_config_obj['server'][0]));
                 secure_server_obj.__keys.splice(2, 0, 'ssl', 'ssl_certificate', 'ssl_certificate_key');

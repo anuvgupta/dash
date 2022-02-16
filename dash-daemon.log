@@ -17058,3 +17058,902 @@ See "systemctl status nginx.service" and "journalctl -xe" for details.
 [ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
 [main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
 [main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: '',
+      cwd: '',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] adding application "620ccbfefc85784665b2d1ac"
+[ws] socket received: signal { signal: 'tail', application: '620ccbfefc85784665b2d1ac' }
+[ws] received signal "tail" for application "620ccbfefc85784665b2d1ac"
+[main] processing signal for app 620ccbfefc85784665b2d1ac: "tail"
+[main] found application 620ccbfefc85784665b2d1ac
+[Error: ENOENT: no such file or directory, open 'tokens.log'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'tokens.log'
+}
+[ws] socket received: get_application_status { application: '620ccbfefc85784665b2d1ac' }
+[ws] server requested process status for application "620ccbfefc85784665b2d1ac"
+[main] found application 620ccbfefc85784665b2d1ac
+[main] describe_process true  1645005837233
+[ws] sending: return_application_status {
+  application_id: '620ccbfefc85784665b2d1ac',
+  success: true,
+  timestamp: 1645005837233,
+  status: ''
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: '',
+      cwd: '',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: '',
+      cwd: '~app_root/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: '',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: '',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: signal { signal: 'untail', application: '620ccbfefc85784665b2d1ac' }
+[ws] received signal "untail" for application "620ccbfefc85784665b2d1ac"
+[main] processing signal for app 620ccbfefc85784665b2d1ac: "untail"
+[main] found application 620ccbfefc85784665b2d1ac
+[ws] socket received: signal { signal: 'tail', application: '620ccbfefc85784665b2d1ac' }
+[ws] received signal "tail" for application "620ccbfefc85784665b2d1ac"
+[main] processing signal for app 620ccbfefc85784665b2d1ac: "tail"
+[main] found application 620ccbfefc85784665b2d1ac
+[ws] sending: tail_application_stream_intro {
+  app_id: '620ccbfefc85784665b2d1ac',
+  log_lines: '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n'
+}
+[ws] socket received: get_application_status { application: '620ccbfefc85784665b2d1ac' }
+[ws] server requested process status for application "620ccbfefc85784665b2d1ac"
+[main] found application 620ccbfefc85784665b2d1ac
+[main] describe_process true  1645006040647
+[ws] sending: return_application_status {
+  application_id: '620ccbfefc85784665b2d1ac',
+  success: true,
+  timestamp: 1645006040647,
+  status: ''
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: proxy_config {
+  application: '620ccbfefc85784665b2d1ac',
+  proxy_settings: {
+    www: true,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: true,
+    ws_enable: false,
+    ws_enable_path: 'socket',
+    nginx_config_export: ''
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name tokens.anuv.me;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3011;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\treturn 301 https://$host$request_uri;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name tokens.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3011;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620ccbfefc85784665b2d1ac"
+[main] processing nginx proxy for app 620ccbfefc85784665b2d1ac
+[main] found application 620ccbfefc85784665b2d1ac
+[main] writing config for app "tokens" (620ccbfefc85784665b2d1ac) to location /etc/nginx/sites-available/dash-app_tokens.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_tokens.conf
+[main] symlink created
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: push_application_proxy_res_daemon {
+  application_id: '620ccbfefc85784665b2d1ac',
+  success: true,
+  message: 'Proxy pushed & linked'
+}
+[ws] socket received: signal { signal: 'restart', application: '620ccbfefc85784665b2d1ac' }
+[ws] received signal "restart" for application "620ccbfefc85784665b2d1ac"
+[main] processing signal for app 620ccbfefc85784665b2d1ac: "restart"
+[main] found application 620ccbfefc85784665b2d1ac
+Error: process or namespace not found
+    at /home/ubuntu/dash/src/dash/node_modules/pm2/lib/API.js:1524:28
+    at /home/ubuntu/dash/src/dash/node_modules/pm2/lib/Client.js:735:12
+    at /home/ubuntu/dash/src/dash/node_modules/pm2-axon-rpc/lib/client.js:45:10
+    at Parser.<anonymous> (/home/ubuntu/dash/src/dash/node_modules/pm2-axon/lib/sockets/req.js:67:8)
+    at Parser.emit (events.js:315:20)
+    at Parser._write (/home/ubuntu/dash/src/dash/node_modules/amp/lib/stream.js:91:16)
+    at doWrite (_stream_writable.js:403:12)
+    at writeOrBuffer (_stream_writable.js:387:5)
+    at Parser.Writable.write (_stream_writable.js:318:11)
+    at Socket.ondata (_stream_readable.js:716:22)
+[ws] sending: return_application_status {
+  application_id: '620ccbfefc85784665b2d1ac',
+  success: false,
+  timestamp: 1645006063150,
+  status: ''
+}
+[ws] sending: signal_application_res_daemon {
+  application_id: '620ccbfefc85784665b2d1ac',
+  success: false,
+  message: '<b>tokens</b> received <b>RESTART</b>'
+}
+[ws] socket received: signal { signal: 'start', application: '620ccbfefc85784665b2d1ac' }
+[ws] received signal "start" for application "620ccbfefc85784665b2d1ac"
+[main] processing signal for app 620ccbfefc85784665b2d1ac: "start"
+[main] found application 620ccbfefc85784665b2d1ac
+{
+  name: 'tokens',
+  script: 'tokens.js',
+  cwd: '/home/ubuntu/dash/apps/tokens',
+  error_file: 'tokens.log',
+  out_file: 'tokens.log',
+  interpreter: '/usr/local/bin/node',
+  args: '',
+  max_memory_restart: '100M',
+  restart_delay: '3000'
+}
+[ws] sending: return_application_status {
+  application_id: '620ccbfefc85784665b2d1ac',
+  success: true,
+  timestamp: 1645006065082,
+  status: 'online'
+}
+[ws] sending: signal_application_res_daemon {
+  application_id: '620ccbfefc85784665b2d1ac',
+  success: true,
+  message: '<b>tokens</b> received <b>START</b>'
+}
+[ws] sending: tail_application_stream {
+  app_id: '620ccbfefc85784665b2d1ac',
+  log_line: '[http] listening on 3011',
+  now_ts: 1645006065594
+}
+[ws] socket received: signal { signal: 'restart', application: '620ccbfefc85784665b2d1ac' }
+[ws] received signal "restart" for application "620ccbfefc85784665b2d1ac"
+[main] processing signal for app 620ccbfefc85784665b2d1ac: "restart"
+[main] found application 620ccbfefc85784665b2d1ac
+[ws] sending: return_application_status {
+  application_id: '620ccbfefc85784665b2d1ac',
+  success: true,
+  timestamp: 1645006067205,
+  status: 'online'
+}
+[ws] sending: signal_application_res_daemon {
+  application_id: '620ccbfefc85784665b2d1ac',
+  success: true,
+  message: '<b>tokens</b> received <b>RESTART</b>'
+}
+[ws] sending: tail_application_stream {
+  app_id: '620ccbfefc85784665b2d1ac',
+  log_line: '[http] listening on 3011',
+  now_ts: 1645006067596
+}
+[ws] socket received: signal { signal: 'tail', application: '620ccbfefc85784665b2d1ac' }
+[ws] received signal "tail" for application "620ccbfefc85784665b2d1ac"
+[main] processing signal for app 620ccbfefc85784665b2d1ac: "tail"
+[main] found application 620ccbfefc85784665b2d1ac
+[ws] sending: tail_application_stream_intro {
+  app_id: '620ccbfefc85784665b2d1ac',
+  log_lines: '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n'
+}
+[ws] socket received: get_application_status { application: '620ccbfefc85784665b2d1ac' }
+[ws] server requested process status for application "620ccbfefc85784665b2d1ac"
+[main] found application 620ccbfefc85784665b2d1ac
+[main] describe_process true online 1645006070193
+[ws] sending: return_application_status {
+  application_id: '620ccbfefc85784665b2d1ac',
+  success: true,
+  timestamp: 1645006070193,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'restart', application: '620ccbfefc85784665b2d1ac' }
+[ws] received signal "restart" for application "620ccbfefc85784665b2d1ac"
+[main] processing signal for app 620ccbfefc85784665b2d1ac: "restart"
+[main] found application 620ccbfefc85784665b2d1ac
+[ws] sending: return_application_status {
+  application_id: '620ccbfefc85784665b2d1ac',
+  success: true,
+  timestamp: 1645006073460,
+  status: 'online'
+}
+[ws] sending: signal_application_res_daemon {
+  application_id: '620ccbfefc85784665b2d1ac',
+  success: true,
+  message: '<b>tokens</b> received <b>RESTART</b>'
+}
+[ws] sending: tail_application_stream {
+  app_id: '620ccbfefc85784665b2d1ac',
+  log_line: '[http] listening on 3011',
+  now_ts: 1645006074067
+}
+[ws] socket received: signal { signal: 'untail', application: '620ccbfefc85784665b2d1ac' }
+[ws] received signal "untail" for application "620ccbfefc85784665b2d1ac"
+[main] processing signal for app 620ccbfefc85784665b2d1ac: "untail"
+[main] found application 620ccbfefc85784665b2d1ac

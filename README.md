@@ -1,10 +1,11 @@
 # Dash
 
-Cloud project manager, application orchestrator, & internet presence dashboard.  
-Deploy live updates, monitor apps & resources, and plan projects – all in realtime from the cloud. 
+**Project manager, application orchestrator, & internet presence dashboard.** Deploy live updates, monitor apps & resources, and plan projects – *all in realtime from the cloud.* 
 
 ## Features
-***Dash** simplifies:*
+**Dash** ties abstract ideas and goals to models of concrete entities, generating smart server configurations for your projects based on a few high-level settings for the software and hardware you manage.  
+&nbsp;  
+*It simplifies the following:*  
  - Project Management
     - Project stages & tasks
     - Ideation/solution design
@@ -15,9 +16,7 @@ Deploy live updates, monitor apps & resources, and plan projects – all in real
     - Web sitemap generation
     - Domain tracking
 
-***Most importantly,* Dash generates smart configurations for your projects based on the virtual entities you model & manage within.**
-
-## Sections
+## Settings
  - **Projects**
     - Meta
         - Name, ID/Slug, Tagline, Description, Visibility, Featured, Demo
@@ -59,8 +58,10 @@ Deploy live updates, monitor apps & resources, and plan projects – all in real
  - **Sitemap**
  - **Ideas**
 
-## VM Setup
-*Setting up a cloud VM to host both `dash-cloud` and `dash-daemon` processes.*
+## Guides
+*A few setup guides for the cloud server & resource daemon software*  
+### VM Setup
+Setting up a cloud VM to host both `dash-cloud` and `dash-daemon` processes.
  - Create/choose application root directory, for example `/home/ubuntu/dash/apps`
  - PM2 setup
     - Install `pm2` globally with `npm`

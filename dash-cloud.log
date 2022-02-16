@@ -10245,3 +10245,313 @@ match between [ '*.rubbr.anuv.me', 'rubbr.ml', '*.rubbr.ml' ] and [ 'rubbr.anuv.
 * [ws] ERROR: unknown event get_sitemap
 [ws] client _c_FREjuR30io – message: get_domains {}
 [ws] client _c_FREjuR30io – message: get_resources {}
+[ws] client _c_FREjuR30io – message: get_applications {}
+[ws] client _c_FREjuR30io – message: new_application {
+  slug: [32m'tokens'[39m,
+  name: [32m'Tokens'[39m,
+  description: [32m'Public token distribution service.'[39m
+}
+[ws] client _c_FREjuR30io – message: get_applications {}
+[ws] client _c_FREjuR30io – message: get_domains {}
+[ws] client _c_FREjuR30io – message: get_resources {}
+[ws] client _c_FREjuR30io – message: signal_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_FREjuR30io – message: get_application_status {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m
+}
+[ws] client _c_FREjuR30io – message: update_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  update: {
+    description: [32m'Personal token distribution service.'[39m
+  }
+}
+[ws] client _c_FREjuR30io – message: update_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  update: {
+    host: [32m'620c8a4ef9ead118d5ce873b'[39m
+  }
+}
+[ws] client _c_FREjuR30io – message: signal_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_FREjuR30io – message: get_application_status {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645005837233[39m,
+  status: [32m''[39m
+}
+[ws] client _c_FREjuR30io – message: update_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  update: {
+    port: [32m'3011'[39m
+  }
+}
+[ws] client _c_FREjuR30io – message: update_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  update: {
+    [32m'ecosystem.cwd'[39m: [32m'~app_root/tokens'[39m
+  }
+}
+[ws] client _c_FREjuR30io – message: update_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  update: {
+    [32m'ecosystem.cwd'[39m: [32m'$app_root/tokens'[39m
+  }
+}
+[ws] client _c_FREjuR30io – message: update_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  update: {
+    [32m'ecosystem.cwd'[39m: [32m'/home/ubuntu/dash/apps/tokens'[39m
+  }
+}
+[ws] client _c_FREjuR30io – message: update_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  update: {
+    [32m'ecosystem.script'[39m: [32m'tokens.js'[39m
+  }
+}
+[ws] client _c_FREjuR30io – message: update_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  update: {
+    [32m'ecosystem.interpreter'[39m: [32m'/usr/local/bin/node'[39m
+  }
+}
+[ws] client _c_FREjuR30io – message: get_domains {
+  associate_application: [32m'620ccbfefc85784665b2d1ac'[39m
+}
+[ws] client _c_FREjuR30io – message: associate_application_domain {
+  application_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  domain_string: [32m'620c8996f9ead118d5ce873a'[39m
+}
+[ws] client _c_FREjuR30io – message: get_domains {}
+[ws] client _c_FREjuR30io – message: get_domains {}
+[ws] client _c_FREjuR30io – message: update_domain_subdomains {
+  id: [32m'620c8996f9ead118d5ce873a'[39m,
+  new_subdomain: [32m'tokens'[39m
+}
+[ws] client _c_FREjuR30io – message: get_applications {}
+[ws] client _c_FREjuR30io – message: get_applications {}
+[ws] client _c_FREjuR30io – message: signal_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_FREjuR30io – message: get_domains {}
+[ws] client _c_FREjuR30io – message: get_resources {}
+[ws] client _c_FREjuR30io – message: signal_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  log_lines: [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m
+}
+[ws] client _c_FREjuR30io – message: get_application_status {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645006040647[39m,
+  status: [32m''[39m
+}
+[ws] client _c_FREjuR30io – message: update_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  update: {
+    domains: [
+      [32m'620c8996f9ead118d5ce873a.tokens'[39m
+    ]
+  }
+}
+[ws] client _c_FREjuR30io – message: get_domains {}
+[ws] client _c_FREjuR30io – message: update_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  update: {
+    [32m'proxy.www'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_FREjuR30io – message: update_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  update: {
+    [32m'proxy.https_enable'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_FREjuR30io – message: update_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  update: {
+    [32m'proxy.https_force'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_FREjuR30io – message: update_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  update: {
+    [32m'proxy.htaccess_deny'[39m: [33mtrue[39m
+  }
+}
+[ws] client _c_FREjuR30io – message: push_application_proxy {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m
+}
+[main] {
+  [32m'/etc/letsencrypt/live/anuv.me/fullchain.pem'[39m: [
+    [32m'anuv.me'[39m,
+    [32m'*.anuv.me'[39m
+  ],
+  [32m'/etc/letsencrypt/live/rubbr.anuv.me/fullchain.pem'[39m: [
+    [32m'*.rubbr.anuv.me'[39m
+  ]
+}
+match between [ 'anuv.me', '*.anuv.me' ] and [ 'tokens.anuv.me' ]
+/etc/letsencrypt/live/anuv.me/fullchain.pem [ 'tokens.anuv.me' ]
+match between [ '*.rubbr.anuv.me' ] and [ 'tokens.anuv.me' ]
+/etc/letsencrypt/live/rubbr.anuv.me/fullchain.pem []
+[ws] client _c_232nFQRwTZ – message: push_application_proxy_res_daemon {
+  application_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  success: [33mtrue[39m,
+  message: [32m'Proxy pushed & linked'[39m
+}
+[ws] client _c_FREjuR30io – message: signal_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  signal: [32m'restart'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  success: [33mfalse[39m,
+  timestamp: [33m1645006063150[39m,
+  status: [32m''[39m
+}
+[ws] client _c_232nFQRwTZ – message: signal_application_res_daemon {
+  application_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  success: [33mfalse[39m,
+  message: [32m'<b>tokens</b> received <b>RESTART</b>'[39m
+}
+[ws] client _c_FREjuR30io – message: signal_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  signal: [32m'start'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645006065082[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_232nFQRwTZ – message: signal_application_res_daemon {
+  application_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>tokens</b> received <b>START</b>'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream {
+  app_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  log_line: [32m'[http] listening on 3011'[39m,
+  now_ts: [33m1645006065594[39m
+}
+[ws] client _c_FREjuR30io – message: signal_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  signal: [32m'restart'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645006067205[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_232nFQRwTZ – message: signal_application_res_daemon {
+  application_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>tokens</b> received <b>RESTART</b>'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream {
+  app_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  log_line: [32m'[http] listening on 3011'[39m,
+  now_ts: [33m1645006067596[39m
+}
+[ws] client _c_FREjuR30io – message: signal_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  log_lines: [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m
+}
+[ws] client _c_FREjuR30io – message: get_application_status {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645006070193[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_FREjuR30io – message: signal_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  signal: [32m'restart'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645006073460[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_232nFQRwTZ – message: signal_application_res_daemon {
+  application_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  success: [33mtrue[39m,
+  message: [32m'<b>tokens</b> received <b>RESTART</b>'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream {
+  app_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  log_line: [32m'[http] listening on 3011'[39m,
+  now_ts: [33m1645006074067[39m
+}
+[ws] client _c_FREjuR30io – message: get_applications {}
+[ws] client _c_FREjuR30io – message: signal_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_FREjuR30io – disconnected
+[ws] client _c_FREjuR30io disconnected --> untailing apps: 
+[ws] client _c_i7cWVgQZL4 – connected
+[ws] client _c_i7cWVgQZL4 – message: auth {}
+[ws] client _c_i7cWVgQZL4 – message: get_projects {}
+[ws] client _c_i7cWVgQZL4 – message: get_resources {}
+[ws] client _c_i7cWVgQZL4 – message: get_domains {}
+[ws] client _c_i7cWVgQZL4 – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_i7cWVgQZL4 – message: get_domains {}
+[ws] client _c_i7cWVgQZL4 – message: get_domains {}
+[ws] client _c_i7cWVgQZL4 – message: get_resources {}
+[ws] client _c_i7cWVgQZL4 – message: get_applications {}
