@@ -15,7 +15,7 @@ Deploy live updates, monitor apps & resources, and plan projects – all in real
     - Web sitemap generation
     - Domain tracking
 
-***Most importantly,* Dash generates smart configurations for your projects based on the tangible & virtual entities you manage and model within.**
+***Most importantly,* Dash generates smart configurations for your projects based on the virtual entities you model & manage within.**
 
 ## Sections
  - **Projects**
