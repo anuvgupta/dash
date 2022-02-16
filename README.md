@@ -1,6 +1,7 @@
 # Dash
 
-**Project manager, application orchestrator, & internet presence dashboard.** Deploy live updates, monitor apps & resources, and plan projects – *all in realtime from the cloud.* 
+**Project manager, application orchestrator, & internet presence dashboard.**  
+Deploy live updates, monitor apps & resources, and plan projects – *all in realtime from the cloud.*  
 
 ## Features
 **Dash** ties abstract ideas and goals to models of concrete entities, generating smart server configurations for your projects based on a few high-level settings for the software and hardware you manage.  
