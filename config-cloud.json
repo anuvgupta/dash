@@ -2,7 +2,7 @@
     "http_port": 3000,
     "ws_port": 3001,
     "mdb_port": 27017,
-    "mongo_db_id": "dashboard",
+    "mongo_db_id": "dash",
     "ws_heartbeat_log": false,
     "secret": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
     "jwt": {
