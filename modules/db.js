@@ -477,6 +477,11 @@ var api = {
             description: description,
             host: "none",
             port: "",
+            code: {
+                repo: "",
+                branch: "",
+                path: "/"
+            },
             environment: {},
             ecosystem: {
                 name: `${slug}`,

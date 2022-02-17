@@ -1843,6 +1843,11 @@
                     filter: img_invert == true ? 'invert()' : 'none'
                 });
             });
+            data('code', code => {
+                block.key('code', code);
+                if (code.hasOwnProperty('repo'))
+                    block.data({repo: code.repo});
+            });
         }
 !domain-item
     init

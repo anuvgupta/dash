@@ -1076,6 +1076,54 @@ var init = _ => {
             });
         }
     });
+    ws_server.bind("pull_application_repo", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        if (id != '') {
+            m.db.get_application(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("pull_application_repo", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("pull_application_repo", "application not found", client);
+                var application_resource_id = result1.host;
+                if (application_resource_id != 'none') {
+                    m.db.get_resource(application_resource_id, null, (success2, result2) => {
+                        if (success2 === false) return ws_server.return_event_error("pull_application_repo", "database error", client);
+                        if (result2 == null) return ws_server.return_event_error("pull_application_repo", "resource not found", client);
+                        if (result2.software.app_root != "") {
+                            if (ws_daemon_client != null && ws_server.clients.hasOwnProperty(ws_daemon_client.id)) {
+                                ws_server.send_to_client('proxy_config', {
+                                    application: id,
+                                    code: result1.code,
+                                }, ws_daemon_client);
+                            } else {
+                                ws_server.send_to_client('pull_application_repo_res_daemon_res', {
+                                    success: true, data: {
+                                        success: false,
+                                        message: 'Host daemon is offline!',
+                                        application_id: id
+                                    }
+                                }, client);
+                            }
+                        } else {
+                            ws_server.send_to_client('pull_application_repo_res_daemon_res', {
+                                success: true, data: {
+                                    success: false,
+                                    message: 'No application root!',
+                                    application_id: id
+                                }
+                            }, client);
+                        }
+                    });
+                } else {
+                    ws_server.send_to_client('pull_application_repo_res_daemon_res', {
+                        success: true, data: {
+                            success: false,
+                            message: 'No host selected!',
+                            application_id: id
+                        }
+                    }, client);
+                }
+            });
+        }
+    });
 
     // daemon
     ws_server.bind("sync_daemon", (client, req) => {

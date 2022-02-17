@@ -614,6 +614,11 @@ var app = {
                     id: id,
                 });
             },
+            pull_application_repo: id => {
+                 app.ws.send('pull_application_repo', {
+                    id: id,
+                });
+            },
             // ideas
             get_ideas: () => {
                 app.ws.send('get_ideas', {});

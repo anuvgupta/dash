@@ -17957,3 +17957,1547 @@ Error: process or namespace not found
 [ws] received signal "untail" for application "620ccbfefc85784665b2d1ac"
 [main] processing signal for app 620ccbfefc85784665b2d1ac: "untail"
 [main] found application 620ccbfefc85784665b2d1ac
+[ws] socket received: signal { signal: 'tail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "tail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "tail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] sending: tail_application_stream_intro {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_lines: '[ws] client ppQwRfIy4c – connected \n' +
+    '[ws] client ppQwRfIy4c – authenticated \n' +
+    '[ws] color palette update sent to client ppQwRfIy4c \n' +
+    '[ws] pattern list update sent to client ppQwRfIy4c \n' +
+    'LED Lights\n' +
+    '[ws] listening on 3031\n' +
+    '[http] listening on 3030\n' +
+    '[ws] client aL35By30Xt – connected \n' +
+    '[ws] client aL35By30Xt – disconnected \n' +
+    '[ws] client eb0oubYLN8 – connected \n' +
+    '[ws] client eb0oubYLN8 – disconnected \n' +
+    '[ws] client 3kGSoGtrvV – connected \n' +
+    '[ws] client 3kGSoGtrvV – disconnected \n' +
+    '[ws] client 898dCpQ2uM – connected \n' +
+    '[ws] client WHyES9KjfA – connected \n' +
+    '[ws] unknown event sync_daemon\n' +
+    '[ws] client 898dCpQ2uM – disconnected \n' +
+    '[ws] client Ag01wal575 – connected \n' +
+    '[ws] client Ag01wal575 – disconnected \n' +
+    '[ws] client bArzRcOl61 – connected \n' +
+    '[ws] client bArzRcOl61 – disconnected \n' +
+    '[ws] client qPL4Qy4AUt – connected \n' +
+    '[ws] client qPL4Qy4AUt – disconnected \n' +
+    '[ws] client WHyES9KjfA – disconnected \n'
+}
+[ws] socket received: get_application_status { application: '620c8f44373a770d6d44e9ae' }
+[ws] server requested process status for application "620c8f44373a770d6d44e9ae"
+[main] found application 620c8f44373a770d6d44e9ae
+[main] describe_process true online 1645012768965
+[ws] sending: return_application_status {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  timestamp: 1645012768965,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: signal { signal: 'untail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "untail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "untail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] socket received: signal { signal: 'tail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "tail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "tail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] sending: tail_application_stream_intro {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_lines: '[ws] client ppQwRfIy4c – connected \n' +
+    '[ws] client ppQwRfIy4c – authenticated \n' +
+    '[ws] color palette update sent to client ppQwRfIy4c \n' +
+    '[ws] pattern list update sent to client ppQwRfIy4c \n' +
+    'LED Lights\n' +
+    '[ws] listening on 3031\n' +
+    '[http] listening on 3030\n' +
+    '[ws] client aL35By30Xt – connected \n' +
+    '[ws] client aL35By30Xt – disconnected \n' +
+    '[ws] client eb0oubYLN8 – connected \n' +
+    '[ws] client eb0oubYLN8 – disconnected \n' +
+    '[ws] client 3kGSoGtrvV – connected \n' +
+    '[ws] client 3kGSoGtrvV – disconnected \n' +
+    '[ws] client 898dCpQ2uM – connected \n' +
+    '[ws] client WHyES9KjfA – connected \n' +
+    '[ws] unknown event sync_daemon\n' +
+    '[ws] client 898dCpQ2uM – disconnected \n' +
+    '[ws] client Ag01wal575 – connected \n' +
+    '[ws] client Ag01wal575 – disconnected \n' +
+    '[ws] client bArzRcOl61 – connected \n' +
+    '[ws] client bArzRcOl61 – disconnected \n' +
+    '[ws] client qPL4Qy4AUt – connected \n' +
+    '[ws] client qPL4Qy4AUt – disconnected \n' +
+    '[ws] client WHyES9KjfA – disconnected \n'
+}
+[ws] socket received: get_application_status { application: '620c8f44373a770d6d44e9ae' }
+[ws] server requested process status for application "620c8f44373a770d6d44e9ae"
+[main] found application 620c8f44373a770d6d44e9ae
+[main] describe_process true online 1645012778603
+[ws] sending: return_application_status {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  timestamp: 1645012778603,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: signal { signal: 'untail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "untail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "untail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] socket received: get_application_status { application: '620c8f44373a770d6d44e9ae' }
+[ws] server requested process status for application "620c8f44373a770d6d44e9ae"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] socket received: signal { signal: 'tail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "tail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "tail"
+[main] found application 620c8f44373a770d6d44e9ae
+[main] describe_process true online 1645014233967
+[ws] sending: return_application_status {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  timestamp: 1645014233967,
+  status: 'online'
+}
+[ws] sending: tail_application_stream_intro {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_lines: '[ws] client ppQwRfIy4c – connected \n' +
+    '[ws] client ppQwRfIy4c – authenticated \n' +
+    '[ws] color palette update sent to client ppQwRfIy4c \n' +
+    '[ws] pattern list update sent to client ppQwRfIy4c \n' +
+    'LED Lights\n' +
+    '[ws] listening on 3031\n' +
+    '[http] listening on 3030\n' +
+    '[ws] client aL35By30Xt – connected \n' +
+    '[ws] client aL35By30Xt – disconnected \n' +
+    '[ws] client eb0oubYLN8 – connected \n' +
+    '[ws] client eb0oubYLN8 – disconnected \n' +
+    '[ws] client 3kGSoGtrvV – connected \n' +
+    '[ws] client 3kGSoGtrvV – disconnected \n' +
+    '[ws] client 898dCpQ2uM – connected \n' +
+    '[ws] client WHyES9KjfA – connected \n' +
+    '[ws] unknown event sync_daemon\n' +
+    '[ws] client 898dCpQ2uM – disconnected \n' +
+    '[ws] client Ag01wal575 – connected \n' +
+    '[ws] client Ag01wal575 – disconnected \n' +
+    '[ws] client bArzRcOl61 – connected \n' +
+    '[ws] client bArzRcOl61 – disconnected \n' +
+    '[ws] client qPL4Qy4AUt – connected \n' +
+    '[ws] client qPL4Qy4AUt – disconnected \n' +
+    '[ws] client WHyES9KjfA – disconnected \n'
+}
+[ws] socket received: signal { signal: 'untail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "untail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "untail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] socket received: signal { signal: 'tail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "tail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "tail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] sending: tail_application_stream_intro {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_lines: '[ws] client ppQwRfIy4c – connected \n' +
+    '[ws] client ppQwRfIy4c – authenticated \n' +
+    '[ws] color palette update sent to client ppQwRfIy4c \n' +
+    '[ws] pattern list update sent to client ppQwRfIy4c \n' +
+    'LED Lights\n' +
+    '[ws] listening on 3031\n' +
+    '[http] listening on 3030\n' +
+    '[ws] client aL35By30Xt – connected \n' +
+    '[ws] client aL35By30Xt – disconnected \n' +
+    '[ws] client eb0oubYLN8 – connected \n' +
+    '[ws] client eb0oubYLN8 – disconnected \n' +
+    '[ws] client 3kGSoGtrvV – connected \n' +
+    '[ws] client 3kGSoGtrvV – disconnected \n' +
+    '[ws] client 898dCpQ2uM – connected \n' +
+    '[ws] client WHyES9KjfA – connected \n' +
+    '[ws] unknown event sync_daemon\n' +
+    '[ws] client 898dCpQ2uM – disconnected \n' +
+    '[ws] client Ag01wal575 – connected \n' +
+    '[ws] client Ag01wal575 – disconnected \n' +
+    '[ws] client bArzRcOl61 – connected \n' +
+    '[ws] client bArzRcOl61 – disconnected \n' +
+    '[ws] client qPL4Qy4AUt – connected \n' +
+    '[ws] client qPL4Qy4AUt – disconnected \n' +
+    '[ws] client WHyES9KjfA – disconnected \n'
+}
+[ws] socket received: get_application_status { application: '620c8f44373a770d6d44e9ae' }
+[ws] server requested process status for application "620c8f44373a770d6d44e9ae"
+[main] found application 620c8f44373a770d6d44e9ae
+[main] describe_process true online 1645014596635
+[ws] sending: return_application_status {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  timestamp: 1645014596635,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "untail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "untail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] socket received: signal { signal: 'tail', application: '620ccbfefc85784665b2d1ac' }
+[ws] received signal "tail" for application "620ccbfefc85784665b2d1ac"
+[main] processing signal for app 620ccbfefc85784665b2d1ac: "tail"
+[main] found application 620ccbfefc85784665b2d1ac
+[ws] sending: tail_application_stream_intro {
+  app_id: '620ccbfefc85784665b2d1ac',
+  log_lines: '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n'
+}
+[ws] socket received: get_application_status { application: '620ccbfefc85784665b2d1ac' }
+[ws] server requested process status for application "620ccbfefc85784665b2d1ac"
+[main] found application 620ccbfefc85784665b2d1ac
+[main] describe_process true online 1645016021941
+[ws] sending: return_application_status {
+  application_id: '620ccbfefc85784665b2d1ac',
+  success: true,
+  timestamp: 1645016021941,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620ccbfefc85784665b2d1ac' }
+[ws] received signal "untail" for application "620ccbfefc85784665b2d1ac"
+[main] processing signal for app 620ccbfefc85784665b2d1ac: "untail"
+[main] found application 620ccbfefc85784665b2d1ac
+[ws] socket received: signal { signal: 'tail', application: '620ccbfefc85784665b2d1ac' }
+[ws] received signal "tail" for application "620ccbfefc85784665b2d1ac"
+[main] processing signal for app 620ccbfefc85784665b2d1ac: "tail"
+[main] found application 620ccbfefc85784665b2d1ac
+[ws] sending: tail_application_stream_intro {
+  app_id: '620ccbfefc85784665b2d1ac',
+  log_lines: '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n'
+}
+[ws] socket received: get_application_status { application: '620ccbfefc85784665b2d1ac' }
+[ws] server requested process status for application "620ccbfefc85784665b2d1ac"
+[main] found application 620ccbfefc85784665b2d1ac
+[main] describe_process true online 1645091004277
+[ws] sending: return_application_status {
+  application_id: '620ccbfefc85784665b2d1ac',
+  success: true,
+  timestamp: 1645091004277,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: signal { signal: 'untail', application: '620ccbfefc85784665b2d1ac' }
+[ws] received signal "untail" for application "620ccbfefc85784665b2d1ac"
+[main] processing signal for app 620ccbfefc85784665b2d1ac: "untail"
+[main] found application 620ccbfefc85784665b2d1ac
+[ws] socket received: signal { signal: 'tail', application: '620ccbfefc85784665b2d1ac' }
+[ws] received signal "tail" for application "620ccbfefc85784665b2d1ac"
+[main] processing signal for app 620ccbfefc85784665b2d1ac: "tail"
+[main] found application 620ccbfefc85784665b2d1ac
+[ws] sending: tail_application_stream_intro {
+  app_id: '620ccbfefc85784665b2d1ac',
+  log_lines: '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n'
+}
+[ws] socket received: get_application_status { application: '620ccbfefc85784665b2d1ac' }
+[ws] server requested process status for application "620ccbfefc85784665b2d1ac"
+[main] found application 620ccbfefc85784665b2d1ac
+[main] describe_process true online 1645092057041
+[ws] sending: return_application_status {
+  application_id: '620ccbfefc85784665b2d1ac',
+  success: true,
+  timestamp: 1645092057041,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620ccbfefc85784665b2d1ac' }
+[ws] received signal "untail" for application "620ccbfefc85784665b2d1ac"
+[main] processing signal for app 620ccbfefc85784665b2d1ac: "untail"
+[main] found application 620ccbfefc85784665b2d1ac
+[ws] socket received: signal { signal: 'tail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "tail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "tail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc24e69a04a0bf9502e77',
+  log_lines: 'listening on *:3032\n' +
+    'user v10hju53gCXo5gnEAAAA connected\n' +
+    'user v10hju53gCXo5gnEAAAA is joe\n' +
+    'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n' +
+    'user v10hju53gCXo5gnEAAAA disconnected\n' +
+    'user OkWuBrDS5XxppvunAAAB connected\n' +
+    'user OkWuBrDS5XxppvunAAAB is hi\n' +
+    'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n' +
+    'user OkWuBrDS5XxppvunAAAB disconnected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC connected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC is hi\n' +
+    'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n' +
+    'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n' +
+    'user -07Ra4tUQRBAqAlsAAAC disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc24e69a04a0bf9502e77' }
+[ws] server requested process status for application "620cc24e69a04a0bf9502e77"
+[main] found application 620cc24e69a04a0bf9502e77
+[main] describe_process true online 1645092066715
+[ws] sending: return_application_status {
+  application_id: '620cc24e69a04a0bf9502e77',
+  success: true,
+  timestamp: 1645092066715,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: signal { signal: 'untail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "untail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "untail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] socket received: signal { signal: 'tail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "tail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "tail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc24e69a04a0bf9502e77',
+  log_lines: 'listening on *:3032\n' +
+    'user v10hju53gCXo5gnEAAAA connected\n' +
+    'user v10hju53gCXo5gnEAAAA is joe\n' +
+    'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n' +
+    'user v10hju53gCXo5gnEAAAA disconnected\n' +
+    'user OkWuBrDS5XxppvunAAAB connected\n' +
+    'user OkWuBrDS5XxppvunAAAB is hi\n' +
+    'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n' +
+    'user OkWuBrDS5XxppvunAAAB disconnected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC connected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC is hi\n' +
+    'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n' +
+    'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n' +
+    'user -07Ra4tUQRBAqAlsAAAC disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc24e69a04a0bf9502e77' }
+[ws] server requested process status for application "620cc24e69a04a0bf9502e77"
+[main] found application 620cc24e69a04a0bf9502e77
+[main] describe_process true online 1645092200711
+[ws] sending: return_application_status {
+  application_id: '620cc24e69a04a0bf9502e77',
+  success: true,
+  timestamp: 1645092200711,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "untail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "untail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] socket received: signal { signal: 'tail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "tail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "tail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc24e69a04a0bf9502e77',
+  log_lines: 'listening on *:3032\n' +
+    'user v10hju53gCXo5gnEAAAA connected\n' +
+    'user v10hju53gCXo5gnEAAAA is joe\n' +
+    'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n' +
+    'user v10hju53gCXo5gnEAAAA disconnected\n' +
+    'user OkWuBrDS5XxppvunAAAB connected\n' +
+    'user OkWuBrDS5XxppvunAAAB is hi\n' +
+    'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n' +
+    'user OkWuBrDS5XxppvunAAAB disconnected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC connected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC is hi\n' +
+    'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n' +
+    'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n' +
+    'user -07Ra4tUQRBAqAlsAAAC disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc24e69a04a0bf9502e77' }
+[ws] server requested process status for application "620cc24e69a04a0bf9502e77"
+[main] found application 620cc24e69a04a0bf9502e77
+[main] describe_process true online 1645092219573
+[ws] sending: return_application_status {
+  application_id: '620cc24e69a04a0bf9502e77',
+  success: true,
+  timestamp: 1645092219573,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "untail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "untail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] socket received: signal { signal: 'tail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "tail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "tail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc24e69a04a0bf9502e77',
+  log_lines: 'listening on *:3032\n' +
+    'user v10hju53gCXo5gnEAAAA connected\n' +
+    'user v10hju53gCXo5gnEAAAA is joe\n' +
+    'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n' +
+    'user v10hju53gCXo5gnEAAAA disconnected\n' +
+    'user OkWuBrDS5XxppvunAAAB connected\n' +
+    'user OkWuBrDS5XxppvunAAAB is hi\n' +
+    'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n' +
+    'user OkWuBrDS5XxppvunAAAB disconnected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC connected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC is hi\n' +
+    'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n' +
+    'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n' +
+    'user -07Ra4tUQRBAqAlsAAAC disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc24e69a04a0bf9502e77' }
+[ws] server requested process status for application "620cc24e69a04a0bf9502e77"
+[main] found application 620cc24e69a04a0bf9502e77
+[main] describe_process true online 1645092251106
+[ws] sending: return_application_status {
+  application_id: '620cc24e69a04a0bf9502e77',
+  success: true,
+  timestamp: 1645092251106,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "untail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "untail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] socket received: signal { signal: 'tail', application: '620ccbfefc85784665b2d1ac' }
+[ws] received signal "tail" for application "620ccbfefc85784665b2d1ac"
+[main] processing signal for app 620ccbfefc85784665b2d1ac: "tail"
+[main] found application 620ccbfefc85784665b2d1ac
+[ws] sending: tail_application_stream_intro {
+  app_id: '620ccbfefc85784665b2d1ac',
+  log_lines: '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n' +
+    '[http] listening on 3011\n'
+}
+[ws] socket received: get_application_status { application: '620ccbfefc85784665b2d1ac' }
+[ws] server requested process status for application "620ccbfefc85784665b2d1ac"
+[main] found application 620ccbfefc85784665b2d1ac
+[main] describe_process true online 1645092257184
+[ws] sending: return_application_status {
+  application_id: '620ccbfefc85784665b2d1ac',
+  success: true,
+  timestamp: 1645092257184,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620ccbfefc85784665b2d1ac' }
+[ws] received signal "untail" for application "620ccbfefc85784665b2d1ac"
+[main] processing signal for app 620ccbfefc85784665b2d1ac: "untail"
+[main] found application 620ccbfefc85784665b2d1ac
+[ws] socket received: signal { signal: 'tail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "tail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "tail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] sending: tail_application_stream_intro {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_lines: '[ws] client ppQwRfIy4c – connected \n' +
+    '[ws] client ppQwRfIy4c – authenticated \n' +
+    '[ws] color palette update sent to client ppQwRfIy4c \n' +
+    '[ws] pattern list update sent to client ppQwRfIy4c \n' +
+    'LED Lights\n' +
+    '[ws] listening on 3031\n' +
+    '[http] listening on 3030\n' +
+    '[ws] client aL35By30Xt – connected \n' +
+    '[ws] client aL35By30Xt – disconnected \n' +
+    '[ws] client eb0oubYLN8 – connected \n' +
+    '[ws] client eb0oubYLN8 – disconnected \n' +
+    '[ws] client 3kGSoGtrvV – connected \n' +
+    '[ws] client 3kGSoGtrvV – disconnected \n' +
+    '[ws] client 898dCpQ2uM – connected \n' +
+    '[ws] client WHyES9KjfA – connected \n' +
+    '[ws] unknown event sync_daemon\n' +
+    '[ws] client 898dCpQ2uM – disconnected \n' +
+    '[ws] client Ag01wal575 – connected \n' +
+    '[ws] client Ag01wal575 – disconnected \n' +
+    '[ws] client bArzRcOl61 – connected \n' +
+    '[ws] client bArzRcOl61 – disconnected \n' +
+    '[ws] client qPL4Qy4AUt – connected \n' +
+    '[ws] client qPL4Qy4AUt – disconnected \n' +
+    '[ws] client WHyES9KjfA – disconnected \n'
+}
+[ws] socket received: get_application_status { application: '620c8f44373a770d6d44e9ae' }
+[ws] server requested process status for application "620c8f44373a770d6d44e9ae"
+[main] found application 620c8f44373a770d6d44e9ae
+[main] describe_process true online 1645092260938
+[ws] sending: return_application_status {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  timestamp: 1645092260938,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "untail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "untail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'user[Lcn6jH9yCsLbfBdyAAAD] disconnected\n' +
+    'user[DEgJZloLmKPM2FI_AAAC] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645092264593
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645092264593,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'user[Lcn6jH9yCsLbfBdyAAAD] disconnected\n' +
+    'user[DEgJZloLmKPM2FI_AAAC] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645092296648
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645092296648,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'user[Lcn6jH9yCsLbfBdyAAAD] disconnected\n' +
+    'user[DEgJZloLmKPM2FI_AAAC] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645092347142
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645092347142,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'user[Lcn6jH9yCsLbfBdyAAAD] disconnected\n' +
+    'user[DEgJZloLmKPM2FI_AAAC] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645092394967
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645092394967,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+* [ws] ERROR: socket error  Unexpected server response: 502
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+* [ws] ERROR: socket error  Unexpected server response: 502
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+* [ws] ERROR: socket error  Unexpected server response: 502
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+* [ws] ERROR: socket error  Unexpected server response: 502
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+* [ws] ERROR: socket error  Unexpected server response: 502
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+* [ws] ERROR: socket error  Unexpected server response: 502
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+* [ws] ERROR: socket error  Unexpected server response: 502
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+* [ws] ERROR: socket error  Unexpected server response: 502
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+* [ws] ERROR: socket error  Unexpected server response: 502
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+[ws] socket connected
+[ws] sending: sync_daemon { daemon_key: 'X1F9K' }
+[ws] socket received: sync_daemon_res {
+  success: true,
+  data: {
+    id: '620c8a4ef9ead118d5ce873b',
+    daemon_key: 'X1F9K',
+    resource: {
+      _id: '620c8a4ef9ead118d5ce873b',
+      slug: 'lightsail',
+      name: 'Lightsail',
+      link: 'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB',
+      ip: '54.186.188.200',
+      provider: 'aws-lightsail',
+      type: 'vm',
+      private_ip: '172.26.0.161',
+      daemon_key: 'X1F9K',
+      specs: [Object],
+      software: [Object],
+      primary_domain: [Object],
+      domains: [],
+      status: 'offline',
+      status_time: 1645093696835,
+      ts_created: 1644989006884,
+      ts_updated: 1645001779394
+    }
+  }
+}
+[ws] identified with dash cloud as resource "Lightsail" (620c8a4ef9ead118d5ce873b)
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n' +
+    'user[Lcn6jH9yCsLbfBdyAAAD] disconnected\n' +
+    'user[DEgJZloLmKPM2FI_AAAC] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645093758773
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645093758773,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "tail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "tail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] sending: tail_application_stream_intro {
+  app_id: '620c8f44373a770d6d44e9ae',
+  log_lines: '[ws] client ppQwRfIy4c – connected \n' +
+    '[ws] client ppQwRfIy4c – authenticated \n' +
+    '[ws] color palette update sent to client ppQwRfIy4c \n' +
+    '[ws] pattern list update sent to client ppQwRfIy4c \n' +
+    'LED Lights\n' +
+    '[ws] listening on 3031\n' +
+    '[http] listening on 3030\n' +
+    '[ws] client aL35By30Xt – connected \n' +
+    '[ws] client aL35By30Xt – disconnected \n' +
+    '[ws] client eb0oubYLN8 – connected \n' +
+    '[ws] client eb0oubYLN8 – disconnected \n' +
+    '[ws] client 3kGSoGtrvV – connected \n' +
+    '[ws] client 3kGSoGtrvV – disconnected \n' +
+    '[ws] client 898dCpQ2uM – connected \n' +
+    '[ws] client WHyES9KjfA – connected \n' +
+    '[ws] unknown event sync_daemon\n' +
+    '[ws] client 898dCpQ2uM – disconnected \n' +
+    '[ws] client Ag01wal575 – connected \n' +
+    '[ws] client Ag01wal575 – disconnected \n' +
+    '[ws] client bArzRcOl61 – connected \n' +
+    '[ws] client bArzRcOl61 – disconnected \n' +
+    '[ws] client qPL4Qy4AUt – connected \n' +
+    '[ws] client qPL4Qy4AUt – disconnected \n' +
+    '[ws] client WHyES9KjfA – disconnected \n'
+}
+[ws] socket received: get_application_status { application: '620c8f44373a770d6d44e9ae' }
+[ws] server requested process status for application "620c8f44373a770d6d44e9ae"
+[main] found application 620c8f44373a770d6d44e9ae
+[main] describe_process true online 1645093763053
+[ws] sending: return_application_status {
+  application_id: '620c8f44373a770d6d44e9ae',
+  success: true,
+  timestamp: 1645093763053,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620c8f44373a770d6d44e9ae' }
+[ws] received signal "untail" for application "620c8f44373a770d6d44e9ae"
+[main] processing signal for app 620c8f44373a770d6d44e9ae: "untail"
+[main] found application 620c8f44373a770d6d44e9ae
+[ws] socket received: signal { signal: 'tail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "tail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "tail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc24e69a04a0bf9502e77',
+  log_lines: 'listening on *:3032\n' +
+    'user v10hju53gCXo5gnEAAAA connected\n' +
+    'user v10hju53gCXo5gnEAAAA is joe\n' +
+    'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n' +
+    'user v10hju53gCXo5gnEAAAA disconnected\n' +
+    'user OkWuBrDS5XxppvunAAAB connected\n' +
+    'user OkWuBrDS5XxppvunAAAB is hi\n' +
+    'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n' +
+    'user OkWuBrDS5XxppvunAAAB disconnected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC connected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC is hi\n' +
+    'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n' +
+    'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n' +
+    'user -07Ra4tUQRBAqAlsAAAC disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc24e69a04a0bf9502e77' }
+[ws] server requested process status for application "620cc24e69a04a0bf9502e77"
+[main] found application 620cc24e69a04a0bf9502e77
+[main] describe_process true online 1645093765930
+[ws] sending: return_application_status {
+  application_id: '620cc24e69a04a0bf9502e77',
+  success: true,
+  timestamp: 1645093765930,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: signal { signal: 'untail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "untail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "untail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] socket received: signal { signal: 'tail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "tail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "tail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc24e69a04a0bf9502e77',
+  log_lines: 'listening on *:3032\n' +
+    'user v10hju53gCXo5gnEAAAA connected\n' +
+    'user v10hju53gCXo5gnEAAAA is joe\n' +
+    'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n' +
+    'user v10hju53gCXo5gnEAAAA disconnected\n' +
+    'user OkWuBrDS5XxppvunAAAB connected\n' +
+    'user OkWuBrDS5XxppvunAAAB is hi\n' +
+    'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n' +
+    'user OkWuBrDS5XxppvunAAAB disconnected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC connected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC is hi\n' +
+    'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n' +
+    'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n' +
+    'user -07Ra4tUQRBAqAlsAAAC disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc24e69a04a0bf9502e77' }
+[ws] server requested process status for application "620cc24e69a04a0bf9502e77"
+[main] found application 620cc24e69a04a0bf9502e77
+[main] describe_process true online 1645093783275
+[ws] sending: return_application_status {
+  application_id: '620cc24e69a04a0bf9502e77',
+  success: true,
+  timestamp: 1645093783275,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "untail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "untail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] socket received: signal { signal: 'tail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "tail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "tail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc24e69a04a0bf9502e77',
+  log_lines: 'listening on *:3032\n' +
+    'user v10hju53gCXo5gnEAAAA connected\n' +
+    'user v10hju53gCXo5gnEAAAA is joe\n' +
+    'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n' +
+    'user v10hju53gCXo5gnEAAAA disconnected\n' +
+    'user OkWuBrDS5XxppvunAAAB connected\n' +
+    'user OkWuBrDS5XxppvunAAAB is hi\n' +
+    'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n' +
+    'user OkWuBrDS5XxppvunAAAB disconnected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC connected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC is hi\n' +
+    'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n' +
+    'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n' +
+    'user -07Ra4tUQRBAqAlsAAAC disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc24e69a04a0bf9502e77' }
+[ws] server requested process status for application "620cc24e69a04a0bf9502e77"
+[main] found application 620cc24e69a04a0bf9502e77
+[main] describe_process true online 1645093890831
+[ws] sending: return_application_status {
+  application_id: '620cc24e69a04a0bf9502e77',
+  success: true,
+  timestamp: 1645093890831,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "untail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "untail"
+[main] found application 620cc24e69a04a0bf9502e77

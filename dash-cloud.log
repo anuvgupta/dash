@@ -10555,3 +10555,1427 @@ match between [ '*.rubbr.anuv.me' ] and [ 'tokens.anuv.me' ]
 [ws] client _c_i7cWVgQZL4 – message: get_domains {}
 [ws] client _c_i7cWVgQZL4 – message: get_resources {}
 [ws] client _c_i7cWVgQZL4 – message: get_applications {}
+[ws] client _c_i7cWVgQZL4 – message: new_application {
+  slug: [32m'tcp-chat'[39m,
+  name: [32m'TCP Chat'[39m,
+  description: [32m'TCP chat room server with basic client, accessible via telnet.'[39m
+}
+[ws] client _c_i7cWVgQZL4 – message: get_applications {}
+[ws] client _c_i7cWVgQZL4 – message: get_domains {}
+[ws] client _c_i7cWVgQZL4 – message: get_resources {}
+[ws] client _c_i7cWVgQZL4 – message: signal_application {
+  id: [32m'620ce6e5fc85784665b2d1ad'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_i7cWVgQZL4 – message: get_application_status {
+  id: [32m'620ce6e5fc85784665b2d1ad'[39m
+}
+[ws] client _c_i7cWVgQZL4 – message: update_application {
+  id: [32m'620ce6e5fc85784665b2d1ad'[39m,
+  update: {
+    description: [32m'TCP chat room server with basic client, accessible via telnet.'[39m
+  }
+}
+[ws] client _c_i7cWVgQZL4 – message: update_application {
+  id: [32m'620ce6e5fc85784665b2d1ad'[39m,
+  update: {
+    description: [32m'TCP chat room server accessible via telnet.'[39m
+  }
+}
+[ws] client _c_i7cWVgQZL4 – message: get_applications {}
+[ws] client _c_i7cWVgQZL4 – message: signal_application {
+  id: [32m'620ce6e5fc85784665b2d1ad'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_i7cWVgQZL4 – message: get_domains {}
+[ws] client _c_i7cWVgQZL4 – message: get_resources {}
+[ws] client _c_i7cWVgQZL4 – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_i7cWVgQZL4 – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[ws] client ppQwRfIy4c – connected \n'[39m +
+    [32m'[ws] client ppQwRfIy4c – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client ppQwRfIy4c \n'[39m +
+    [32m'[ws] pattern list update sent to client ppQwRfIy4c \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3031\n'[39m +
+    [32m'[http] listening on 3030\n'[39m +
+    [32m'[ws] client aL35By30Xt – connected \n'[39m +
+    [32m'[ws] client aL35By30Xt – disconnected \n'[39m +
+    [32m'[ws] client eb0oubYLN8 – connected \n'[39m +
+    [32m'[ws] client eb0oubYLN8 – disconnected \n'[39m +
+    [32m'[ws] client 3kGSoGtrvV – connected \n'[39m +
+    [32m'[ws] client 3kGSoGtrvV – disconnected \n'[39m +
+    [32m'[ws] client 898dCpQ2uM – connected \n'[39m +
+    [32m'[ws] client WHyES9KjfA – connected \n'[39m +
+    [32m'[ws] unknown event sync_daemon\n'[39m +
+    [32m'[ws] client 898dCpQ2uM – disconnected \n'[39m +
+    [32m'[ws] client Ag01wal575 – connected \n'[39m +
+    [32m'[ws] client Ag01wal575 – disconnected \n'[39m +
+    [32m'[ws] client bArzRcOl61 – connected \n'[39m +
+    [32m'[ws] client bArzRcOl61 – disconnected \n'[39m +
+    [32m'[ws] client qPL4Qy4AUt – connected \n'[39m +
+    [32m'[ws] client qPL4Qy4AUt – disconnected \n'[39m +
+    [32m'[ws] client WHyES9KjfA – disconnected \n'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645012768965[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_i7cWVgQZL4 – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    description: [32m'Audio-reactive IoT LED light strips.'[39m
+  }
+}
+[ws] client _c_i7cWVgQZL4 – message: get_applications {}
+[ws] client _c_i7cWVgQZL4 – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_i7cWVgQZL4 – message: get_domains {}
+[ws] client _c_i7cWVgQZL4 – message: get_resources {}
+[ws] client _c_i7cWVgQZL4 – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[ws] client ppQwRfIy4c – connected \n'[39m +
+    [32m'[ws] client ppQwRfIy4c – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client ppQwRfIy4c \n'[39m +
+    [32m'[ws] pattern list update sent to client ppQwRfIy4c \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3031\n'[39m +
+    [32m'[http] listening on 3030\n'[39m +
+    [32m'[ws] client aL35By30Xt – connected \n'[39m +
+    [32m'[ws] client aL35By30Xt – disconnected \n'[39m +
+    [32m'[ws] client eb0oubYLN8 – connected \n'[39m +
+    [32m'[ws] client eb0oubYLN8 – disconnected \n'[39m +
+    [32m'[ws] client 3kGSoGtrvV – connected \n'[39m +
+    [32m'[ws] client 3kGSoGtrvV – disconnected \n'[39m +
+    [32m'[ws] client 898dCpQ2uM – connected \n'[39m +
+    [32m'[ws] client WHyES9KjfA – connected \n'[39m +
+    [32m'[ws] unknown event sync_daemon\n'[39m +
+    [32m'[ws] client 898dCpQ2uM – disconnected \n'[39m +
+    [32m'[ws] client Ag01wal575 – connected \n'[39m +
+    [32m'[ws] client Ag01wal575 – disconnected \n'[39m +
+    [32m'[ws] client bArzRcOl61 – connected \n'[39m +
+    [32m'[ws] client bArzRcOl61 – disconnected \n'[39m +
+    [32m'[ws] client qPL4Qy4AUt – connected \n'[39m +
+    [32m'[ws] client qPL4Qy4AUt – disconnected \n'[39m +
+    [32m'[ws] client WHyES9KjfA – disconnected \n'[39m
+}
+[ws] client _c_i7cWVgQZL4 – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645012778603[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_i7cWVgQZL4 – message: update_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  update: {
+    description: [32m'Audio-Reactive IoT LED light strips.'[39m
+  }
+}
+[ws] client _c_i7cWVgQZL4 – message: get_applications {}
+[ws] client _c_i7cWVgQZL4 – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_i7cWVgQZL4 – message: get_domains {}
+[ws] client _c_i7cWVgQZL4 – message: get_resources {}
+[ws] client _c_i7cWVgQZL4 – message: signal_application {
+  id: [32m'620ce6e5fc85784665b2d1ad'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_i7cWVgQZL4 – message: get_application_status {
+  id: [32m'620ce6e5fc85784665b2d1ad'[39m
+}
+[ws] client _c_i7cWVgQZL4 – message: get_resources {}
+[ws] client _c_i7cWVgQZL4 – message: get_applications {}
+[ws] client _c_i7cWVgQZL4 – message: get_projects {}
+[ws] client _c_i7cWVgQZL4 – message: get_applications {}
+[ws] client _c_i7cWVgQZL4 – message: signal_application {
+  id: [32m'620ce6e5fc85784665b2d1ad'[39m,
+  signal: [32m'start'[39m
+}
+[ws] client _c_i7cWVgQZL4 – message: get_projects {}
+[ws] client _c_i7cWVgQZL4 – message: get_applications {}
+[ws] client _c_i7cWVgQZL4 – disconnected
+[ws] client _c_i7cWVgQZL4 disconnected --> untailing apps: 
+[ws] client _c_9YNOZFBf0W – connected
+[ws] client _c_9YNOZFBf0W – message: auth {}
+[ws] client _c_9YNOZFBf0W – message: get_projects {}
+[ws] client _c_9YNOZFBf0W – message: get_applications {}
+[ws] client _c_9YNOZFBf0W – message: get_projects {}
+[ws] client _c_9YNOZFBf0W – message: new_project {
+  slug: [32m'w'[39m,
+  name: [32m'w'[39m,
+  repo: [32m'w'[39m,
+  desc: [32m'w'[39m
+}
+[ws] client _c_9YNOZFBf0W – message: get_projects {}
+[ws] client _c_9YNOZFBf0W – message: get_applications {}
+[ws] client _c_9YNOZFBf0W – disconnected
+[ws] client _c_AOm1yxAe9u – connected
+[ws] client _c_AOm1yxAe9u – message: auth {}
+[ws] client _c_AOm1yxAe9u – message: get_projects {}
+[ws] client _c_AOm1yxAe9u – message: get_applications {}
+[ws] client _c_AOm1yxAe9u – message: get_domains {}
+[ws] client _c_AOm1yxAe9u – message: get_resources {}
+[ws] client _c_AOm1yxAe9u – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_AOm1yxAe9u – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645014233967[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[ws] client ppQwRfIy4c – connected \n'[39m +
+    [32m'[ws] client ppQwRfIy4c – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client ppQwRfIy4c \n'[39m +
+    [32m'[ws] pattern list update sent to client ppQwRfIy4c \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3031\n'[39m +
+    [32m'[http] listening on 3030\n'[39m +
+    [32m'[ws] client aL35By30Xt – connected \n'[39m +
+    [32m'[ws] client aL35By30Xt – disconnected \n'[39m +
+    [32m'[ws] client eb0oubYLN8 – connected \n'[39m +
+    [32m'[ws] client eb0oubYLN8 – disconnected \n'[39m +
+    [32m'[ws] client 3kGSoGtrvV – connected \n'[39m +
+    [32m'[ws] client 3kGSoGtrvV – disconnected \n'[39m +
+    [32m'[ws] client 898dCpQ2uM – connected \n'[39m +
+    [32m'[ws] client WHyES9KjfA – connected \n'[39m +
+    [32m'[ws] unknown event sync_daemon\n'[39m +
+    [32m'[ws] client 898dCpQ2uM – disconnected \n'[39m +
+    [32m'[ws] client Ag01wal575 – connected \n'[39m +
+    [32m'[ws] client Ag01wal575 – disconnected \n'[39m +
+    [32m'[ws] client bArzRcOl61 – connected \n'[39m +
+    [32m'[ws] client bArzRcOl61 – disconnected \n'[39m +
+    [32m'[ws] client qPL4Qy4AUt – connected \n'[39m +
+    [32m'[ws] client qPL4Qy4AUt – disconnected \n'[39m +
+    [32m'[ws] client WHyES9KjfA – disconnected \n'[39m
+}
+[ws] client _c_AOm1yxAe9u – disconnected
+[ws] client _c_AOm1yxAe9u disconnected --> untailing apps: 620c8f44373a770d6d44e9ae
+[ws] client _c_aVWXKnF2f2 – connected
+[ws] client _c_aVWXKnF2f2 – message: auth {}
+[ws] client _c_aVWXKnF2f2 – message: get_projects {}
+[ws] client _c_aVWXKnF2f2 – message: get_applications {}
+[ws] client _c_aVWXKnF2f2 – message: get_resources {}
+[ws] client _c_aVWXKnF2f2 – message: get_applications {}
+[ws] client _c_aVWXKnF2f2 – disconnected
+[ws] client _c_WZalbP7CkU – connected
+[ws] client _c_WZalbP7CkU – message: auth {}
+[ws] client _c_WZalbP7CkU – message: get_projects {}
+[ws] client _c_WZalbP7CkU – message: get_applications {}
+[ws] client _c_WZalbP7CkU – message: get_domains {}
+[ws] client _c_WZalbP7CkU – message: get_resources {}
+[ws] client _c_WZalbP7CkU – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_WZalbP7CkU – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[ws] client ppQwRfIy4c – connected \n'[39m +
+    [32m'[ws] client ppQwRfIy4c – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client ppQwRfIy4c \n'[39m +
+    [32m'[ws] pattern list update sent to client ppQwRfIy4c \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3031\n'[39m +
+    [32m'[http] listening on 3030\n'[39m +
+    [32m'[ws] client aL35By30Xt – connected \n'[39m +
+    [32m'[ws] client aL35By30Xt – disconnected \n'[39m +
+    [32m'[ws] client eb0oubYLN8 – connected \n'[39m +
+    [32m'[ws] client eb0oubYLN8 – disconnected \n'[39m +
+    [32m'[ws] client 3kGSoGtrvV – connected \n'[39m +
+    [32m'[ws] client 3kGSoGtrvV – disconnected \n'[39m +
+    [32m'[ws] client 898dCpQ2uM – connected \n'[39m +
+    [32m'[ws] client WHyES9KjfA – connected \n'[39m +
+    [32m'[ws] unknown event sync_daemon\n'[39m +
+    [32m'[ws] client 898dCpQ2uM – disconnected \n'[39m +
+    [32m'[ws] client Ag01wal575 – connected \n'[39m +
+    [32m'[ws] client Ag01wal575 – disconnected \n'[39m +
+    [32m'[ws] client bArzRcOl61 – connected \n'[39m +
+    [32m'[ws] client bArzRcOl61 – disconnected \n'[39m +
+    [32m'[ws] client qPL4Qy4AUt – connected \n'[39m +
+    [32m'[ws] client qPL4Qy4AUt – disconnected \n'[39m +
+    [32m'[ws] client WHyES9KjfA – disconnected \n'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645014596635[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_WZalbP7CkU – message: get_applications {}
+[ws] client _c_WZalbP7CkU – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_WZalbP7CkU – message: get_domains {}
+[ws] client _c_WZalbP7CkU – message: get_resources {}
+[ws] client _c_WZalbP7CkU – message: signal_application {
+  id: [32m'620ce6e5fc85784665b2d1ad'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_WZalbP7CkU – message: get_application_status {
+  id: [32m'620ce6e5fc85784665b2d1ad'[39m
+}
+[ws] client _c_WZalbP7CkU – disconnected
+[ws] client _c_WZalbP7CkU disconnected --> untailing apps: 
+[ws] client _c_iqI7u4X6Iw – connected
+[ws] client _c_iqI7u4X6Iw – message: auth {}
+[ws] client _c_iqI7u4X6Iw – message: get_projects {}
+[ws] client _c_iqI7u4X6Iw – message: get_applications {}
+[ws] client _c_iqI7u4X6Iw – message: get_domains {}
+[ws] client _c_iqI7u4X6Iw – message: get_resources {}
+[ws] client _c_iqI7u4X6Iw – message: signal_application {
+  id: [32m'620ce6e5fc85784665b2d1ad'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_iqI7u4X6Iw – message: get_application_status {
+  id: [32m'620ce6e5fc85784665b2d1ad'[39m
+}
+[ws] client _c_iqI7u4X6Iw – disconnected
+[ws] client _c_SN0QpjQABr – connected
+[ws] client _c_SN0QpjQABr – message: auth {}
+[ws] client _c_SN0QpjQABr – message: get_projects {}
+[ws] client _c_SN0QpjQABr – message: get_applications {}
+[ws] client _c_SN0QpjQABr – message: get_domains {}
+[ws] client _c_SN0QpjQABr – message: get_resources {}
+[ws] client _c_SN0QpjQABr – message: signal_application {
+  id: [32m'620ce6e5fc85784665b2d1ad'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_SN0QpjQABr – message: get_application_status {
+  id: [32m'620ce6e5fc85784665b2d1ad'[39m
+}
+[ws] client _c_SN0QpjQABr – message: get_projects {}
+[ws] client _c_SN0QpjQABr – message: get_applications {}
+[ws] client _c_SN0QpjQABr – message: get_applications {
+  associate: [32m'620ceba3fc85784665b2d1ae'[39m
+}
+[ws] client _c_SN0QpjQABr – message: signal_application {
+  id: [32m'620ce6e5fc85784665b2d1ad'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_SN0QpjQABr – message: associate_project_application {
+  project_id: [32m'620ceba3fc85784665b2d1ae'[39m,
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_SN0QpjQABr – message: get_applications {}
+[ws] client _c_SN0QpjQABr – message: link_project_demo {
+  project_id: [32m'620ceba3fc85784665b2d1ae'[39m,
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] http://leds.anuv.me/ 
+[ws] client _c_SN0QpjQABr – message: get_applications {}
+[ws] client _c_SN0QpjQABr – message: link_project_demo {
+  project_id: [32m'620ceba3fc85784665b2d1ae'[39m,
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] http://leds.anuv.me/ http://leds.anuv.me/
+[ws] client _c_SN0QpjQABr – message: get_applications {}
+[ws] client _c_SN0QpjQABr – message: get_applications {}
+[ws] client _c_SN0QpjQABr – message: get_resources {}
+[ws] client _c_SN0QpjQABr – message: get_domains {}
+[ws] client _c_SN0QpjQABr – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_SN0QpjQABr – message: get_domains {}
+[ws] client _c_SN0QpjQABr – message: get_applications {
+  launch: [32m'620ccbfefc85784665b2d1ac'[39m
+}
+[ws] client _c_SN0QpjQABr – message: get_domains {}
+[ws] client _c_SN0QpjQABr – message: get_resources {}
+[ws] client _c_SN0QpjQABr – message: signal_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_SN0QpjQABr – message: get_application_status {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  log_lines: [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645016021941[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_SN0QpjQABr – message: get_applications {}
+[ws] client _c_SN0QpjQABr – message: get_resources {}
+[ws] client _c_SN0QpjQABr – message: get_domains {}
+[ws] client _c_SN0QpjQABr – message: get_domains {}
+[ws] client _c_SN0QpjQABr – message: get_domains {}
+[ws] client _c_SN0QpjQABr – message: get_resources {}
+[ws] client _c_SN0QpjQABr – message: get_applications {}
+[ws] client _c_SN0QpjQABr – message: get_projects {}
+[ws] client _c_SN0QpjQABr – disconnected
+[ws] client _c_SN0QpjQABr disconnected --> untailing apps: 620ccbfefc85784665b2d1ac
+[ws] client _c_CgNm8rtCIw – connected
+[ws] client _c_CgNm8rtCIw – message: sign_in {
+  password: [32m'80f189984e5ca70287d13342f6daa0db45cba3c131c4e46dc81360f3a4c4f690'[39m
+}
+[ws] client _c_CgNm8rtCIw – message: sign_in {
+  password: [32m'9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'[39m
+}
+[ws] client _c_CgNm8rtCIw – message: get_projects {}
+[ws] client _c_CgNm8rtCIw – message: get_applications {}
+[ws] client _c_CgNm8rtCIw – message: get_projects {}
+[ws] client _c_CgNm8rtCIw – disconnected
+[ws] client _c_fGiK2KGefJ – connected
+[ws] client _c_fGiK2KGefJ – disconnected
+[ws] client _c_tKZd0HcCbN – connected
+[ws] client _c_tKZd0HcCbN – message: auth {}
+[ws] client _c_tKZd0HcCbN – message: get_projects {}
+[ws] client _c_tKZd0HcCbN – message: get_applications {}
+[ws] client _c_tKZd0HcCbN – message: get_domains {}
+[ws] client _c_tKZd0HcCbN – message: get_resources {}
+[ws] client _c_tKZd0HcCbN – message: signal_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  log_lines: [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m
+}
+[ws] client _c_tKZd0HcCbN – message: get_application_status {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645091004277[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_tKZd0HcCbN – message: update_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  update: {
+    primary_domain: [32m'620c8996f9ead118d5ce873a.tokens'[39m
+  }
+}
+[ws] client _c_tKZd0HcCbN – disconnected
+[ws] client _c_tKZd0HcCbN disconnected --> untailing apps: 620ccbfefc85784665b2d1ac
+[ws] client _c_qmmGB8zEE4 – connected
+[ws] client _c_qmmGB8zEE4 – message: auth {}
+[ws] client _c_qmmGB8zEE4 – message: get_projects {}
+[ws] client _c_qmmGB8zEE4 – message: get_applications {}
+[ws] client _c_qmmGB8zEE4 – message: get_resources {}
+[ws] client _c_qmmGB8zEE4 – message: get_domains {}
+[ws] client _c_qmmGB8zEE4 – message: get_applications {}
+[ws] client _c_qmmGB8zEE4 – message: get_domains {}
+[ws] client _c_qmmGB8zEE4 – message: get_resources {}
+[ws] client _c_qmmGB8zEE4 – message: signal_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_qmmGB8zEE4 – message: get_application_status {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  log_lines: [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645092057041[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_qmmGB8zEE4 – message: get_applications {}
+[ws] client _c_qmmGB8zEE4 – message: signal_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_qmmGB8zEE4 – message: get_domains {}
+[ws] client _c_qmmGB8zEE4 – message: get_resources {}
+[ws] client _c_qmmGB8zEE4 – message: signal_application {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  log_lines: [32m'listening on *:3032\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA connected\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA is joe\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA disconnected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB connected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB is hi\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB disconnected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC connected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC is hi\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n'[39m +
+    [32m'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC disconnected\n'[39m
+}
+[ws] client _c_qmmGB8zEE4 – message: get_application_status {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645092066715[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_qmmGB8zEE4 – message: update_application {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  update: {
+    [32m'code.repo'[39m: [32m'https://github.com/anuvgupta/messenger'[39m
+  }
+}
+[ws] client _c_qmmGB8zEE4 – disconnected
+[ws] client _c_qmmGB8zEE4 disconnected --> untailing apps: 620cc24e69a04a0bf9502e77
+[ws] client _c_w4H9msI1sv – connected
+[ws] client _c_w4H9msI1sv – message: auth {}
+[ws] client _c_w4H9msI1sv – message: get_projects {}
+[ws] client _c_w4H9msI1sv – disconnected
+[ws] client _c_v96nqh37WX – connected
+[ws] client _c_v96nqh37WX – message: auth {}
+[ws] client _c_v96nqh37WX – message: get_projects {}
+[ws] client _c_v96nqh37WX – message: get_applications {}
+[ws] client _c_v96nqh37WX – message: get_domains {}
+[ws] client _c_v96nqh37WX – disconnected
+[ws] client _c_KwTLFGHBB9 – connected
+[ws] client _c_KwTLFGHBB9 – message: auth {}
+[ws] client _c_KwTLFGHBB9 – message: get_projects {}
+[ws] client _c_KwTLFGHBB9 – message: get_applications {}
+[ws] client _c_KwTLFGHBB9 – message: get_domains {}
+[ws] client _c_KwTLFGHBB9 – message: get_resources {}
+[ws] client _c_KwTLFGHBB9 – message: signal_application {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  log_lines: [32m'listening on *:3032\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA connected\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA is joe\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA disconnected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB connected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB is hi\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB disconnected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC connected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC is hi\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n'[39m +
+    [32m'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC disconnected\n'[39m
+}
+[ws] client _c_KwTLFGHBB9 – message: get_application_status {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645092200711[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_KwTLFGHBB9 – disconnected
+[ws] client _c_KwTLFGHBB9 disconnected --> untailing apps: 620cc24e69a04a0bf9502e77
+[ws] client _c_TrqOalpL72 – connected
+[ws] client _c_TrqOalpL72 – message: auth {}
+[ws] client _c_TrqOalpL72 – message: get_projects {}
+[ws] client _c_TrqOalpL72 – message: get_applications {}
+[ws] client _c_TrqOalpL72 – message: get_domains {}
+[ws] client _c_TrqOalpL72 – message: get_resources {}
+[ws] client _c_TrqOalpL72 – message: signal_application {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  log_lines: [32m'listening on *:3032\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA connected\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA is joe\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA disconnected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB connected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB is hi\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB disconnected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC connected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC is hi\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n'[39m +
+    [32m'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC disconnected\n'[39m
+}
+[ws] client _c_TrqOalpL72 – message: get_application_status {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645092219573[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_TrqOalpL72 – disconnected
+[ws] client _c_TrqOalpL72 disconnected --> untailing apps: 620cc24e69a04a0bf9502e77
+[ws] client _c_yQanrNcc2V – connected
+[ws] client _c_yQanrNcc2V – message: auth {}
+[ws] client _c_yQanrNcc2V – message: get_projects {}
+[ws] client _c_yQanrNcc2V – message: get_applications {}
+[ws] client _c_yQanrNcc2V – message: get_domains {}
+[ws] client _c_yQanrNcc2V – message: get_resources {}
+[ws] client _c_yQanrNcc2V – message: signal_application {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_yQanrNcc2V – message: get_application_status {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  log_lines: [32m'listening on *:3032\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA connected\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA is joe\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA disconnected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB connected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB is hi\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB disconnected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC connected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC is hi\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n'[39m +
+    [32m'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC disconnected\n'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645092251106[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_yQanrNcc2V – message: get_applications {}
+[ws] client _c_yQanrNcc2V – message: signal_application {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_yQanrNcc2V – message: get_domains {}
+[ws] client _c_yQanrNcc2V – message: get_resources {}
+[ws] client _c_yQanrNcc2V – message: signal_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_yQanrNcc2V – message: get_application_status {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  log_lines: [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m +
+    [32m'[http] listening on 3011\n'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645092257184[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_yQanrNcc2V – message: get_applications {}
+[ws] client _c_yQanrNcc2V – message: signal_application {
+  id: [32m'620ccbfefc85784665b2d1ac'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_yQanrNcc2V – message: get_domains {}
+[ws] client _c_yQanrNcc2V – message: get_resources {}
+[ws] client _c_yQanrNcc2V – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[ws] client ppQwRfIy4c – connected \n'[39m +
+    [32m'[ws] client ppQwRfIy4c – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client ppQwRfIy4c \n'[39m +
+    [32m'[ws] pattern list update sent to client ppQwRfIy4c \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3031\n'[39m +
+    [32m'[http] listening on 3030\n'[39m +
+    [32m'[ws] client aL35By30Xt – connected \n'[39m +
+    [32m'[ws] client aL35By30Xt – disconnected \n'[39m +
+    [32m'[ws] client eb0oubYLN8 – connected \n'[39m +
+    [32m'[ws] client eb0oubYLN8 – disconnected \n'[39m +
+    [32m'[ws] client 3kGSoGtrvV – connected \n'[39m +
+    [32m'[ws] client 3kGSoGtrvV – disconnected \n'[39m +
+    [32m'[ws] client 898dCpQ2uM – connected \n'[39m +
+    [32m'[ws] client WHyES9KjfA – connected \n'[39m +
+    [32m'[ws] unknown event sync_daemon\n'[39m +
+    [32m'[ws] client 898dCpQ2uM – disconnected \n'[39m +
+    [32m'[ws] client Ag01wal575 – connected \n'[39m +
+    [32m'[ws] client Ag01wal575 – disconnected \n'[39m +
+    [32m'[ws] client bArzRcOl61 – connected \n'[39m +
+    [32m'[ws] client bArzRcOl61 – disconnected \n'[39m +
+    [32m'[ws] client qPL4Qy4AUt – connected \n'[39m +
+    [32m'[ws] client qPL4Qy4AUt – disconnected \n'[39m +
+    [32m'[ws] client WHyES9KjfA – disconnected \n'[39m
+}
+[ws] client _c_yQanrNcc2V – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645092260938[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_yQanrNcc2V – message: get_applications {}
+[ws] client _c_yQanrNcc2V – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_yQanrNcc2V – message: get_domains {}
+[ws] client _c_yQanrNcc2V – message: get_resources {}
+[ws] client _c_yQanrNcc2V – message: signal_application {
+  id: [32m'620cc45369a04a0bf9502e78'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620cc45369a04a0bf9502e78'[39m,
+  log_lines: [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'user[Lcn6jH9yCsLbfBdyAAAD] disconnected\n'[39m +
+    [32m'user[DEgJZloLmKPM2FI_AAAC] disconnected\n'[39m
+}
+[ws] client _c_yQanrNcc2V – message: get_application_status {
+  id: [32m'620cc45369a04a0bf9502e78'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620cc45369a04a0bf9502e78'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645092264593[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_yQanrNcc2V – message: get_applications {}
+[ws] client _c_yQanrNcc2V – message: signal_application {
+  id: [32m'620cc45369a04a0bf9502e78'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_yQanrNcc2V – message: get_domains {}
+[ws] client _c_yQanrNcc2V – message: get_resources {}
+[ws] client _c_yQanrNcc2V – message: signal_application {
+  id: [32m'620cc45369a04a0bf9502e78'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620cc45369a04a0bf9502e78'[39m,
+  log_lines: [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'user[Lcn6jH9yCsLbfBdyAAAD] disconnected\n'[39m +
+    [32m'user[DEgJZloLmKPM2FI_AAAC] disconnected\n'[39m
+}
+[ws] client _c_yQanrNcc2V – message: get_application_status {
+  id: [32m'620cc45369a04a0bf9502e78'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620cc45369a04a0bf9502e78'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645092296648[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_yQanrNcc2V – message: update_application {
+  id: [32m'620cc45369a04a0bf9502e78'[39m,
+  update: {
+    [32m'proxy.ws_enable_path'[39m: [32m'socket'[39m
+  }
+}
+[ws] client _c_yQanrNcc2V – disconnected
+[ws] client _c_yQanrNcc2V disconnected --> untailing apps: 620cc45369a04a0bf9502e78
+[ws] client _c_y6Qn10JHOx – connected
+[ws] client _c_y6Qn10JHOx – message: auth {}
+[ws] client _c_y6Qn10JHOx – message: get_projects {}
+[ws] client _c_y6Qn10JHOx – message: get_applications {}
+[ws] client _c_y6Qn10JHOx – message: get_domains {}
+[ws] client _c_y6Qn10JHOx – message: get_resources {}
+[ws] client _c_y6Qn10JHOx – message: signal_application {
+  id: [32m'620cc45369a04a0bf9502e78'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_y6Qn10JHOx – message: get_application_status {
+  id: [32m'620cc45369a04a0bf9502e78'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620cc45369a04a0bf9502e78'[39m,
+  log_lines: [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'user[Lcn6jH9yCsLbfBdyAAAD] disconnected\n'[39m +
+    [32m'user[DEgJZloLmKPM2FI_AAAC] disconnected\n'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620cc45369a04a0bf9502e78'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645092347142[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_y6Qn10JHOx – disconnected
+[ws] client _c_y6Qn10JHOx disconnected --> untailing apps: 620cc45369a04a0bf9502e78
+[ws] client _c_R2ZtbxiyCT – connected
+[ws] client _c_R2ZtbxiyCT – message: auth {}
+[ws] client _c_R2ZtbxiyCT – message: get_projects {}
+[ws] client _c_R2ZtbxiyCT – message: get_applications {}
+[ws] client _c_R2ZtbxiyCT – message: get_domains {}
+[ws] client _c_R2ZtbxiyCT – message: get_resources {}
+[ws] client _c_R2ZtbxiyCT – message: signal_application {
+  id: [32m'620cc45369a04a0bf9502e78'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_232nFQRwTZ – message: tail_application_stream_intro {
+  app_id: [32m'620cc45369a04a0bf9502e78'[39m,
+  log_lines: [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'user[Lcn6jH9yCsLbfBdyAAAD] disconnected\n'[39m +
+    [32m'user[DEgJZloLmKPM2FI_AAAC] disconnected\n'[39m
+}
+[ws] client _c_R2ZtbxiyCT – message: get_application_status {
+  id: [32m'620cc45369a04a0bf9502e78'[39m
+}
+[ws] client _c_232nFQRwTZ – message: return_application_status {
+  application_id: [32m'620cc45369a04a0bf9502e78'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645092394967[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_R2ZtbxiyCT – message: update_application {
+  id: [32m'620cc45369a04a0bf9502e78'[39m,
+  update: {
+    [32m'code.repo'[39m: [32m'https://github.com/anuvgupta/messenger'[39m
+  }
+}
+[ws] client _c_R2ZtbxiyCT – message: update_application {
+  id: [32m'620cc45369a04a0bf9502e78'[39m,
+  update: {
+    [32m'code.branch'[39m: [32m'master'[39m
+  }
+}
+[ws] client _c_R2ZtbxiyCT – message: update_application {
+  id: [32m'620cc45369a04a0bf9502e78'[39m,
+  update: {
+    [32m'code.path'[39m: [32m'.'[39m
+  }
+}
+[process] interrupt
+[main] unload
+[ws] exit
+[ws] server closed
+[web] exit
+[main] exit
+[process] exit
+/home/ubuntu/dash/src/dash/modules/db.js:482
+                branch "",
+                       ^^
+
+SyntaxError: Unexpected string
+    at wrapSafe (internal/modules/cjs/loader.js:1053:16)
+    at Module._compile (internal/modules/cjs/loader.js:1101:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+    at Module.load (internal/modules/cjs/loader.js:985:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+    at Module.require (internal/modules/cjs/loader.js:1025:19)
+    at Module.Hook._require.Module.require (/usr/local/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+    at require (internal/modules/cjs/helpers.js:72:18)
+    at /home/ubuntu/dash/src/dash/dash-cloud.js:29:30
+    at Array.forEach (<anonymous>)
+/home/ubuntu/dash/src/dash/modules/db.js:482
+                branch "",
+                       ^^
+
+SyntaxError: Unexpected string
+    at wrapSafe (internal/modules/cjs/loader.js:1053:16)
+    at Module._compile (internal/modules/cjs/loader.js:1101:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+    at Module.load (internal/modules/cjs/loader.js:985:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+    at Module.require (internal/modules/cjs/loader.js:1025:19)
+    at Module.Hook._require.Module.require (/usr/local/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+    at require (internal/modules/cjs/helpers.js:72:18)
+    at /home/ubuntu/dash/src/dash/dash-cloud.js:29:30
+    at Array.forEach (<anonymous>)
+/home/ubuntu/dash/src/dash/modules/db.js:482
+                branch "",
+                       ^^
+
+SyntaxError: Unexpected string
+    at wrapSafe (internal/modules/cjs/loader.js:1053:16)
+    at Module._compile (internal/modules/cjs/loader.js:1101:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+    at Module.load (internal/modules/cjs/loader.js:985:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+    at Module.require (internal/modules/cjs/loader.js:1025:19)
+    at Module.Hook._require.Module.require (/usr/local/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+    at require (internal/modules/cjs/helpers.js:72:18)
+    at /home/ubuntu/dash/src/dash/dash-cloud.js:29:30
+    at Array.forEach (<anonymous>)
+/home/ubuntu/dash/src/dash/modules/db.js:482
+                branch "",
+                       ^^
+
+SyntaxError: Unexpected string
+    at wrapSafe (internal/modules/cjs/loader.js:1053:16)
+    at Module._compile (internal/modules/cjs/loader.js:1101:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+    at Module.load (internal/modules/cjs/loader.js:985:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+    at Module.require (internal/modules/cjs/loader.js:1025:19)
+    at Module.Hook._require.Module.require (/usr/local/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+    at require (internal/modules/cjs/helpers.js:72:18)
+    at /home/ubuntu/dash/src/dash/dash-cloud.js:29:30
+    at Array.forEach (<anonymous>)
+/home/ubuntu/dash/src/dash/modules/db.js:482
+                branch "",
+                       ^^
+
+SyntaxError: Unexpected string
+    at wrapSafe (internal/modules/cjs/loader.js:1053:16)
+    at Module._compile (internal/modules/cjs/loader.js:1101:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+    at Module.load (internal/modules/cjs/loader.js:985:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+    at Module.require (internal/modules/cjs/loader.js:1025:19)
+    at Module.Hook._require.Module.require (/usr/local/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+    at require (internal/modules/cjs/helpers.js:72:18)
+    at /home/ubuntu/dash/src/dash/dash-cloud.js:29:30
+    at Array.forEach (<anonymous>)
+/home/ubuntu/dash/src/dash/modules/db.js:482
+                branch "",
+                       ^^
+
+SyntaxError: Unexpected string
+    at wrapSafe (internal/modules/cjs/loader.js:1053:16)
+    at Module._compile (internal/modules/cjs/loader.js:1101:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+    at Module.load (internal/modules/cjs/loader.js:985:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+    at Module.require (internal/modules/cjs/loader.js:1025:19)
+    at Module.Hook._require.Module.require (/usr/local/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+    at require (internal/modules/cjs/helpers.js:72:18)
+    at /home/ubuntu/dash/src/dash/dash-cloud.js:29:30
+    at Array.forEach (<anonymous>)
+/home/ubuntu/dash/src/dash/modules/db.js:482
+                branch "",
+                       ^^
+
+SyntaxError: Unexpected string
+    at wrapSafe (internal/modules/cjs/loader.js:1053:16)
+    at Module._compile (internal/modules/cjs/loader.js:1101:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+    at Module.load (internal/modules/cjs/loader.js:985:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+    at Module.require (internal/modules/cjs/loader.js:1025:19)
+    at Module.Hook._require.Module.require (/usr/local/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+    at require (internal/modules/cjs/helpers.js:72:18)
+    at /home/ubuntu/dash/src/dash/dash-cloud.js:29:30
+    at Array.forEach (<anonymous>)
+/home/ubuntu/dash/src/dash/modules/db.js:482
+                branch "",
+                       ^^
+
+SyntaxError: Unexpected string
+    at wrapSafe (internal/modules/cjs/loader.js:1053:16)
+    at Module._compile (internal/modules/cjs/loader.js:1101:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+    at Module.load (internal/modules/cjs/loader.js:985:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+    at Module.require (internal/modules/cjs/loader.js:1025:19)
+    at Module.Hook._require.Module.require (/usr/local/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+    at require (internal/modules/cjs/helpers.js:72:18)
+    at /home/ubuntu/dash/src/dash/dash-cloud.js:29:30
+    at Array.forEach (<anonymous>)
+/home/ubuntu/dash/src/dash/modules/db.js:482
+                branch "",
+                       ^^
+
+SyntaxError: Unexpected string
+    at wrapSafe (internal/modules/cjs/loader.js:1053:16)
+    at Module._compile (internal/modules/cjs/loader.js:1101:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+    at Module.load (internal/modules/cjs/loader.js:985:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+    at Module.require (internal/modules/cjs/loader.js:1025:19)
+    at Module.Hook._require.Module.require (/usr/local/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+    at require (internal/modules/cjs/helpers.js:72:18)
+    at /home/ubuntu/dash/src/dash/dash-cloud.js:29:30
+    at Array.forEach (<anonymous>)
+/home/ubuntu/dash/src/dash/modules/db.js:482
+                branch "",
+                       ^^
+
+SyntaxError: Unexpected string
+    at wrapSafe (internal/modules/cjs/loader.js:1053:16)
+    at Module._compile (internal/modules/cjs/loader.js:1101:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+    at Module.load (internal/modules/cjs/loader.js:985:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+    at Module.require (internal/modules/cjs/loader.js:1025:19)
+    at Module.Hook._require.Module.require (/usr/local/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+    at require (internal/modules/cjs/helpers.js:72:18)
+    at /home/ubuntu/dash/src/dash/dash-cloud.js:29:30
+    at Array.forEach (<anonymous>)
+/home/ubuntu/dash/src/dash/modules/db.js:482
+                branch "",
+                       ^^
+
+SyntaxError: Unexpected string
+    at wrapSafe (internal/modules/cjs/loader.js:1053:16)
+    at Module._compile (internal/modules/cjs/loader.js:1101:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+    at Module.load (internal/modules/cjs/loader.js:985:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+    at Module.require (internal/modules/cjs/loader.js:1025:19)
+    at Module.Hook._require.Module.require (/usr/local/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+    at require (internal/modules/cjs/helpers.js:72:18)
+    at /home/ubuntu/dash/src/dash/dash-cloud.js:29:30
+    at Array.forEach (<anonymous>)
+/home/ubuntu/dash/src/dash/modules/db.js:482
+                branch "",
+                       ^^
+
+SyntaxError: Unexpected string
+    at wrapSafe (internal/modules/cjs/loader.js:1053:16)
+    at Module._compile (internal/modules/cjs/loader.js:1101:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+    at Module.load (internal/modules/cjs/loader.js:985:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+    at Module.require (internal/modules/cjs/loader.js:1025:19)
+    at Module.Hook._require.Module.require (/usr/local/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+    at require (internal/modules/cjs/helpers.js:72:18)
+    at /home/ubuntu/dash/src/dash/dash-cloud.js:29:30
+    at Array.forEach (<anonymous>)
+/home/ubuntu/dash/src/dash/modules/db.js:482
+                branch "",
+                       ^^
+
+SyntaxError: Unexpected string
+    at wrapSafe (internal/modules/cjs/loader.js:1053:16)
+    at Module._compile (internal/modules/cjs/loader.js:1101:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+    at Module.load (internal/modules/cjs/loader.js:985:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+    at Module.require (internal/modules/cjs/loader.js:1025:19)
+    at Module.Hook._require.Module.require (/usr/local/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+    at require (internal/modules/cjs/helpers.js:72:18)
+    at /home/ubuntu/dash/src/dash/dash-cloud.js:29:30
+    at Array.forEach (<anonymous>)
+DASHBOARD
+[svc] cloud
+[utils] initializing
+[cli] initializing
+[db] initializing
+[main] initializing
+[web] initializing
+[ws] initializing
+[web] listening on 3000
+[ws] listening on 3001
+[db] connected to 27017 (db=dash)
+[main] ready
+[main] starting resource monitor
+[ws] client _c_tMWH6VnHIB – connected
+[ws] client _c_tMWH6VnHIB – message: sync_daemon {
+  daemon_key: [32m'X1F9K'[39m
+}
+[ws] client _c_2BAinkndaD – connected
+[ws] client _c_2BAinkndaD – message: auth {}
+[ws] client _c_2BAinkndaD – message: get_projects {}
+[ws] client _c_2BAinkndaD – message: get_resources {}
+[ws] client _c_2BAinkndaD – message: get_applications {}
+[ws] client _c_2BAinkndaD – message: get_domains {}
+[ws] client _c_2BAinkndaD – message: get_resources {}
+[ws] client _c_2BAinkndaD – message: signal_application {
+  id: [32m'620cc45369a04a0bf9502e78'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_2BAinkndaD – message: get_application_status {
+  id: [32m'620cc45369a04a0bf9502e78'[39m
+}
+[ws] client _c_tMWH6VnHIB – message: tail_application_stream_intro {
+  app_id: [32m'620cc45369a04a0bf9502e78'[39m,
+  log_lines: [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'regular collision between users DEgJZloLmKPM2FI_AAAC and Lcn6jH9yCsLbfBdyAAAD\n'[39m +
+    [32m'user[Lcn6jH9yCsLbfBdyAAAD] disconnected\n'[39m +
+    [32m'user[DEgJZloLmKPM2FI_AAAC] disconnected\n'[39m
+}
+[ws] client _c_tMWH6VnHIB – message: return_application_status {
+  application_id: [32m'620cc45369a04a0bf9502e78'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645093758773[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_2BAinkndaD – message: get_applications {}
+[ws] client _c_2BAinkndaD – message: signal_application {
+  id: [32m'620cc45369a04a0bf9502e78'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_2BAinkndaD – message: get_domains {}
+[ws] client _c_2BAinkndaD – message: get_resources {}
+[ws] client _c_2BAinkndaD – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_tMWH6VnHIB – message: tail_application_stream_intro {
+  app_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  log_lines: [32m'[ws] client ppQwRfIy4c – connected \n'[39m +
+    [32m'[ws] client ppQwRfIy4c – authenticated \n'[39m +
+    [32m'[ws] color palette update sent to client ppQwRfIy4c \n'[39m +
+    [32m'[ws] pattern list update sent to client ppQwRfIy4c \n'[39m +
+    [32m'LED Lights\n'[39m +
+    [32m'[ws] listening on 3031\n'[39m +
+    [32m'[http] listening on 3030\n'[39m +
+    [32m'[ws] client aL35By30Xt – connected \n'[39m +
+    [32m'[ws] client aL35By30Xt – disconnected \n'[39m +
+    [32m'[ws] client eb0oubYLN8 – connected \n'[39m +
+    [32m'[ws] client eb0oubYLN8 – disconnected \n'[39m +
+    [32m'[ws] client 3kGSoGtrvV – connected \n'[39m +
+    [32m'[ws] client 3kGSoGtrvV – disconnected \n'[39m +
+    [32m'[ws] client 898dCpQ2uM – connected \n'[39m +
+    [32m'[ws] client WHyES9KjfA – connected \n'[39m +
+    [32m'[ws] unknown event sync_daemon\n'[39m +
+    [32m'[ws] client 898dCpQ2uM – disconnected \n'[39m +
+    [32m'[ws] client Ag01wal575 – connected \n'[39m +
+    [32m'[ws] client Ag01wal575 – disconnected \n'[39m +
+    [32m'[ws] client bArzRcOl61 – connected \n'[39m +
+    [32m'[ws] client bArzRcOl61 – disconnected \n'[39m +
+    [32m'[ws] client qPL4Qy4AUt – connected \n'[39m +
+    [32m'[ws] client qPL4Qy4AUt – disconnected \n'[39m +
+    [32m'[ws] client WHyES9KjfA – disconnected \n'[39m
+}
+[ws] client _c_2BAinkndaD – message: get_application_status {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m
+}
+[ws] client _c_tMWH6VnHIB – message: return_application_status {
+  application_id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645093763053[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_2BAinkndaD – message: get_applications {}
+[ws] client _c_2BAinkndaD – message: signal_application {
+  id: [32m'620c8f44373a770d6d44e9ae'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_2BAinkndaD – message: get_domains {}
+[ws] client _c_2BAinkndaD – message: get_resources {}
+[ws] client _c_2BAinkndaD – message: signal_application {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_tMWH6VnHIB – message: tail_application_stream_intro {
+  app_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  log_lines: [32m'listening on *:3032\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA connected\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA is joe\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA disconnected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB connected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB is hi\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB disconnected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC connected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC is hi\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n'[39m +
+    [32m'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC disconnected\n'[39m
+}
+[ws] client _c_2BAinkndaD – message: get_application_status {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m
+}
+[ws] client _c_tMWH6VnHIB – message: return_application_status {
+  application_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645093765930[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_2BAinkndaD – message: update_application {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  update: {
+    [32m'code.repo'[39m: [32m'https://github.com/anuvgupta/messenger'[39m
+  }
+}
+[ws] client _c_2BAinkndaD – message: update_application {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  update: {
+    [32m'code.branch'[39m: [32m'master'[39m
+  }
+}
+[ws] client _c_2BAinkndaD – message: get_applications {}
+[ws] client _c_2BAinkndaD – message: signal_application {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_2BAinkndaD – message: get_domains {}
+[ws] client _c_2BAinkndaD – message: get_resources {}
+[ws] client _c_2BAinkndaD – message: signal_application {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_2BAinkndaD – message: get_application_status {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m
+}
+[ws] client _c_tMWH6VnHIB – message: tail_application_stream_intro {
+  app_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  log_lines: [32m'listening on *:3032\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA connected\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA is joe\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA disconnected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB connected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB is hi\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB disconnected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC connected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC is hi\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n'[39m +
+    [32m'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC disconnected\n'[39m
+}
+[ws] client _c_tMWH6VnHIB – message: return_application_status {
+  application_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645093783275[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_2BAinkndaD – message: get_applications {}
+[ws] client _c_2BAinkndaD – message: signal_application {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  signal: [32m'untail'[39m
+}
+[ws] client _c_2BAinkndaD – disconnected
+[ws] client _c_2BAinkndaD disconnected --> untailing apps: 
+[ws] client _c_Cn3xVYoEQi – connected
+[ws] client _c_Cn3xVYoEQi – message: auth {}
+[ws] client _c_Cn3xVYoEQi – message: get_projects {}
+[ws] client _c_Cn3xVYoEQi – message: get_applications {}
+[ws] client _c_Cn3xVYoEQi – disconnected
+[ws] client _c_wdb6R3vpnb – connected
+[ws] client _c_wdb6R3vpnb – message: auth {}
+[ws] client _c_wdb6R3vpnb – message: get_projects {}
+[ws] client _c_wdb6R3vpnb – message: get_applications {}
+[ws] client _c_wdb6R3vpnb – message: get_domains {}
+[ws] client _c_wdb6R3vpnb – message: get_resources {}
+[ws] client _c_wdb6R3vpnb – message: signal_application {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_tMWH6VnHIB – message: tail_application_stream_intro {
+  app_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  log_lines: [32m'listening on *:3032\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA connected\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA is joe\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA disconnected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB connected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB is hi\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB disconnected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC connected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC is hi\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n'[39m +
+    [32m'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC disconnected\n'[39m
+}
+[ws] client _c_wdb6R3vpnb – message: get_application_status {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m
+}
+[ws] client _c_tMWH6VnHIB – message: return_application_status {
+  application_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645093890831[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_wdb6R3vpnb – disconnected
+[ws] client _c_wdb6R3vpnb disconnected --> untailing apps: 620cc24e69a04a0bf9502e77
+[ws] client _c_Vgssf0GgdT – connected
+[ws] client _c_Vgssf0GgdT – message: auth {}
+[ws] client _c_Vgssf0GgdT – message: get_projects {}
