@@ -327,7 +327,7 @@ var api = {
                 apache_root: "",
                 www_root: "",
             },
-            primary_domain: { id: '', sub: '' },
+            primary_domain: '',
             domains: [],
             status: "new",
             status_time: -1,
@@ -479,7 +479,7 @@ var api = {
             port: "",
             environment: {},
             ecosystem: {
-                name: slug,
+                name: `${slug}`,
                 script: "",
                 cwd: "",
                 error_file: `${slug}.log`,
@@ -498,7 +498,7 @@ var api = {
                 ws_enable_path: "socket",
                 nginx_config_export: "",
             },
-            primary_domain: { id: '', sub: '' },
+            primary_domain: '',
             domains: [],
             status: "new",
             status_time: -1,
@@ -547,7 +547,7 @@ var api = {
                 if (!result1) resolve(null, result1);
                 else {
                     if (update.hasOwnProperty('slug'))
-                        update['ecosystem.name'] = update.slug;
+                        update['ecosystem.name'] = `${update.slug}`;
                     if (!update.hasOwnProperty('ts_updated'))
                         update.ts_updated = ts_now;
                     mongo_api.collection('application').updateOne({ _id: mongo_oid(id) }, {
@@ -594,8 +594,9 @@ var api = {
             } else {
                 if (result1) {
                     var ecosystems = {};
-                    for (var r in result1)
-                        ecosystems[result1[r]._id.toString()] = result1[r].ecosystem;
+                    for (var r in result1) {
+                        ecosystems[result1[r]._id.toString()] = JSON.parse(JSON.stringify(result1[r].ecosystem));
+                    }
                     resolve(true, ecosystems);
                 } else resolve(null, result1);
             }

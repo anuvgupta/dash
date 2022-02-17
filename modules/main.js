@@ -181,6 +181,7 @@ var api = {
         if (proxy_settings.https_enable === true) {
             var cert_sub_map = {};
             var cert_key_map = {}
+            // console.log(domains);
             for (var d in domains) {
                 for (var c in domains[d].certificates) {
                     var cert = domains[d].certificates[c];
@@ -207,7 +208,7 @@ var api = {
                     }
                 }
                 // console.log(cert_path, subdomains_matched);
-                if (subdomains_matched.length <= 0) break;
+                if (subdomains_matched.length <= 0) continue;
                 var secure_server_obj = JSON.parse(JSON.stringify(proxy_config_obj['server'][0]));
                 secure_server_obj.__keys.splice(2, 0, 'ssl', 'ssl_certificate', 'ssl_certificate_key');
                 secure_server_obj = Object.assign(secure_server_obj, {

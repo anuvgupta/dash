@@ -8,6 +8,7 @@ const path = require("path");
 const websocket = require("ws");
 const split2 = require('split2');
 const readline = require("readline");
+const cproc = require("child_process");
 const tf = require('@logdna/tail-file');
 
 /* ENVIRONMENT */
@@ -92,15 +93,43 @@ const app = {
     },
     process_proxy_config: (application_id, nginx_root, nginx_config, proxy_settings, resolve) => {
         app.log(`processing nginx proxy for app ${application_id}`);
-        if (db.ecosystem.hasOwnProperty(application_id)) {
-            app.log(`found application ${application_id}`);
-            var app_ecosystem = db.ecosystem[application_id];
-            var app_name = app_ecosystem.name;
-            // pm[`${signal}_process`] && pm[`${signal}_process`](app_ecosystem, application_id, (success = true) => {
-            //     resolve(success, `<b>${app_ecosystem.name}</b> received <b>${signal.toUpperCase()}</b>`);
-            // });
-            console.log(nginx_config);
-        } else resolve(false, `App ${app_ecosystem.name} not in ecosystem`);
+        if (!db.ecosystem.hasOwnProperty(application_id))
+            return resolve(false, `App ${app_ecosystem.name} not in ecosystem`);
+        app.log(`found application ${application_id}`);
+        var app_ecosystem = db.ecosystem[application_id];
+        var app_name = app_ecosystem.name;
+        var proxy_file_dir_loc = `${nginx_root}/sites-available`;
+        var proxy_file_location = `${proxy_file_dir_loc}/dash-app_${app_name}.conf`;
+        var proxy_file_link_loc = `${nginx_root}/sites-enabled/dash-app_${app_name}.conf`;
+        // var proxy_file_rel_path = path.relative(proxy_file_dir_loc, proxy_file_location);
+        var proxy_file_content = `# ${app_name} (dash managed application) reverse proxy configuration\n${nginx_config}\n`;
+        app.log(`writing config for app "${app_name}" (${application_id}) to location ${proxy_file_location}`);
+        fs.writeFile(proxy_file_location, proxy_file_content, (err) => {
+            if (err) { console.error(err); return resolve(false, "Failed writing proxy file"); }
+            app.log(`wrote file, linking to location ${proxy_file_link_loc}`);
+            _next = _ => {
+                // app.log(fs.readFileSync(proxy_file_link_loc, 'utf8'));
+                var reload_command = "sudo /usr/sbin/service nginx reload";
+                app.log(`running command: \`${reload_command}\``);
+                cproc.exec(`${reload_command}`, (error, stdout, stderr) => {
+                    if (error) { app.log(`error: ${error.message}`); return resolve(false, `Failed NGINX reload: ${error.message}`); }
+                    if (stderr) { app.log(`stderr: ${stderr}`); return resolve(false `Failed NGINX reload: ${stderr.toString()}`); }
+                    app.log(`stdout: ${stdout}`);
+                    return resolve(true, "Proxy pushed & linked");
+                });
+            };
+            if (fs.existsSync(proxy_file_link_loc)) {
+                app.log('symlink exists');
+                _next();
+            } else {
+                fs.symlink(proxy_file_location, proxy_file_link_loc, 'file', (err) => {
+                    if (err) { console.error(err); return resolve(false, "Failed symlinking proxy file"); }
+                    app.log("symlink created");
+                    _next();
+                });
+            }
+        });
+        
     },
     refresh_ecosystem: (ecosystem) => {
         app.log("refreshing ecosystem");
