@@ -495,6 +495,7 @@ var api = {
                 restart_delay: "3000"
             },
             proxy: {
+                enable: false,
                 www: false,
                 htaccess_deny: false,
                 https_enable: false,

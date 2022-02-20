@@ -3111,6 +3111,11 @@ app
                         }
                     #proxy
                         {
+                            // proxy enable
+                            block.child('subcontent/application_proxy').data({
+                                enabled: proxy.enable === true
+                            });
+
                             // www
                             block.child('subcontent/application_proxy/www/value/switch').data({
                                 val: proxy.www === true ? 'on' : 'off'
@@ -3133,7 +3138,7 @@ app
                                 val: proxy.ws_enable === true ? 'on' : 'off'
                             });
                             // ws_enable_path
-                            console.log(proxy);
+                            //console.log(proxy);
                             var ws_enable_path_alt = `/${proxy.ws_enable_path}`;
                             if (proxy.ws_enable_path == '') ws_enable_path_alt = '<span class="text_placeholder">/socket</span>';
                             block.child('subcontent/application_proxy/ws_enable_path/value/text').html(`${ws_enable_path_alt}`);
@@ -3267,6 +3272,9 @@ app
                             if (update_ecosystem)
                                 block.data({ ecosystem: new_data.ecosystem, });
                             var update_proxy = false;
+                            if (old_data.proxy.enable != new_data.proxy.enable) {
+                                update_proxy = true;
+                            }
                             if (old_data.proxy.www != new_data.proxy.www) {
                                 update_proxy = true;
                             }
@@ -4832,6 +4840,67 @@ app
                             class dashboard_detail_section
                             css
                                 min-height 100px
+                            #enabled
+                                {
+                                    var proxy_display_val = enabled === true ? 'inline-block' : 'none';
+                                    block.child('www').css('display', proxy_display_val)
+                                        .sibling('https_enable').css('display', proxy_display_val)
+                                        .sibling('htaccess_deny').css('display', proxy_display_val)
+                                        .sibling('https_force').css('display', proxy_display_val)
+                                        .sibling('ws_enable').css('display', proxy_display_val)
+                                        .sibling('ws_enable_path').css('display', proxy_display_val)
+                                        .sibling('ws_enable').css('display', proxy_display_val)
+                                        .sibling('ws_enable_path').css('display', proxy_display_val)
+                                    ;
+                                    block.child('enable/switch').data({
+                                        val: enabled === true ? 'on' : 'off'
+                                    });
+                                    block.child('save_button_wrap').css({
+                                        opacity: (enabled === true ? '1' : '0.6'),
+                                        pointerEvents: (enabled === true ? 'auto' : 'none')
+                                    });
+                                }
+                            block enable
+                                css
+                                    position absolute
+                                    top 16px
+                                    right 75px
+                                    width auto
+                                    height 50px
+                                    z-index 99
+                                switch switch
+                                    val on
+                                    label On
+                                    css
+                                        margin 0
+                                        transform scale(0.85)
+                                    {
+                                        block.child('label').css({
+                                            minWidth: '25px',
+                                            marginRight: '10px',
+                                            fontWeight: '300'
+                                        });
+                                    }
+                                    :modified
+                                        {
+                                            //console.log('updated to ' + block.key('state'));
+                                            var value = block.key('state') === true;
+                                            block.data({ label: (value ? 'On' : 'Off') });
+                                            if (data.hasOwnProperty('locked') && data.locked == true) return;
+                                            block.parent(3).on('send_application_update', {
+                                                'proxy.enable': value
+                                            });
+                                            if (value === false) {
+                                                setTimeout(_ => {
+                                                    app.ws.api.remove_application_proxy(block.parent(3).key('application')._id);
+                                                }, 20);
+                                            } else {
+                                                setTimeout(_ => {
+                                                    app.ws.api.push_application_proxy(block.parent(3).key('application')._id);
+                                                }, 20);
+                                            }
+                                            event.stopPropagation();
+                                        }
                             div title
                                 css
                                     height auto
@@ -5246,6 +5315,8 @@ app
                                     box-shadow 2px 2px 5px 2px rgba(44, 44, 44, 0.2)
                                     transition opacity 0.2s ease, top 0.25s ease, background-color 0.1s ease
                                     cursor pointer
+                                    z-index 100
+                                    pointer-events none
                                 #color
                                     {
                                         block.css('background-color', `${color}`);
@@ -5267,6 +5338,7 @@ app
                                     css
                                         top 22px
                                         opacity 0.9
+                                        pointer-events auto
                                     {
                                         block.key('toggled', 'yes');
                                         event.stopPropagation();
@@ -5275,6 +5347,7 @@ app
                                     css
                                         top 5px
                                         opacity 0
+                                        pointer-events none
                                     {
                                         block.key('toggled', 'no');
                                         event.stopPropagation();
@@ -5779,7 +5852,7 @@ app
                                 #primary
                                     {
                                         block.key('primary', primary);
-                                        console.log('PRIMARY', primary);
+                                        //console.log('PRIMARY', primary);
                                         var children = block.children();
                                         var domain_id = primary.split('.')[0];
                                         for (var c in children) {

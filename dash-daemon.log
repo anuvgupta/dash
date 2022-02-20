@@ -19501,3 +19501,4428 @@ Error: process or namespace not found
 [ws] received signal "untail" for application "620cc24e69a04a0bf9502e77"
 [main] processing signal for app 620cc24e69a04a0bf9502e77: "untail"
 [main] found application 620cc24e69a04a0bf9502e77
+[ws] socket received: signal { signal: 'tail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "tail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "tail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc24e69a04a0bf9502e77',
+  log_lines: 'listening on *:3032\n' +
+    'user v10hju53gCXo5gnEAAAA connected\n' +
+    'user v10hju53gCXo5gnEAAAA is joe\n' +
+    'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n' +
+    'user v10hju53gCXo5gnEAAAA disconnected\n' +
+    'user OkWuBrDS5XxppvunAAAB connected\n' +
+    'user OkWuBrDS5XxppvunAAAB is hi\n' +
+    'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n' +
+    'user OkWuBrDS5XxppvunAAAB disconnected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC connected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC is hi\n' +
+    'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n' +
+    'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n' +
+    'user -07Ra4tUQRBAqAlsAAAC disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc24e69a04a0bf9502e77' }
+[ws] server requested process status for application "620cc24e69a04a0bf9502e77"
+[main] found application 620cc24e69a04a0bf9502e77
+[main] describe_process true online 1645097311142
+[ws] sending: return_application_status {
+  application_id: '620cc24e69a04a0bf9502e77',
+  success: true,
+  timestamp: 1645097311142,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "untail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "untail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] socket received: signal { signal: 'tail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "tail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "tail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc24e69a04a0bf9502e77',
+  log_lines: 'listening on *:3032\n' +
+    'user v10hju53gCXo5gnEAAAA connected\n' +
+    'user v10hju53gCXo5gnEAAAA is joe\n' +
+    'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n' +
+    'user v10hju53gCXo5gnEAAAA disconnected\n' +
+    'user OkWuBrDS5XxppvunAAAB connected\n' +
+    'user OkWuBrDS5XxppvunAAAB is hi\n' +
+    'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n' +
+    'user OkWuBrDS5XxppvunAAAB disconnected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC connected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC is hi\n' +
+    'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n' +
+    'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n' +
+    'user -07Ra4tUQRBAqAlsAAAC disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc24e69a04a0bf9502e77' }
+[ws] server requested process status for application "620cc24e69a04a0bf9502e77"
+[main] found application 620cc24e69a04a0bf9502e77
+[main] describe_process true online 1645351531970
+[ws] sending: return_application_status {
+  application_id: '620cc24e69a04a0bf9502e77',
+  success: true,
+  timestamp: 1645351531970,
+  status: 'online'
+}
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+[ws] socket connected
+[ws] sending: sync_daemon { daemon_key: 'X1F9K' }
+[ws] socket received: sync_daemon_res {
+  success: true,
+  data: {
+    id: '620c8a4ef9ead118d5ce873b',
+    daemon_key: 'X1F9K',
+    resource: {
+      _id: '620c8a4ef9ead118d5ce873b',
+      slug: 'lightsail',
+      name: 'Lightsail',
+      link: 'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB',
+      ip: '54.186.188.200',
+      provider: 'aws-lightsail',
+      type: 'vm',
+      private_ip: '172.26.0.161',
+      daemon_key: 'X1F9K',
+      specs: [Object],
+      software: [Object],
+      primary_domain: [Object],
+      domains: [],
+      status: 'desync',
+      status_time: 1645352087560,
+      ts_created: 1644989006884,
+      ts_updated: 1645001779394
+    }
+  }
+}
+[ws] identified with dash cloud as resource "Lightsail" (620c8a4ef9ead118d5ce873b)
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+* [ws] ERROR: socket error  Unexpected server response: 502
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+[ws] socket connected
+[ws] sending: sync_daemon { daemon_key: 'X1F9K' }
+[ws] socket received: sync_daemon_res {
+  success: true,
+  data: {
+    id: '620c8a4ef9ead118d5ce873b',
+    daemon_key: 'X1F9K',
+    resource: {
+      _id: '620c8a4ef9ead118d5ce873b',
+      slug: 'lightsail',
+      name: 'Lightsail',
+      link: 'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB',
+      ip: '54.186.188.200',
+      provider: 'aws-lightsail',
+      type: 'vm',
+      private_ip: '172.26.0.161',
+      daemon_key: 'X1F9K',
+      specs: [Object],
+      software: [Object],
+      primary_domain: [Object],
+      domains: [],
+      status: 'offline',
+      status_time: 1645352118915,
+      ts_created: 1644989006884,
+      ts_updated: 1645001779394
+    }
+  }
+}
+[ws] identified with dash cloud as resource "Lightsail" (620c8a4ef9ead118d5ce873b)
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: signal { signal: 'tail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "tail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "tail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc24e69a04a0bf9502e77',
+  log_lines: 'listening on *:3032\n' +
+    'user v10hju53gCXo5gnEAAAA connected\n' +
+    'user v10hju53gCXo5gnEAAAA is joe\n' +
+    'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n' +
+    'user v10hju53gCXo5gnEAAAA disconnected\n' +
+    'user OkWuBrDS5XxppvunAAAB connected\n' +
+    'user OkWuBrDS5XxppvunAAAB is hi\n' +
+    'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n' +
+    'user OkWuBrDS5XxppvunAAAB disconnected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC connected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC is hi\n' +
+    'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n' +
+    'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n' +
+    'user -07Ra4tUQRBAqAlsAAAC disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc24e69a04a0bf9502e77' }
+[ws] server requested process status for application "620cc24e69a04a0bf9502e77"
+[main] found application 620cc24e69a04a0bf9502e77
+[main] describe_process true online 1645352562619
+[ws] sending: return_application_status {
+  application_id: '620cc24e69a04a0bf9502e77',
+  success: true,
+  timestamp: 1645352562619,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "untail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "untail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] socket received: signal { signal: 'tail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "tail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "tail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc24e69a04a0bf9502e77',
+  log_lines: 'listening on *:3032\n' +
+    'user v10hju53gCXo5gnEAAAA connected\n' +
+    'user v10hju53gCXo5gnEAAAA is joe\n' +
+    'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n' +
+    'user v10hju53gCXo5gnEAAAA disconnected\n' +
+    'user OkWuBrDS5XxppvunAAAB connected\n' +
+    'user OkWuBrDS5XxppvunAAAB is hi\n' +
+    'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n' +
+    'user OkWuBrDS5XxppvunAAAB disconnected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC connected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC is hi\n' +
+    'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n' +
+    'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n' +
+    'user -07Ra4tUQRBAqAlsAAAC disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc24e69a04a0bf9502e77' }
+[ws] server requested process status for application "620cc24e69a04a0bf9502e77"
+[main] found application 620cc24e69a04a0bf9502e77
+[main] describe_process true online 1645352607582
+[ws] sending: return_application_status {
+  application_id: '620cc24e69a04a0bf9502e77',
+  success: true,
+  timestamp: 1645352607582,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "untail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "untail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] socket received: signal { signal: 'tail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "tail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "tail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc24e69a04a0bf9502e77',
+  log_lines: 'listening on *:3032\n' +
+    'user v10hju53gCXo5gnEAAAA connected\n' +
+    'user v10hju53gCXo5gnEAAAA is joe\n' +
+    'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n' +
+    'user v10hju53gCXo5gnEAAAA disconnected\n' +
+    'user OkWuBrDS5XxppvunAAAB connected\n' +
+    'user OkWuBrDS5XxppvunAAAB is hi\n' +
+    'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n' +
+    'user OkWuBrDS5XxppvunAAAB disconnected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC connected\n' +
+    'user -07Ra4tUQRBAqAlsAAAC is hi\n' +
+    'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n' +
+    'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n' +
+    'user -07Ra4tUQRBAqAlsAAAC disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc24e69a04a0bf9502e77' }
+[ws] server requested process status for application "620cc24e69a04a0bf9502e77"
+[main] found application 620cc24e69a04a0bf9502e77
+[main] describe_process true online 1645352620229
+[ws] sending: return_application_status {
+  application_id: '620cc24e69a04a0bf9502e77',
+  success: true,
+  timestamp: 1645352620229,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc24e69a04a0bf9502e77' }
+[ws] received signal "untail" for application "620cc24e69a04a0bf9502e77"
+[main] processing signal for app 620cc24e69a04a0bf9502e77: "untail"
+[main] found application 620cc24e69a04a0bf9502e77
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645352741534
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645352741534,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645352787627
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645352787627,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645352833295
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645352833295,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645352847194
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645352847194,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645352891444
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645352891444,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645352907276
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645352907276,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645352922267
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645352922267,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645353014838
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645353014838,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645353057003
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645353057003,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645353067927
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645353067927,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645353075855
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645353075855,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645353927277
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645353927277,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645353995739
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645353995739,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354005929
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354005929,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354010129
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354010129,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354026569
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354026569,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354038247
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354038247,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354045728
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354045728,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354064620
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354064620,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354182737
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354182737,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354201078
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354201078,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354210081
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354210081,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354242011
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354242011,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354279926
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354279926,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354692698
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354692698,
+  status: 'online'
+}
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354705089
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354705089,
+  status: 'online'
+}
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354753648
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354753648,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354837410
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354837410,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354857702
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354857702,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354884081
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354884081,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354888216
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354888216,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354891063
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354891063,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354896456
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354896456,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354900208
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354900208,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354937077
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354937077,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645354961810
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645354961810,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645355004493
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645355004493,
+  status: 'online'
+}
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645355017374
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645355017374,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: proxy_config {
+  application: '620cc45369a04a0bf9502e78',
+  proxy_settings: {
+    www: true,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: true,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: '',
+    enable: true
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name rubbr.anuv.me rubbr.ml www.rubbr.ml;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\treturn 301 https://$host$request_uri;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name rubbr.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name rubbr.ml www.rubbr.ml;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/rubbr.anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/rubbr.anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620cc45369a04a0bf9502e78"
+[main] processing nginx proxy for app 620cc45369a04a0bf9502e78
+[main] found application 620cc45369a04a0bf9502e78
+[main] writing config for app "rubbr-sio" (620cc45369a04a0bf9502e78) to location /etc/nginx/sites-available/dash-app_rubbr-sio.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_rubbr-sio.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: push_application_proxy_res_daemon {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  message: 'Proxy pushed & linked'
+}
+[ws] socket received: proxy_config {
+  application: '620cc45369a04a0bf9502e78',
+  proxy_settings: {
+    www: true,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: true,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: '',
+    enable: true
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name rubbr.anuv.me rubbr.ml www.rubbr.ml;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\treturn 301 https://$host$request_uri;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name rubbr.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name rubbr.ml www.rubbr.ml;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/rubbr.anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/rubbr.anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620cc45369a04a0bf9502e78"
+[main] processing nginx proxy for app 620cc45369a04a0bf9502e78
+[main] found application 620cc45369a04a0bf9502e78
+[main] writing config for app "rubbr-sio" (620cc45369a04a0bf9502e78) to location /etc/nginx/sites-available/dash-app_rubbr-sio.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_rubbr-sio.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: push_application_proxy_res_daemon {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  message: 'Proxy pushed & linked'
+}
+[ws] socket received: proxy_config {
+  application: '620cc45369a04a0bf9502e78',
+  proxy_settings: {
+    www: true,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: true,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: '',
+    enable: true
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name rubbr.anuv.me rubbr.ml www.rubbr.ml;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\treturn 301 https://$host$request_uri;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name rubbr.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name rubbr.ml www.rubbr.ml;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/rubbr.anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/rubbr.anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620cc45369a04a0bf9502e78"
+[main] processing nginx proxy for app 620cc45369a04a0bf9502e78
+[main] found application 620cc45369a04a0bf9502e78
+[main] writing config for app "rubbr-sio" (620cc45369a04a0bf9502e78) to location /etc/nginx/sites-available/dash-app_rubbr-sio.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_rubbr-sio.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: push_application_proxy_res_daemon {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  message: 'Proxy pushed & linked'
+}
+[ws] socket received: proxy_config {
+  application: '620cc45369a04a0bf9502e78',
+  proxy_settings: {
+    www: true,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: true,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: '',
+    enable: true
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name rubbr.anuv.me rubbr.ml www.rubbr.ml;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\treturn 301 https://$host$request_uri;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name rubbr.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name rubbr.ml www.rubbr.ml;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/rubbr.anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/rubbr.anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n'
+}
+[ws] received nginx proxy config for application "620cc45369a04a0bf9502e78"
+[main] processing nginx proxy for app 620cc45369a04a0bf9502e78
+[main] found application 620cc45369a04a0bf9502e78
+[main] writing config for app "rubbr-sio" (620cc45369a04a0bf9502e78) to location /etc/nginx/sites-available/dash-app_rubbr-sio.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_rubbr-sio.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: push_application_proxy_res_daemon {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  message: 'Proxy pushed & linked'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645355437131
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645355437131,
+  status: 'online'
+}
+[ws] socket received: signal { signal: 'untail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "untail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "untail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645355476843
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645355476843,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+[ws] socket connected
+[ws] sending: sync_daemon { daemon_key: 'X1F9K' }
+[ws] socket received: sync_daemon_res {
+  success: true,
+  data: {
+    id: '620c8a4ef9ead118d5ce873b',
+    daemon_key: 'X1F9K',
+    resource: {
+      _id: '620c8a4ef9ead118d5ce873b',
+      slug: 'lightsail',
+      name: 'Lightsail',
+      link: 'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB',
+      ip: '54.186.188.200',
+      provider: 'aws-lightsail',
+      type: 'vm',
+      private_ip: '172.26.0.161',
+      daemon_key: 'X1F9K',
+      specs: [Object],
+      software: [Object],
+      primary_domain: [Object],
+      domains: [],
+      status: 'desync',
+      status_time: 1645356143648,
+      ts_created: 1644989006884,
+      ts_updated: 1645001779394
+    }
+  }
+}
+[ws] identified with dash cloud as resource "Lightsail" (620c8a4ef9ead118d5ce873b)
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+[ws] socket connected
+[ws] sending: sync_daemon { daemon_key: 'X1F9K' }
+[ws] socket received: sync_daemon_res {
+  success: true,
+  data: {
+    id: '620c8a4ef9ead118d5ce873b',
+    daemon_key: 'X1F9K',
+    resource: {
+      _id: '620c8a4ef9ead118d5ce873b',
+      slug: 'lightsail',
+      name: 'Lightsail',
+      link: 'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB',
+      ip: '54.186.188.200',
+      provider: 'aws-lightsail',
+      type: 'vm',
+      private_ip: '172.26.0.161',
+      daemon_key: 'X1F9K',
+      specs: [Object],
+      software: [Object],
+      primary_domain: [Object],
+      domains: [],
+      status: 'desync',
+      status_time: 1645356335741,
+      ts_created: 1644989006884,
+      ts_updated: 1645001779394
+    }
+  }
+}
+[ws] identified with dash cloud as resource "Lightsail" (620c8a4ef9ead118d5ce873b)
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+[ws] socket connected
+[ws] sending: sync_daemon { daemon_key: 'X1F9K' }
+[ws] socket received: sync_daemon_res {
+  success: true,
+  data: {
+    id: '620c8a4ef9ead118d5ce873b',
+    daemon_key: 'X1F9K',
+    resource: {
+      _id: '620c8a4ef9ead118d5ce873b',
+      slug: 'lightsail',
+      name: 'Lightsail',
+      link: 'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB',
+      ip: '54.186.188.200',
+      provider: 'aws-lightsail',
+      type: 'vm',
+      private_ip: '172.26.0.161',
+      daemon_key: 'X1F9K',
+      specs: [Object],
+      software: [Object],
+      primary_domain: [Object],
+      domains: [],
+      status: 'desync',
+      status_time: 1645356432765,
+      ts_created: 1644989006884,
+      ts_updated: 1645001779394
+    }
+  }
+}
+[ws] identified with dash cloud as resource "Lightsail" (620c8a4ef9ead118d5ce873b)
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+[ws] socket connected
+[ws] sending: sync_daemon { daemon_key: 'X1F9K' }
+[ws] socket received: sync_daemon_res {
+  success: true,
+  data: {
+    id: '620c8a4ef9ead118d5ce873b',
+    daemon_key: 'X1F9K',
+    resource: {
+      _id: '620c8a4ef9ead118d5ce873b',
+      slug: 'lightsail',
+      name: 'Lightsail',
+      link: 'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB',
+      ip: '54.186.188.200',
+      provider: 'aws-lightsail',
+      type: 'vm',
+      private_ip: '172.26.0.161',
+      daemon_key: 'X1F9K',
+      specs: [Object],
+      software: [Object],
+      primary_domain: [Object],
+      domains: [],
+      status: 'desync',
+      status_time: 1645357310087,
+      ts_created: 1644989006884,
+      ts_updated: 1645001779394
+    }
+  }
+}
+[ws] identified with dash cloud as resource "Lightsail" (620c8a4ef9ead118d5ce873b)
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: signal { signal: 'tail', application: '620cc45369a04a0bf9502e78' }
+[ws] received signal "tail" for application "620cc45369a04a0bf9502e78"
+[main] processing signal for app 620cc45369a04a0bf9502e78: "tail"
+[main] found application 620cc45369a04a0bf9502e78
+[ws] sending: tail_application_stream_intro {
+  app_id: '620cc45369a04a0bf9502e78',
+  log_lines: 'user[6iMXCgbziEOmk27KAAAL] connected\n' +
+    'user[6iMXCgbziEOmk27KAAAL] disconnected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] connected\n' +
+    'user[QvfBOLVz61LefE7pAAAM] is ua\n' +
+    'user[QvfBOLVz61LefE7pAAAM] disconnected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] connected\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] is Drewdaddy07\n' +
+    'user[RCeeDQfmG0MbLFzSAAAN] disconnected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] connected\n' +
+    'user[kYB-9F9GRqDTOYGkAAAO] disconnected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] connected\n' +
+    'user[XKyNVEKuTfnH8eRkAAAP] disconnected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] connected\n' +
+    'user[d9LLoXZxiBPgIeP8AAAQ] disconnected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] connected\n' +
+    'user[-wy4UFdjBsqw4JznAAAR] disconnected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] connected\n' +
+    'user[2tExOTYHzsUg6bTdAAAS] disconnected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] connected\n' +
+    'user[gWrnmFbPETcWkO0qAAAT] disconnected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] connected\n' +
+    'user[Muzp-IID57KDQqbWAAAU] disconnected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] connected\n' +
+    'user[KhOmvZ7Kc9Fwy7ehAAAV] disconnected\n'
+}
+[ws] socket received: get_application_status { application: '620cc45369a04a0bf9502e78' }
+[ws] server requested process status for application "620cc45369a04a0bf9502e78"
+[main] found application 620cc45369a04a0bf9502e78
+[main] describe_process true online 1645357318135
+[ws] sending: return_application_status {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  timestamp: 1645357318135,
+  status: 'online'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: proxy_config {
+  application: '620cc45369a04a0bf9502e78',
+  proxy_settings: {
+    www: true,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: true,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: '',
+    enable: true
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name rubbr.anuv.me rubbr.ml www.rubbr.ml;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\treturn 301 https://$host$request_uri;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name rubbr.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name rubbr.ml www.rubbr.ml;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/rubbr.anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/rubbr.anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n',
+  remove: false
+}
+[ws] received nginx proxy config for application "620cc45369a04a0bf9502e78"
+[main] processing nginx proxy for app 620cc45369a04a0bf9502e78
+[main] found application 620cc45369a04a0bf9502e78
+[main] writing config for app "rubbr-sio" (620cc45369a04a0bf9502e78) to location /etc/nginx/sites-available/dash-app_rubbr-sio.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_rubbr-sio.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: push_application_proxy_res_daemon {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  message: 'Proxy pushed & linked'
+}
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[ws] socket received: proxy_config {
+  application: '620cc45369a04a0bf9502e78',
+  proxy_settings: {
+    www: true,
+    htaccess_deny: true,
+    https_enable: true,
+    https_force: true,
+    ws_enable: true,
+    ws_enable_path: 'socket',
+    nginx_config_export: '',
+    enable: false
+  },
+  nginx_root: '/etc/nginx',
+  nginx_config: 'map $http_upgrade $connection_upgrade {\n' +
+    '\tdefault upgrade;\n' +
+    "\t'' close;\n" +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 80;\n' +
+    '\tlisten [::]:80;\n' +
+    '\tserver_name rubbr.anuv.me rubbr.ml www.rubbr.ml;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\treturn 301 https://$host$request_uri;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name rubbr.anuv.me;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n' +
+    'server {\n' +
+    '\tlisten 443 ssl;\n' +
+    '\tlisten [::]:443 ssl;\n' +
+    '\tserver_name rubbr.ml www.rubbr.ml;\n' +
+    '\tssl on;\n' +
+    '\tssl_certificate /etc/letsencrypt/live/rubbr.anuv.me/fullchain.pem;\n' +
+    '\tssl_certificate_key /etc/letsencrypt/live/rubbr.anuv.me/privkey.pem;\n' +
+    '\tlocation / {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t}\n' +
+    '\tlocation /socket {\n' +
+    '\t\tproxy_pass http://127.0.0.1:3033;\n' +
+    '\t\tproxy_http_version 1.1;\n' +
+    '\t\tproxy_set_header Upgrade $http_upgrade;\n' +
+    '\t\tproxy_set_header Connection $connection_upgrade;\n' +
+    '\t\tproxy_set_header Host $host;\n' +
+    '\t\tproxy_set_header X-Real-IP $remote_addr;\n' +
+    '\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n' +
+    '\t\tproxy_set_header X-Forwarded-Proto $scheme;\n' +
+    '\t\tproxy_connect_timeout 7d;\n' +
+    '\t\tproxy_send_timeout 7d;\n' +
+    '\t\tproxy_read_timeout 7d;\n' +
+    '\t}\n' +
+    '\tlocation ~ /\\.ht {\n' +
+    '\t\tdeny all;\n' +
+    '\t}\n' +
+    '}\n',
+  remove: true
+}
+[ws] received nginx proxy config for application "620cc45369a04a0bf9502e78"
+[main] processing nginx proxy for app 620cc45369a04a0bf9502e78
+[main] found application 620cc45369a04a0bf9502e78
+[main] writing config for app "rubbr-sio" (620cc45369a04a0bf9502e78) to location /etc/nginx/sites-available/dash-app_rubbr-sio.conf
+[main] wrote file, linking to location /etc/nginx/sites-enabled/dash-app_rubbr-sio.conf
+[main] symlink exists
+[main] running command: `sudo /usr/sbin/service nginx reload`
+[main] stdout: 
+[ws] sending: push_application_proxy_res_daemon {
+  application_id: '620cc45369a04a0bf9502e78',
+  success: true,
+  message: 'Proxy pushed & linked'
+}
+[ws] socket disconnected
+[ws] reconnecting in 5 sec
+[ws] socket connected
+[ws] sending: sync_daemon { daemon_key: 'X1F9K' }
+[ws] socket received: sync_daemon_res {
+  success: true,
+  data: {
+    id: '620c8a4ef9ead118d5ce873b',
+    daemon_key: 'X1F9K',
+    resource: {
+      _id: '620c8a4ef9ead118d5ce873b',
+      slug: 'lightsail',
+      name: 'Lightsail',
+      link: 'https://lightsail.aws.amazon.com/ls/webapp/us-west-2/instances/Ubuntu-2GB',
+      ip: '54.186.188.200',
+      provider: 'aws-lightsail',
+      type: 'vm',
+      private_ip: '172.26.0.161',
+      daemon_key: 'X1F9K',
+      specs: [Object],
+      software: [Object],
+      primary_domain: [Object],
+      domains: [],
+      status: 'desync',
+      status_time: 1645357349399,
+      ts_created: 1644989006884,
+      ts_updated: 1645001779394
+    }
+  }
+}
+[ws] identified with dash cloud as resource "Lightsail" (620c8a4ef9ead118d5ce873b)
+[ws] socket received: ecosystem {
+  ecosystem: {
+    '620c8f44373a770d6d44e9ae': {
+      name: 'led-lights',
+      script: 'ledlights.js',
+      cwd: '/home/ubuntu/dash/apps/led-lights/nodejs_server',
+      error_file: 'led-lights.log',
+      out_file: 'led-lights.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc24e69a04a0bf9502e77': {
+      name: 'messenger',
+      script: 'app.js',
+      cwd: '/home/ubuntu/dash/apps/messenger',
+      error_file: 'messenger.log',
+      out_file: 'messenger.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620cc45369a04a0bf9502e78': {
+      name: 'rubbr-sio',
+      script: 'rubbr.js',
+      cwd: '/home/ubuntu/dash/apps/rubbr-sio/rubbr',
+      error_file: 'rubbr-sio.log',
+      out_file: 'rubbr-sio.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    },
+    '620ccbfefc85784665b2d1ac': {
+      name: 'tokens',
+      script: 'tokens.js',
+      cwd: '/home/ubuntu/dash/apps/tokens',
+      error_file: 'tokens.log',
+      out_file: 'tokens.log',
+      interpreter: '/usr/local/bin/node',
+      args: '',
+      max_memory_restart: '100M',
+      restart_delay: '3000'
+    }
+  }
+}
+[ws] received ecosystem update
+[main] refreshing ecosystem
+[main] refreshing application "620c8f44373a770d6d44e9ae"
+[main] refreshing application "620cc24e69a04a0bf9502e77"
+[main] refreshing application "620cc45369a04a0bf9502e78"
+[main] refreshing application "620ccbfefc85784665b2d1ac"
+[process] interrupt
+[main] exit
+[ws] exit
+[pm] exit
+[process] exit

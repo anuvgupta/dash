@@ -614,6 +614,12 @@ var app = {
                     id: id,
                 });
             },
+            remove_application_proxy: (id) => {
+                app.ws.send('push_application_proxy', {
+                    id: id,
+                    remove: true
+                });
+            },
             pull_application_repo: id => {
                  app.ws.send('pull_application_repo', {
                     id: id,
@@ -655,11 +661,10 @@ var app = {
             setTimeout(_ => {
                 // $('#manage_project_button_62044d639dedbb1fda4748a0')[0].click();
 
-                // app.ui.block.child('main/menu/applications').node().click();
-                // setTimeout(_ => {
-                //     // $('#manage_application_button_62044dc89dedbb1fda4748a1')[0].click();
-                //     $('#manage_application_button_6209cb1797d24f113064678f')[0].click();
-                // }, 300);
+                app.ui.block.child('main/menu/applications').node().click();
+                setTimeout(_ => {
+                    $('#manage_application_button_620cc45369a04a0bf9502e78')[0].click();
+                }, 300);
 
                 // app.ui.block.child('main/menu/domains').node().click();
                 // setTimeout(_ => {

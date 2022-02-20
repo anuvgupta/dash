@@ -109,14 +109,7 @@ const app = {
             app.log(`wrote file, linking to location ${proxy_file_link_loc}`);
             _next = _ => {
                 // app.log(fs.readFileSync(proxy_file_link_loc, 'utf8'));
-                var reload_command = "sudo /usr/sbin/service nginx reload";
-                app.log(`running command: \`${reload_command}\``);
-                cproc.exec(`${reload_command}`, (error, stdout, stderr) => {
-                    if (error) { app.log(`error: ${error.message}`); return resolve(false, `Failed NGINX reload: ${error.message}`); }
-                    if (stderr) { app.log(`stderr: ${stderr}`); return resolve(false `Failed NGINX reload: ${stderr.toString()}`); }
-                    app.log(`stdout: ${stdout}`);
-                    return resolve(true, "Proxy pushed & linked");
-                });
+                pm.nginx_reload(resolve, "Proxy pushed & linked");
             };
             if (fs.existsSync(proxy_file_link_loc)) {
                 app.log('symlink exists');
@@ -130,6 +123,37 @@ const app = {
             }
         });
         
+    },
+    remove_proxy_config: (application_id, nginx_root, resolve) => {
+        app.log(`removing nginx proxy for app ${application_id}`);
+        if (!db.ecosystem.hasOwnProperty(application_id))
+            return resolve(false, `App ${app_ecosystem.name} not in ecosystem`);
+        app.log(`found application ${application_id}`);
+        var app_ecosystem = db.ecosystem[application_id];
+        var app_name = app_ecosystem.name;
+        var proxy_file_dir_loc = `${nginx_root}/sites-available`;
+        var proxy_file_location = `${proxy_file_dir_loc}/dash-app_${app_name}.conf`;
+        var proxy_file_link_loc = `${nginx_root}/sites-enabled/dash-app_${app_name}.conf`;
+        // var proxy_file_rel_path = path.relative(proxy_file_dir_loc, proxy_file_location);
+        try {
+            if (fs.existsSync(proxy_file_link_loc)) {
+                fs.unlink(proxy_file_link_loc, (err1) => {
+                    if (err1) {
+                        resolve(false, `failed to remove proxy link ${proxy_file_link_loc}`);
+                        throw err1;
+                    }
+                    if (fs.existsSync(proxy_file_location)) {
+                        fs.unlink(proxy_file_location, (err2) => {
+                            if (err2) {
+                                resolve(false, `failed to remove proxy file ${proxy_file_location}`);
+                                throw err2;
+                            }
+                            pm.nginx_reload(resolve, "Proxy removed");
+                        });
+                    }
+                });
+            }
+        } catch(err) { app.err(err); }
     },
     refresh_ecosystem: (ecosystem) => {
         app.log("refreshing ecosystem");
@@ -258,10 +282,18 @@ const ws = {
                 }
                 break;
             case 'proxy_config':
-                ws.log(`received nginx proxy config for application "${data.application}"`);
-                app.process_proxy_config(data.application, data.nginx_root, data.nginx_config, data.proxy_settings, (success, message) => {
-                    ws.api.proxy_config_respond(data.application, success, message);
-                });
+                var remove = data.hasOwnProperty('remove') && data.remove === true;
+                if (remove) {
+                    ws.log(`removing nginx proxy config for application "${data.application}"`);
+                    app.remove_proxy_config(data.application, data.nginx_root, (success, message) => {
+                        ws.api.proxy_config_respond(data.application, success, message);
+                    });
+                } else {
+                    ws.log(`received nginx proxy config for application "${data.application}"`);
+                    app.process_proxy_config(data.application, data.nginx_root, data.nginx_config, data.proxy_settings, (success, message) => {
+                        ws.api.proxy_config_respond(data.application, success, message);
+                    });
+                }
                 break;
             case 'hb':
                 ws.api.hb_respond();
@@ -449,6 +481,16 @@ const pm = {
             pm.tail_process_context[app_id] = null;
             delete pm.tail_process_context[app_id];
         }
+    },
+    nginx_reload: (resolve, msg) => {
+        var reload_command = "sudo /usr/sbin/service nginx reload";
+        pm.log(`running command: \`${reload_command}\``);
+        cproc.exec(`${reload_command}`, (error, stdout, stderr) => {
+            if (error) { app.log(`error: ${error.message}`); return resolve(false, `Failed NGINX reload: ${error.message}`); }
+            if (stderr) { app.log(`stderr: ${stderr}`); return resolve(false `Failed NGINX reload: ${stderr.toString()}`); }
+            pm.log(`stdout: ${stdout}`);
+            return resolve(true, `${msg}`);
+        });
     },
     // module infra
     log: utils.logger('pm'),

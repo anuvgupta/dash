@@ -987,6 +987,7 @@ var init = _ => {
     });
     ws_server.bind("push_application_proxy", (client, req) => {
         var id = req.id ? (`${req.id}`).trim() : '';
+        var remove = req.hasOwnProperty('remove') && req.remove === true;
         if (id != '') {
             m.db.get_application(id, null, (success1, result1) => {
                 if (success1 === false) return ws_server.return_event_error("push_application_proxy", "database error", client);
@@ -1015,7 +1016,8 @@ var init = _ => {
                                             application: id,
                                             proxy_settings: result1.proxy,
                                             nginx_root: result2.software.nginx_root,
-                                            nginx_config: nginx_site_config_export
+                                            nginx_config: nginx_site_config_export,
+                                            remove: remove === true
                                         }, ws_daemon_client);
                                     } else {
                                         ws_server.send_to_client('push_application_proxy_res_daemon_res', {
@@ -1058,6 +1060,7 @@ var init = _ => {
             });
         }
     });
+    
     ws_server.bind("push_application_proxy_res_daemon", (client, req) => {
         var application_id = req.application_id ? (`${req.application_id}`).trim() : '';
         var success = req.success && req.success === true;

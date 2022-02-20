@@ -11979,3 +11979,113 @@ DASHBOARD
 [ws] client _c_Vgssf0GgdT – connected
 [ws] client _c_Vgssf0GgdT – message: auth {}
 [ws] client _c_Vgssf0GgdT – message: get_projects {}
+[ws] client _c_Vgssf0GgdT – disconnected
+[ws] client _c_qTvd3MZCsk – connected
+[ws] client _c_qTvd3MZCsk – message: auth {}
+[ws] client _c_qTvd3MZCsk – message: get_projects {}
+[ws] client _c_qTvd3MZCsk – message: get_applications {}
+[ws] client _c_qTvd3MZCsk – message: get_applications {}
+[ws] client _c_qTvd3MZCsk – message: get_domains {}
+[ws] client _c_qTvd3MZCsk – message: get_resources {}
+[ws] client _c_qTvd3MZCsk – message: signal_application {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_tMWH6VnHIB – message: tail_application_stream_intro {
+  app_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  log_lines: [32m'listening on *:3032\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA connected\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA is joe\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA disconnected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB connected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB is hi\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB disconnected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC connected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC is hi\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n'[39m +
+    [32m'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC disconnected\n'[39m
+}
+[ws] client _c_qTvd3MZCsk – message: get_application_status {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m
+}
+[ws] client _c_tMWH6VnHIB – message: return_application_status {
+  application_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645097311142[39m,
+  status: [32m'online'[39m
+}
+[ws] client _c_qTvd3MZCsk – message: get_resources {}
+[ws] client _c_qTvd3MZCsk – message: get_domains {}
+[ws] client _c_qTvd3MZCsk – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_qTvd3MZCsk – message: get_domains {}
+[ws] client _c_qTvd3MZCsk – message: get_resources {}
+[ws] client _c_qTvd3MZCsk – message: get_domains {}
+[ws] client _c_qTvd3MZCsk – message: get_resource {
+  id: [32m'620c8a4ef9ead118d5ce873b'[39m
+}
+[ws] client _c_qTvd3MZCsk – message: get_domains {}
+[ws] client _c_qTvd3MZCsk – message: get_applications {}
+[ws] client _c_qTvd3MZCsk – message: get_resources {}
+[ws] client _c_qTvd3MZCsk – message: get_applications {}
+[ws] client _c_qTvd3MZCsk – message: get_resources {}
+[ws] client _c_qTvd3MZCsk – message: get_domains {}
+[ws] client _c_qTvd3MZCsk – message: get_domains {}
+[ws] client _c_qTvd3MZCsk – message: get_sitemap {}
+* [ws] ERROR: unknown event get_sitemap
+[ws] client _c_qTvd3MZCsk – message: get_ideas {}
+* [ws] ERROR: unknown event get_ideas
+[ws] client _c_qTvd3MZCsk – message: get_resources {}
+[ws] client _c_qTvd3MZCsk – disconnected
+[ws] client _c_qTvd3MZCsk disconnected --> untailing apps: 620cc24e69a04a0bf9502e77
+[ws] client _c_sMdDhk4cRR – connected
+[ws] client _c_sMdDhk4cRR – message: auth {}
+[ws] client _c_sMdDhk4cRR – message: get_projects {}
+[ws] client _c_sMdDhk4cRR – disconnected
+[ws] client _c_MsJMYnk1g4 – connected
+[ws] client _c_MsJMYnk1g4 – message: auth {}
+[ws] client _c_MsJMYnk1g4 – message: get_projects {}
+[ws] client _c_MsJMYnk1g4 – message: get_applications {}
+[ws] client _c_MsJMYnk1g4 – message: get_domains {}
+[ws] client _c_MsJMYnk1g4 – message: get_resources {}
+[ws] client _c_MsJMYnk1g4 – message: signal_application {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  signal: [32m'tail'[39m
+}
+[ws] client _c_MsJMYnk1g4 – message: get_application_status {
+  id: [32m'620cc24e69a04a0bf9502e77'[39m
+}
+[ws] client _c_tMWH6VnHIB – message: tail_application_stream_intro {
+  app_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  log_lines: [32m'listening on *:3032\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA connected\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA is joe\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA requests history for chat "main"\n'[39m +
+    [32m'user v10hju53gCXo5gnEAAAA disconnected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB connected\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB is hi\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB requests history for chat "main"\n'[39m +
+    [32m'user OkWuBrDS5XxppvunAAAB disconnected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC connected\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC is hi\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC requests history for chat "main"\n'[39m +
+    [32m'message in chat "main" – hi[-07Ra4tUQRBAqAlsAAAC]: boo\n'[39m +
+    [32m'user -07Ra4tUQRBAqAlsAAAC disconnected\n'[39m
+}
+[ws] client _c_tMWH6VnHIB – message: return_application_status {
+  application_id: [32m'620cc24e69a04a0bf9502e77'[39m,
+  success: [33mtrue[39m,
+  timestamp: [33m1645351531970[39m,
+  status: [32m'online'[39m
+}
+[process] interrupt
+[main] unload
+[ws] exit
+[ws] server closed
+[web] exit
+[main] exit
+[process] exit
