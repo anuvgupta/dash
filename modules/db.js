@@ -496,6 +496,7 @@ var api = {
             },
             proxy: {
                 enable: false,
+                path: "",
                 www: false,
                 htaccess_deny: false,
                 https_enable: false,
