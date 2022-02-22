@@ -15,7 +15,10 @@ Deploy live updates, monitor apps & resources, and plan projects – *all in rea
     - Reverse proxy generation
  - Internet Presence
     - Web sitemap generation
-    - Domain tracking
+    - Domain+certificate tracking
+
+&nbsp;  
+Dash also exposes a web API for my project portfolio site on GitHub pages ((github.anuv.me)[https://github.anuv.me/]).
 
 ## Settings
  - **Projects**
@@ -56,6 +59,7 @@ Deploy live updates, monitor apps & resources, and plan projects – *all in rea
         - List of active subdomains on domain
     - Certificates
         - List of active certificates for domain/subdomains
+        - Certificate: Subdomains, Resource, File Path, Key File Path, Expiration
  - **Sitemap**
  - **Ideas**
 
