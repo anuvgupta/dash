@@ -177,9 +177,9 @@ var api = {
             proxy_config_obj['server'][0][ws_endpoint_key].__keys.push('proxy_connect_timeout', 'proxy_send_timeout', 'proxy_read_timeout');
             if (!proxy_config_obj['server'][0].__keys.includes(ws_endpoint_key))
                 proxy_config_obj['server'][0].__keys.push(ws_endpoint_key);
-            var upgrade_key = 'map $http_upgrade $connection_upgrade';
-            proxy_config_obj[upgrade_key] = { 'default': "upgrade", "''": "close" };
-            proxy_config_obj.__keys.unshift(upgrade_key);
+            // var upgrade_key = 'map $http_upgrade $connection_upgrade';
+            // proxy_config_obj[upgrade_key] = { 'default': "upgrade", "''": "close" };
+            // proxy_config_obj.__keys.unshift(upgrade_key);
         }
         if (proxy_settings.htaccess_deny === true) {
             var htdeny_key = 'location ~ /\\.ht';
