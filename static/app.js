@@ -311,7 +311,25 @@ var app = {
             },
         },
         display_cert_renewal_info: _ => {
-            
+            $.ajax({
+                url : '/certs.txt',
+                type : 'GET',
+                data : {},
+                dataType:'text',
+                success : (data) => {              
+                    bootbox.confirm({
+                        size: 'xl',
+                        centerVertical: true,
+                        title: `<span class="modal_title">SSL Certificate Renewal</span>`,
+                        message: (`${data.replaceAll('\n', '<br/>')}`),
+                        callback: (s) => { }
+                    })
+                },
+                error : (request, error) => {
+                    console.log(JSON.stringify(request));
+                    console.error(error);
+                }
+            });
         },
         init: (callback) => {
             app.ui.block.fill(document.body);

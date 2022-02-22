@@ -33,6 +33,7 @@ var api = {
             featured: false,
             applications: [],
             link: '',
+            major: false,
             tech: {
                 primary: [],
                 secondary: [],

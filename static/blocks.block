@@ -4175,7 +4175,7 @@
                 block.child('block/expiration/value/text').html('').data(`${expiration_desc}`);
                 block.child('block/expiration/value_editor').attribute('value', `${expiration}`);
                 var deltaSec = parseInt(expiration) - parseInt(Date.now() / 1000);
-                if (deltaSec <= 604800 + (86400 * 20)) { //  1 week + a day
+                if (deltaSec <= 604800 + (86400)) { //  1 week + a day
                     block.child('block/renew').css('display', 'table');
                 } else block.child('block/renew').css('display', 'none');
             });
