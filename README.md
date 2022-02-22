@@ -18,7 +18,7 @@ Deploy live updates, monitor apps & resources, and plan projects – *all in rea
     - Domain+certificate tracking
 
 &nbsp;  
-Dash also exposes a web API for my project portfolio site on GitHub pages ((github.anuv.me)[https://github.anuv.me/]).
+Dash also exposes a web API for my project portfolio site on GitHub pages ([https://github.anuv.me/](github.anuv.me)).
 
 ## Settings
  - **Projects**
