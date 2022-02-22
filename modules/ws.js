@@ -662,7 +662,8 @@ var init = _ => {
                 var update = {
                     certificates: result1.certificates.concat([{
                         host: "", subdomains: [],
-                        cert_path: "", cert_key_path: ""
+                        cert_path: "", cert_key_path: "",
+                        expiration: -1
                     }])
                 };
                 m.db.update_domain(id, update, (success2, result2) => {

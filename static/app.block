@@ -4255,7 +4255,7 @@ app
                             div cwd
                                 class value_edge
                                 text label
-                                    val Path
+                                    val Directory
                                     class label_desc
                                 block value
                                     {
@@ -7237,7 +7237,7 @@ app
                                     }
                                 #update_item
                                     {
-                                        console.log(update_item);
+                                        //console.log(update_item);
                                         var id = parseInt(update_item.id);
                                         var update = update_item.update;
                                         setTimeout(_ => {
@@ -7249,7 +7249,7 @@ app
                                     {
                                         if (certificates == undefined || !certificates)
                                             certificates = [];
-                                        console.log(certificates);
+                                        //console.log(certificates);
                                         if (certificates.length <= 0) {
                                             block
                                                 .html('')
