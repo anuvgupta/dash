@@ -549,16 +549,16 @@ var app = {
                     id: id
                 });
             },
-            associate_resource_domain: (resource_id, domain_id) => {
+            associate_resource_domain: (resource_id, domain_string) => {
                 app.ws.send('associate_resource_domain', {
                     resource_id: resource_id,
-                    domain_id: domain_id
+                    domain_string: domain_string
                 });
             },
-            deassociate_resource_domain: (resource_id, domain_id) => {
+            deassociate_resource_domain: (resource_id, domain_string) => {
                 app.ws.send('deassociate_resource_domain', {
                     resource_id: resource_id,
-                    domain_id: domain_id
+                    domain_string: domain_string
                 });
             },
             // applications
@@ -667,10 +667,10 @@ var app = {
             setTimeout(_ => {
                 // $('#manage_project_button_62044d639dedbb1fda4748a0')[0].click();
 
-                app.ui.block.child('main/menu/applications').node().click();
-                setTimeout(_ => {
-                    $('#manage_application_button_6213eb0c1ba7767605cc7483')[0].click();
-                }, 300);
+                // app.ui.block.child('main/menu/applications').node().click();
+                // setTimeout(_ => {
+                //     $('#manage_application_button_6213eb0c1ba7767605cc7483')[0].click();
+                // }, 300);
 
                 // app.ui.block.child('main/menu/domains').node().click();
                 // setTimeout(_ => {

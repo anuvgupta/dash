@@ -474,19 +474,26 @@ var init = _ => {
     });
     ws_server.bind("associate_resource_domain", (client, req) => {
         var resource_id = req.resource_id ? (`${req.resource_id}`).trim() : '';
-        var domain_id = req.domain_id ? (`${req.domain_id}`).trim() : '';
-        if (resource_id != '' && domain_id != '') {
+        var domain_string = req.domain_string ? (`${req.domain_string}`).trim() : '';
+        if (resource_id != '' && domain_string != '') {
             m.db.get_resource(resource_id, null, (success1, result1) => {
                 if (success1 === false) return ws_server.return_event_error("associate_resource_domain", "database error", client);
                 if (result1 == null)
                     return ws_server.return_event_error("associate_resource_domain", "resource not found", client);
+                var domain_id = domain_string;
+                var domain_subdomain = '';
+                if (domain_string.includes('.')) {
+                    var domain_string_split = domain_string.split('.');
+                    domain_id = domain_string_split[0];
+                    domain_subdomain = domain_string.slice(domain_string.indexOf('.') + 1);
+                }
                 m.db.get_domain(domain_id, null, (success2, result2) => {
                     if (success2 === false) return ws_server.return_event_error("associate_resource_domain", "database error", client);
                     if (result2 == null)
                         return ws_server.return_event_error("associate_resource_domain", "domain not found", client);
                     var update = { domains: result1.domains };
-                    if (!update.domains.includes(domain_id))
-                        update.domains.push(domain_id);
+                    // if (!update.domains.includes(domain_string))
+                    update.domains.push(domain_string);
                     m.db.update_resource(resource_id, update, (success3, result3) => {
                         if (success3 === false) return ws_server.return_event_error("associate_resource_domain", "database error", client);
                         return ws_server.return_event_data("update_resource", { id: resource_id, resource: result3 }, client);
@@ -497,19 +504,20 @@ var init = _ => {
     });
     ws_server.bind("deassociate_resource_domain", (client, req) => {
         var resource_id = req.resource_id ? (`${req.resource_id}`).trim() : '';
-        var domain_id = req.domain_id ? (`${req.domain_id}`).trim() : '';
-        if (resource_id != '' && domain_id != '') {
+        var domain_string = req.domain_string ? (`${req.domain_string}`).trim() : '';
+        if (resource_id != '' && domain_string != '') {
             m.db.get_resource(resource_id, null, (success1, result1) => {
                 if (success1 === false) return ws_server.return_event_error("deassociate_resource_domain", "database error", client);
                 if (result1 == null)
                     return ws_server.return_event_error("deassociate_resource_domain", "resource not found", client);
+                var domain_id = domain_string.split('.')[0];
                 m.db.get_domain(domain_id, null, (success2, result2) => {
                     if (success2 === false) return ws_server.return_event_error("deassociate_resource_domain", "database error", client);
                     if (result2 == null)
                         return ws_server.return_event_error("deassociate_resource_domain", "domain not found", client);
                     var update = { domains: [] };
                     for (var d in result1.domains) {
-                        if (result1.domains[d] != domain_id)
+                        if (result1.domains[d] != domain_string)
                             update.domains.push(result1.domains[d]);
                     }
                     m.db.update_resource(resource_id, update, (success3, result3) => {

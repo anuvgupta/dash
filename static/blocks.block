@@ -2682,7 +2682,7 @@
                 block.key('first', first);
             });
         }
-!resource-domain-list-item
+!DEPRECATED-resource-domain-list-item
     init
         {
             var block = Block('block');
@@ -2877,6 +2877,297 @@
                 block.key('selected', selected === true);
                 block.child('link').key('toggled', (selected === true ? 'yes' : 'no'));
                 block.child('link/wrap/image').css('opacity', (selected === true ? '0.65' : '0.2'));
+            });
+            data('first', (first) => {
+                block.key('first', first);
+            });
+        }
+!resource-domain-list-item
+    init
+        {
+            // should be identical to the application-domain-list-item
+            var block = Block('div');
+            block
+                .css({
+                    height: '46px',
+                    width: '100%',
+                    marginBottom: '3px',
+                })
+                .add(Block('block', 1)
+                    .__child('content')
+                        .css('text-align', 'left')
+                        .__parent()
+                    .css({
+                        height: '46px',
+                        borderBottom: '1px solid #f6f6f6',
+                        position: 'relative',
+                        width: '100%',
+                    })
+                    .add(Block('a', 'text')
+                        .css({
+                            fontSize: '16px',
+                            letterSpacing: '0.6px',
+                            paddingLeft: '7px',
+                            color: '#444'
+                        })
+                        .attribute('href', '#')
+                        .attribute('target', '_blank')
+                        .add(Block('text', 1))
+                    )
+                    .add(Block('block', 'subdomain')
+                        .__child('content')
+                            .css('text-align', 'right')
+                            .__parent()
+                        .css({
+                            position: 'absolute',
+                            right: '113px',
+                            top: '0',
+                            width: 'auto',
+                        })
+                        .add(Block('div', 'select_wrap')
+                            .css({
+                                height: '27px',
+                                width: '150px',
+                            })
+                            .add(Block('select', 1)
+                                .css({
+                                    'padding': '0 3px',
+                                    fontSize: '14px',
+                                    letterSpacing: '1px',
+                                    color: '#444',
+                                    fontWeight: '300',
+                                    height: '100%',
+                                    width: '100%',
+                                    borderRadius: '3px',
+                                    cursor: 'pointer',
+                                    textAlign: 'left'
+                                })
+                                .add(Block('option', '__none__')
+                                    .html('None').attribute('value', '__none__')
+                                )
+                                .on('input', (e, b, d) => {
+                                    block.parent().data({ update_item: {
+                                        id: block.key('id'), idx: block.key('idx'),
+                                        sub: b.node().value === '__none__' ? '' : b.node().value,
+                                    } });
+                                    if (block.key('selected') === true) {
+                                        block.parent().data({ link_sub: {
+                                            id: block.key('id'), sub: b.node().value === '__none__' ? '' : b.node().value
+                                        } });
+                                    }
+                                })
+                            )
+                        )
+                    )
+                    .add(Block('block', 'link')
+                        .css({
+                            position: 'absolute',
+                            right: '66px',
+                            top: '0',
+                            width: '40px'
+                        })
+                        .key('toggled', 'no')
+                        .add(Block('block', 'wrap')
+                            .css({
+                                width: '30px',
+                                height: '30px',
+                                margin: '0 auto'
+                            })
+                            .add(Block('image', 1)
+                                .data({
+                                    src: '/img/link_b.png',
+                                    height: '22px',
+                                    width: '22px',
+                                    css: {
+                                        margin: '0 auto',
+                                        opacity: '0.2',
+                                        transition: 'opacity 0.2s ease',
+                                        cursor: 'pointer'
+                                    }
+                                })
+                                .on('mouseover', (e, b, d) => {
+                                    if (b.parent(1).key('toggled') == 'yes') {
+                                        b.css('opacity', '0.5');
+                                    } else b.css('opacity', '0.5');
+                                })
+                                .on('mouseout', (e, b, d) => {
+                                    if (b.parent(1).key('toggled') == 'yes') {
+                                        b.css('opacity', '0.65');
+                                    } else b.css('opacity', '0.2');
+                                })
+                                .on('click', (e, b, d) => {
+                                    if (block.key('selected') === true || b.parent(1).key('toggled') == 'yes') {
+                                        block.parent().data({ link_sub: {
+                                            id: '', sub: ''
+                                        } });
+                                    } else {
+                                        var sub = '';
+                                        sub = block.child('block/subdomain/select_wrap/select').node().value;
+                                        if (sub == '__none__') sub = '';
+                                        block.parent().data({ link_sub: {
+                                            id: block.key('id'), sub: sub
+                                        } });
+                                    }
+                                })
+                            )
+                        )
+                    )
+                    .add(Block('block', 'delete')
+                        .css({
+                            position: 'absolute',
+                            right: '33px',
+                            top: '0',
+                            width: '40px'
+                        })
+                        .add(Block('block', 'wrap')
+                            .css({
+                                width: '30px',
+                                height: '30px',
+                                margin: '0 auto'
+                            })
+                            .add(Block('image', 1)
+                                .data({
+                                    src: '/img/delete_b.png',
+                                    height: '22px',
+                                    width: '22px',
+                                    css: {
+                                        margin: '0 auto',
+                                        opacity: '0.6',
+                                        transition: 'opacity 0.2s ease',
+                                        cursor: 'pointer'
+                                    }
+                                })
+                                .on('mouseover', (e, b, d) => {
+                                    b.css('opacity', '0.85');
+                                })
+                                .on('mouseout', (e, b, d) => {
+                                    b.css('opacity', '0.6');
+                                })
+                                .on('click', (e, b, d) => {
+                                    block.parent().data({
+                                        del: {
+                                            domain_id: block.key('id'),
+                                            domain_name: block.key('domain_name'),
+                                            domain_string: block.key('domain_string'),
+                                            domain_sub: block.key('sub'),
+                                        }
+                                    });
+                                })
+                            )
+                        )
+                    )
+                    .add(Block('block', 'manage')
+                        .css({
+                            position: 'absolute',
+                            right: '0',
+                            top: '0',
+                            width: '40px'
+                        })
+                        .add(Block('block', 'wrap')
+                            .css({
+                                width: '30px',
+                                height: '30px',
+                                margin: '0 auto'
+                            })
+                            .add(Block('image', 1)
+                                .data({
+                                    src: '/img/launch_b.png',
+                                    height: '22px',
+                                    width: '22px',
+                                    css: {
+                                        margin: '0 auto',
+                                        opacity: '0.6',
+                                        transition: 'opacity 0.2s ease',
+                                        cursor: 'pointer'
+                                    }
+                                })
+                                .on('mouseover', (e, b, d) => {
+                                    b.css('opacity', '0.85');
+                                })
+                                .on('mouseout', (e, b, d) => {
+                                    b.css('opacity', '0.6');
+                                })
+                                .on('click', (e, b, d) => {
+                                    block.parent().data({
+                                        manage: block.key('id')
+                                    });
+                                })
+                            )
+                        )
+                    )
+                )
+            ;
+            return block;
+        }
+    load
+        {
+            data('domain_string', (domain_string) => {
+                block.key('domain_string', domain_string.toString());
+                //console.log('domain_string', domain_string);
+            });
+            data('_id', (_id) => {
+                block.key('id', _id.toString());
+            });
+            data('idx', (idx) => {
+                block.key('idx', idx.toString());
+            });
+            data('domain', (domain) => {
+                block.key('domain_name', domain.toString());
+                block.child('block/text/text').html(domain);
+                block.child('block/text').attribute('href', `http://${domain}`);
+                var last_sub = block.key('sub');
+                if (last_sub != null && last_sub != '')
+                    block.child('block/text').attribute('href', `http://${last_sub}.${domain}`);
+                var subdomains = block.key('subdomains');
+                if (subdomains)
+                    block.data({ subdomains: subdomains });
+            });
+            data('port', (port) => {
+                block.key('port', port);
+                var port_alt = (`:${port}`).trim();
+                if (port_alt == ':') port_alt = '<span class="text_placeholder" style="opacity: 0.7;">:80</span>';
+                block.child('block/port/text').html(port_alt);
+            });
+            data('selected', (selected) => {
+                block.key('selected', selected === true);
+                block.child('block/link').key('toggled', (selected === true ? 'yes' : 'no'));
+                block.child('block/link/wrap/image').css('opacity', (selected === true ? '0.65' : '0.2'));
+            });
+            data('subdomains', (subdomains) => {
+                block.key('subdomains', subdomains);
+                var domain = block.key('domain_name');
+                if (!domain) domain = '';
+                var select_block = block.child('block/subdomain/select_wrap/select');
+                select_block.html('').add(Block('option', '__none__')
+                    .html('None').attribute('value', '__none__')
+                );
+                for (var s in subdomains) {
+                    select_block.add(Block('option', subdomains[s])
+                        .html(`${subdomains[s]}.${domain}`).attribute('value', subdomains[s])
+                    );
+                }
+                if (block.key('sub') != '' && block.key('sub') != null) {
+                    block.data({ sub: block.key('sub') });
+                }
+            });
+            data('sub', sub => {
+                block.key('sub', sub);
+                var domain = block.key('domain_name');
+                if (!domain) domain = "";
+                var select_block = block.child('block/subdomain/select_wrap/select');
+                var children = select_block.children();
+                for (var c in children) {
+                    children[c].node().removeAttribute('selected');
+                }
+                if (select_block.child(sub) != null) {
+                    domain = `${sub}.${domain}`;
+                    select_block.child(sub).attribute('selected', 'selected');
+                    select_block.node().value = sub;
+                } else {
+                    select_block.child('__none__').attribute('selected', 'selected');
+                    select_block.node().value = '__none__';
+                }
+                block.child('block/text').attribute('href', `http://${domain}`);
             });
             data('first', (first) => {
                 block.key('first', first);
