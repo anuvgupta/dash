@@ -2960,6 +2960,10 @@ app
                         overflow-x hidden
                         overflow-y auto
                         -webkit-overflow-scrolling touch
+                    @query window width != 0
+                        {
+                            block.css('height', (window.innerHeight - block.$().offset().top - 14) + 'px');
+                        }
                 div detail
                     css
                         width 100%
@@ -6468,6 +6472,10 @@ app
                         overflow-x hidden
                         overflow-y auto
                         -webkit-overflow-scrolling touch
+                    @query window width != 0
+                        {
+                            block.css('height', (window.innerHeight - block.$().offset().top - 14) + 'px');
+                        }
                 div detail
                     css
                         width 100%

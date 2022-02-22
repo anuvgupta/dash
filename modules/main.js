@@ -28,7 +28,8 @@ var get_indents = (n = 1) => {
         indents_text += indent_marker;
     return indents_text;
 };
-var parse_nginx_config_obj = (proxy_config_obj, proxy_config_key = null, indents = -1) => {
+// recursive reverse-parser (generates nginx config string from object/tree representation)
+var reverse_parse_nginx_config_obj = (proxy_config_obj, proxy_config_key = null, indents = -1) => {
     var eol = '\n';
     var ret_text = '';
     var typeof_type = typeof proxy_config_obj;
@@ -41,8 +42,8 @@ var parse_nginx_config_obj = (proxy_config_obj, proxy_config_key = null, indents
             for (var k in keys) {
                 if (Array.isArray(proxy_config_obj[keys[k]])) { // array
                     for (var i in proxy_config_obj[keys[k]])
-                        ret_text += parse_nginx_config_obj(proxy_config_obj[keys[k]][i], keys[k], indents + 1);
-                } else ret_text += parse_nginx_config_obj(proxy_config_obj[keys[k]], keys[k], indents + 1);
+                        ret_text += reverse_parse_nginx_config_obj(proxy_config_obj[keys[k]][i], keys[k], indents + 1);
+                } else ret_text += reverse_parse_nginx_config_obj(proxy_config_obj[keys[k]], keys[k], indents + 1);
             }
             if (proxy_config_key) ret_text += `${get_indents(indents)}}` + eol;
         }
@@ -149,13 +150,20 @@ var api = {
                 },
             }]
         };
+        var main_location_key = 'location /';
+        if (proxy_settings.hasOwnProperty('path') && proxy_settings.path != '') {
+            main_location_key = `location /${(`${proxy_settings.path}`).trim()}`;
+            proxy_config_obj['server'][0][main_location_key] = JSON.parse(JSON.stringify(proxy_config_obj['server'][0]['location /']));
+            delete proxy_config_obj['server'][0]['location /'];
+            proxy_config_obj['server'][0].__keys = ['listen', 'server_name', main_location_key];
+        }
         if (proxy_settings.ws_enable === true) {
             var ws_endpoint = "";
             var ws_endpoint_key = `location /${ws_endpoint}`;
             if (proxy_settings.ws_enable_path.trim() != '') {
                 ws_endpoint = proxy_settings.ws_enable_path.trim();
                 ws_endpoint_key = `location /${ws_endpoint}`;
-                proxy_config_obj['server'][0][ws_endpoint_key] = JSON.parse(JSON.stringify(proxy_config_obj['server'][0]['location /']));
+                proxy_config_obj['server'][0][ws_endpoint_key] = JSON.parse(JSON.stringify(proxy_config_obj['server'][0][main_location_key]));
             }
             proxy_config_obj['server'][0][ws_endpoint_key] = Object.assign(proxy_config_obj['server'][0][ws_endpoint_key], {
                 'proxy_pass': `http://127.0.0.1:${port.length >= 2 && ws_endpoint != '' ? port[1] : port[0]}`,
@@ -222,8 +230,8 @@ var api = {
             }
         }
         if (proxy_settings.https_force === true) {
-            proxy_config_obj['server'][0]['location /']['return'] = "301 https://$host$request_uri";
-            proxy_config_obj['server'][0]['location /'].__keys.push('return');
+            proxy_config_obj['server'][0][main_location_key]['return'] = "301 https://$host$request_uri";
+            proxy_config_obj['server'][0][main_location_key].__keys.push('return');
         }
         // log(proxy_config_obj);
         return proxy_config_obj;
@@ -232,7 +240,7 @@ var api = {
     convert_nginx_proxy_config_obj: (proxy_config_obj) => {
         if (!proxy_config_obj) return null;
         var proxy_config_text = '';
-        proxy_config_text = parse_nginx_config_obj(proxy_config_obj);
+        proxy_config_text = reverse_parse_nginx_config_obj(proxy_config_obj);
         return (proxy_config_text != '' ? proxy_config_text : null);
     },
 
