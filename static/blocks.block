@@ -2902,13 +2902,16 @@
                         position: 'relative',
                         width: '100%',
                     })
-                    .add(Block('text', 1)
+                    .add(Block('a', 'text')
                         .css({
                             fontSize: '16px',
                             letterSpacing: '0.6px',
                             paddingLeft: '7px',
                             color: '#444'
                         })
+                        .attribute('href', '#')
+                        .attribute('target', '_blank')
+                        .add(Block('text', 1))
                     )
                     .add(Block('block', 'subdomain')
                         .__child('content')
@@ -3099,6 +3102,7 @@
         {
             data('domain_string', (domain_string) => {
                 block.key('domain_string', domain_string.toString());
+                //console.log('domain_string', domain_string);
             });
             data('_id', (_id) => {
                 block.key('id', _id.toString());
@@ -3108,7 +3112,11 @@
             });
             data('domain', (domain) => {
                 block.key('domain_name', domain.toString());
-                block.child('block/text').html('').data(domain);
+                block.child('block/text/text').html(domain);
+                block.child('block/text').attribute('href', `http://${domain}`);
+                var last_sub = block.key('sub');
+                if (last_sub != null && last_sub != '')
+                    block.child('block/text').attribute('href', `http://${last_sub}.${domain}`);
                 var subdomains = block.key('subdomains');
                 if (subdomains)
                     block.data({ subdomains: subdomains });
@@ -3143,19 +3151,22 @@
             });
             data('sub', sub => {
                 block.key('sub', sub);
-                //console.log(sub);
+                var domain = block.key('domain_name');
+                if (!domain) domain = "";
                 var select_block = block.child('block/subdomain/select_wrap/select');
                 var children = select_block.children();
                 for (var c in children) {
                     children[c].node().removeAttribute('selected');
                 }
                 if (select_block.child(sub) != null) {
+                    domain = `${sub}.${domain}`;
                     select_block.child(sub).attribute('selected', 'selected');
                     select_block.node().value = sub;
                 } else {
                     select_block.child('__none__').attribute('selected', 'selected');
                     select_block.node().value = '__none__';
                 }
+                block.child('block/text').attribute('href', `http://${domain}`);
             });
             data('first', (first) => {
                 block.key('first', first);
