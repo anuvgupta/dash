@@ -3,6 +3,7 @@
 
 /* IMPORTS */
 const ws = require("ws");
+const ansi_up = require('ansi_up');
 const jwt = require("jsonwebtoken");
 
 /* INFRA */
@@ -11,8 +12,8 @@ var log = null;
 var err = null;
 
 
-
 /* MODULE */
+const ansi = new ansi_up.default;
 var ws_server = {
     port: null,
     socket: null,
@@ -473,19 +474,26 @@ var init = _ => {
     });
     ws_server.bind("associate_resource_domain", (client, req) => {
         var resource_id = req.resource_id ? (`${req.resource_id}`).trim() : '';
-        var domain_id = req.domain_id ? (`${req.domain_id}`).trim() : '';
-        if (resource_id != '' && domain_id != '') {
+        var domain_string = req.domain_string ? (`${req.domain_string}`).trim() : '';
+        if (resource_id != '' && domain_string != '') {
             m.db.get_resource(resource_id, null, (success1, result1) => {
                 if (success1 === false) return ws_server.return_event_error("associate_resource_domain", "database error", client);
                 if (result1 == null)
                     return ws_server.return_event_error("associate_resource_domain", "resource not found", client);
+                var domain_id = domain_string;
+                var domain_subdomain = '';
+                if (domain_string.includes('.')) {
+                    var domain_string_split = domain_string.split('.');
+                    domain_id = domain_string_split[0];
+                    domain_subdomain = domain_string.slice(domain_string.indexOf('.') + 1);
+                }
                 m.db.get_domain(domain_id, null, (success2, result2) => {
                     if (success2 === false) return ws_server.return_event_error("associate_resource_domain", "database error", client);
                     if (result2 == null)
                         return ws_server.return_event_error("associate_resource_domain", "domain not found", client);
                     var update = { domains: result1.domains };
-                    if (!update.domains.includes(domain_id))
-                        update.domains.push(domain_id);
+                    // if (!update.domains.includes(domain_string))
+                    update.domains.push(domain_string);
                     m.db.update_resource(resource_id, update, (success3, result3) => {
                         if (success3 === false) return ws_server.return_event_error("associate_resource_domain", "database error", client);
                         return ws_server.return_event_data("update_resource", { id: resource_id, resource: result3 }, client);
@@ -496,19 +504,20 @@ var init = _ => {
     });
     ws_server.bind("deassociate_resource_domain", (client, req) => {
         var resource_id = req.resource_id ? (`${req.resource_id}`).trim() : '';
-        var domain_id = req.domain_id ? (`${req.domain_id}`).trim() : '';
-        if (resource_id != '' && domain_id != '') {
+        var domain_string = req.domain_string ? (`${req.domain_string}`).trim() : '';
+        if (resource_id != '' && domain_string != '') {
             m.db.get_resource(resource_id, null, (success1, result1) => {
                 if (success1 === false) return ws_server.return_event_error("deassociate_resource_domain", "database error", client);
                 if (result1 == null)
                     return ws_server.return_event_error("deassociate_resource_domain", "resource not found", client);
+                var domain_id = domain_string.split('.')[0];
                 m.db.get_domain(domain_id, null, (success2, result2) => {
                     if (success2 === false) return ws_server.return_event_error("deassociate_resource_domain", "database error", client);
                     if (result2 == null)
                         return ws_server.return_event_error("deassociate_resource_domain", "domain not found", client);
                     var update = { domains: [] };
                     for (var d in result1.domains) {
-                        if (result1.domains[d] != domain_id)
+                        if (result1.domains[d] != domain_string)
                             update.domains.push(result1.domains[d]);
                     }
                     m.db.update_resource(resource_id, update, (success3, result3) => {
@@ -866,6 +875,7 @@ var init = _ => {
         var log_line = req.log_line ? (`${req.log_line}`).trim() : '';
         var now_ts = req.now_ts;
         if (app_id != '' && log_line != '') {
+            log_line = ansi.ansi_to_html(log_line);
             ws_server.send_to_group("tail_app_stream_line", {
                 app_id: app_id, log_line: log_line, now_ts: now_ts
             }, "app");
@@ -876,8 +886,11 @@ var init = _ => {
         var log_lines = req.log_lines ? (`${req.log_lines}`).trim() : '';
         // console.log(app_id, log_lines);
         if (app_id != '') {
+            var log_lines_arr = log_lines.split('\n');
+            for (var l in log_lines_arr)
+                log_lines_arr[l] = ansi.ansi_to_html(log_lines_arr[l]);
             ws_server.send_to_group("tail_app_stream_lines", {
-                app_id: app_id, log_lines: log_lines
+                app_id: app_id, log_lines: log_lines_arr.join('\n')
             }, "app");
         }
     });
@@ -1060,7 +1073,6 @@ var init = _ => {
             });
         }
     });
-    
     ws_server.bind("push_application_proxy_res_daemon", (client, req) => {
         var application_id = req.application_id ? (`${req.application_id}`).trim() : '';
         var success = req.success && req.success === true;
@@ -1081,6 +1093,7 @@ var init = _ => {
     });
     ws_server.bind("pull_application_repo", (client, req) => {
         var id = req.id ? (`${req.id}`).trim() : '';
+        var remove = req.hasOwnProperty('remove') && req.remove === true;
         if (id != '') {
             m.db.get_application(id, null, (success1, result1) => {
                 if (success1 === false) return ws_server.return_event_error("pull_application_repo", "database error", client);
@@ -1091,10 +1104,14 @@ var init = _ => {
                         if (success2 === false) return ws_server.return_event_error("pull_application_repo", "database error", client);
                         if (result2 == null) return ws_server.return_event_error("pull_application_repo", "resource not found", client);
                         if (result2.software.app_root != "") {
+                            var ws_daemon_client = m.ws.get_daemon_client(application_resource_id);
                             if (ws_daemon_client != null && ws_server.clients.hasOwnProperty(ws_daemon_client.id)) {
-                                ws_server.send_to_client('proxy_config', {
+                                ws_server.send_to_client('application_repo', {
                                     application: id,
                                     code: result1.code,
+                                    app_root: result2.software.app_root,
+                                    tail: true,
+                                    remove: remove
                                 }, ws_daemon_client);
                             } else {
                                 ws_server.send_to_client('pull_application_repo_res_daemon_res', {
@@ -1123,6 +1140,35 @@ var init = _ => {
                             application_id: id
                         }
                     }, client);
+                }
+            });
+        }
+    });
+    ws_server.bind("pull_application_repo_res_daemon", (client, req) => {
+        var application_id = req.application_id ? (`${req.application_id}`).trim() : '';
+        var success = req.success && req.success === true;
+        var message = req.message ? (`${req.message}`).trim() : '';
+        var updated_cwd = req.updated_cwd ? (`${req.updated_cwd}`).trim() : '';
+        if (application_id != '' && message != '') {
+            m.db.get_application(application_id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("pull_application_repo_res_daemon", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("pull_application_repo_res_daemon", "application not found", client);
+                ws_server.send_to_group("pull_application_repo_res_daemon_res", {
+                    success: true, data: {
+                        success: success,
+                        message: message,
+                        application_id: application_id
+                    }
+                }, "app");
+                // console.log("updated_cwd", updated_cwd);
+                // console.log("result1.ecosystem.cwd", result1.ecosystem.cwd);
+                if (updated_cwd != result1.ecosystem.cwd) {
+                    m.db.update_application(application_id, { 'ecosystem.cwd': updated_cwd }, (success2, result2) => {
+                        if (success2 === false || success2 === null) return ws_server.return_event_error("pull_application_repo_res_daemon", "database error", client);
+                        ws_server.send_to_group("update_application_res", {
+                            success: true, data: { id: application_id, application: result2 }
+                        }, "app");
+                    });
                 }
             });
         }

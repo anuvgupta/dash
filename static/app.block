@@ -248,6 +248,19 @@ app
                 }
             } else console.err(push_application_proxy_toast_res)
         }
+    #pull_application_repo_res_daemon_res
+        {
+            var pull_application_repo_toast_res = pull_application_repo_res_daemon_res;
+            if (pull_application_repo_toast_res.success) {
+                var current_application = block.child('main/content/applications/detail').key('application');
+                if (current_application && current_application._id == pull_application_repo_toast_res.data.application_id) {
+                    block.child('main/content/applications/detail/subcontent/application_code/signal_toast').data({
+                        summon: pull_application_repo_toast_res.data.message,
+                        color: pull_application_repo_toast_res.data.success === false ? '#b3443b' : '#3b8251'
+                    });
+                }
+            } else console.err(pull_application_repo_toast_res)
+        }
 
     #resource_status
         {
@@ -3231,7 +3244,7 @@ app
                             }
                             if (old_data.host != new_data.host) {
                                 block.data({ host: new_data.host, });
-                                block.child('subcontent/application_info/host/value_editor').on('hide');
+                                block.child('subcontent/application_info/host/value').on('hide');
                                 setTimeout(_ => {
                                     app.ws.api.signal_application(new_data._id, 'tail');
                                     app.ws.api.get_application_status(new_data._id);
@@ -4046,7 +4059,10 @@ app
                                         block.child('log_output').add(Block('div', 'line_' + line.timestamp)
                                             .class((line.hasOwnProperty('initial') && line.initial === true) ? 'application_log_output_line_initial' : 'application_log_output_line')
                                             //.html(`${line.value}`)
-                                            .add(Block('text', 1).data(`${line.value}`))
+                                            .add(Block('text', 1).html(`${line.value}`).css({
+                                                height: line.value == '' ? '8px' : 'auto',
+                                                display: line.value == '' ? 'block' : 'inline-block',
+                                            }))
                                             .on('release', (e, b, d) => {
                                                 setTimeout(_ => {
                                                     b.css('background-color', 'rgba(50,50,50,0)');
@@ -4540,10 +4556,17 @@ app
                                                 block.on('hide');
                                             }
                                         }
+                            {
+                                var wrapperA = Block('div', 'wrapperA');
+                                block.__add(wrapperA).setAdd(wrapperA);
+                            }
                             div out_file
                                 class value_edge
                                 css
                                     margin-bottom 20px
+                                    width 50%
+                                    display inline-block
+                                    vertical-align top
                                 text label
                                     val Output Log
                                     class label_desc
@@ -4620,6 +4643,9 @@ app
                                 class value_edge
                                 css
                                     margin-bottom 20px
+                                    width 50%
+                                    display inline-block
+                                    vertical-align top
                                 text label
                                     val Error Log
                                     class label_desc
@@ -4692,10 +4718,17 @@ app
                                                 block.on('hide');
                                             }
                                         }
+                            {
+                                var wrapperB = Block('div', 'wrapperB');
+                                block.__add(wrapperB).setAdd(wrapperB);
+                            }
                             div max_memory_restart
                                 class value_edge
                                 css
                                     margin-bottom 20px
+                                    width 50%
+                                    display inline-block
+                                    vertical-align top
                                 text label
                                     val Memory Limit
                                     class label_desc
@@ -4772,6 +4805,9 @@ app
                                 class value_edge
                                 css
                                     margin-bottom 20px
+                                    width 50%
+                                    display inline-block
+                                    vertical-align top
                                 text label
                                     val Restart Delay
                                     class label_desc
@@ -5705,7 +5741,7 @@ app
                             div path
                                 class value_edge
                                 text label
-                                    val Path
+                                    val Package Path
                                     class label_desc
                                 block value
                                     {
@@ -5778,12 +5814,121 @@ app
                                                 block.on('hide');
                                             }
                                         }
+                            div signal_toast
+                                css
+                                    position absolute
+                                    top 5px
+                                    right 78px
+                                    width 180px
+                                    background-color #333
+                                    opacity 0
+                                    border-radius 3px
+                                    height 40px
+                                    -webkit-box-shadow 2px 2px 5px 2px rgba(44, 44, 44, 0.2)
+                                    box-shadow 2px 2px 5px 2px rgba(44, 44, 44, 0.2)
+                                    transition opacity 0.2s ease, top 0.25s ease, background-color 0.1s ease
+                                    cursor pointer
+                                    z-index 100
+                                    pointer-events none
+                                #color
+                                    {
+                                        block.css('background-color', `${color}`);
+                                    }
+                                #val
+                                    {
+                                        block.child('content/text').html(val);
+                                    }
+                                #summon
+                                    {
+                                        const _b = block;
+                                        _b.data(summon);
+                                        _b.on('show');
+                                        setTimeout(_ => {
+                                            _b.on('hide');
+                                        }, 5000);
+                                    }
+                                :show
+                                    css
+                                        top 22px
+                                        opacity 0.9
+                                        pointer-events auto
+                                    {
+                                        block.key('toggled', 'yes');
+                                        event.stopPropagation();
+                                    }
+                                :hide
+                                    css
+                                        top 5px
+                                        opacity 0
+                                        pointer-events none
+                                    {
+                                        block.key('toggled', 'no');
+                                        event.stopPropagation();
+                                    }
+                                $toggled no
+                                :toggle
+                                    {
+                                        if (block.key('toggled') == 'no') {
+                                            block.on('show');
+                                        } else {
+                                            block.on('hide');
+                                        }
+                                        event.stopPropagation();
+                                    }
+                                :click
+                                    {
+                                        block.on('toggle');
+                                    }
+                                block content
+                                    text text
+                                        val This is a toast!
+                                        css
+                                            color white
+                                            letter-spacing 0.1px
+                                            cursor pointer
                             div end_spacer
                                 css
                                     height 15px
                             div end_spacer_again
                                 css
                                     height 7px
+                            block remove_button_wrap
+                                css
+                                    position absolute
+                                    height 40px
+                                    width 40px
+                                    top 20px
+                                    right 62px
+                                button remove_button
+                                    css
+                                        outline none
+                                        border none
+                                        background-color rgba(255,255,255,0)
+                                        height 30px
+                                        width 30px
+                                        margin 0 auto
+                                        opacity 0.6
+                                        padding 0
+                                        display block
+                                        transition opacity 0.2s ease
+                                    image img
+                                        src /img/x_b.png
+                                        height 30px
+                                        width 30px
+                                        css
+                                            margin 0 auto
+                                    :click
+                                        {
+                                            setTimeout(_ => {
+                                                app.ws.api.remove_application_repo(block.parent(3).key('application')._id);
+                                            }, 20);
+                                        }
+                                    :mouseover
+                                        css
+                                            opacity 0.75
+                                    :mouseout
+                                        css
+                                            opacity 0.6
                             block save_button_wrap
                                 css
                                     position absolute
@@ -5937,7 +6082,7 @@ app
                                     {
                                         var domains = JSON.parse(JSON.stringify(block.parent(2).key('application').domains));
                                         var primary_domain = block.parent(2).key('application').primary_domain;
-                                        update_item.idx = parseInt(update_item.idx);                                        
+                                        update_item.idx = parseInt(update_item.idx);
                                         var domain_old = domains[update_item.idx];
                                         domains[update_item.idx] = `${update_item.id}${update_item.sub === '' ? '' : '.' + update_item.sub}`;
                                         var update_obj = {};
@@ -7745,9 +7890,9 @@ app
                                 block.data({ software: new_data.software, });
                             if (new_data.hasOwnProperty('applications')) 
                                 block.data({ applications: new_data.applications });
-                            if (new_data.hasOwnProperty('domains')) 
+                            if (new_data.hasOwnProperty('domains') && (!old_data.hasOwnProperty('domains') || JSON.stringify(old_data.domains) != JSON.stringify(new_data.domains))) 
                                 block.data({ domains: new_data.domains });
-                            if (new_data.hasOwnProperty('primary_domain')) 
+                            if (new_data.hasOwnProperty('primary_domain') && new_data.primary_domain != old_data.primary_domain) 
                                 block.data({ primary_domain: new_data.primary_domain });
                             block.key('resource', new_data);
                         }
@@ -9263,33 +9408,40 @@ app
                                         //console.log(link);
                                         setTimeout(_ => {
                                             block.parent(2).on('send_resource_update', {
-                                                primary_domain: {
-                                                    id: link, sub: ''
-                                                }
+                                                primary_domain: `${link}`
                                             });
                                         }, 10);
+                                    }
+                                #link_sub
+                                    {
+                                        //console.log('link_sub', link_sub);
+                                        //setTimeout(_ => {
+                                            block.parent(2).on('send_resource_update', {
+                                                primary_domain: `${link_sub.id}${link_sub.sub == '' ? '' : '.'}${link_sub.sub}`
+                                            });
+                                        //}, 10);
                                     }
                                 #primary
                                     {
                                         block.key('primary', primary);
-                                        if (primary && primary.id) {
-                                            //console.log(primary);
-                                            var children = block.children();
-                                            for (var c in children) {
-                                                if (children[c].mark() == `resource_domain_${primary.id}`) {
-                                                    children[c].data({ selected: true });
-                                                } else {
-                                                    children[c].data({ selected: false });
-                                                }
+                                        //console.log('PRIMARY', primary);
+                                        var children = block.children();
+                                        var domain_id = primary.split('.')[0];
+                                        for (var c in children) {
+                                            //console.log(children[c].mark());
+                                            if (primary != '' && (children[c].mark() == `resource_domain_${primary}` || children[c].mark().includes(`resource_domain_${primary}_`))) {
+                                                children[c].data({ selected: true, });
+                                            } else {
+                                                children[c].data({ selected: false, });
                                             }
                                         }
                                     }
                                 #del
                                     {
-                                        app.ui.display_modal.generic_confirm("Update Resource", `Deassociate domain "${del.domain_name}" from this resource?`, (result) => {
+                                        app.ui.display_modal.generic_confirm("Update Resource", `Deassociate domain "${del.domain_sub === '' ? '' : del.domain_sub + '.'}${del.domain_name}" from this resource?`, (result) => {
                                             if (result) {
                                                 setTimeout(_ => {
-                                                    app.ws.api.deassociate_resource_domain(block.parent(2).key('resource')._id, del.domain_id);
+                                                    app.ws.api.deassociate_resource_domain(block.parent(2).key('resource')._id, del.domain_string);
                                                 }, 10);
                                                 return true;
                                             }
@@ -9298,9 +9450,10 @@ app
                                 #domain_details
                                     {
                                         var children = block.children();
-                                        for (var c in children) {
-                                            for (var d in domain_details) {
+                                        for (var d in domain_details) {
+                                            for (var c in children) {
                                                 var domain_detail = domain_details[d];
+                                                //console.log(children[c].key('id'), domain_detail._id);
                                                 if (domain_detail._id == children[c].key('id')) {
                                                     children[c].data(domain_detail)
                                                 }
@@ -9311,8 +9464,9 @@ app
                                     {
                                         if (domains == undefined || !domains)
                                             domains = [];
-                                        //console.log(domains);
+                                        //console.log('domain update', domains);
                                         if (domains.length <= 0) {
+                                            block.data({'clear_children': {}});
                                             block
                                                 .html('')
                                                 .css({
@@ -9333,6 +9487,7 @@ app
                                                 )
                                             ;
                                         } else {
+                                            block.data({'clear_children': {}});
                                             block
                                                 .html('')
                                                 .css({
@@ -9346,13 +9501,22 @@ app
                                             var primary_domain = block.key('primary');
                                             var first = true;
                                             for (var d in domains) {
-                                                var domain_id = domains[d];
-                                                var primary_domain_sel = primary_domain && primary_domain.hasOwnProperty('id') && primary_domain.id === domain_id;
-                                                block.add(Block('resource-domain-list-item', `resource_domain_${domain_id}`)
+                                                var domain_string = domains[d];
+                                                var domain_id = domain_string;
+                                                var domain_sub = '';
+                                                if (domain_string.includes('.')) {
+                                                    domain_id = domain_string.split('.')[0];
+                                                    domain_sub = domain_string.slice(domain_string.indexOf('.') + 1);
+                                                }
+                                                var primary_domain_sel = primary_domain && (primary_domain === domain_string);
+                                                block.add(Block('resource-domain-list-item', `resource_domain_${domains[d]}_${d}`)
                                                     .data({
+                                                        idx: d,
                                                         _id: domain_id,
+                                                        sub: domain_sub,
+                                                        domain_string: domains[d],
+                                                        selected: primary_domain_sel,
                                                         first: first,
-                                                        //selected: primary_domain_sel
                                                     })
                                                 );
                                                 first = false;
@@ -9364,6 +9528,29 @@ app
                                         }, 10);
                                         setTimeout(_ => {
                                             app.ws.api.get_domains();
+                                        }, 10);
+                                    }
+                                #clear_children
+                                    {
+                                        var children = block.children();
+                                        for (var c in children) {
+                                            block.remove(c);
+                                        }
+                                    }
+                                #update_item
+                                    {
+                                        var domains = JSON.parse(JSON.stringify(block.parent(2).key('resource').domains));
+                                        var primary_domain = block.parent(2).key('resource').primary_domain;
+                                        update_item.idx = parseInt(update_item.idx);
+                                        var domain_old = domains[update_item.idx];
+                                        domains[update_item.idx] = `${update_item.id}${update_item.sub === '' ? '' : '.' + update_item.sub}`;
+                                        var update_obj = {};
+                                        if (domain_old === primary_domain) {
+                                            update_obj['primary_domain'] = domains[update_item.idx];
+                                        }
+                                        update_obj['domains'] = domains;
+                                        setTimeout(_ => {
+                                            block.parent(2).on('send_resource_update', update_obj);
                                         }, 10);
                                     }
                             div end_spacer

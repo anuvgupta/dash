@@ -70,9 +70,11 @@ Setting up a cloud VM to host both `dash-cloud` and `dash-daemon` processes.
     - Dash's application management will bring up the other apps automatically with PM2
  - NGINX setup
     - Install `nginx` with system package manager (ie. `apt`)
-    - Check `notes/nginx_configs` folder for example `nginx.conf` main configuration
+    - Check `config/nginx/reference` folder for example `nginx.conf` main configuration
     - Ensure folders `/etx/nginx/sites-enabled` and `/etc/nginx/sites-available` exist
         - Ensure current `$USER` has write permissions to those folders
+    - Add sites `dash-cloud.conf` and `dash-proxy_apache.conf` from repo folder `config/nginx` to VM folder `/etc/nginx/sites-available`
+        - Then link with `sudo ln -s /etc/nginx/sites-available/dash-cloud.conf /etc/nginx/sites-enabled/dash-cloud.conf` and restart NGINX
     - Ensure current `$USER` has the ability to start, stop, and restart the nginx service without requiring a password for sudo
         - One possible solution
             - Create/edit `/etc/sudoers.d/$USER` (ie. `/etc/sudoers.d/ubuntu`) to contain:
