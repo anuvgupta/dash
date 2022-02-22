@@ -45,29 +45,30 @@ var util = {
     capitalize: word => {
         return word.charAt(0).toUpperCase() + word.slice(1);
     },
-    duration_desc: last_timestamp => {
+    duration_desc: (last_timestamp, forward = false) => {
         if (last_timestamp < 0) return "";
-        var deltaSec = parseInt(Date.now() / 1000) - parseInt(last_timestamp / 1000);
-        if (deltaSec < 0) {
-            deltaSec = 0;
-        }
+        var ending_tag = forward ? '' : ' ago'
+        var now = Date.now();
+        var deltaSec = parseInt(now / 1000) - parseInt(last_timestamp / 1000);
+        if (forward) deltaSec = -1 * deltaSec;
+        if (deltaSec < 0) deltaSec = 0;
         var outputString = "";
         if (deltaSec < 5) {
             outputString += "now";
         } else if (deltaSec < 60) {
-            outputString += `${parseInt(Math.floor(parseFloat(deltaSec) / 5.0) * 5.0)} seconds ago`;
+            outputString += `${parseInt(Math.floor(parseFloat(deltaSec) / 5.0) * 5.0)} seconds${ending_tag}`;
         } else if (deltaSec < 3600) {
             var mins = parseInt(deltaSec / 60);
-            outputString += `${mins} minute${mins == 1 ? '' : 's'} ago`;
+            outputString += `${mins} minute${mins == 1 ? '' : 's'}${ending_tag}`;
         } else if (deltaSec < 86400) {
             var hrs = parseInt(deltaSec / 3600);
-            outputString += `${hrs} hour${hrs == 1 ? '' : 's'} ago`;
+            outputString += `${hrs} hour${hrs == 1 ? '' : 's'}${ending_tag}`;
         } else if (deltaSec < 604800) {
             var days = parseInt(deltaSec / 86400);
-            outputString += `${days} day${days == 1 ? '' : 's'} ago`;
+            outputString += `${days} day${days == 1 ? '' : 's'}${ending_tag}`;
         } else {
             var weeks = parseInt(deltaSec / 604800);
-            outputString += `${weeks} week${weeks == 1 ? '' : 's'} ago`;
+            outputString += `${weeks} week${weeks == 1 ? '' : 's'}${ending_tag}`;
         }
         return outputString;
     },

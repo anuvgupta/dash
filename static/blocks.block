@@ -3468,6 +3468,7 @@
         {
             var block = Block('div');
             block
+                .key('expiration', -1)
                 .css({
                     minHeight: '180px',
                     width: '100%',
@@ -3929,6 +3930,137 @@
                             })
                         )
                     )
+                    .add(Block('div', 'expiration')
+                        .class('value_edge')
+                        .css({
+                            marginTop: '0',
+                            marginBottom: '3px',
+                        })
+                        .add(Block('text', 'label')
+                            .data('Expiration')
+                            .class('label_desc')
+                            .css({
+                                fontSize: '10px',
+                                marginBottom: '0',
+                                height: '14px',
+                            })
+                        )
+                        .add(Block('div', 'value')
+                            .class('value_text_wrap')
+                            .css('height', 'auto')
+                            .add(Block('text', 'text')
+                                .data(`${Date.now()}`)
+                                .class('value_text')
+                                .css({
+                                    fontSize: '12px',
+                                    wordBreak: 'break-all'
+                                })
+                            )
+                            .on('mouseover', (e, b, d) => {
+                                if (b.child('edit_button').key('showing') == 'off')
+                                    b.child('edit_button').on('show');
+                            })
+                            .on('mouseout', (e, b, d) => {
+                                if (b.child('edit_button').key('showing') == 'on')
+                                    b.child('edit_button').on('hide');
+                            })
+                            .add(Block('edit-button', 'edit_button')
+                                .css({
+                                    marginLeft: '14px',
+                                    paddingTop: '3px',
+                                    height: '17px',
+                                    width: '17px',
+                                })
+                                .on('click', (e, b, d) => {
+                                    b.parent().css('display', 'none')
+                                        .sibling('value_editor').css('display', 'block');
+                                    b.parent().sibling('value_editor').node().value = block.key('expiration');
+                                    setTimeout(_ => {
+                                        b.parent().sibling('value_editor').node().select();
+                                    }, 15);
+                                })
+                            )
+                        )
+                        .add(Block('input', 'value_editor')
+                            .class('value_editor')
+                            .attribute('placeholder', `${Date.now()}`)
+                            .css({
+                                display: 'none',
+                                height: '25px',
+                                marginTop: '-1px',
+                                marginLeft: '-2px',
+                                marginBottom: '2px',
+                                fontSize: '12px',
+                                width: '90%'
+                            })
+                            .on('hide', (e, b, d) => {
+                                b.css('display', 'none').sibling('value').css('display', 'table');
+                                e.stopPropagation();
+                            })
+                            .on('keyup', (e, b, d) => {
+                                if (e.keyCode == 13) {
+                                    // enter
+                                    var value = b.node().value;
+                                    if (!value) value = '';
+                                    value = (`${value}`).trim();
+                                    if (value.length > 0) {
+                                        value = parseInt(value);
+                                        if (value != NaN) {
+                                            block.parent().data({ update_item: {
+                                                id: block.key('id'),
+                                                update: {
+                                                    expiration: value
+                                                }
+                                            } });
+                                        }
+                                    }
+                                    setTimeout(_ => { b.on('hide'); }, 250);
+                                } else if (e.keyCode == 27) {
+                                    // escape
+                                    b.on('hide');
+                                }
+                                e.stopPropagation();
+                            })
+                        )
+                    )
+                    .add(Block('block', 'renew')
+                        .css({
+                            position: 'absolute',
+                            right: '1px',
+                            top: '3px',
+                            width: '40px',
+                            height: '40px'
+                        })
+                        .add(Block('block', 'wrap')
+                            .css({
+                                width: '30px',
+                                height: '30px',
+                                margin: '0 auto'
+                            })
+                            .add(Block('image', 1)
+                                .data({
+                                    src: '/img/lock_reset_b.png',
+                                    height: '22px',
+                                    width: '22px',
+                                    css: {
+                                        margin: '0 auto',
+                                        opacity: '0.6',
+                                        transition: 'opacity 0.2s ease',
+                                        cursor: 'pointer'
+                                    }
+                                })
+                                .on('mouseover', (e, b, d) => {
+                                    b.css('opacity', '0.85');
+                                })
+                                .on('mouseout', (e, b, d) => {
+                                    b.css('opacity', '0.6');
+                                })
+                                .on('click', (e, b, d) => {
+                                    console.log('renew');
+                                })
+                            )
+                        )
+                    )
                     .add(Block('block', 'delete')
                         .css({
                             position: 'absolute',
@@ -4002,7 +4134,7 @@
             });
             data('subdomains', subdomains => {
                 block.key('subdomains', subdomains);
-                console.log(subdomains);
+                //console.log(subdomains);
                 var value = `${subdomains.join(', ')}`;
                 var value_alt = `${value}`;
                 if (subdomains.length <= 0)
@@ -4036,5 +4168,15 @@
             });
             data('first', (first) => {
                 block.key('first', first);
+            });
+            data('expiration', expiration => {
+                block.key('expiration', expiration);
+                var expiration_desc = util.duration_desc(expiration * 1000, true);
+                block.child('block/expiration/value/text').html('').data(`${expiration_desc}`);
+                block.child('block/expiration/value_editor').attribute('value', `${expiration}`);
+                var deltaSec = parseInt(expiration) - parseInt(Date.now() / 1000);
+                if (deltaSec <= 604800 + (86400 * 20)) { //  1 week + a day
+                    block.child('block/renew').css('display', 'table');
+                } else block.child('block/renew').css('display', 'none');
             });
         }
