@@ -1,0 +1,47 @@
+REVERSE PROXY SERVERS
+80/443 - nginx (apache proxy)
+80/443 - nginx (pocketjs proxy)
+
+DEFAULT SERVERS
+8000 - apache2
+8001 - nginx
+
+POCKETJS APPS
+8002 - chat-simple-demo
+8003 - chat-better-demo
+8004 - slop
+8005 - sfhacks-results
+8006 - rubbr-pjs
+8007 - rpi-lights
+
+NODE.JS APPS
+//3001 - messenger
+//3002 - rubbr-sio
+//3003 - led-lights (http)
+//3004 - led-lights (ws)
+3005 - tcp-chat
+3006 - rokutv-remote (http)
+3007 - rokutv-remote (ws)
+3008 - nestor (ws)
+3009 - nestor (http)
+3010 - download
+3011 - tokens
+3012 – uncurated (http)
+3013 – uncurated (ws)
+3014 – monarch-game (http)
+3015 – monarch-game (ws)
+3016 – simplicity-cloud (frontend)
+3017 – simplicity-cloud (backend)
+3018 – games
+3019 – dash (http)
+3020 – dash (ws)
+3021 – cube
+3022 – phue-gateway (http)
+3023 – phue-gateway (ws)
+3024 – moon (http)
+3025 – moon (ws)
+3026 – gripsim (http)
+3027 – gripsim (ws)
+3028 – fitcheck (frontend)
+3029 – fitcheck (backend)
+
