@@ -3644,6 +3644,11 @@ app
                                     class value_text_wrap
                                     css
                                         height 25.2px
+                                    :hide
+                                        {
+                                            block.child('text').node().blur();
+                                            event.stopPropagation();
+                                        }
                                     select text
                                         name application_host_select
                                         class value_select
