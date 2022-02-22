@@ -310,6 +310,9 @@ var app = {
                 });
             },
         },
+        display_cert_renewal_info: _ => {
+            
+        },
         init: (callback) => {
             app.ui.block.fill(document.body);
             Block.queries();
