@@ -3,6 +3,7 @@
 
 /* IMPORTS */
 const ws = require("ws");
+const ansi_up = require('ansi_up');
 const jwt = require("jsonwebtoken");
 
 /* INFRA */
@@ -11,8 +12,8 @@ var log = null;
 var err = null;
 
 
-
 /* MODULE */
+const ansi = new ansi_up.default;
 var ws_server = {
     port: null,
     socket: null,
@@ -866,6 +867,7 @@ var init = _ => {
         var log_line = req.log_line ? (`${req.log_line}`).trim() : '';
         var now_ts = req.now_ts;
         if (app_id != '' && log_line != '') {
+            log_line = ansi.ansi_to_html(log_line);
             ws_server.send_to_group("tail_app_stream_line", {
                 app_id: app_id, log_line: log_line, now_ts: now_ts
             }, "app");
@@ -876,8 +878,11 @@ var init = _ => {
         var log_lines = req.log_lines ? (`${req.log_lines}`).trim() : '';
         // console.log(app_id, log_lines);
         if (app_id != '') {
+            var log_lines_arr = log_lines.split('\n');
+            for (var l in log_lines_arr)
+                log_lines_arr[l] = ansi.ansi_to_html(log_lines_arr[l]);
             ws_server.send_to_group("tail_app_stream_lines", {
-                app_id: app_id, log_lines: log_lines
+                app_id: app_id, log_lines: log_lines_arr.join('\n')
             }, "app");
         }
     });
@@ -1060,7 +1065,6 @@ var init = _ => {
             });
         }
     });
-    
     ws_server.bind("push_application_proxy_res_daemon", (client, req) => {
         var application_id = req.application_id ? (`${req.application_id}`).trim() : '';
         var success = req.success && req.success === true;
@@ -1081,6 +1085,7 @@ var init = _ => {
     });
     ws_server.bind("pull_application_repo", (client, req) => {
         var id = req.id ? (`${req.id}`).trim() : '';
+        var remove = req.hasOwnProperty('remove') && req.remove === true;
         if (id != '') {
             m.db.get_application(id, null, (success1, result1) => {
                 if (success1 === false) return ws_server.return_event_error("pull_application_repo", "database error", client);
@@ -1091,10 +1096,14 @@ var init = _ => {
                         if (success2 === false) return ws_server.return_event_error("pull_application_repo", "database error", client);
                         if (result2 == null) return ws_server.return_event_error("pull_application_repo", "resource not found", client);
                         if (result2.software.app_root != "") {
+                            var ws_daemon_client = m.ws.get_daemon_client(application_resource_id);
                             if (ws_daemon_client != null && ws_server.clients.hasOwnProperty(ws_daemon_client.id)) {
-                                ws_server.send_to_client('proxy_config', {
+                                ws_server.send_to_client('application_repo', {
                                     application: id,
                                     code: result1.code,
+                                    app_root: result2.software.app_root,
+                                    tail: true,
+                                    remove: remove
                                 }, ws_daemon_client);
                             } else {
                                 ws_server.send_to_client('pull_application_repo_res_daemon_res', {
@@ -1123,6 +1132,35 @@ var init = _ => {
                             application_id: id
                         }
                     }, client);
+                }
+            });
+        }
+    });
+    ws_server.bind("pull_application_repo_res_daemon", (client, req) => {
+        var application_id = req.application_id ? (`${req.application_id}`).trim() : '';
+        var success = req.success && req.success === true;
+        var message = req.message ? (`${req.message}`).trim() : '';
+        var updated_cwd = req.updated_cwd ? (`${req.updated_cwd}`).trim() : '';
+        if (application_id != '' && message != '') {
+            m.db.get_application(application_id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("pull_application_repo_res_daemon", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("pull_application_repo_res_daemon", "application not found", client);
+                ws_server.send_to_group("pull_application_repo_res_daemon_res", {
+                    success: true, data: {
+                        success: success,
+                        message: message,
+                        application_id: application_id
+                    }
+                }, "app");
+                // console.log("updated_cwd", updated_cwd);
+                // console.log("result1.ecosystem.cwd", result1.ecosystem.cwd);
+                if (updated_cwd != result1.ecosystem.cwd) {
+                    m.db.update_application(application_id, { 'ecosystem.cwd': updated_cwd }, (success2, result2) => {
+                        if (success2 === false || success2 === null) return ws_server.return_event_error("pull_application_repo_res_daemon", "database error", client);
+                        ws_server.send_to_group("update_application_res", {
+                            success: true, data: { id: application_id, application: result2 }
+                        }, "app");
+                    });
                 }
             });
         }

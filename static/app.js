@@ -625,6 +625,12 @@ var app = {
                     id: id,
                 });
             },
+            remove_application_repo: (id) => {
+                app.ws.send('pull_application_repo', {
+                    id: id,
+                    remove: true
+                });
+            },
             // ideas
             get_ideas: () => {
                 app.ws.send('get_ideas', {});
@@ -663,7 +669,7 @@ var app = {
 
                 app.ui.block.child('main/menu/applications').node().click();
                 setTimeout(_ => {
-                    $('#manage_application_button_620cc45369a04a0bf9502e78')[0].click();
+                    $('#manage_application_button_6213eb0c1ba7767605cc7483')[0].click();
                 }, 300);
 
                 // app.ui.block.child('main/menu/domains').node().click();

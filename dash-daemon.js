@@ -5,8 +5,10 @@
 const fs = require("fs");
 const pm2 = require("pm2");
 const path = require("path");
+const debug = require('debug');
 const websocket = require("ws");
 const split2 = require('split2');
+const git = require('simple-git');
 const readline = require("readline");
 const cproc = require("child_process");
 const tf = require('@logdna/tail-file');
@@ -94,7 +96,7 @@ const app = {
     process_proxy_config: (application_id, nginx_root, nginx_config, proxy_settings, resolve) => {
         app.log(`processing nginx proxy for app ${application_id}`);
         if (!db.ecosystem.hasOwnProperty(application_id))
-            return resolve(false, `App ${app_ecosystem.name} not in ecosystem`);
+            return resolve(false, `App ${application_id} not in ecosystem`);
         app.log(`found application ${application_id}`);
         var app_ecosystem = db.ecosystem[application_id];
         var app_name = app_ecosystem.name;
@@ -127,7 +129,7 @@ const app = {
     remove_proxy_config: (application_id, nginx_root, resolve) => {
         app.log(`removing nginx proxy for app ${application_id}`);
         if (!db.ecosystem.hasOwnProperty(application_id))
-            return resolve(false, `App ${app_ecosystem.name} not in ecosystem`);
+            return resolve(false, `App ${application_id} not in ecosystem`);
         app.log(`found application ${application_id}`);
         var app_ecosystem = db.ecosystem[application_id];
         var app_name = app_ecosystem.name;
@@ -192,7 +194,148 @@ const app = {
         }
         // console.log(db.ecosystem);
     },
-
+    pull_app_code: (application_id, app_root, code, tail, resolve) => {
+        app.log(`pulling repo for app ${application_id}`);
+        if (app_root == '') return resolve(false, "No resource app root");
+        if (code.repo == '') return resolve(false, "No app repo remote");
+        if (!db.ecosystem.hasOwnProperty(application_id))
+            return resolve(false, `App ${application_id} not in ecosystem`);
+        app.log(`found application ${application_id}`);
+        var app_ecosystem = db.ecosystem[application_id];
+        var app_name = app_ecosystem.name;
+        var app_repo_loc = `${app_root}/${app_name}`;
+        var repo_name = code.repo.split('/');
+        repo_name = repo_name[repo_name.length - 1];
+        var output_log_path = path.join(app_ecosystem.cwd, app_ecosystem.out_file);
+        var error_log_path = path.join(app_ecosystem.cwd, app_ecosystem.error_file);
+        var app_repo_package_path = `${app_repo_loc}${code.path == '.' || code.path.trim() == '' ? '' : ('/' + code.path)}`;
+        var package_command = "ls";
+        if (!fs.existsSync(app_root)) fs.mkdirSync(app_root);
+        var _next = (resolve = null) => {
+            app_ecosystem.cwd = `${app_repo_package_path}`;
+            output_log_path = path.join(app_ecosystem.cwd, app_ecosystem.out_file);
+            error_log_path = path.join(app_ecosystem.cwd, app_ecosystem.error_file);
+            if (!fs.existsSync(`${output_log_path}`))
+                fs.closeSync(fs.openSync(output_log_path, 'w'));
+            var _next_again = _ => {
+                var out_desc = fs.openSync(`${output_log_path}`, "a");
+                var err_desc = out_desc;
+                if (output_log_path != error_log_path) 
+                    err_desc = fs.openSync(`${error_log_path}`, "a"); 
+                if (fs.existsSync(`${app_repo_package_path}/package.json`))
+                    package_command = "npm install";
+                else if (fs.existsSync(`${app_repo_package_path}/requirements.txt`))
+                    package_command = "pip install -r requirements.txt";
+                fs.appendFileSync(`${output_log_path}`, "=====DASH:PKG=====\n");
+                fs.appendFileSync(`${output_log_path}`, `[dash] ${package_command}\n`);
+                var package_command_process = cproc.spawn(package_command.split(' ')[0], package_command.split(' ').slice(1), {
+                    cwd: `${app_repo_package_path}`,
+                    stdio: [process.stdin, out_desc, err_desc]
+                });
+                var resolved = false;
+                package_command_process.on('error', (error) => {
+                    console.error(`error: ${error.message}`);
+                    if (resolve && resolved === false) {
+                        resolved = true;
+                        resolve(false);
+                    }
+                });
+                package_command_process.on('close', (code) => {
+                    app.log(`package process exited: ${code}`);
+                    fs.appendFileSync(`${output_log_path}`, `[dash] package process exited: ${code}\n`);
+                    fs.appendFileSync(`${output_log_path}`, "=====DASH:RDY=====\n");
+                    // fs.appendFileSync(`${output_log_path}`, `[dash] application "${app_name}" code repository & package ready\n`);
+                    if (resolve && resolved === false) {
+                        resolved = true;
+                        resolve(true);
+                    }
+                    setTimeout(_ => {
+                        fs.closeSync(out_desc);
+                        if (output_log_path != error_log_path)
+                            fs.closeSync(err_desc);
+                    }, 20);
+                });
+            };
+            if (tail || pm.tail_process_context.hasOwnProperty(application_id)) 
+                pm.tail_process(app_ecosystem, application_id, _ => {
+                    setTimeout(_next_again, 100);
+                });
+            else _next_again();
+        };
+        var log_ts = Date.now();
+        var msg_a = "=====DASH:GIT=====";
+        var msg_b = "";
+        if (!fs.existsSync(app_repo_loc)) {
+            app.log(`cloning repo "${repo_name}" for app "${app_name}" to location ${app_repo_loc}`);
+            msg_b = `[dash] cloning repo "${repo_name}" into ${app_repo_loc}`;
+            if (fs.existsSync(output_log_path)) {
+                fs.appendFileSync(`${output_log_path}`, `${msg_a}\n`);
+                fs.appendFileSync(`${output_log_path}`, `${msg_b}\n`);
+            } else {
+                app.ws.api.tail_application_stream(application_id, msg_a, log_ts);
+                app.ws.api.tail_application_stream(application_id, msg_b, log_ts + 1);
+            }
+            git()
+                .clone(code.repo, app_repo_loc)
+                .checkout(code.branch)
+                .then(result => {
+                    _next(s => {
+                        resolve(s, `<b>${app_name}</b> cloned`);
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                    resolve(false, `failed to clone to ${app_repo_loc}`);
+                })
+            ;
+        } else {
+            app.log(`syncing repo "${repo_name}" for app "${app_name}" to location ${app_repo_loc}`);
+            msg_b = `[dash] syncing repo "${repo_name}" in ${app_repo_loc}`;
+            if (fs.existsSync(output_log_path)) {
+                fs.appendFileSync(`${output_log_path}`, `${msg_a}\n`);
+                fs.appendFileSync(`${output_log_path}`, `${msg_b}\n`);
+            } else {
+                app.ws.api.tail_application_stream(application_id, msg_a, log_ts);
+                app.ws.api.tail_application_stream(application_id, msg_b, log_ts + 1);
+            }
+            git(app_repo_loc)
+                .pull(code.repo)
+                .checkout(code.branch)
+                .then(result => {
+                    _next(_ => {
+                        resolve(true, `<b>${app_name}</b> synced`);
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                    resolve(false, `failed to sync to ${app_repo_loc}`);
+                })
+            ;
+        }
+        
+    },
+    remove_app_code: (application_id, app_root, code, resolve) => {
+        app.log(`removing repo for app ${application_id}`);
+        if (app_root == '') return resolve(false, "No resource app root");
+        if (code.repo == '') return resolve(false, "No app repo remote");
+        if (!db.ecosystem.hasOwnProperty(application_id))
+            return resolve(false, `App ${application_id} not in ecosystem`);
+        app.log(`found application ${application_id}`);
+        var app_ecosystem = db.ecosystem[application_id];
+        var app_name = app_ecosystem.name;
+        var app_base_loc = `${app_root}/${app_name}`;
+        if (!fs.existsSync(app_root)) return resolve(false, "No app root directory");
+        if (!fs.existsSync(app_base_loc)) return resolve(true, "No repo directory");
+        fs.rmdir(app_base_loc, { recursive: true }, (err1) => {
+            if (err1) {
+                resolve(false, `failed to remove directory ${app_base_loc}`);
+                throw err1;
+            }
+            app.ws.api.tail_application_stream(application_id, "=====DASH:RM=====", Date.now());
+            // app.ws.api.tail_application_stream(application_id, `[dash] application "${app_name}" code repository & package `, Date.now() + 1);
+            resolve(true, `<b>${app_name}</b> removed`);
+        });
+    },
     // module infra
     ws: null, pm: null,
     link: resolve => {
@@ -295,6 +438,20 @@ const ws = {
                     });
                 }
                 break;
+            case 'application_repo':
+                var remove = data.hasOwnProperty('remove') && data.remove === true;
+                if (remove) {
+                    ws.log(`removing application code repository for app "${data.application}"`);
+                    app.remove_app_code(data.application, data.app_root, data.code, (success, message) => {
+                        ws.api.pull_app_code_respond(data.application, success, message);
+                    });
+                } else {
+                    ws.log(`pulling application code repository for app "${data.application}"`);
+                    app.pull_app_code(data.application, data.app_root, data.code, data.tail, (success, message) => {
+                        ws.api.pull_app_code_respond(data.application, success, message);
+                    });
+                }
+                break;
             case 'hb':
                 ws.api.hb_respond();
                 break;
@@ -322,19 +479,28 @@ const ws = {
                 success: success, message: message
             });
         },
-        tail_application_stream: (application_id, log_line, now_ts) => {
+        pull_app_code_respond: (application_id, success, message) => {
+            ws.send('pull_application_repo_res_daemon', {
+                application_id: application_id,
+                success: success, message: message,
+                updated_cwd: db.ecosystem[application_id] && db.ecosystem[application_id].cwd
+            });
+        },
+        tail_application_stream: (application_id, log_line, now_ts, error = false) => {
             ws.send('tail_application_stream', {
                 app_id: application_id,
                 log_line: log_line,
-                now_ts: now_ts
-            });
+                now_ts: now_ts,
+                error: error
+            }, global.config.log_tf_stream_log === false);
         },
-        tail_application_stream_intro: (application_id, log_lines) => {
+        tail_application_stream_intro: (application_id, log_lines, error = false) => {
             // console.log(application_id, log_lines);
             ws.send('tail_application_stream_intro', {
                 app_id: application_id,
                 log_lines: log_lines,
-            });
+                error: error
+            }, global.config.log_tf_stream_log === false);
         },
         return_application_status: (application_id, success, status, timestamp) => {
             ws.send('return_application_status', {
@@ -392,14 +558,18 @@ const pm = {
         pm2.connect(!(global.config.pm2_daemon_mode), resolve);
     },
     start_process: (ecosystem, app_id, resolve = null) => {
-        console.log(ecosystem);
-        pm2.start(ecosystem, (error, env) => {
-            if (error) console.error(error);
-            // console.log('env', env);
+        pm2.delete(ecosystem.name, (error1, env1) => {
+            if (error1) console.error(error1);
+            // console.log('env1', env1);
             var status = "";
-            if (!error && env[0]) status = env[0].pm2_env.status;
-            ws.api.return_application_status(app_id, error == null, status, Date.now());
-            if (resolve) resolve(error == null);
+            if (!error1) status = "removed";
+            pm2.start(ecosystem, (error2, env2) => {
+                if (error2) console.error(error2);
+                // console.log('env', env);
+                if (!error2 && env2[0]) status = env2[0].pm2_env.status;
+                ws.api.return_application_status(app_id, error2 == null, status, Date.now());
+                if (resolve) resolve(error2 == null);
+            });
         });
     },
     stop_process: (ecosystem, app_id, resolve = null) => {
@@ -445,6 +615,7 @@ const pm = {
     tail_process: (ecosystem, app_id, resolve = null) => {
         const output_log_path = path.join(ecosystem.cwd, ecosystem.out_file);
         const error_log_path = path.join(ecosystem.cwd, ecosystem.error_file);
+        if (!fs.existsSync(output_log_path)) return;
         fs.readFile(output_log_path, 'utf8', (err, data) => {
             if (err) { console.error(err); return; }
             var lines = data.split('\n');
@@ -470,16 +641,51 @@ const pm = {
                     const now_ts = Date.now();
                     ws.api.tail_application_stream(app_id, line, now_ts);
                 });
+            if (output_log_path != error_log_path) {
+                if (!fs.existsSync(error_log_path)) {
+                    if (resolve) resolve();
+                }
+                fs.readFile(error_log_path, 'utf8', (err2, data2) => {
+                    if (err2) { console.error(err2); return; }
+                    var lines = data2.split('\n');
+                    var line_lim = lines.length - global.config.log_tf_load_lines;
+                    if (line_lim < 0) line_lim = 0;
+                    lines = lines.slice(line_lim);
+                    ws.api.tail_application_stream_intro(`${app_id}_err`, lines.join('\n'), true);
+                    pm.untail_process(ecosystem, `${app_id}_err`);
+                    pm.tail_process_context[`${app_id}_err`] = new tf(error_log_path);
+                    pm.tail_process_context[`${app_id}_err`]
+                        .on('tail_error', (err2) => {
+                            pm.error('error tailing file', err2);
+                            throw err2;
+                        })
+                        .start()
+                        .catch((err2) => {
+                            console.error('error tailing file - cannot start, check file exists', err2);
+                            throw err2;
+                        });
+                    pm.tail_process_context[`${app_id}_err`]
+                        .pipe(split2())
+                        .on('data', (line) => {
+                            const now_ts = Date.now();
+                            ws.api.tail_application_stream(app_id, line, now_ts, true);
+                        });
+                    if (resolve) resolve();
+                });
+            } else if (resolve) resolve();
         });
-        if (output_log_path != error_log_path) {
-            // TODO: also tail the error log if its a different file
-        }
     },
     untail_process: (ecosystem, app_id, resolve = null) => {
         if (pm.tail_process_context.hasOwnProperty(app_id) && pm.tail_process_context[app_id] != null) {
             pm.tail_process_context[app_id].quit();
             pm.tail_process_context[app_id] = null;
             delete pm.tail_process_context[app_id];
+        }
+        var err_log_id = `${app_id}_err`;
+        if (pm.tail_process_context.hasOwnProperty(err_log_id) && pm.tail_process_context[err_log_id] != null) {
+            pm.tail_process_context[err_log_id].quit();
+            pm.tail_process_context[err_log_id] = null;
+            delete pm.tail_process_context[err_log_id];
         }
     },
     nginx_reload: (resolve, msg) => {
@@ -533,6 +739,8 @@ const cli = {
                 }
             }
         });
+        if (global.config['simple-git_log'] === true)
+            debug.enable('simple-git,simple-git:*');
         if (resolve) resolve();
     },
     log: utils.logger('cli'),
