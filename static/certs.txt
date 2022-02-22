@@ -1,0 +1,28 @@
+HTTPS/SSL Certificate Renewal Guide
+For Certbot/LetsEncrypt
+
+Documentation: https://eff-certbot.readthedocs.io/en/stable/
+Documentation (manual renewal): https://eff-certbot.readthedocs.io/en/stable/using.html?highlight=manual#manual
+
+Steps:
+ - note: `sudo` MAY be required for certbot commands
+ - run `tmux new -s certbot_NAME` because dns refresh may take a while
+ - run `certbot certificates` to view current certs
+ - run `certbot certonly --manual` to renew or obtain certs
+ - enter domains to renew existing certs and new domains to obtain certs for
+ - answer Y or N to ip logging question
+ - copy the acme challenge dns record name and value
+ - then (IMPORTANT) close the terminal window without killing the tmux session
+    - ie. with tmux in an ssh session on macos terminal, close the window by hitting the top left red X close window button
+ - open dns manager/registrar and add acme challenge dns record with (IMPORTANT) TTL value of around 300 sec (5 min) or less
+ - check https://www.whatsmydns.net/#TXT/_acme-challenge.DOMAIN to see if value is updated in most locations before proceeding
+    - check `nslookup -type=txt _acme-challenge.DOMAIN` (or use `dig`) on same machine that certbot is running on for potentially better accuracy
+ - once certain that the domain is updated and the cnahge has propagated to the machine you are running certbot on (IMPORTANT), only then proceed
+    - if it takes a reaaaaaaalllly long time for the domain to update (even if you set the TTL to something low, maybe the nameservers aren't all fully updated yet), that is okay, you used tmux which will keep certbot open as long as possible. if it takes so long that by the time it is updated, hours later, certbot has timed out and the program has exited, don't fear! often times if you run the exact same certbot command again with the exact same list of domains, it will reuse the previous challenge, so you dont have to wait another few hours to a day); that said, it is always possible that certbot cancels the attempt and generates new challenges if you really wait too long 
+ - open a new ssh connection to the machine (if necessary), then reattach to the old tmux session with `tmux attach -t certbot_NAME`
+ - press enter once very carefully (IMPORTANT) as it is easy to press enter twice by accident and fail, aborting the prcess entirely and possibly requiring new challenges with new data (and thus a whole extra few hours to a day)
+ - complete any remaining challenges (ie. repeat the process for any other domains and/or finish file-based verification)
+ - certbot will let you know when the process is complete! then it will quit
+ - run `certbot certificates` and copy the path of the newly generated certificates
+ - update your server (ie. apache) or proxy/gateway server (ie. nginx) configurations to use the newly generated certificate
+ - refresh/reload/restart your server, and you are done! 
