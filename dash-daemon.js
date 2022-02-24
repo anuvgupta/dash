@@ -101,8 +101,8 @@ const app = {
         var app_ecosystem = db.ecosystem[application_id];
         var app_name = app_ecosystem.name;
         var proxy_file_dir_loc = `${nginx_root}/sites-available`;
-        var proxy_file_location = `${proxy_file_dir_loc}/dash-app_${app_name}.conf`;
-        var proxy_file_link_loc = `${nginx_root}/sites-enabled/dash-app_${app_name}.conf`;
+        var proxy_file_location = `${proxy_file_dir_loc}/_dash-app_${app_name}.conf`;
+        var proxy_file_link_loc = `${nginx_root}/sites-enabled/_dash-app_${app_name}.conf`;
         // var proxy_file_rel_path = path.relative(proxy_file_dir_loc, proxy_file_location);
         var proxy_file_content = `# ${app_name} (dash managed application) reverse proxy configuration\n${nginx_config}\n`;
         app.log(`writing config for app "${app_name}" (${application_id}) to location ${proxy_file_location}`);
@@ -134,8 +134,8 @@ const app = {
         var app_ecosystem = db.ecosystem[application_id];
         var app_name = app_ecosystem.name;
         var proxy_file_dir_loc = `${nginx_root}/sites-available`;
-        var proxy_file_location = `${proxy_file_dir_loc}/dash-app_${app_name}.conf`;
-        var proxy_file_link_loc = `${nginx_root}/sites-enabled/dash-app_${app_name}.conf`;
+        var proxy_file_location = `${proxy_file_dir_loc}/_dash-app_${app_name}.conf`;
+        var proxy_file_link_loc = `${nginx_root}/sites-enabled/_dash-app_${app_name}.conf`;
         // var proxy_file_rel_path = path.relative(proxy_file_dir_loc, proxy_file_location);
         try {
             if (fs.existsSync(proxy_file_link_loc)) {
