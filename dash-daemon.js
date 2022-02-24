@@ -210,6 +210,7 @@ const app = {
         var error_log_path = path.join(app_ecosystem.cwd, app_ecosystem.error_file);
         var app_repo_package_path = `${app_repo_loc}${code.path == '.' || code.path.trim() == '' ? '' : ('/' + code.path)}`;
         var package_command = "ls";
+        var second_package_command = "";
         if (!fs.existsSync(app_root)) fs.mkdirSync(app_root);
         var _next = (resolve = null) => {
             app_ecosystem.cwd = `${app_repo_package_path}`;
@@ -222,8 +223,12 @@ const app = {
                 var err_desc = out_desc;
                 if (output_log_path != error_log_path) 
                     err_desc = fs.openSync(`${error_log_path}`, "a"); 
-                if (fs.existsSync(`${app_repo_package_path}/package.json`))
+                if (fs.existsSync(`${app_repo_package_path}/package.json`)) {
                     package_command = "npm install";
+                    var package_full_json = JSON.parse(fs.readFileSync(`${app_repo_package_path}/package.json`));
+                    if (package_full_json.hasOwnProperty('scripts') && package_full_json.scripts.hasOwnProperty('build') && package_full_json.scripts.build != '')
+                        second_package_command = "npm run build";
+                }
                 else if (fs.existsSync(`${app_repo_package_path}/requirements.txt`))
                     package_command = "pip install -r requirements.txt";
                 fs.appendFileSync(`${output_log_path}`, "=====DASH:PKG=====\n");
@@ -243,17 +248,39 @@ const app = {
                 package_command_process.on('close', (code) => {
                     app.log(`package process exited: ${code}`);
                     fs.appendFileSync(`${output_log_path}`, `[dash] package process exited: ${code}\n`);
-                    fs.appendFileSync(`${output_log_path}`, "=====DASH:RDY=====\n");
-                    // fs.appendFileSync(`${output_log_path}`, `[dash] application "${app_name}" code repository & package ready\n`);
-                    if (resolve && resolved === false) {
-                        resolved = true;
-                        resolve(true);
+                    var _next_third = _ => {
+                        fs.appendFileSync(`${output_log_path}`, "=====DASH:RDY=====\n");
+                        // fs.appendFileSync(`${output_log_path}`, `[dash] application "${app_name}" code repository & package ready\n`);
+                        if (resolve && resolved === false) {
+                            resolved = true;
+                            resolve(true);
+                        }
+                        setTimeout(_ => {
+                            fs.closeSync(out_desc);
+                            if (output_log_path != error_log_path)
+                                fs.closeSync(err_desc);
+                        }, 20);
+                    };
+                    if (second_package_command == '') _next_third();
+                    else {
+                        fs.appendFileSync(`${output_log_path}`, `[dash] ${second_package_command}\n`);
+                        var second_package_command_process = cproc.spawn(second_package_command.split(' ')[0], second_package_command.split(' ').slice(1), {
+                            cwd: `${app_repo_package_path}`,
+                            stdio: [process.stdin, out_desc, err_desc]
+                        });
+                        second_package_command_process.on('error', (error) => {
+                            console.error(`error: ${error.message}`);
+                            if (resolve && resolved === false) {
+                                resolved = true;
+                                resolve(false);
+                            }
+                        });
+                        second_package_command_process.on('close', (code) => {
+                            app.log(`second package process exited: ${code}`);
+                            fs.appendFileSync(`${output_log_path}`, `[dash] second package process exited: ${code}\n`);
+                            _next_third();
+                        });
                     }
-                    setTimeout(_ => {
-                        fs.closeSync(out_desc);
-                        if (output_log_path != error_log_path)
-                            fs.closeSync(err_desc);
-                    }, 20);
                 });
             };
             if (tail || pm.tail_process_context.hasOwnProperty(application_id)) 
@@ -275,9 +302,11 @@ const app = {
                 app.ws.api.tail_application_stream(application_id, msg_a, log_ts);
                 app.ws.api.tail_application_stream(application_id, msg_b, log_ts + 1);
             }
+            var remote_source_name = 'origin';
             git()
-                .clone(code.repo, app_repo_loc)
-                .checkout(code.branch)
+                .clone(code.repo, app_repo_loc, ['-b', `${code.branch}`, '--single-branch'])
+                // .checkout(`${code.branch}`)
+                // .checkoutBranch(`${code.branch}`)
                 .then(result => {
                     _next(s => {
                         resolve(s, `<b>${app_name}</b> cloned`);
@@ -300,7 +329,8 @@ const app = {
             }
             git(app_repo_loc)
                 .pull(code.repo)
-                .checkout(code.branch)
+                // .checkout(`${code.branch}`)
+                // .checkoutBranch(`${code.branch}`)
                 .then(result => {
                     _next(_ => {
                         resolve(true, `<b>${app_name}</b> synced`);

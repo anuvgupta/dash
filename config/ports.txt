@@ -1,0 +1,12 @@
+REVERSE PROXY SERVERS
+80/443 - nginx (dash proxy)
+80/443 - nginx (dash app proxies)
+80/443 - nginx (apache proxy)
+80/443 - nginx (pocketjs proxy)?
+
+CLOUD APPS
+8000 - apache2 default server
+8001 - nginx default server?
+3000-3001 - dash cloud
+3002-3050 - dash apps
+8002-8007 - dash pocketjs apps
