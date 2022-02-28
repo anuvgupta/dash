@@ -97,3 +97,11 @@ Setting up a cloud VM to host both `dash-cloud` and `dash-daemon` processes.
                 ```
                 ubuntu ALL=(ALL) NOPASSWD: /usr/sbin/service apache2 start,/usr/sbin/service apache2 stop,/usr/sbin/service apache2 restart,/usr/sbin/service apache2 reload
                 ```
+
+
+## Misc
+
+### Useful Commands
+
+ - `git remote set-url origin https://anuvgupta:TOKEN@github.com/anuvgupta/dash.git`
+ - `sudo systemctl status apache2.service`
