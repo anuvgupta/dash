@@ -75,7 +75,7 @@ Setting up a cloud VM to host both `dash-cloud` and `dash-daemon` processes.
  - NGINX setup
     - Install `nginx` with system package manager (ie. `apt`)
     - Check `config/nginx/reference` folder for example `nginx.conf` main configuration
-    - Ensure folders `/etx/nginx/sites-enabled` and `/etc/nginx/sites-available` exist
+    - Ensure folders `/etc/nginx/sites-enabled` and `/etc/nginx/sites-available` exist
         - Ensure current `$USER` has write permissions to those folders
     - Add sites `dash-cloud.conf` and `dash-proxy_apache.conf` from repo folder `config/nginx` to VM folder `/etc/nginx/sites-available`
         - Then link with `sudo ln -s /etc/nginx/sites-available/dash-cloud.conf /etc/nginx/sites-enabled/dash-cloud.conf` and restart NGINX
@@ -86,3 +86,14 @@ Setting up a cloud VM to host both `dash-cloud` and `dash-daemon` processes.
                 ubuntu ALL=(ALL) NOPASSWD: /usr/sbin/service nginx start,/usr/sbin/service nginx stop,/usr/sbin/service nginx restart,/usr/sbin/service nginx reload
                 ```
             - [Relevant StackOverflow Answer](https://stackoverflow.com/questions/3011067/restart-nginx-without-sudo#:~:text=Instructions%3A,to%20restart%20nginx%20without%20sudo.&text=Save%20by%20hitting%20ctrl%20%2B%20o,enter%20to%20confirm%20the%20default.)
+ - Apache2 setup
+    - Install `apache2` (or `httpd`) with system package manager (ie. `apt`)
+    - Check `config/apache2/reference` folder for example `apache2.conf`/`ports.conf` main configuration
+    - Ensure folders `/etc/apache2/sites-enabled` and `/etc/apache2/sites-available` exist
+        - Ensure current `$USER` has write permissions to those folders
+    - Ensure current `$USER` has the ability to start, stop, and restart the apache service without requiring a password for sudo
+        - One possible solution
+            - Create/edit `/etc/sudoers.d/$USER` (ie. `/etc/sudoers.d/ubuntu`) to contain:
+                ```
+                ubuntu ALL=(ALL) NOPASSWD: /usr/sbin/service apache2 start,/usr/sbin/service apache2 stop,/usr/sbin/service apache2 restart,/usr/sbin/service apache2 reload
+                ```

@@ -327,6 +327,8 @@ var api = {
                 nginx_root: "",
                 apache_root: "",
                 www_root: "",
+                nginx_port: "",
+                apache_port: "",
             },
             primary_domain: '',
             domains: [],
@@ -505,6 +507,7 @@ var api = {
                 ws_enable: false,
                 ws_enable_path: "socket",
                 nginx_config_export: "",
+                apache_vhost: false
             },
             primary_domain: '',
             domains: [],

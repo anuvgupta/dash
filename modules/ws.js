@@ -1098,6 +1098,101 @@ var init = _ => {
             });
         }
     });
+    ws_server.bind("push_application_vhost", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        var remove = req.hasOwnProperty('remove') && req.remove === true;
+        if (id != '') {
+            m.db.get_application(id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("push_application_vhost", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("push_application_vhost", "application not found", client);
+                var application_resource_id = result1.host;
+                if (application_resource_id != 'none') {
+                    m.db.get_resource(application_resource_id, null, (success2, result2) => {
+                        if (success2 === false) return ws_server.return_event_error("push_application_vhost", "database error", client);
+                        if (result2 == null) return ws_server.return_event_error("push_application_vhost", "resource not found", client);
+                        if (result2.software.apache_root != "") {
+                            var domain_id_list = [];
+                            for (var d in result1.domains) {
+                                var item = result1.domains[d];
+                                if (item.includes('.')) item = item.split('.')[0];
+                                if (!domain_id_list.includes(item)) domain_id_list.push(item);
+                            }
+                            m.db.get_domains_by_ids(domain_id_list, (success3, result3) => {
+                                if (success3 === false) return ws_server.return_event_error("push_application_vhost", "database error", client);
+                                if (result3 == null) return ws_server.return_event_error("push_application_vhost", "domains not found", client);
+                                var vhost_site_config = m.main.gen_vhost_proxy_config(result1.proxy, result1, result2, result3);
+                                if (vhost_site_config != null) {
+                                    var vhost_site_config_export = m.main.convert_vhost_proxy_config_obj(vhost_site_config);
+                                    console.log(vhost_site_config_export);
+                                    var ws_daemon_client = m.ws.get_daemon_client(application_resource_id);
+                                    if (ws_daemon_client != null && ws_server.clients.hasOwnProperty(ws_daemon_client.id)) {
+                                        ws_server.send_to_client('vhost_config', {
+                                            application: id,
+                                            proxy_settings: result1.proxy,
+                                            apache_root: result2.software.apache_root,
+                                            www_root: result2.software.www_root,
+                                            vhost_config: vhost_site_config_export,
+                                            remove: remove === true
+                                        }, ws_daemon_client);
+                                    } else {
+                                        ws_server.send_to_client('push_application_vhost_res_daemon_res', {
+                                            success: true, data: {
+                                                success: false,
+                                                message: 'Host daemon is offline!',
+                                                application_id: id
+                                            }
+                                        }, client);
+                                    }
+                                } else {
+                                    ws_server.send_to_client('push_application_vhost_res_daemon_res', {
+                                        success: true, data: {
+                                            success: false,
+                                            message: `${m.main.gen_vhost_proxy_config_error != '' ? m.main.gen_vhost_proxy_config_error : 'Unknown Error'}!`,
+                                            application_id: id
+                                        }
+                                    }, client);
+                                }
+                            });
+                        } else {
+                            ws_server.send_to_client('push_application_vhost_res_daemon_res', {
+                                success: true, data: {
+                                    success: false,
+                                    message: 'No host Apache root!',
+                                    application_id: id
+                                }
+                            }, client);
+                        }
+                    });
+                } else {
+                    ws_server.send_to_client('push_application_vhost_res_daemon_res', {
+                        success: true, data: {
+                            success: false,
+                            message: 'No host selected!',
+                            application_id: id
+                        }
+                    }, client);
+                }
+            });
+        }
+    });
+    ws_server.bind("push_application_vhost_res_daemon", (client, req) => {
+        var application_id = req.application_id ? (`${req.application_id}`).trim() : '';
+        var success = req.success && req.success === true;
+        var message = req.message ? (`${req.message}`).trim() : '';
+        if (application_id != '' && message != '') {
+            m.db.get_application(application_id, null, (success1, result1) => {
+                if (success1 === false) return ws_server.return_event_error("push_application_vhost_res_daemon", "database error", client);
+                if (result1 == null) return ws_server.return_event_error("push_application_vhost_res_daemon", "application not found", client);
+                ws_server.send_to_group("push_application_vhost_res_daemon_res", {
+                    success: true, data: {
+                        success: success,
+                        message: message,
+                        application_id: application_id
+                    }
+                }, "app");
+            });
+        }
+    });
     ws_server.bind("pull_application_repo", (client, req) => {
         var id = req.id ? (`${req.id}`).trim() : '';
         var remove = req.hasOwnProperty('remove') && req.remove === true;

@@ -641,6 +641,17 @@ var app = {
                     remove: true
                 });
             },
+            push_application_vhost: (id) => {
+                app.ws.send('push_application_vhost', {
+                    id: id,
+                });
+            },
+            remove_application_vhost: (id) => {
+                app.ws.send('push_application_vhost', {
+                    id: id,
+                    remove: true
+                });
+            },
             pull_application_repo: id => {
                  app.ws.send('pull_application_repo', {
                     id: id,

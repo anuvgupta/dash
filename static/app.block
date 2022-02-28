@@ -248,6 +248,19 @@ app
                 }
             } else console.err(push_application_proxy_toast_res)
         }
+    #push_application_vhost_res_daemon_res
+        {
+            var push_application_proxy_toast_res = push_application_vhost_res_daemon_res;
+            if (push_application_proxy_toast_res.success) {
+                var current_application = block.child('main/content/applications/detail').key('application');
+                if (current_application && current_application._id == push_application_proxy_toast_res.data.application_id) {
+                    block.child('main/content/applications/detail/subcontent/application_proxy/signal_toast').data({
+                        summon: push_application_proxy_toast_res.data.message,
+                        color: push_application_proxy_toast_res.data.success === false ? '#b3443b' : '#3b8251'
+                    });
+                }
+            } else console.err(push_application_proxy_toast_res)
+        }
     #pull_application_repo_res_daemon_res
         {
             var pull_application_repo_toast_res = pull_application_repo_res_daemon_res;
@@ -2067,7 +2080,7 @@ app
                                     height 90px
                                     width 85px
                                     top 0
-                                    right -86px
+                                    right -85px
                                     border-radius 4px
                                     border 1px solid #efefef
                                     background-color white
@@ -3166,6 +3179,11 @@ app
                             if (proxy.path == '') path_alt = '<span class="text_placeholder">/</span>';
                             block.child('subcontent/application_proxy/path_port_wrap/path/value/text').html(`${path_alt}`);
                             block.child('subcontent/application_proxy/path_port_wrap/path/value_editor').attribute('value', `${proxy.path}`);
+
+                            // apache_vhost
+                            block.child('subcontent/application_proxy/apache_vhost/value/switch').data({
+                                val: proxy.apache_vhost === true ? 'on' : 'off'
+                            });
                         }
                     #code
                         {
@@ -3317,6 +3335,9 @@ app
                             if (old_data.proxy.ws_enable_path != new_data.proxy.ws_enable_path) {
                                 update_proxy = true;
                                 block.child('subcontent/application_proxy/ws_enable_path/value_editor').on('hide');
+                            }
+                            if (old_data.proxy.apache_vhost != new_data.proxy.apache_vhost) {
+                                update_proxy = true;
                             }
                             if (old_data.proxy.path != new_data.proxy.path) {
                                 update_proxy = true;
@@ -3764,7 +3785,7 @@ app
                                     height 90px
                                     width 85px
                                     top 0
-                                    right -86px
+                                    right -85px
                                     border-radius 4px
                                     border 1px solid #efefef
                                     background-color white
@@ -4988,6 +5009,184 @@ app
                             div spacer
                                 css
                                     height 80px
+                            div path_port_wrap
+                                css
+                                    height auto
+                                    vertical-align top
+                                div port
+                                    class value_edge
+                                    css
+                                        margin-bottom 20px
+                                        vertical-align top
+                                        display inline-block
+                                        box-sizing border-box
+                                        width 50%
+                                    text label
+                                        val Port
+                                        class label_desc
+                                        css
+                                            margin-bottom 3px
+                                    block value
+                                        {
+                                            block.__child('content').css('text-align', 'left');
+                                        }
+                                        class value_text_wrap
+                                        css
+                                            height 25.2px
+                                        text text
+                                            val :80
+                                            class value_text
+                                            css
+                                                font-size 21px
+                                        :mouseover
+                                            {
+                                                if (block.child('edit_button').key('showing') == 'off')
+                                                    block.child('edit_button').on('show');
+                                            }
+                                        :mouseout
+                                            {
+                                                if (block.child('edit_button').key('showing') == 'on')
+                                                    block.child('edit_button').on('hide');
+                                            }
+                                        edit-button edit_button
+                                            // this is an edit button
+                                            css
+                                                margin-left 12px
+                                                padding-top 4px
+                                            :click
+                                                {
+                                                    //block.parent(2).data('');
+                                                    block.parent().css('display', 'none')
+                                                        .sibling('value_editor').css('display', 'block');
+                                                    //console.log(block.parent(4).key('application').port);
+                                                    block.parent().sibling('value_editor').node().value = block.parent(5).key('application').port;
+                                                    setTimeout(_ => {
+                                                        block.parent().sibling('value_editor').node().select();
+                                                    }, 15);
+                                                }
+                                    input value_editor
+                                        class value_editor
+                                        placeholder 80
+                                        css
+                                            display none
+                                            height 27px
+                                            margin-top -2px
+                                            margin-left -2px
+                                            margin-bottom 2px
+                                            width 75%
+                                            font-size 21px
+                                        :hide
+                                            {
+                                                block.css('display', 'none').sibling('value').css('display', 'table');
+                                                event.stopPropagation();
+                                            }
+                                        :keyup
+                                            {
+                                                if (event.keyCode == 13) {
+                                                    // enter
+                                                    var value = block.node().value;
+                                                    if (!value) value = '';
+                                                    /*
+                                                    if (value === '') value = null;
+                                                    else value = parseInt((`${value}`).trim());
+                                                    if (value == null || (value != NaN && value >= 0)) {
+                                                        block.parent(3).on('send_application_update', {
+                                                            'port': value
+                                                        });
+                                                    }
+                                                    */
+                                                    value = (`${value}`).trim();
+                                                    //if (value.length > 0) {
+                                                        block.parent(3).on('send_application_update', {
+                                                            'port': value
+                                                        });
+                                                    //}
+                                                    setTimeout(_ => { block.on('hide'); }, 250);
+                                                } else if (event.keyCode == 27) {
+                                                    // escape
+                                                    block.on('hide');
+                                                }
+                                            }
+                                div path
+                                    class value_edge
+                                    css
+                                        margin-bottom 20px
+                                        vertical-align top
+                                        display inline-block
+                                        box-sizing border-box
+                                        width 50%
+                                    text label
+                                        val Endpoint
+                                        class label_desc
+                                    block value
+                                        {
+                                            block.__child('content').css('text-align', 'left');
+                                        }
+                                        class value_text_wrap
+                                        css
+                                            height 25.2px
+                                        text text
+                                            val /
+                                            class value_text
+                                            css
+                                                font-size 20px
+                                        :mouseover
+                                            {
+                                                if (block.child('edit_button').key('showing') == 'off')
+                                                    block.child('edit_button').on('show');
+                                            }
+                                        :mouseout
+                                            {
+                                                if (block.child('edit_button').key('showing') == 'on')
+                                                    block.child('edit_button').on('hide');
+                                            }
+                                        edit-button edit_button
+                                            css
+                                                margin-left 12px
+                                                padding-top 4px
+                                            :click
+                                                {
+                                                    block.parent().css('display', 'none')
+                                                        .sibling('value_editor').css('display', 'block');
+                                                    block.parent().sibling('value_editor').node().value = block.parent(5).key('application').proxy.path;
+                                                    setTimeout(_ => {
+                                                        block.parent().sibling('value_editor').node().select();
+                                                    }, 15);
+                                                }
+                                    input value_editor
+                                        class value_editor
+                                        placeholder api
+                                        css
+                                            display none
+                                            height 27px
+                                            margin-top -2.5px
+                                            margin-left -2px
+                                            margin-bottom 2.5px
+                                            width 75%
+                                            font-size 20px
+                                        :hide
+                                            {
+                                                block.css('display', 'none').sibling('value').css('display', 'table');
+                                                event.stopPropagation();
+                                            }
+                                        :keyup
+                                            {
+                                                if (event.keyCode == 13) {
+                                                    // enter
+                                                    var value = block.node().value;
+                                                    if (!value) value = '';
+                                                    value = (`${value}`).trim();
+                                                    //if (value.length > 0) {
+                                                        block.parent(3).on('send_application_update', {
+                                                            'proxy.path': value
+                                                        });
+                                                    //}
+                                                    setTimeout(_ => { block.on('hide'); }, 250);
+                                                } else if (event.keyCode == 27) {
+                                                    // escape
+                                                    block.on('hide');
+                                                }
+                                            }
                             div www
                                 class value_edge
                                 css
@@ -5268,183 +5467,55 @@ app
                                                 block.on('hide');
                                             }
                                         }
-                            div path_port_wrap
+                            div apache_vhost
+                                class value_edge
                                 css
-                                    height auto
+                                    width 50%
+                                    display inline-block
                                     vertical-align top
-                                div port
-                                    class value_edge
+                                text label
+                                    val Apache VirtualHost
+                                    class label_desc
                                     css
-                                        margin-bottom 20px
-                                        vertical-align top
-                                        display inline-block
-                                        box-sizing border-box
-                                        width 50%
-                                    text label
-                                        val Port
-                                        class label_desc
-                                        css
-                                            margin-bottom 3px
-                                    block value
-                                        {
-                                            block.__child('content').css('text-align', 'left');
-                                        }
-                                        class value_text_wrap
-                                        css
-                                            height 25.2px
-                                        text text
-                                            val :80
-                                            class value_text
-                                            css
-                                                font-size 21px
-                                        :mouseover
-                                            {
-                                                if (block.child('edit_button').key('showing') == 'off')
-                                                    block.child('edit_button').on('show');
-                                            }
-                                        :mouseout
-                                            {
-                                                if (block.child('edit_button').key('showing') == 'on')
-                                                    block.child('edit_button').on('hide');
-                                            }
-                                        edit-button edit_button
-                                            // this is an edit button
-                                            css
-                                                margin-left 12px
-                                                padding-top 4px
-                                            :click
-                                                {
-                                                    //block.parent(2).data('');
-                                                    block.parent().css('display', 'none')
-                                                        .sibling('value_editor').css('display', 'block');
-                                                    //console.log(block.parent(4).key('application').port);
-                                                    block.parent().sibling('value_editor').node().value = block.parent(5).key('application').port;
-                                                    setTimeout(_ => {
-                                                        block.parent().sibling('value_editor').node().select();
-                                                    }, 15);
-                                                }
-                                    input value_editor
-                                        class value_editor
-                                        placeholder 80
-                                        css
-                                            display none
-                                            height 27px
-                                            margin-top -2px
-                                            margin-left -2px
-                                            margin-bottom 2px
-                                            width 75%
-                                            font-size 21px
-                                        :hide
-                                            {
-                                                block.css('display', 'none').sibling('value').css('display', 'table');
-                                                event.stopPropagation();
-                                            }
-                                        :keyup
-                                            {
-                                                if (event.keyCode == 13) {
-                                                    // enter
-                                                    var value = block.node().value;
-                                                    if (!value) value = '';
-                                                    /*
-                                                    if (value === '') value = null;
-                                                    else value = parseInt((`${value}`).trim());
-                                                    if (value == null || (value != NaN && value >= 0)) {
-                                                        block.parent(3).on('send_application_update', {
-                                                            'port': value
-                                                        });
-                                                    }
-                                                    */
-                                                    value = (`${value}`).trim();
-                                                    //if (value.length > 0) {
-                                                        block.parent(3).on('send_application_update', {
-                                                            'port': value
-                                                        });
-                                                    //}
-                                                    setTimeout(_ => { block.on('hide'); }, 250);
-                                                } else if (event.keyCode == 27) {
-                                                    // escape
-                                                    block.on('hide');
-                                                }
-                                            }
-                                div path
-                                    class value_edge
+                                        padding-bottom 8px
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
                                     css
-                                        margin-bottom 20px
-                                        vertical-align top
-                                        display inline-block
-                                        box-sizing border-box
-                                        width 50%
-                                    text label
-                                        val Endpoint
-                                        class label_desc
-                                    block value
+                                        height 25.2px
+                                    switch switch
+                                        val on
+                                        label Enable
+                                        css
+                                            margin 0
                                         {
-                                            block.__child('content').css('text-align', 'left');
+                                            block.child('label').css({
+                                                //minWidth: '55px',
+                                                marginRight: '10px',
+                                                fontWeight: '300'
+                                            });
                                         }
-                                        class value_text_wrap
-                                        css
-                                            height 25.2px
-                                        text text
-                                            val /
-                                            class value_text
-                                            css
-                                                font-size 20px
-                                        :mouseover
+                                        :modified
                                             {
-                                                if (block.child('edit_button').key('showing') == 'off')
-                                                    block.child('edit_button').on('show');
-                                            }
-                                        :mouseout
-                                            {
-                                                if (block.child('edit_button').key('showing') == 'on')
-                                                    block.child('edit_button').on('hide');
-                                            }
-                                        edit-button edit_button
-                                            css
-                                                margin-left 12px
-                                                padding-top 4px
-                                            :click
-                                                {
-                                                    block.parent().css('display', 'none')
-                                                        .sibling('value_editor').css('display', 'block');
-                                                    block.parent().sibling('value_editor').node().value = block.parent(5).key('application').proxy.path;
+                                                //console.log('updated to ' + block.key('state'));
+                                                var value = block.key('state') === true;
+                                                block.data({ label: (value ? 'Enable' : 'Disable') });
+                                                if (data.hasOwnProperty('locked') && data.locked == true) return;
+                                                block.parent(4).on('send_application_update', {
+                                                    'proxy.apache_vhost': value
+                                                });
+                                                if (value === false) {
                                                     setTimeout(_ => {
-                                                        block.parent().sibling('value_editor').node().select();
-                                                    }, 15);
+                                                        app.ws.api.remove_application_vhost(block.parent(4).key('application')._id);
+                                                    }, 20);
+                                                } else {
+                                                    setTimeout(_ => {
+                                                        app.ws.api.push_application_vhost(block.parent(4).key('application')._id);
+                                                    }, 20);
                                                 }
-                                    input value_editor
-                                        class value_editor
-                                        placeholder api
-                                        css
-                                            display none
-                                            height 27px
-                                            margin-top -2.5px
-                                            margin-left -2px
-                                            margin-bottom 2.5px
-                                            width 75%
-                                            font-size 20px
-                                        :hide
-                                            {
-                                                block.css('display', 'none').sibling('value').css('display', 'table');
                                                 event.stopPropagation();
-                                            }
-                                        :keyup
-                                            {
-                                                if (event.keyCode == 13) {
-                                                    // enter
-                                                    var value = block.node().value;
-                                                    if (!value) value = '';
-                                                    value = (`${value}`).trim();
-                                                    //if (value.length > 0) {
-                                                        block.parent(3).on('send_application_update', {
-                                                            'proxy.path': value
-                                                        });
-                                                    //}
-                                                    setTimeout(_ => { block.on('hide'); }, 250);
-                                                } else if (event.keyCode == 27) {
-                                                    // escape
-                                                    block.on('hide');
-                                                }
                                             }
                             div signal_toast
                                 css
@@ -6991,7 +7062,7 @@ app
                                     height 90px
                                     width 85px
                                     top 0
-                                    right -86px
+                                    right -85px
                                     border-radius 4px
                                     border 1px solid #efefef
                                     background-color white
@@ -7790,6 +7861,16 @@ app
                             if (apache_root_alt == '') apache_root_alt = '<span class="text_placeholder">/etc/apache2</span>';
                             block.child('subcontent/resource_software/apache_root/value/text').html(`${apache_root_alt}`);
                             block.child('subcontent/resource_software/apache_root/value_editor').attribute('value', `${software.apache_root}`);
+                            // nginx_port
+                            var nginx_port_alt = `:${software.nginx_port}`;
+                            if (nginx_port_alt == ':' || software.nginx_port == 0) nginx_port_alt = '<span class="text_placeholder">:80</span>';
+                            block.child('subcontent/resource_software/nginx_port/value/text').html(`${nginx_port_alt}`);
+                            block.child('subcontent/resource_software/nginx_port/value_editor').attribute('value', `${software.nginx_port}`);
+                            // apache_port
+                            var apache_port_alt = `:${software.apache_port}`;
+                            if (apache_port_alt == ':' || software.apache_port == 0) apache_port_alt = '<span class="text_placeholder">:80</span>';
+                            block.child('subcontent/resource_software/apache_port/value/text').html(`${apache_port_alt}`);
+                            block.child('subcontent/resource_software/apache_port/value_editor').attribute('value', `${software.apache_port}`);
                             // www_root
                             var www_root_alt = software.www_root;
                             if (www_root_alt == '') www_root_alt = '<span class="text_placeholder">/var/www</span>';
@@ -7815,7 +7896,9 @@ app
                                 block.child('subcontent/resource_specs/location/value_editor').on('hide');
                                 block.child('subcontent/resource_software/app_root/value_editor').on('hide');
                                 block.child('subcontent/resource_software/nginx_root/value_editor').on('hide');
+                                block.child('subcontent/resource_software/nginx_port/value_editor').on('hide');
                                 block.child('subcontent/resource_software/apache_root/value_editor').on('hide');
+                                block.child('subcontent/resource_software/apache_port/value_editor').on('hide');
                                 block.child('subcontent/resource_software/www_root/value_editor').on('hide');
                                 block.child('subcontent/resource_daemon/daemon_key/value_editor').on('hide');
                                 block.child('subcontent/resource_info/more_menu').on('hide');
@@ -7894,6 +7977,14 @@ app
                             if (old_data.software.apache_root != new_data.software.apache_root) {
                                 update_software = true;
                                 block.child('subcontent/resource_software/apache_root/value_editor').on('hide');
+                            }
+                            if (old_data.software.nginx_port != new_data.software.nginx_port) {
+                                update_software = true;
+                                block.child('subcontent/resource_software/nginx_port/value_editor').on('hide');
+                            }
+                            if (old_data.software.apache_port != new_data.software.apache_port) {
+                                update_software = true;
+                                block.child('subcontent/resource_software/apache_port/value_editor').on('hide');
                             }
                             if (old_data.software.www_root != new_data.software.www_root) {
                                 update_software = true;
@@ -8175,7 +8266,7 @@ app
                                         margin-left -2px
                                         margin-bottom 2px
                                         font-size 20px
-                                        width 90%
+                                        width 80%
                                         //letter-spacing normal
                                         letter-spacing 0.6px
                                     :hide
@@ -8256,7 +8347,7 @@ app
                                         margin-left -2px
                                         margin-bottom 2px
                                         font-size 20px
-                                        width 90%
+                                        width 80%
                                         //letter-spacing normal
                                         letter-spacing 0.6px
                                     :hide
@@ -8547,7 +8638,7 @@ app
                                     height 90px
                                     width 85px
                                     top 0
-                                    right -86px
+                                    right -85px
                                     border-radius 4px
                                     border 1px solid #efefef
                                     background-color white
@@ -8715,8 +8806,18 @@ app
                                                 block.on('hide');
                                             }
                                         }
+                            {
+                                var wrapperA = Block('div', 'wrapperA');
+                                block.__add(wrapperA).setAdd(wrapperA);
+                            }
                             div nginx_root
                                 class value_edge
+                                css
+                                    margin-bottom 20px
+                                    vertical-align top
+                                    display inline-block
+                                    box-sizing border-box
+                                    width 50%
                                 text label
                                     val NGINX Root
                                     class label_desc
@@ -8791,8 +8892,112 @@ app
                                                 block.on('hide');
                                             }
                                         }
+                            div nginx_port
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                    vertical-align top
+                                    display inline-block
+                                    box-sizing border-box
+                                    width 50%
+                                text label
+                                    val NGINX Port
+                                    class label_desc
+                                    css
+                                        margin-bottom 3px
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val :80
+                                        class value_text
+                                        css
+                                            font-size 20px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        // this is an edit button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                //block.parent(2).data('');
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                //console.log(block.parent(4).key('resource').software.nginx_port);
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('resource').software.nginx_port;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder 80
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        width 75%
+                                        font-size 20px
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                /*
+                                                if (value === '') value = null;
+                                                else value = parseInt((`${value}`).trim());
+                                                if (value == null || (value != NaN && value >= 0)) {
+                                                    block.parent(3).on('send_resource_update', {
+                                                        'software.nginx_port': value
+                                                    });
+                                                }
+                                                */
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_resource_update', {
+                                                        'software.nginx_port': value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            {
+                                var wrapperB = Block('div', 'wrapperB');
+                                block.__add(wrapperB).setAdd(wrapperB);
+                            }
                             div apache_root
                                 class value_edge
+                                css
+                                    margin-bottom 20px
+                                    vertical-align top
+                                    display inline-block
+                                    box-sizing border-box
+                                    width 50%
                                 text label
                                     val Apache Root
                                     class label_desc
@@ -8867,6 +9072,103 @@ app
                                                 block.on('hide');
                                             }
                                         }
+                            div apache_port
+                                class value_edge
+                                css
+                                    margin-bottom 20px
+                                    vertical-align top
+                                    display inline-block
+                                    box-sizing border-box
+                                    width 50%
+                                text label
+                                    val Apache Port
+                                    class label_desc
+                                    css
+                                        margin-bottom 3px
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val :80
+                                        class value_text
+                                        css
+                                            font-size 20px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        // this is an edit button
+                                        css
+                                            margin-left 12px
+                                            padding-top 4px
+                                        :click
+                                            {
+                                                //block.parent(2).data('');
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                //console.log(block.parent(4).key('resource').software.apache_port);
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('resource').software.apache_port;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder 80
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -2px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        width 75%
+                                        font-size 20px
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                /*
+                                                if (value === '') value = null;
+                                                else value = parseInt((`${value}`).trim());
+                                                if (value == null || (value != NaN && value >= 0)) {
+                                                    block.parent(3).on('send_resource_update', {
+                                                        'software.apache_port': value
+                                                    });
+                                                }
+                                                */
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_resource_update', {
+                                                        'software.apache_port': value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
+                            {
+                                block.removeAddBlock();
+                            }
                             div www_root
                                 class value_edge
                                 text label

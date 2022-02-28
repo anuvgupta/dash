@@ -53,6 +53,31 @@ var reverse_parse_nginx_config_obj = (proxy_config_obj, proxy_config_key = null,
     }
     return ret_text;
 };
+// recursive reverse-parser (generates vhost config string from object/tree representation)
+var reverse_parse_vhost_config_obj = (proxy_config_obj, proxy_config_key = null, indents = -1) => {
+    var eol = '\n';
+    var ret_text = '';
+    var typeof_type = typeof proxy_config_obj;
+    if (typeof_type === 'object') {
+        if (Array.isArray(proxy_config_obj)) {
+            ret_text = get_indents(indents) + '* ERROR * parser encountered unexpected array: [' + proxy_config_obj.join(', ') + ']' + eol;
+        } else { // object
+            if (proxy_config_key) ret_text += `${get_indents(indents)}<${proxy_config_key}${proxy_config_obj.__tag ? (` ${proxy_config_obj.__tag}`) : ''}>` + eol;
+            var keys = (proxy_config_obj.hasOwnProperty('__keys') ? proxy_config_obj.__keys : Object.keys(proxy_config_obj));
+            for (var k in keys) {
+                if (Array.isArray(proxy_config_obj[keys[k]])) { // array
+                    for (var i in proxy_config_obj[keys[k]])
+                        ret_text += reverse_parse_vhost_config_obj(proxy_config_obj[keys[k]][i], keys[k], indents + 1);
+                } else ret_text += reverse_parse_vhost_config_obj(proxy_config_obj[keys[k]], keys[k], indents + 1);
+            }
+            if (proxy_config_key) ret_text += `${get_indents(indents)}</${proxy_config_key}>` + eol;
+        }
+    } else if (typeof_type === 'string' || typeof_type === 'number' || typeof_type === 'boolean') {
+        // string, number, boolean
+        ret_text = `${get_indents(indents)}${proxy_config_key ? proxy_config_key + ' ' : ''}${proxy_config_obj}` + eol;
+    }
+    return ret_text;
+};
 var api = {
     resource_desync_timeout: 4,
     resource_disconnect_timeout: 8,
@@ -241,6 +266,98 @@ var api = {
         if (!proxy_config_obj) return null;
         var proxy_config_text = '';
         proxy_config_text = reverse_parse_nginx_config_obj(proxy_config_obj);
+        return (proxy_config_text != '' ? proxy_config_text : null);
+    },
+    gen_vhost_proxy_config_error: '',
+    gen_vhost_proxy_config: (proxy_settings, application, host_resource, domains) => {
+        if (!proxy_settings) {
+            api.gen_vhost_proxy_config_error = 'No proxy settings';
+            return null;
+        }
+        // parse port(s)
+        var port = application.port ? application.port.trim() : '';
+        if (port == '') {
+            api.gen_vhost_proxy_config_error = 'No app port';
+            return null;
+        }
+        port = port.split('/');
+        if (port.length <= 0) {
+            api.gen_vhost_proxy_config_error = 'Invalid app port';
+            return null;
+        }
+        // create server name list
+        var primary_server_name = "";
+        var server_names = '';
+        var server_names_list = [];
+        for (var ad in application.domains) {
+            var d_id = application.domains[ad].split('.')[0];
+            var d_sub = application.domains[ad].includes('.') ? application.domains[ad].slice(application.domains[ad].indexOf('.') + 1) : '';
+            var p_d_id = application.primary_domain.split('.')[0];
+            var p_d_sub = application.primary_domain.includes('.') ? application.primary_domain.slice(application.primary_domain.indexOf('.') + 1) : '';
+            var primary = (d_id === p_d_id && d_sub === p_d_sub);
+            for (var d in domains) {
+                if (d_id == domains[d]._id.toString()) {
+                    var domain_name = domains[d].domain;
+                    if (d_sub == '') {
+                        server_names += domain_name + ' ';
+                        server_names_list.push(domain_name);
+                        if (primary) primary_server_name = domain_name;
+                        if (proxy_settings.www === true && (domain_name.match(/\./g) || []).length == 1) {
+                            var www_alias = `www.${domain_name}`;
+                            server_names += `${www_alias} `;
+                            server_names_list.push(www_alias);
+                            if (primary) primary_server_name = www_alias;
+                        }
+                    } else {
+                        var sub_name = `${d_sub}.${domain_name}`;
+                        server_names += `${sub_name} `;
+                        server_names_list.push(sub_name);
+                        if (primary) primary_server_name = sub_name;
+                    }
+                }
+            }
+        }
+        server_names = server_names.trim();
+        if (server_names == '') {
+            api.gen_vhost_proxy_config_error = 'No app domains';
+            return null;
+        }
+        if (primary_server_name == '') primary_server_name = server_names.split(' ')[0];
+        if (server_names.includes(primary_server_name)) {
+            server_names = server_names.split(' ');
+            server_names.splice(server_names.indexOf(primary_server_name), 1);
+            server_names = (`${server_names.join(' ')}`).trim();
+        }
+
+        // generate vhost config object
+        var app_ecosystem = application.ecosystem;
+        var document_root = `${host_resource.software.www_root}/${application.slug}`;
+        if (application.code.path != '') document_root = path.join(document_root, application.code.path);
+        // if (fs.existsSync(path.join(document_root, 'html'))) document_root = path.join(document_root, 'html');
+        // else if (fs.existsSync(path.join(document_root, 'static'))) document_root = path.join(document_root, 'static');
+        var vhost_config_obj = {
+            __keys: ['VirtualHost'],
+            'VirtualHost': {
+                __keys: ['ServerAdmin', 'DocumentRoot', 'ServerName', 'ErrorLog', 'Header'],
+                __tag: `*:${port[0]}`,
+                'ServerAdmin': `${global.config.webmaster_email}`,
+                'DocumentRoot': `${document_root}`,
+                'ServerName': `${primary_server_name}`,
+                'ErrorLog': `${document_root}/${app_ecosystem.error_file == '' || app_ecosystem.error_file == null ? app_ecosystem.out_file : app_ecosystem.error_file}`,
+                'Header': [ "set Access-Control-Allow-Origin \"*\"" ]
+            }
+        };
+        if (server_names != "") {
+            vhost_config_obj['VirtualHost'].__keys.splice(3, 0, 'ServerAlias');
+            vhost_config_obj['VirtualHost']['ServerAlias'] = `${server_names}`;
+        }
+        return vhost_config_obj;
+        // return null;
+    },
+    convert_vhost_proxy_config_obj: (proxy_config_obj) => {
+        if (!proxy_config_obj) return null;
+        var proxy_config_text = '';
+        proxy_config_text = reverse_parse_vhost_config_obj(proxy_config_obj);
         return (proxy_config_text != '' ? proxy_config_text : null);
     },
 

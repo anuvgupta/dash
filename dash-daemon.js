@@ -158,6 +158,83 @@ const app = {
             }
         } catch(err) { app.err(err); }
     },
+    process_vhost_config: (application_id, apache_root, www_root, vhost_config, proxy_settings, resolve) => {
+        app.log(`processing vhost config for app ${application_id}`);
+        if (!db.ecosystem.hasOwnProperty(application_id))
+            return resolve(false, `App ${application_id} not in ecosystem`);
+        app.log(`found application ${application_id}`);
+        var app_ecosystem = db.ecosystem[application_id];
+        var app_name = app_ecosystem.name;
+        var vhost_file_dir_loc = `${apache_root}/sites-available`;
+        var vhost_file_location = `${vhost_file_dir_loc}/dash-app_${app_name}.conf`;
+        var vhost_file_link_loc = `${apache_root}/sites-enabled/dash-app_${app_name}.conf`;
+        var vhost_app_loc = `${app_ecosystem.cwd}`;
+        var vhost_app_link_loc = `${www_root}/${app_name}`;
+        var vhost_file_content = `# ${app_name} (dash managed application) virtual host configuration\n${vhost_config}\n`;
+        app.log(`writing config for app "${app_name}" (${application_id}) to location ${vhost_file_location}`);
+        fs.writeFile(vhost_file_location, vhost_file_content, (err) => {
+            if (err) { console.error(err); return resolve(false, "Failed writing vhost file"); }
+            app.log(`wrote file, linking to location ${vhost_file_link_loc}`);
+            _next = _ => {
+                // app.log(fs.readFileSync(vhost_file_link_loc, 'utf8'));
+                fs.symlink(vhost_app_loc, vhost_app_link_loc, 'dir', (err) => {
+                    if (err) { console.error(err); return resolve(false, `Failed symlinking ${vhost_app_link_loc}`); }
+                    app.log(`symlink ${vhost_app_link_loc} created`);
+                    pm.apache_reload(resolve, "VHost pushed & linked");
+                });
+            };
+            if (fs.existsSync(vhost_file_link_loc)) {
+                app.log('symlink exists');
+                _next();
+            } else {
+                fs.symlink(vhost_file_location, vhost_file_link_loc, 'file', (err) => {
+                    if (err) { console.error(err); return resolve(false, "Failed symlinking vhost file"); }
+                    app.log("symlink created");
+                    _next();
+                });
+            }
+        });
+        
+    },
+    remove_vhost_config: (application_id, apache_root, www_root, resolve) => {
+        app.log(`removing vhost config for app ${application_id}`);
+        if (!db.ecosystem.hasOwnProperty(application_id))
+            return resolve(false, `App ${application_id} not in ecosystem`);
+        app.log(`found application ${application_id}`);
+        var app_ecosystem = db.ecosystem[application_id];
+        var app_name = app_ecosystem.name;
+        var vhost_file_dir_loc = `${apache_root}/sites-available`;
+        var vhost_file_location = `${vhost_file_dir_loc}/dash-app_${app_name}.conf`;
+        var vhost_file_link_loc = `${apache_root}/sites-enabled/dash-app_${app_name}.conf`;
+        var vhost_app_link_loc = `${www_root}/${app_name}`;
+        try {
+            if (fs.existsSync(vhost_file_link_loc)) {
+                fs.unlink(vhost_file_link_loc, (err1) => {
+                    if (err1) {
+                        resolve(false, `failed to remove vhost link ${vhost_file_link_loc}`);
+                        throw err1;
+                    }
+                    if (fs.existsSync(vhost_file_location)) {
+                        fs.unlink(vhost_file_location, (err2) => {
+                            if (err2) {
+                                resolve(false, `failed to remove vhost file ${vhost_file_location}`);
+                                throw err2;
+                            }
+                            if (fs.existsSync(vhost_app_link_loc)) {
+                                fs.unlink(vhost_app_link_loc, (err3) => {
+                                    if (err3) {
+                                        resolve(false, `failed to remove www app dir link ${vhost_app_link_loc}`);
+                                        throw err3;
+                                    }
+                                    pm.apache_reload(resolve, "VHost removed");
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        } catch(err) { app.err(err); }
+    },
     refresh_ecosystem: (ecosystem) => {
         app.log("refreshing ecosystem");
         for (var e in db.ecosystem) {
@@ -474,6 +551,20 @@ const ws = {
                     });
                 }
                 break;
+            case 'vhost_config':
+                var remove = data.hasOwnProperty('remove') && data.remove === true;
+                if (remove) {
+                    ws.log(`removing apache vhost config for application "${data.application}"`);
+                    app.remove_vhost_config(data.application, data.apache_root, data.www_root, (success, message) => {
+                        ws.api.vhost_config_respond(data.application, success, message);
+                    });
+                } else {
+                    ws.log(`received apache vhost config for application "${data.application}"`);
+                    app.process_vhost_config(data.application, data.apache_root, data.www_root, data.vhost_config, data.proxy_settings, (success, message) => {
+                        ws.api.vhost_config_respond(data.application, success, message);
+                    });
+                }
+                break;
             case 'application_repo':
                 var remove = data.hasOwnProperty('remove') && data.remove === true;
                 if (remove) {
@@ -515,6 +606,12 @@ const ws = {
                 success: success, message: message
             });
         },
+        vhost_config_respond: (application_id, success, message) => {
+            ws.send('push_application_vhost_res_daemon', {
+                application_id: application_id,
+                success: success, message: message
+            });
+        },
         pull_app_code_respond: (application_id, success, message) => {
             ws.send('pull_application_repo_res_daemon', {
                 application_id: application_id,
@@ -544,7 +641,7 @@ const ws = {
                 success: success, timestamp: timestamp,
                 status: status
             });
-        }
+        },
     },
     initialize_client: resolve => {
         ws.url = `ws${app.secure ? 's' : ''}://${app.config.cloud_socket}`;
@@ -730,6 +827,16 @@ const pm = {
         cproc.exec(`${reload_command}`, (error, stdout, stderr) => {
             if (error) { app.log(`error: ${error.message}`); return resolve(false, `Failed NGINX reload: ${error.message}`); }
             if (stderr) { app.log(`stderr: ${stderr}`); return resolve(false `Failed NGINX reload: ${stderr.toString()}`); }
+            pm.log(`stdout: ${stdout}`);
+            return resolve(true, `${msg}`);
+        });
+    },
+    apache_reload: (resolve, msg) => {
+        var reload_command = "sudo /usr/sbin/service apache2 reload";
+        pm.log(`running command: \`${reload_command}\``);
+        cproc.exec(`${reload_command}`, (error, stdout, stderr) => {
+            if (error) { app.log(`error: ${error.message}`); return resolve(false, `Failed Apache2 reload: ${error.message}`); }
+            if (stderr) { app.log(`stderr: ${stderr}`); return resolve(false `Failed Apache2 reload: ${stderr.toString()}`); }
             pm.log(`stdout: ${stdout}`);
             return resolve(true, `${msg}`);
         });
