@@ -339,7 +339,7 @@ var api = {
             __keys: ['VirtualHost'],
             'VirtualHost': {
                 __keys: ['ServerAdmin', 'DocumentRoot', 'ServerName', 'ErrorLog', 'Header'],
-                __tag: `*:${port[0]}`,
+                __tag: `*:${host_resource.software.apache_port == "" ? port[0] : host_resource.software.apache_port}`,
                 'ServerAdmin': `${global.config.webmaster_email}`,
                 'DocumentRoot': `${document_root}`,
                 'ServerName': `${primary_server_name}`,
