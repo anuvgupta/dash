@@ -770,12 +770,18 @@ var init = _ => {
                     });
                 };
                 if (host_resource != 'none') {
-                    if (update.hasOwnProperty('ecosystem.cwd')) {
-                        if (update['ecosystem.cwd'].includes('$app_root')) {
+                    if (update.hasOwnProperty('ecosystem.cwd') || update.hasOwnProperty('ecosystem.interpreter')) {
+                        if (
+                            (update.hasOwnProperty('ecosystem.cwd') && update['ecosystem.cwd'].includes('$app_root')) ||
+                            (update.hasOwnProperty('ecosystem.interpreter') && update['ecosystem.interpreter'].includes('$app_root'))
+                        ) {
                             m.db.get_resource(host_resource, null, (success3, result3) => {
                                 if (success3 === null || success3 === null) return _next(update);
                                 if (result3.software.app_root == "") return _next(update);
-                                update['ecosystem.cwd'] = update['ecosystem.cwd'].replace('$app_root', result3.software.app_root);
+                                if (update.hasOwnProperty('ecosystem.cwd') && update['ecosystem.cwd'].includes('$app_root'))
+                                    update['ecosystem.cwd'] = update['ecosystem.cwd'].replace('$app_root', result3.software.app_root);
+                                if (update.hasOwnProperty('ecosystem.interpreter') && update['ecosystem.interpreter'].includes('$app_root'))
+                                    update['ecosystem.interpreter'] = update['ecosystem.interpreter'].replace('$app_root', result3.software.app_root);
                                 return _next(update);
                             });
                         } else return _next(update);

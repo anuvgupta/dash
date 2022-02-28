@@ -68,6 +68,7 @@ const app = {
     main: _ => {
         utils.delay(_ => {
             app.log("initializing");
+            global.config.github_token = (`${fs.readFileSync(global.config.github_token_path)}`).trim();
             cli.init(_ => {
                 pm.init(_ => {
                     ws.init(_ => {
@@ -223,14 +224,16 @@ const app = {
                 var err_desc = out_desc;
                 if (output_log_path != error_log_path) 
                     err_desc = fs.openSync(`${error_log_path}`, "a"); 
-                if (fs.existsSync(`${app_repo_package_path}/package.json`)) {
+                if (fs.existsSync(`${path.join(app_repo_package_path, 'package.json')}`)) {
                     package_command = "npm install";
-                    var package_full_json = JSON.parse(fs.readFileSync(`${app_repo_package_path}/package.json`));
+                    var package_full_json = JSON.parse(fs.readFileSync(`${path.join(app_repo_package_path, 'package.json')}`));
                     if (package_full_json.hasOwnProperty('scripts') && package_full_json.scripts.hasOwnProperty('build') && package_full_json.scripts.build != '')
                         second_package_command = "npm run build";
                 }
-                else if (fs.existsSync(`${app_repo_package_path}/requirements.txt`))
-                    package_command = "pip install -r requirements.txt";
+                else if (fs.existsSync(`${path.join(app_repo_package_path, 'requirements.txt')}`)){
+                    package_command = `python3 -m venv ${path.join(app_repo_package_path, 'venv')}`;
+                    second_package_command = `${path.join(app_repo_package_path, 'venv/bin/python3')} -m pip install -r ${path.join(app_repo_package_path, 'requirements.txt')}`;
+                }
                 fs.appendFileSync(`${output_log_path}`, "=====DASH:PKG=====\n");
                 fs.appendFileSync(`${output_log_path}`, `[dash] ${package_command}\n`);
                 var package_command_process = cproc.spawn(package_command.split(' ')[0], package_command.split(' ').slice(1), {
@@ -289,6 +292,9 @@ const app = {
                 });
             else _next_again();
         };
+        var repo_alt = code.repo;
+        if (repo_alt.includes('github.com'))
+            repo_alt = repo_alt.replace('github.com', `${global.config.github_token}@github.com`);
         var log_ts = Date.now();
         var msg_a = "=====DASH:GIT=====";
         var msg_b = "";
@@ -304,7 +310,7 @@ const app = {
             }
             var remote_source_name = 'origin';
             git()
-                .clone(code.repo, app_repo_loc, ['-b', `${code.branch}`, '--single-branch'])
+                .clone(repo_alt, app_repo_loc, ['-b', `${code.branch}`, '--single-branch'])
                 // .checkout(`${code.branch}`)
                 // .checkoutBranch(`${code.branch}`)
                 .then(result => {
@@ -328,7 +334,7 @@ const app = {
                 app.ws.api.tail_application_stream(application_id, msg_b, log_ts + 1);
             }
             git(app_repo_loc)
-                .pull(code.repo)
+                .pull(repo_alt)
                 // .checkout(`${code.branch}`)
                 // .checkoutBranch(`${code.branch}`)
                 .then(result => {
