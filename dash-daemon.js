@@ -302,6 +302,7 @@ const app = {
                 if (output_log_path != error_log_path) 
                     err_desc = fs.openSync(`${error_log_path}`, "a"); 
                 if (fs.existsSync(`${path.join(app_repo_package_path, 'package.json')}`)) {
+                    // potentially remove lockfile here?
                     package_command = "npm install";
                     var package_full_json = JSON.parse(fs.readFileSync(`${path.join(app_repo_package_path, 'package.json')}`));
                     if (package_full_json.hasOwnProperty('scripts') && package_full_json.scripts.hasOwnProperty('build') && package_full_json.scripts.build != '')
