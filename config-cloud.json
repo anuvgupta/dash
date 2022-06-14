@@ -18,7 +18,8 @@
                     ["vm", ["Cloud Virtual Machine", "Cloud VM"]],
                     ["ct", ["Cloud Container", "Cloud CTR"]],
                     ["lt", ["Laptop Computer", "Laptop"]],
-                    ["pc", ["Personal Computer", "PC"]]
+                    ["pc", ["Personal Computer", "PC"]],
+                    ["mc", ["Micro Computer", "Micro"]]
                 ]
             },
             "providers": [
