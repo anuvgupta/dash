@@ -46,6 +46,9 @@ var init = _ => {
                     delete result.projects[p]['public'];
                     delete result.projects[p]['applications'];
                     delete result.projects[p]['domains'];
+                    if (result.projects[p]['demo_pass_show'] !== true)
+                        delete result.projects[p]['demo_pass'];
+                    delete result.projects[p]['demo_pass_show'];
                 }
                 for (var a in result.applications) {
                     result.applications[a] = {

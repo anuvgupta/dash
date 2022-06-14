@@ -29,17 +29,20 @@ var api = {
             docs: '',
             public: public,
             img: null,
+            img_invert: false,  // why was this missing? take it out again if needed
             icon: null,
             featured: false,
             applications: [],
             link: '',
+            demo_pass: '',
+            demo_pass_show: false,
             major: false,
             tech: {
                 primary: [],
                 secondary: [],
                 languages: []
             },
-            tagline: (`${desc.split(' ').splice(0, 6).join(' ')}...`),
+            tagline: (`${desc.split(' ').splice(0, 5).join(' ')}...`),
             description: desc,
             ts_created: timestamp,
             ts_updated: timestamp,
