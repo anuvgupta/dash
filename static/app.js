@@ -4,6 +4,7 @@
 var app = {
     ui: {
         block: Block('div', 'app'),
+        mui_ripple_on: false,
         colors: {
             primary: "rgba(20, 125, 252, 0.94)", //"rgba(0, 123, 255, 0.9)", // "rgba(67, 133, 243, 0.99)", // rgba(219, 43, 58, 0.85)
             background: "#f1f1f1",
@@ -34,6 +35,10 @@ var app = {
             if (app.ui.colors.status.hasOwnProperty(status))
                 return app.ui.colors.status[status];
             return app.ui.colors.status.default;
+        },
+        mui_upgrade: _ => {
+            if (app.ui.mui_ripple_on === true)
+                window.componentHandler.upgradeDom();
         },
         display_modal: {
             disconnected: _ => {
@@ -339,7 +344,7 @@ var app = {
                 app.ui.block.on('ready');
                 setTimeout(app.ui.register_ui_intervals, 50);
                 setTimeout(_ => {
-                    window.componentHandler.upgradeDom();
+                    app.ui.mui_upgrade();
                 }, 100);
             }, 100);
             setTimeout(_ => {

@@ -760,7 +760,7 @@ app
                         setTimeout(_ => {
                             Block.queries();
                             setTimeout(_ => {
-                                window.componentHandler.upgradeDom();
+                                app.ui.mui_upgrade();
                             }, 10);
                         }, 10);
                     }
@@ -817,7 +817,7 @@ app
                         setTimeout(_ => {
                             Block.queries();
                             setTimeout(_ => {
-                                window.componentHandler.upgradeDom();
+                                app.ui.mui_upgrade();
                             }, 10);
                         }, 5);
                     }
@@ -2989,7 +2989,7 @@ app
                         setTimeout(_ => {
                             Block.queries();
                             setTimeout(_ => {
-                                window.componentHandler.upgradeDom();
+                                app.ui.mui_upgrade();
                             }, 10);
                         }, 10);
                     }
@@ -3038,7 +3038,7 @@ app
                             setTimeout(_ => {
                                 Block.queries();
                                 setTimeout(_ => {
-                                    window.componentHandler.upgradeDom();
+                                    app.ui.mui_upgrade();
                                 }, 10);
                             }, 5);
                         }
@@ -6676,7 +6676,7 @@ app
                         setTimeout(_ => {
                             Block.queries();
                             setTimeout(_ => {
-                                window.componentHandler.upgradeDom();
+                                app.ui.mui_upgrade();
                             }, 10);
                         }, 10);
                     }
@@ -6715,7 +6715,7 @@ app
                             setTimeout(_ => {
                                 Block.queries();
                                 setTimeout(_ => {
-                                    window.componentHandler.upgradeDom();
+                                    app.ui.mui_upgrade();
                                 }, 10);
                             }, 5);
                         }
@@ -7774,7 +7774,7 @@ app
                         setTimeout(_ => {
                             Block.queries();
                             setTimeout(_ => {
-                                window.componentHandler.upgradeDom();
+                                app.ui.mui_upgrade();
                             }, 10);
                         }, 10);
                     }
@@ -7811,7 +7811,7 @@ app
                         setTimeout(_ => {
                             Block.queries();
                             setTimeout(_ => {
-                                window.componentHandler.upgradeDom();
+                                app.ui.mui_upgrade();
                             }, 10);
                         }, 5);
                     }
