@@ -490,6 +490,7 @@ var api = {
                 name: `${slug}`,
                 script: "",
                 cwd: "",
+                static_dir: "",
                 error_file: `${slug}.log`,
                 out_file: `${slug}.log`,
                 interpreter: "",

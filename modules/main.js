@@ -136,17 +136,23 @@ var api = {
                 if (d_id == domains[d]._id.toString()) {
                     var domain_name = domains[d].domain;
                     if (d_sub == '') {
-                        server_names += domain_name + ' ';
-                        server_names_list.push(domain_name);
+                        if (!server_names_list.includes(domain_name)) {
+                            server_names += domain_name + ' ';
+                            server_names_list.push(domain_name);
+                        }
                         if (proxy_settings.www === true && (domain_name.match(/\./g) || []).length == 1) {
                             var www_alias = `www.${domain_name}`;
-                            server_names += `${www_alias} `;
-                            server_names_list.push(www_alias);
+                            if (!server_names_list.includes(www_alias)) {
+                                server_names += `${www_alias} `;
+                                server_names_list.push(www_alias);
+                            }
                         }
                     } else {
                         var sub_name = `${d_sub}.${domain_name}`;
-                        server_names += `${sub_name} `;
-                        server_names_list.push(sub_name);
+                        if (!server_names_list.includes(sub_name)) {
+                            server_names += `${sub_name} `;
+                            server_names_list.push(sub_name);
+                        }
                     }
                 }
             }
@@ -299,19 +305,25 @@ var api = {
                 if (d_id == domains[d]._id.toString()) {
                     var domain_name = domains[d].domain;
                     if (d_sub == '') {
-                        server_names += domain_name + ' ';
-                        server_names_list.push(domain_name);
+                        if (!server_names_list.includes(domain_name)) {
+                            server_names += domain_name + ' ';
+                            server_names_list.push(domain_name);
+                        }
                         if (primary) primary_server_name = domain_name;
                         if (proxy_settings.www === true && (domain_name.match(/\./g) || []).length == 1) {
                             var www_alias = `www.${domain_name}`;
-                            server_names += `${www_alias} `;
-                            server_names_list.push(www_alias);
+                            if (!server_names_list.includes(www_alias)) {
+                                server_names += `${www_alias} `;
+                                server_names_list.push(www_alias);
+                            }
                             if (primary) primary_server_name = www_alias;
                         }
                     } else {
                         var sub_name = `${d_sub}.${domain_name}`;
-                        server_names += `${sub_name} `;
-                        server_names_list.push(sub_name);
+                        if (!server_names_list.includes(sub_name)) {
+                            server_names += `${sub_name} `;
+                            server_names_list.push(sub_name);
+                        }
                         if (primary) primary_server_name = sub_name;
                     }
                 }
@@ -332,9 +344,10 @@ var api = {
         // generate vhost config object
         var app_ecosystem = application.ecosystem;
         var document_root = `${host_resource.software.www_root}/${application.slug}`;
-        if (application.code.path != '') document_root = path.join(document_root, application.code.path);
-        // if (fs.existsSync(path.join(document_root, 'html'))) document_root = path.join(document_root, 'html');
-        // else if (fs.existsSync(path.join(document_root, 'static'))) document_root = path.join(document_root, 'static');
+        if (app_ecosystem.static_dir != '') document_root = path.join(document_root, app_ecosystem.static_dir);
+        // if (application.code.path != '') document_root = path.join(document_root, application.code.path);
+        // // if (fs.existsSync(path.join(document_root, 'html'))) document_root = path.join(document_root, 'html');
+        // // else if (fs.existsSync(path.join(document_root, 'static'))) document_root = path.join(document_root, 'static');
         var vhost_config_obj = {
             __keys: ['VirtualHost'],
             'VirtualHost': {

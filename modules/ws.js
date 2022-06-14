@@ -1251,6 +1251,7 @@ var init = _ => {
         var success = req.success && req.success === true;
         var message = req.message ? (`${req.message}`).trim() : '';
         var updated_cwd = req.updated_cwd ? (`${req.updated_cwd}`).trim() : '';
+        var updated_static_dir = req.updated_static_dir ? (`${req.updated_static_dir}`).trim() : '';
         if (application_id != '' && message != '') {
             m.db.get_application(application_id, null, (success1, result1) => {
                 if (success1 === false) return ws_server.return_event_error("pull_application_repo_res_daemon", "database error", client);
@@ -1264,14 +1265,14 @@ var init = _ => {
                 }, "app");
                 // console.log("updated_cwd", updated_cwd);
                 // console.log("result1.ecosystem.cwd", result1.ecosystem.cwd);
-                if (updated_cwd != result1.ecosystem.cwd) {
-                    m.db.update_application(application_id, { 'ecosystem.cwd': updated_cwd }, (success2, result2) => {
+                // if (updated_cwd != result1.ecosystem.cwd) {
+                    m.db.update_application(application_id, { 'ecosystem.cwd': updated_cwd, 'ecosystem.static_dir': updated_static_dir }, (success2, result2) => {
                         if (success2 === false || success2 === null) return ws_server.return_event_error("pull_application_repo_res_daemon", "database error", client);
                         ws_server.send_to_group("update_application_res", {
                             success: true, data: { id: application_id, application: result2 }
                         }, "app");
                     });
-                }
+                // }
             });
         }
     });
