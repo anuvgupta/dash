@@ -343,7 +343,8 @@ var api = {
 
         // generate vhost config object
         var app_ecosystem = application.ecosystem;
-        var document_root = `${host_resource.software.www_root}/${application.slug}`;
+        var apache_app_root = `${host_resource.software.www_root}/${application.slug}`;
+        var document_root = apache_app_root;
         if (app_ecosystem.static_dir != '') document_root = path.join(document_root, app_ecosystem.static_dir);
         // if (application.code.path != '') document_root = path.join(document_root, application.code.path);
         // // if (fs.existsSync(path.join(document_root, 'html'))) document_root = path.join(document_root, 'html');
@@ -356,7 +357,7 @@ var api = {
                 'ServerAdmin': `${global.config.webmaster_email}`,
                 'DocumentRoot': `${document_root}`,
                 'ServerName': `${primary_server_name}`,
-                'ErrorLog': `${document_root}/${app_ecosystem.error_file == '' || app_ecosystem.error_file == null ? app_ecosystem.out_file : app_ecosystem.error_file}`,
+                'ErrorLog': `${apache_app_root}/${app_ecosystem.error_file == '' || app_ecosystem.error_file == null ? app_ecosystem.out_file : app_ecosystem.error_file}`,
                 'Header': [ "set Access-Control-Allow-Origin \"*\"" ]
             }
         };
