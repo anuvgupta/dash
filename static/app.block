@@ -2792,86 +2792,12 @@ app
                                                 block.on('hide');
                                             }
                                         }
-                            div public
-                                class value_edge
-                                css
-                                    width 50%
-                                    display inline-block
-                                    vertical-align top
-                                text label
-                                    val Visibility
-                                    class label_desc
-                                block value
-                                    {
-                                        block.__child('content').css('text-align', 'left');
-                                    }
-                                    class value_text_wrap
-                                    css
-                                        height 25.2px
-                                    switch switch
-                                        val on
-                                        label Public
-                                        css
-                                            margin 0
-                                        {
-                                            block.child('label').css({
-                                                minWidth: '55px',
-                                                marginRight: '6px',
-                                                fontWeight: '300'
-                                            });
-                                        }
-                                        :modified
-                                            {
-                                                //console.log('updated to ' + block.key('state'));
-                                                var value = block.key('state') === true;
-                                                block.data({ label: (value ? 'Public' : 'Private') });
-                                                if (data.hasOwnProperty('locked') && data.locked == true) return;
-                                                block.parent(4).on('send_project_update', {
-                                                    public: value
-                                                });
-                                                event.stopPropagation();
-                                            }
-                            div demo_pass_show
-                                class value_edge
-                                css
-                                    width 50%
-                                    display inline-block
-                                    vertical-align top
-                                text label
-                                    val Password
-                                    class label_desc
-                                block value
-                                    {
-                                        block.__child('content').css('text-align', 'left');
-                                    }
-                                    class value_text_wrap
-                                    css
-                                        height 25.2px
-                                    switch switch
-                                        val off
-                                        label Hide
-                                        css
-                                            margin 0
-                                        {
-                                            block.child('label').css({
-                                                minWidth: '75px',
-                                                marginRight: '6px',
-                                                fontWeight: '300'
-                                            });
-                                        }
-                                        :modified
-                                            {
-                                                //console.log('updated to ' + block.key('state'));
-                                                var value = block.key('state') === true;
-                                                block.data({ label: (value ? 'Show' : 'Hide') });
-                                                if (data.hasOwnProperty('locked') && data.locked == true) return;
-                                                block.parent(4).on('send_project_update', {
-                                                    demo_pass_show: value
-                                                });
-                                                event.stopPropagation();
-                                            }
                             div demo_pass
                                 class value_edge
+                                css
+                                    width 48%
+                                    display inline-block
+                                    vertical-align top
                                 text label
                                     val Password
                                     class label_desc
@@ -2945,6 +2871,84 @@ app
                                                 block.on('hide');
                                             }
                                         }
+                            div demo_pass_show
+                                class value_edge
+                                css
+                                    width 50%
+                                    display inline-block
+                                    vertical-align top
+                                text label
+                                    val Password
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    switch switch
+                                        val off
+                                        label Hide
+                                        css
+                                            margin 0
+                                        {
+                                            block.child('label').css({
+                                                minWidth: '75px',
+                                                marginRight: '6px',
+                                                fontWeight: '300'
+                                            });
+                                        }
+                                        :modified
+                                            {
+                                                //console.log('updated to ' + block.key('state'));
+                                                var value = block.key('state') === true;
+                                                block.data({ label: (value ? 'Show' : 'Hide') });
+                                                if (data.hasOwnProperty('locked') && data.locked == true) return;
+                                                block.parent(4).on('send_project_update', {
+                                                    demo_pass_show: value
+                                                });
+                                                event.stopPropagation();
+                                            }
+                            div public
+                                class value_edge
+                                css
+                                    width 48%
+                                    display inline-block
+                                    vertical-align top
+                                text label
+                                    val Visibility
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    switch switch
+                                        val on
+                                        label Public
+                                        css
+                                            margin 0
+                                        {
+                                            block.child('label').css({
+                                                minWidth: '55px',
+                                                marginRight: '6px',
+                                                fontWeight: '300'
+                                            });
+                                        }
+                                        :modified
+                                            {
+                                                //console.log('updated to ' + block.key('state'));
+                                                var value = block.key('state') === true;
+                                                block.data({ label: (value ? 'Public' : 'Private') });
+                                                if (data.hasOwnProperty('locked') && data.locked == true) return;
+                                                block.parent(4).on('send_project_update', {
+                                                    public: value
+                                                });
+                                                event.stopPropagation();
+                                            }
                             div end_spacer
                                 css
                                     height 15px
