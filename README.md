@@ -77,8 +77,9 @@ Setting up a cloud VM to host both `dash-cloud` and `dash-daemon` processes.
     - Check `config/nginx/reference` folder for example `nginx.conf` main configuration
     - Ensure folders `/etc/nginx/sites-enabled` and `/etc/nginx/sites-available` exist
         - Ensure current `$USER` has write permissions to those folders
-    - Add sites `dash-cloud.conf` and `dash-proxy_apache.conf` from repo folder `config/nginx` to VM folder `/etc/nginx/sites-available`
-        - Then link with `sudo ln -s /etc/nginx/sites-available/dash-cloud.conf /etc/nginx/sites-enabled/dash-cloud.conf` and restart NGINX
+    - Add sites from repo folder `config/nginx` to VM folder `/etc/nginx/sites-available`
+        - Sites include: `dash-core_cloud.conf`, `dash-core_default.conf`, `dash-core_redirect.conf`, `dash-core_ws-upgrade.conf`
+        - Then link with `sudo ln -s /etc/nginx/sites-available/dash-core_cloud.conf /etc/nginx/sites-enabled/dash-core_cloud.conf` and restart NGINX
     - Ensure current `$USER` has the ability to start, stop, and restart the nginx service without requiring a password for sudo
         - One possible solution
             - Create/edit `/etc/sudoers.d/$USER` (ie. `/etc/sudoers.d/ubuntu`) to contain:
@@ -91,6 +92,9 @@ Setting up a cloud VM to host both `dash-cloud` and `dash-daemon` processes.
     - Check `config/apache2/reference` folder for example `apache2.conf`/`ports.conf` main configuration
     - Ensure folders `/etc/apache2/sites-enabled` and `/etc/apache2/sites-available` exist
         - Ensure current `$USER` has write permissions to those folders
+    - Add sites from repo folder `config/apache2` to VM folder `/etc/apache2/sites-available`
+        - Sites include: `dash-core_default.conf`, `dash-core_redirect.conf`
+        - Then link with `sudo ln -s /etc/apache2/sites-available/dash-core_cloud.conf /etc/apache2/sites-enabled/dash-core_cloud.conf` and restart Apache2
     - Ensure current `$USER` has the ability to start, stop, and restart the apache service without requiring a password for sudo
         - One possible solution
             - Create/edit `/etc/sudoers.d/$USER` (ie. `/etc/sudoers.d/ubuntu`) to contain:
