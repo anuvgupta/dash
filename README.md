@@ -105,3 +105,118 @@ Setting up a cloud VM to host both `dash-cloud` and `dash-daemon` processes.
 
  - `git remote set-url origin https://anuvgupta:TOKEN@github.com/anuvgupta/dash.git`
  - `sudo systemctl status apache2.service`
+ 
+&nbsp;  
+&nbsp;  
+&nbsp;  
+
+## Focus Board
+
+right now
+- project icon & editor
+- project purpose
+    - creativity: cool idea, product, invention—bigger flagship projects, unique projects, personal favs
+        - dash, nestor, audiu, rubbr, fitcheck, block.js, pocketjs, uncurated, led-lights
+    - essentials: standards, practice exercises—classic typical software projects everyone should learn to do
+        - anuv.me: personal home page website
+        - tcp-chat: command-line tcp messaging room
+        - messenger: realtime messaging room app
+        - slop: realtime shared grocery list app
+        - space-invaders: space invaders java desktop game
+    - learning: projects created to learn about a technology or library etc.
+        - pi
+    - utility: general use tool, made solely out of need, created during other projects—frameworks, libraries, smaller scripts
+        - tunnel.js, chain.js, vizio-remote, node-scaffold, repetition, dolphin, aliases, flask-react-scaffold
+    - infrastructure???: projects created to support my software ecosystem>>>>>>????????
+    - school: for school/classes/clubs
+        - soundfinder, ut ticket exchange, simplicity-cloud, peer2peer, lancerhacks, sfgpa, sfhacks-results, sitarhero, murk, worldcup, phue-gateway, fakenews, jtrump
+    - work: for internships and career work
+        - zineone event gateway, pres-rcvs integration, capic endpoint simulation, 6connect ipam connector, chessroom
+    - fun: for entertainment
+        - me.anuv.me, games, monarchy, moon, drummer, catchapples, pi?
+    - other: remaining
+
+
+ideas for later
+- external sites
+    - one way
+        - add “external” widget in application to mark as external site, then mark audiu, chessroom, github projects site
+        - in future, add integrations for external sites in the external widget, ie. to control & observe processes through heroku api/cli
+            - possible integrations: heroku (audiu, rubbr-legacy-og), firebase (chessroom), github pages (projects site)
+    - another way
+        - create a resource for each external app, wherever it is running (ie a resource for audiu’s heroku container, a resource for chessroom’s firebase container, etc…)
+- squash application view into a bar, i have so many apps its hard to understand when they are displayed so big (resource and project sizes are fine, apps are too similar to projects)
+- create projects again
+- set project majority for each project: major/flagship (ie pocketjs, blockjs, nestor, audiu, uncurated), minor (like led-lights, tcp-chat, dolphin, messenger, vizioir, moon etc.)
+    - rename majority to flagship?
+- add filter on resources/applications widget for online/offline apps
+    - also sort by port
+- checkbox on whether resource/domain is owned by you or external
+- add resource widget for showing list of available ports (checked with “p” bash shortcut)
+- save dash config to file from ui (mongo backup?)
+- options for app code for when u pull app repo and install packages and build
+    - have options to manually specify the install and build commands and force dash daemon to use those
+    - can disable install and/or build
+    - this allows for using local python and skipping install, ie for jetson nano
+- domain desc should be domains subdomains.join(“, “)
+- refresh buttons on each page (just run the :select_$TYPE function again? or load data firs tthen do that? guess u have to add one on the detail page and one on the content page and they will do diff things)
+- autoremove domains from apps & resources on domain delete
+    - autoremove apps from project on app delete
+- add environment section to application, where you can add and edit env var for pm2 to pass into the app
+- add a secure switch to app which controls the proxy https fields too
+- filter projects by technology, language, visibility, featured, app domain, application
+    - filter applications by interpreter, status, secure, websocket proxy, host resource, domain
+    - filter resources by provider, type, status, domain, location
+    - filter domains by top level
+- idea section, promote ideas to projects
+- sitemap section, generated from applications/projects/domains
+    - resource-focused view shows resources on top and apps underneath/on resources assigned to ports, domains listed under each app
+    - domain-focused view shows domains on top and apps underneath/on domains, resource listed under each app
+    - also have filters to choose which resources or domains or apps to show, similar to main section filters
+- keep identifiers (slugs) unique when updating (its already unique when creating)
+- project focus board before stages and features
+- project stages
+    - add widget for stages in project
+    - each stage has name, tasks to complete (subtasks allowed), and a deadline
+    - can view previous and future stages
+- project features (widget to write out/explain the features of each project in a brief bulleted list)
+- code link button in project app list item view to load (copy) project repo from app repo
+- application batch commands (ideally after implementing app filtering)
+    - send signal to all apps (start, restart, stop)
+    - save proxy for all apps
+- add button on resource to push default nginx & apache configs to resource (ie. ws upgrade, default, redirect, etc.)
+- add switch for secure to force push all the apps to secure or insecure (changes https_force, not https_enable for all app proxies)
+- fix extra long text displays
+- fix log load after first start signal (maybe file doesnt exist yet)
+- add loading gif for slow network requests ie log loading
+- push page state for each view & update view on state change
+- clean up the :hide_editors events for each section
+
+test & bugfix
+- high priority
+- low priority
+
+done:
+- project management
+    - project majority switch
+    - project type (library, application, script, static site, other)
+    - project platform (web, desktop, mobile, embedded, other)
+    - project demo password & demo password display enable
+- cert renewal guide/reminder
+- toast notifications for process signals
+- pull app code using git & install dependency packages
+    - token for private github repos
+    - support for pip install with venv on python venv apps
+- nginx proxy config & apache vhost config generation from minimal buttons & text fields
+    - add application field: proxy_enable, controls whether proxy options are even shown and also writes the nginx config when turned on (deletes it when off, so no need for clear proxy button)
+    - generate proxy servers for each combination of cert and domain name, use minimal number of servers
+    - replace/fix redirect site with smart vhost/proxy rewrite redirects
+    - create field for app/proxy/static path, then use that for apache vhost document root (always set document root to app_root/static_path)
+        - change apache error log to be in app_root directly so its the same as the process ecosystem log
+        - essentially document root will be like slop/html, so we link /var/www/slop to ~/dash/apps/slop, and set the apache config document root to /var/www/slop/html (which actually points to ~/dash/apps/slop/html), then we put hte log in /var/www/slop/error.log (which is actually ~/dash/apps/slop/error.log)
+- process control & status w/ pm2
+- managed object model, view, & controller
+    - objects: project, application, resource, domain
+- masonry grid ui for dashboard
+- jwt auth, cookies, basic ui, cli debugging & more infra
+- node scaffold for web & websocket backend
