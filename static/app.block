@@ -1040,7 +1040,7 @@ app
                             $('div.masonry-grid-container').masonry({
                                 // options
                                 itemSelector: 'div.masonry-grid-container div.dashboard_detail_section',
-                                columnWidth: 455
+                                columnWidth: app.ui.masonry_grid_size
                             });
                             event.stopPropagation();
                         }
@@ -1064,7 +1064,10 @@ app
                                 applications: project.applications,
                                 tech: project.tech,
                                 demo_pass: project.demo_pass,
-                                demo_pass_show: project.demo_pass_show
+                                demo_pass_show: project.demo_pass_show,
+                                type: project.type,
+                                platform: project.platform,
+                                purpose: project.purpose,
                             });
                         }
                     #name
@@ -1353,6 +1356,18 @@ app
                                 tech_languages_block.child('value/text').html('<span class="text_placeholder" style="font-size: 18px;"></span>');
                             }
                         }
+                    #type
+                        {
+                            block.child('subcontent/project_info/type/value/text').data({ choose: `${type}`});
+                        }
+                    #purpose
+                        {
+                            block.child('subcontent/project_info/purpose/value/text').data({ choose: `${purpose}`});
+                        }
+                    #platform
+                        {
+                            block.child('subcontent/project_info/platform/value/text').data({ choose: `${platform}`});
+                        }
                     :hide_editors
                         {
                             //setTimeout(_ => {
@@ -1424,6 +1439,15 @@ app
                             if (old_data.link != new_data.link) {
                                 block.data({ link: new_data.link, });
                                 block.child('subcontent/project_demo/link/value_editor').on('hide');
+                            }
+                            if (old_data.type != new_data.type) {
+                                block.data({ type: new_data.type, });
+                            }
+                            if (old_data.platform != new_data.platform) {
+                                block.data({ platform: new_data.platform, });
+                            }
+                            if (old_data.purpose != new_data.purpose) {
+                                block.data({ purpose: new_data.purpose, });
                             }
                             if (old_data.img != new_data.img) {
                                 block.data({ img: new_data.img, });
@@ -1913,6 +1937,153 @@ app
                                                 });
                                                 event.stopPropagation();
                                             }
+                            div platform
+                                class value_edge
+                                css
+                                    width 48%
+                                    display inline-block
+                                    vertical-align top
+                                    margin-bottom 20px
+                                text label
+                                    val Platform
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    select text
+                                        name project_platform_select
+                                        class value_select
+                                        css
+                                            width 95%
+                                        :change
+                                            {
+                                                var platform_val = block.node().value;
+                                                block.parent(4).on('send_project_update', {
+                                                    platform: platform_val
+                                                });
+                                            }
+                                        #choose
+                                            {
+                                                var children = block.children();
+                                                for (var c in children)
+                                                    children[c].node().removeAttribute('selected');
+                                                block.child(choose).attribute('selected', 'selected');
+                                            }
+                                        option none
+                                            html None
+                                            value none
+                                            selected selected
+                                        {
+                                            for (var t in app.main.config.cloud.project.platforms) {
+                                                var platform = app.main.config.cloud.project.platforms[t];
+                                                block.add(Block('option', platform[0]).data({
+                                                    value: platform[0],
+                                                    html: platform[1]
+                                                }));
+                                            }
+                                        }
+                            div type
+                                class value_edge
+                                css
+                                    width 48%
+                                    display inline-block
+                                    vertical-align top
+                                    margin-bottom 20px
+                                text label
+                                    val Type
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    select text
+                                        name project_type_select
+                                        class value_select
+                                        css
+                                            width 95%
+                                        :change
+                                            {
+                                                var type_val = block.node().value;
+                                                block.parent(4).on('send_project_update', {
+                                                    type: type_val
+                                                });
+                                            }
+                                        #choose
+                                            {
+                                                var children = block.children();
+                                                for (var c in children)
+                                                    children[c].node().removeAttribute('selected');
+                                                block.child(choose).attribute('selected', 'selected');
+                                            }
+                                        option none
+                                            html None
+                                            value none
+                                            selected selected
+                                        {
+                                            for (var t in app.main.config.cloud.project.types) {
+                                                var type = app.main.config.cloud.project.types[t];
+                                                block.add(Block('option', type[0]).data({
+                                                    value: type[0],
+                                                    html: type[1]
+                                                }));
+                                            }
+                                        }
+                            div purpose
+                                class value_edge
+                                css
+                                    width 98%
+                                    display inline-block
+                                    vertical-align top
+                                    margin-bottom 20px
+                                text label
+                                    val Purpose
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    select text
+                                        name project_purpose_select
+                                        class value_select
+                                        css
+                                            width 95%
+                                        :change
+                                            {
+                                                var purpose_val = block.node().value;
+                                                block.parent(4).on('send_project_update', {
+                                                    purpose: purpose_val
+                                                });
+                                            }
+                                        #choose
+                                            {
+                                                var children = block.children();
+                                                for (var c in children)
+                                                    children[c].node().removeAttribute('selected');
+                                                block.child(choose).attribute('selected', 'selected');
+                                            }
+                                        option none
+                                            html None
+                                            value none
+                                            selected selected
+                                        {
+                                            for (var t in app.main.config.cloud.project.purposes) {
+                                                var purpose = app.main.config.cloud.project.purposes[t];
+                                                block.add(Block('option', purpose[0]).data({
+                                                    value: purpose[0],
+                                                    html: purpose[1]
+                                                }));
+                                            }
+                                        }
                             div end_spacer
                                 css
                                     height 15px
@@ -3250,7 +3421,7 @@ app
                             $('div.masonry-grid-container').masonry({
                                 // options
                                 itemSelector: 'div.masonry-grid-container div.dashboard_detail_section',
-                                columnWidth: 455
+                                columnWidth: app.ui.masonry_grid_size
                             });
                             event.stopPropagation();
                         }
@@ -6927,7 +7098,7 @@ app
                             $('div.masonry-grid-container').masonry({
                                 // options
                                 itemSelector: 'div.masonry-grid-container div.dashboard_detail_section',
-                                columnWidth: 455
+                                columnWidth: app.ui.masonry_grid_size
                             });
                             event.stopPropagation();
                         }
@@ -8052,7 +8223,7 @@ app
                             $('div.masonry-grid-container').masonry({
                                 // options
                                 itemSelector: 'div.masonry-grid-container div.dashboard_detail_section',
-                                columnWidth: 455
+                                columnWidth: app.ui.masonry_grid_size
                             });
                             event.stopPropagation();
                         }

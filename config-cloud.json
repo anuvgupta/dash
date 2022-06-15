@@ -13,6 +13,32 @@
     },
     "env": {
         "cloud": {
+            "project": {
+                "types": [
+                    ["scr", "Script"],
+                    ["lib", "Library"],
+                    ["app", "Application"],
+                    ["stc", "Static Site"],
+                    ["oth", "Other"]
+                ],
+                "platforms": [
+                    ["web", "Web"],
+                    ["des", "Desktop"],
+                    ["mob", "Mobile"],
+                    ["emb", "Embedded"],
+                    ["oth", "Other"]
+                ],
+                "purposes": [
+                    ["crt", "Creativity"],
+                    ["ent", "Entertainment"],
+                    ["esn", "Essentials"],
+                    ["lrn", "Learning"],
+                    ["utl", "Utility"],
+                    ["sch", "School"],
+                    ["wrk", "Work"],
+                    ["oth", "Other"]
+                ]
+            },
             "resource": {
                 "types": [
                     ["vm", ["Cloud Virtual Machine", "Cloud VM"]],

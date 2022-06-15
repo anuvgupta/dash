@@ -5,6 +5,7 @@ var app = {
     ui: {
         block: Block('div', 'app'),
         mui_ripple_on: false,
+        masonry_grid_size: 455,
         colors: {
             primary: "rgba(20, 125, 252, 0.94)", //"rgba(0, 123, 255, 0.9)", // "rgba(67, 133, 243, 0.99)", // rgba(219, 43, 58, 0.85)
             background: "#f1f1f1",

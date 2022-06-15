@@ -37,6 +37,9 @@ var api = {
             demo_pass: '',
             demo_pass_show: false,
             major: false,
+            type: 'none',
+            platform: 'none',
+            purpose: 'none',
             tech: {
                 primary: [],
                 secondary: [],
