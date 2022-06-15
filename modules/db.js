@@ -489,7 +489,7 @@ var api = {
             code: {
                 repo: "",
                 branch: "",
-                path: "/"
+                path: ""
             },
             environment: {},
             ecosystem: {
