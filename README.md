@@ -114,28 +114,6 @@ Setting up a cloud VM to host both `dash-cloud` and `dash-daemon` processes.
 
 right now
 - project icon & editor
-- project purpose
-    - creativity: cool idea, product, invention—bigger flagship projects, unique projects, personal favs
-        - dash, nestor, audiu, rubbr, fitcheck, block.js, pocketjs, uncurated, led-lights
-    - essentials: standards, practice exercises—classic typical software projects everyone should learn to do
-        - anuv.me: personal home page website
-        - tcp-chat: command-line tcp messaging room
-        - messenger: realtime messaging room app
-        - slop: realtime shared grocery list app
-        - space-invaders: space invaders java desktop game
-    - learning: projects created to learn about a technology or library etc.
-        - pi
-    - utility: general use tool, made solely out of need, created during other projects—frameworks, libraries, smaller scripts
-        - tunnel.js, chain.js, vizio-remote, node-scaffold, repetition, dolphin, aliases, flask-react-scaffold
-    - infrastructure???: projects created to support my software ecosystem>>>>>>????????
-    - school: for school/classes/clubs
-        - soundfinder, ut ticket exchange, simplicity-cloud, peer2peer, lancerhacks, sfgpa, sfhacks-results, sitarhero, murk, worldcup, phue-gateway, fakenews, jtrump
-    - work: for internships and career work
-        - zineone event gateway, pres-rcvs integration, capic endpoint simulation, 6connect ipam connector, chessroom
-    - fun: for entertainment
-        - me.anuv.me, games, monarchy, moon, drummer, catchapples, pi?
-    - other: remaining
-
 
 ideas for later
 - external sites
@@ -202,6 +180,27 @@ done:
     - project type (library, application, script, static site, other)
     - project platform (web, desktop, mobile, embedded, other)
     - project demo password & demo password display enable
+    - project purpose
+        - creativity: cool idea, product, invention—bigger flagship projects, unique projects, personal favs
+            - dash, nestor, audiu, rubbr, fitcheck, block.js, pocketjs, uncurated, led-lights
+        - essentials: standards, practice exercises—classic typical software projects everyone should learn to do
+            - anuv.me: personal home page website
+            - tcp-chat: command-line tcp messaging room
+            - messenger: realtime messaging room app
+            - slop: realtime shared grocery list app
+            - space-invaders: space invaders java desktop game
+        - learning: projects created to learn about a technology or library etc.
+            - pi
+        - utility: general use tool, made solely out of need, created during other projects—frameworks, libraries, smaller scripts
+            - tunnel.js, chain.js, vizio-remote, node-scaffold, repetition, dolphin, aliases, flask-react-scaffold
+        - infrastructure???: projects created to support my software ecosystem>>>>>>????????
+        - school: for school/classes/clubs
+            - soundfinder, ut ticket exchange, simplicity-cloud, peer2peer, lancerhacks, sfgpa, sfhacks-results, sitarhero, murk, worldcup, phue-gateway, fakenews, jtrump
+        - work: for internships and career work
+            - zineone event gateway, pres-rcvs integration, capic endpoint simulation, 6connect ipam connector, chessroom
+        - fun: for entertainment
+            - me.anuv.me, games, monarchy, moon, drummer, catchapples, pi?
+        - other: remaining
 - cert renewal guide/reminder
 - toast notifications for process signals
 - pull app code using git & install dependency packages
