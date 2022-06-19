@@ -758,10 +758,20 @@ var init = _ => {
                 var host_resource = result1.host;
                 var app_identifier_slug = result1.slug;
                 var _next = (update_obj) => {
+                    var refresh_ecosystem_now = false;
+                    for (var field_name in update_obj) {
+                        var refresh_watched_fields = ['name', 'slug', 'host', 'port', 'ecosystem', 'environment'];
+                        if (refresh_watched_fields.includes(field_name) || field_name.includes('ecosystem.') || field_name.includes('environment.')) {
+                            refresh_ecosystem_now = true;
+                            break;
+                        }
+                    }
                     m.db.update_application(id, update_obj, (success2, result2) => {
                         if (success2 === false) return ws_server.return_event_error("update_application", "database error", client);
-                        if (host_resource != 'none')
-                            m.ws.refresh_daemon_ecosystem(host_resource);
+                        if (host_resource != 'none') {
+                            if (refresh_ecosystem_now)
+                                m.ws.refresh_daemon_ecosystem(host_resource);
+                        }
                         if (result2.host != host_resource && result2.host != 'none') {
                             host_resource = result2.host;
                             m.ws.refresh_daemon_ecosystem(host_resource);
@@ -1355,7 +1365,7 @@ var api = {
     refresh_daemon_ecosystem: (resource_id) => {
         var daemon_client = m.ws.get_daemon_client(resource_id);
         if (daemon_client === null) return;
-        m.db.get_daemon_ecosystem(resource_id, (success, result) => {
+        m.db.get_daemon_ecosystem(resource_id, true, (success, result) => {
             if (success === false || success === null) return;
             ws_server.send_to_client('ecosystem', {
                 ecosystem: result

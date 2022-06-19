@@ -602,7 +602,7 @@ var api = {
             } else resolve(result1.deletedCount == 1, result1);
         });
     },
-    get_daemon_ecosystem: (resource_id, resolve) => {
+    get_daemon_ecosystem: (resource_id, get_environment, resolve) => {
         mongo_api.collection('application').find({
             host: resource_id
         }).toArray((e, result1) => {
@@ -613,7 +613,19 @@ var api = {
                 if (result1) {
                     var ecosystems = {};
                     for (var r in result1) {
-                        ecosystems[result1[r]._id.toString()] = JSON.parse(JSON.stringify(result1[r].ecosystem));
+                        var _key = result1[r]._id.toString();
+                        ecosystems[_key] = JSON.parse(JSON.stringify(result1[r].ecosystem));
+                        var port = result1[r].port;
+                        try {
+                            if (port.trim().length > 0 && port.includes('/')) {
+                                port = port.split('/');
+                                for (var p in port)
+                                    port[p] = parseInt(port[p]);
+                            } else port = [ parseInt(port) ];
+                        } catch (e) { port = []; }
+                        ecosystems[_key]['ports'] = port;
+                        if (get_environment)
+                            ecosystems[_key]['env'] = JSON.parse(JSON.stringify(result1[r].environment));
                     }
                     resolve(true, ecosystems);
                 } else resolve(null, result1);

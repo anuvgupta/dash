@@ -3068,7 +3068,7 @@ app
                             div associate
                                 css
                                     position absolute
-                                    top 24px
+                                    top 23px
                                     right 25px
                                     width 40px
                                     height 40px
@@ -3727,10 +3727,11 @@ app
                                     .parent().sibling('slug').child('value_editor').on('hide')
                                     .parent().sibling('description').child('value_editor').on('hide')
                                 .parent(1).sibling('application_proxy')
+                                    .child('path_port_wrap')
                                     .child('port').child('value_editor').on('hide')
                                     .parent().sibling('path').child('value_editor').on('hide')
-                                .parent(1).sibling('application_ecosystem')
-                                    .parent().sibling('cwd').child('value_editor').on('hide')
+                                .parent(2).sibling('application_ecosystem')
+                                    .child('cwd').child('value_editor').on('hide')
                                     .parent().sibling('static_dir').child('value_editor').on('hide')
                                     .parent().sibling('args').child('value_editor').on('hide')
                                     .parent().sibling('out_file').child('value_editor').on('hide')
@@ -6230,6 +6231,76 @@ app
                                     :mouseout
                                         css
                                             opacity 0.6
+                        div application_environment
+                            class dashboard_detail_section
+                            div title
+                                css
+                                    height auto
+                                    min-height 50px
+                                    width 100%
+                                    position absolute
+                                    top 24px
+                                    left 0
+                                text text
+                                    val Environment
+                                    css
+                                        position absolute
+                                        font-size 27px
+                                        letter-spacing 1px
+                                        opacity 0.95
+                                        top 7px
+                                        left 85px
+                                        font-weight 400
+                                image icon
+                                    src /img/braces_b.png
+                                    height 35px
+                                    width 35px
+                                    css
+                                        position absolute
+                                        top 1px
+                                        left 28px
+                                        opacity 0.6
+                            div spacer
+                                css
+                                     height 80px
+                            div associate
+                                css
+                                    position absolute
+                                    top 23px
+                                    right 25px
+                                    width 40px
+                                    height 40px
+                                block plus
+                                    css
+                                        opacity 0.6
+                                        transition opacity 0.2s ease
+                                    :mouseover
+                                        css
+                                            opacity 0.9
+                                    :mouseout
+                                        css
+                                            opacity 0.6
+                                    image image
+                                        src /img/add_b.png
+                                        height 30px
+                                        width 30px
+                                        css
+                                            cursor pointer
+                                        :click
+                                            {
+
+                                                var application = app.ui.block.child('main/content/applications/detail').key('application');
+                                                if (application) {
+                                                    setTimeout(_ => {
+                                                        app.ws.api.get_domains(null, null, application._id);
+                                                    }, 10);
+                                                }
+                                                event.stopPropagation();
+                                            }
+                            
+                            div end_spacer
+                                css
+                                    height 15px
                         div application_code
                             class dashboard_detail_section
                             css
@@ -6684,7 +6755,7 @@ app
                             div associate
                                 css
                                     position absolute
-                                    top 24px
+                                    top 23px
                                     right 25px
                                     width 40px
                                     height 40px
@@ -10274,7 +10345,7 @@ app
                             div associate
                                 css
                                     position absolute
-                                    top 24px
+                                    top 23px
                                     right 25px
                                     width 40px
                                     height 40px

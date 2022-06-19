@@ -5,6 +5,7 @@
 const fs = require("fs");
 const pm2 = require("pm2");
 const path = require("path");
+const util = require("util");
 const debug = require('debug');
 const websocket = require("ws");
 const split2 = require('split2');
@@ -41,13 +42,36 @@ const utils = {
     rand_int: (low, high) => {  // inclusive
         return (Math.floor(Math.random() * (high - low + 1)) + low);
     },
-    logger: (module, err = false) => {
-        return (...args) => {
-            args = Array.prototype.slice.call(args);
-            args.unshift(`${err ? '* ' : ''}[${module}]${err ? ' ERROR:' : ''}`);
-            target = err ? console.error : console.log;
-            target.apply(null, args);
-        }
+    logger: (id, as_error) => {
+        var e = as_error ? true : false;
+        var logger_obj = (...args) => {
+            var msg = "";
+            for (var i = 0; i < args.length; i++) {
+                var arg = args[i];
+                if (typeof arg === 'object' && arg !== null)
+                    arg = util.inspect(arg, {
+                        showHidden: false, depth: logger_obj.depth, colors: true, compact: false
+                    });
+                msg += `${arg}${i < args.length - 1 ? ' ' : ''}`;
+            }
+            if (e) {
+                msg = `* [${id}] ERROR: ${msg}`;
+                console.error(msg);
+            } else {
+                msg = `[${id}] ${msg}`;
+                console.log(msg);
+            }
+        };
+        logger_obj.depth = null;
+        return logger_obj;
+        // logger: (module, err = false) => {
+        //     return (...args) => {
+        //         args = Array.prototype.slice.call(args);
+        //         args.unshift(`${err ? '* ' : ''}[${module}]${err ? ' ERROR:' : ''}`);
+        //         target = err ? console.error : console.log;
+        //         target.apply(null, args);
+        //     }
+        // },
     },
 };
 
