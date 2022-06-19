@@ -168,6 +168,7 @@ const app = {
         var vhost_file_dir_loc = `${apache_root}/sites-available`;
         var vhost_file_location = `${vhost_file_dir_loc}/dash-app_${app_name}.conf`;
         var vhost_file_link_loc = `${apache_root}/sites-enabled/dash-app_${app_name}.conf`;
+        // var vhost_app_loc = `${app_ecosystem.static_dir && app_ecosystem.static_dir.trim() != '' ? `${app_ecosystem.cwd}/${app_ecosystem.static_dir}` : app_ecosystem.cwd}`;
         var vhost_app_loc = `${app_ecosystem.cwd}`;
         var vhost_app_link_loc = `${www_root}/${app_name}`;
         var vhost_file_content = `# ${app_name} (dash managed application) virtual host configuration\n${vhost_config}\n`;
@@ -292,6 +293,7 @@ const app = {
         if (!fs.existsSync(app_root)) fs.mkdirSync(app_root);
         var _next = (resolve = null) => {
             app_ecosystem.cwd = `${app_repo_package_path}`;
+            app_ecosystem.static_dir = `${code.path}`;
             output_log_path = path.join(app_ecosystem.cwd, app_ecosystem.out_file);
             error_log_path = path.join(app_ecosystem.cwd, app_ecosystem.error_file);
             if (!fs.existsSync(`${output_log_path}`))
@@ -302,6 +304,7 @@ const app = {
                 if (output_log_path != error_log_path) 
                     err_desc = fs.openSync(`${error_log_path}`, "a"); 
                 if (fs.existsSync(`${path.join(app_repo_package_path, 'package.json')}`)) {
+                    // potentially remove lockfile here?
                     package_command = "npm install";
                     var package_full_json = JSON.parse(fs.readFileSync(`${path.join(app_repo_package_path, 'package.json')}`));
                     if (package_full_json.hasOwnProperty('scripts') && package_full_json.scripts.hasOwnProperty('build') && package_full_json.scripts.build != '')
@@ -616,7 +619,8 @@ const ws = {
             ws.send('pull_application_repo_res_daemon', {
                 application_id: application_id,
                 success: success, message: message,
-                updated_cwd: db.ecosystem[application_id] && db.ecosystem[application_id].cwd
+                updated_cwd: db.ecosystem[application_id] && db.ecosystem[application_id].cwd,
+                updated_static_dir: db.ecosystem[application_id] && db.ecosystem[application_id].static_dir
             });
         },
         tail_application_stream: (application_id, log_line, now_ts, error = false) => {

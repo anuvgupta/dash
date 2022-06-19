@@ -29,17 +29,23 @@ var api = {
             docs: '',
             public: public,
             img: null,
+            img_invert: false,  // why was this missing? take it out again if needed
             icon: null,
             featured: false,
             applications: [],
             link: '',
+            demo_pass: '',
+            demo_pass_show: false,
             major: false,
+            type: 'none',
+            platform: 'none',
+            purpose: 'none',
             tech: {
                 primary: [],
                 secondary: [],
                 languages: []
             },
-            tagline: (`${desc.split(' ').splice(0, 6).join(' ')}...`),
+            tagline: (`${desc.split(' ').splice(0, 5).join(' ')}...`),
             description: desc,
             ts_created: timestamp,
             ts_updated: timestamp,
@@ -483,13 +489,14 @@ var api = {
             code: {
                 repo: "",
                 branch: "",
-                path: "/"
+                path: ""
             },
             environment: {},
             ecosystem: {
                 name: `${slug}`,
                 script: "",
                 cwd: "",
+                static_dir: "",
                 error_file: `${slug}.log`,
                 out_file: `${slug}.log`,
                 interpreter: "",

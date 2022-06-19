@@ -38,6 +38,7 @@ function web_return_error(req, res, code, msg) {
 }
 
 var init = _ => {
+    var project_config = global.config.env.cloud.project;
     express_api.get("/api/projects", (req, res) => {
         m.db.project_summary((success, result) => {
             if (success && result) {
@@ -46,6 +47,30 @@ var init = _ => {
                     delete result.projects[p]['public'];
                     delete result.projects[p]['applications'];
                     delete result.projects[p]['domains'];
+                    if (result.projects[p]['demo_pass_show'] !== true)
+                        delete result.projects[p]['demo_pass'];
+                    delete result.projects[p]['demo_pass_show'];
+                    // replace type slug
+                    if (result.projects[p]['type'] && result.projects[p]['type'] != 'none') {
+                        for (var t in project_config.types) {
+                            if (project_config.types[t][0] == result.projects[p]['type'])
+                                result.projects[p]['type'] = project_config.types[t][1];
+                        }
+                    } else result.projects[p]['type'] = 'None';
+                    // replace platform slug
+                    if (result.projects[p]['platform'] && result.projects[p]['platform'] != 'none') {
+                        for (var t in project_config.platforms) {
+                            if (project_config.platforms[t][0] == result.projects[p]['platform'])
+                                result.projects[p]['platform'] = project_config.platforms[t][1];
+                        }
+                    } else result.projects[p]['platform'] = 'None';
+                    // replace purpose slug
+                    if (result.projects[p]['purpose'] && result.projects[p]['purpose'] != 'none') {
+                        for (var t in project_config.purposes) {
+                            if (project_config.purposes[t][0] == result.projects[p]['purpose'])
+                                result.projects[p]['purpose'] = project_config.purposes[t][1];
+                        }
+                    } else result.projects[p]['purpose'] = 'None';
                 }
                 for (var a in result.applications) {
                     result.applications[a] = {

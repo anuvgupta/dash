@@ -6,17 +6,21 @@ body {
     /* background-color: #f9f9f9; */
     background-color: #f1f1f1;
 }
+
 * {
     font-family: 'Source Sans Pro', Trebuchet, Verdana, Helvetica, Arial,
         sans-serif;
 }
+
 .subbutton {
     transition: background-color 0.15s ease;
     background-color: #f8f8f8;
 }
+
 .subbutton:hover {
     background-color: #e9e9e9;
 }
+
 .subbutton:active {
     background-color: #f1f1f1;
 }
@@ -35,12 +39,14 @@ br.break {
         -o-transform: rotate(0deg);
         transform: rotate(0deg);
     }
+
     to {
         -webkit-transform: rotate(360deg);
         -o-transform: rotate(360deg);
         transform: rotate(360deg);
     }
 }
+
 @keyframes rotating {
     from {
         -ms-transform: rotate(0deg);
@@ -49,6 +55,7 @@ br.break {
         -o-transform: rotate(0deg);
         transform: rotate(0deg);
     }
+
     to {
         -ms-transform: rotate(360deg);
         -moz-transform: rotate(360deg);
@@ -57,18 +64,21 @@ br.break {
         transform: rotate(360deg);
     }
 }
+
 @-webkit-keyframes rotating_n {
     from {
         -webkit-transform: rotate(0deg);
         -o-transform: rotate(0deg);
         transform: rotate(0deg);
     }
+
     to {
         -webkit-transform: rotate(-360deg);
         -o-transform: rotate(-360deg);
         transform: rotate(-360deg);
     }
 }
+
 @keyframes rotating_n {
     from {
         -ms-transform: rotate(0deg);
@@ -77,6 +87,7 @@ br.break {
         -o-transform: rotate(0deg);
         transform: rotate(0deg);
     }
+
     to {
         -ms-transform: rotate(-360deg);
         -moz-transform: rotate(-360deg);
@@ -85,6 +96,7 @@ br.break {
         transform: rotate(-360deg);
     }
 }
+
 .rotating4 {
     -webkit-animation: rotating 4s linear infinite;
     -moz-animation: rotating 4s linear infinite;
@@ -92,6 +104,7 @@ br.break {
     -o-animation: rotating 4s linear infinite;
     animation: rotating 4s linear infinite;
 }
+
 .rotating4_n {
     -webkit-animation: rotating_n 4s linear infinite;
     -moz-animation: rotating_n 4s linear infinite;
@@ -99,6 +112,7 @@ br.break {
     -o-animation: rotating_n 4s linear infinite;
     animation: rotating_n 4s linear infinite;
 }
+
 .rotating5 {
     -webkit-animation: rotating 5s linear infinite;
     -moz-animation: rotating 5s linear infinite;
@@ -106,6 +120,7 @@ br.break {
     -o-animation: rotating 5s linear infinite;
     animation: rotating 5s linear infinite;
 }
+
 .rotating5_n {
     -webkit-animation: rotating_n 5s linear infinite;
     -moz-animation: rotating_n 5s linear infinite;
@@ -113,6 +128,7 @@ br.break {
     -o-animation: rotating_n 5s linear infinite;
     animation: rotating_n 5s linear infinite;
 }
+
 .rotating6 {
     -webkit-animation: rotating 6s linear infinite;
     -moz-animation: rotating 6s linear infinite;
@@ -120,6 +136,7 @@ br.break {
     -o-animation: rotating 6s linear infinite;
     animation: rotating 6s linear infinite;
 }
+
 .rotating6_n {
     -webkit-animation: rotating_n 6s linear infinite;
     -moz-animation: rotating_n 6s linear infinite;
@@ -127,6 +144,7 @@ br.break {
     -o-animation: rotating_n 6s linear infinite;
     animation: rotating_n 6s linear infinite;
 }
+
 .rotating7 {
     -webkit-animation: rotating 7s linear infinite;
     -moz-animation: rotating 7s linear infinite;
@@ -134,6 +152,7 @@ br.break {
     -o-animation: rotating 7s linear infinite;
     animation: rotating 7s linear infinite;
 }
+
 .rotating7_n {
     -webkit-animation: rotating_n 7s linear infinite;
     -moz-animation: rotating_n 7s linear infinite;
@@ -141,6 +160,7 @@ br.break {
     -o-animation: rotating_n 7s linear infinite;
     animation: rotating_n 7s linear infinite;
 }
+
 .rotating8 {
     -webkit-animation: rotating 8s linear infinite;
     -moz-animation: rotating 8s linear infinite;
@@ -148,6 +168,7 @@ br.break {
     -o-animation: rotating 8s linear infinite;
     animation: rotating 8s linear infinite;
 }
+
 .rotating8_n {
     -webkit-animation: rotating_n 8s linear infinite;
     -moz-animation: rotating_n 8s linear infinite;
@@ -160,6 +181,7 @@ br.break {
     opacity: 0.97;
     transition: opacity 0.2s ease;
 }
+
 .new_project_button:hover {
     opacity: 0.8;
 }
@@ -170,6 +192,7 @@ br.break {
     display: inline-block;
     margin-left: 10px;
 }
+
 .modal_text_input {
     font-size: 18px;
     margin: 1px 0;
@@ -177,6 +200,7 @@ br.break {
     padding: 5px 10px;
     box-sizing: border-box;
 }
+
 select.modal_select_input {
     font-size: 18px;
     margin: 1px 0;
@@ -184,12 +208,15 @@ select.modal_select_input {
     padding: 5px 10px;
     box-sizing: border-box;
 }
+
 .modal_title {
     font-size: 25px;
 }
+
 h5.modal-title {
     margin-top: 6px;
 }
+
 div.modal-dialog div.modal-footer button.bootbox-cancel {
     text-transform: uppercase;
     letter-spacing: 2.5px;
@@ -197,6 +224,7 @@ div.modal-dialog div.modal-footer button.bootbox-cancel {
     font-size: 13px;
     /* outline: none; */
 }
+
 div.modal-dialog div.modal-footer button.bootbox-accept {
     text-transform: uppercase;
     letter-spacing: 2.5px;
@@ -204,6 +232,7 @@ div.modal-dialog div.modal-footer button.bootbox-accept {
     font-size: 13px;
     /* outline: none; */
 }
+
 span.modal_text_input_label {
     letter-spacing: 1px;
 }
@@ -253,13 +282,16 @@ div.value_edit_button_hidden {
     opacity: 0;
     pointer-events: none;
 }
+
 div.value_edit_button {
     opacity: 0.6;
     pointer-events: auto;
 }
+
 div.value_edit_button:hover {
     opacity: 0.9;
 }
+
 input.value_editor {
     opacity: 0.9;
     font-size: 26px;
@@ -284,6 +316,7 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
+
 a:hover {
     color: rgba(10, 115, 242, 0.75);
     text-decoration: none;
@@ -300,6 +333,7 @@ button.menu-button {
     background-color: rgba(50, 50, 50, 0);
     transition: background-color 0.15s ease;
 }
+
 button.menu-button:hover {
     background-color: rgba(50, 50, 50, 0.05);
 }
@@ -323,7 +357,7 @@ div.dashboard_detail_section {
     vertical-align: top;
 }
 
-div.resource-content {
+/* div.resource-content {
     transition: height 0.2s ease, max-height 0.2s ease;
 }
 
@@ -335,6 +369,21 @@ div.application-content {
 }
 div.domain-content {
     transition: height 0.35s ease, max-height 0.35s ease;
+} */
+div.resource-content {
+    transition: height 0.15s ease, max-height 0.15s ease;
+}
+
+div.project-content {
+    transition: height 0.15s ease, max-height 0.15s ease;
+}
+
+div.application-content {
+    transition: height 0.15s ease, max-height 0.15s ease;
+}
+
+div.domain-content {
+    transition: height 0.15s ease, max-height 0.15s ease;
 }
 
 span.noItemsMessage {
@@ -393,6 +442,7 @@ div.tech_delete_button {
     top: 6px;
     position: absolute;
 }
+
 div.tech_delete_button:hover {
     opacity: 0.6;
 }
@@ -405,6 +455,7 @@ div.tech_delete_button_small {
     top: 2.5px;
     position: absolute;
 }
+
 div.tech_delete_button_small:hover {
     opacity: 0.6;
 }
