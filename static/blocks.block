@@ -4181,3 +4181,88 @@
                 } else block.child('block/renew').css('display', 'none');
             });
         }
+!application-environment-list-item
+    init
+        {
+            var block = Block('div');
+            block
+                .css({
+                    height: '46px',
+                    width: '100%',
+                    marginBottom: '3px',
+                })
+                .on('lock', (e, b, d) => {
+                    b.css('opacity', '0.8').css('pointer-events', 'none');
+                })
+                .on('unlock', (e, b, d) => {
+                    b.css('opacity', '1').css('pointer-events', 'auto');
+                })
+                .add(Block('block', 1)
+                    .__child('content')
+                        .css('text-align', 'left')
+                        .__parent()
+                    .css({
+                        height: '46px',
+                        borderBottom: '1px solid #f6f6f6',
+                        position: 'relative',
+                        width: '100%',
+                    })
+                    .add(Block('block', 'env_key')
+                        .__child('content')
+                            .css('text-align', 'left')
+                            .__parent()
+                        .css({
+                            fontSize: '16px',
+                            letterSpacing: '0.6px',
+                            paddingLeft: '10px',
+                            color: '#444',
+                            width: '50%',
+                            height: '100%',
+                            boxSizing: 'border-box',
+                            display: 'inline-table',
+                            verticalAlign: 'top'
+                        })
+                        .add(Block('text', 1)
+                            .data('_')
+                        )
+                    )
+                    .add(Block('block', 'env_val')
+                        .__child('content')
+                            .css('text-align', 'left')
+                            .__parent()
+                        .css({
+                            fontSize: '16px',
+                            letterSpacing: '0.6px',
+                            paddingLeft: '10px',
+                            color: '#444',
+                            width: '50%',
+                            height: '100%',
+                            boxSizing: 'border-box',
+                            display: 'inline-table',
+                            verticalAlign: 'top'
+                        })
+                        .add(Block('text', 1)
+                            .data('_')
+                        )
+                    )
+                )
+            ;
+            return block;
+        }
+    load
+        {
+            var reserved_env_keys = ['PORT', 'PORT_SCK'];
+            data('env_key', env_key => {
+                block.key('env_key', env_key);
+                block.child('block/env_key/text').html('').data(`${env_key}`);
+                if (reserved_env_keys.includes(env_key))
+                    block.on('lock');
+            });
+            data('env_value', env_val => {
+                block.key('env_val', env_val);
+                block.child('block/env_val/text').html('').data(`${env_val}`);
+            });
+            data('first', (first) => {
+                block.key('first', first);
+            });
+        }

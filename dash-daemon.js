@@ -719,6 +719,7 @@ const pm = {
         pm2.connect(!(global.config.pm2_daemon_mode), resolve);
     },
     start_process: (ecosystem, app_id, resolve = null) => {
+        console.log(ecosystem);
         pm2.delete(ecosystem.name, (error1, env1) => {
             if (error1) console.error(error1);
             // console.log('env1', env1);

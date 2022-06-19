@@ -615,6 +615,7 @@ var api = {
                     for (var r in result1) {
                         var _key = result1[r]._id.toString();
                         ecosystems[_key] = JSON.parse(JSON.stringify(result1[r].ecosystem));
+                        delete ecosystems[_key]['static_dir'];
                         var port = result1[r].port;
                         try {
                             if (port.trim().length > 0 && port.includes('/')) {
@@ -623,9 +624,13 @@ var api = {
                                     port[p] = parseInt(port[p]);
                             } else port = [ parseInt(port) ];
                         } catch (e) { port = []; }
-                        ecosystems[_key]['ports'] = port;
-                        if (get_environment)
-                            ecosystems[_key]['env'] = JSON.parse(JSON.stringify(result1[r].environment));
+                        //ecosystems[_key]['ports'] = port;
+                        if (get_environment) {
+                            var app_environment = JSON.parse(JSON.stringify(result1[r].environment));
+                            if (port.length > 0) app_environment['PORT'] = port[0];
+                            if (port.length > 1) app_environment['PORT_SCK'] = port[1];
+                            ecosystems[_key]['env'] = app_environment;
+                        }
                     }
                     resolve(true, ecosystems);
                 } else resolve(null, result1);

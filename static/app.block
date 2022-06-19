@@ -3510,6 +3510,7 @@ app
                     #application
                         {
                             block.key('application', application);
+                            application.environment.__port__ = application.port;
                             block.data({
                                 name: application.name,
                                 slug: application.slug,
@@ -3517,6 +3518,7 @@ app
                                 port: application.port,
                                 host: application.host,
                                 ecosystem: application.ecosystem,
+                                environment: application.environment,
                                 domains: application.domains,
                                 primary_domain: application.primary_domain,
                                 status: application.status,
@@ -3615,6 +3617,13 @@ app
                             if (args_alt == '') args_alt = '<span class="text_placeholder">--flagA arg0 arg1 arg2</span>';
                             block.child('subcontent/application_ecosystem/args/value/text').html(`${args_alt}`);
                             block.child('subcontent/application_ecosystem/args/value_editor').attribute('value', `${args}`);
+                        }
+                    #environment
+                        {
+                            //console.log('received application environment', environment);
+                            block.child('subcontent/application_environment/list').data({
+                                environment: environment
+                            });
                         }
                     #domains
                         {
@@ -3801,11 +3810,17 @@ app
                             if (old_data.status_time != new_data.status_time) {
                                 block.data({ status_time: new_data.status_time });
                             }
+                            //if (!new_data.environment) new_data.environment = {};
+                            new_data.environment.__port__ = new_data.port;
+                            if (JSON.stringify(old_data.environment) != JSON.stringify(new_data.environment)) {
+                                block.data({ environment: new_data.environment, });
+                            }
                             var update_ecosystem = false;
                             if (old_data.ecosystem.cwd != new_data.ecosystem.cwd) {
                                 update_ecosystem = true;
                                 block.child('subcontent/application_ecosystem/cwd/value_editor').on('hide');
-                            }if (old_data.ecosystem.static_dir != new_data.ecosystem.static_dir) {
+                            }
+                            if (old_data.ecosystem.static_dir != new_data.ecosystem.static_dir) {
                                 update_ecosystem = true;
                                 block.child('subcontent/application_ecosystem/static_dir/value_editor').on('hide');
                             }
@@ -6233,6 +6248,8 @@ app
                                             opacity 0.6
                         div application_environment
                             class dashboard_detail_section
+                            css
+                                min-height 160px
                             div title
                                 css
                                     height auto
@@ -6297,7 +6314,80 @@ app
                                                 }
                                                 event.stopPropagation();
                                             }
-                            
+                            div list
+                                css
+                                    //background-color red
+                                    width 100%
+                                    max-height 250px
+                                    height auto
+                                    min-height 45px
+                                    overflow-x none
+                                    overflow-y auto
+                                #environment
+                                    {
+                                        var port = null;
+                                        var port_sck = null;
+                                        if (environment.hasOwnProperty('__port__')) {
+                                            if (environment.__port__) {
+                                                if (environment.__port__.includes('/')) {
+                                                    port = environment.__port__.split('/');
+                                                    port_sck = parseInt(port[1]);
+                                                    port = parseInt(port[0]);
+                                                } else port = parseInt(environment.__port__);
+                                            }
+                                            delete environment['__port__'];
+                                        }
+                                        if (port !== null) environment['PORT'] = port;
+                                        if (port_sck !== null) environment['PORT_SCK'] = port_sck;
+                                        console.log(environment, port, port_sck);
+                                        console.log(Object.keys(environment).length);
+                                        if (Object.keys(environment).length <= 0) {
+                                            block
+                                                .html('')
+                                                .css({
+                                                    textAlign: 'center',
+                                                    paddingTop: '15px',
+                                                    paddingBottom: '10px',
+                                                    minHeight: '45px',
+                                                    borderTop: 'none',
+                                                })
+                                                .add(Block('text', 1)
+                                                    .html('No environment variables for application.')
+                                                    .css({
+                                                        letterSpacing: '1.3px',
+                                                        fontSize: '16px',
+                                                        color: '#333',
+                                                        fontStyle: 'italic',
+                                                    })
+                                                )
+                                            ;
+                                        } else {
+                                            block
+                                                .html('')
+                                                .css({
+                                                    textAlign: 'left',
+                                                    paddingTop: '0',
+                                                    paddingBottom: '0',
+                                                    minHeight: '105px',
+                                                    borderTop: '1px solid #f6f6f6',
+                                                })
+                                            ;
+                                            var first = true;
+                                            for (var env_key in environment) {
+                                                var env_value = environment[env_key];
+                                                block.add(Block('application-environment-list-item', `app_env_${env_key}`)
+                                                    .data({ env_key: env_key, env_value: env_value }).data({
+                                                        first: first
+                                                    })
+                                                );
+                                                first = false;
+                                            }
+                                        }
+                                        block.parent(2).on('update_grid');
+                                        setTimeout(_ => {
+                                            Block.queries();
+                                        }, 10);
+                                    }
                             div end_spacer
                                 css
                                     height 15px
