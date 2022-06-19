@@ -129,6 +129,25 @@ var app = {
                     }
                 });
             },
+            edit_project_icon: (id, url) => {
+                bootbox.confirm({
+                    centerVertical: true,
+                    title: '<span class="modal_title">Update Project</span>',
+                    message: `<div id='update_project_icon_display_modal'>` +
+                        `<div style="margin: 3px 0;"><span class="modal_text_input_label">Icon URL:</span>&nbsp;` +
+                        `<input value='${url}' placeholder="/img/projects/project-zero-icon.png" class="modal_text_input" id="up_modal_iconurl_input" type='text' name='up_modal_imgurl'/></div>` +
+                        `<div style="height: 8px"></div></div>`,
+                    callback: (result) => {
+                        if (result) {
+                            var icon_url = (`${$('#update_project_icon_display_modal #up_modal_iconurl_input')[0].value}`).trim();
+                            app.ws.api.update_project(id, {
+                                icon: icon_url,
+                            });
+                        }
+                        return true;
+                    }
+                });
+            },
             new_resource: _ => {
                 bootbox.confirm({
                     centerVertical: true,

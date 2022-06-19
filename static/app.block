@@ -1068,6 +1068,7 @@ app
                                 type: project.type,
                                 platform: project.platform,
                                 purpose: project.purpose,
+                                icon: project.icon,
                             });
                         }
                     #name
@@ -1154,6 +1155,12 @@ app
                         {
                             block.child('subcontent/project_info/image').data({
                                 update_invert: img_invert
+                            });
+                        }
+                    #icon
+                        {
+                            block.child('subcontent/project_demo/icon').data({
+                                update: icon ? (`${icon}`).trim() : ''
                             });
                         }
                     #repo
@@ -1454,6 +1461,9 @@ app
                             }
                             if (old_data.img_invert != new_data.img_invert) {
                                 block.data({ img_invert: new_data.img_invert, });
+                            }
+                            if (old_data.icon != new_data.icon) {
+                                block.data({ icon: new_data.icon, });
                             }
                             if (old_data.repo != new_data.repo) {
                                 block.data({ repo: new_data.repo, });
@@ -2713,6 +2723,45 @@ app
                             div spacer
                                 css
                                      height 80px
+                            div public
+                                class value_edge
+                                css
+                                    width 48%
+                                    display inline-block
+                                    vertical-align top
+                                text label
+                                    val Visibility
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    switch switch
+                                        val on
+                                        label Public
+                                        css
+                                            margin 0
+                                        {
+                                            block.child('label').css({
+                                                minWidth: '55px',
+                                                marginRight: '6px',
+                                                fontWeight: '300'
+                                            });
+                                        }
+                                        :modified
+                                            {
+                                                //console.log('updated to ' + block.key('state'));
+                                                var value = block.key('state') === true;
+                                                block.data({ label: (value ? 'Public' : 'Private') });
+                                                if (data.hasOwnProperty('locked') && data.locked == true) return;
+                                                block.parent(4).on('send_project_update', {
+                                                    public: value
+                                                });
+                                                event.stopPropagation();
+                                            }
                             div link
                                 class value_edge
                                 text label
@@ -2878,7 +2927,7 @@ app
                                     display inline-block
                                     vertical-align top
                                 text label
-                                    val Password
+                                    val Display
                                     class label_desc
                                 block value
                                     {
@@ -2910,48 +2959,78 @@ app
                                                 });
                                                 event.stopPropagation();
                                             }
-                            div public
-                                class value_edge
-                                css
-                                    width 48%
-                                    display inline-block
-                                    vertical-align top
-                                text label
-                                    val Visibility
-                                    class label_desc
-                                block value
-                                    {
-                                        block.__child('content').css('text-align', 'left');
-                                    }
-                                    class value_text_wrap
-                                    css
-                                        height 25.2px
-                                    switch switch
-                                        val on
-                                        label Public
-                                        css
-                                            margin 0
-                                        {
-                                            block.child('label').css({
-                                                minWidth: '55px',
-                                                marginRight: '6px',
-                                                fontWeight: '300'
-                                            });
-                                        }
-                                        :modified
-                                            {
-                                                //console.log('updated to ' + block.key('state'));
-                                                var value = block.key('state') === true;
-                                                block.data({ label: (value ? 'Public' : 'Private') });
-                                                if (data.hasOwnProperty('locked') && data.locked == true) return;
-                                                block.parent(4).on('send_project_update', {
-                                                    public: value
-                                                });
-                                                event.stopPropagation();
-                                            }
                             div end_spacer
                                 css
                                     height 15px
+                            block icon
+                                css
+                                    height 80px
+                                    width 80px
+                                    position absolute
+                                    top 80px
+                                    right 50px
+                                    border-radius 4px
+                                    opacity 0.99
+                                    transition opacity 0.2s ease
+                                    cursor pointer
+                                    //-webkit-box-shadow 1px 1px 2px 1px rgba(94,94,94,0.05)
+                                    //box-shadow 1px 1px 2px 1px rgba(94,94,94,0.05)
+                                #update
+                                    {
+                                        block.key('img_path', update);
+                                        var data = {
+                                            src: '/img/gear_bg.jpg',
+                                            css: {
+                                                opacity: '0.75'
+                                            }
+                                        };
+                                        if (update && update.trim() != '') {
+                                            //console.log(update);
+                                            data.src = update;
+                                            data.css.opacity = '0.97';
+                                        }
+                                        block.child('img').data(data);
+                                    }
+                                $edit_opacity 0.95
+                                :mouseover
+                                    css
+                                        opacity 0.94
+                                    {
+                                        block.child('edit').css('opacity', block.key('edit_opacity'));
+                                    }
+                                :mouseout
+                                    css
+                                        opacity 0.99
+                                    edit
+                                        css
+                                            opacity 0
+                                :click
+                                    {
+                                        var url = '';
+                                        if (block.key('img_path'))
+                                            url = block.key('img_path');
+                                        app.ui.display_modal.edit_project_icon(block.parent(2).key('project')._id.toString(), url);
+                                    }
+                                image img
+                                    src /img/gear_bg.jpg
+                                    height 80px
+                                    width 80px
+                                    css
+                                        border-radius 7px
+                                        position absolute
+                                        top 0
+                                        left 0
+                                        opacity 0.9
+                                image edit
+                                    src /img/edit_b.png
+                                    height 25px
+                                    width 25px
+                                    css
+                                        margin 0 auto
+                                        position relative
+                                        z-index 100
+                                        opacity 0
+                                        transition opacity 0.15s ease
                         div project_apps
                             class dashboard_detail_section
                             css
@@ -3123,7 +3202,6 @@ app
                             div end_spacer
                                 css
                                     height 40px
-                        
             div applications
                 $active_view content
                 css
@@ -10476,6 +10554,9 @@ app
                                                     borderTop: '1px solid #f6f6f6',
                                                 })
                                             ;
+                                            for (var a in applications) {
+                                                // TODO: sort applications by port in ascending order, use the second port if it has two (the one after the slash)
+                                            }
                                             var first = true;
                                             for (var a in applications) {
                                                 var application = applications[a];
