@@ -10625,9 +10625,11 @@ app
                                                     borderTop: '1px solid #f6f6f6',
                                                 })
                                             ;
-                                            for (var a in applications) {
-                                                // TODO: sort applications by port in ascending order, use the second port if it has two (the one after the slash)
-                                            }
+                                            applications = applications.sort((a, b) => {
+                                                var port_a = app.main.extract_port(a.port);
+                                                var port_b = app.main.extract_port(b.port);
+                                                return (port_a < port_b ? -1 : (port_b < port_a ? 1 : (0)));
+                                            })
                                             var first = true;
                                             for (var a in applications) {
                                                 var application = applications[a];

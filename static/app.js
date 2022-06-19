@@ -700,6 +700,12 @@ var app = {
     },
     main: {
         config: {},
+        extract_port: p => {
+            if (p.includes('/'))
+                p = p.split('/')[1];
+            p = parseInt(p);
+            return p;
+        },
         init: _ => {
             console.clear();
             console.log("[main] loading...");
