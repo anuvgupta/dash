@@ -4197,6 +4197,10 @@
                 .on('unlock', (e, b, d) => {
                     b.css('opacity', '1').css('pointer-events', 'auto');
                 })
+                .on('hide_editor', (e, b, d) => {
+                    b.child('block/env_key/value_editor').on('hide');
+                    e.stopPropagation();
+                })
                 .add(Block('block', 1)
                     .__child('content')
                         .css('text-align', 'left')
@@ -4225,6 +4229,70 @@
                         .add(Block('text', 1)
                             .data('_')
                         )
+                        .on('mouseover', (e, b, d) => {
+                            if (b.child('edit_button').key('showing') == 'off')
+                                b.child('edit_button').on('show');
+                        })
+                        .on('mouseout', (e, b, d) => {
+                            if (b.child('edit_button').key('showing') == 'on')
+                                b.child('edit_button').on('hide');
+                        })
+                        .add(Block('edit-button', 'edit_button')
+                            .css({
+                                marginLeft: '12px',
+                                paddingTop: '4px',
+                            })
+                            .on('click', (e, b, d) => {
+                                //b.parent(2).data('');
+                                b.css('display', 'none');
+                                b.sibling('text').css('display', 'none')
+                                    .sibling('value_editor').css('display', 'block');
+                                //console.log(b.parent(4).key('application').name);
+                                b.sibling('value_editor').node().value = block.key('env_key');
+                                setTimeout(_ => {
+                                    b.sibling('value_editor').node().select();
+                                }, 15);
+                            })
+                        )
+                        .add(Block('input', 'value_editor')
+                            .class('value_editor')
+                            .attribute('placeholder', 'env-key')
+                            .css({
+                                display: 'none',
+                                height: '27px',
+                                marginTop: '-2px',
+                                marginLeft: '-2px',
+                                marginBottom: '2px',
+                                width: '55%',
+                                fontSize: '16px',
+                            })
+                            .on('hide', (e, b, d) => {
+                                b.css('display', 'none').sibling('text').css('display', 'inline-block').sibling('edit_button').css('display', 'inline-block');
+                                e.stopPropagation();
+                            })
+                            .on('keyup', (e, b, d) => {
+                                if (e.keyCode == 13) {
+                                    // enter
+                                    var value = b.node().value;
+                                    if (!value) value = '';
+                                    value = (`${value}`).trim();
+                                    if (value.length > 0) {
+                                        block.parent().on('rename', {
+                                            from: block.key('env_key'),
+                                            to: value
+                                        });
+                                    } else {
+                                        block.parent().on('remove', {
+                                            key: block.key('env_key')
+                                        });
+                                    }
+                                    setTimeout(_ => { b.on('hide'); }, 250);
+                                } else if (e.keyCode == 27) {
+                                    // escape
+                                    b.on('hide');
+                                }
+                            })
+                        )
                     )
                     .add(Block('block', 'env_val')
                         .__child('content')
@@ -4243,6 +4311,67 @@
                         })
                         .add(Block('text', 1)
                             .data('_')
+                        )
+                        .on('mouseover', (e, b, d) => {
+                            if (b.child('edit_button').key('showing') == 'off')
+                                b.child('edit_button').on('show');
+                        })
+                        .on('mouseout', (e, b, d) => {
+                            if (b.child('edit_button').key('showing') == 'on')
+                                b.child('edit_button').on('hide');
+                        })
+                        .add(Block('edit-button', 'edit_button')
+                            .css({
+                                marginLeft: '12px',
+                                paddingTop: '4px',
+                            })
+                            .on('click', (e, b, d) => {
+                                //b.parent(2).data('');
+                                b.css('display', 'none');
+                                b.sibling('text').css('display', 'none')
+                                    .sibling('value_editor').css('display', 'block');
+                                //console.log(b.parent(4).key('application').name);
+                                b.sibling('value_editor').node().value = block.key('env_val');
+                                setTimeout(_ => {
+                                    b.sibling('value_editor').node().select();
+                                }, 15);
+                            })
+                        )
+                        .add(Block('input', 'value_editor')
+                            .class('value_editor')
+                            .attribute('placeholder', 'env-val')
+                            .css({
+                                display: 'none',
+                                height: '27px',
+                                marginTop: '-2px',
+                                marginLeft: '-2px',
+                                marginBottom: '2px',
+                                width: '55%',
+                                fontSize: '16px',
+                            })
+                            .on('hide', (e, b, d) => {
+                                b.css('display', 'none').sibling('text').css('display', 'inline-block').sibling('edit_button').css('display', 'inline-block');
+                                e.stopPropagation();
+                            })
+                            .on('keyup', (e, b, d) => {
+                                if (e.keyCode == 13) {
+                                    // enter
+                                    var value = b.node().value;
+                                    if (!value) value = '';
+                                    value = (`${value}`).trim();
+                                    //if (value.length > 0) {
+                                        block.parent().on('update', {
+                                            key: block.key('env_key'),
+                                            from: block.key('env_val'),
+                                            val: value,
+                                        });
+                                    //}
+                                    setTimeout(_ => { b.on('hide'); }, 250);
+                                } else if (e.keyCode == 27) {
+                                    // escape
+                                    b.on('hide');
+                                }
+                            })
                         )
                     )
                 )

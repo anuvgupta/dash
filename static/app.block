@@ -3696,7 +3696,7 @@ app
                         }
                     #code
                         {
-                            console.log(code);
+                            //console.log(code);
                             // repo
                             var repo_alt = code.repo;
                             var repo_alt_alt = repo_alt;
@@ -3814,6 +3814,7 @@ app
                             new_data.environment.__port__ = new_data.port;
                             if (JSON.stringify(old_data.environment) != JSON.stringify(new_data.environment)) {
                                 block.data({ environment: new_data.environment, });
+                                block.child('subcontent/application_environment/list').on('hide_editors');
                             }
                             var update_ecosystem = false;
                             if (old_data.ecosystem.cwd != new_data.ecosystem.cwd) {
@@ -6280,7 +6281,7 @@ app
                             div spacer
                                 css
                                      height 80px
-                            div associate
+                            div add_field
                                 css
                                     position absolute
                                     top 23px
@@ -6305,13 +6306,16 @@ app
                                             cursor pointer
                                         :click
                                             {
-
-                                                var application = app.ui.block.child('main/content/applications/detail').key('application');
-                                                if (application) {
-                                                    setTimeout(_ => {
-                                                        app.ws.api.get_domains(null, null, application._id);
-                                                    }, 10);
-                                                }
+                                                var env_local = block.parent(1).sibling('list').key('environment_local');
+                                                var new_key_name = 'field-' + Object.keys(env_local).length;
+                                                for (var z = 1; env_local.hasOwnProperty(new_key_name); z++)
+                                                    new_key_name += '-' + z;
+                                                var new_field_val = 'value-' + Object.keys(env_local).length * 5;
+                                                block.parent(1).sibling('list').on('update', {
+                                                    key: new_key_name,
+                                                    val: new_field_val,
+                                                    from: '',
+                                                });
                                                 event.stopPropagation();
                                             }
                             div list
@@ -6323,8 +6327,17 @@ app
                                     min-height 45px
                                     overflow-x none
                                     overflow-y auto
+                                {
+                                    block.key('environment_local', {});
+                                }
                                 #environment
                                     {
+                                        if (environment) {
+                                            var env_copy = JSON.parse(JSON.stringify(environment));
+                                            delete env_copy['__port__'];
+                                            block.key('environment_local',  env_copy);
+                                            console.log(env_copy);
+                                        }
                                         var port = null;
                                         var port_sck = null;
                                         if (environment.hasOwnProperty('__port__')) {
@@ -6339,8 +6352,8 @@ app
                                         }
                                         if (port !== null) environment['PORT'] = port;
                                         if (port_sck !== null) environment['PORT_SCK'] = port_sck;
-                                        console.log(environment, port, port_sck);
-                                        console.log(Object.keys(environment).length);
+                                        //console.log(environment, port, port_sck);
+                                        //console.log(Object.keys(environment).length);
                                         if (Object.keys(environment).length <= 0) {
                                             block
                                                 .html('')
@@ -6387,6 +6400,46 @@ app
                                         setTimeout(_ => {
                                             Block.queries();
                                         }, 10);
+                                    }
+                                :rename
+                                    {
+                                        var env_local = block.key('environment_local');
+                                        if (data.from !== data.to) {
+                                            console.log('rename value "' + data.from + '" to "' + data.to + '"');
+                                            env_local[data.to] = env_local[data.from];
+                                            delete env_local[data.from];
+                                            block.parent(2).on('send_application_update', {
+                                                environment: env_local
+                                            });
+                                        }
+                                        event.stopPropagation();
+                                    }
+                                :remove
+                                    {
+                                        var env_local = block.key('environment_local');
+                                        console.log('remove value "' + data.key + '"');
+                                        delete env_local[data.key];
+                                        block.parent(2).on('send_application_update', {
+                                            environment: env_local
+                                        });
+                                        event.stopPropagation();
+                                    }
+                                :update
+                                    {
+                                        var env_local = block.key('environment_local');
+                                        console.log('update value ' + data.key + ' from "' + data.from + '" to "' + data.val + '"');
+                                        env_local[data.key] = data.val;
+                                        block.parent(2).on('send_application_update', {
+                                            environment: env_local
+                                        });
+                                        event.stopPropagation();
+                                    }
+                                :hide_editors
+                                    {
+                                        var children = block.children();
+                                        for (var c in children)
+                                            children[c].on('hide_editor');
+                                        event.stopPropagation();
                                     }
                             div end_spacer
                                 css
