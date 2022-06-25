@@ -26,8 +26,5 @@
         "simple-git": "^3.2.6",
         "split2": "^4.1.0",
         "ws": "^7.3.1"
-    },
-    "devDependencies": {
-        "nodemon": "^2.0.4"
     }
 }
