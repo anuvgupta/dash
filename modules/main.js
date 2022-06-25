@@ -365,6 +365,16 @@ var api = {
             vhost_config_obj['VirtualHost'].__keys.splice(3, 0, 'ServerAlias');
             vhost_config_obj['VirtualHost']['ServerAlias'] = `${server_names}`;
         }
+        // add app env vars to vhost for php and other cgi scripts
+        var app_env = JSON.parse(JSON.stringify(application.environment));
+        if (port.length > 0) app_env['PORT'] = port[0];
+        if (port.length > 1) app_env['PORT_SCK'] = port[1];
+        if (Object.keys(app_env).length > 0) {
+            vhost_config_obj['VirtualHost'].__keys.push('SetEnv');
+            vhost_config_obj['VirtualHost']['SetEnv'] = [];
+            for (var e in app_env)
+                vhost_config_obj['VirtualHost']['SetEnv'].push(`${e} ${app_env[e]}`);
+        }
         return vhost_config_obj;
         // return null;
     },
@@ -372,6 +382,7 @@ var api = {
         if (!proxy_config_obj) return null;
         var proxy_config_text = '';
         proxy_config_text = reverse_parse_vhost_config_obj(proxy_config_obj);
+        // console.log(proxy_config_text);
         return (proxy_config_text != '' ? proxy_config_text : null);
     },
 
