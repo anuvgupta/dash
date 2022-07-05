@@ -42,6 +42,25 @@ var init = _ => {
     express_api.get("/api/projects", (req, res) => {
         m.db.project_summary((success, result) => {
             if (success && result) {
+                for (var a in result.applications) {
+                    var project_slug = "";
+                    for (var p in result.projects) {
+                        if (result.projects[p]['applications'].includes(result.applications[a]._id.toString())) {
+                            project_slug = result.projects[p]['slug'];
+                            break;
+                        }
+                    }
+                    result.applications[a] = {
+                        slug: result.applications[a].slug,
+                        name: result.applications[a].name,
+                        description: result.applications[a].description,
+                        status: result.applications[a].status,
+                        status_time: result.applications[a].status_time,
+                        ts_created: result.applications[a].ts_created,
+                        ts_updated: result.applications[a].ts_updated,
+                        project_slug: project_slug,
+                    };
+                }
                 for (var p in result.projects) {
                     delete result.projects[p]['_id'];
                     delete result.projects[p]['public'];
@@ -71,17 +90,6 @@ var init = _ => {
                                 result.projects[p]['purpose'] = project_config.purposes[t][1];
                         }
                     } else result.projects[p]['purpose'] = 'None';
-                }
-                for (var a in result.applications) {
-                    result.applications[a] = {
-                        slug: result.applications[a].slug,
-                        name: result.applications[a].name,
-                        description: result.applications[a].description,
-                        status: result.applications[a].status,
-                        status_time: result.applications[a].status_time,
-                        ts_created: result.applications[a].ts_created,
-                        ts_updated: result.applications[a].ts_updated
-                    };
                 }
                 web_return_data(req, res, {
                     projects: result.projects,
