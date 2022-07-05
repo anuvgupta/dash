@@ -1069,6 +1069,7 @@ app
                                 platform: project.platform,
                                 purpose: project.purpose,
                                 icon: project.icon,
+                                complete: project.complete
                             });
                         }
                     #name
@@ -1375,6 +1376,12 @@ app
                         {
                             block.child('subcontent/project_info/platform/value/text').data({ choose: `${platform}`});
                         }
+                    #complete
+                        {
+                            block.child('subcontent/project_code/complete/value/switch').data({
+                                val: complete === true ? 'on' : 'off'
+                            });
+                        }
                     :hide_editors
                         {
                             //setTimeout(_ => {
@@ -1442,6 +1449,9 @@ app
                             }
                             if (old_data.featured != new_data.featured) {
                                 block.data({ featured: new_data.featured });
+                            }
+                            if (old_data.complete != new_data.complete) {
+                                block.data({ complete: new_data.complete });
                             }
                             if (old_data.link != new_data.link) {
                                 block.data({ link: new_data.link, });
