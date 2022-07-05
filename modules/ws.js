@@ -343,8 +343,19 @@ var init = _ => {
                                 if (result3 == null) return ws_server.return_event_error("link_project_demo", "domain not found", client);
                                 if (result3.domain && result3.domain != '') {
                                     var sub = result2.primary_domain.includes('.') ? result2.primary_domain.slice(result2.primary_domain.indexOf('.') + 1) : '';
-                                    var link = `http://${sub == '' ? '' : sub + '.'}${result3.domain}/`;
-                                    log(link, result1.link);
+                                    var cert_found = false;
+                                    for (var c in result3.certificates) {
+                                        if (result3.certificates[c].subdomains.includes(`${sub}.${result3.domain}`) || result3.certificates[c].subdomains.includes(`*.${result3.domain}`)) {
+                                            if (result3.certificates[c].expiration > parseInt(Date.now() / 1000)) {
+                                                console.log(result3.certificates[c]);
+                                                cert_found = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    var protocol = (cert_found || result3.domain.includes('herokuapp.com') || result3.domain.includes('github.io')) ? 'https' : 'http';
+                                    var link = `${protocol}://${sub == '' ? '' : sub + '.'}${result3.domain}/`;
+                                    // log(link, result1.link);
                                     if (link === result1.link) link = '';
                                     var update = { link: link };
                                     m.db.update_project(project_id, update, (success4, result4) => {
