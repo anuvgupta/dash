@@ -2447,7 +2447,6 @@ app
                                                 });
                                                 event.stopPropagation();
                                             }
-                            
                             div tech_primary
                                 class value_edge
                                 css
