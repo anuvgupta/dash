@@ -19,6 +19,8 @@
                     ["lib", "Library"],
                     ["app", "Application"],
                     ["stc", "Static Site"],
+                    ["gam", "Game"],
+                    ["bld", "Build"],
                     ["oth", "Other"]
                 ],
                 "platforms": [
