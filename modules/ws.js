@@ -345,9 +345,9 @@ var init = _ => {
                                     var sub = result2.primary_domain.includes('.') ? result2.primary_domain.slice(result2.primary_domain.indexOf('.') + 1) : '';
                                     var cert_found = false;
                                     for (var c in result3.certificates) {
-                                        if (result3.certificates[c].subdomains.includes(`${sub}.${result3.domain}`) || result3.certificates[c].subdomains.includes(`*.${result3.domain}`)) {
+                                        if (result3.certificates[c].subdomains.includes(`${sub}${sub == '' ? '' : '.'}${result3.domain}`) || result3.certificates[c].subdomains.includes(`*.${result3.domain}`)) {
                                             if (result3.certificates[c].expiration > parseInt(Date.now() / 1000)) {
-                                                console.log(result3.certificates[c]);
+                                                // console.log(result3.certificates[c]);
                                                 cert_found = true;
                                                 break;
                                             }
