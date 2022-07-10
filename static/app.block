@@ -3628,6 +3628,7 @@ app
                                 environment: application.environment,
                                 domains: application.domains,
                                 primary_domain: application.primary_domain,
+                                memory: application.memory,
                                 status: application.status,
                                 status_time: application.status_time,
                                 proxy: application.proxy,
@@ -3745,10 +3746,17 @@ app
                                 primary: primary_domain
                             });
                         }
+                    #memory
+                        {
+                            var b = block.child('subcontent/application_process/status');
+                            b.key('memory', memory);
+                            b.on('status_update');
+                        }
                     #status
                         {
-                            //console.log(status);
-                            block.child('subcontent/application_process/status').key('status', status).on('status_update');
+                            var b = block.child('subcontent/application_process/status');
+                            b.key('status', status);
+                            b.on('status_update');
                         }
                     #status_time
                         {
@@ -4532,6 +4540,7 @@ app
                                     margin-bottom 20px
                                 :status_update
                                     {
+                                        var memory_usage = block.key('memory');
                                         var status_code = block.key('status');
                                         var status_time = block.key('status_time');
                                         var status_final_text = "Status some time ago";
@@ -4544,6 +4553,10 @@ app
                                         }
                                         block.child('value/labels/status/text').html('').data(status_final_text);
                                         block.child('value/light/circle').css('background-color', status_final_color);
+                                        //console.log('memory_usage',memory_usage);
+                                        if (memory_usage == null) memory_usage = '0';
+                                        memory_usage += 'mb';
+                                        block.child('value/labels/memory/text').html('').data(memory_usage);
                                         event.stopPropagation();
                                     }
                                 text label
@@ -4571,7 +4584,7 @@ app
                                                 margin 0 0 0 auto
                                     div labels
                                         css
-                                            width 73%
+                                            width 83%
                                             height 100%
                                             float left
                                             padding-left 18px
@@ -4579,7 +4592,9 @@ app
                                         block status
                                             css
                                                 height 100%
-                                                width 100%
+                                                width 80%
+                                                display inline-table
+                                                vertical-align middle
                                             text text
                                                 val Status some time ago
                                                 css
@@ -4588,6 +4603,21 @@ app
                                                     font-size 14px
                                                     color #888
                                                     font-style italic
+                                                    //padding-top 2px
+                                        block memory
+                                            css
+                                                height 100%
+                                                width 20%
+                                                display inline-table
+                                                vertical-align middle
+                                            text text
+                                                val 0mb
+                                                css
+                                                    display block
+                                                    text-align right
+                                                    font-size 15px
+                                                    color #777
+                                                    //font-style italic
                                                     //padding-top 2px
                             div signals
                                 class value_edge
@@ -6443,7 +6473,7 @@ app
                                             var env_copy = JSON.parse(JSON.stringify(environment));
                                             delete env_copy['__port__'];
                                             block.key('environment_local',  env_copy);
-                                            console.log(env_copy);
+                                            //console.log(env_copy);
                                         }
                                         var port = null;
                                         var port_sck = null;

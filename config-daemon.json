@@ -7,6 +7,7 @@
     "simple-git_log": false,
     "log_tf_load_lines": 25,
     "pm2_daemon_mode": true,
+    "bytes_per_mib": 1048576,
     "resource_key": "X1F9K",
     "github_token_path": "/home/ubuntu/dash/tokens/github_token"
 }

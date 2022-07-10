@@ -520,6 +520,7 @@ var api = {
             },
             primary_domain: '',
             domains: [],
+            memory: 0,
             status: "new",
             status_time: -1,
             ts_created: timestamp,
