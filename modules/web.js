@@ -90,6 +90,13 @@ var init = _ => {
                                 result.projects[p]['purpose'] = project_config.purposes[t][1];
                         }
                     } else result.projects[p]['purpose'] = 'None';
+                    // replace category slug
+                    if (result.projects[p]['category'] && result.projects[p]['category'] != 'none') {
+                        for (var t in project_config.categories) {
+                            if (project_config.categories[t][0] == result.projects[p]['category'])
+                                result.projects[p]['category'] = project_config.categories[t][1];
+                        }
+                    } else result.projects[p]['category'] = 'None';
                 }
                 web_return_data(req, res, {
                     projects: result.projects,
