@@ -3858,7 +3858,7 @@ app
                                     .parent(1)
                                 .parent().sibling('application_ecosystem')
                                     .child('cwd').child('value_editor').on('hide')
-                                    .parent().sibling('static_dir').child('value_editor').on('hide')
+                                    //.parent().sibling('static_dir').child('value_editor').on('hide')
                                     .parent().sibling('args').child('value_editor').on('hide')
                                     .parent().sibling('out_file').child('value_editor').on('hide')
                                     .parent().sibling('error_file').child('value_editor').on('hide')
