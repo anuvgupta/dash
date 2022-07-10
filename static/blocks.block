@@ -2260,12 +2260,12 @@
                 )
                 .add(Block('div', 'description')
                     .css({
-                        fontSize: '17px',
+                        fontSize: '16px',
                         fontWeight: '300',
                         margin: '10px 2px 5px 5px',
                         opacity: '0.9',
-                        letterSpacing: '0.5px',
-                        lineHeight: '24px',
+                        letterSpacing: '0.4px',
+                        lineHeight: '22px',
                     })
                     .add(Block('text', 'tag')
                         .data('_')
@@ -2291,6 +2291,42 @@
                     .add(Block('text', 'desc')
                         .data('_').html('')
                     )
+                    .on('update', (e, b, d) => {
+                        var domain = block.key('domain') ? block.key('domain') : '';
+                        var subdomains = block.key('subdomains') ? block.key('subdomains') : [];
+                        subdomains = JSON.parse(JSON.stringify(subdomains));
+                        subdomains.sort((a, b) => {
+                            if (a === '*') {
+                                if (b === 'www') return -1;  // * vs www --> *
+                                else return -1;  // * vs anything --> *
+                            } else if (b === '*') {
+                                if (a === 'www') return 1;  // www vs * --> *
+                                else return 1;  // anything vs * --> *
+                            } else if (a === 'www') {
+                                if (b === '*') return 1;  // www vs * --> *
+                                else return -1;  // www vs anything --> www
+                            } else if (b === 'www') {
+                                if (a === '*') return -1;  // * vs www --> *
+                                else return 1;  // anything vs www --> www
+                            } else {
+                                if (a.length > b.length)
+                                    return 1;
+                                else return -1;
+                            }
+                        });
+                        var desc = "No subdomains found.";
+                        if (subdomains.length > 0) {
+                            desc = "";
+                            for (var s in subdomains) {
+                                desc += `${subdomains[s]}.${domain}`;
+                                if (s < subdomains.length - 1) desc += ", ";
+                            }
+                        }
+                        if (desc.length > 105) {
+                            desc = desc.substring(0, 105) + '...';
+                        }
+                        b.child('desc').html('').data(desc).css({ display: 'inline-block' });
+                    })
                 )
                 .add(Block('div', 'spacer2')
                     .css({
@@ -2399,6 +2435,11 @@
             data('domain', (domain) => {
                 block.key('domain', domain.toString());
                 block.child('name/text').html('').data(domain);
+                block.child('description').on('update');
+            });
+            data('subdomains', (subdomains) => {
+                block.key('subdomains', subdomains);
+                block.child('description').on('update');
             });
             data('ts_created', ts_created => {
                 block.key('ts_created', ts_created);
