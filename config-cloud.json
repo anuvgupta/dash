@@ -19,6 +19,7 @@
                     ["lib", "Library"],
                     ["app", "Application"],
                     ["stc", "Static Site"],
+                    ["tem", "Template"],
                     ["gam", "Game"],
                     ["bld", "Build"],
                     ["oth", "Other"]
@@ -47,7 +48,7 @@
                     ["esn", "Essentials"],
                     ["utl", "Utility"],
                     ["sch", "School"],
-                    ["wrk", "Work"],
+                    ["wrk", "Career"],
                     ["oth", "Other"]
                 ]
             },

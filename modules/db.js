@@ -40,6 +40,7 @@ var api = {
             complete: false,
             type: 'none',
             platform: 'none',
+            category: 'none',
             purpose: 'none',
             tech: {
                 primary: [],
