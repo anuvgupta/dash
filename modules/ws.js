@@ -947,11 +947,14 @@ var init = _ => {
     ws_server.bind("return_application_status", (client, req) => {
         var id = req.application_id ? (`${req.application_id}`).trim() : '';
         var status = req.status ? (`${req.status}`).trim() : '';
+        var memory = req.memory ? (`${req.memory}`).trim() : '0';
+        try { memory = parseFloat(memory).toFixed(1); } catch (e) { memory = '0'; }
         var success = req.success === true;
         var timestamp = req.timestamp;
         // console.log(id, status, success, timestamp);
-        if (id != '' && status != '' && success) {
+        if (id != '' && status != '' && memory != '' && success) {
             var update = {
+                memory: memory,
                 status: status,
                 status_time: timestamp
             };

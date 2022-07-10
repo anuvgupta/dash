@@ -558,9 +558,9 @@ const ws = {
                 if (db.ecosystem.hasOwnProperty(application_id)) {
                     app.log(`found application ${application_id}`);
                     var app_ecosystem = db.ecosystem[application_id];
-                    pm.describe_process(app_ecosystem, application_id, (success, status, timestamp) => {
+                    pm.describe_process(app_ecosystem, application_id, (success, status, memory, timestamp) => {
                         app.log('describe_process', success, status, timestamp);
-                        ws.api.return_application_status(application_id, success, status, timestamp);
+                        ws.api.return_application_status(application_id, success, status, memory, timestamp);
                     });
                 }
                 break;
@@ -663,10 +663,11 @@ const ws = {
                 error: error
             }, global.config.log_tf_stream_log === false);
         },
-        return_application_status: (application_id, success, status, timestamp) => {
+        return_application_status: (application_id, success, status, memory, timestamp) => {
             ws.send('return_application_status', {
                 application_id: application_id,
                 success: success, timestamp: timestamp,
+                memory: memory,
                 status: status
             });
         },
@@ -724,12 +725,15 @@ const pm = {
             if (error1) console.error(error1);
             // console.log('env1', env1);
             var status = "";
+            var memory = 0;
             if (!error1) status = "removed";
             pm2.start(ecosystem, (error2, env2) => {
                 if (error2) console.error(error2);
-                // console.log('env', env);
-                if (!error2 && env2[0]) status = env2[0].pm2_env.status;
-                ws.api.return_application_status(app_id, error2 == null, status, Date.now());
+                if (!error2 && env2[0]) {
+                    status = env2[0].pm2_env.status;
+                    memory = env2[0].monit.memory / global.config.bytes_per_mib;
+                }
+                ws.api.return_application_status(app_id, error2 == null, status, memory, Date.now());
                 if (resolve) resolve(error2 == null);
             });
         });
@@ -737,40 +741,52 @@ const pm = {
     stop_process: (ecosystem, app_id, resolve = null) => {
         pm2.stop(ecosystem.name, (error, env) => {
             if (error) console.error(error);
-            // console.log('env', env);
             var status = "";
-            if (!error && env[0]) status = env[0].pm2_env.status;
-            ws.api.return_application_status(app_id, error == null, status, Date.now());
+            var memory = 0;
+            if (!error && env[0]) {
+                status = env[0].pm2_env.status;
+                memory = env[0].monit.memory / global.config.bytes_per_mib;
+            }
+            ws.api.return_application_status(app_id, error == null, status, memory, Date.now());
             if (resolve) resolve(error == null);
         });
     },
     restart_process: (ecosystem, app_id, resolve = null) => {
         pm2.restart(ecosystem.name, (error, env) => {
             if (error) console.error(error);
-            // console.log('env', env);
             var status = "";
-            if (!error && env[0]) status = env[0].pm2_env.status;
-            ws.api.return_application_status(app_id, error == null, status, Date.now());
+            var memory = 0;
+            if (!error && env[0]) {
+                status = env[0].pm2_env.status;
+                memory = env[0].monit.memory / global.config.bytes_per_mib;
+            }
+            ws.api.return_application_status(app_id, error == null, status, memory, Date.now());
             if (resolve) resolve(error == null);
         });
     },
     delete_process: (ecosystem, app_id, resolve = null) => {
         pm2.delete(ecosystem.name, (error, env) => {
             if (error) console.error(error);
-            // console.log('env', env);
             var status = "";
-            if (!error) status = "removed";
-            ws.api.return_application_status(app_id, error == null, status, Date.now());
+            var memory = 0;
+            if (!error) {
+                status = "removed";
+                memory = 0;
+            }
+            ws.api.return_application_status(app_id, error == null, status, memory, Date.now());
             if (resolve) resolve(error == null);
         });
     },
     describe_process: (ecosystem, app_id, resolve = null) => {
         pm2.describe(ecosystem.name, (error, env) => {
             if (error) console.error(error);
-            // console.log('env', env);
             var status = "";
-            if (!error && env[0]) status = env[0].pm2_env.status;
-            if (resolve) resolve(error == null, status, Date.now());
+            var memory = 0;
+            if (!error && env[0]) {
+                status = env[0].pm2_env.status;
+                memory = env[0].monit.memory / global.config.bytes_per_mib;
+            }
+            if (resolve) resolve(error == null, status, memory, Date.now());
         });
     },
     tail_process_context: {},
