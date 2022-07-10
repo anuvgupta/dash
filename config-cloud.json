@@ -34,12 +34,12 @@
                     ["mus", "Music"],
                     ["gam", "Gaming"],
                     ["hlt", "Health"],
-                    ["ads", "Advertising"],
                     ["soc", "Social Media"],
                     ["qol", "Quality of Life"],
                     ["stl", "Student Life"],
                     ["inf", "Infrastructure"],
-                    ["edu", "Education"]
+                    ["edu", "Education"],
+                    ["oth", "Other"]
                 ],
                 "purposes": [
                     ["crt", "Creativity"],
