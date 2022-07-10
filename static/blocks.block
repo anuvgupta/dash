@@ -333,7 +333,7 @@
             block
                 .css({
                     width: '400px',
-                    height: '280px',
+                    height: '285px',
                     borderRadius: '7px',
                     backgroundColor: 'white',
                     '-webkit-box-shadow': '2px 2px 5px 2px rgba(64,64,64,0.1)',
@@ -708,12 +708,12 @@
                 )
                 .add(Block('div', 'description')
                     .css({
-                        fontSize: '17px',
+                        fontSize: '15px',
                         fontWeight: '300',
-                        margin: '10px 2px 5px 5px',
+                        margin: '3px 2px 5px 5px',
                         opacity: '0.9',
                         letterSpacing: '0.5px',
-                        lineHeight: '24px'
+                        lineHeight: '21px'
                     })
                     .add(Block('text', 'tag')
                         .data('_')
@@ -755,25 +755,36 @@
                     .add(Block('block', 'content')
                         .add(Block('div', 'mdl_button_container')
                             .css({
-                                height: '50px',
-                                width: '150px',
+                                height: '42px',
+                                //width: '150px',
+                                width: '100%',
                                 margin: '0 auto',
                             })
                             .add(Block('button', 1)
                                 .class('mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect')
-                                .html('Manage')
+                                .add(Block('image', 1)
+                                    .data({
+                                        src: '/img/gear_w.png',
+                                        height: '24px',
+                                        width: '24px',
+                                        css: { margin: '0 auto' }
+                                    })
+                                )
                                 .css({
                                     backgroundColor: app.ui.colors.primary,
                                     color: 'white',
                                     letterSpacing: '2.5px',
                                     fontSize: '12px',
                                     fontWeight: '500',
-                                    paddingLeft: '25px',
-                                    paddingRight: '25px',
+                                    paddingLeft: '28px',
+                                    paddingRight: '28px',
                                     opacity: '1',
                                     transition: 'opacity 0.2s ease',
-                                    height: '47px',
-                                    outline: 'none'
+                                    height: '42px',
+                                    outline: 'none',
+                                    // experiment
+                                    width: '100%',
+                                    boxSizing: 'border-box'
                                 })
                                 .on('mouseover', (e, b, d) => {
                                     b.css('opacity', '0.8');
@@ -1115,15 +1126,21 @@
                             })
                             .add(Block('button', 1)
                                 .class('mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect')
-                                .html('Manage')
+                                .add(Block('image', 1)
+                                    .data({
+                                        src: '/img/gear_w.png',
+                                        height: '25px',
+                                        width: '25px'
+                                    })
+                                )
                                 .css({
                                     backgroundColor: app.ui.colors.primary,
                                     color: 'white',
                                     letterSpacing: '2.5px',
                                     fontSize: '12px',
                                     fontWeight: '500',
-                                    paddingLeft: '25px',
-                                    paddingRight: '25px',
+                                    paddingLeft: '45px',
+                                    paddingRight: '45px',
                                     opacity: '1',
                                     transition: 'opacity 0.2s ease',
                                     height: '65px',  // 42px
@@ -1273,8 +1290,8 @@
             var _block = block;
             block
                 .css({
-                    width: '390px',
-                    height: '230px',
+                    width: '570px',
+                    height: '165px',
                     borderRadius: '7px',
                     backgroundColor: 'white',
                     '-webkit-box-shadow': '2px 2px 5px 2px rgba(64,64,64,0.1)',
@@ -1691,33 +1708,43 @@
                     .class('application-content')
                     .css({
                         maxHeight: '120px',
-                        height: '100%',
-                        width: '99%',
-                    })
-                    .query('window width != 0', function (event, block, data) {
-                        block.css('max-height', `calc(100% - ${3 - 3 + ((5 + block.sibling('description').$().height() + 20 + 20 + 10) + 45)}px)`);
+                        height: 'auto',
+                        width: 'auto',
+                        position: 'absolute',
+                        top: '20px',
+                        right: '24px'
                     })
                     .add(Block('block', 'content')
+                        .css({
+                            width: 'auto',
+                            height: 'auto'
+                        })
                         .add(Block('div', 'mdl_button_container')
                             .css({
-                                height: '45px',
-                                width: '150px',
+                                height: 'auto',
+                                width: 'auto',
                                 margin: '0 auto',
                             })
                             .add(Block('button', 1)
                                 .class('mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect')
-                                .html('Manage')
+                                .add(Block('image', 1)
+                                    .data({
+                                        src: '/img/gear_w.png',
+                                        height: '22px',
+                                        width: '22px'
+                                    })
+                                )
                                 .css({
                                     backgroundColor: app.ui.colors.primary,
                                     color: 'white',
                                     letterSpacing: '2.5px',
                                     fontSize: '12px',
                                     fontWeight: '500',
-                                    paddingLeft: '25px',
-                                    paddingRight: '25px',
+                                    paddingLeft: '26px',
+                                    paddingRight: '26px',
                                     opacity: '1',
                                     transition: 'opacity 0.2s ease',
-                                    height: '42px',
+                                    height: '38px',
                                     outline: 'none'
                                 })
                                 .on('mouseover', (e, b, d) => {
@@ -2274,30 +2301,40 @@
                     .class('domain-content')
                     .css({
                         maxHeight: '120px',
-                        height: '100%',
-                        width: '99%',
-                    })
-                    .query('window width != 0', function (event, block, data) {
-                        block.css('max-height', `calc(100% - ${3 - 3 + ((5 + block.sibling('description').$().height() + 20 + 20 + 10) + 45)}px)`);
+                        height: 'auto',
+                        width: 'auto',
+                        position: 'absolute',
+                        top: '20px',
+                        right: '24px'
                     })
                     .add(Block('block', 'content')
+                        .css({
+                            width: 'auto',
+                            height: 'auto'
+                        })
                         .add(Block('div', 'mdl_button_container')
                             .css({
-                                height: '45px',
-                                width: '150px',
+                                height: 'auto',
+                                width: 'auto',
                                 margin: '0 auto',
                             })
                             .add(Block('button', 1)
                                 .class('mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect')
-                                .html('Manage')
+                                .add(Block('image', 1)
+                                    .data({
+                                        src: '/img/gear_w.png',
+                                        height: '22px',
+                                        width: '22px'
+                                    })
+                                )
                                 .css({
                                     backgroundColor: app.ui.colors.primary,
                                     color: 'white',
                                     letterSpacing: '2.5px',
                                     fontSize: '12px',
                                     fontWeight: '500',
-                                    paddingLeft: '20px',
-                                    paddingRight: '20px',
+                                    paddingLeft: '28px',
+                                    paddingRight: '28px',
                                     opacity: '1',
                                     transition: 'opacity 0.2s ease',
                                     height: '40px',
