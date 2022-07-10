@@ -1069,7 +1069,8 @@ app
                                 platform: project.platform,
                                 purpose: project.purpose,
                                 icon: project.icon,
-                                complete: project.complete
+                                complete: project.complete,
+                                category: project.category
                             });
                         }
                     #name
@@ -1372,6 +1373,10 @@ app
                         {
                             block.child('subcontent/project_info/purpose/value/text').data({ choose: `${purpose}`});
                         }
+                    #category
+                        {
+                            block.child('subcontent/project_info/category/value/text').data({ choose: `${category}`});
+                        }
                     #platform
                         {
                             block.child('subcontent/project_info/platform/value/text').data({ choose: `${platform}`});
@@ -1465,6 +1470,9 @@ app
                             }
                             if (old_data.purpose != new_data.purpose) {
                                 block.data({ purpose: new_data.purpose, });
+                            }
+                            if (old_data.category != new_data.category) {
+                                block.data({ category: new_data.category, });
                             }
                             if (old_data.img != new_data.img) {
                                 block.data({ img: new_data.img, });
@@ -2055,10 +2063,59 @@ app
                                                 }));
                                             }
                                         }
+                            div category
+                                class value_edge
+                                css
+                                    width 48%
+                                    display inline-block
+                                    vertical-align top
+                                    margin-bottom 20px
+                                text label
+                                    val Category
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    select text
+                                        name project_category_select
+                                        class value_select
+                                        css
+                                            width 95%
+                                        :change
+                                            {
+                                                var category_val = block.node().value;
+                                                block.parent(4).on('send_project_update', {
+                                                    category: category_val
+                                                });
+                                            }
+                                        #choose
+                                            {
+                                                var children = block.children();
+                                                for (var c in children)
+                                                    children[c].node().removeAttribute('selected');
+                                                block.child(choose).attribute('selected', 'selected');
+                                            }
+                                        option none
+                                            html None
+                                            value none
+                                            selected selected
+                                        {
+                                            for (var t in app.main.config.cloud.project.categories) {
+                                                var category = app.main.config.cloud.project.categories[t];
+                                                block.add(Block('option', category[0]).data({
+                                                    value: category[0],
+                                                    html: category[1]
+                                                }));
+                                            }
+                                        }
                             div purpose
                                 class value_edge
                                 css
-                                    width 98%
+                                    width 48%
                                     display inline-block
                                     vertical-align top
                                     margin-bottom 20px

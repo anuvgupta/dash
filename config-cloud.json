@@ -30,11 +30,21 @@
                     ["emb", "Embedded"],
                     ["oth", "Other"]
                 ],
+                "categories": [
+                    ["mus", "Music"],
+                    ["gam", "Gaming"],
+                    ["hlt", "Health"],
+                    ["ads", "Advertising"],
+                    ["soc", "Social Media"],
+                    ["qol", "Quality of Life"],
+                    ["stl", "Student Life"],
+                    ["inf", "Infrastructure"],
+                    ["edu", "Education"]
+                ],
                 "purposes": [
                     ["crt", "Creativity"],
                     ["ent", "Entertainment"],
                     ["esn", "Essentials"],
-                    ["lrn", "Learning"],
                     ["utl", "Utility"],
                     ["sch", "School"],
                     ["wrk", "Work"],
