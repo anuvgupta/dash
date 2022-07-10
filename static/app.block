@@ -3681,8 +3681,8 @@ app
                             var static_dir = ecosystem.static_dir;
                             var static_dir_alt = static_dir;
                             if (static_dir_alt == '') static_dir_alt = '<span class="text_placeholder">/var/www/application-zero/html</span>';
-                            block.child('subcontent/application_ecosystem/static_dir/value/text').html(`${static_dir_alt}`);
-                            block.child('subcontent/application_ecosystem/static_dir/value_editor').attribute('value', `${static_dir}`);
+                            block.child('subcontent/application_static/static_dir/value/text').html(`${static_dir_alt}`);
+                            block.child('subcontent/application_static/static_dir/value_editor').attribute('value', `${static_dir}`);
 
                             var script = ecosystem.script;
                             var script_alt = script;
@@ -3850,11 +3850,13 @@ app
                                 block.child('subcontent/application_info/name/value_editor').on('hide')
                                     .parent().sibling('slug').child('value_editor').on('hide')
                                     .parent().sibling('description').child('value_editor').on('hide')
-                                .parent(1).sibling('application_proxy')
+                                    .parent()
+                                .parent().sibling('application_proxy')
                                     .child('path_port_wrap')
                                     .child('port').child('value_editor').on('hide')
                                     .parent().sibling('path').child('value_editor').on('hide')
-                                .parent(2).sibling('application_ecosystem')
+                                    .parent(1)
+                                .parent().sibling('application_ecosystem')
                                     .child('cwd').child('value_editor').on('hide')
                                     .parent().sibling('static_dir').child('value_editor').on('hide')
                                     .parent().sibling('args').child('value_editor').on('hide')
@@ -3864,10 +3866,13 @@ app
                                     .parent().sibling('interpreter').child('value_editor').on('hide')
                                     .parent().sibling('max_memory_restart').child('value_editor').on('hide')
                                     .parent().sibling('restart_delay').child('value_editor').on('hide')
-                                .parent(1).sibling('application_process')
+                                    .parent()
+                                .parent().sibling('application_process')
                                     .child('signal_toast').on('hide')
                                 .parent().sibling('application_proxy')
                                     .child('signal_toast').on('hide')
+                                .parent().sibling('application_static')
+                                    .child('static_dir').child('value_editor').on('hide').parent()
                                 .parent().sibling('application_info')
                                     .child('more_menu').on('hide')
                                 ;
@@ -3875,7 +3880,6 @@ app
 
                             /*
                                 block.child('subcontent/application_ecosystem/cwd/value_editor').on('hide');
-                                block.child('subcontent/application_ecosystem/static_dir/value_editor').on('hide');
                                 block.child('subcontent/application_ecosystem/args/value_editor').on('hide');
                                 block.child('subcontent/application_ecosystem/out_file/value_editor').on('hide');
                                 block.child('subcontent/application_ecosystem/error_file/value_editor').on('hide');
@@ -3883,6 +3887,7 @@ app
                                 block.child('subcontent/application_ecosystem/interpreter/value_editor').on('hide');
                                 block.child('subcontent/application_ecosystem/max_memory_restart/value_editor').on('hide');
                                 block.child('subcontent/application_ecosystem/restart_delay/value_editor').on('hide');
+                                block.child('subcontent/application_static/static_dir/value_editor').on('hide');
                                 block.child('subcontent/application_process/signal_toast').on('hide');
                                 block.child('subcontent/application_proxy/signal_toast').on('hide');
                                 //block.child('subcontent/application_proxy/https_cert/value_editor').on('hide');
@@ -3941,7 +3946,7 @@ app
                             }
                             if (old_data.ecosystem.static_dir != new_data.ecosystem.static_dir) {
                                 update_ecosystem = true;
-                                block.child('subcontent/application_ecosystem/static_dir/value_editor').on('hide');
+                                block.child('subcontent/application_static/static_dir/value_editor').on('hide');
                             }
                             if (old_data.ecosystem.script != new_data.ecosystem.script) {
                                 update_ecosystem = true;
@@ -5592,82 +5597,6 @@ app
                                                 block.on('hide');
                                             }
                                         }
-                            div static_dir
-                                class value_edge
-                                text label
-                                    val Static Root
-                                    class label_desc
-                                block value
-                                    {
-                                        block.__child('content').css('text-align', 'left');
-                                    }
-                                    class value_text_wrap
-                                    css
-                                        height 25.2px
-                                    text text
-                                        val /var/www/application-zero/html
-                                        class value_text
-                                        css
-                                            font-size 17px
-                                    :mouseover
-                                        {
-                                            if (block.child('edit_button').key('showing') == 'off')
-                                                block.child('edit_button').on('show');
-                                        }
-                                    :mouseout
-                                        {
-                                            if (block.child('edit_button').key('showing') == 'on')
-                                                block.child('edit_button').on('hide');
-                                        }
-                                    edit-button edit_button
-                                        css
-                                            margin-left 14px
-                                            padding-top 3px
-                                            height 17px
-                                            width 17px
-                                        :click
-                                            {
-                                                block.parent().css('display', 'none')
-                                                    .sibling('value_editor').css('display', 'block');
-                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').ecosystem.static_dir;
-                                                setTimeout(_ => {
-                                                    block.parent().sibling('value_editor').node().select();
-                                                }, 15);
-                                            }
-                                input value_editor
-                                    class value_editor
-                                    placeholder /var/www/application-zero/html
-                                    css
-                                        display none
-                                        height 27px
-                                        margin-top -1px
-                                        margin-left -2px
-                                        margin-bottom 2px
-                                        font-size 17px
-                                        width 90%
-                                    :hide
-                                        {
-                                            block.css('display', 'none').sibling('value').css('display', 'table');
-                                            event.stopPropagation();
-                                        }
-                                    :keyup
-                                        {
-                                            if (event.keyCode == 13) {
-                                                // enter
-                                                var value = block.node().value;
-                                                if (!value) value = '';
-                                                value = (`${value}`).trim();
-                                                //if (value.length > 0) {
-                                                    block.parent(3).on('send_application_update', {
-                                                        'ecosystem.static_dir': value
-                                                    });
-                                                //}
-                                                setTimeout(_ => { block.on('hide'); }, 250);
-                                            } else if (event.keyCode == 27) {
-                                                // escape
-                                                block.on('hide');
-                                            }
-                                        }
                             div end_spacer
                                 css
                                     height 15px
@@ -7275,7 +7204,82 @@ app
                                                 }
                                                 event.stopPropagation();
                                             }
-                            
+                            div static_dir
+                                class value_edge
+                                text label
+                                    val Static Root
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    text text
+                                        val /var/www/application-zero/html
+                                        class value_text
+                                        css
+                                            font-size 17px
+                                    :mouseover
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'off')
+                                                block.child('edit_button').on('show');
+                                        }
+                                    :mouseout
+                                        {
+                                            if (block.child('edit_button').key('showing') == 'on')
+                                                block.child('edit_button').on('hide');
+                                        }
+                                    edit-button edit_button
+                                        css
+                                            margin-left 14px
+                                            padding-top 3px
+                                            height 17px
+                                            width 17px
+                                        :click
+                                            {
+                                                block.parent().css('display', 'none')
+                                                    .sibling('value_editor').css('display', 'block');
+                                                block.parent().sibling('value_editor').node().value = block.parent(4).key('application').ecosystem.static_dir;
+                                                setTimeout(_ => {
+                                                    block.parent().sibling('value_editor').node().select();
+                                                }, 15);
+                                            }
+                                input value_editor
+                                    class value_editor
+                                    placeholder /var/www/application-zero/html
+                                    css
+                                        display none
+                                        height 27px
+                                        margin-top -1px
+                                        margin-left -2px
+                                        margin-bottom 2px
+                                        font-size 17px
+                                        width 90%
+                                    :hide
+                                        {
+                                            block.css('display', 'none').sibling('value').css('display', 'table');
+                                            event.stopPropagation();
+                                        }
+                                    :keyup
+                                        {
+                                            if (event.keyCode == 13) {
+                                                // enter
+                                                var value = block.node().value;
+                                                if (!value) value = '';
+                                                value = (`${value}`).trim();
+                                                //if (value.length > 0) {
+                                                    block.parent(3).on('send_application_update', {
+                                                        'ecosystem.static_dir': value
+                                                    });
+                                                //}
+                                                setTimeout(_ => { block.on('hide'); }, 250);
+                                            } else if (event.keyCode == 27) {
+                                                // escape
+                                                block.on('hide');
+                                            }
+                                        }
                             div signal_toast
                                 css
                                     position absolute
