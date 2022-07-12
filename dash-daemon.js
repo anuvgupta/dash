@@ -333,10 +333,11 @@ const app = {
                     var package_full_json = JSON.parse(fs.readFileSync(`${path.join(app_repo_package_path, 'package.json')}`));
                     if (package_full_json.hasOwnProperty('scripts') && package_full_json.scripts.hasOwnProperty('build') && package_full_json.scripts.build != '')
                         second_package_command = "npm run build";
-                }
-                else if (fs.existsSync(`${path.join(app_repo_package_path, 'requirements.txt')}`)){
+                } else if (fs.existsSync(`${path.join(app_repo_package_path, 'requirements.txt')}`)){
                     package_command = `python3 -m venv ${path.join(app_repo_package_path, 'venv')}`;
                     second_package_command = `${path.join(app_repo_package_path, 'venv/bin/python3')} -m pip install -r ${path.join(app_repo_package_path, 'requirements.txt')}`;
+                } else if (fs.existsSync(`${path.join(app_repo_package_path, 'package.sh')}`)) {
+                    package_command = 'bash package.sh';
                 }
                 fs.appendFileSync(`${output_log_path}`, "=====DASH:PKG=====\n");
                 fs.appendFileSync(`${output_log_path}`, `[dash] ${package_command}\n`);
@@ -731,7 +732,7 @@ const pm = {
                 if (error2) console.error(error2);
                 if (!error2 && env2[0]) {
                     status = env2[0].pm2_env.status;
-                    memory = env2[0].monit.memory / global.config.bytes_per_mib;
+                    if (env[0].monit) memory = env2[0].monit.memory / global.config.bytes_per_mib;
                 }
                 ws.api.return_application_status(app_id, error2 == null, status, memory, Date.now());
                 if (resolve) resolve(error2 == null);
@@ -745,7 +746,7 @@ const pm = {
             var memory = 0;
             if (!error && env[0]) {
                 status = env[0].pm2_env.status;
-                memory = env[0].monit.memory / global.config.bytes_per_mib;
+                if (env[0].monit) memory = env[0].monit.memory / global.config.bytes_per_mib;
             }
             ws.api.return_application_status(app_id, error == null, status, memory, Date.now());
             if (resolve) resolve(error == null);
@@ -758,7 +759,7 @@ const pm = {
             var memory = 0;
             if (!error && env[0]) {
                 status = env[0].pm2_env.status;
-                memory = env[0].monit.memory / global.config.bytes_per_mib;
+                if (env[0].monit) memory = env[0].monit.memory / global.config.bytes_per_mib;
             }
             ws.api.return_application_status(app_id, error == null, status, memory, Date.now());
             if (resolve) resolve(error == null);
@@ -784,7 +785,7 @@ const pm = {
             var memory = 0;
             if (!error && env[0]) {
                 status = env[0].pm2_env.status;
-                memory = env[0].monit.memory / global.config.bytes_per_mib;
+                if (env[0].monit) memory = env[0].monit.memory / global.config.bytes_per_mib;
             }
             if (resolve) resolve(error == null, status, memory, Date.now());
         });
