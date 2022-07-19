@@ -64,6 +64,7 @@
             "providers": [
                 ["aws-lightsail", "AWS Lightsail"],
                 ["aws-ec2", "AWS EC2"],
+                ["oci-compute", "OCI Compute"],
                 ["gcp-compute", "GCP Compute"],
                 ["azure-compute", "Azure Compute"],
                 ["digitalocean", "DigitalOcean"],
