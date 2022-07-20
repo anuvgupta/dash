@@ -327,7 +327,9 @@ const app = {
                 var err_desc = out_desc;
                 if (output_log_path != error_log_path) 
                     err_desc = fs.openSync(`${error_log_path}`, "a"); 
-                if (fs.existsSync(`${path.join(app_repo_package_path, 'package.json')}`)) {
+                if (fs.existsSync(`${path.join(app_repo_package_path, 'package.sh')}`)) {
+                    package_command = 'bash package.sh';
+                } else if (fs.existsSync(`${path.join(app_repo_package_path, 'package.json')}`)) {
                     // potentially remove lockfile here?
                     package_command = "npm install";
                     var package_full_json = JSON.parse(fs.readFileSync(`${path.join(app_repo_package_path, 'package.json')}`));
@@ -336,8 +338,6 @@ const app = {
                 } else if (fs.existsSync(`${path.join(app_repo_package_path, 'requirements.txt')}`)){
                     package_command = `python3 -m venv ${path.join(app_repo_package_path, 'venv')}`;
                     second_package_command = `${path.join(app_repo_package_path, 'venv/bin/python3')} -m pip install -r ${path.join(app_repo_package_path, 'requirements.txt')}`;
-                } else if (fs.existsSync(`${path.join(app_repo_package_path, 'package.sh')}`)) {
-                    package_command = 'bash package.sh';
                 }
                 fs.appendFileSync(`${output_log_path}`, "=====DASH:PKG=====\n");
                 fs.appendFileSync(`${output_log_path}`, `[dash] ${package_command}\n`);
