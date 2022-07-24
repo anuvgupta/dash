@@ -504,7 +504,8 @@ var api = {
                 interpreter: "",
                 args: "",
                 max_memory_restart: "100M",
-                restart_delay: "3000"
+                restart_delay: "3000",
+                cluster_mode: true
             },
             proxy: {
                 enable: false,

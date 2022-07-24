@@ -3720,6 +3720,11 @@ app
                             block.child('subcontent/application_ecosystem/restart_delay/value/text').html(`${restart_delay_alt}`);
                             block.child('subcontent/application_ecosystem/restart_delay/value_editor').attribute('value', `${restart_delay}`);
 
+                            // cluster_mode
+                            block.child('subcontent/application_ecosystem/cluster_mode/value/switch').data({
+                                val: ecosystem.cluster_mode === true ? 'on' : 'off'
+                            });
+
                             var args = ecosystem.args;
                             var args_alt = `${args}`;
                             if (args_alt == '') args_alt = '<span class="text_placeholder">--flagA arg0 arg1 arg2</span>';
@@ -3971,6 +3976,9 @@ app
                             if (old_data.ecosystem.restart_delay != new_data.ecosystem.restart_delay) {
                                 update_ecosystem = true;
                                 block.child('subcontent/application_ecosystem/restart_delay/value_editor').on('hide');
+                            }
+                            if (old_data.ecosystem.cluster_mode != new_data.ecosystem.cluster_mode) {
+                                update_ecosystem = true;
                             }
                             if (old_data.ecosystem.args != new_data.ecosystem.args) {
                                 update_ecosystem = true;
@@ -5597,6 +5605,45 @@ app
                                                 block.on('hide');
                                             }
                                         }
+                            div cluster_mode
+                                class value_edge
+                                css
+                                    width 50%
+                                    display inline-block
+                                    vertical-align top
+                                text label
+                                    val Exec Mode
+                                    class label_desc
+                                block value
+                                    {
+                                        block.__child('content').css('text-align', 'left');
+                                    }
+                                    class value_text_wrap
+                                    css
+                                        height 25.2px
+                                    switch switch
+                                        val on
+                                        label Cluster
+                                        css
+                                            margin 0
+                                        {
+                                            block.child('label').css({
+                                                //minWidth: '55px',
+                                                marginRight: '10px',
+                                                fontWeight: '300'
+                                            });
+                                        }
+                                        :modified
+                                            {
+                                                //console.log('updated to ' + block.key('state'));
+                                                var value = block.key('state') === true;
+                                                block.data({ label: (value ? 'Cluster' : 'Fork') });
+                                                if (data.hasOwnProperty('locked') && data.locked == true) return;
+                                                block.parent(4).on('send_application_update', {
+                                                    'ecosystem.cluster_mode': value
+                                                });
+                                                event.stopPropagation();
+                                            }
                             div end_spacer
                                 css
                                     height 15px

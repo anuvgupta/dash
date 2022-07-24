@@ -73,6 +73,12 @@ const utils = {
         //     }
         // },
     },
+    correct_ecosystem_exec_mode: (ecosystem) => {
+        var ecosystem_copy = JSON.parse(JSON.stringify(ecosystem));
+        ecosystem_copy["exec_mode"] = (ecosystem_copy["cluster_mode"] === true ? "cluster" : "fork");
+        delete ecosystem_copy["cluster_mode"];
+        return ecosystem_copy;
+    }
 };
 
 // database
@@ -721,6 +727,7 @@ const pm = {
         pm2.connect(!(global.config.pm2_daemon_mode), resolve);
     },
     start_process: (ecosystem, app_id, resolve = null) => {
+        ecosystem = utils.correct_ecosystem_exec_mode(ecosystem);
         console.log(ecosystem);
         pm2.delete(ecosystem.name, (error1, env1) => {
             if (error1) console.error(error1);

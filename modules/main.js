@@ -224,7 +224,7 @@ var api = {
             for (var d in domains) {
                 for (var c in domains[d].certificates) {
                     var cert = domains[d].certificates[c];
-                    if (cert.host === host_resource.slug) {
+                    if (cert.host === host_resource.slug || cert.host.split(', ').join(',').split(',').includes(host_resource.slug)) {
                         var cert_path = cert.cert_path;
                         if (!cert_sub_map.hasOwnProperty(cert_path))
                             cert_sub_map[cert_path] = [];
