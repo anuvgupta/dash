@@ -814,6 +814,7 @@ app
                         for (var f in filters) {
                             var child_view = block.child('project_filter/filter_options').child(f);
                             if (child_view && child_view.block) {
+                                child_view.html('');
                                 for (var fl in filters[f]) {
                                     var filter_tuple = filters[f][fl];
                                     var filter_key = typeof filter_tuple === 'string' ? filter_tuple : filter_tuple[0];
@@ -1017,7 +1018,7 @@ app
                             letter-spacing 0.9px
                         :input
                             {
-                                // refresh project list with self to force refilter
+                                // refresh project list with self to force re-filter
                                 var project_list = block.parent(1).key('project_list');
                                 block.parent(1).data({
                                     project_list: project_list
