@@ -14,6 +14,13 @@
     "env": {
         "cloud": {
             "project": {
+                "filters": [
+                    "platform",
+                    "type",
+                    "category",
+                    "purpose",
+                    "tech"
+                ],
                 "types": [
                     ["scr", "Script"],
                     ["lib", "Library"],

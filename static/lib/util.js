@@ -81,5 +81,39 @@ var util = {
     },
     sort_compare_oldest_first: (a, b, field = 'ts_updated') => {
         return a[field] < b[field] ? -1 : 1;
+    },
+    set_concat: (arr_set_orig, arr_set_join) => {
+        for (var i in arr_set_join) {
+            var item = arr_set_join[i];
+            if (!arr_set_orig.includes(item)) {
+                arr_set_orig.push(item);
+            }
+        }
+        return arr_set_orig;
+    },
+    replace_slugs_in_list: (list, config) => {
+        for (var i in list) {
+            for (var t in config) {
+                if (config[t][0] === list[i]) {
+                    list[i] = config[t][1];
+                }
+            }
+        }
+        return list;
+    },
+    replace_slugs_in_list_tuple: (list, config) => {
+        for (var i in list) {
+            for (var t in config) {
+                if (config[t][0] === list[i]) {
+                    list[i] = [config[t][0], config[t][1]];
+                }
+            }
+        }
+        return list;
+    },
+    bool_to_str: (bool_val) => {
+        if (typeof bool_val === 'boolean' || typeof bool_val === 'number')
+            return bool_val ? "true" : "false";
+        return `${bool_val}`;
     }
 };

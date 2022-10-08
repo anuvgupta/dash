@@ -749,6 +749,86 @@ app
                             var project_block_new = Block('project-item', `project_${project_list[p]._id.toString()}`).data(project_list[p]).key('project_metadata', project_list[p]);
                             block.child('content').add(project_block_new);
                         }
+
+                        // <filtering>
+                        var filters = {};
+                        var tech_popularity_sort = {};
+                        // build filters
+                        for (var p in project_list) {
+                            for (var field_name in project_list[p]) {
+                                if (app.main.config.cloud.project.filters.includes(field_name)) {
+                                    if (!filters.hasOwnProperty(field_name)) filters[field_name] = [];
+                                    if (!filters[field_name].includes(project_list[p][field_name])) {
+                                        if (field_name == "tech") {
+                                            // nuance for tech (measure popularity & extract language)
+                                            for (var t in project_list[p].tech.primary) {
+                                                var pri_tech = project_list[p].tech.primary[t];
+                                                if (!tech_popularity_sort.hasOwnProperty(pri_tech))
+                                                    tech_popularity_sort[pri_tech] = 0;
+                                                tech_popularity_sort[pri_tech]++;
+                                            }
+                                            for (var t in project_list[p].tech.secondary) {
+                                                var scd_tech = project_list[p].tech.secondary[t];
+                                                if (!tech_popularity_sort.hasOwnProperty(scd_tech))
+                                                    tech_popularity_sort[scd_tech] = 0;
+                                                tech_popularity_sort[scd_tech]++;
+                                            }
+                                            filters.tech = util.set_concat(filters.tech, project_list[p].tech.primary);
+                                            filters.tech = util.set_concat(filters.tech, project_list[p].tech.secondary);
+                                            if (!filters.hasOwnProperty('language')) filters['language'] = [];
+                                            if (!filters.language.includes(project_list[p].language))
+                                                filters.language = util.set_concat(filters.language, project_list[p].tech.languages);
+                                        } else {
+                                            // build filter traditionally
+                                            filters[field_name].push(project_list[p][field_name]);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        // nuance for tech (correct order)
+                        if (filters.hasOwnProperty('tech')) {
+                            filters.tech.sort((a, b) => {
+                                var a_popularity = tech_popularity_sort.hasOwnProperty(a) ? tech_popularity_sort[a] : 0;
+                                var b_popularity = tech_popularity_sort.hasOwnProperty(b) ? tech_popularity_sort[b] : 0;
+                                return b_popularity - a_popularity;
+                            });
+                            filters.tech = filters.tech.filter((tech_name, i, arr) => {
+                                return (tech_popularity_sort.hasOwnProperty(tech_name) && !(tech_popularity_sort[tech_name] <= 1));
+                            });
+                        }
+                        // correct slugs
+                        if (filters.hasOwnProperty('type')) {
+                            filters.type = util.replace_slugs_in_list_tuple(filters.type, app.main.config.cloud.project.types);
+                        }
+                        if (filters.hasOwnProperty('purpose')) {
+                            filters.purpose = util.replace_slugs_in_list_tuple(filters.purpose, app.main.config.cloud.project.purposes);
+                        }
+                        if (filters.hasOwnProperty('platform')) {
+                            filters.platform = util.replace_slugs_in_list_tuple(filters.platform, app.main.config.cloud.project.platforms);
+                        }
+                        if (filters.hasOwnProperty('category')) {
+                            filters.category = util.replace_slugs_in_list_tuple(filters.category, app.main.config.cloud.project.categories);
+                        }
+                        // generate filter options
+                        for (var f in filters) {
+                            var child_view = block.child('project_filter/filter_options').child(f);
+                            if (child_view && child_view.block) {
+                                for (var fl in filters[f]) {
+                                    var filter_tuple = filters[f][fl];
+                                    var filter_key = typeof filter_tuple === 'string' ? filter_tuple : filter_tuple[0];
+                                    var filter_val = typeof filter_tuple === 'string' ? filter_tuple : filter_tuple[1];
+                                    filter_key = f + "-" + filter_key;
+                                    child_view.add(Block('option', filter_key)
+                                        .attribute('value', filter_key)
+                                        .html(`${util.capitalize(filter_val)}`)
+                                    );
+                                }
+                            }
+                        }
+                        console.log(filters);
+                        // </filtering>
+
                         if (project_list.length > 2)
                             block.child('content').css('text-align', 'center');
                         else block.child('content').css('text-align', 'left');
@@ -757,7 +837,9 @@ app
                             block.child('content').html(`<div style="margin: 20px auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
                         }
                         //Block.queries();
+                        block.child('project_filter/filter_options').on('input');
                         setTimeout(_ => {
+                            block.child('project_filter/filter_options').on('input');
                             Block.queries();
                             setTimeout(_ => {
                                 app.ui.mui_upgrade();
@@ -891,15 +973,100 @@ app
                         top 23px
                         right 80px
                         z-index 11
+                    block filter_counter
+                        css
+                            position absolute
+                            top 0
+                            left -40px
+                            height 100%
+                            width 40px
+                        text text
+                            css
+                                font-size 14px
                     select filter_options
                         css
                             height 35px
-                            width 110px
+                            width 140px
                             padding 0px 10px
                             letter-spacing 0.9px
+                        :input
+                            {
+                                var result = block.node().value;
+                                var result_arr = result.split('-');
+                                var field_key = result_arr[0];
+                                var field_val = result_arr[1];
+                                
+                                var filter_total = 0;
+                                var project_views = block.parent().sibling("content").children();
+                                for (var v in project_views) {
+                                    if (field_key == 'all') {
+                                        project_views[v].css('display', 'inline-block');
+                                        filter_total++;
+                                    } else {
+                                        var project_metadata = project_views[v].key('project_metadata');
+                                        var filter_pass = false;
+                                        if (field_key == 'language') {
+                                            filter_pass = project_metadata.tech.languages.includes(field_val);
+                                        } else if (field_key == 'tech') {
+                                            filter_pass = project_metadata.tech.primary.includes(field_val) || project_metadata.tech.secondary.includes(field_val);
+                                        } else {
+                                            var project_val = util.bool_to_str(project_metadata[field_key]);
+                                            filter_pass = field_val.toLowerCase() == project_val.toLowerCase();
+                                        }
+                                        project_views[v].css('display', filter_pass ? 'inline-block' : 'none');
+                                        filter_total += filter_pass;
+                                    }
+                                }
+                                block.sibling('filter_counter/text').html(`${filter_total}`);
+                            }
                         option all
-                            value all
+                            value all-all
                             html All
+                        optgroup major
+                            label Priority
+                            option true
+                                value major-true
+                                html Major
+                            option false
+                                value major-false
+                                html Minor
+                        optgroup featured
+                            label Featured
+                            option true
+                                value featured-true
+                                html Promoted
+                                selected selected
+                            option false
+                                value featured-false
+                                html Standard
+                        optgroup complete
+                            label Status
+                            option true
+                                value complete-true
+                                html Complete
+                            option false
+                                value complete-false
+                                html Building
+                        optgroup public
+                            label Visibility
+                            option true
+                                value public-true
+                                html Public
+                            option false
+                                value public-false
+                                html Private
+                        optgroup platform
+                            label Platform
+                        optgroup type
+                            label Type
+                        optgroup category
+                            label Category
+                        optgroup purpose
+                            label Purpose
+                        optgroup language
+                            label Language
+                        optgroup tech
+                            label Technology
                 div title
                     css
                         position absolute
