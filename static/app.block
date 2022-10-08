@@ -745,15 +745,15 @@ app
                         block.key('project_list', project_list);
 
                         block.child('content').html('');
-                        for (var p in project_list) {
+                        var generate_project_view = (project_list, p) => {
                             var project_block_new = Block('project-item', `project_${project_list[p]._id.toString()}`).data(project_list[p]).key('project_metadata', project_list[p]);
                             block.child('content').add(project_block_new);
-                        }
+                        };
 
                         // <filtering>
+                        // build filters
                         var filters = {};
                         var tech_popularity_sort = {};
-                        // build filters
                         for (var p in project_list) {
                             for (var field_name in project_list[p]) {
                                 if (app.main.config.cloud.project.filters.includes(field_name)) {
@@ -826,7 +826,33 @@ app
                                 }
                             }
                         }
-                        console.log(filters);
+                        //console.log(filters);
+                        // apply filters
+                        var result = block.child('project_filter/filter_options').node().value;
+                        var result_arr = result.split('-');
+                        var field_key = result_arr[0];
+                        var field_val = result_arr[1];
+                        var filter_total = 0;
+                        for (var p in project_list) {
+                            if (field_key == 'all') {
+                                generate_project_view(project_list, p);
+                                filter_total++;
+                            } else {
+                                var project_metadata = project_list[p];
+                                var filter_pass = false;
+                                if (field_key == 'language') {
+                                    filter_pass = project_metadata.tech.languages.includes(field_val);
+                                } else if (field_key == 'tech') {
+                                    filter_pass = project_metadata.tech.primary.includes(field_val) || project_metadata.tech.secondary.includes(field_val);
+                                } else {
+                                    var project_val = util.bool_to_str(project_metadata[field_key]);
+                                    filter_pass = field_val.toLowerCase() == project_val.toLowerCase();
+                                }
+                                if (filter_pass) generate_project_view(project_list, p);
+                                filter_total += filter_pass;
+                            }
+                        }
+                        block.child('project_filter/filter_counter/text').html(`${filter_total}`);
                         // </filtering>
 
                         if (project_list.length > 2)
@@ -837,9 +863,9 @@ app
                             block.child('content').html(`<div style="margin: 20px auto; text-align: center; padding-top: 2px;"><span class="noItemsMessage">${msg}</span></div>`);
                         }
                         //Block.queries();
-                        block.child('project_filter/filter_options').on('input');
+                        //block.child('project_filter/filter_options').on('input');
                         setTimeout(_ => {
-                            block.child('project_filter/filter_options').on('input');
+                            //block.child('project_filter/filter_options').on('input');
                             Block.queries();
                             setTimeout(_ => {
                                 app.ui.mui_upgrade();
@@ -991,33 +1017,11 @@ app
                             letter-spacing 0.9px
                         :input
                             {
-                                var result = block.node().value;
-                                var result_arr = result.split('-');
-                                var field_key = result_arr[0];
-                                var field_val = result_arr[1];
-                                
-                                var filter_total = 0;
-                                var project_views = block.parent().sibling("content").children();
-                                for (var v in project_views) {
-                                    if (field_key == 'all') {
-                                        project_views[v].css('display', 'inline-block');
-                                        filter_total++;
-                                    } else {
-                                        var project_metadata = project_views[v].key('project_metadata');
-                                        var filter_pass = false;
-                                        if (field_key == 'language') {
-                                            filter_pass = project_metadata.tech.languages.includes(field_val);
-                                        } else if (field_key == 'tech') {
-                                            filter_pass = project_metadata.tech.primary.includes(field_val) || project_metadata.tech.secondary.includes(field_val);
-                                        } else {
-                                            var project_val = util.bool_to_str(project_metadata[field_key]);
-                                            filter_pass = field_val.toLowerCase() == project_val.toLowerCase();
-                                        }
-                                        project_views[v].css('display', filter_pass ? 'inline-block' : 'none');
-                                        filter_total += filter_pass;
-                                    }
-                                }
-                                block.sibling('filter_counter/text').html(`${filter_total}`);
+                                // refresh project list with self to force refilter
+                                var project_list = block.parent(1).key('project_list');
+                                block.parent(1).data({
+                                    project_list: project_list
+                                });
                             }
                         option all
                             value all-all
