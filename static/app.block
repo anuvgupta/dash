@@ -831,6 +831,7 @@ app
                             }
                         }
                         // apply filters
+                        block.child('project_filter/filter_options').node().value = result;
                         var result_arr = result.split('-');
                         var field_key = result_arr[0];
                         var field_val = result_arr[1];
