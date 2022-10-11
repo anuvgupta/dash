@@ -3744,6 +3744,8 @@ app
                         option all
                             value all-all
                             html All
+                        optgroup status
+                            label Status
                         optgroup nginx_proxy
                             label Nginx
                             option true
@@ -3774,8 +3776,6 @@ app
                             option false_force
                                 value proxy.https_force-false
                                 html HTTP Allow
-                        optgroup status
-                            label Status
                 div title
                     css
                         position absolute
