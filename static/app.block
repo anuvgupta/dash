@@ -1041,7 +1041,7 @@ app
                             label Featured
                             option true
                                 value featured-true
-                                html Promoted
+                                html Featured
                                 selected selected
                             option false
                                 value featured-false
