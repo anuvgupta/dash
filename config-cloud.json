@@ -59,6 +59,9 @@
                     ["oth", "Other"]
                 ]
             },
+            "application": {
+                "filters": ["status"]
+            },
             "resource": {
                 "types": [
                     ["vm", ["Cloud Virtual Machine", "Cloud VM"]],

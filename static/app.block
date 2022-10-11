@@ -849,7 +849,7 @@ app
                                     filter_pass = project_metadata.tech.primary.includes(field_val) || project_metadata.tech.secondary.includes(field_val);
                                 } else {
                                     var project_val = util.bool_to_str(project_metadata[field_key]);
-                                    filter_pass = field_val.toLowerCase() == project_val.toLowerCase();
+                                    filter_pass = field_val.toLowerCase().trim() == project_val.toLowerCase().trim();
                                 }
                                 if (filter_pass) generate_project_view(project_list, p);
                                 filter_total += filter_pass;
@@ -3502,16 +3502,90 @@ app
                 :hide
                     css
                         display none
+                $filter_default status-online
                 #application_list
                     {
+                        var result = block.child('application_filter/filter_options').node().value;
+                        console.log(result);
+
                         application_list = application_list.sort(util.sort_compare_newest_first);
                         block.key('application_list', application_list);
 
                         block.child('content').html('');
-                        for (var a in application_list) {
+                        var generate_application_view = (application_list, a) => {
                             var application_block_new = Block('application-item', `application_${application_list[a]._id.toString()}`).data(application_list[a]).key('application_metadata', application_list[a]);
                             block.child('content').add(application_block_new);
+                        };
+
+
+                        // <filtering>
+                        // build filters
+                        var filters = {};
+                        for (var a in application_list) {
+                            for (var field_name in application_list[a]) {
+                                if (app.main.config.cloud.application.filters.includes(field_name)) {
+                                    if (!filters.hasOwnProperty(field_name)) filters[field_name] = [];
+                                    if (!filters[field_name].includes(application_list[a][field_name])) {
+                                        // build filter traditionally
+                                        filters[field_name].push(application_list[a][field_name]);
+                                    }
+                                }
+                            }
                         }
+                        // correct slugs
+                        /* no slugs to correct */
+                        // generate filter options
+                        for (var f in filters) {
+                            var child_view = block.child('application_filter/filter_options').child(f);
+                            if (child_view && child_view.block) {
+                                child_view.html('');
+                                for (var fl in filters[f]) {
+                                    var filter_tuple = filters[f][fl];
+                                    var filter_key = typeof filter_tuple === 'string' ? filter_tuple : filter_tuple[0];
+                                    var filter_val = typeof filter_tuple === 'string' ? filter_tuple : filter_tuple[1];
+                                    filter_key = f + "-" + filter_key;
+                                    child_view.add(Block('option', filter_key)
+                                        .attribute('value', filter_key)
+                                        .html(`${util.capitalize(filter_val)}`)
+                                    );
+                                }
+                            }
+                        }
+                        if (block.key('first') !== "done") {
+                            block.key('first', "done");
+                            result = block.key('filter_default');
+                        }
+                        // apply filters
+                        block.child('application_filter/filter_options').node().value = result;
+                        var result_arr = result.split('-');
+                        var field_key = result_arr[0];
+                        var field_val = result_arr[1];
+                        var filter_total = 0;
+                        for (var a in application_list) {
+                            if (field_key == 'all') {
+                                generate_application_view(application_list, a);
+                                filter_total++;
+                            } else {
+                                var application_metadata = application_list[a];
+                                var filter_pass = false;
+                                console.log(field_key);
+                                if (field_key.includes('.')) {
+                                    var field_key_outer = field_key.split('.')[0];
+                                    var field_key_inner = field_key.split('.')[1];
+                                    var application_val = util.bool_to_str(application_metadata[field_key_outer][field_key_inner]);
+                                    filter_pass = field_val.toLowerCase().trim() == application_val.toLowerCase().trim();
+                                } else {
+                                    var application_val = util.bool_to_str(application_metadata[field_key]);
+                                    filter_pass = field_val.toLowerCase().trim() == application_val.toLowerCase().trim();
+                                }
+                                if (filter_pass) generate_application_view(application_list, a);
+                                filter_total += filter_pass;
+                            }
+                        }
+                        block.child('application_filter/filter_counter/text').html(`${filter_total}`);
+                        // </filtering>
+
+
                         if (application_list.length > 2)
                             block.child('content').css('text-align', 'center');
                         else block.child('content').css('text-align', 'left');
@@ -3643,15 +3717,65 @@ app
                         top 23px
                         right 80px
                         z-index 11
+                    block filter_counter
+                        css
+                            position absolute
+                            top 0
+                            left -40px
+                            height 100%
+                            width 40px
+                        text text
+                            css
+                                font-size 14px
                     select filter_options
                         css
                             height 35px
-                            width 110px
+                            width 140px
                             padding 0px 10px
                             letter-spacing 0.9px
+                        :input
+                            {
+                                // refresh application list with self to force re-filter
+                                var application_list = block.parent(1).key('application_list');
+                                block.parent(1).data({
+                                    application_list: application_list
+                                });
+                            }
                         option all
-                            value all
+                            value all-all
                             html All
+                        optgroup nginx_proxy
+                            label Nginx
+                            option true
+                                value proxy.enable-true
+                                html Proxy On
+                            option false
+                                value proxy.enable-false
+                                html Proxy Off
+                        optgroup apache_vhost
+                            label Apache
+                            option true
+                                value proxy.apache_vhost-true
+                                html Virtualhost On
+                            option false
+                                value proxy.apache_vhost-false
+                                html Virtualhost Off
+                        optgroup secure
+                            label Secure
+                            option true_enable
+                                value proxy.https_enable-true
+                                html HTTPS On
+                            option false_enable
+                                value proxy.https_enable-false
+                                html HTTPS Off
+                            option true_force
+                                value proxy.https_force-true
+                                html HTTPS Force
+                            option false_force
+                                value proxy.https_force-false
+                                html HTTP Allow
+                        optgroup status
+                            label Status
                 div title
                     css
                         position absolute
