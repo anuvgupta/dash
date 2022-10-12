@@ -120,7 +120,7 @@ const app = {
                 resolve(success, `<b>${app_ecosystem.name}</b> received <b>${signal.toUpperCase()}</b>`);
             });
         } else {
-            resolve(false, `App ${app_ecosystem.name} not in ecosystem`);
+            resolve(false, `App ${application_id} not in ecosystem`);
             // TODO: queue signal for processing later? or maybe not
         }
     },
