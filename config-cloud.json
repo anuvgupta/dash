@@ -60,7 +60,10 @@
                 ]
             },
             "application": {
-                "filters": ["status"]
+                "filters": [
+                    "status",
+                    "ecosystem.interpreter"
+                ]
             },
             "resource": {
                 "types": [

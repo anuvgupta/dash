@@ -3506,7 +3506,7 @@ app
                 #application_list
                     {
                         var result = block.child('application_filter/filter_options').node().value;
-                        console.log(result);
+                        //console.log(result);
 
                         application_list = application_list.sort(util.sort_compare_newest_first);
                         block.key('application_list', application_list);
@@ -3529,9 +3529,27 @@ app
                                         // build filter traditionally
                                         filters[field_name].push(application_list[a][field_name]);
                                     }
+                                } else {
+                                    // nested (filter properties with dots)
+                                    for (var ffn in app.main.config.cloud.application.filters) {
+                                        var filter_field_name = app.main.config.cloud.application.filters[ffn];
+                                        //console.log(filter_field_name.split('.')[0]);
+                                        if (filter_field_name.split('.')[0] === field_name) {
+                                            var new_value = application_list[a][field_name][filter_field_name.split('.')[1]];
+                                            // special handling for pathed interpreters
+                                            if (new_value.split('/').length > 1)
+                                                new_value = new_value.split('/')[new_value.split('/').length - 1];
+                                            if (!filters.hasOwnProperty(filter_field_name)) filters[filter_field_name] = [];
+                                            if (!filters[filter_field_name].includes(new_value)) {
+                                                if (new_value.trim() != "")
+                                                    filters[filter_field_name].push(new_value);
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
+                        //console.log(filters);
                         // correct slugs
                         /* no slugs to correct */
                         // generate filter options
@@ -3552,6 +3570,7 @@ app
                             }
                         }
                         if (block.key('first') !== "done") {
+                            // apply programmatic filter default (instead of html attribute, since these html elements are generated after)
                             block.key('first', "done");
                             result = block.key('filter_default');
                         }
@@ -3568,12 +3587,12 @@ app
                             } else {
                                 var application_metadata = application_list[a];
                                 var filter_pass = false;
-                                console.log(field_key);
+                                //console.log(field_key);
                                 if (field_key.includes('.')) {
                                     var field_key_outer = field_key.split('.')[0];
                                     var field_key_inner = field_key.split('.')[1];
                                     var application_val = util.bool_to_str(application_metadata[field_key_outer][field_key_inner]);
-                                    filter_pass = field_val.toLowerCase().trim() == application_val.toLowerCase().trim();
+                                    filter_pass = field_val.toLowerCase().trim() == application_val.toLowerCase().trim() || application_val.toLowerCase().trim().includes(field_val.toLowerCase().trim());
                                 } else {
                                     var application_val = util.bool_to_str(application_metadata[field_key]);
                                     filter_pass = field_val.toLowerCase().trim() == application_val.toLowerCase().trim();
@@ -3746,6 +3765,8 @@ app
                             html All
                         optgroup status
                             label Status
+                        optgroup ecosystem.interpreter
+                            label Interpreter
                         optgroup nginx_proxy
                             label Nginx
                             option true
