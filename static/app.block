@@ -3551,7 +3551,7 @@ app
                         }
                         //console.log(filters);
                         // correct slugs
-                        /* no slugs to correct */
+                        // no slugs to correct
                         // generate filter options
                         for (var f in filters) {
                             var child_view = block.child('application_filter/filter_options').child(f);
@@ -7739,15 +7739,99 @@ app
                         display none
                 #domain_list
                     {
+                        var result = block.child('domain_filter/filter_options').node().value;
+
                         //console.log('DOMAIN LIST');
                         domain_list = domain_list.sort(util.sort_compare_newest_first);
                         block.key('domain_list', domain_list);
 
                         block.child('content').html('');
-                        for (var a in domain_list) {
-                            var domain_block_new = Block('domain-item', `domain_${domain_list[a]._id.toString()}`).data(domain_list[a]).key('domain_metadata', domain_list[a]);
+                        var generate_domain_view = (domain_list, d) => {
+                            var domain_block_new = Block('domain-item', `domain_${domain_list[d]._id.toString()}`).data(domain_list[d]).key('domain_metadata', domain_list[d]);
                             block.child('content').add(domain_block_new);
+                        };
+
+                        // <filtering>
+                        // build filters
+                        var filters = {};
+                        for (var d in domain_list) {
+                            for (var field_name in domain_list[d]) {
+                                if (app.main.config.cloud.domain.filters.includes(field_name)) {
+                                    if (!filters.hasOwnProperty(field_name)) filters[field_name] = [];
+                                    if (!filters[field_name].includes(domain_list[d][field_name])) {
+                                        // build filter traditionally
+                                        filters[field_name].push(domain_list[d][field_name]);
+                                    }
+                                }
+                            }
                         }
+                        //console.log(filters);
+                        // correct slugs & tlds
+                        if (filters.hasOwnProperty('topLevel')) {
+                            var filters_topLevel_new = [];
+                            for (var f in filters.topLevel) {
+                                var filter_val = filters.topLevel[f];
+                                if (isNaN(parseInt(filter_val))) {
+                                    filters_topLevel_new.push([`${filter_val}`, `.${filter_val}`]);
+                                } else {
+                                    //filters['ip'] = ["ip-false", "ip-true"];  //  not needed
+                                }
+                            }
+                            filters.topLevel = filters_topLevel_new;
+                        }
+                        //console.log(filters);
+                        // generate filter options
+                        for (var f in filters) {
+                            var child_view = block.child('domain_filter/filter_options').child(f);
+                            if (child_view && child_view.block) {
+                                child_view.html('');
+                                for (var fl in filters[f]) {
+                                    var filter_tuple = filters[f][fl];
+                                    var filter_key = typeof filter_tuple === 'string' ? filter_tuple : filter_tuple[0];
+                                    var filter_val = typeof filter_tuple === 'string' ? filter_tuple : filter_tuple[1];
+                                    filter_key = f + "-" + filter_key;
+                                    child_view.add(Block('option', filter_key)
+                                        .attribute('value', filter_key)
+                                        .html(`${filter_key === 'topLevel' ? filter_val : util.capitalize(filter_val)}`)
+                                    );
+                                }
+                            }
+                        }
+                        // programmatic filter default not needed
+                        //if (block.key('first') !== "done") {
+                        //    // apply programmatic filter default (instead of html attribute, since these html elements are generated after)
+                        //    block.key('first', "done");
+                        //    result = block.key('filter_default');
+                        //}
+                        // apply filters
+                        block.child('domain_filter/filter_options').node().value = result;
+                        var result_arr = result.split('-');
+                        var field_key = result_arr[0];
+                        var field_val = result_arr.splice(1).join('-');
+                        var filter_total = 0;
+                        for (var d in domain_list) {
+                            if (field_key == 'all') {
+                                generate_domain_view(domain_list, d);
+                                filter_total++;
+                            } else {
+                                var domain_metadata = domain_list[d];
+                                var filter_pass = false;
+                                //console.log(field_key, field_val);
+                                //console.log(domain_metadata);
+                                if (field_key == 'ip') {
+                                    var isNumeric = isNaN(parseInt(domain_metadata['topLevel']));
+                                    filter_pass = field_val === 'true' ? !isNumeric : isNumeric;
+                                } else {
+                                    var domain_val = util.bool_to_str(domain_metadata[field_key]);
+                                    filter_pass = field_val.toLowerCase().trim() == domain_val.toLowerCase().trim();
+                                }
+                                if (filter_pass) generate_domain_view(domain_list, d);
+                                filter_total += filter_pass;
+                            }
+                        }
+                        block.child('domain_filter/filter_counter/text').html(`${filter_total}`);
+                        // </filtering>
+
                         if (domain_list.length > 2)
                             block.child('content').css('text-align', 'center');
                         else block.child('content').css('text-align', 'left');
@@ -7869,15 +7953,44 @@ app
                         top 23px
                         right 80px
                         z-index 11
+                    block filter_counter
+                        css
+                            position absolute
+                            top 0
+                            left -40px
+                            height 100%
+                            width 40px
+                        text text
+                            css
+                                font-size 14px
                     select filter_options
                         css
                             height 35px
-                            width 110px
+                            width 140px
                             padding 0px 10px
                             letter-spacing 0.9px
+                        :input
+                            {
+                                // refresh domain list with self to force re-filter
+                                var domain_list = block.parent(1).key('domain_list');
+                                block.parent(1).data({
+                                    domain_list: domain_list
+                                });
+                            }
                         option all
                             value all
                             html All
+                            selected selected
+                        optgroup topLevel
+                            label TLD
+                        optgroup ip
+                            label Category
+                            option false
+                                value ip-false
+                                html Domain Name
+                            option true
+                                value ip-true
+                                html IP Address
                 div title
                     css
                         position absolute
