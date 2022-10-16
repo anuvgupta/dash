@@ -127,10 +127,6 @@ ideas for later
             - possible integrations: heroku (audiu, rubbr-legacy-og), firebase (chessroom), github pages (projects site)
     - another way
         - create a resource for each external app, wherever it is running (ie a resource for audiu’s heroku container, a resource for chessroom’s firebase container, etc…)
-- squash application view into a bar, i have so many apps its hard to understand when they are displayed so big (resource and project sizes are fine, apps are too similar to projects)
-- create projects again
-- set project majority for each project: major/flagship (ie pocketjs, blockjs, nestor, audiu, uncurated), minor (like led-lights, tcp-chat, dolphin, messenger, vizioir, moon etc.)
-    - rename majority to flagship?
 - add filter on resources/applications widget for online/offline apps
     - also sort by port
 - checkbox on whether resource/domain is owned by you or external
@@ -140,16 +136,11 @@ ideas for later
     - have options to manually specify the install and build commands and force dash daemon to use those
     - can disable install and/or build
     - this allows for using local python and skipping install, ie for jetson nano
-- domain desc should be domains subdomains.join(“, “)
 - refresh buttons on each page (just run the :select_$TYPE function again? or load data firs tthen do that? guess u have to add one on the detail page and one on the content page and they will do diff things)
 - autoremove domains from apps & resources on domain delete
     - autoremove apps from project on app delete
 - add environment section to application, where you can add and edit env var for pm2 to pass into the app
 - add a secure switch to app which controls the proxy https fields too
-- filter projects by technology, language, visibility, featured, app domain, application
-    - filter applications by interpreter, status, secure, websocket proxy, host resource, domain
-    - filter resources by provider, type, status, domain, location
-    - filter domains by top level
 - idea section, promote ideas to projects
 - sitemap section, generated from applications/projects/domains
     - resource-focused view shows resources on top and apps underneath/on resources assigned to ports, domains listed under each app
@@ -179,6 +170,15 @@ test & bugfix
 - low priority
 
 done:
+- filter projects by technology, language, visibility, featured, app domain, application
+    - filter applications by interpreter, status, secure, websocket proxy, host resource, domain
+    - filter resources by provider, type, status, domain, location
+    - filter domains by top level
+- domain desc should be domains subdomains.join(“, “)
+- set project majority for each project: major/flagship (ie pocketjs, blockjs, nestor, audiu, uncurated), minor (like led-lights, tcp-chat, dolphin, messenger, vizioir, moon etc.)
+    - rename majority to flagship?
+- create projects again
+- squash application view into a bar, i have so many apps its hard to understand when they are displayed so big (resource and project sizes are fine, apps are too similar to projects)
 - project management
     - project majority switch
     - project type (library, application, script, static site, other)
