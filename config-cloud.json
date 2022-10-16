@@ -66,9 +66,14 @@
                 ]
             },
             "resource": {
+                "filters": [
+                    "status",
+                    "provider",
+                    "type"
+                ],
                 "types": [
                     ["vm", ["Cloud Virtual Machine", "Cloud VM"]],
-                    ["ct", ["Cloud Container", "Cloud CTR"]],
+                    ["ct", ["Cloud Container", "Container"]],
                     ["lt", ["Laptop Computer", "Laptop"]],
                     ["pc", ["Personal Computer", "PC"]],
                     ["mc", ["Micro Computer", "Micro"]]

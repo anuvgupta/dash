@@ -834,7 +834,7 @@ app
                         block.child('project_filter/filter_options').node().value = result;
                         var result_arr = result.split('-');
                         var field_key = result_arr[0];
-                        var field_val = result_arr[1];
+                        var field_val = result_arr.splice(1).join('-');
                         var filter_total = 0;
                         for (var p in project_list) {
                             if (field_key == 'all') {
@@ -3485,6 +3485,7 @@ app
             
             div applications
                 $active_view content
+                $filter_default status-online
                 css
                     width 100%
                     height auto
@@ -3502,7 +3503,6 @@ app
                 :hide
                     css
                         display none
-                $filter_default status-online
                 #application_list
                     {
                         var result = block.child('application_filter/filter_options').node().value;
@@ -3578,7 +3578,7 @@ app
                         block.child('application_filter/filter_options').node().value = result;
                         var result_arr = result.split('-');
                         var field_key = result_arr[0];
-                        var field_val = result_arr[1];
+                        var field_val = result_arr.splice(1).join('-');
                         var filter_total = 0;
                         for (var a in application_list) {
                             if (field_key == 'all') {
@@ -8819,6 +8819,7 @@ app
                             
             div resources
                 $active_view content
+                $filter_default status-online
                 css
                     width 100%
                     height auto
@@ -8838,14 +8839,90 @@ app
                         display none
                 #resource_list
                     {
+                        var result = block.child('resource_filter/filter_options').node().value;
+
                         resource_list = resource_list.sort(util.sort_compare_newest_first);
                         block.key('resource_list', resource_list);
 
                         block.child('content').html('');
-                        for (var r in resource_list) {
+                        var generate_resource_view = (resource_list, r) => {
                             var resource_block_new = Block('resource-item', `resource_${resource_list[r]._id.toString()}`).data(resource_list[r]).key('resource_metadata', resource_list[r]);
                             block.child('content').add(resource_block_new);
+                        };
+
+                        // <filtering>
+                        // build filters
+                        var filters = {};
+                        for (var r in resource_list) {
+                            for (var field_name in resource_list[r]) {
+                                if (app.main.config.cloud.resource.filters.includes(field_name)) {
+                                    if (!filters.hasOwnProperty(field_name)) filters[field_name] = [];
+                                    if (!filters[field_name].includes(resource_list[r][field_name])) {
+                                        // build filter traditionally
+                                        filters[field_name].push(resource_list[r][field_name]);
+                                    }
+                                }
+                            }
                         }
+                        console.log(filters);
+                        // correct slugs
+                        if (filters.hasOwnProperty('type')) {
+                            filters.type = util.replace_slugs_in_list_subtuple(filters.type, app.main.config.cloud.resource.types, 1);
+                        }
+                        if (filters.hasOwnProperty('provider')) {
+                           filters.provider = util.replace_slugs_in_list_tuple(filters.provider, app.main.config.cloud.providers);
+                        }
+                        console.log(filters);
+                        // generate filter options
+                        for (var f in filters) {
+                            var child_view = block.child('resource_filter/filter_options').child(f);
+                            if (child_view && child_view.block) {
+                                child_view.html('');
+                                for (var fl in filters[f]) {
+                                    var filter_tuple = filters[f][fl];
+                                    var filter_key = typeof filter_tuple === 'string' ? filter_tuple : filter_tuple[0];
+                                    var filter_val = typeof filter_tuple === 'string' ? filter_tuple : filter_tuple[1];
+                                    filter_key = f + "-" + filter_key;
+                                    child_view.add(Block('option', filter_key)
+                                        .attribute('value', filter_key)
+                                        .html(`${util.capitalize(filter_val)}`)
+                                    );
+                                }
+                            }
+                        }
+                        if (block.key('first') !== "done") {
+                            // apply programmatic filter default (instead of html attribute, since these html elements are generated after)
+                            block.key('first', "done");
+                            result = block.key('filter_default');
+                        }
+                        // apply filters
+                        block.child('resource_filter/filter_options').node().value = result;
+                        var result_arr = result.split('-');
+                        var field_key = result_arr[0];
+                        var field_val = result_arr.splice(1).join('-');
+                        var filter_total = 0;
+                        for (var r in resource_list) {
+                            if (field_key == 'all') {
+                                generate_resource_view(resource_list, r);
+                                filter_total++;
+                            } else {
+                                var resource_metadata = resource_list[r];
+                                var filter_pass = false;
+                                console.log(field_key, field_val);
+                                console.log(resource_metadata);
+                                if (false) {
+                                    // not needed as of yet
+                                } else {
+                                    var resource_val = util.bool_to_str(resource_metadata[field_key]);
+                                    filter_pass = field_val.toLowerCase().trim() == resource_val.toLowerCase().trim();
+                                }
+                                if (filter_pass) generate_resource_view(resource_list, r);
+                                filter_total += filter_pass;
+                            }
+                        }
+                        block.child('resource_filter/filter_counter/text').html(`${filter_total}`);
+                        // </filtering>
+
                         if (resource_list.length > 2)
                             block.child('content').css('text-align', 'center');
                         else block.child('content').css('text-align', 'left');
@@ -8986,15 +9063,39 @@ app
                         top 23px
                         right 80px
                         z-index 11
+                    block filter_counter
+                        css
+                            position absolute
+                            top 0
+                            left -40px
+                            height 100%
+                            width 40px
+                        text text
+                            css
+                                font-size 14px
                     select filter_options
                         css
                             height 35px
                             width 110px
                             padding 0px 10px
                             letter-spacing 0.9px
+                        :input
+                            {
+                                // refresh resource list with self to force re-filter
+                                var resource_list = block.parent(1).key('resource_list');
+                                block.parent(1).data({
+                                    resource_list: resource_list
+                                });
+                            }
                         option all
                             value all
                             html All
+                        optgroup status
+                            label Status
+                        optgroup provider
+                            label Provider
+                        optgroup type
+                            label Type
                 div title
                     css
                         position absolute

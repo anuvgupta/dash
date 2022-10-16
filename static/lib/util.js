@@ -111,6 +111,16 @@ var util = {
         }
         return list;
     },
+    replace_slugs_in_list_subtuple: (list, config, selector = 0) => {
+        for (var i in list) {
+            for (var t in config) {
+                if (config[t][0] === list[i]) {
+                    list[i] = [config[t][0], config[t][1][selector]];
+                }
+            }
+        }
+        return list;
+    },
     bool_to_str: (bool_val) => {
         if (typeof bool_val === 'boolean' || typeof bool_val === 'number')
             return bool_val ? "true" : "false";
