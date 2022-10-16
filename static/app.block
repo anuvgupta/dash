@@ -1220,7 +1220,7 @@ app
                         }
                     #project
                         {
-                            console.log(project);
+                            //console.log(project);
                             block.key('project', project);
                             block.data({
                                 name: project.name,
@@ -6790,7 +6790,7 @@ app
                                     {
                                         var env_local = block.key('environment_local');
                                         if (data.from !== data.to) {
-                                            console.log('rename value "' + data.from + '" to "' + data.to + '"');
+                                            //console.log('rename value "' + data.from + '" to "' + data.to + '"');
                                             env_local[data.to] = env_local[data.from];
                                             delete env_local[data.from];
                                             block.parent(2).on('send_application_update', {
@@ -6802,7 +6802,7 @@ app
                                 :remove
                                     {
                                         var env_local = block.key('environment_local');
-                                        console.log('remove value "' + data.key + '"');
+                                        //console.log('remove value "' + data.key + '"');
                                         delete env_local[data.key];
                                         block.parent(2).on('send_application_update', {
                                             environment: env_local
@@ -6812,7 +6812,7 @@ app
                                 :update
                                     {
                                         var env_local = block.key('environment_local');
-                                        console.log('update value ' + data.key + ' from "' + data.from + '" to "' + data.val + '"');
+                                        //console.log('update value ' + data.key + ' from "' + data.from + '" to "' + data.val + '"');
                                         env_local[data.key] = data.val;
                                         block.parent(2).on('send_application_update', {
                                             environment: env_local
@@ -8864,7 +8864,7 @@ app
                                 }
                             }
                         }
-                        console.log(filters);
+                        //console.log(filters);
                         // correct slugs
                         if (filters.hasOwnProperty('type')) {
                             filters.type = util.replace_slugs_in_list_subtuple(filters.type, app.main.config.cloud.resource.types, 1);
@@ -8872,7 +8872,7 @@ app
                         if (filters.hasOwnProperty('provider')) {
                            filters.provider = util.replace_slugs_in_list_tuple(filters.provider, app.main.config.cloud.providers);
                         }
-                        console.log(filters);
+                        //console.log(filters);
                         // generate filter options
                         for (var f in filters) {
                             var child_view = block.child('resource_filter/filter_options').child(f);
@@ -8908,8 +8908,8 @@ app
                             } else {
                                 var resource_metadata = resource_list[r];
                                 var filter_pass = false;
-                                console.log(field_key, field_val);
-                                console.log(resource_metadata);
+                                //console.log(field_key, field_val);
+                                //console.log(resource_metadata);
                                 if (false) {
                                     // not needed as of yet
                                 } else {

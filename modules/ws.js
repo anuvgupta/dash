@@ -1147,7 +1147,7 @@ var init = _ => {
                                 var vhost_site_config = m.main.gen_vhost_proxy_config(result1.proxy, result1, result2, result3);
                                 if (vhost_site_config != null) {
                                     var vhost_site_config_export = m.main.convert_vhost_proxy_config_obj(vhost_site_config);
-                                    console.log(vhost_site_config_export);
+                                    //console.log(vhost_site_config_export);
                                     var ws_daemon_client = m.ws.get_daemon_client(application_resource_id);
                                     if (ws_daemon_client != null && ws_server.clients.hasOwnProperty(ws_daemon_client.id)) {
                                         ws_server.send_to_client('vhost_config', {

@@ -181,7 +181,7 @@ var api = {
                 resolve(false, e);
             } else {
                 if (result1) {
-                    console.log(result1);
+                    //console.log(result1);
                     var app_ids = [];
                     for (var p in result1)
                         app_ids = app_ids.concat(result1[p].applications);
@@ -190,7 +190,7 @@ var api = {
                     mongo_api.collection('application').find({
                         _id: { $in: app_ids },
                     }).toArray((e2, result2) => {
-                        console.log(result2);
+                        //console.log(result2);
                         if (e2) {
                             err("error summarizing projects - retrieving applications", e2.message ? e2.message : e2);
                             resolve(false, e2);

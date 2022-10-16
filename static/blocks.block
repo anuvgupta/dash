@@ -3422,7 +3422,7 @@
                                     b.css('opacity', '0.6');
                                 })
                                 .on('click', (e, b, d) => {
-                                    console.log(`add subdomain ${b.parent().sibling('select').node().value} to certificate ${block.key('id')}`);
+                                    //console.log(`add subdomain ${b.parent().sibling('select').node().value} to certificate ${block.key('id')}`);
                                     var subdomains = block.key('subdomains');
                                     if (!subdomains) subdomains = [];
                                     var domain_name = block.key('domain_name');
@@ -4053,7 +4053,7 @@
                 block.child('block/expiration/value/text').html('').data(`${expiration_desc}`);
                 block.child('block/expiration/value_editor').attribute('value', `${expiration}`);
                 var deltaSec = parseInt(expiration) - parseInt(Date.now() / 1000);
-                console.log(deltaSec);
+                //console.log(deltaSec);
                 if (deltaSec <= 604800 + (86400 * 2)) { //  1 week + 2 days
                     block.child('block/renew').css('display', 'table');
                 } else block.child('block/renew').css('display', 'none');
