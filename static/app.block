@@ -1085,6 +1085,27 @@ app
                             font-size 30px
                             color #333
                         val Projects
+                    image refresh
+                        src /img/refresh_b.png
+                        height 15px
+                        width 15px
+                        css
+                            opacity 0.12
+                            cursor pointer
+                            position absolute
+                            right -28px
+                            top 5px
+                            transition opacity 0.2s ease
+                        :mouseover
+                            css
+                                opacity 0.55
+                        :mouseout
+                            css
+                                opacity 0.12
+                        :click
+                            {
+                                app.ui.block.child('main/menu/projects').on('click');
+                            }
                     #select_project_name
                         {
                             block.child('text').html(`Projects&nbsp;&nbsp;/&nbsp;&nbsp;<span class='b600'>${select_project_name}</span>`);
@@ -3808,6 +3829,27 @@ app
                             font-size 30px
                             color #333
                         val Applications
+                    image refresh
+                        src /img/refresh_b.png
+                        height 15px
+                        width 15px
+                        css
+                            opacity 0.12
+                            cursor pointer
+                            position absolute
+                            right -28px
+                            top 5px
+                            transition opacity 0.2s ease
+                        :mouseover
+                            css
+                                opacity 0.55
+                        :mouseout
+                            css
+                                opacity 0.12
+                        :click
+                            {
+                                app.ui.block.child('main/menu/applications').on('click');
+                            }
                     #select_application_name
                         {
                             block.child('text').html(`Applications&nbsp;&nbsp;/&nbsp;&nbsp;<span class='b600'>${select_application_name}</span>`);
@@ -8002,6 +8044,27 @@ app
                             font-size 30px
                             color #333
                         val Domains
+                    image refresh
+                        src /img/refresh_b.png
+                        height 15px
+                        width 15px
+                        css
+                            opacity 0.12
+                            cursor pointer
+                            position absolute
+                            right -28px
+                            top 5px
+                            transition opacity 0.2s ease
+                        :mouseover
+                            css
+                                opacity 0.55
+                        :mouseout
+                            css
+                                opacity 0.12
+                        :click
+                            {
+                                app.ui.block.child('main/menu/domains').on('click');
+                            }
                     #select_domain_name
                         {
                             block.child('text').html(`Domains&nbsp;&nbsp;/&nbsp;&nbsp;<span class='b600'>${select_domain_name}</span>`);
@@ -9220,6 +9283,27 @@ app
                             font-size 30px
                             color #333
                         val Resources
+                    image refresh
+                        src /img/refresh_b.png
+                        height 15px
+                        width 15px
+                        css
+                            opacity 0.12
+                            cursor pointer
+                            position absolute
+                            right -28px
+                            top 5px
+                            transition opacity 0.2s ease
+                        :mouseover
+                            css
+                                opacity 0.55
+                        :mouseout
+                            css
+                                opacity 0.12
+                        :click
+                            {
+                                app.ui.block.child('main/menu/resources').on('click');
+                            }
                     #select_resource_name
                         {
                             block.child('text').html(`Resources&nbsp;&nbsp;/&nbsp;&nbsp;<span class='b600'>${select_resource_name}</span>`);
