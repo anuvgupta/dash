@@ -468,6 +468,11 @@ var app = {
             get_projects: () => {
                 app.ws.send('get_projects', {});
             },
+            get_project: (id) => {
+                app.ws.send('get_project', {
+                    id: id,
+                });
+            },
             new_project: (slug, name, repo, desc) => {
                 app.ws.send('new_project', {
                     slug: slug,
@@ -521,6 +526,11 @@ var app = {
                 });
             },
             // domains
+            get_domain: (id) => {
+                app.ws.send('get_domain', {
+                    id: id,
+                });
+            },
             get_domains: (launch = null, associate_resource = null, associate_application = null) => {
                 var data = {};
                 if (launch != null) data.launch = launch;
@@ -615,6 +625,11 @@ var app = {
                 if (launch != null) data.launch = launch;
                 if (associate != null) data.associate = associate;
                 app.ws.send('get_applications', data);
+            },
+            get_application: (id) => {
+                app.ws.send('get_application', {
+                    id: id,
+                });
             },
             new_application: (slug, name, desc, ip) => {
                 app.ws.send('new_application', {

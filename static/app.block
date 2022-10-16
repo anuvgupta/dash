@@ -77,6 +77,18 @@ app
                 });
             }
         }
+    #get_project_res
+        {
+            block.data({
+                update_project_res: {
+                    success: get_project_res.success,
+                    data: {
+                        id: get_project_res.data.project._id,
+                        project: get_project_res.data.project
+                    }
+                }
+            });
+        }
     #star_project_res
         {
             //console.log(star_project_res.data.id, star_project_res.data.starred);
@@ -209,6 +221,18 @@ app
                 });
             }
         }
+    #get_application_res
+        {
+            block.data({
+                update_application_res: {
+                    success: get_application_res.success,
+                    data: {
+                        id: get_application_res.data.application._id,
+                        application: get_application_res.data.application
+                    }
+                }
+            });
+        }
     #update_application_res
         {
             var current_application = block.child('main/content/applications/detail').key('application');
@@ -324,7 +348,7 @@ app
                 }
             }
         }
-    
+
     #new_domain_res
             {
                 if (new_domain_res.success) {
@@ -386,6 +410,19 @@ app
                 });
             }
         }
+    #get_domain_res
+        {
+            block.data({
+                update_domain_res: {
+                    success: get_domain_res.success,
+                    data: {
+                        id: get_domain_res.data.domain._id,
+                        domain: get_domain_res.data.domain
+                    }
+                }
+            });
+        }
+
     #update_domain_res
         {
            var current_domain = block.child('main/content/domains/detail').key('domain');
@@ -556,7 +593,7 @@ app
                     :hide
                         css
                             opacity 0
-                
+
     div main
         css
             display none
@@ -901,6 +938,8 @@ app
                     }
                 #select_project
                     {
+                        //console.log(select_project);
+                        block.key('detail_active_object', select_project);
                         block.key('active_view', 'detail');
                         block.child('content').css('display', 'none')
                             .sibling('detail').css('display', 'block')
@@ -931,6 +970,12 @@ app
                                 app.ui.mui_upgrade();
                             }, 10);
                         }, 5);
+                    }
+                :reselect_project
+                    {
+                        var selected_project = block.key('detail_active_object');
+                        app.ws.api.get_project(selected_project._id);
+                        //app.ws.api.get_applications();
                     }
                 #update_project_local
                     {
@@ -1104,7 +1149,13 @@ app
                                 opacity 0.12
                         :click
                             {
-                                app.ui.block.child('main/menu/projects').on('click');
+                                var active_view = block.parent(1).key('active_view');
+                                //console.log(active_view);
+                                if (active_view === 'content') {
+                                    app.ui.block.child('main/menu/projects').on('click');
+                                } else if (active_view === 'detail') {
+                                    block.parent(1).on('reselect_project');
+                                }
                             }
                     #select_project_name
                         {
@@ -3644,6 +3695,7 @@ app
                 #select_application
                     {
                         //console.log(select_application);
+                        block.key('detail_active_object', select_application);
                         block.key('active_view', 'detail');
                         block.child('content').css('display', 'none')
                             .sibling('detail').css('display', 'block')
@@ -3690,6 +3742,13 @@ app
                                 }, 10);
                             }, 5);
                         }
+                    }
+                :reselect_application
+                    {
+                        var selected_application = block.key('detail_active_object');
+                        app.ws.api.get_application(selected_application._id);
+                        app.ws.api.get_domains();
+                        app.ws.api.get_resources();
                     }
                 #update_application_local
                     {
@@ -3848,7 +3907,12 @@ app
                                 opacity 0.12
                         :click
                             {
-                                app.ui.block.child('main/menu/applications').on('click');
+                                var active_view = block.parent(1).key('active_view');
+                                if (active_view === 'content') {
+                                    app.ui.block.child('main/menu/applications').on('click');
+                                } else if (active_view === 'detail') {
+                                    block.parent(1).on('reselect_application');
+                                }
                             }
                     #select_application_name
                         {
@@ -7892,6 +7956,7 @@ app
                 #select_domain
                     {
                         //console.log(select_domain);
+                        block.key('detail_active_object', select_domain);
                         block.key('active_view', 'detail');
                         block.child('content').css('display', 'none')
                             .sibling('detail').css('display', 'block')
@@ -7928,6 +7993,19 @@ app
                                 }, 10);
                             }, 5);
                         }
+                    }
+                :reselect_domain
+                    {
+                        var selected_domain = block.key('detail_active_object');
+                        app.ws.api.get_domain(selected_domain._id);
+                        /*
+                        setTimeout(_ => {
+                            var selected_domain_new = block.key('detail_active_object');
+                            block.data({
+                                select_domain: selected_domain_new
+                            });
+                        }, 200);
+                        */
                     }
                 #update_domain_local
                     {
@@ -8063,7 +8141,13 @@ app
                                 opacity 0.12
                         :click
                             {
-                                app.ui.block.child('main/menu/domains').on('click');
+                                var active_view = block.parent(1).key('active_view');
+                                //console.log(active_view);
+                                if (active_view === 'content') {
+                                    app.ui.block.child('main/menu/domains').on('click');
+                                } else if (active_view === 'detail') {
+                                    block.parent(1).on('reselect_domain');
+                                }
                             }
                     #select_domain_name
                         {
@@ -9117,6 +9201,7 @@ app
                 #select_resource
                     {
                         //console.log(select_resource);
+                        block.key('detail_active_object', select_resource);
                         block.key('active_view', 'detail');
                         block.child('content').css('display', 'none')
                             .sibling('detail').css('display', 'block')
@@ -9150,6 +9235,12 @@ app
                                 app.ui.mui_upgrade();
                             }, 10);
                         }, 5);
+                    }
+                :reselect_resource
+                    {
+                        var selected_resource = block.key('detail_active_object');
+                        app.ws.api.get_domains();
+                        app.ws.api.get_resource(selected_resource._id);
                     }
                 #update_resource_local
                     {
@@ -9302,7 +9393,12 @@ app
                                 opacity 0.12
                         :click
                             {
-                                app.ui.block.child('main/menu/resources').on('click');
+                                var active_view = block.parent(1).key('active_view');
+                                if (active_view === 'content') {
+                                    app.ui.block.child('main/menu/resources').on('click');
+                                } else if (active_view === 'detail') {
+                                    block.parent(1).on('reselect_resource');
+                                }
                             }
                     #select_resource_name
                         {

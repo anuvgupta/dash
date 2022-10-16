@@ -234,6 +234,14 @@ var init = _ => {
             return ws_server.return_event_data("get_projects", { list: result1 }, client);
         });
     });
+    ws_server.bind("get_project", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        m.db.get_project(id, null, (success1, result1) => {
+            if (success1 === false || result1 === null)
+                return ws_server.return_event_error("get_project", "database error", client);
+            return ws_server.return_event_data("get_project", { project: result1 }, client);
+        });
+    });
     ws_server.bind("update_project", (client, req) => {
         var id = req.id ? (`${req.id}`).trim() : '';
         var update = req.update ? JSON.parse(JSON.stringify(req.update)) : null;
@@ -756,6 +764,14 @@ var init = _ => {
                 ret_data.associate = associate_project_id;
             }
             return ws_server.return_event_data("get_applications", ret_data, client);
+        });
+    });
+    ws_server.bind("get_application", (client, req) => {
+        var id = req.id ? (`${req.id}`).trim() : '';
+        m.db.get_application(id, null, (success1, result1) => {
+            if (success1 === false || result1 === null)
+                return ws_server.return_event_error("get_application", "database error", client);
+            return ws_server.return_event_data("get_application", { application: result1 }, client);
         });
     });
     ws_server.bind("update_application", (client, req) => {
