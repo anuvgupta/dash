@@ -2805,7 +2805,7 @@
                         .add(Block('div', 'select_wrap')
                             .css({
                                 height: '27px',
-                                width: '150px',
+                                width: '120px',
                             })
                             .add(Block('select', 1)
                                 .css({
@@ -3095,7 +3095,7 @@
                         .add(Block('div', 'select_wrap')
                             .css({
                                 height: '27px',
-                                width: '150px',
+                                width: '120px',
                             })
                             .add(Block('select', 1)
                                 .css({
