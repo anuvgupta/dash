@@ -9076,7 +9076,7 @@ app
                     select filter_options
                         css
                             height 35px
-                            width 110px
+                            width 140px
                             padding 0px 10px
                             letter-spacing 0.9px
                         :input
