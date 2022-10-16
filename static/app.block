@@ -9546,6 +9546,7 @@ app
                                 block.child('subcontent/resource_software/apache_port/value_editor').on('hide');
                                 block.child('subcontent/resource_software/www_root/value_editor').on('hide');
                                 block.child('subcontent/resource_daemon/daemon_key/value_editor').on('hide');
+                                block.child('subcontent/resource_apps/title/app_filter/online').on('reset_state');
                                 block.child('subcontent/resource_info/more_menu').on('hide');
                             //}, 200);
                         }
@@ -11547,6 +11548,37 @@ app
                                         top 1px
                                         left 28px
                                         opacity 0.6
+                                block app_filter
+                                    css
+                                        position absolute
+                                        top 2px
+                                        right 30px
+                                        width 95px
+                                        height 35px
+                                        padding-top 7px
+                                    input online
+                                        type checkbox
+                                        value online
+                                        id app_filter_online
+                                        checked checked
+                                        css
+                                            cursor pointer
+                                        :click
+                                            {
+                                                block.parent(1).sibling('list').on('reload');
+                                            }
+                                        :reset_state
+                                            {
+                                                block.node().checked = true;  // this one works
+                                                //block.attribute('checked', 'checked');  // doesn't work
+                                            }
+                                    label online_label
+                                        for app_filter_online
+                                        html &nbsp;&nbsp;Online
+                                        css
+                                            vertical-align middle
+                                            cursor pointer
+                                            color #444
                             div spacer
                                 css
                                     height 80px
@@ -11559,6 +11591,9 @@ app
                                     min-height 45px
                                     overflow-x none
                                     overflow-y auto
+                                {
+                                    block.key('applications', []);
+                                }
                                 #manage
                                     {
                                         setTimeout(_ => {
@@ -11567,6 +11602,19 @@ app
                                     }
                                 #applications
                                     {
+                                        block.key('applications', applications);
+
+                                        // apply online filter
+                                        var filter_online = block.sibling('title').child('app_filter/online').node().checked === true;
+                                        var applications_filtered = [];
+                                        for (var a in applications) {
+                                            var application = applications[a];
+                                            var application_online = application.status === 'online';
+                                            var filter_pass = filter_online ? application_online : !application_online;
+                                            if (filter_pass) applications_filtered.push(application);
+                                        }
+                                        applications = applications_filtered;
+
                                         if (applications.length <= 0) {
                                             block
                                                 .html('')
@@ -11578,7 +11626,7 @@ app
                                                     borderTop: 'none',
                                                 })
                                                 .add(Block('text', 1)
-                                                    .html('No applications found on resource.')
+                                                    .html(`No ${filter_online ? 'online' : 'offline'} applications found on resource.`)
                                                     .css({
                                                         letterSpacing: '1.3px',
                                                         fontSize: '16px',
@@ -11607,9 +11655,7 @@ app
                                             for (var a in applications) {
                                                 var application = applications[a];
                                                 block.add(Block('resource-application-list-item', `resource_app_${application._id}`)
-                                                    .data(application).data({
-                                                        first: first
-                                                    })
+                                                    .data(application).data({ first: first })
                                                 );
                                                 first = false;
                                             }
@@ -11618,6 +11664,12 @@ app
                                         setTimeout(_ => {
                                             Block.queries();
                                         }, 10);
+                                    }
+                                :reload
+                                    {
+                                        var applications_list = block.key('applications');
+                                        if (applications_list)
+                                            block.data({ applications: applications_list });
                                     }
                             div end_spacer
                                 css
