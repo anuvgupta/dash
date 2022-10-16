@@ -107,9 +107,16 @@ var init = _ => {
     });
 };
 var api = {
+    home_handler: (req, res) => {
+        // res.sendFile(__dirname + "/static/index.html");
+        res.render('app', {
+            export_cloud_config: api.export_cloud_config
+        });
+    },
     get_cloud_config: _ => {
-        const config_dup = JSON.parse(JSON.stringify(global.config.env));
-        return config_dup;
+        const env_overrides = { production: global.env === "prod" };
+        const env_duplicate = JSON.parse(JSON.stringify(global.config.env));
+        return Object.assign(env_duplicate, env_overrides);
     },
     export_cloud_config: _ => {
         const encoded_data = Buffer.from(JSON.stringify(api.get_cloud_config())).toString('base64');
@@ -139,12 +146,7 @@ module.exports = {
             next();
         });
         express_api.use(express.static("static"));
-        express_api.get("/", (req, res) => {
-            // res.sendFile(__dirname + "/static/index.html");
-            res.render('app', {
-                export_cloud_config: api.export_cloud_config
-            });
-        });
+        express_api.get("/", api.home_handler);
         module.exports.api.exit = resolve => {
             log("exit");
             http_server.close(_ => {

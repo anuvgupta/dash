@@ -413,7 +413,8 @@ var app = {
             socket.addEventListener('message', e => {
                 var d = app.ws.decode_msg(e.data);
                 if (d != null) {
-                    console.log('[ws] socket received:', d.event, d.data);
+                    if (!app.main.production())
+                        console.log('[ws] socket received:', d.event, d.data);
                     var data = {};
                     data[d.event] = d.data;
                     app.ui.block.data(data);
@@ -433,7 +434,8 @@ var app = {
         send: (event, data, auth = true) => {
             var token = null;
             if (auth) token = app.ws.api.get_token_cookie();
-            console.log('[ws] sending:', event, data, token);
+            if (!app.main.production())
+                console.log('[ws] sending:', event, data, token);
             app.ws.socket.send(app.ws.encode_msg(event, data, token));
         },
         api: {
@@ -700,6 +702,9 @@ var app = {
     },
     main: {
         config: {},
+        production: _ => {
+            return app.main.config.production === true;
+        },
         extract_port: p => {
             if (p.includes('/'))
                 p = p.split('/')[1];
