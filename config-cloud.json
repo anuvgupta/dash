@@ -77,7 +77,7 @@
                     "type"
                 ],
                 "types": [
-                    ["vm", ["Cloud Virtual Machine", "VM"]],
+                    ["vm", ["Virtual Machine", "VM"]],
                     ["ct", ["Cloud Container", "Container"]],
                     ["lt", ["Laptop Computer", "Laptop"]],
                     ["pc", ["Personal Computer", "PC"]],
