@@ -377,6 +377,32 @@ var api = {
             }
         });
     },
+    get_resources_by_primary_domain: (domain_id, resolve) => {
+        mongo_api.collection('resource').find({
+            primary_domain: { $regex: `${domain_id}` }
+        }).toArray((e, result1) => {
+            if (e) {
+                err("error finding resources", e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (result1) resolve(true, result1);
+                else resolve(null, result1);
+            }
+        });
+    },
+    get_resources_by_domain: (domain_id, resolve) => {
+        mongo_api.collection('resource').find({
+            domains: { $regex: `${domain_id}` }
+        }).toArray((e, result1) => {
+            if (e) {
+                err("error finding resources", e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (result1) resolve(true, result1);
+                else resolve(null, result1);
+            }
+        });
+    },
     get_resource_by_key: (daemon_key, resolve) => {
         mongo_api.collection('resource').findOne({
             daemon_key: daemon_key
@@ -550,6 +576,32 @@ var api = {
     },
     get_applications: (resolve) => {
         mongo_api.collection('application').find({}).toArray((e, result1) => {
+            if (e) {
+                err("error finding applications", e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (result1) resolve(true, result1);
+                else resolve(null, result1);
+            }
+        });
+    },
+    get_applications_by_primary_domain: (domain_id, resolve) => {
+        mongo_api.collection('application').find({
+            primary_domain: { $regex: `${domain_id}` }
+        }).toArray((e, result1) => {
+            if (e) {
+                err("error finding applications", e.message ? e.message : e);
+                resolve(false, e);
+            } else {
+                if (result1) resolve(true, result1);
+                else resolve(null, result1);
+            }
+        });
+    },
+    get_applications_by_domain: (domain_id, resolve) => {
+        mongo_api.collection('application').find({
+            domains: { $regex: `${domain_id}` }
+        }).toArray((e, result1) => {
             if (e) {
                 err("error finding applications", e.message ? e.message : e);
                 resolve(false, e);

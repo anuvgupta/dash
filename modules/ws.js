@@ -627,9 +627,99 @@ var init = _ => {
             m.db.get_domain(id, null, (success1, result1) => {
                 if (success1 === false) return ws_server.return_event_error("delete_domain", "database error", client);
                 if (result1 == null) return ws_server.return_event_error("delete_domain", "resource not found", client);
-                m.db.delete_domain(id, null, (success2, result2) => {
-                    if (success2 === false) return ws_server.return_event_error("delete_domain", "database error", client);
-                    return ws_server.return_event_data("delete_domain", { id: id }, client);
+                // console.log(result1);
+                var clear_domain = (_next) => {
+                    m.db.delete_domain(id, null, (successFinal, resultFinal) => {
+                        if (successFinal === false) return ws_server.return_event_error("delete_domain", "database error", client);
+                        if (_next) _next();
+                        return ws_server.return_event_data("delete_domain", { id: id }, client);
+                    });
+                };
+                var clear_application_domains = (_next) => {
+                    m.db.get_applications_by_domain(id, (success3, result3) => {
+                        if (success3 === false) return ws_server.return_event_error("delete_domain", "database error", client);
+                        if (result3 == null || result3.length <= 0) {
+                            _next();
+                        } else {
+                            for (var a in result3) {
+                                var app_id = `${result3[a]._id}`;
+                                var app_domains = result3[a].domains;
+                                var app_domains_filtered = [];
+                                for (var d in app_domains) {
+                                    if (!(app_domains[d] === id || app_domains[d].includes(id)))
+                                        app_domains_filtered.push(app_domains[d]);
+                                }
+                                m.db.update_application(app_id, {
+                                    domains: app_domains_filtered
+                                }, _ => { });
+                            }
+                            setTimeout(_next, 200);
+                        }
+                    });
+                };
+                var clear_application_primary_domain = (_next) => {
+                    m.db.get_applications_by_primary_domain(id, (success2, result2) => {
+                        if (success2 === false) return ws_server.return_event_error("delete_domain", "database error", client);
+                        if (result2 == null || result2.length <= 0) {
+                            _next();
+                        } else {
+                            for (var a in result2) {
+                                var app_id = `${result2[a]._id}`;
+                                m.db.update_application(app_id, {
+                                    primary_domain: ""
+                                }, _ => { });
+                            }
+                            setTimeout(_next, 200);
+                        }
+                    });
+                };
+                var clear_resource_domains = (_next) => {
+                    m.db.get_resources_by_domain(id, (success4, result4) => {
+                        if (success4 === false) return ws_server.return_event_error("delete_domain", "database error", client);
+                        if (result4 == null || result4.length <= 0) {
+                            _next();
+                        } else {
+                            for (var a in result4) {
+                                var app_id = `${result4[a]._id}`;
+                                var app_domains = result4[a].domains;
+                                var app_domains_filtered = [];
+                                for (var d in app_domains) {
+                                    if (!(app_domains[d] === id || app_domains[d].includes(id)))
+                                        app_domains_filtered.push(app_domains[d]);
+                                }
+                                m.db.update_resource(app_id, {
+                                    domains: app_domains_filtered
+                                }, _ => { });
+                            }
+                            setTimeout(_next, 200);
+                        }
+                    });
+                };
+                var clear_resource_primary_domain = (_next) => {
+                    m.db.get_resources_by_primary_domain(id, (success5, result5) => {
+                        if (success5 === false) return ws_server.return_event_error("delete_domain", "database error", client);
+                        if (result5 == null || result5.length <= 0) {
+                            _next();
+                        } else {
+                            for (var a in result5) {
+                                var app_id = `${result5[a]._id}`;
+                                m.db.update_resource(app_id, {
+                                    primary_domain: ""
+                                }, _ => { });
+                            }
+                            setTimeout(_next, 200);
+                        }
+                    });
+                };
+                // execute clear methods
+                clear_application_primary_domain(_ => {
+                    clear_application_domains(_ => {
+                        clear_resource_primary_domain(_ => {
+                            clear_resource_domains(_ => {
+                                clear_domain();
+                            });
+                        });
+                    });
                 });
             });
         }
