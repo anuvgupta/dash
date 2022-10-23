@@ -926,6 +926,10 @@ var init = _ => {
                     return ws_server.return_event_error("delete_application", "application not found", client);
                 m.db.delete_application(id, null, (success2, result2) => {
                     if (success2 === false) return ws_server.return_event_error("delete_application", "database error", client);
+                    setTimeout(_ => {
+                        // ensure application is deleted in daemon ecosystem
+                        m.ws.refresh_daemon_ecosystem(result1.host);
+                    }, 100);
                     return ws_server.return_event_data("delete_application", { id: id }, client);
                 });
             });
