@@ -7,10 +7,6 @@
     "scripts": {
         "postinstall": "(cd src/app/cloud && npm install); (cd src/app/daemon && npm install)"
     },
-    "dependencies": {
-        
-    },
-    "devDependencies": {
-        "typescript": "^5.0.3"
-    }
+    "dependencies": {},
+    "devDependencies": {}
 }
