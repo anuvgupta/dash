@@ -1,0 +1,14 @@
+{
+    "name": "dash-daemon",
+    "version": "1.0.0",
+    "description": "Dash daemon resource client",
+    "main": "main.ts",
+    "author": "Anuv Gupta",
+    "license": "ISC",
+    "dependencies": {
+
+    },
+    "devDependencies": {
+        "typescript": "^5.0.3"
+    }
+}

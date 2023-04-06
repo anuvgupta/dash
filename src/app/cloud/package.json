@@ -1,0 +1,14 @@
+{
+    "name": "dash-cloud",
+    "version": "1.0.0",
+    "description": "Dash cloud website server",
+    "main": "main.ts",
+    "author": "Anuv Gupta",
+    "license": "ISC",
+    "dependencies": {
+
+    },
+    "devDependencies": {
+        "typescript": "^5.0.3"
+    }
+}

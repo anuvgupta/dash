@@ -1,31 +1,14 @@
 {
     "name": "dash",
     "version": "1.0.0",
-    "description": "",
-    "main": "dash.js",
-    "scripts": {
-        "start": "node dash-cloud.js prod",
-        "test": "nodemon --ignore 'mongodb/*' --ignore 'static/*' dash-cloud.js dev ",
-        "start-daemon": "node dash-daemon.js prod",
-        "test-daemon": "nodemon --ignore 'mongodb/*' --ignore 'static/*' dash-daemon.js dev "
-    },
-    "author": "",
+    "description": "Dash cloud server & daemon client",
+    "author": "Anuv Gupta",
     "license": "ISC",
+    "scripts": {
+        "postinstall": "cd src/app/cloud && npm install && cd ../daemon && npm install"
+    },
     "dependencies": {
-        "@logdna/tail-file": "^2.1.0",
-        "ansi_up": "^5.1.0",
-        "body-parser": "^1.19.0",
-        "debug": "^4.3.3",
-        "ejs": "^3.1.6",
-        "express": "^4.17.1",
-        "express-jwt": "^6.0.0",
-        "jsonwebtoken": "^8.5.1",
-        "mongodb": "^3.5.9",
-        "pm2": "^5.1.2",
-        "random-number": "0.0.9",
-        "simple-git": "^3.2.6",
-        "split2": "^4.1.0",
-        "ws": "^7.3.1"
+        
     },
     "devDependencies": {
         "typescript": "^5.0.3"
