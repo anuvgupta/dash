@@ -5,7 +5,7 @@
     "author": "Anuv Gupta",
     "license": "ISC",
     "scripts": {
-        "postinstall": "cd src/app/cloud && npm install && cd ../daemon && npm install"
+        "postinstall": "(cd src/app/cloud && npm install); (cd src/app/daemon && npm install)"
     },
     "dependencies": {
         
