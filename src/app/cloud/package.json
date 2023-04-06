@@ -5,10 +5,15 @@
     "main": "../../../dist/app/cloud/Main.js",
     "author": "Anuv Gupta",
     "license": "ISC",
+    "config": {
+        "root": "../../.."
+    },
     "scripts": {
-        "clean": "rm -rf ../../../dist/app/cloud",
-        "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
-        "build": "tsc",
+        "clean": "rm -rf $npm_package_config_root/dist/app/cloud $npm_package_config_root/dist/config/cloud",
+        "prebuild": "npm run clean && tslint -c tslint.json -p tsconfig.json --fix",
+        "build": "tsc && npm run build-config && npm run build-static",
+        "build-config": "mkdir -p $npm_package_config_root/dist/config/cloud && cp -R $npm_package_config_root/src/config/cloud/* $npm_package_config_root/dist/config/cloud/",
+        "build-static": "mkdir -p $npm_package_config_root/dist/app/cloud/frontend && cp -R frontend/* $npm_package_config_root/dist/app/cloud/frontend/",
         "prestart": "npm run build",
         "start": "node .",
         "test": "echo \"Error: no test specified\" && exit 1"
