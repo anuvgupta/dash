@@ -6,13 +6,15 @@
     "author": "Anuv Gupta",
     "license": "ISC",
     "config": {
-        "root": "../../.."
+        "root": "../../..",
+        "src": "../../../src",
+        "dist": "../../../dist"
     },
     "scripts": {
-        "clean": "rm -rf $npm_package_config_root/dist/app/daemon $npm_package_config_root/dist/config/daemon",
+        "clean": "rm -rf $npm_package_config_dist/app/daemon $npm_package_config_dist/config/daemon",
         "prebuild": "npm run clean && tslint -c tslint.json -p tsconfig.json --fix",
-        "build": "tsc && npm run build-config && npm run build-static",
-        "build-config": "mkdir -p $npm_package_config_root/dist/config/daemon && cp -R $npm_package_config_root/src/config/daemon/* $npm_package_config_root/dist/config/daemon/",
+        "build": "npm run build-config && npm run build-static && tsc",
+        "build-config": "mkdir -p $npm_package_config_dist/config/daemon && cp -R $npm_package_config_src/config/daemon/* $npm_package_config_dist/config/daemon/",
         "build-static": "exit 0",
         "prestart": "npm run build",
         "start": "node .",
