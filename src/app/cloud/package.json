@@ -2,13 +2,19 @@
     "name": "dash-cloud",
     "version": "1.0.0",
     "description": "Dash cloud website server",
-    "main": "main.ts",
+    "main": "../../../dist/app/cloud/Main.js",
     "author": "Anuv Gupta",
     "license": "ISC",
-    "dependencies": {
-
+    "scripts": {
+        "clean": "rm -rf ../../../dist/app/cloud",
+        "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+        "build": "tsc",
+        "prestart": "npm run build",
+        "start": "node .",
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "devDependencies": {
+        "tslint": "^6.1.3",
         "typescript": "^5.0.3"
     }
 }

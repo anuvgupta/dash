@@ -1,6 +1,9 @@
 # dependency modules
 node_modules
 
+# build artifacts
+dist
+
 # database artifacts
 mongodb/dump
 mongodb/database
