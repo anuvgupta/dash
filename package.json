@@ -9,7 +9,5 @@
         "clean": "rm -rf dist",
         "prebuild": "npm run clean && mkdir -p dist",
         "build": "(cd src/app/cloud && npm run build); (cd src/app/daemon && npm run build)"
-    },
-    "dependencies": {},
-    "devDependencies": {}
+    }
 }
