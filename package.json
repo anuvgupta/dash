@@ -5,9 +5,9 @@
     "author": "Anuv Gupta",
     "license": "ISC",
     "scripts": {
-        "postinstall": "(cd src/app/cloud && npm install); (cd src/app/daemon && npm install)",
+        "postinstall": "(cd src/daemon && npm install); (cd src/cloud/backend && npm install); (cd src/cloud/frontend && npm install)",
         "clean": "rm -rf dist",
         "prebuild": "npm run clean && mkdir -p dist",
-        "build": "(cd src/app/cloud && npm run build); (cd src/app/daemon && npm run build)"
+        "build": "(cd src/daemon && npm run build); (cd src/cloud/backend && npm run build); (cd src/cloud/frontend && npm run build)"
     }
 }

@@ -1,0 +1,32 @@
+{
+    "name": "dash-cloud-backend",
+    "version": "1.0.0",
+    "description": "Dash cloud website backend",
+    "main": "../../../dist/cloud/backend/src/Main.js",
+    "author": "Anuv Gupta",
+    "license": "ISC",
+    "config": {
+        "root": "../../..",
+        "src": "../../../src",
+        "dist": "../../../dist"
+    },
+    "scripts": {
+        "clean": "rm -rf $npm_package_config_dist/cloud/backend",
+        "prebuild": "npm run clean && tslint -c tslint.json -p tsconfig.json --fix",
+        "build": "npm run build-source && npm run build-config && npm run build-assets",
+        "build-source": "tsc",
+        "build-config": "mkdir -p $npm_package_config_dist/cloud/backend/config && cp $npm_package_config_src/cloud/backend/config/* $npm_package_config_dist/cloud/backend/config/",
+        "build-assets": "mkdir -p $npm_package_config_dist/cloud/backend/assets && cp $npm_package_config_src/cloud/backend/assets/* $npm_package_config_dist/cloud/backend/assets/",
+        "prestart": "npm run build",
+        "start": "node .",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "devDependencies": {
+        "@types/node": "^18.15.11",
+        "tslint": "^6.1.3",
+        "typescript": "^5.0.3"
+    },
+    "dependencies": {
+        "random-number": "^0.0.9"
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "name": "dash-cloud-frontend",
+    "version": "1.0.0",
+    "description": "Dash cloud website frontend",
+    "author": "Anuv Gupta",
+    "license": "ISC",
+    "config": {
+        "root": "../../..",
+        "src": "../../../src",
+        "dist": "../../../dist"
+    },
+    "scripts": {
+        "clean": "rm -rf $npm_package_config_dist/cloud/frontend",
+        "prebuild": "npm run clean",
+        "build": "npm run build-source && npm run build-config && npm run build-assets",
+        "build-source": "mkdir -p $npm_package_config_dist/cloud/frontend/src && cp $npm_package_config_src/cloud/frontend/src/* $npm_package_config_dist/cloud/frontend/src/",
+        "build-config": "mkdir -p $npm_package_config_dist/cloud/frontend/config && cp $npm_package_config_src/cloud/frontend/config/* $npm_package_config_dist/cloud/frontend/config/",
+        "build-assets": "mkdir -p $npm_package_config_dist/cloud/frontend/assets && cp -R $npm_package_config_src/cloud/frontend/assets/* $npm_package_config_dist/cloud/frontend/assets/",
+        "prestart": "npm run build",
+        "start": "exit 0",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    }
+}

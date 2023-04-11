@@ -1,8 +1,8 @@
 /**
  * Model for Projects
  */
+
 class Project {
-    // fields
     id: string;
     name: string;
     slug: string;
@@ -33,7 +33,6 @@ class Project {
     tsCreated: number;
     tsUpdated: number;
 
-    // default constructor
     constructor(
         id: string,
         name: string,
