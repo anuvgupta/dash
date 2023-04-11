@@ -58,6 +58,10 @@ describe("Is utility class tests", () => {
         let errorVariable = new Error("abc");
         expect(Is.error(errorVariable)).toBe(true);
     });
+    test("error-inheritance-true", () => {
+        let errorVariable = new SyntaxError("abc");
+        expect(Is.error(errorVariable)).toBe(true);
+    });
     test("error-false", () => {
         let notErrorVariable = "abc";
         expect(Is.error(notErrorVariable)).toBe(false);
