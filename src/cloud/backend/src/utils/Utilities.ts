@@ -6,6 +6,11 @@ import * as RandomNumber from "random-number";
  */
 
 class Utilities {
+    static alphanumericChars: string =
+        "0123456789" +
+        "abcdefghijklmnopqrstuvwxyz" +
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
     // non-blocking delayed callback
     static delay(callback: () => void, timeout: number): void {
         setTimeout((_): void => {
@@ -14,10 +19,6 @@ class Utilities {
     }
 
     // generate random alphanumeric key
-    static alphanumericChars: string =
-        "0123456789" +
-        "abcdefghijklmnopqrstuvwxyz" +
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     static randomId(length: number = 10): string {
         let key: string = "";
         for (let i: number = 0; i < length; i++) {
@@ -40,6 +41,14 @@ class Utilities {
             max,
             integer: integer ?? true,
         });
+    }
+
+    // split domain string
+    static splitDomain(domain: string): object {
+        const domainList = domain.split(".");
+        const sld = domainList.slice(0, domainList.length - 1).join(".");
+        const tld = domainList[domainList.length - 1];
+        return { sld, tld };
     }
 }
 
