@@ -19,10 +19,14 @@
         "build-assets": "mkdir -p $npm_package_config_dist/cloud/backend/assets && cp $npm_package_config_src/cloud/backend/assets/* $npm_package_config_dist/cloud/backend/assets/",
         "prestart": "npm run build",
         "start": "node .",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "npx jest",
+        "test-coverage": "npx jest --coverage"
     },
     "devDependencies": {
+        "@types/jest": "^29.5.0",
         "@types/node": "^18.15.11",
+        "jest": "^29.5.0",
+        "ts-jest": "^29.1.0",
         "tslint": "^6.1.3",
         "typescript": "^5.0.3"
     },
