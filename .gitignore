@@ -4,6 +4,9 @@ node_modules
 # build artifacts
 dist
 
+# test artifacts
+coverage
+
 # database artifacts
 mongodb/dump
 mongodb/database
