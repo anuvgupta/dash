@@ -6,15 +6,21 @@ describe("Is utility class tests", () => {
         let undefinedVariable = undefined;
         expect(Is.undefined(undefinedVariable)).toBe(true);
     });
+    test("undefined-false", () => {
+        let definedVariable = "abc";
+        expect(Is.undefined(definedVariable)).toBe(false);
+    });
     test("undefined-true-func", () => {
         let someFunc = (optionalParameter?: string) => {
             expect(Is.undefined(optionalParameter)).toBe(true);
         };
         someFunc();
     });
-    test("undefined-false", () => {
-        let definedVariable = "abc";
-        expect(Is.undefined(definedVariable)).toBe(false);
+    test("undefined-false-func", () => {
+        let someFunc = (optionalParameter?: string) => {
+            expect(Is.undefined(optionalParameter)).toBe(false);
+        };
+        someFunc("abc");
     });
 
     // defined
@@ -22,15 +28,21 @@ describe("Is utility class tests", () => {
         let undefinedVariable = undefined;
         expect(Is.defined(undefinedVariable)).toBe(false);
     });
+    test("defined-false", () => {
+        let definedVariable = "abc";
+        expect(Is.defined(definedVariable)).toBe(true);
+    });
     test("defined-true-func", () => {
+        let someFunc = (optionalParameter?: string) => {
+            expect(Is.defined(optionalParameter)).toBe(true);
+        };
+        someFunc("abc");
+    });
+    test("defined-false-func", () => {
         let someFunc = (optionalParameter?: string) => {
             expect(Is.defined(optionalParameter)).toBe(false);
         };
         someFunc();
-    });
-    test("defined-false", () => {
-        let definedVariable = "abc";
-        expect(Is.defined(definedVariable)).toBe(true);
     });
 
     // null
@@ -58,13 +70,13 @@ describe("Is utility class tests", () => {
         let errorVariable = new Error("abc");
         expect(Is.error(errorVariable)).toBe(true);
     });
-    test("error-inheritance-true", () => {
-        let errorVariable = new SyntaxError("abc");
-        expect(Is.error(errorVariable)).toBe(true);
-    });
     test("error-false", () => {
         let notErrorVariable = "abc";
         expect(Is.error(notErrorVariable)).toBe(false);
+    });
+    test("error-inheritance-true", () => {
+        let errorVariable = new SyntaxError("abc");
+        expect(Is.error(errorVariable)).toBe(true);
     });
 
     // notError
