@@ -1,15 +1,14 @@
-import * as Util from "util";
-import * as RandomNumber from "random-number";
-
 /**
  * Utilities & general-purpose convenience functions
  */
 
 class Utilities {
+    // alphanumeric character list
+    static defaultIdLength: number = 10;
     static alphanumericChars: string =
-        "0123456789" +
         "abcdefghijklmnopqrstuvwxyz" +
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+        "0123456789";
 
     // non-blocking delayed callback
     static delay(callback: () => void, timeout: number): void {
@@ -19,28 +18,26 @@ class Utilities {
     }
 
     // generate random alphanumeric key
-    static randomId(length: number = 10): string {
-        let key: string = "";
-        for (let i: number = 0; i < length; i++) {
-            key +=
+    static randomId(): string;
+    static randomId(length: number): string;
+    static randomId(length?: number): string {
+        const maxLength: number = length ?? Utilities.defaultIdLength;
+        let randomId: string = "";
+        for (let i: number = 0; i < maxLength; i++) {
+            randomId +=
                 Utilities.alphanumericChars[
-                    Utilities.randomNumber(
+                    Utilities.randomInteger(
                         0,
                         Utilities.alphanumericChars.length - 1
                     )
                 ];
         }
-        return key;
+        return randomId;
     }
 
-    // generate random number
-    static randomNumber(min: number, max: number): number;
-    static randomNumber(min: number, max: number, integer?: boolean): number {
-        return RandomNumber({
-            min,
-            max,
-            integer: integer ?? true,
-        });
+    // generate random integer
+    static randomInteger(min: number, max: number): number {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     // split domain string
