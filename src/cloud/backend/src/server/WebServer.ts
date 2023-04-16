@@ -7,6 +7,6 @@ import * as ExpressJwt from "express-jwt";
  * Web server
  */
 
-class WebServer {
-    constructor() {}
-}
+// class WebServer {
+//     constructor() {}
+// }
