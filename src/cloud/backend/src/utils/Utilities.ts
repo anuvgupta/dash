@@ -18,12 +18,9 @@ class Utilities {
     }
 
     // generate random alphanumeric key
-    static randomId(): string;
-    static randomId(length: number): string;
-    static randomId(length?: number): string {
-        const maxLength: number = length ?? Utilities.defaultIdLength;
+    static randomId(length: number = Utilities.defaultIdLength): string {
         let randomId: string = "";
-        for (let i: number = 0; i < maxLength; i++) {
+        for (let i: number = 0; i < length; i++) {
             randomId +=
                 Utilities.alphanumericChars[
                     Utilities.randomInteger(

@@ -15,11 +15,9 @@ class Log {
     depth: number;
     inspectProps: object;
 
-    constructor(id: string);
-    constructor(id: string, depth: number);
-    constructor(id: string, depth?: number) {
+    constructor(id: string, depth: number | null = null) {
         this.id = id;
-        this.depth = depth ?? null;
+        this.depth = depth;
         this.inspectProps = {
             showHidden: false,
             colors: true,
