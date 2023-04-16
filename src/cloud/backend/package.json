@@ -19,7 +19,7 @@
         "build-assets": "mkdir -p $npm_package_config_dist/cloud/backend/assets && cp $npm_package_config_src/cloud/backend/assets/* $npm_package_config_dist/cloud/backend/assets/",
         "prestart": "npm run build",
         "start": "node .",
-        "test": "npm run test-verbose",
+        "test": "npx jest",
         "test-coverage": "npx jest --coverage",
         "test-verbose": "npx jest --silent=false"
     },

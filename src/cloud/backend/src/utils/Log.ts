@@ -1,22 +1,22 @@
 import * as Util from "util";
+
 import Is from "./Is";
 
 /**
  * Logging utility class
  */
 
-enum Level {
-    INFO = "INFO",
-    WARN = "WARN",
-    ERROR = "ERROR",
-}
-
 class Log {
+    static INFO: string = "INFO";
+    static WARN: string = "WARN";
+    static ERROR: string = "ERROR";
+
     id: string;
     depth: number;
     inspectProps: object;
 
     constructor(id: string);
+    constructor(id: string, depth: number);
     constructor(id: string, depth?: number) {
         this.id = id;
         this.depth = depth ?? null;
@@ -29,17 +29,17 @@ class Log {
     }
 
     info(...args): void {
-        this.print(Level.INFO, ...args);
+        this.print(Log.INFO, ...args);
     }
 
     warn(...args): void {
         const firstArg = args[0];
         if (Is.error(firstArg)) {
             const restArgs = Array.from(args).slice(1);
-            this.print(Level.WARN, ...restArgs);
-            this.printStackTrace(Level.WARN, firstArg);
+            this.print(Log.WARN, ...restArgs);
+            this.printStackTrace(Log.WARN, firstArg);
         } else {
-            this.print(Level.WARN, ...args);
+            this.print(Log.WARN, ...args);
         }
     }
 
@@ -47,14 +47,14 @@ class Log {
         const firstArg = args[0];
         if (Is.error(firstArg)) {
             const restArgs = Array.from(args).slice(1);
-            this.print(Level.ERROR, ...restArgs);
-            this.printStackTrace(Level.ERROR, firstArg);
+            this.print(Log.ERROR, ...restArgs);
+            this.printStackTrace(Log.ERROR, firstArg);
         } else {
-            this.print(Level.ERROR, ...args);
+            this.print(Log.ERROR, ...args);
         }
     }
 
-    private print(level: Level, ...args): void {
+    private print(level: string, ...args): void {
         let msg = "";
         for (let i = 0; i < args.length; i++) {
             let arg = args[i];
@@ -66,32 +66,26 @@ class Log {
         }
         msg = `[${this.id}] [${level.toString()}] ${msg}`;
         switch (level) {
-            case Level.INFO:
+            case Log.INFO:
                 console.log(msg);
                 break;
-            case Level.WARN:
+            case Log.WARN:
                 console.warn(msg);
                 break;
-            case Level.ERROR:
+            case Log.ERROR:
                 console.error(`* ${msg}`);
-                break;
-            default:
-                console.log(msg);
                 break;
         }
     }
 
-    private printStackTrace(level: Level, error: Error) {
+    private printStackTrace(level: string, error: Error) {
         const msg = error.stack;
         switch (level) {
-            case Level.WARN:
+            case Log.WARN:
                 console.warn(msg);
                 break;
-            case Level.ERROR:
+            case Log.ERROR:
                 console.error(msg);
-                break;
-            default:
-                console.log(msg);
                 break;
         }
     }

@@ -3,7 +3,6 @@ import Utilities from "../../src/utils/Utilities";
 describe("Utilities utility class tests", () => {
     // delay
     jest.useFakeTimers();
-    jest.spyOn(global, "setTimeout");
     const delayMillis: number = 500;
     test("delay-called", () => {
         const callback: () => void = jest.fn();
