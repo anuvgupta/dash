@@ -3,7 +3,7 @@ import * as Util from "util";
 import Log from "../../src/utils/Log";
 
 describe("Log utility class tests", () => {
-    let log;
+    let log: Log;
     let logMock;
     let warnMock;
     let errorMock;

@@ -31,7 +31,7 @@ class Log {
     }
 
     warn(...args): void {
-        const firstArg = args[0];
+        const firstArg: any = args[0];
         if (Is.error(firstArg)) {
             const restArgs = Array.from(args).slice(1);
             this.print(Log.WARN, ...restArgs);
@@ -42,7 +42,7 @@ class Log {
     }
 
     error(...args): void {
-        const firstArg = args[0];
+        const firstArg: any = args[0];
         if (Is.error(firstArg)) {
             const restArgs = Array.from(args).slice(1);
             this.print(Log.ERROR, ...restArgs);
@@ -53,9 +53,9 @@ class Log {
     }
 
     private print(level: string, ...args): void {
-        let msg = "";
-        for (let i = 0; i < args.length; i++) {
-            let arg = args[i];
+        let msg: string = "";
+        for (let i: number = 0; i < args.length; i++) {
+            let arg: any = args[i];
             if (typeof arg === "object" && arg !== null) {
                 arg = Util.inspect(arg, this.inspectProps);
             }
@@ -77,13 +77,13 @@ class Log {
     }
 
     private printStackTrace(level: string, error: Error) {
-        const msg = error.stack;
+        const stackTrace: any = error.stack;
         switch (level) {
             case Log.WARN:
-                console.warn(msg);
+                console.warn(stackTrace);
                 break;
             case Log.ERROR:
-                console.error(msg);
+                console.error(stackTrace);
                 break;
         }
     }

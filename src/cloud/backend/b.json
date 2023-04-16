@@ -1,0 +1,11 @@
+{
+    "targets": {
+        "test": "npm run test",
+        "test-verbose": "npm run test-verbose",
+        "coverage": "npm run test-coverage",
+        "build": "npm run build",
+        "release": "npm run test && npm run build",
+        "start": "npm run test && npm run start",
+        "clean": "npm run clean"
+    }
+}
