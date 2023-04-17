@@ -1,6 +1,5 @@
 import * as Fs from "fs";
 
-import Log from "../utils/Log";
 import InvalidConfigException from "../exception/InvalidConfigException";
 
 /**
@@ -10,15 +9,17 @@ class Configuration {
     sourcePath: string;
     configFileData: string;
     configData: any;
-
     constructor(sourcePath: string) {
         this.sourcePath = sourcePath;
         this.configFileData = "";
         this.configData = null;
     }
 
+    /**
+     * Load configuration data from file
+     */
     load(): void {
-        // read config file data
+        // Read config file data
         if (!Fs.existsSync(this.sourcePath)) {
             throw new InvalidConfigException(
                 `Configuration file ${this.sourcePath} not found`
@@ -28,7 +29,7 @@ class Configuration {
             encoding: "utf8",
             flag: "r",
         });
-        // parse config file data
+        // Parse config file data
         try {
             this.configData = JSON.parse(this.configFileData);
         } catch (e) {
@@ -38,6 +39,9 @@ class Configuration {
         }
     }
 
+    /**
+     * Get configuration value by key
+     */
     get(key: string): any {
         if (!this.configData.hasOwnProperty(key)) {
             return null;

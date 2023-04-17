@@ -1,34 +1,45 @@
 /**
  * Type checking utility class
  */
-
 class Is {
-    // check undefined
+    /**
+     * Check if undefined
+     */
     static undefined(value: any): boolean {
         return typeof value === "undefined" && value === undefined;
     }
 
-    // check defined
+    /**
+     * Check if defined
+     */
     static defined(value: any): boolean {
         return !Is.undefined(value);
     }
 
-    // check null
+    /**
+     * Check if null
+     */
     static null(value: any): boolean {
         return value === null;
     }
 
-    // check nonnull
+    /**
+     * Check if nonnull
+     */
     static nonnull(value: any): boolean {
         return !Is.null(value);
     }
 
-    // check error
+    /**
+     * Check if error
+     */
     static error(value: any): boolean {
         return value instanceof Error;
     }
 
-    // check not error
+    /**
+     * Check if not error
+     */
     static notError(value: any): boolean {
         return !Is.error(value);
     }

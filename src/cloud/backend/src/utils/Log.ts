@@ -5,16 +5,15 @@ import Is from "./Is";
 /**
  * Logging utility class
  */
-
 class Log {
+    // Log levels
     static INFO: string = "INFO";
     static WARN: string = "WARN";
     static ERROR: string = "ERROR";
 
     id: string;
-    depth: number;
+    depth: number | null;
     inspectProps: object;
-
     constructor(id: string, depth: number | null = null) {
         this.id = id;
         this.depth = depth;
@@ -26,10 +25,16 @@ class Log {
         };
     }
 
+    /**
+     * Print informational message to logs
+     */
     info(...args): void {
         this.print(Log.INFO, ...args);
     }
 
+    /**
+     * Print warning message & error to logs
+     */
     warn(...args): void {
         const firstArg: any = args[0];
         if (Is.error(firstArg)) {
@@ -41,6 +46,9 @@ class Log {
         }
     }
 
+    /**
+     * Print exception message & error to logs
+     */
     error(...args): void {
         const firstArg: any = args[0];
         if (Is.error(firstArg)) {
@@ -52,6 +60,7 @@ class Log {
         }
     }
 
+    // Print message and/or error to logs at specific level
     private print(level: string, ...args): void {
         let msg: string = "";
         for (let i: number = 0; i < args.length; i++) {
@@ -76,6 +85,7 @@ class Log {
         }
     }
 
+    // Print stack track or cause for an error at specific level
     private printStackTrace(level: string, error: Error) {
         const stackTrace: any = error.stack;
         switch (level) {

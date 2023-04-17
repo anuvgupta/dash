@@ -3,7 +3,6 @@ import Is from "../utils/Is";
 /**
  * Exception when configuration file data is invalid or not found.
  */
-
 class InvalidConfigException extends Error {
     constructor(message: string, cause: Error = null) {
         super(message);
