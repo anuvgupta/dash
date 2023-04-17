@@ -34,7 +34,8 @@ class Configuration {
             this.configData = JSON.parse(this.configFileData);
         } catch (e) {
             throw new InvalidConfigException(
-                `Configuration file ${this.sourcePath} contains invalid JSON`
+                `Configuration file ${this.sourcePath} contains invalid JSON`,
+                e
             );
         }
     }

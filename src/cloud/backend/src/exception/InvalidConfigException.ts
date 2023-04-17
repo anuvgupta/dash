@@ -5,13 +5,10 @@ import Is from "../utils/Is";
  */
 class InvalidConfigException extends Error {
     constructor(message: string, cause: Error = null) {
-        super(message);
+        super(message, Is.nonnull(cause) ? { cause } : undefined);
         // need to set prototype for custom errors, arrays, maps
         Object.setPrototypeOf(this, InvalidConfigException.prototype);
         // source: https://github.com/microsoft/TypeScript-wiki/blob/81fe7b91664de43c02ea209492ec1cea7f3661d0/Breaking-Changes.md#extending-built-ins-like-error-array-and-map-may-no-longer-work
-        if (Is.nonnull(cause) && Is.defined(cause)) {
-            this.cause = cause;
-        }
     }
 }
 

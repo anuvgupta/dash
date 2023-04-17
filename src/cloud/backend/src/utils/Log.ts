@@ -92,11 +92,16 @@ class Log {
      */
     private printStackTrace(level: string, error: Error) {
         const stackTrace: any = error.stack;
+        const stackTraceTitle: string = "Exception stack trace:";
         switch (level) {
             case Log.WARN:
+                console.warn(error);
+                this.info(stackTraceTitle);
                 console.warn(stackTrace);
                 break;
             case Log.ERROR:
+                console.error(error);
+                this.info(stackTraceTitle);
                 console.error(stackTrace);
                 break;
         }
