@@ -60,7 +60,9 @@ class Log {
         }
     }
 
-    // Print message and/or error to logs at specific level
+    /**
+     * Print message and/or error to logs at specific level
+     */
     private print(level: string, ...args): void {
         let msg: string = "";
         for (let i: number = 0; i < args.length; i++) {
@@ -85,7 +87,9 @@ class Log {
         }
     }
 
-    // Print stack track or cause for an error at specific level
+    /**
+     * Print stack track or cause for an error at specific level
+     */
     private printStackTrace(level: string, error: Error) {
         const stackTrace: any = error.stack;
         switch (level) {
