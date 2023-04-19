@@ -17,7 +17,7 @@
         "build-source": "tsc",
         "build-config": "mkdir -p $npm_package_config_dist/cloud/backend/config && cp $npm_package_config_src/cloud/backend/config/* $npm_package_config_dist/cloud/backend/config/",
         "build-assets": "mkdir -p $npm_package_config_dist/cloud/backend/assets && cp $npm_package_config_src/cloud/backend/assets/* $npm_package_config_dist/cloud/backend/assets/",
-        "prestart": "exit 0",
+        "prestart": "npm run build",
         "start": "node .",
         "test": "npx jest",
         "test-coverage": "npx jest --coverage",
