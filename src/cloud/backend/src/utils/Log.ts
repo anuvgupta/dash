@@ -14,6 +14,11 @@ export default class Log {
     static ERROR: string = "ERROR";
 
     /**
+     * Default log depth
+     */
+    static DEPTH_DEFAULT = 2;
+
+    /**
      * Log decorator factory generic for all classes
      * https://levelup.gitconnected.com/start-implementing-your-own-typescript-class-decorators-84a49f560dea
      */
@@ -23,7 +28,7 @@ export default class Log {
     ) {
         if (context.kind === "class") {
             return class extends target {
-                log: Log = new Log(target.name);
+                log: Log = new Log(target.name, Log.DEPTH_DEFAULT);
                 constructor(...args: any[]) {
                     super(...args);
                 }

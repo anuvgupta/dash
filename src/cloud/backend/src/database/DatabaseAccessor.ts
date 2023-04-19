@@ -3,6 +3,8 @@ import * as MongoDb from "mongodb";
 import Is from "../utils/Is";
 import Log from "../utils/Log";
 import Resolve from "../utils/Resolve";
+import Table from "../model/Table";
+import TableAccessor from "./TableAccessor";
 import DatabaseConnectionException from "../exception/DatabaseConnectionException";
 
 /**
@@ -18,6 +20,7 @@ export default class DatabaseAccessor {
     name: string;
     host: string;
     port: number;
+    tables: { [key in Table]: TableAccessor };
     log: Log;
     constructor(name: string, host: string, port: number) {
         this.db = null;
@@ -40,6 +43,7 @@ export default class DatabaseAccessor {
             .then((client) => {
                 this.client = client;
                 this.db = this.client.db(this.name);
+                this.initializeTables();
                 this.log.info(
                     `Connected to database ${this.name} at ${this.host}:${this.port}`
                 );
@@ -54,5 +58,22 @@ export default class DatabaseAccessor {
                     )
                 );
             });
+    }
+
+    table(key: Table): TableAccessor {
+        if (Table.hasOwnProperty(key)) {
+            return this.tables[key];
+        }
+    }
+
+    private initializeTables(): void {
+        const tableMap: object = {};
+        for (const tableKey in Table) {
+            if (Table.hasOwnProperty(tableKey)) {
+                const tableName: string = Table[tableKey].toString();
+                tableMap[tableKey] = new TableAccessor(tableName, this.db);
+            }
+        }
+        this.tables = tableMap as typeof this.tables;
     }
 }
