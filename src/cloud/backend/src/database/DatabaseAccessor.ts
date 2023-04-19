@@ -1,6 +1,5 @@
 import * as MongoDb from "mongodb";
 
-import Is from "../utils/Is";
 import Log from "../utils/Log";
 import Resolve from "../utils/Resolve";
 import Table from "../model/table/Table";

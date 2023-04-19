@@ -1,9 +1,9 @@
-import TableItem from "./table/TableItem";
+import TableRecord from "./table/TableRecord";
 
 /**
  * Model for Projects
  */
-export default class Project implements TableItem {
+export default class Project implements TableRecord {
     /**
      * Project constructor
      */
