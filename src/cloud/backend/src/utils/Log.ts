@@ -96,7 +96,7 @@ export default class Log {
             msg += `${arg}`;
             msg += `${i < args.length - 1 ? " " : ""}`;
         }
-        msg = `[${this.id}] [${level.toString()}] ${msg}`;
+        msg = `[${level.toString()}] [${this.id}] ${msg}`;
         switch (level) {
             case Log.INFO:
                 console.log(msg);
