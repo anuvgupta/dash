@@ -7,6 +7,8 @@ import Table from "../model/Table";
 import TableAccessor from "./TableAccessor";
 import DatabaseConnectionException from "../exception/DatabaseConnectionException";
 
+type TableMap = { [key in Table]: TableAccessor };
+
 /**
  * Accessor for MongoDB database
  */
@@ -20,7 +22,7 @@ export default class DatabaseAccessor {
     name: string;
     host: string;
     port: number;
-    tables: { [key in Table]: TableAccessor };
+    tables: TableMap;
     log: Log;
     constructor(name: string, host: string, port: number) {
         this.db = null;
@@ -43,7 +45,7 @@ export default class DatabaseAccessor {
             .then((client) => {
                 this.client = client;
                 this.db = this.client.db(this.name);
-                this.initializeTables();
+                this.tables = this.initializeTables();
                 this.log.info(
                     `Connected to database ${this.name} at ${this.host}:${this.port}`
                 );
@@ -66,7 +68,7 @@ export default class DatabaseAccessor {
         }
     }
 
-    private initializeTables(): void {
+    private initializeTables(): TableMap {
         const tableMap: object = {};
         for (const tableKey in Table) {
             if (Table.hasOwnProperty(tableKey)) {
@@ -74,6 +76,6 @@ export default class DatabaseAccessor {
                 tableMap[tableKey] = new TableAccessor(tableName, this.db);
             }
         }
-        this.tables = tableMap as typeof this.tables;
+        return tableMap as TableMap;
     }
 }
