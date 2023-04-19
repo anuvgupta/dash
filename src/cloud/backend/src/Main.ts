@@ -7,16 +7,30 @@ import Configuration from "./config/Configuration";
 import DatabaseAccessor from "./database/DatabaseAccessor";
 import InvalidConfigException from "./exception/InvalidConfigException";
 
+const APP_NAME: string = "dash-cloud";
+const BASE_DIR: string = `${__dirname}`;
+const CONFIG_PATH: string = "../config/config.json";
+
+/**
+ * Main class
+ */
 export default class Main {
-    static main() {
+    /**
+     * Main method
+     */
+    static main(...args: any[]) {
+        args = Array.from(args).slice(2);
+
         const log = new Log("Main");
+        log.info(APP_NAME);
+        const config: Configuration = new Configuration(
+            `${BASE_DIR}/${CONFIG_PATH}`
+        );
+        config.load();
 
-        log.info("dash-cloud");
-
-        const databaseName = "temp_db_name";
-        const databaseHost = "localhost";
-        const databasePort = 27017;
-
+        const databaseHost: string = config.get("mongo_host");
+        const databasePort: number = config.get("mongo_port");
+        const databaseName: string = config.get("mongo_database");
         const databaseAccessor: DatabaseAccessor = new DatabaseAccessor(
             databaseName,
             databaseHost,
@@ -30,5 +44,5 @@ export default class Main {
     }
 }
 
-// entry point
-Main.main();
+// Entry point
+Main.main(...process.argv);

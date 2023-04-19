@@ -1,10 +1,12 @@
 import * as Fs from "fs";
 
+import Log from "../utils/Log";
 import InvalidConfigException from "../exception/InvalidConfigException";
 
 /**
  * Configuration loader
  */
+@Log.Inject
 export default class Configuration {
     /**
      * Configuration constructor
@@ -12,6 +14,7 @@ export default class Configuration {
     sourcePath: string;
     configFileData: string;
     configData: any;
+    log: Log;
     constructor(sourcePath: string) {
         this.sourcePath = sourcePath;
         this.configFileData = "";
@@ -22,6 +25,7 @@ export default class Configuration {
      * Load configuration data from file
      */
     load(): void {
+        this.log.info(`Configuration file ${this.sourcePath} loading`);
         // Read config file data
         if (!Fs.existsSync(this.sourcePath)) {
             throw new InvalidConfigException(
@@ -41,6 +45,7 @@ export default class Configuration {
                 exception
             );
         }
+        this.log.info(`Configuration file ${this.sourcePath} loaded`);
     }
 
     /**
