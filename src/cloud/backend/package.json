@@ -7,16 +7,16 @@
     "license": "ISC",
     "config": {
         "root": "../../..",
-        "src": "../../../src",
-        "dist": "../../../dist"
+        "src": "../../../src/cloud/backend",
+        "dist": "../../../dist/cloud/backend"
     },
     "scripts": {
-        "clean": "rm -rf $npm_package_config_dist/cloud/backend",
+        "clean": "rm -rf $npm_package_config_dist/*",
         "prebuild": "npm run clean && tslint -c tslint.json -p tsconfig.json --fix",
         "build": "npm run build-source && npm run build-config && npm run build-assets",
-        "build-source": "tsc && mkdir -p $npm_package_config_dist/cloud/backend/node_modules && cp -R $npm_package_config_src/cloud/backend/node_modules/* $npm_package_config_dist/cloud/backend/node_modules/",
-        "build-config": "mkdir -p $npm_package_config_dist/cloud/backend/config && cp -R $npm_package_config_src/cloud/backend/config/* $npm_package_config_dist/cloud/backend/config/",
-        "build-assets": "mkdir -p $npm_package_config_dist/cloud/backend/assets && cp -R $npm_package_config_src/cloud/backend/assets/* $npm_package_config_dist/cloud/backend/assets/",
+        "build-source": "tsc && mkdir -p $npm_package_config_dist/node_modules && cp -R $npm_package_config_src/node_modules/* $npm_package_config_dist/node_modules/",
+        "build-config": "mkdir -p $npm_package_config_dist/config && cp -R $npm_package_config_src/config/* $npm_package_config_dist/config/",
+        "build-assets": "mkdir -p $npm_package_config_dist/assets && cp -R $npm_package_config_src/assets/* $npm_package_config_dist/assets/",
         "prestart": "npm run build",
         "start": "node .",
         "test": "npx jest",

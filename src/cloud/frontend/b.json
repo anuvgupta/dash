@@ -1,0 +1,12 @@
+{
+    "package": "dash-cloud-frontend",
+    "targets": {
+        "clean": "npm run clean",
+        "build": "npm run build",
+        "release": "npm run build && npm run test",
+        "start": "npm run start",
+        "test": "npm run test",
+        "test-verbose": "npm run test-verbose",
+        "coverage": "npm run test-coverage"
+    }
+}
