@@ -118,7 +118,7 @@ export default class Log {
     /**
      * Print stack track or cause for an error at specific level
      */
-    private printStackTrace(level: string, error: Error) {
+    private printStackTrace(level: string, error: Error): void {
         const stackTrace: any = error.stack;
         const stackTraceTitle: string = "Exception stack trace:";
         switch (level) {
