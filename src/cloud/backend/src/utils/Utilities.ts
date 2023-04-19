@@ -1,10 +1,15 @@
 /**
  * Utilities & general-purpose convenience functions
  */
-class Utilities {
-    // Default identifier length
+export default class Utilities {
+    /**
+     * Default identifier length
+     */
     static defaultIdLength: number = 10;
-    // Alphanumeric character list
+
+    /**
+     * Alphanumeric character list
+     */
     static alphanumericChars: string =
         "abcdefghijklmnopqrstuvwxyz" +
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
@@ -53,5 +58,3 @@ class Utilities {
         return { sld, tld };
     }
 }
-
-export default Utilities;

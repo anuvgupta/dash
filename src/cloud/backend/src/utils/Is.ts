@@ -1,7 +1,7 @@
 /**
  * Type checking utility class
  */
-class Is {
+export default class Is {
     /**
      * Check if undefined
      */
@@ -44,5 +44,3 @@ class Is {
         return !Is.error(value);
     }
 }
-
-export default Is;

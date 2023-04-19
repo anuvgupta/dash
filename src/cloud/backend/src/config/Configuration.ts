@@ -5,7 +5,10 @@ import InvalidConfigException from "../exception/InvalidConfigException";
 /**
  * Configuration loader
  */
-class Configuration {
+export default class Configuration {
+    /**
+     * Configuration constructor
+     */
     sourcePath: string;
     configFileData: string;
     configData: any;
@@ -50,5 +53,3 @@ class Configuration {
         return this.configData[key];
     }
 }
-
-export default Configuration;

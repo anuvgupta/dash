@@ -1,7 +1,10 @@
 /**
  * Model for Projects
  */
-class Project {
+export default class Project {
+    /**
+     * Project constructor
+     */
     id: string;
     name: string;
     slug: string;
@@ -31,7 +34,6 @@ class Project {
     tagline: string;
     tsCreated: number;
     tsUpdated: number;
-
     constructor(
         id: string,
         name: string,
