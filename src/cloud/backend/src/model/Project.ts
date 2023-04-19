@@ -1,7 +1,9 @@
+import TableItem from "./table/TableItem";
+
 /**
  * Model for Projects
  */
-export default class Project {
+export default class Project implements TableItem {
     /**
      * Project constructor
      */

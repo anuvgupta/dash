@@ -3,7 +3,7 @@ import * as MongoDb from "mongodb";
 import Is from "../utils/Is";
 import Log from "../utils/Log";
 import Resolve from "../utils/Resolve";
-import Table from "../model/Table";
+import Table from "../model/table/Table";
 import TableAccessor from "./TableAccessor";
 import DatabaseConnectionException from "../exception/DatabaseConnectionException";
 
@@ -19,6 +19,7 @@ export default class DatabaseAccessor {
      */
     db: any;
     client: any;
+    uri: string;
     name: string;
     host: string;
     port: number;
@@ -30,16 +31,14 @@ export default class DatabaseAccessor {
         this.name = name;
         this.host = host;
         this.port = port;
+        this.uri = `mongodb://${this.host}:${this.port}`;
         this.tables = {} as TableMap;
     }
 
     connect(resolve: Resolve) {
-        this.log.info(
-            `Connecting to database ${this.name}@${this.host}:${this.port}`
-        );
-        const mongoURI: string = `mongodb://${this.host}:${this.port}`;
+        this.log.info(`Connecting to database ${this.name}@${this.uri}`);
         const mongoClient: MongoDb.MongoClient = new MongoDb.MongoClient(
-            mongoURI
+            this.uri
         );
         mongoClient
             .connect()
@@ -47,16 +46,14 @@ export default class DatabaseAccessor {
                 this.client = client;
                 this.db = this.client.db(this.name);
                 this.tables = this.initializeTables();
-                this.log.info(
-                    `Connected to database ${this.name}@${this.host}:${this.port}`
-                );
+                this.log.info(`Connected to database ${this.name}@${this.uri}`);
                 resolve(null);
             })
             .catch((exception) => {
                 resolve(
                     null,
                     new DatabaseConnectionException(
-                        `Failed connecting to database ${this.name}@${this.host}:${this.port}`,
+                        `Failed connecting to database ${this.name}@${this.uri}`,
                         exception
                     )
                 );
@@ -64,9 +61,13 @@ export default class DatabaseAccessor {
     }
 
     table(key: string): TableAccessor {
-        if (Table.hasOwnProperty(key)) {
+        if (
+            Object.keys(Table).hasOwnProperty(key) &&
+            this.tables.hasOwnProperty(key)
+        ) {
             return this.tables[key];
         }
+        return null;
     }
 
     private initializeTables(): TableMap {
