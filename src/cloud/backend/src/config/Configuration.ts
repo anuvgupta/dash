@@ -35,10 +35,10 @@ export default class Configuration {
         // Parse config file data
         try {
             this.configData = JSON.parse(this.configFileData);
-        } catch (e) {
+        } catch (exception) {
             throw new InvalidConfigException(
                 `Configuration file ${this.sourcePath} contains invalid JSON`,
-                e
+                exception
             );
         }
     }

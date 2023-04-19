@@ -34,7 +34,7 @@ export default class Is {
      * Check if error
      */
     static error(value: any): boolean {
-        return value instanceof Error;
+        return Is.defined(value) && Is.nonnull(value) && value instanceof Error;
     }
 
     /**
