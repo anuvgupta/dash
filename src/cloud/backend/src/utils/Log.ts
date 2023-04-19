@@ -5,12 +5,35 @@ import Is from "./Is";
 /**
  * Logging utility class
  */
-class Log {
-    // Log levels
+export default class Log {
+    /**
+     * Log levels (info, warn, error)
+     */
     static INFO: string = "INFO";
     static WARN: string = "WARN";
     static ERROR: string = "ERROR";
 
+    /**
+     * Log decorator factory generic for all classes
+     * https://levelup.gitconnected.com/start-implementing-your-own-typescript-class-decorators-84a49f560dea
+     */
+    static Inject<T extends new (...args: any[]) => {}>(
+        target: T,
+        context: any
+    ) {
+        if (context.kind === "class") {
+            return class extends target {
+                log: Log = new Log(target.name);
+                constructor(...args: any[]) {
+                    super(...args);
+                }
+            };
+        }
+    }
+
+    /**
+     * Log constructor
+     */
     id: string;
     depth: number | null;
     inspectProps: object;
@@ -107,5 +130,3 @@ class Log {
         }
     }
 }
-
-export default Log;

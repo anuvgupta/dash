@@ -6,7 +6,8 @@
     "jsRules": {},
     "rules": {
         "no-console": false,
-        "trailing-comma": [ false ]
+        "trailing-comma": [ false ],
+        "max-classes-per-file": false
     },
     "rulesDirectory": []
 }
