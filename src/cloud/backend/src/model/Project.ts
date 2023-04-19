@@ -1,7 +1,6 @@
 /**
  * Model for Projects
  */
-
 class Project {
     id: string;
     name: string;
