@@ -56,14 +56,14 @@ export default class Log {
     /**
      * Print informational message to logs
      */
-    info(...args): void {
+    info(...args: any[]): void {
         this.print(Log.INFO, ...args);
     }
 
     /**
      * Print warning message & error to logs
      */
-    warn(...args): void {
+    warn(...args: any[]): void {
         const firstArg: any = args[0];
         if (Is.error(firstArg)) {
             const restArgs = Array.from(args).slice(1);
@@ -77,7 +77,7 @@ export default class Log {
     /**
      * Print exception message & error to logs
      */
-    error(...args): void {
+    error(...args: any[]): void {
         const firstArg: any = args[0];
         if (Is.error(firstArg)) {
             const restArgs = Array.from(args).slice(1);
@@ -91,7 +91,7 @@ export default class Log {
     /**
      * Print message and/or error to logs at specific level
      */
-    private print(level: string, ...args): void {
+    private print(level: string, ...args: any[]): void {
         let msg: string = "";
         for (let i: number = 0; i < args.length; i++) {
             let arg: any = args[i];
