@@ -24,7 +24,7 @@ export default class Configuration {
     /**
      * Load configuration data from file
      */
-    load(): void {
+    load(): Configuration {
         this.log.info(`Configuration file ${this.sourcePath} loading`);
         // Read config file data
         if (!Fs.existsSync(this.sourcePath)) {
@@ -46,6 +46,7 @@ export default class Configuration {
             );
         }
         this.log.info(`Configuration file ${this.sourcePath} loaded`);
+        return this;
     }
 
     /**
