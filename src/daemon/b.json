@@ -2,6 +2,7 @@
     "package": "dash-daemon",
     "targets": {
         "clean": "npm run clean",
+        "install": "npm install",
         "build": "npm run build",
         "release": "npm run build && npm run test",
         "start": "npm run start",
