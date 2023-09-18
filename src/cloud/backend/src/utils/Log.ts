@@ -16,7 +16,7 @@ export default class Log {
     /**
      * Default log depth
      */
-    static DEPTH_DEFAULT = 2;
+    static DEPTH_DEFAULT: number = 2;
 
     /**
      * Log decorator factory generic for all classes
