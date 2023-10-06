@@ -25,11 +25,11 @@ export default class Configuration {
      * Load configuration data from file
      */
     load(): Configuration {
-        this.log.info(`Configuration file ${this.sourcePath} loading`);
+        this.log.info(`Loading config file ${this.sourcePath}`);
         // Read config file data
         if (!Fs.existsSync(this.sourcePath)) {
             throw new InvalidConfigException(
-                `Configuration file ${this.sourcePath} not found`
+                `Config file ${this.sourcePath} not found`
             );
         }
         this.configFileData = Fs.readFileSync(this.sourcePath, {
@@ -41,11 +41,11 @@ export default class Configuration {
             this.configData = JSON.parse(this.configFileData);
         } catch (exception) {
             throw new InvalidConfigException(
-                `Configuration file ${this.sourcePath} contains invalid JSON`,
+                `Config file ${this.sourcePath} contains invalid JSON`,
                 exception
             );
         }
-        this.log.info(`Configuration file ${this.sourcePath} loaded`);
+        this.log.info(`Config file ${this.sourcePath} loaded`);
         return this;
     }
 

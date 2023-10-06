@@ -57,4 +57,12 @@ export default class Utilities {
         const tld = domainList[domainList.length - 1];
         return { sld, tld };
     }
+
+    /**
+     * Slice initial arguments (node path & script path) from argument list
+     * Also converts arguments (specical list) type into normal list type
+     */
+    static getArguments(args: any[]): any[] {
+        return Array.from(args).slice(2);
+    }
 }
