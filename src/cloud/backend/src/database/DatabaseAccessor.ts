@@ -34,7 +34,7 @@ export default class DatabaseAccessor {
         this.tables = {} as TableMap;
     }
 
-    connect(resolve: Resolve): void {
+    load(resolve: Resolve): void {
         this.log.info(`Connecting to DB ${this.name}@${this.uri}`);
         const mongoClient: MongoDb.MongoClient = new MongoDb.MongoClient(
             this.uri
