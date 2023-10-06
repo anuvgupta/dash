@@ -16,7 +16,7 @@ export default class TableAccessor {
     constructor(name: string, db: any) {
         this.db = db;
         this.name = name;
-        // TODO: implement something like: this.log.chainId(name);
+        this.log.chain(name);
     }
 
     get(id: string, resolve: Resolve): void {
