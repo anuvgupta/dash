@@ -147,4 +147,16 @@ describe("Log utility class tests", () => {
         const logOutput: string = `[INFO] [ExampleClass] ${exampleMessage}: ${exampleValue}`;
         expect(logMock).toHaveBeenCalledWith(logOutput);
     });
+
+    // chained IDs
+    test("chained-inject-info", () => {
+        const examplePrefix: string = "SpecificOperation";
+        const exampleValue: string = "abc";
+        const exampleMessage: string = "Example message";
+        const exampleObject: ExampleClass = new ExampleClass(exampleValue);
+        exampleObject.chainLogPrefix(examplePrefix);
+        exampleObject.logExampleMessage();
+        const logOutput: string = `[INFO] [ExampleClass] [SpecificOperation] ${exampleMessage}: ${exampleValue}`;
+        expect(logMock).toHaveBeenCalledWith(logOutput);
+    });
 });

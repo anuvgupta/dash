@@ -42,6 +42,7 @@ export default class Log {
     id: string;
     depth: number | null;
     inspectProps: object;
+    chainedIds: string[];
     constructor(id: string, depth: number | null = null) {
         this.id = id;
         this.depth = depth;
@@ -51,6 +52,7 @@ export default class Log {
             compact: false,
             depth: this.depth,
         };
+        this.chainedIds = [];
     }
 
     /**
@@ -89,6 +91,15 @@ export default class Log {
     }
 
     /**
+     * Add ID after main ID for precise logging
+     */
+    chain(nextId: string): void {
+        if (nextId && nextId.length > 0) {
+            this.chainedIds.push(nextId);
+        }
+    }
+
+    /**
      * Print message and/or error to logs at specific level
      */
     private print(level: string, ...args: any[]): void {
@@ -101,7 +112,8 @@ export default class Log {
             msg += `${arg}`;
             msg += `${i < args.length - 1 ? " " : ""}`;
         }
-        msg = `[${level.toString()}] [${this.id}] ${msg}`;
+        const chainedIds = this.getChainedIds();
+        msg = `[${level.toString()}] [${this.id}]${chainedIds} ${msg}`;
         switch (level) {
             case Log.INFO:
                 console.log(msg);
@@ -133,5 +145,16 @@ export default class Log {
                 console.error(stackTrace);
                 break;
         }
+    }
+
+    /**
+     * Get chained IDs
+     */
+    private getChainedIds(): string {
+        let chainedIdsAsString = "";
+        for (const chainedId of this.chainedIds) {
+            chainedIdsAsString += ` [${chainedId}]`;
+        }
+        return chainedIdsAsString;
     }
 }

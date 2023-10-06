@@ -16,4 +16,8 @@ export default class ExampleClass {
     logExampleMessage(): void {
         this.log.info(`${this.exampleMessage}: ${this.exampleField}`);
     }
+
+    chainLogPrefix(prefix: string): void {
+        this.log.chain(prefix);
+    }
 }
