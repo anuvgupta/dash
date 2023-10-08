@@ -1,6 +1,7 @@
 import * as Util from "util";
 import * as Readline from "readline";
 
+import Main from "../Main";
 import Log from "../utils/Log";
 
 /**
@@ -11,9 +12,11 @@ export default class CommandLineInterface {
     /**
      * Command-line interface constructor
      */
+    main: Main;
     input: Readline.Interface;
     log: Log;
-    constructor() {
+    constructor(main: Main) {
+        this.main = main;
         this.input = Readline.createInterface({
             input: process.stdin,
             output: process.stdout,
@@ -42,7 +45,7 @@ export default class CommandLineInterface {
                 } else if (line[0] === "code" || line[0] === "eval") {
                     if (line.length > 1 && line[1] !== "") {
                         lineText = lineText.substring(4);
-                        const ret = Function(lineText)();
+                        const ret = Function(lineText).bind(this.main)();
                         if (ret !== undefined) console.log(ret);
                     }
                 } else if (line[0] === "clear" || line[0] === "c") {

@@ -17,7 +17,6 @@
         "build-source": "tsc && mkdir -p $npm_package_config_dist/node_modules && cp -R $npm_package_config_src/node_modules/* $npm_package_config_dist/node_modules/",
         "build-config": "mkdir -p $npm_package_config_dist/config && cp -R $npm_package_config_src/config/* $npm_package_config_dist/config/",
         "build-assets": "mkdir -p $npm_package_config_dist/assets && cp -R $npm_package_config_src/assets/* $npm_package_config_dist/assets/",
-        "prestart": "npm run build",
         "start": "node .",
         "test": "npx jest",
         "test-coverage": "npx jest --coverage",
@@ -26,7 +25,9 @@
     "devDependencies": {
         "@types/express": "^4.17.17",
         "@types/jest": "^29.5.0",
+        "@types/jsonwebtoken": "^9.0.3",
         "@types/node": "^18.15.11",
+        "@types/ws": "^8.5.6",
         "jest": "^29.5.0",
         "ts-jest": "^29.1.0",
         "tsconfig-paths": "^4.2.0",
@@ -34,10 +35,12 @@
         "typescript": "^5.0.3"
     },
     "dependencies": {
+        "ansi_up": "^6.0.2",
         "ejs": "^3.1.9",
         "express": "^4.18.2",
         "express-jwt": "^8.4.1",
         "jsonwebtoken": "^9.0.0",
-        "mongodb": "^5.3.0"
+        "mongodb": "^5.3.0",
+        "ws": "^8.14.2"
     }
 }

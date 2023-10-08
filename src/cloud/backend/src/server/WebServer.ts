@@ -89,6 +89,7 @@ export default class WebServer {
                 this.returnData(req, res, {
                     hello: "bye",
                 });
+                // TODO: finish this route
             }
         );
     }

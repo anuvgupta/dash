@@ -135,14 +135,16 @@ export default class Log {
         const stackTraceTitle: string = "Exception stack trace:";
         switch (level) {
             case Log.WARN:
-                console.warn(error);
                 this.info(stackTraceTitle);
-                console.warn(stackTrace);
+                console.warn(error);
+                // this.info(stackTraceTitle);
+                // console.warn(stackTrace);
                 break;
             case Log.ERROR:
-                console.error(error);
                 this.info(stackTraceTitle);
-                console.error(stackTrace);
+                console.error(error);
+                // this.info(stackTraceTitle);
+                // console.error(stackTrace);
                 break;
         }
     }

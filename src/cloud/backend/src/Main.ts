@@ -2,7 +2,9 @@ import Is from "./utils/Is";
 import Log from "./utils/Log";
 import Utilities from "./utils/Utilities";
 import WebServer from "./server/WebServer";
+import JwtConfig from "./config/JwtConfig";
 import Configuration from "./config/Configuration";
+import WebSocketServer from "./server/WebSocketServer";
 import DatabaseAccessor from "./database/DatabaseAccessor";
 import CommandLineInterface from "./cli/CommandLineInterface";
 import InvalidConfigException from "./exception/InvalidConfigException";
@@ -16,37 +18,55 @@ const CONFIG_PATH: string = "../config/config.json";
  */
 export default class Main {
     /**
+     * Main method
+     */
+    static main(...args: any[]) {
+        args = Utilities.getArguments(args);
+        // console.log(args);
+        let stage: string = "prod";
+        if (args.length > 0) {
+            stage = `${args[0]}`;
+        }
+        const main = new Main(stage);
+        main.load(() => {
+            main.log.info("Ready");
+        });
+    }
+
+    /**
      * Main constructor
      */
     stage: string;
-    webServer: WebServer;
+    baseDirPath: string[];
     config: Configuration;
     cli: CommandLineInterface;
     database: DatabaseAccessor;
+    webSocketServer: WebSocketServer;
+    webServer: WebServer;
     log: Log;
     constructor(stage: string) {
+        this.stage = stage;
+        this.baseDirPath = BASE_DIR.split("/");
         this.log = new Log("Main");
         this.log.info(APP_NAME);
-        this.stage = stage;
-
+        // Configuration store
         this.config = new Configuration(`${BASE_DIR}/${CONFIG_PATH}`);
         this.log.info("Loading config");
         this.config.load();
-
-        this.cli = new CommandLineInterface();
-
+        // Command-line interface
+        this.cli = new CommandLineInterface(this);
+        // Mongo database accessor
         this.database = new DatabaseAccessor(
             this.config.get("mongo_database"),
             this.config.get("mongo_host"),
             this.config.get("mongo_port")
         );
-
-        const baseDirPathArr = BASE_DIR.split("/");
+        // Web server
         const backendPath =
-            baseDirPathArr.slice(0, baseDirPathArr.length - 2).join("/") +
+            this.baseDirPath.slice(0, this.baseDirPath.length - 2).join("/") +
             "/backend";
         const frontendPath =
-            baseDirPathArr.slice(0, baseDirPathArr.length - 2).join("/") +
+            this.baseDirPath.slice(0, this.baseDirPath.length - 2).join("/") +
             "/frontend";
         this.webServer = new WebServer(
             this.config.get("http_port"),
@@ -54,6 +74,13 @@ export default class Main {
             this.config.get("env"),
             backendPath,
             frontendPath
+        );
+        // WebSocket server
+        this.webSocketServer = new WebSocketServer(
+            this.config.get("ws_port"),
+            this.stage,
+            this.config.get("ws_heartbeat_log"),
+            new JwtConfig(this.config.get("jwt"))
         );
     }
 
@@ -71,22 +98,6 @@ export default class Main {
                 this.webServer.route();
                 callback();
             });
-        });
-    }
-
-    /**
-     * Main method
-     */
-    static main(...args: any[]) {
-        args = Utilities.getArguments(args);
-        // console.log(args);
-        let stage: string = "prod";
-        if (args.length > 0) {
-            stage = `${args[0]}`;
-        }
-        const main = new Main(stage);
-        main.load(() => {
-            main.log.info("Ready");
         });
     }
 }
