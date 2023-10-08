@@ -45,7 +45,7 @@ export default class Configuration {
                 exception
             );
         }
-        this.log.info(`Config file ${this.sourcePath} loaded`);
+        this.log.info(`Config file loaded`);
         return this;
     }
 
