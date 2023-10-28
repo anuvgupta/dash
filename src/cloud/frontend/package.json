@@ -16,7 +16,6 @@
         "build-source": "mkdir -p $npm_package_config_dist/src && cp -R $npm_package_config_src/src/* $npm_package_config_dist/src/",
         "build-config": "mkdir -p $npm_package_config_dist/config && cp -R $npm_package_config_src/config/* $npm_package_config_dist/config/",
         "build-assets": "mkdir -p $npm_package_config_dist/assets && cp -R $npm_package_config_src/assets/* $npm_package_config_dist/assets/",
-        "prestart": "npm run build",
         "start": "exit 0",
         "test": "echo \"Error: no test specified\" && exit 1"
     }
