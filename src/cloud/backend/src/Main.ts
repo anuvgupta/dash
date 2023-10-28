@@ -1,3 +1,10 @@
+/**
+ * dash-cloud-backend entry point
+ */
+
+/**
+ * Main imports
+ */
 import Is from "@dash/utils/Is";
 import Log from "@dash/utils/Log";
 import Utilities from "@dash/utils/Utilities";
@@ -6,10 +13,19 @@ import JwtConfig from "@dash/config/JwtConfig";
 import MongoConfig from "@dash/config/MongoConfig";
 import Configuration from "@dash/config/Configuration";
 import WebSocketServer from "@dash/server/WebSocketServer";
+import WebActivity from "@dash/server/activity/WebActivity";
 import DatabaseAccessor from "@dash/database/DatabaseAccessor";
 import CommandLineInterface from "@dash/cli/CommandLineInterface";
 import InvalidConfigException from "@dash/exception/InvalidConfigException";
 
+/**
+ * Activity imports
+ */
+import GetProjects from "@dash/api/web/projects/GetProjects";
+
+/**
+ * Constants
+ */
 const APP_NAME: string = "dash-cloud";
 const BASE_DIR: string = `${__dirname}`;
 const CONFIG_PATH: string = "../config/config.json";
@@ -44,6 +60,7 @@ export default class Main {
     database: DatabaseAccessor;
     webSocketServer: WebSocketServer;
     webServer: WebServer;
+    webActivities: WebActivity[];
     log: Log;
     constructor(stage: string) {
         this.stage = stage;
@@ -74,6 +91,8 @@ export default class Main {
             backendPath,
             frontendPath
         );
+        // Web activities
+        this.webActivities = [new GetProjects()];
         // WebSocket server
         this.webSocketServer = new WebSocketServer(
             this.stage,
@@ -93,7 +112,7 @@ export default class Main {
             this.log.info("Connected to database");
             this.log.info("Starting web server");
             this.webServer.load(() => {
-                this.webServer.route();
+                this.webServer.route(this.webActivities);
                 callback();
             });
         });

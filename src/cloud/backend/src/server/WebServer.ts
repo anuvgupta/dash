@@ -5,6 +5,12 @@ import * as Jwt from "jsonwebtoken";
 import * as ExpressJwt from "express-jwt";
 
 import Log from "@dash/utils/Log";
+import WebActivity from "@dash/server/activity/WebActivity";
+
+/**
+ * Web event handler
+ */
+type WebEventHandler = (req: Express.Request, res: Express.Response) => void;
 
 /**
  * Web server
@@ -64,11 +70,19 @@ export default class WebServer {
         return this;
     }
 
-    bind(
-        method: string,
-        path: string,
-        handler: (req: Express.Request, res: Express.Response) => void
-    ): void {
+    route(activities: WebActivity[]): void {
+        for (const activity of activities) {
+            this.bind(
+                activity.getMethod(),
+                activity.getEndpoint(),
+                (req: Express.Request, res: Express.Response) => {
+                    activity.handleRequest(req, res);
+                }
+            );
+        }
+    }
+
+    private bind(method: string, path: string, handler: WebEventHandler): void {
         switch (method) {
             case "get":
                 this.api.get(path, handler);
@@ -81,26 +95,26 @@ export default class WebServer {
         }
     }
 
-    route(): void {
-        this.bind(
-            "get",
-            "/api/projects",
-            (req: Express.Request, res: Express.Response) => {
-                this.returnData(req, res, {
-                    hello: "bye",
-                });
-                // TODO: finish this route
-            }
-        );
-    }
-
     private homeHandler(req: Express.Request, res: Express.Response): void {
-        this.returnView(req, res, "app", {
+        WebServer.returnView(req, res, "app", {
             envConfig: this.exportEnvConfig(),
         });
     }
 
-    private returnView(
+    private getEnvConfig(): object {
+        const envOverrides = { production: this.stage === "prod" };
+        const envDuplicate = JSON.parse(JSON.stringify(this.envConfig));
+        return Object.assign(envDuplicate, envOverrides);
+    }
+
+    private exportEnvConfig(): string {
+        const encodedData = Buffer.from(
+            JSON.stringify(this.getEnvConfig())
+        ).toString("base64");
+        return `JSON.parse(atob("${encodedData}"))`;
+    }
+
+    static returnView(
         req: Express.Request,
         res: Express.Response,
         view: string,
@@ -109,7 +123,7 @@ export default class WebServer {
         res.render(view, data);
     }
 
-    private returnData(
+    static returnData(
         req: Express.Request,
         res: Express.Response,
         data: any
@@ -119,7 +133,7 @@ export default class WebServer {
         res.send(JSON.stringify(data, null, 2));
     }
 
-    private returnError(
+    static returnError(
         req: Express.Request,
         res: Express.Response,
         code: number,
@@ -137,18 +151,5 @@ export default class WebServer {
                 2
             )
         );
-    }
-
-    private getEnvConfig(): object {
-        const envOverrides = { production: this.stage === "prod" };
-        const envDuplicate = JSON.parse(JSON.stringify(this.envConfig));
-        return Object.assign(envDuplicate, envOverrides);
-    }
-
-    private exportEnvConfig(): string {
-        const encodedData = Buffer.from(
-            JSON.stringify(this.getEnvConfig())
-        ).toString("base64");
-        return `JSON.parse(atob("${encodedData}"))`;
     }
 }
