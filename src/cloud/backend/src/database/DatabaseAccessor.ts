@@ -1,11 +1,11 @@
 import * as MongoDb from "mongodb";
 
-import Log from "../utils/Log";
-import Resolve from "../utils/Resolve";
-import Table from "../model/table/Table";
-import TableAccessor from "./TableAccessor";
-import MongoConfig from "../config/MongoConfig";
-import DatabaseConnectionException from "../exception/DatabaseConnectionException";
+import Log from "@dash/utils/Log";
+import Resolve from "@dash/utils/Resolve";
+import Table from "@dash/model/table/Table";
+import MongoConfig from "@dash/config/MongoConfig";
+import TableAccessor from "@dash/database/TableAccessor";
+import DatabaseConnectionException from "@dash/exception/DatabaseConnectionException";
 
 type TableMap = { [key: string]: TableAccessor };
 

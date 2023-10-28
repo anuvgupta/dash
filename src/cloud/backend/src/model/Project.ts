@@ -1,4 +1,4 @@
-import TableRecord from "./table/TableRecord";
+import TableRecord from "@dash/model/table/TableRecord";
 
 /**
  * Model for Projects

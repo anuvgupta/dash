@@ -2,9 +2,9 @@ import * as Ws from "ws";
 import * as AnsiUp from "ansi_up";
 import * as Jwt from "jsonwebtoken";
 
-import Log from "../utils/Log";
-import Utilities from "../utils/Utilities";
-import JwtConfig from "../config/JwtConfig";
+import Log from "@dash/utils/Log";
+import Utilities from "@dash/utils/Utilities";
+import JwtConfig from "@dash/config/JwtConfig";
 
 /**
  * Interface to communicatewith socket clients

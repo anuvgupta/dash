@@ -1,7 +1,7 @@
 import * as Fs from "fs";
 
-import Log from "../utils/Log";
-import InvalidConfigException from "../exception/InvalidConfigException";
+import Log from "@dash/utils/Log";
+import InvalidConfigException from "@dash/exception/InvalidConfigException";
 
 /**
  * Configuration loader

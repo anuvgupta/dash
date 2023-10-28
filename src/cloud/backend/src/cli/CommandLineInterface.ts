@@ -1,8 +1,8 @@
 import * as Util from "util";
 import * as Readline from "readline";
 
-import Main from "../Main";
-import Log from "../utils/Log";
+import Main from "@dash/Main";
+import Log from "@dash/utils/Log";
 
 /**
  * Command-line interface

@@ -1,4 +1,4 @@
-import Utilities from "../../src/utils/Utilities";
+import Utilities from "@dash/utils/Utilities";
 
 describe("Utilities utility class tests", () => {
     // delay

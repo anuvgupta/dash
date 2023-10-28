@@ -1,6 +1,6 @@
-import Log from "../utils/Log";
-import Resolve from "../utils/Resolve";
-import TableRecord from "../model/table/TableRecord";
+import Log from "@dash/utils/Log";
+import Resolve from "@dash/utils/Resolve";
+import TableRecord from "@dash/model/table/TableRecord";
 
 /**
  * Accessor for tables within DatabaseAccessor

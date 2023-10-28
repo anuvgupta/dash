@@ -1,14 +1,14 @@
-import Is from "./utils/Is";
-import Log from "./utils/Log";
-import Utilities from "./utils/Utilities";
-import WebServer from "./server/WebServer";
-import JwtConfig from "./config/JwtConfig";
-import MongoConfig from "./config/MongoConfig";
-import Configuration from "./config/Configuration";
-import WebSocketServer from "./server/WebSocketServer";
-import DatabaseAccessor from "./database/DatabaseAccessor";
-import CommandLineInterface from "./cli/CommandLineInterface";
-import InvalidConfigException from "./exception/InvalidConfigException";
+import Is from "@dash/utils/Is";
+import Log from "@dash/utils/Log";
+import Utilities from "@dash/utils/Utilities";
+import WebServer from "@dash/server/WebServer";
+import JwtConfig from "@dash/config/JwtConfig";
+import MongoConfig from "@dash/config/MongoConfig";
+import Configuration from "@dash/config/Configuration";
+import WebSocketServer from "@dash/server/WebSocketServer";
+import DatabaseAccessor from "@dash/database/DatabaseAccessor";
+import CommandLineInterface from "@dash/cli/CommandLineInterface";
+import InvalidConfigException from "@dash/exception/InvalidConfigException";
 
 const APP_NAME: string = "dash-cloud";
 const BASE_DIR: string = `${__dirname}`;

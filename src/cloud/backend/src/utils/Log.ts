@@ -1,6 +1,6 @@
 import * as Util from "util";
 
-import Is from "./Is";
+import Is from "@dash/utils/Is";
 
 /**
  * Logging utility class

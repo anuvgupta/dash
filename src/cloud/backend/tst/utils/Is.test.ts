@@ -1,4 +1,4 @@
-import Is from "../../src/utils/Is";
+import Is from "@dash/utils/Is";
 
 describe("Is utility class tests", () => {
     // undefined

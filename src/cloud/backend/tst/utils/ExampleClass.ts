@@ -1,4 +1,4 @@
-import Log from "../../src/utils/Log";
+import Log from "@dash/utils/Log";
 
 /**
  * Example class for utility tests

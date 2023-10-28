@@ -1,4 +1,4 @@
-import Is from "../utils/Is";
+import Is from "@dash/utils/Is";
 
 /**
  * Exception when error occurs while connecting to database
