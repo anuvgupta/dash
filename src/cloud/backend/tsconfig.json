@@ -8,10 +8,10 @@
         "sourceMap": true,
         "outDir": "../../../dist",
         "rootDir": "../../",
-        "baseUrl": ".",
+        "baseUrl": "./src",
         "paths": {
-            "*": [
-                "node_modules/*"
+            "@dash/*": [
+                "*"
             ]
         }
     },

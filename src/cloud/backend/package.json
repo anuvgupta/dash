@@ -19,7 +19,7 @@
         "build-modules": "mkdir -p $npm_package_config_dist/node_modules && cp -R $npm_package_config_src/node_modules/* $npm_package_config_dist/node_modules/",
         "build-config": "mkdir -p $npm_package_config_dist/config && cp -R $npm_package_config_src/config/* $npm_package_config_dist/config/",
         "build-assets": "mkdir -p $npm_package_config_dist/assets && cp -R $npm_package_config_src/assets/* $npm_package_config_dist/assets/",
-        "start": "node .",
+        "start": "TS_NODE_BASEURL=$npm_package_config_dist/src node -r tsconfig-paths/register .",
         "test": "npx jest",
         "test-coverage": "npx jest --coverage",
         "test-verbose": "npx jest --silent=false"

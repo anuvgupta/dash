@@ -4,7 +4,7 @@ import * as Express from "express";
 import * as Jwt from "jsonwebtoken";
 import * as ExpressJwt from "express-jwt";
 
-import Log from "../utils/Log";
+import Log from "@dash/utils/Log";
 
 /**
  * Web server
