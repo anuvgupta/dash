@@ -19,13 +19,13 @@ export default class WebServer {
     stage: string;
     backendPath: string;
     frontendPath: string;
-    cloudConfig: object;
+    envConfig: object;
     server: Http.Server;
     log: Log;
     constructor(
         stage: string,
         port: number,
-        cloudConfig: object,
+        envConfig: object,
         backendPath: string,
         frontendPath: string
     ) {
@@ -34,7 +34,7 @@ export default class WebServer {
         this.api = Express.default();
         this.backendPath = backendPath;
         this.frontendPath = frontendPath;
-        this.cloudConfig = cloudConfig;
+        this.envConfig = envConfig;
         this.server = null;
     }
 
@@ -96,7 +96,7 @@ export default class WebServer {
 
     private homeHandler(req: Express.Request, res: Express.Response): void {
         this.returnView(req, res, "app", {
-            cloudConfig: this.exportCloudConfig(),
+            envConfig: this.exportEnvConfig(),
         });
     }
 
@@ -139,15 +139,15 @@ export default class WebServer {
         );
     }
 
-    private getCloudConfig(): object {
+    private getEnvConfig(): object {
         const envOverrides = { production: this.stage === "prod" };
-        const envDuplicate = JSON.parse(JSON.stringify(this.cloudConfig));
+        const envDuplicate = JSON.parse(JSON.stringify(this.envConfig));
         return Object.assign(envDuplicate, envOverrides);
     }
 
-    private exportCloudConfig(): string {
+    private exportEnvConfig(): string {
         const encodedData = Buffer.from(
-            JSON.stringify(this.getCloudConfig())
+            JSON.stringify(this.getEnvConfig())
         ).toString("base64");
         return `JSON.parse(atob("${encodedData}"))`;
     }
