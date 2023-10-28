@@ -4,6 +4,7 @@ import Log from "../utils/Log";
 import Resolve from "../utils/Resolve";
 import Table from "../model/table/Table";
 import TableAccessor from "./TableAccessor";
+import MongoConfig from "../config/MongoConfig";
 import DatabaseConnectionException from "../exception/DatabaseConnectionException";
 
 type TableMap = { [key: string]: TableAccessor };
@@ -24,12 +25,12 @@ export default class DatabaseAccessor {
     port: number;
     tables: TableMap;
     log: Log;
-    constructor(name: string, host: string, port: number) {
+    constructor(mongoConfig: MongoConfig) {
         this.db = null;
         this.client = null;
-        this.name = name;
-        this.host = host;
-        this.port = port;
+        this.name = mongoConfig.database;
+        this.host = mongoConfig.host;
+        this.port = mongoConfig.port;
         this.uri = `mongodb://${this.host}:${this.port}`;
         this.tables = {} as TableMap;
     }

@@ -61,24 +61,17 @@ export default class WebSocketServer {
     stage: string;
     online: boolean;
     jwtConfig: JwtConfig;
-    logHeartbeats: boolean;
     clients: { [key: string]: SocketClient }; // client sockets
     events: { [key: string]: SocketEventHandler }; // event handlers
+    silencedEvents: string[];
     socket: Ws.WebSocketServer;
     log: Log;
-    constructor(
-        port: number,
-        stage: string,
-        logHeartbeats: boolean,
-        jwtConfig: JwtConfig
-    ) {
-        this.port = port;
+    constructor(stage: string, port: number, jwtConfig: JwtConfig) {
         this.stage = stage;
+        this.port = port;
         this.jwtConfig = jwtConfig;
-        this.logHeartbeats = logHeartbeats;
-        this.socket = new Ws.Server({
-            port,
-        });
+        this.silencedEvents = [];
+        this.socket = new Ws.Server({ port });
     }
 
     /**
@@ -101,10 +94,7 @@ export default class WebSocketServer {
                         data.auth = null;
                     }
                     // console.log('    ', data.event, data.data);
-                    if (
-                        data.event !== "hb_daemon" ||
-                        this.logHeartbeats === true
-                    ) {
+                    if (!this.silencedEvents.includes(data.event)) {
                         this.log.info(
                             `Client ${client.id} – message: ${data.event}`,
                             data.data

@@ -3,6 +3,7 @@ import Log from "./utils/Log";
 import Utilities from "./utils/Utilities";
 import WebServer from "./server/WebServer";
 import JwtConfig from "./config/JwtConfig";
+import MongoConfig from "./config/MongoConfig";
 import Configuration from "./config/Configuration";
 import WebSocketServer from "./server/WebSocketServer";
 import DatabaseAccessor from "./database/DatabaseAccessor";
@@ -57,9 +58,7 @@ export default class Main {
         this.cli = new CommandLineInterface(this);
         // Mongo database accessor
         this.database = new DatabaseAccessor(
-            this.config.get("mongo_database"),
-            this.config.get("mongo_host"),
-            this.config.get("mongo_port")
+            new MongoConfig(this.config.get("mongo"))
         );
         // Web server
         const backendPath =
@@ -69,17 +68,16 @@ export default class Main {
             this.baseDirPath.slice(0, this.baseDirPath.length - 2).join("/") +
             "/frontend";
         this.webServer = new WebServer(
-            this.config.get("http_port"),
             this.stage,
+            this.config.get("http_port"),
             this.config.get("env"),
             backendPath,
             frontendPath
         );
         // WebSocket server
         this.webSocketServer = new WebSocketServer(
-            this.config.get("ws_port"),
             this.stage,
-            this.config.get("ws_heartbeat_log"),
+            this.config.get("ws_port"),
             new JwtConfig(this.config.get("jwt"))
         );
     }

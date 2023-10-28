@@ -23,14 +23,14 @@ export default class WebServer {
     server: Http.Server;
     log: Log;
     constructor(
-        port: number,
         stage: string,
+        port: number,
         cloudConfig: object,
         backendPath: string,
         frontendPath: string
     ) {
-        this.port = port;
         this.stage = stage;
+        this.port = port;
         this.api = Express.default();
         this.backendPath = backendPath;
         this.frontendPath = frontendPath;
