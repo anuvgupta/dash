@@ -1,7 +1,7 @@
 import * as Util from "util";
 
-import Log from "../../src/utils/Log";
-import ExampleClass from "./ExampleClass";
+import Log from "@dash/utils/Log";
+import ExampleClass from "@test/utils/ExampleClass";
 
 describe("Log utility class tests", () => {
     let log: Log;
