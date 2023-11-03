@@ -19,7 +19,7 @@ export default class Utilities {
      * Non-blocking delayed callback
      */
     static delay(callback: () => void, timeout: number): void {
-        setTimeout((_): void => {
+        setTimeout((): void => {
             process.nextTick(callback);
         }, timeout);
     }

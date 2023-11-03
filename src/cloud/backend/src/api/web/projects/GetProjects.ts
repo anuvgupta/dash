@@ -4,7 +4,13 @@ import Log from "@dash/utils/Log";
 import WebActivity from "@dash/server/activity/WebActivity";
 
 /**
- * Get projects list
+ * Route configuration
+ */
+const METHOD: string = "get";
+const ENDPOINT: string = "/api/projects";
+
+/**
+ * Get projects list route handler
  */
 @Log.Inject
 export default class GetProjects extends WebActivity {
@@ -13,7 +19,7 @@ export default class GetProjects extends WebActivity {
      */
     log: Log;
     constructor() {
-        super("/api/projects", "get");
+        super(ENDPOINT, METHOD);
     }
 
     /**
