@@ -89,7 +89,8 @@ export default class Main {
             this.config.get("http_port"),
             this.config.get("env"),
             backendPath,
-            frontendPath
+            frontendPath,
+            this.database
         );
         // Web activities
         this.webActivities = [new GetProjects()];

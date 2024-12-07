@@ -6,6 +6,7 @@ import * as ExpressJwt from "express-jwt";
 
 import Log from "@dash/utils/Log";
 import WebActivity from "@dash/server/activity/WebActivity";
+import DatabaseAccessor from "@dash/database/DatabaseAccessor";
 
 /**
  * Web event handler
@@ -27,13 +28,15 @@ export default class WebServer {
     frontendPath: string;
     envConfig: object;
     server: Http.Server;
+    database: DatabaseAccessor;
     log: Log;
     constructor(
         stage: string,
         port: number,
         envConfig: object,
         backendPath: string,
-        frontendPath: string
+        frontendPath: string,
+        database: DatabaseAccessor
     ) {
         this.stage = stage;
         this.port = port;
@@ -41,6 +44,7 @@ export default class WebServer {
         this.backendPath = backendPath;
         this.frontendPath = frontendPath;
         this.envConfig = envConfig;
+        this.database = database;
         this.server = null;
     }
 
@@ -72,6 +76,7 @@ export default class WebServer {
 
     route(activities: WebActivity[]): void {
         for (const activity of activities) {
+            activity.setDatabaseAcesssor(this.database);
             this.bind(
                 activity.getMethod(),
                 activity.getEndpoint(),

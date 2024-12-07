@@ -2,6 +2,7 @@ import * as Express from "express";
 
 import Log from "@dash/utils/Log";
 import WebServer from "@dash/server/WebServer";
+import DatabaseAccessor from "@dash/database/DatabaseAccessor";
 
 /**
  * Web route handler
@@ -12,6 +13,7 @@ export default abstract class WebActivity {
      */
     protected endpoint: string;
     protected method: string;
+    protected database: DatabaseAccessor;
     constructor(endpoint: string, method: string) {
         this.endpoint = endpoint;
         this.method = method;
@@ -25,15 +27,22 @@ export default abstract class WebActivity {
     /**
      * Endpoint accessor
      */
-    getEndpoint() {
+    getEndpoint(): string {
         return this.endpoint;
     }
 
     /**
      * Method accessor
      */
-    getMethod() {
+    getMethod(): string {
         return this.method;
+    }
+
+    /**
+     *
+     */
+    setDatabaseAcesssor(db: DatabaseAccessor): void {
+        this.database = db;
     }
 
     /**

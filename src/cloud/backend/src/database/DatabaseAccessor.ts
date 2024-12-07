@@ -7,7 +7,7 @@ import MongoConfig from "@dash/config/MongoConfig";
 import TableAccessor from "@dash/database/TableAccessor";
 import DatabaseConnectionException from "@dash/exception/DatabaseConnectionException";
 
-type TableMap = { [key: string]: TableAccessor };
+type TableMap = { [key: Table]: TableAccessor };
 
 /**
  * Accessor for MongoDB database
@@ -60,11 +60,8 @@ export default class DatabaseAccessor {
             });
     }
 
-    table(key: string): TableAccessor {
-        if (
-            Object.keys(Table).hasOwnProperty(key) &&
-            this.tables.hasOwnProperty(key)
-        ) {
+    table(key: Table): TableAccessor {
+        if (this.tables.hasOwnProperty(key)) {
             return this.tables[key];
         }
         return null;
